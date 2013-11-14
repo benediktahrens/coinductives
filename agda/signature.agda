@@ -59,9 +59,23 @@ module _ {Σ} where
 
     TermList-map : ∀ {l V W} → (V → W) → TermList Σ V l → TermList Σ W l
     TermList-map f []                = []
-    TermList-map f (_∷_ {n = n} x t) = ?
+    TermList-map f (_∷_ {n = n} x t) = {!!}
 --(♯ (CoTerm-map (**-map {n = n} f) (♭ x))) ∷ TermList-map f t
 
 
   CoTerm-map′ : ∀ {V W} → (V → W) → CoTerm′ Σ V → CoTerm′ Σ W
   CoTerm-map′ f (s ∷ x) = s ∷ {!!}
+
+-- define bisimulation relation R
+
+
+-- prove:  f = g → ∀ x, CoTerm f x R CoTerm g x
+
+
+-- prove: f = id → ∀ x, CoTerm f x R x
+-- corol:  ∀ x, CoTerm id x R x
+
+
+
+
+
