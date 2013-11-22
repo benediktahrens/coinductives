@@ -1,0 +1,88 @@
+
+
+\pdfoutput=1
+
+\documentclass{amsart}
+
+\usepackage[protrusion=true,expansion=true]{microtype}
+
+\usepackage{amsmath}
+
+\usepackage[style=authoryear,
+ maxnames=2,
+ maxbibnames=99 ,                
+ uniquename=init ,
+]{biblatex}
+% \bibliography{literature.bib}
+
+\usepackage{ownstyle}
+
+
+\author{nobody}
+
+\title{Comodules over relative comonads}
+
+\newcommand{\fat}[1]{\textbf{#1}}
+
+\begin{document}
+
+
+\begin{abstract}
+  bla bla
+\end{abstract}
+
+\maketitle
+
+% \tableofcontents
+
+
+\begin{definition}[Relative comonad]
+  Let $F:\C\to\D$ be a functor. A \fat{relative comonad $T$ over $F$} is given by
+  \begin{packitem}
+   \item a map $T:\C_0 \to \D_0$ on the objects of the categories involved;
+   \item an operation $\counit : \forall c : \C_0, \D(Tc,Fc)$;
+   \item an operation $\cobind: \forall c,d:\C_0, \D(Tc,Fd) \to \D(Tc,Td)$
+  \end{packitem}
+  such that 
+  \begin{packitem}
+   \item $\forall c,d:\C_0, \forall f:\D(Tc,Fd), \comp{\cobind(f)}{\counit_d} = f$
+   \item $\forall c : \C_0, \cobind(\counit_c) = \id_c$
+   \item $\forall a,b,c:\C_0, \forall f : \D(Ta,Fb),\forall g:\D(Tb,Fc), \\
+        \comp{\cobind(f)}{\cobind(g)} = \cobind(\comp{\cobind(f)}{g})$
+  \end{packitem}
+
+ 
+\end{definition}
+
+\begin{definition}[Functoriality for relative comonads]
+  %TODO: functoriality for rel comonads 
+\end{definition}
+
+\begin{definition}[Module over relative comonad]
+ Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
+ A \fat{module over T} consists of
+   \begin{packitem}
+   \item a map $S:\C_0 \to \E_0$ on the objects of the categories involved;
+   \item an operation $\mcobind: \forall c,d:\C_0, \D(Tc,Fd) \to \E(Sc,Sd)$
+  \end{packitem}
+  such that 
+  \begin{packitem}
+   \item $\forall c : \C_0, \mcobind(\counit_c) = \id_c$
+   \item $\forall a,b,c:\C_0, \forall f : \D(Ta,Fb),\forall g:\D(Tb,Fc), \\
+        \comp{\mcobind(f)}{\mcobind(g)} = \mcobind(\comp{\cobind(f)}{g})$
+  \end{packitem}
+
+\end{definition}
+
+
+\begin{definition}[Functoriality for modules over relative comonads]
+  %TODO: functoriality for rel comonads 
+\end{definition}
+
+
+
+
+
+% \printbibliography
+
+\end{document}
