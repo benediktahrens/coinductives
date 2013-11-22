@@ -1,0 +1,14 @@
+
+*.*#
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.pdf
+*.run.xml
+*.backup
+*.*~
+*.swp
+*-blx.bib
+
