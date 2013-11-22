@@ -45,17 +45,19 @@
   \end{packitem}
   such that 
   \begin{packitem}
-   \item $\forall c,d:\C_0, \forall f:\D(Tc,Fd), \comp{\cobind(f)}{\counit_d} = f$
-   \item $\forall c : \C_0, \cobind(\counit_c) = \id_c$
+   \item $\forall c,d:\C_0, \forall f:\D(Tc,Fd), \comp{\cobind(f)}{\counit_d} = f$;
+   \item $\forall c : \C_0, \cobind(\counit_c) = \id_c$;
    \item $\forall a,b,c:\C_0, \forall f : \D(Ta,Fb),\forall g:\D(Tb,Fc), \\
-        \comp{\cobind(f)}{\cobind(g)} = \cobind(\comp{\cobind(f)}{g})$
+        \comp{\cobind(f)}{\cobind(g)} = \cobind(\comp{\cobind(f)}{g})$.
   \end{packitem}
 
  
 \end{definition}
 
 \begin{definition}[Functoriality for relative comonads]
-  %TODO: functoriality for rel comonads 
+ For $f : \C(c,d)$ we define
+  \[ \lift^T(f) := \cobind(\comp{\counit_c}{Ff}) .  \]
+  %TODO: prove functor laws
 \end{definition}
 
 \begin{definition}[Module over relative comonad]
@@ -67,15 +69,17 @@
   \end{packitem}
   such that 
   \begin{packitem}
-   \item $\forall c : \C_0, \mcobind(\counit_c) = \id_c$
+   \item $\forall c : \C_0, \mcobind(\counit_c) = \id_c$;
    \item $\forall a,b,c:\C_0, \forall f : \D(Ta,Fb),\forall g:\D(Tb,Fc), \\
-        \comp{\mcobind(f)}{\mcobind(g)} = \mcobind(\comp{\cobind(f)}{g})$
+        \comp{\mcobind(f)}{\mcobind(g)} = \mcobind(\comp{\cobind(f)}{g})$ .
   \end{packitem}
 
 \end{definition}
 
 
 \begin{definition}[Functoriality for modules over relative comonads]
+For $f : \C(c,d)$ we define
+  \[ \mlift^S(f) := \mcobind(\comp{\counit_c}{Ff}) .  \]
   %TODO: functoriality for rel comonads 
 \end{definition}
 
