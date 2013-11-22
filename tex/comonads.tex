@@ -64,8 +64,8 @@
  Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
  A \fat{module over T} consists of
    \begin{packitem}
-   \item a map $S:\C_0 \to \E_0$ on the objects of the categories involved;
-   \item an operation $\mcobind: \forall c,d:\C_0, \D(Tc,Fd) \to \E(Sc,Sd)$
+   \item a map $:\C_0 \to \E_0$ on the objects of the categories involved;
+   \item an operation $\mcobind: \forall c,d:\C_0, \D(Tc,Fd) \to \E(Mc,Md)$
   \end{packitem}
   such that 
   \begin{packitem}
@@ -78,12 +78,31 @@
 
 
 \begin{definition}[Functoriality for modules over relative comonads]
-For $f : \C(c,d)$ we define
+ Let $M$ be a comodule over $T$. For $f : \C(c,d)$ we define
   \[ \mlift^S(f) := \mcobind(\comp{\counit_c}{Ff}) .  \]
   %TODO: functoriality for rel comonads 
 \end{definition}
 
 
+\begin{definition}[Constant comodule]
+  Given $e:\E_0$, the function $\C_0\to\E_0$ sending any object of $\C$ to $e$ is equiped with
+  the structure of a comodule over $T$.
+\end{definition}
+
+
+\begin{definition}[Product comodule]
+ Given two comodules $M,N$ over $T$, then the pointwise product is equiped with the structure of 
+ a comodule over $T$.
+\end{definition}
+
+
+\begin{definition}[Product in context]
+ Suppose $\C$ has binary products.
+ Given a comodule $M$ over $T$ and an object $c_0:\C_0$, then precomposition with \enquote{product with $c_0$}
+ gives a comodule over $T$.
+ 
+%  Needs a shift operation $\D(Tc,Fd) \to \D(T(c\times c_0),F(d\times c_0))$
+\end{definition}
 
 
 
