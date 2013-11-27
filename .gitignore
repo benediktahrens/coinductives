@@ -5,10 +5,10 @@
 *.blg
 *.log
 *.out
-*.pdf
 *.run.xml
 *.backup
 *.*~
 *.swp
 *-blx.bib
+tex/*.pdf
 
