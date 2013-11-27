@@ -49,10 +49,14 @@
    \item $\forall c : \C_0, \cobind(\counit_c) = \id_c$;
    \item $\forall a,b,c:\C_0, \forall f : \D(Ta,Fb),\forall g:\D(Tb,Fc), \\
         \comp{\cobind(f)}{\cobind(g)} = \cobind(\comp{\cobind(f)}{g})$.
-  \end{packitem}
-
- 
+  \end{packitem} 
 \end{definition}
+
+\begin{example}
+  The triangular matrices of Matthes \& Picard form a relative comonad over the functor from sets to setoids
+  associating to any set the setoid together with the equality equivalence relation.
+\end{example}
+
 
 \begin{definition}[Functoriality for relative comonads]
  For $f : \C(c,d)$ we define
@@ -126,6 +130,19 @@ with
 %  Needs a shift operation $\D(Tc,Fd) \to \D(T(c\times c_0),F(d\times c_0))$
 \end{definition}
 
+\begin{definition}[Identity comodule]
+ %TODO: identity comodule (i.e. identity functor forms a comodule over any relative comonad
+\end{definition}
+
+
+\begin{definition}[Morphism of comodules]
+ %TODO: morphism of comodules
+\end{definition}
+
+
+\begin{example}
+ The constructor of triangular matrices is a comodule morphism of appropriate type.
+\end{example}
 
 
 % \printbibliography
