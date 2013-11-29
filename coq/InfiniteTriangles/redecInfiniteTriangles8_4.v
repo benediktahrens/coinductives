@@ -6,6 +6,7 @@ Set Implicit Arguments.
 Require Import Utf8. (* just for displaying purposes *)
 Require Import Streams. (* this hides hd of List *)
 Require Import Setoid.
+Require Import SetoidTactics.
 
 Require Import Relations.
 Require Import Morphisms.
@@ -156,7 +157,7 @@ Lemma bisimilar_injr (A: Type) (a a': A) (t t': Trap A):
 Proof.
   intros H.
   refine (match H in (t ~~ t')  return (rest t ~~ rest t') with 
-            constrB A t t' Hyp1 Hyp2  => _ end).
+            constrB t t' Hyp1 Hyp2  => _ end).
   assumption.
 Qed.
 
@@ -165,7 +166,7 @@ Lemma bisimilar_injl (A: Type) (a a': A) (t t': Trap A):
 Proof.
   intros H.
   refine (match H in (t ~~ t') return (top t = top t') with 
-            constrB A t t' Hyp1 Hyp2  => _ end).
+            constrB t t' Hyp1 Hyp2  => _ end).
   assumption.  
 Qed.
 
