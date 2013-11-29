@@ -17,6 +17,7 @@ FILES=\
 	  Theory/RelativeComonad.v                           \
 	  Category/Type.v                                    \
 	  Category/Setoid.v                                  \
+	  Category/Functor/Type_Setoid.v                     \
 
 ALL= $(FILES)
 
