@@ -12,6 +12,7 @@ COQDEP=$(COQBIN)coqdep $(LIBS)
 FILES=\
 	  Misc/Unicode.v                                     \
 	  Theory/Notations.v                                 \
+	  Theory/Category.v                                  \
 
 ALL= $(FILES)
 
