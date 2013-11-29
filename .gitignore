@@ -11,4 +11,12 @@
 *.swp
 *-blx.bib
 tex/*.pdf
+*.vo
+*.cmi
+*.cmx
+*.cmxs
+*.native
+*.o
+*.glob
+coq/.depend
 
