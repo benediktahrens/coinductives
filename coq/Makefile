@@ -18,6 +18,8 @@ FILES=\
 	  Category/Type.v                                    \
 	  Category/Setoid.v                                  \
 	  Category/Functor/Type_Setoid.v                     \
+	  InfiniteTriangles/redecInfiniteTriangles8_4.v      \
+	  Category/RelativeComonad/InfiniteTriangles.v
 
 ALL= $(FILES)
 
