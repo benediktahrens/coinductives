@@ -19,7 +19,8 @@ FILES=\
 	  Category/Setoid.v                                  \
 	  Category/Functor/Type_Setoid.v                     \
 	  InfiniteTriangles/redecInfiniteTriangles8_4.v      \
-	  Category/RelativeComonad/InfiniteTriangles.v
+	  Category/RelativeComonad/InfiniteTriangles.v       \
+	  Theory/Module.v
 
 ALL= $(FILES)
 
