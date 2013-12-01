@@ -24,10 +24,11 @@ Notation "'counit[' X ]" := (@counit _ _ _ _ X) (only parsing).
  * Relative Comonad laws
  *)
 Class IsRelativeComonad `{F : RawFunctor 𝒞 𝒟} (T : RawRelativeComonad F) : Prop :=
-  { cobind_counit   : ∀ {X : 𝒞}, cobind (counit[ X ]) ≈ id[ T X ]
-  ; counit_cobind   : ∀ {X Y : 𝒞} {f : T X ⇒ F Y}, counit ∘ cobind(f) ≈ f
-  ; cobind_compose  : ∀ {X Y Z : 𝒞} {f : T X ⇒ F Y} {g : T Y ⇒ F Z}, cobind(g) ∘ cobind(f) ≈ cobind(g ∘ cobind(f))
-  ; cobind_cong     :> ∀ {X Y : 𝒞}, (cobind (r := T) (X := X) (Y := Y)) Preserves _≈_ ⟶ _≈_ }.
+  { cobind_counit   : ∀ {X : 𝒞}, cobind (counit[ X ]) ≈ᶜ id[ T X ]
+  ; counit_cobind   : ∀ {X Y : 𝒞} {f : T X ⇒ F Y}, counit ∘ cobind(f) ≈ᶜ f
+  ; cobind_compose  : ∀ {X Y Z : 𝒞} {f : T X ⇒ F Y} {g : T Y ⇒ F Z},
+                        cobind(g) ∘ cobind(f) ≈ᶜ cobind(g ∘ cobind(f))
+  ; cobind_cong     :> ∀ {X Y : 𝒞}, (cobind (r := T) (X := X) (Y := Y)) Preserves _≈ᶜ_ ⟶ _≈ᶜ_ }.
 
 (*
  * Relative Comonad

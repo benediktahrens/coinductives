@@ -29,18 +29,20 @@ Infix "⇒"      := Hom.
 
 Notation "'id[' X ]" := (@id _ X) (only parsing).
 
-Local Notation "_≈_" := Hom_eq.
-Local Infix "≈"      := Hom_eq (at level 70).
+(* Notations for equality on RawCategory *)
+Notation "_≈ᶜ_" := Hom_eq.
+Infix "≈ᶜ"      := Hom_eq (at level 70).
+Notation "x ≈ᶜ y :> C [ A , B ]" := (@Hom_eq C A B x y) (at level 70, y at next level).
 
 (*
  * Laws on RawCategory
  *)
 Class IsCategory (𝒞 : RawCategory) : Prop :=
   { Hom_eq_Equivalence :> ∀ {A B : 𝒞}, Equivalence (@Hom_eq _ A B)
-  ; left_id            : ∀ {A B : 𝒞} {f : A ⇒ B}, id ∘ f ≈ f
-  ; right_id           : ∀ {A B : 𝒞} {f : A ⇒ B}, f ∘ id ≈ f
-  ; compose_assoc      : ∀ {A B C D : 𝒞} {h : C ⇒ D} {g : B ⇒ C} {f : A ⇒ B}, h ∘ g ∘ f ≈ h ∘ (g ∘ f)
-  ; compose_cong       :> ∀ {A B C : 𝒞}, (@compose _ A B C) Preserves₂ _≈_ ⟶ _≈_ ⟶ _≈_ }.
+  ; left_id            : ∀ {A B : 𝒞} {f : A ⇒ B}, id ∘ f ≈ᶜ f
+  ; right_id           : ∀ {A B : 𝒞} {f : A ⇒ B}, f ∘ id ≈ᶜ f
+  ; compose_assoc      : ∀ {A B C D : 𝒞} {h : C ⇒ D} {g : B ⇒ C} {f : A ⇒ B}, h ∘ g ∘ f ≈ᶜ h ∘ (g ∘ f)
+  ; compose_cong       :> ∀ {A B C : 𝒞}, (@compose _ A B C) Preserves₂ _≈ᶜ_ ⟶ _≈ᶜ_ ⟶ _≈ᶜ_ }.
 
 Instance: ∀ {𝒞 : RawCategory}, IsCategory 𝒞 → ∀ {A B : 𝒞}, Setoid (A ⇒ B) := { equiv := Hom_eq }.
 
