@@ -37,3 +37,49 @@ Structure RelativeComonad `(F : Functor 𝒞 𝒟) : Type :=
   ; isRelativeComonad  : IsRelativeComonad rawRelativeComonad }.
 
 Existing Instance isRelativeComonad.
+
+(*
+ * Relative Comonad ⟹ Functor
+ *)
+
+Section RComonad_Functor.
+
+  Definition lift `{F : RawFunctor 𝒞 𝒟} (T : RawRelativeComonad F) {A B : 𝒞} (f : A ⇒ B) : T A ⇒ T B :=
+    cobind (F⋅f ∘ counit).
+
+  Section Lift_Functoriality.
+
+    Context `{F : Functor 𝒞 𝒟} {T : RelativeComonad F}.
+
+    Lemma lift_id : ∀ (A : 𝒞), id[ T A ] ≈ lift T id[ A ].
+    Proof.
+      intro A; simpl; unfold lift.
+      rewrite <- identity, left_id, cobind_counit.
+      reflexivity.
+    Qed.
+
+    Lemma lift_compose : ∀ (A B C : 𝒞) (g : B ⇒ C) (f : A ⇒ B), lift T (g ∘ f) ≈ (lift T g) ∘ (lift T f).
+    Proof.
+      intros A B C g f; simpl; unfold lift.
+      rewrite cobind_compose,
+              compose_assoc,
+              counit_cobind,
+              <- compose_assoc,
+              <- Fhom_compose.
+      reflexivity.
+    Qed.
+
+    Lemma lift_cong : ∀ (A B : 𝒞), (lift T (A := A) (B := B)) Preserves _≈_ ⟶ _≈_.
+    Proof.
+      intros A B f g eq_fg.
+      unfold lift. now rewrite eq_fg.
+    Qed.
+
+  End Lift_Functoriality.
+
+  Program Definition RComonad_Functor `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) : Functor 𝒞 𝒟 :=
+    {| rawFunctor := {| Fobj := T ; Fhom := λ A B ∙ lift T (A := A) (B := B) |}
+     ; isFunctor  := {| identity := lift_id ; Fhom_compose := lift_compose ; Fhom_cong := lift_cong |} |}.
+
+End RComonad_Functor.
+
