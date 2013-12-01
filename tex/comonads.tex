@@ -55,6 +55,17 @@
 \begin{example}
   The triangular matrices of Matthes \& Picard form a relative comonad over the functor from sets to setoids
   associating to any set the setoid together with the equality equivalence relation.
+  
+  More precisely, let $E$ be an arbitrary fixed type.
+   We consider infinite triangular matrices to be given by the following coinductive definition:
+  
+  \begin{lstlisting}
+Coinductive Tri : Set -> Set :=
+   head : forall A : Set, Tri (A) -> A.
+ | tail : forall A : Set, Tri (A) -> Tri (E x A).
+  \end{lstlisting}
+
+  
 \end{example}
 
 
@@ -107,7 +118,7 @@
 \end{align*}
 with 
 \begin{align*}
-               \cut_A: \C(T(E\times A), TA), \quad \cut_A := \cobind_{E \times A, A}(\comp{\counit_{E \times A}}{\pr_1})
+               \cut_A: \C(T(E\times A), TA), \quad \cut_A := \cobind_{E \times A, A}(\comp{\counit_{E \times A}}{\pr_1}) \enspace .
 \end{align*}
 
 
@@ -122,8 +133,8 @@ with
  gives a comodule $M(E\times\_)$ over $T$.
  
  The comodule operation is deduced from that of $M$ by 
- \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \C(TA,B)&\to \C(M(E\times A), M(E\times B)) \\
-                                                      f &\mapsto \mcobind^M_{E\times A,E\times B}(\lift(f))
+ \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \C(TA,B)&\to \C(M(E\times A), M(E\times B)) \enspace ,\\
+                                                      f &\mapsto \mcobind^M_{E\times A,E\times B}(\lift(f)) \enspace .
   \end{align*}                                        
  
  
@@ -143,13 +154,67 @@ with
 \end{definition}
 
 
-\begin{definition}[Morphism of comodules]
+\begin{definition}[Morphism of comodules]\label{def:morphism_of_comodules}
  %TODO: morphism of comodules
+ 
+ Let $M, N : \C \to \E$ be comodules over the relative comonad $T : \C \stackrel{F}{\to} \D$.
+ A \fat{morphism of comodules} from $M$ to $N$ is given by a family of morphisms 
+   \[ \alpha_c:\E(Mc,Nc) \]
+ such that for any $c,d:\C_0$ and $f : \D(Tc,Fd)$ one has
+ \[   \comp{\mcobind^M(f)}{\alpha_d} = \comp{\alpha_c}{\mcobind^N(f)} \enspace . \]
+ 
 \end{definition}
+
+\begin{remark}[Category of comodules]
+ Fix a relative comonad $\T : \C\stackrel{F}{\to}\D$ and a category $\E$.
+ Comodules over $T$ towards $\E$ and their morphisms (\Cref{def:morphism_of_comodules}) form a category.
+\end{remark}
 
 
 \begin{example}
- The constructor of triangular matrices is a comodule morphism of appropriate type.
+ The destructor \lstinline!tail! is a morphism of comodules from the comodule $A \mapsto T(A)$ to $A\mapsto T(E\times A)$.
+\end{example}
+
+
+\begin{definition}[Morphism of relative comonads]
+ Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
+  is given by a family of morphisms \[\tau_c : \D(Tc,Sc)\] such that for any $c : \C_0$,
+     \[  \counit^T_c = \comp{\tau_c}{\counit^S_c} \]
+   and for any $c,d : \D_0$ and $f : \D(Tc,Fd)$,
+   \[  \comp{\cobind^T(f)}{\tau_d} = \comp{\tau_c}{\cobind^S(\comp{f}{\tau_d})} \enspace .  \]
+\end{definition}
+
+\begin{remark}[Category of relative comonads]
+ Fix a functor $F : \C\to\D$. Relative comonads over $F$ and their morphisms form a category.
+\end{remark}
+
+
+\begin{definition}[Pullback comodule]
+  Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $N$ be a 
+  comodule over $S$ towards a category $\E$. We define the \fat{pullback comodule} $\tau^*N$ to be the comodule over $T$ given by
+  \[  \tau^*N(c) := Nc \]
+  and 
+   \[ \mcobind^{\tau^*N}(f) := \mcobind^N(\comp{\tau_c}{f}) \enspace . \]
+\end{definition}
+
+Need functoriality of all the constructions on comodules in order for \Cref{ex:final_sem_tri} to make sense.
+
+\begin{example}[Final semantics for triangular matrices]\label{ex:final_sem_tri}
+   Let $\mathcal{T}$ be the category where an object is a pair $(T,t)$ of a relative comonad $T$ over the functor
+   $\eq: \Set \to \Setoid$ together with a morphism of comodules $t : T \to T(E \times \_)$.
+   A morphism $\tau : (T,t) \to (S,s)$ is given by a morphism of relative comonads $\tau : T \to S$ such that
+   the following diagram of comodule morphisms commutes:
+   
+   \[     \comp{t}{\tau(E\times \_)} = \comp{\tau}{s} \]
+   
+   \[ \begin{xy}
+       \xymatrix{   T  \ar[r]^t \ar[d]_{\tau}  &  **[r]T (E\times \_ )\ar[d]^{\tau(E\times \_)} \\
+                    S  \ar[r]_s  &  **[r]S (E\times \_ )
+        }
+      \end{xy}
+   \]
+
+   
 \end{example}
 
 
