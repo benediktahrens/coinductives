@@ -75,9 +75,9 @@ Coinductive Tri : Set -> Set :=
   %TODO: prove functor laws
 \end{definition}
 
-\begin{definition}[Module over relative comonad]
+\begin{definition}[Comodule over relative comonad]
  Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
- A \fat{module over T} consists of
+ A \fat{comodule over T} consists of
    \begin{packitem}
    \item a map $:\C_0 \to \E_0$ on the objects of the categories involved;
    \item an operation $\mcobind: \forall c,d:\C_0, \D(Tc,Fd) \to \E(Mc,Md)$
@@ -91,12 +91,29 @@ Coinductive Tri : Set -> Set :=
 
 \end{definition}
 
+\begin{definition}[Morphism of comodules]\label{def:morphism_of_comodules}
+ %TODO: morphism of comodules
+ 
+ Let $M, N : \C \to \E$ be comodules over the relative comonad $T : \C \stackrel{F}{\to} \D$.
+ A \fat{morphism of comodules} from $M$ to $N$ is given by a family of morphisms 
+   \[ \alpha_c:\E(Mc,Nc) \]
+ such that for any $c,d:\C_0$ and $f : \D(Tc,Fd)$ one has
+ \[   \comp{\mcobind^M(f)}{\alpha_d} = \comp{\alpha_c}{\mcobind^N(f)} \enspace . \]
+ 
+\end{definition}
+
+\begin{remark}[Category of comodules]
+ Fix a relative comonad $\T : \C\stackrel{F}{\to}\D$ and a category $\E$.
+ Comodules over $T$ towards $\E$ and their morphisms (\Cref{def:morphism_of_comodules}) form a category $\RComod(T,\E)$.
+\end{remark}
+
 
 \begin{definition}[Functoriality for modules over relative comonads]
- Let $M$ be a comodule over $T$. For $f : \C(c,d)$ we define
+ Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(c,d)$ we define
   \[ \mlift^S(f) := \mcobind(\comp{\counit_c}{Ff}) .  \]
   %TODO: functoriality for rel comonads 
 \end{definition}
+
 
 
 \begin{definition}[Constant comodule]
@@ -104,11 +121,12 @@ Coinductive Tri : Set -> Set :=
   the structure of a comodule over $T$.
 \end{definition}
 
+%TODO: is not needed
+% \begin{definition}[Product comodule]
+%  Given two comodules $M,N$ over $T$, then the pointwise product is equiped with the structure of 
+%  a comodule over $T$.
+% \end{definition}
 
-\begin{definition}[Product comodule]
- Given two comodules $M,N$ over $T$, then the pointwise product is equiped with the structure of 
- a comodule over $T$.
-\end{definition}
 
 \begin{definition}
  Suppose $\C$ has binary products. Let $E : \C$
@@ -127,7 +145,7 @@ with
 
 
 
-\begin{definition}[Product in context]
+\begin{definition}[Product in context]\label{def:product_in_context}
  Suppose $\C$ has binary products.
  Given a comodule $M$ over $T$ and an object $E:\C_0$, then precomposition with \enquote{product with $E$}
  gives a comodule $M(E\times\_)$ over $T$.
@@ -136,39 +154,33 @@ with
  \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \C(TA,B)&\to \C(M(E\times A), M(E\times B)) \enspace ,\\
                                                       f &\mapsto \mcobind^M_{E\times A,E\times B}(\lift(f)) \enspace .
   \end{align*}                                        
- 
- 
-%  Needs a shift operation $\D(Tc,Fd) \to \D(T(c\times c_0),F(d\times c_0))$
-\end{definition}
 
-\begin{definition}[Identity comodule]
-
-  WRONG, it isn't 
+ \noindent
+ Furthermore, given two comodules $M$ and $N$ over $\T$ with target category $\E$, and a comodule morphism $\alpha : M \to N$, then 
+ we can define a comodule morphism \[\alpha(E\times \_) : M(E\times \_) \to N(E\times \_) \] by setting
+          \[ \alpha(E \times \_)_A := \alpha_{E\times A} \enspace . \]
   
-  i don't delete this yet
+  \noindent
+  We thus obtain an endofunctor on the category of comodules over $T$ towards $\E$,
+   \[  \_ (E\times \_) : \RComod(T,\E) \to \RComod(T,\E) \enspace . \]
+ 
 
- %TODO: identity comodule (i.e. identity functor forms a comodule over any relative comonad
- 
- %
- 
 \end{definition}
 
+% \begin{definition}[Identity comodule]
+% 
+%   WRONG, it isn't 
+%   
+%   i don't delete this yet
+% 
+%  %TODO: identity comodule (i.e. identity functor forms a comodule over any relative comonad
+%  
+%  %
+%  
+% \end{definition}
 
-\begin{definition}[Morphism of comodules]\label{def:morphism_of_comodules}
- %TODO: morphism of comodules
- 
- Let $M, N : \C \to \E$ be comodules over the relative comonad $T : \C \stackrel{F}{\to} \D$.
- A \fat{morphism of comodules} from $M$ to $N$ is given by a family of morphisms 
-   \[ \alpha_c:\E(Mc,Nc) \]
- such that for any $c,d:\C_0$ and $f : \D(Tc,Fd)$ one has
- \[   \comp{\mcobind^M(f)}{\alpha_d} = \comp{\alpha_c}{\mcobind^N(f)} \enspace . \]
- 
-\end{definition}
 
-\begin{remark}[Category of comodules]
- Fix a relative comonad $\T : \C\stackrel{F}{\to}\D$ and a category $\E$.
- Comodules over $T$ towards $\E$ and their morphisms (\Cref{def:morphism_of_comodules}) form a category.
-\end{remark}
+
 
 
 \begin{example}
@@ -189,31 +201,52 @@ with
 \end{remark}
 
 
-\begin{definition}[Pullback comodule]
-  Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $N$ be a 
-  comodule over $S$ towards a category $\E$. We define the \fat{pullback comodule} $\tau^*N$ to be the comodule over $T$ given by
-  \[  \tau^*N(c) := Nc \]
+\begin{definition}[Pullback comodule]\label{def:pullback_comodule}
+  Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
+  comodule over $S$ towards a category $\E$. We define the \fat{pullback comodule} $\tau^*M$ to be the comodule over $T$ given by
+  \[  \tau^*M(c) := Mc \]
   and 
-   \[ \mcobind^{\tau^*N}(f) := \mcobind^N(\comp{\tau_c}{f}) \enspace . \]
+   \[ \mcobind^{\tau^*M}(f) := \mcobind^M(\comp{\tau_c}{f}) \enspace . \]
+   
+  \noindent
+  Pullback is functorial: if $M$ and $N$ are comodules over $S$ with codomain category $\E$, and $\alpha : M\to N$ is 
+    a morphism of comodules, then we define \[\tau^*\alpha : \tau^*M \to \tau^*N\] 
+    as the family of morphisms
+     \[ \tau^*\alpha_c := \alpha_c \enspace . \]
 \end{definition}
 
-Need functoriality of all the constructions on comodules in order for \Cref{ex:final_sem_tri} to make sense.
+\begin{definition}[Morphism of comonads induces morphism of comodules]
+  Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$.
+  Then $\tau$ gives rise to a morphism of comodules over $T$ from the tautological comodule
+  of $T$ to the pullback along $\tau$ of the tautological comodule over $S$,
+  \[ \tau : T \to \tau^*S \enspace . \]
+\end{definition}
+
+
+\begin{remark}\label{rem:prod_pullback_commute}
+ Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pullback_comodule} commute in the sense that
+ we have an isomorphism of comodules \[\tau^*(M(E\times \_)) \cong (\tau^*M)(E \times \_) \enspace . \]
+\end{remark}
+
+
 
 \begin{example}[Final semantics for triangular matrices]\label{ex:final_sem_tri}
    Let $\mathcal{T}$ be the category where an object is a pair $(T,t)$ of a relative comonad $T$ over the functor
    $\eq: \Set \to \Setoid$ together with a morphism of comodules $t : T \to T(E \times \_)$.
    A morphism $\tau : (T,t) \to (S,s)$ is given by a morphism of relative comonads $\tau : T \to S$ such that
-   the following diagram of comodule morphisms commutes:
+   the following diagram of comodule morphisms commutes,
    
-   \[     \comp{t}{\tau(E\times \_)} = \comp{\tau}{s} \]
-   
+   \[     \comp{t}{\tau(E\times \_)} = \comp{\tau}{s} \enspace , \]
+   i.e.\, diagrammatically,   
    \[ \begin{xy}
        \xymatrix{   T  \ar[r]^t \ar[d]_{\tau}  &  **[r]T (E\times \_ )\ar[d]^{\tau(E\times \_)} \\
-                    S  \ar[r]_s  &  **[r]S (E\times \_ )
+                    \tau^*S  \ar[r]_{\tau^*s}  &  **[r] \tau^*S (E\times \_ )
         }
       \end{xy}
    \]
 
+   \noindent
+   Here in the lower right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
    
 \end{example}
 
