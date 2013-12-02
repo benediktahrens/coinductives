@@ -4,6 +4,8 @@
 
 Require Import Theory.Category.
 
+Generalizable All Variables.
+
 (*
  * Functor structure without laws
  *)
@@ -12,9 +14,22 @@ Structure RawFunctor (𝒞 𝒟 : RawCategory) : Type :=
   ; Fhom : ∀ {A B : 𝒞}, A ⇒ B → Fobj A ⇒ Fobj B }.
 
 Arguments Fobj {_} {_} _ _.
-Arguments Fhom {_} {_} _ {A B} _.
+Arguments Fhom {_} {_} {_} {A B} _.
 
-Notation "F ⋅ f" := (Fhom F f) (at level 35).
+(*----------------------------------------------------------------------------*)
+
+(*
+ * Overloaded operator [Fhom] for functors
+ *)
+
+Class FMap {𝒞 𝒟 : RawCategory} (F : 𝒞 → 𝒟) :=
+  fmap : ∀ {A B : 𝒞}, A ⇒ B → F A ⇒ F B.
+
+Notation "F ⋅ f" := (fmap (F := F) f) (at level 35).
+
+Instance: ∀ `(F : RawFunctor 𝒞 𝒟), FMap F := { fmap := λ A B ∙ Fhom (A := A) (B := B) }.
+
+(*----------------------------------------------------------------------------*)
 
 (*
  * Functoriality
