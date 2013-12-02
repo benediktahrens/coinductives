@@ -79,3 +79,37 @@ Section ComoduleRC_Functor.
      ; isFunctor  := {| identity := mlift_id ; Fhom_compose := mlift_compose ; Fhom_cong := mlift_cong |} |}.
 
 End ComoduleRC_Functor.
+
+(*
+ * Morphism between Comodules over a Relative Comonad
+ *)
+
+Section Comodule_Morphism.
+
+  Notation mcobind M f := (mcobind (c := M) f).
+
+  Structure comodule_rc_mor `{F : functor 𝒞 𝒟} {T : relative_comonad F} {ℰ} (M N : comodule_rc T ℰ) : Type :=
+    { M_mor :> ∀ (C : 𝒞), M C ⇒ N C }.
+
+  Class IsComoduleRCMor `{F : functor 𝒞 𝒟} {T : relative_comonad F} {ℰ} {M N : comodule_rc T ℰ}
+              (α : comodule_rc_mor M N) : Prop :=
+    M_mor_commutes : ∀ {C D : 𝒞} {f : T C ⇒ F D}, α(D) ∘ M.(mcobind) f ≈ᶜ N.(mcobind) f ∘ α(C).
+
+  Structure ComoduleRCMor `{F : Functor 𝒞 𝒟} {T : RelativeComonad F} {ℰ} (M N : ComoduleRC T ℰ) : Type :=
+    { _comodule_rc_mor :> comodule_rc_mor M N
+    ; isComoduleRCMor  : IsComoduleRCMor _comodule_rc_mor }.
+
+  Existing Instance isComoduleRCMor.
+
+
+  (*
+   * Morphism instances
+   *)
+
+  Global Instance: ∀ `{F : functor 𝒞 𝒟} (T : relative_comonad F) (ℰ : category), Morphism (comodule_rc T ℰ) :=
+    {| mor := comodule_rc_mor |}.
+
+  Global Instance: ∀ `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) (ℰ : Category), Morphism (ComoduleRC T ℰ) :=
+    {| mor := ComoduleRCMor |}.
+
+End Comodule_Morphism.
