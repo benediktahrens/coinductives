@@ -22,8 +22,7 @@ Arguments setoid_hom_cong {_} {_} _ _ _ _.
 
 Existing Instance setoid_hom_cong.
 
-Notation "_⟶_" := (Setoid_Hom).
-Infix "⟶" := Setoid_Hom (at level 70).
+Instance: Morphism SetoidType := Setoid_Hom.
 
 (*
  * Trivial Setoid on a type
@@ -36,7 +35,7 @@ Definition FreeSetoid (A : Type) : SetoidType :=
  * Setoid_Hom is a Setoid
  *)
 Program Definition SS (S₁ S₂ : SetoidType) : SetoidType :=
-  {| Carrier := S₁ ⟶ S₂
+  {| Carrier := Setoid_Hom S₁ S₂
    ; Carrier_setoid := {| equiv := λ f g ∙ ∀ {x y}, x ≈ y → f x ≈ g y |} |}.
 Next Obligation. constructor.
   + (* reflexivity *)
@@ -53,11 +52,11 @@ Defined.
 
 (*----------------------------------------------------------------------------*)
 
-Definition Id (A : SetoidType) : A ⟶ A :=
+Definition Id (A : SetoidType) : A ⟹ A :=
   {| setoid_hom      := λ x ∙ x
    ; setoid_hom_cong := λ _ _ x ∙ x |}.
 
-Program Definition Compose (A B C : SetoidType) (g : B ⟶ C) (f : A ⟶ B) : A ⟶ C :=
+Program Definition Compose (A B C : SetoidType) (g : B ⟹ C) (f : A ⟹ B) : A ⟹ C :=
   {| setoid_hom := λ x ∙ g (f x) |}.
 Next Obligation.
   intros x y eq_xy. now rewrite eq_xy.
@@ -70,7 +69,7 @@ Defined.
  *)
 Definition Setoid_category : category :=
   {| Obj     := SetoidType
-   ; Hom     := _⟶_
+   ; Hom     := _⟹_
    ; id      := Id
    ; compose := Compose
    ; Hom_eq  := λ A B f₁ f₂ ∙ ∀ x y, x ≈ y → f₁ x ≈ f₂ y |}.

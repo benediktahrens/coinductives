@@ -74,7 +74,7 @@ Section ComoduleRC_Functor.
   End Mlift_Functoriality.
 
   Program Definition ComoduleRC_Functor
-                       `{F : Functor 𝒞 𝒟} {T : RelativeComonad F} {ℰ} (M : ComoduleRC T ℰ) : Functor 𝒞 ℰ :=
+                       `{F : Functor 𝒞 𝒟} {T : RelativeComonad F} {ℰ} (M : ComoduleRC T ℰ) : 𝒞 ⟹ ℰ :=
     {| _functor   := {| Fobj := M ; Fhom := λ A B ∙ mlift M (A := A) (B := B) |}
      ; isFunctor  := {| identity := mlift_id ; Fhom_compose := mlift_compose ; Fhom_cong := mlift_cong |} |}.
 

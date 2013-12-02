@@ -57,3 +57,14 @@ Structure Category : Type :=
   ; isCategory : IsCategory _category }.
 
 Existing Instance isCategory.
+
+(*
+ * Notation for morphisms
+ *)
+Class Morphism (A : Type) : Type :=
+  mor : A → A → Type.
+
+Notation "_⟹_" := mor.
+Infix "⟹"      := mor (at level 60, right associativity).
+
+Instance: ∀ (𝒞 : category), Morphism 𝒞 := λ 𝒞 ∙ Hom (c := 𝒞).

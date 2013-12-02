@@ -23,13 +23,13 @@ Section RComonad_def.
     + apply bisimilar_trans.
   Defined.
 
-  Program Definition TopSetoid (X : 𝑻𝒚𝒑𝒆) : TriSetoid X ⟶ FreeSetoid X :=
+  Program Definition TopSetoid (X : 𝑻𝒚𝒑𝒆) : TriSetoid X ⟹ FreeSetoid X :=
     {| setoid_hom := @top E X |}.
   Next Obligation.
     hnf. apply top_cong.
   Defined.
 
-  Program Definition RedecSetoid (X Y : 𝑻𝒚𝒑𝒆) (F : TriSetoid X ⟶ FreeSetoid Y) : TriSetoid X ⟶ TriSetoid Y :=
+  Program Definition RedecSetoid (X Y : 𝑻𝒚𝒑𝒆) (F : TriSetoid X ⟹ FreeSetoid Y) : TriSetoid X ⟹ TriSetoid Y :=
     {| setoid_hom := @redec E X Y F |}.
   Next Obligation.
     hnf in *; simpl in *.

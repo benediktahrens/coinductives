@@ -47,3 +47,6 @@ Structure Functor (𝒞 𝒟 : Category) : Type :=
   ; isFunctor  : IsFunctor _functor }.
 
 Existing Instance isFunctor.
+
+Instance: Morphism category := functor.
+Instance: Morphism Category := Functor.

@@ -78,7 +78,7 @@ Section RComonad_Functor.
 
   End Lift_Functoriality.
 
-  Program Definition RelativeComonad_Functor `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) : Functor 𝒞 𝒟 :=
+  Program Definition RelativeComonad_Functor `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) : 𝒞 ⟹ 𝒟 :=
     {| _functor := {| Fobj := T ; Fhom := λ A B ∙ lift T (A := A) (B := B) |}
      ; isFunctor  := {| identity := lift_id ; Fhom_compose := lift_compose ; Fhom_cong := lift_cong |} |}.
 

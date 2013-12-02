@@ -29,7 +29,7 @@ Proof. constructor.
     intros x y eq_xy. now rewrite eq_xy.
 Defined.
 
-Definition TS : Functor 𝑻𝒚𝒑𝒆 𝑺𝒆𝒕𝒐𝒊𝒅 :=
+Definition TS : 𝑻𝒚𝒑𝒆 ⟹ 𝑺𝒆𝒕𝒐𝒊𝒅 :=
   {| _functor := TS_functor
    ; isFunctor  := TS_IsFunctor |}.
 
