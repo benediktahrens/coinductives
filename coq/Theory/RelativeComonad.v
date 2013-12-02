@@ -10,7 +10,7 @@ Generalizable All Variables.
 (*
  * Relative Comonad without laws
  *)
-Structure RawRelativeComonad `(F : RawFunctor 𝒞 𝒟) : Type :=
+Structure relative_comonad `(F : functor 𝒞 𝒟) : Type :=
   { T      :> 𝒞 → 𝒟
   ; counit : ∀ {X : 𝒞}, T X ⇒ F X
   ; cobind : ∀ {X Y : 𝒞}, T X ⇒ F Y → T X ⇒ T Y }.
@@ -23,7 +23,7 @@ Notation "'counit[' X ]" := (@counit _ _ _ _ X) (only parsing).
 (*
  * Relative Comonad laws
  *)
-Class IsRelativeComonad `{F : RawFunctor 𝒞 𝒟} (T : RawRelativeComonad F) : Prop :=
+Class IsRelativeComonad `{F : functor 𝒞 𝒟} (T : relative_comonad F) : Prop :=
   { cobind_counit   : ∀ {X : 𝒞}, cobind (counit[ X ]) ≈ᶜ id[ T X ]
   ; counit_cobind   : ∀ {X Y : 𝒞} {f : T X ⇒ F Y}, counit ∘ cobind(f) ≈ᶜ f
   ; cobind_compose  : ∀ {X Y Z : 𝒞} {f : T X ⇒ F Y} {g : T Y ⇒ F Z},
@@ -34,8 +34,8 @@ Class IsRelativeComonad `{F : RawFunctor 𝒞 𝒟} (T : RawRelativeComonad F) :
  * Relative Comonad
  *)
 Structure RelativeComonad `(F : Functor 𝒞 𝒟) : Type :=
-  { rawRelativeComonad :> RawRelativeComonad F
-  ; isRelativeComonad  : IsRelativeComonad rawRelativeComonad }.
+  { _relative_comonad :> relative_comonad F
+  ; isRelativeComonad  : IsRelativeComonad _relative_comonad }.
 
 Existing Instance isRelativeComonad.
 
@@ -45,7 +45,7 @@ Existing Instance isRelativeComonad.
 
 Section RComonad_Functor.
 
-  Definition lift `{F : RawFunctor 𝒞 𝒟} (T : RawRelativeComonad F) {A B : 𝒞} (f : A ⇒ B) : T A ⇒ T B :=
+  Definition lift `{F : functor 𝒞 𝒟} (T : relative_comonad F) {A B : 𝒞} (f : A ⇒ B) : T A ⇒ T B :=
     cobind (F⋅f ∘ counit).
 
   Section Lift_Functoriality.
@@ -78,9 +78,8 @@ Section RComonad_Functor.
 
   End Lift_Functoriality.
 
-  Program Definition RComonad_Functor `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) : Functor 𝒞 𝒟 :=
-    {| rawFunctor := {| Fobj := T ; Fhom := λ A B ∙ lift T (A := A) (B := B) |}
+  Program Definition RelativeComonad_Functor `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) : Functor 𝒞 𝒟 :=
+    {| _functor := {| Fobj := T ; Fhom := λ A B ∙ lift T (A := A) (B := B) |}
      ; isFunctor  := {| identity := lift_id ; Fhom_compose := lift_compose ; Fhom_cong := lift_cong |} |}.
 
 End RComonad_Functor.
-

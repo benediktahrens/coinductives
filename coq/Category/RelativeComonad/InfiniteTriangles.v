@@ -37,7 +37,7 @@ Section RComonad_def.
     hnf. apply F.(setoid_hom_cong).
   Defined.
 
-  Program Definition IT : RawRelativeComonad 𝑻𝒚𝒑𝒆⟹𝑺𝒆𝒕𝒐𝒊𝒅 :=
+  Program Definition IT : relative_comonad 𝑻𝒚𝒑𝒆⟹𝑺𝒆𝒕𝒐𝒊𝒅 :=
     {| T := TriSetoid
      ; counit := TopSetoid
      ; cobind := RedecSetoid |}.
@@ -65,7 +65,7 @@ Section RComonad_def.
   Qed.
 
   Definition 𝑅𝑒𝑑𝑒𝑐 : RelativeComonad 𝑻𝒚𝒑𝒆⟹𝑺𝒆𝒕𝒐𝒊𝒅 :=
-    {| rawRelativeComonad := IT
+    {| _relative_comonad := IT
      ; isRelativeComonad  := IT_isRelativeComonad |}.
 
 End RComonad_def.

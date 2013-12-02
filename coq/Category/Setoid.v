@@ -68,7 +68,7 @@ Defined.
 (*
  * RawCategory
  *)
-Definition Setoid_RawCategory : RawCategory :=
+Definition Setoid_category : category :=
   {| Obj     := SetoidType
    ; Hom     := _⟶_
    ; id      := Id
@@ -78,7 +78,7 @@ Definition Setoid_RawCategory : RawCategory :=
 (*
  * IsCategory
  *)
-Definition Setoid_IsCategory : IsCategory Setoid_RawCategory.
+Definition Setoid_IsCategory : IsCategory Setoid_category.
 Proof. constructor.
   - (* Hom_eq_Equivalence *)
     intros A B; constructor; hnf ; simpl.
@@ -102,5 +102,5 @@ Proof. constructor.
 Qed.
 
 Definition 𝑺𝒆𝒕𝒐𝒊𝒅 : Category :=
-  {| rawCategory := Setoid_RawCategory
+  {| _category := Setoid_category
    ; isCategory  := Setoid_IsCategory |}.

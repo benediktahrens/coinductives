@@ -7,7 +7,7 @@ Require Import Theory.Category.
 (*
  * RawCategory
  *)
-Definition Type_RawCategory : RawCategory :=
+Definition Type_category : category :=
   {| Obj     := Type
    ; Hom     := λ A B ∙ A → B
    ; id      := λ A x ∙ x
@@ -17,7 +17,7 @@ Definition Type_RawCategory : RawCategory :=
 (*
  * IsCategory
  *)
-Definition Type_IsCategory : IsCategory Type_RawCategory.
+Definition Type_IsCategory : IsCategory Type_category.
 Proof. constructor.
   + (* Hom_eq_Equivalence *)
     intros A B; constructor; hnf; simpl; [ reflexivity | now symmetry | etransitivity ; eauto].
@@ -32,5 +32,5 @@ Proof. constructor.
     now rewrite eq_g₁g₂, eq_f₁f₂.
 Qed.
 
-Definition 𝑻𝒚𝒑𝒆 : Category := {| rawCategory := Type_RawCategory
+Definition 𝑻𝒚𝒑𝒆 : Category := {| _category := Type_category
                               ; isCategory   := Type_IsCategory |}.

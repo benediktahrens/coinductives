@@ -10,14 +10,14 @@ Require Import Category.Setoid.
 (*
  * RawFunctor
  *)
-Program Definition TS_RawFunctor : RawFunctor 𝑻𝒚𝒑𝒆 𝑺𝒆𝒕𝒐𝒊𝒅 :=
+Program Definition TS_functor : functor 𝑻𝒚𝒑𝒆 𝑺𝒆𝒕𝒐𝒊𝒅 :=
   {| Fobj := FreeSetoid
    ; Fhom := λ A B f ∙ {| setoid_hom := f |} |}.
 
 (*
  * IsFunctor
  *)
-Definition TS_IsFunctor : IsFunctor TS_RawFunctor.
+Definition TS_IsFunctor : IsFunctor TS_functor.
 Proof. constructor.
   + (* identity *)
     intros X. simpl; auto.
@@ -30,7 +30,7 @@ Proof. constructor.
 Defined.
 
 Definition TS : Functor 𝑻𝒚𝒑𝒆 𝑺𝒆𝒕𝒐𝒊𝒅 :=
-  {| rawFunctor := TS_RawFunctor
+  {| _functor := TS_functor
    ; isFunctor  := TS_IsFunctor |}.
 
 Notation "'𝑻𝒚𝒑𝒆⟹𝑺𝒆𝒕𝒐𝒊𝒅'" := TS.
