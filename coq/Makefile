@@ -21,7 +21,8 @@ FILES=\
 	  InfiniteTriangles/redecInfiniteTriangles8_4.v      \
 	  Category/RelativeComonad/InfiniteTriangles.v       \
 	  Theory/Comodule.v                                  \
-	  Category/RComod.v
+	  Category/RComod.v                                  \
+	  Category/RComonad.v
 
 ALL= $(FILES)
 

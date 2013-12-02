@@ -83,3 +83,39 @@ Section RComonad_Functor.
      ; isFunctor  := {| identity := lift_id ; Fhom_compose := lift_compose ; Fhom_cong := lift_cong |} |}.
 
 End RComonad_Functor.
+
+(*
+ * Morphism between Relative comonads
+ *)
+
+Section RelativeComonad_Morphism.
+
+  Notation cobind T f := (cobind (r := T) f).
+  Notation counit T X := (counit (r := T) (X := X)).
+
+  Structure relative_comonad_mor `{F : functor 𝒞 𝒟} (T S : relative_comonad F) : Type :=
+    { T_mor :> ∀ (C : 𝒞), T C ⇒ S C }.
+
+  Class IsRelativeComonadMor `{F : functor 𝒞 𝒟} {T S : relative_comonad F}
+          (τ : relative_comonad_mor T S) : Prop :=
+    { T_mor_counit   : ∀ {C : 𝒞}, T.(counit) C ≈ᶜ S.(counit) C ∘ τ(C)
+    ; T_mor_commutes : ∀ {C D : 𝒞} {f : S C ⇒ F D}, τ(D) ∘ T.(cobind) (f ∘ τ(C)) ≈ᶜ S.(cobind) f ∘ τ(C) }.
+
+  Structure RelativeComonadMor `{F : Functor 𝒞 𝒟} (T S : RelativeComonad F) : Type :=
+    { _relative_comonad_mor :> relative_comonad_mor T S
+    ; isRelativeComonadMor  : IsRelativeComonadMor _relative_comonad_mor }.
+
+  Existing Instance isRelativeComonadMor.
+
+
+  (*
+   * Morphism instances
+   *)
+
+  Global Instance: ∀ `{F : functor 𝒞 𝒟}, Morphism (relative_comonad F) :=
+    {| mor := relative_comonad_mor |}.
+
+  Global Instance: ∀ `{F : Functor 𝒞 𝒟}, Morphism (RelativeComonad F) :=
+    {| mor := RelativeComonadMor |}.
+
+End RelativeComonad_Morphism.
