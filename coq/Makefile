@@ -20,7 +20,7 @@ FILES=\
 	  Category/Functor/Type_Setoid.v                     \
 	  InfiniteTriangles/redecInfiniteTriangles8_4.v      \
 	  Category/RelativeComonad/InfiniteTriangles.v       \
-	  Theory/Module.v
+	  Theory/Comodule.v
 
 ALL= $(FILES)
 
