@@ -192,8 +192,8 @@ with
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
   is given by a family of morphisms \[\tau_c : \D(Tc,Sc)\] such that for any $c : \C_0$,
      \[  \counit^T_c = \comp{\tau_c}{\counit^S_c} \]
-   and for any $c,d : \D_0$ and $f : \D(Tc,Fd)$,
-   \[  \comp{\cobind^T(f)}{\tau_d} = \comp{\tau_c}{\cobind^S(\comp{f}{\tau_d})} \enspace .  \]
+   and for any $c,d : \C_0$ and $f : \D(Sc,Fd)$,
+   \[  \comp{\cobind^T(\comp{\tau_c}{f})}{\tau_d} = \comp{\tau_c}{\cobind^S(f)} \enspace .  \]
 \end{definition}
 
 \begin{remark}[Category of relative comonads]
