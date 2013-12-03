@@ -15,14 +15,26 @@ Generalizable All Variables.
 
 Section category_def.
 
-  Context `{F : functor 𝒞 𝒟} (T : relative_comonad F) (ℰ : category).
+  Context `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) (ℰ : Category).
 
-  Notation RComod := (comodule_rc T ℰ).
+  Notation RComod := (ComoduleRC T ℰ).
 
-  Definition Id (M : RComod) : M ⟹ M := {| M_mor := λ C ∙ id[ M C ] |}.
+  Definition Id (M : RComod) : M ⟹ M.
+    constructor 1 with {| M_mor := λ C ∙ id[ M C ] |}.
+    abstract (
+      intros C D f; simpl; rewrite left_id, right_id; reflexivity
+    ).
+  Defined.
 
-  Definition Compose (M N P : RComod) (f : N ⟹ P) (g : M ⟹ N) : M ⟹ P :=
-    {| M_mor := λ C ∙ (f C) ∘ (g C) |}.
+  Definition Compose (M N P : RComod) (f : N ⟹ P) (g : M ⟹ N) : M ⟹ P.
+    constructor 1 with {| M_mor := λ C ∙ (f C) ∘ (g C) |}.
+    abstract (
+      intros C D h; simpl;
+      rewrite <- compose_assoc; rewrite <- M_mor_commutes;
+      rewrite compose_assoc; rewrite M_mor_commutes; rewrite compose_assoc;
+      reflexivity
+    ).
+  Defined.
 
   Definition Eq (M N : RComod) (f g : M ⟹ N) : Prop := ∀ (C : 𝒞), f C ≈ᶜ g C.
 
@@ -62,4 +74,3 @@ Qed.
 Definition 𝑹𝑪𝒐𝒎𝒐𝒅 `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) (ℰ : Category) : Category :=
   {| _category := rcomod T ℰ
    ; isCategory := rcomod_IsCategory |}.
-

@@ -99,7 +99,7 @@ Section Comodule_Morphism.
     { _comodule_rc_mor :> comodule_rc_mor M N
     ; isComoduleRCMor  : IsComoduleRCMor _comodule_rc_mor }.
 
-  Existing Instance isComoduleRCMor.
+  Global Existing Instance isComoduleRCMor.
 
 
   (*
