@@ -5,6 +5,7 @@
 Require Import Theory.Category.
 Require Import Theory.Functor.
 Require Import Theory.RelativeComonad.
+Require Import Setoid.
 
 Generalizable All Variables.
 
@@ -14,14 +15,35 @@ Generalizable All Variables.
 
 Section category_def.
 
-  Context `(F : functor 𝒞 𝒟).
+  Context `(F : Functor 𝒞 𝒟).
 
-  Notation RComonad := (relative_comonad F).
+  Notation RComonad := (RelativeComonad F).
 
-  Definition Id (T : RComonad) : T ⟹ T := {| T_mor := λ C ∙ id[ T C ] |}.
+  Definition Id (T : RComonad) : T ⟹ T.
+    constructor 1 with {| T_mor := λ C ∙ id[ T C ] |}.
+    abstract (
+        (* IsRelativeComonadMor *) constructor;
+        [ (* T_mor_counit *)
+          intro C; simpl; rewrite right_id; reflexivity
+        | (* T_mor_cobind *)
+          intros C D f; simpl; rewrite left_id; do 2 rewrite right_id; reflexivity ]
+    ).
+  Defined.
 
-  Definition Compose (M N P : RComonad) (f : N ⟹ P) (g : M ⟹ N) : M ⟹ P :=
-    {| T_mor := λ C ∙ (f C) ∘ (g C) |}.
+  Definition Compose (M N P : RComonad) (f : N ⟹ P) (g : M ⟹ N) : M ⟹ P.
+    constructor 1 with {| T_mor := λ C ∙ (f C) ∘ (g C) |}.
+    abstract (
+        (* IsRelativeComonadMor *) constructor;
+        [ (* T_mor_counit *)
+          intros C; simpl; rewrite <- compose_assoc;
+          do 2 rewrite <- T_mor_counit; reflexivity
+        | (* T_mor_cobind *)
+        intros C D h; simpl; setoid_rewrite <- compose_assoc at 2;
+        rewrite <- T_mor_commutes; rewrite compose_assoc;
+        setoid_rewrite <- compose_assoc at 2; rewrite T_mor_commutes;
+        rewrite <- compose_assoc; reflexivity ]
+    ).
+  Defined.
 
   Definition Eq (M N : RComonad) (f g : M ⟹ N) : Prop := ∀ (C : 𝒞), f C ≈ᶜ g C.
 

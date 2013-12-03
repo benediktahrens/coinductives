@@ -105,7 +105,7 @@ Section RelativeComonad_Morphism.
     { _relative_comonad_mor :> relative_comonad_mor T S
     ; isRelativeComonadMor  : IsRelativeComonadMor _relative_comonad_mor }.
 
-  Existing Instance isRelativeComonadMor.
+  Global Existing Instance isRelativeComonadMor.
 
 
   (*
