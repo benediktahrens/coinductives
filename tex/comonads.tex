@@ -128,16 +128,29 @@ Coinductive Tri : Set -> Set :=
 % \end{definition}
 
 
+
+\begin{remark}[Notation]
+ Suppose $\C$ has products. We write $\pr_1(A,B) : A\times B \to A$ and $\pr_2(A,B) : A\times B \to B$.
+\end{remark}
+
+\begin{definition}[Strong monoidal functor]
+ A functor $F:\C\to\D$ between categories with products is \fat{strong monoidal} if we have a family of isomorphisms
+  \[ \alpha_{A,B} : F(A\times B) \stackrel{\sim}{\to} FA\times FB\enspace . \] 
+\end{definition}
+
+
 \begin{definition}
- Suppose $\C$ has binary products. Let $E : \C$
+ Suppose $F : \C\to \D$ is a strong monoidal functor, i.e.\ we have a family of isomorphisms
+  \[ \alpha_{A,B} : F(A\times B) \to FA\times FB\enspace . \] 
+  Let $T$ be a relative comonad over $F$, and let $E : \C$ be an object of $\C$.
  We define
- \begin{align*} \lift_{A,B} : \C(TA,B) &\to \C(T(E\times A),E\times B)\\
-                                   f   &\mapsto \langle \comp{\counit_{E\times A}}{\pr_1}, \comp{\cut_{E\times A}}{f} \rangle
+ \begin{align*} \extend_{A,B} : \D(TA,FB) &\to \D\bigl(T(E\times A),F(E\times B)\bigr)\\
+                                   f   &\mapsto \comp{\bigl\langle \comp{\counit_{E\times A}}{\comp{\alpha_{E,A}}{\pr_1(FE,FA)}}, \comp{\lift(\pr_2(E,A))}{f} \bigr\rangle}{\alpha_{E,B}^{-1}} \enspace .
 \end{align*}
-with 
-\begin{align*}
-               \cut_A: \C(T(E\times A), TA), \quad \cut_A := \cobind_{E \times A, A}(\comp{\counit_{E \times A}}{\pr_1}) \enspace .
-\end{align*}
+% with 
+% \begin{align*}
+%                \cut_A: \C(T(E\times A), TA), \quad \cut_A := \cobind_{E \times A, A}(\comp{\counit_{E \times A}}{\pr_1}) \enspace .
+% \end{align*}
 
 
 
@@ -152,7 +165,7 @@ with
  
  The comodule operation is deduced from that of $M$ by 
  \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \C(TA,B)&\to \C(M(E\times A), M(E\times B)) \enspace ,\\
-                                                      f &\mapsto \mcobind^M_{E\times A,E\times B}(\lift(f)) \enspace .
+                                                      f &\mapsto \mcobind^M_{E\times A,E\times B}(\extend(f)) \enspace .
   \end{align*}                                        
 
  \noindent
