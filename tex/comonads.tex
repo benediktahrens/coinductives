@@ -18,9 +18,10 @@
 \usepackage{ownstyle}
 
 
-\author{nobody}
+\author{Benedikt Ahrens}
+\author{R\'egis Spadotti}
 
-\title{Comodules over relative comonads}
+\title{Comodules over relative comonads \\ for terminal semantics}
 
 \newcommand{\fat}[1]{\textbf{#1}}
 
@@ -28,13 +29,24 @@
 
 
 \begin{abstract}
-  bla bla
+  We give a category-theoretic characterisation of heterogeneous coinductive datatypes as terminal objects.
+  
+  The right notion of sameness for terms of a coinductive datatype is not equality but \emph{bisimulation}.
+  Consequently, we model coinductive datatypes that are parametrized by a set not as a comonad on the category of sets,
+  but as a \emph{relative} comonad from sets to setoids, over a suitable functor.
 \end{abstract}
 
 \maketitle
 
 % \tableofcontents
 
+\section{Introduction}
+
+
+\section{Relative comonads and comodules over such comonads}
+
+\emph{Relative monads} were defined by \textcite{DBLP:conf/fossacs/AltenkirchCU10}.
+The dual notion is that of a relative \emph{co}monad:
 
 \begin{definition}[Relative comonad]
   Let $F:\C\to\D$ be a functor. A \fat{relative comonad $T$ over $F$} is given by
@@ -52,29 +64,45 @@
   \end{packitem} 
 \end{definition}
 
+Instances of relative comonads are given by some coinductive datatypes.
+First, we define the underlying functor:
+
+\begin{definition}
+ We define $\eq : \Set\to\Setoid$ as the left adjoint to the forgetful functor 
+  $U : \Setoid \to \Set$.
+  More precisely, the functor $\eq$ sends any set $X$ to the setoid $(X,=_X)$.
+\end{definition}
+
+
 \begin{example}
-  The triangular matrices of \citeauthor{DBLP:conf/types/MatthesP11} \parencite{DBLP:conf/types/MatthesP11} 
-  form a relative comonad over the functor from sets to setoids
-  associating to any set the setoid together with the equality equivalence relation.
-  
-  More precisely, let $E$ be an arbitrary fixed type.
-   We consider infinite triangular matrices to be given by the following coinductive definition:
-  
+  \textcite{DBLP:conf/types/MatthesP11} study the coinductive datatype of infinite triangular matrices:
+Let $E$ be an arbitrary fixed type.
+   Infinite triangular matrices are given by the following coinductive definition: 
   \begin{lstlisting}
 Coinductive Tri : Set -> Set :=
    head : forall A : Set, Tri (A) -> A.
  | tail : forall A : Set, Tri (A) -> Tri (E x A).
   \end{lstlisting}
-
-  
+%
+  \textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that infinite triangular matrices
+  are an instance of such a comonad.
+   
+  A weak constructive comonad as defined in \parencite{DBLP:conf/types/MatthesP11}, however, is \emph{precisely}
+  a comonad relative to the functor $\eq : \Set\to\Setoid$.
+  This yields our first example of relative comonads. 
 \end{example}
 
 
+Relative comonads are functorial:
 \begin{definition}[Functoriality for relative comonads]
  For $f : \C(c,d)$ we define
   \[ \lift^T(f) := \cobind(\comp{\counit_c}{Ff}) .  \]
   %TODO: prove functor laws
 \end{definition}
+
+
+In order to characterise the destructors of coinductive datatypes, we introduce the notion of \emph{comodule
+over a relative comonad}:
 
 \begin{definition}[Comodule over relative comonad]
  Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
@@ -102,6 +130,9 @@ Coinductive Tri : Set -> Set :=
  \[   \comp{\mcobind^M(f)}{\alpha_d} = \comp{\alpha_c}{\mcobind^N(f)} \enspace . \]
  
 \end{definition}
+
+
+
 
 \begin{remark}[Category of comodules]
  Fix a relative comonad $\T : \C\stackrel{F}{\to}\D$ and a category $\E$.
