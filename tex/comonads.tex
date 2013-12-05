@@ -6,10 +6,9 @@
 
 \usepackage[protrusion=true,expansion=true]{microtype}
 
-\usepackage{amsmath}
 
 \usepackage[style=numeric,
- maxnames=2,
+ maxnames=3,
  maxbibnames=99 ,                
  uniquename=init ,
 ]{biblatex}
@@ -21,7 +20,7 @@
 \author{Benedikt Ahrens}
 \author{R\'egis Spadotti}
 
-\title{Comodules over relative comonads \\ for terminal semantics}
+\title[Comodules over relative comonads for coinitial semantics]{Comodules over relative comonads \\ for coinitial semantics}
 
 \newcommand{\fat}[1]{\textbf{#1}}
 
@@ -67,14 +66,14 @@ The dual notion is that of a relative \emph{co}monad:
 Instances of relative comonads are given by some coinductive datatypes.
 First, we define the underlying functor:
 
-\begin{definition}
+\begin{definition}\label{def:eq}
  We define $\eq : \Set\to\Setoid$ as the left adjoint to the forgetful functor 
   $U : \Setoid \to \Set$.
   More precisely, the functor $\eq$ sends any set $X$ to the setoid $(X,=_X)$.
 \end{definition}
 
 
-\begin{example}
+\begin{example}\label{ex:tri_comonad}
   \textcite{DBLP:conf/types/MatthesP11} study the coinductive datatype of infinite triangular matrices:
 Let $E$ be an arbitrary fixed type.
    Infinite triangular matrices are given by the following coinductive definition: 
@@ -120,32 +119,46 @@ over a relative comonad}:
 
 \end{definition}
 
+\begin{example}[Tautological comodule]\label{tautological_comodule}
+  Given a relative comonad $T : \C\stackrel{F}{\to}\D$, the assignment $c \mapsto Tc$ yields a comodule over $T$ 
+  with target category $\D$, the \textbf{tautological comodule} of $T$, also called $T$.
+  The comodule operation is given by
+    \[  \mcobind^T(f) := \cobind^T(f) \enspace . \]
+\end{example}
+
+
+A \emph{morphism of comodules} is given by a family of morphisms that is compatible with 
+the module operation:
+
 \begin{definition}[Morphism of comodules]\label{def:morphism_of_comodules}
- %TODO: morphism of comodules
- 
  Let $M, N : \C \to \E$ be comodules over the relative comonad $T : \C \stackrel{F}{\to} \D$.
  A \fat{morphism of comodules} from $M$ to $N$ is given by a family of morphisms 
    \[ \alpha_c:\E(Mc,Nc) \]
  such that for any $c,d:\C_0$ and $f : \D(Tc,Fd)$ one has
  \[   \comp{\mcobind^M(f)}{\alpha_d} = \comp{\alpha_c}{\mcobind^N(f)} \enspace . \]
- 
 \end{definition}
 
 
-
+Composition and identity of comodule morphisms happens pointwise. We thus obtain a category of comodules
+over a fixed comonad, towards a fixed target category:
 
 \begin{remark}[Category of comodules]
  Fix a relative comonad $\T : \C\stackrel{F}{\to}\D$ and a category $\E$.
  Comodules over $T$ towards $\E$ and their morphisms (\Cref{def:morphism_of_comodules}) form a category $\RComod(T,\E)$.
 \end{remark}
 
+Similarly to relative comonads, comodules over these are functorial:
 
-\begin{definition}[Functoriality for modules over relative comonads]
+\begin{definition}[Functoriality for modules over relative comonads]\label{def:comodule_lift}
  Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(c,d)$ we define
   \[ \mlift^S(f) := \mcobind(\comp{\counit_c}{Ff}) .  \]
-  %TODO: functoriality for rel comonads 
 \end{definition}
 
+
+\begin{remark}
+  The family of morphisms constituting a comodule morphism is actually natural with respect to the functoriality 
+  defined in \Cref{def:comodule_lift}.
+\end{remark}
 
 
 \begin{definition}[Constant comodule]
@@ -170,8 +183,12 @@ over a relative comonad}:
   \[ \alpha_{A,B} : F(A\times B) \stackrel{\sim}{\to} FA\times FB\enspace . \] 
 \end{definition}
 
+\begin{example}
+  The functor $\eq: \Set \to \Setoid$ of \Cref{def:eq} is strong monoidal.
+\end{example}
 
-\begin{definition}
+
+\begin{definition}\label{def:extend}
  Suppose $F : \C\to \D$ is a strong monoidal functor, i.e.\ we have a family of isomorphisms
   \[ \alpha_{A,B} : F(A\times B) \to FA\times FB\enspace . \] 
   Let $T$ be a relative comonad over $F$, and let $E : \C$ be an object of $\C$.
@@ -191,12 +208,12 @@ over a relative comonad}:
 
 
 \begin{definition}[Product in context]\label{def:product_in_context}
- Suppose $\C$ has binary products.
+ Suppose $F:\C\to\D$ strong monoidal as in \Cref{def:extend}.
  Given a comodule $M$ over $T$ and an object $E:\C_0$, then precomposition with \enquote{product with $E$}
  gives a comodule $M(E\times\_)$ over $T$.
  
  The comodule operation is deduced from that of $M$ by 
- \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \C(TA,B)&\to \C(M(E\times A), M(E\times B)) \enspace ,\\
+ \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \C(TA,FB)&\to \C(M(E\times A), M(E\times B)) \enspace ,\\
                                                       f &\mapsto \mcobind^M_{E\times A,E\times B}(\extend(f)) \enspace .
   \end{align*}                                        
 
@@ -207,7 +224,7 @@ over a relative comonad}:
   
   \noindent
   We thus obtain an endofunctor on the category of comodules over $T$ towards $\E$,
-   \[  \_ (E\times \_) : \RComod(T,\E) \to \RComod(T,\E) \enspace . \]
+   \[ M(\_) \mapsto  M (E\times \_) : \RComod(T,\E) \to \RComod(T,\E) \enspace . \]
  
 
 \end{definition}
@@ -229,7 +246,8 @@ over a relative comonad}:
 
 
 \begin{example}
- The destructor \lstinline!tail! is a morphism of comodules from the comodule $A \mapsto T(A)$ to $A\mapsto T(E\times A)$.
+ The destructor \lstinline!tail! of \Cref{ex:tri_comonad} is a morphism of comodules over the comonad \lstinline!Tri! 
+  from the tautological comodule  $\text{\lstinline!Tri!}(\_)$ to $\text{\lstinline!Tri!}(E\times \_)$.
 \end{example}
 
 
@@ -295,6 +313,7 @@ over a relative comonad}:
    
 \end{example}
 
+\section{Conclusions}
 
 \printbibliography
 
