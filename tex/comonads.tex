@@ -8,6 +8,7 @@
 
 
 \usepackage[style=numeric,
+ isbn=false,
  maxnames=3,
  maxbibnames=99 ,                
  uniquename=init ,
@@ -40,6 +41,16 @@
 % \tableofcontents
 
 \section{Introduction}
+
+ Simple inductive types---\textsf{W}-types---are characterised categorically as initial algebras of
+ a polynomial functor.
+ This characterisation has been extended to heterogeneous datatypes, e.g., the type of $\lambda$-terms,
+ in various formulations \parencite{fpt, ahrens_relmonads}.
+ 
+ Similarly, simple coinductive types are characterised as terminal---coinitial---algebras of polynomial functors.
+ In this work we extend this characterisation to heterogeneous coinductive types.
+ Our motivating example is given by the coinductive datatype of infinite triangular matrices as studied by
+ \textcite{DBLP:conf/types/MatthesP11}.
 
 
 \section{Relative comonads and comodules over such comonads}
