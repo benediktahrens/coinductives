@@ -8,12 +8,12 @@
 
 \usepackage{amsmath}
 
-\usepackage[style=authoryear,
+\usepackage[style=numeric,
  maxnames=2,
  maxbibnames=99 ,                
  uniquename=init ,
 ]{biblatex}
-% \bibliography{literature.bib}
+\bibliography{literature.bib}
 
 \usepackage{ownstyle}
 
@@ -53,7 +53,8 @@
 \end{definition}
 
 \begin{example}
-  The triangular matrices of Matthes \& Picard form a relative comonad over the functor from sets to setoids
+  The triangular matrices of \citeauthor{DBLP:conf/types/MatthesP11} \parencite{DBLP:conf/types/MatthesP11} 
+  form a relative comonad over the functor from sets to setoids
   associating to any set the setoid together with the equality equivalence relation.
   
   More precisely, let $E$ be an arbitrary fixed type.
@@ -264,6 +265,6 @@ Coinductive Tri : Set -> Set :=
 \end{example}
 
 
-% \printbibliography
+\printbibliography
 
 \end{document}
