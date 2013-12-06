@@ -29,7 +29,7 @@
 
 
 \begin{abstract}
-  We give a category-theoretic characterisation of heterogeneous coinductive datatypes as terminal objects.
+  We give a category-theoretic characterisation of heterogeneous coinductive datatypes as terminal---\enquote{coinitial}---objects.
   
   The right notion of sameness for terms of a coinductive datatype is not equality but \emph{bisimulation}.
   Consequently, we model coinductive datatypes that are parametrized by a set not as a comonad on the category of sets,
@@ -256,7 +256,7 @@ Similarly to relative comonads, comodules over these are functorial:
 
 
 
-\begin{example}
+\begin{example}\label{ex:tail_comodule}
  The destructor \lstinline!tail! of \Cref{ex:tri_comonad} is a morphism of comodules over the comonad \lstinline!Tri! 
   from the tautological comodule  $\text{\lstinline!Tri!}(\_)$ to $\text{\lstinline!Tri!}(E\times \_)$.
 \end{example}
@@ -304,7 +304,7 @@ Similarly to relative comonads, comodules over these are functorial:
 
 
 
-\begin{example}[Final semantics for triangular matrices]\label{ex:final_sem_tri}
+\begin{example}[Coinitial semantics for triangular matrices]\label{ex:final_sem_tri}
    Let $\mathcal{T}$ be the category where an object is a pair $(T,t)$ of a relative comonad $T$ over the functor
    $\eq: \Set \to \Setoid$ together with a morphism of comodules $t : T \to T(E \times \_)$.
    A morphism $\tau : (T,t) \to (S,s)$ is given by a morphism of relative comonads $\tau : T \to S$ such that
@@ -322,9 +322,14 @@ Similarly to relative comonads, comodules over these are functorial:
    \noindent
    Here in the lower right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
    
+   Then the relative comonad of \Cref{ex:tri_comonad}, equiped with the morphism of comodules of \Cref{ex:tail_comodule},
+   constitutes the terminal---\enquote{coinitial}---object in this category.
+   
 \end{example}
 
 \section{Conclusions}
+
+
 
 \printbibliography
 
