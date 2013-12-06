@@ -52,6 +52,9 @@
  Our motivating example is given by the coinductive datatype of infinite triangular matrices as studied by
  \textcite{DBLP:conf/types/MatthesP11}.
 
+ All our definitions, examples and lemmas have been implemented in the proof assistant \textsf{Coq} \parencite{coq}.
+ In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
+ 
 \subsection*{Organisation of the paper}
   In \Cref{sec:preliminaries} we introduce the notions and notations used later on.
   In \Cref{sec:comonads} we recall the definition of relative comonads and define comodules over such comonads.
@@ -337,9 +340,9 @@ Similarly to relative comonads, comodules over these are functorial:
    Let $\mathcal{T}$ be the category where an object is a pair $(T,t)$ of a relative comonad $T$ over the functor
    $\eq: \Set \to \Setoid$ together with a morphism of comodules $t : T \to T(E \times \_)$.
    A morphism $\tau : (T,t) \to (S,s)$ is given by a morphism of relative comonads $\tau : T \to S$ such that
-   the following diagram of comodule morphisms commutes,
+   the following diagram of comodule morphisms in the category $\RComod(T,\E)$ commutes,
    
-   \[     \comp{t}{\tau(E\times \_)} = \comp{\tau}{s} \enspace , \]
+   \[     \comp{t}{\tau(E\times \_)} = \comp{\tau}{\tau^*s} \enspace , \]
    i.e.\, diagrammatically,   
    \[ \begin{xy}
        \xymatrix{   T  \ar[r]^t \ar[d]_{\tau}  &  **[r]T (E\times \_ )\ar[d]^{\tau(E\times \_)} \\
