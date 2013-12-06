@@ -52,8 +52,55 @@
  Our motivating example is given by the coinductive datatype of infinite triangular matrices as studied by
  \textcite{DBLP:conf/types/MatthesP11}.
 
+\subsection*{Organisation of the paper}
+  In \Cref{sec:preliminaries} we introduce the notions and notations used later on.
+  In \Cref{sec:comonads} we recall the definition of relative comonads and define comodules over such comonads.
+  Some constructions of comodules are given.
+ 
+\section{Preliminaries}\label{sec:preliminaries}
 
-\section{Relative comonads and comodules over such comonads}
+
+\begin{definition}[Some categories]\label{def:set_setoid}
+ We denote by $\Set$ the category of sets. The category $\Setoid$ has as objects sets equiped with an equivalence relation,
+ and as morphisms set-theoretic functions that are compatible with the equivalence relations of the source and target setoids.
+\end{definition}
+
+
+
+\begin{definition}\label{def:eq}
+ We define $\eq : \Set\to\Setoid$ as the left adjoint to the forgetful functor 
+  $U : \Setoid \to \Set$.
+  More explicitly, the functor $\eq$ sends any set $X$ to the setoid $(X,=_X)$ given by the set $X$ itself, together
+  with the equality relation.
+\end{definition}
+
+
+\begin{remark}[Notation for product]
+  We denote the category-theoretic binary product of objects $A$ and $B$ of a category $\C$ by $A\times B$.
+  We write $\pr_1(A,B) : A\times B \to A$ and $\pr_2(A,B) : A\times B \to B$ for the projections, and we omit the 
+  argument $(A,B)$ when it is clear from the context.
+  Given $f : \C(A, B)$ and $g : \C(A,C)$, we write $\langle f,g\rangle : \C(A,B\times C)$ for the induced map into the product such that
+  $\comp{\langle f,g\rangle}{\pr_1} = f$ and $\comp{\langle f,g\rangle}{\pr_2} = g$.
+\end{remark}
+
+Both of the categories of \Cref{def:set_setoid} have binary products, they are \emph{cartesian monoidal}, i.e.\ the terminal 
+object is neutral with respect to the multiplication. Functors preserving the monoidal structure \textbf{up to isomorphism}
+are called \emph{strong monoidal}:
+
+\begin{definition}[Strong monoidal functor]
+ A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if the maps
+ \[ \alpha_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : F(A\times B) \stackrel{}{\to} FA\times FB\enspace  \] 
+ are isomorphisms.
+ (Note that for \emph{cartesian} monoidal categories, the family $\alpha$ of morphisms automatically makes commute the 
+  diagrams necessary to have a strong monoidal functor, since it is given by universal property.)
+\end{definition}
+
+\begin{example}
+  The functor $\eq: \Set \to \Setoid$ of \Cref{def:eq} is strong monoidal.
+\end{example}
+
+
+\section{Relative comonads and comodules over such comonads}\label{sec:comonads}
 
 \emph{Relative monads} were defined by \textcite{DBLP:conf/fossacs/AltenkirchCU10}.
 The dual notion is that of a relative \emph{co}monad:
@@ -74,14 +121,7 @@ The dual notion is that of a relative \emph{co}monad:
   \end{packitem} 
 \end{definition}
 
-Instances of relative comonads are given by some coinductive datatypes.
-First, we define the underlying functor:
-
-\begin{definition}\label{def:eq}
- We define $\eq : \Set\to\Setoid$ as the left adjoint to the forgetful functor 
-  $U : \Setoid \to \Set$.
-  More precisely, the functor $\eq$ sends any set $X$ to the setoid $(X,=_X)$.
-\end{definition}
+Instances of relative comonads are given by some coinductive datatypes:
 
 
 \begin{example}\label{ex:tri_comonad}
@@ -103,11 +143,11 @@ Coinductive Tri : Set -> Set :=
 \end{example}
 
 
-Relative comonads are functorial:
+Just like relative monads, relative comonads are functorial:
 \begin{definition}[Functoriality for relative comonads]
  For $f : \C(c,d)$ we define
   \[ \lift^T(f) := \cobind(\comp{\counit_c}{Ff}) .  \]
-  %TODO: prove functor laws
+ The functor properties are easily checked.
 \end{definition}
 
 
@@ -116,7 +156,7 @@ over a relative comonad}:
 
 \begin{definition}[Comodule over relative comonad]
  Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
- A \fat{comodule over T} consists of
+ A \fat{comodule over T towards $\E$} consists of
    \begin{packitem}
    \item a map $:\C_0 \to \E_0$ on the objects of the categories involved;
    \item an operation $\mcobind: \forall c,d:\C_0, \D(Tc,Fd) \to \E(Mc,Md)$
@@ -185,18 +225,6 @@ Similarly to relative comonads, comodules over these are functorial:
 
 
 
-\begin{remark}[Notation]
- Suppose $\C$ has products. We write $\pr_1(A,B) : A\times B \to A$ and $\pr_2(A,B) : A\times B \to B$.
-\end{remark}
-
-\begin{definition}[Strong monoidal functor]
- A functor $F:\C\to\D$ between categories with products is \fat{strong monoidal} if we have a family of isomorphisms
-  \[ \alpha_{A,B} : F(A\times B) \stackrel{\sim}{\to} FA\times FB\enspace . \] 
-\end{definition}
-
-\begin{example}
-  The functor $\eq: \Set \to \Setoid$ of \Cref{def:eq} is strong monoidal.
-\end{example}
 
 
 \begin{definition}\label{def:extend}
