@@ -89,7 +89,7 @@ are called \emph{strong monoidal}:
 
 \begin{definition}[Strong monoidal functor]
  A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if the maps
- \[ \alpha_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : F(A\times B) \stackrel{}{\to} FA\times FB\enspace  \] 
+ \[ \alpha_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
  are isomorphisms.
  (Note that for \emph{cartesian} monoidal categories, the family $\alpha$ of morphisms automatically makes commute the 
   diagrams necessary to have a strong monoidal functor, since it is given by universal property.)
@@ -228,8 +228,9 @@ Similarly to relative comonads, comodules over these are functorial:
 
 
 \begin{definition}\label{def:extend}
- Suppose $F : \C\to \D$ is a strong monoidal functor, i.e.\ we have a family of isomorphisms
-  \[ \alpha_{A,B} : F(A\times B) \to FA\times FB\enspace . \] 
+ Let $F : \C\to \D$ be a strong monoidal functor between (cartesian) monoidal categories, 
+ i.e.\ we have a family of isomorphisms
+  \[ \alpha_{A,B} : F(A\times B) \stackrel{\sim}{\to} FA\times FB\enspace . \] 
   Let $T$ be a relative comonad over $F$, and let $E : \C$ be an object of $\C$.
  We define
  \begin{align*} \extend_{A,B} : \D(TA,FB) &\to \D\bigl(T(E\times A),F(E\times B)\bigr)\\
