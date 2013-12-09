@@ -90,7 +90,7 @@ Both of the categories of \Cref{def:set_setoid} have binary products, they are \
 object is neutral with respect to the multiplication. Functors preserving the monoidal structure \textbf{up to isomorphism}
 are called \emph{strong monoidal}:
 
-\begin{definition}[Strong monoidal functor]
+\begin{definition}[Strong monoidal functor]\label{def:monoidal_functor}
  A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if the maps
  \[ \alpha_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
  are isomorphisms.
@@ -108,7 +108,7 @@ are called \emph{strong monoidal}:
 \emph{Relative monads} were defined by \textcite{DBLP:conf/fossacs/AltenkirchCU10}.
 The dual notion is that of a relative \emph{co}monad:
 
-\begin{definition}[Relative comonad]
+\begin{definition}[Relative comonad]\label{def:rel_comonad}
   Let $F:\C\to\D$ be a functor. A \fat{relative comonad $T$ over $F$} is given by
   \begin{packitem}
    \item a map $T:\C_0 \to \D_0$ on the objects of the categories involved;
@@ -157,7 +157,7 @@ Just like relative monads, relative comonads are functorial:
 In order to characterise the destructors of coinductive datatypes, we introduce the notion of \emph{comodule
 over a relative comonad}:
 
-\begin{definition}[Comodule over relative comonad]
+\begin{definition}[Comodule over relative comonad]\label{def:comodule}
  Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
  A \fat{comodule over T towards $\E$} consists of
    \begin{packitem}
@@ -173,7 +173,7 @@ over a relative comonad}:
 
 \end{definition}
 
-\begin{example}[Tautological comodule]\label{tautological_comodule}
+\begin{example}[Tautological comodule]\label{def:tautological_comodule}
   Given a relative comonad $T : \C\stackrel{F}{\to}\D$, the assignment $c \mapsto Tc$ yields a comodule over $T$ 
   with target category $\D$, the \textbf{tautological comodule} of $T$, also called $T$.
   The comodule operation is given by
@@ -359,10 +359,16 @@ Similarly to relative comonads, comodules over these are functorial:
    
 \end{example}
 
+\section{Formalization in \texttt{Coq}}
+
 \section{Conclusions}
 
 
 
 \printbibliography
+
+\appendix
+
+\input{formal_table}
 
 \end{document}
