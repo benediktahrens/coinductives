@@ -45,3 +45,20 @@ Qed.
 
 Definition 𝑻𝒚𝒑𝒆 : Category :=
   mkCategory left_id right_id compose_assoc.
+
+
+(*------------------------------------------------------------------------------
+  -- ＴＹＰＥＳ  ＨＡＳ  ＢＩＮＡＲＹ  ＰＲＯＤＵＣＴ
+  ----------------------------------------------------------------------------*)
+
+Require Import Theory.Product.
+
+Program Instance 𝑻𝒚𝒑𝒆_BinaryProduct : BinaryProduct 𝑻𝒚𝒑𝒆 :=
+  Product.make 𝑻𝒚𝒑𝒆 _⟨×⟩_ (λ C f g (c : C) ∙ (f c , g c)) fst snd.
+Next Obligation. (* Pmor_cong₂ *)
+  intros f₁ f₂ eq_f₁f₂ g₁ g₂ eq_g₁g₂ x. now f_equal.
+Qed.
+Next Obligation. (* Pmor_universal *)
+  rewrite <- H. rewrite <- H0.
+  remember (i x); destruct (i x); now subst.
+Qed.
