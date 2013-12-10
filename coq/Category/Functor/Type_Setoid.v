@@ -35,3 +35,17 @@ Proof.
 Qed.
 
 Definition 𝑬𝑸 : Functor 𝑻𝒚𝒑𝒆 𝑺𝒆𝒕𝒐𝒊𝒅 := mkFunctor identity map_compose.
+
+(*------------------------------------------------------------------------------
+  -- ＥＱ  ＩＳ  ＳＴＲＯＮＧ  ＭＯＮＯＩＤＡＬ
+  ----------------------------------------------------------------------------*)
+
+Require Import Theory.Product.
+Require Import Theory.Morphism.
+Require Import Theory.StrongMonoidal.
+
+Program Instance 𝑬𝑸_SM : StrongMonoidal 𝑬𝑸 :=
+  λ (A B : 𝑻𝒚𝒑𝒆) ∙ Iso.make ⟨ 𝑬𝑸 ⋅ π₁ , 𝑬𝑸 ⋅ π₂ ⟩ (Π.make (λ x ∙ x)).
+Next Obligation. (* id_cong *)
+  intros [x x'] [y y'] [eq_xx' eq_yy']; now f_equal.
+Qed.
