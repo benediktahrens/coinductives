@@ -27,7 +27,9 @@ FILES=\
 	  Category/Categories.v                              \
 	  Theory/InitialTerminal.v                           \
 	  Theory/Product.v                                   \
-	  Theory/Morphism.v
+	  Theory/Morphism.v                                  \
+	  Theory/StrongMonoidal.v
+
 
 ALL= $(FILES)
 
