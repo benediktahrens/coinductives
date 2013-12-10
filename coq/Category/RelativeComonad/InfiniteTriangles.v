@@ -34,7 +34,7 @@ Section Definitions.
   Qed.
 
   Program Definition Redec {X Y : 𝑻𝒚𝒑𝒆} : [ Tri X ⇒ 𝑬𝑸 Y ⟶ Tri X ⇒ Tri Y ] :=
-    Π.make (λ f ∙ Π.make (@redec E X Y f)).
+    λ f ↦ Π.make (@redec E X Y f).
   Next Obligation.
     intros u v eq_uv. apply redec_cong; intuition.
     intros t₁ t₂ eq_t₁t₂; now rewrite eq_t₁t₂.

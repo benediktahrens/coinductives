@@ -17,7 +17,7 @@ Local Infix "⇛" := Hom (at level 30, right associativity).
 Definition id {A} : A ⇛ A := Π.id.
 
 Program Definition compose {A B C} : [ B ⇛ C ⟶ A ⇛ B ⟶ A ⇛ C ] :=
-  Π₂.make (λ g f ∙ Π.compose g f).
+  λ g f ↦₂ Π.compose g f.
 Next Obligation.
   intros f₁ f₂ eq_f₁f₂ g₁ g₂ eq_g₁g₂ x y eq_xy.
   simpl. rewrite eq_xy. apply eq_f₁f₂. apply eq_g₁g₂. reflexivity.
@@ -63,7 +63,7 @@ Section Product_construction.
   Qed.
 
   Program Definition product_mor (A B C : 𝑺𝒆𝒕𝒐𝒊𝒅) (f : C ⇒ A) (g : C ⇒ B) : C ⇒ product A B :=
-    Π.make (λ c ∙ (f c , g c)).
+    λ c ↦ (f c , g c).
   Next Obligation.
     intros x y eq_xy; simpl; split; now rewrite eq_xy.
   Qed.

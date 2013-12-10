@@ -53,7 +53,7 @@ Module Morphism.
 
   (* -- Ｉｄｅｎｔｉｔｙ  /  Ｃｏｍｐｏｓｉｔｉｏｎ                      -- *)
   Program Definition id {𝒞} : 𝒞 ⇛ 𝒞 :=
-    make (λ X ∙ X) (λ A B ∙ Π.make (λ f ∙ f)).
+    make (λ X ∙ X) (λ A B ∙ λ f ↦ f).
   Next Obligation. (* map_cong *)
     intros f g eq_fg. apply eq_fg.
   Qed.
@@ -65,7 +65,7 @@ Module Morphism.
   Qed.
 
   Program Definition compose {𝒞 𝒟 ℰ} : [ 𝒟 ⇛ ℰ ⟶ 𝒞 ⇛ 𝒟 ⟶ 𝒞 ⇛ ℰ ] :=
-    (Π₂.make (λ G F ∙ make (λ X ∙ G (F X)) (λ A B ∙ Π.make (λ f ∙ G⋅(F⋅f))))).
+    λ G F ↦₂ make (λ X ∙ G (F X)) (λ A B ∙ λ f ↦ G⋅(F⋅f)).
   Next Obligation. (* map_cong *)
     intros x y eq_xy. now rewrite eq_xy.
   Qed.

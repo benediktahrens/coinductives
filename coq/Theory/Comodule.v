@@ -30,7 +30,7 @@ Section Functor.
   Context `{F : Functor 𝒞 𝒟} {T : RelativeComonad F} {ℰ} (M : Comodule T ℰ).
 
   Program Definition mlift {A B} : [ A ⇒ B ⟶ M A ⇒ M B ] :=
-    Π.make (λ f ∙ M⋅mcobind (F⋅f ∘ counit[ A ])).
+    λ f ↦ M⋅mcobind (F⋅f ∘ counit[ A ]).
   Next Obligation.
     intros x y eq_xy. now rewrite eq_xy.
   Qed.
@@ -90,7 +90,7 @@ Module Morphism.
     Qed.
 
     Program Definition compose {M N P : Comodule T ℰ} : [ N ⇛ P ⟶ M ⇛ N ⟶ M ⇛ P ] :=
-      Π₂.make (λ g f ∙ make (α := λ C ∙ g(C) ∘ f(C)) _ ).
+      λ g f ↦₂ make (α := λ C ∙ g(C) ∘ f(C)) _.
     Next Obligation.
       rewrite <- compose_assoc; rewrite <- α_commutes.
       rewrite compose_assoc; rewrite α_commutes; rewrite compose_assoc.

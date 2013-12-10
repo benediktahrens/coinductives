@@ -34,7 +34,7 @@ Section Functor.
   Context `{F : Functor 𝒞 𝒟} (T : RelativeComonad F).
 
   Program Definition lift {A B} : [ (A ⇒ B) ⟶ T A ⇒ T B ] :=
-    Π.make (λ f ∙ T⋅cobind (F⋅f ∘ T⋅counit)).
+    λ f ↦ T⋅cobind (F⋅f ∘ T⋅counit).
   Next Obligation.
     intros f g eq_fg. now rewrite eq_fg.
   Qed.
@@ -101,7 +101,7 @@ Module Morphism.
     Qed.
 
     Program Definition compose {S T U} : [ T ⇛ U ⟶ S ⇛ T ⟶ S ⇛ U ] :=
-      Π₂.make (λ g f ∙ make (τ := λ C ∙ g(C) ∘ f(C)) _ _ ).
+      λ g f ↦₂ make (τ := λ C ∙ g(C) ∘ f(C)) _ _.
     Next Obligation.
       rewrite <- compose_assoc; now do 2 rewrite <- τ_counit.
     Qed.
@@ -138,7 +138,7 @@ Section ExtendConstruction.
   Notation "'α[E,A]'" := (F-×).
 
   Program Definition extend (A B : 𝒞) : [ T A ⇒ F B ⟶ T (E × A) ⇒ F (E × B) ] :=
-    Π.make (λ f ∙ α[E,A]⁻¹ ∘ ⟨ π₁[ F E , F A ] ∘ α[E,A] ∘ T⋅counit , f ∘ Lift(T) ⋅ π₂[ E , A ] ⟩).
+    λ f ↦ α[E,A]⁻¹ ∘ ⟨ π₁[ F E , F A ] ∘ α[E,A] ∘ T⋅counit , f ∘ Lift(T) ⋅ π₂[ E , A ] ⟩.
   Next Obligation.
     intros f g eq_fg.
     now rewrite eq_fg.

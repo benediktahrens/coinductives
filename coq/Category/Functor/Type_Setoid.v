@@ -14,7 +14,7 @@ Unset Strict Implicit.
 Definition F : 𝑻𝒚𝒑𝒆 → 𝑺𝒆𝒕𝒐𝒊𝒅 := Setoid.eq_setoid.
 
 Program Definition map {A B} : [ A ⇒ B ⟶ F A ⇒ F B ] :=
-  Π.make (λ f ∙ Π.make f).
+  λ f ↦ Π.make f.
 Next Obligation.
   idtac.
   intros x y eq_xy. rewrite eq_xy.
@@ -45,7 +45,7 @@ Require Import Theory.Morphism.
 Require Import Theory.StrongMonoidal.
 
 Program Instance 𝑬𝑸_SM : StrongMonoidal 𝑬𝑸 :=
-  λ (A B : 𝑻𝒚𝒑𝒆) ∙ Iso.make ⟨ 𝑬𝑸 ⋅ π₁ , 𝑬𝑸 ⋅ π₂ ⟩ (Π.make (λ x ∙ x)).
+  λ (A B : 𝑻𝒚𝒑𝒆) ∙ Iso.make ⟨ 𝑬𝑸 ⋅ π₁ , 𝑬𝑸 ⋅ π₂ ⟩ (λ x ↦ x).
 Next Obligation. (* id_cong *)
   intros [x x'] [y y'] [eq_xx' eq_yy']; now f_equal.
 Qed.

@@ -66,6 +66,9 @@ Module Π.
 
   Notation make f := (@mkΠ _ _ f _) (only parsing).
 
+  Notation "'λ' x .. y ↦ F" := (make (λ x ∙ .. (λ y ∙ F) ..))
+    (at level 200, x binder, y binder, no associativity).
+
   Program Definition id {A} : [A ⟶ A] := make (λ x ∙ x).
   Next Obligation.
     intros f g eq_fg. exact eq_fg.
@@ -92,6 +95,9 @@ Module Π₂.
   Notation "[ A ⟶ B ⟶ C ]" := (Π₂ A B C).
 
   Notation make  f := (@mkΠ₂ _ _ _ f _) (only parsing).
+
+  Notation "'λ' x .. y ↦₂ F" := (make (λ x ∙ .. (λ y ∙ F) ..))
+    (at level 200, x binder, y binder, no associativity).
 
 End Π₂.
 
