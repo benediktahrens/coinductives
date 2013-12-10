@@ -9,7 +9,7 @@
 % Weitere Pakete werden geladen
 %\RequirePackage{ngerman, ifthen}
 \RequirePackage[all,2cell]{xy}\SelectTips{cm}{10}\SilentMatrices\UseAllTwocells  % commutative diagrams
-\RequirePackage{amsmath, amssymb, amsfonts}
+\RequirePackage{amsmath, amssymb, amsfonts, amsthm}
 % \RequirePackage{amsthm}
 %\RequirePackage[latin1]{inputenc}
 %\RequirePackage[utf8]{inputenc}
@@ -154,17 +154,20 @@ plainpages = false
 
 % Theoremumgebungen fuer das Skript definieren
 % \theoremstyle{mydefinition}
+\theoremstyle{definition}
 \newtheorem{definition}{Definition}%[section]
 \newtheorem{example}[definition]{Example}
-\newtheorem{remark}[definition]{Remark}
+% \theoremstyle{remark}
+ \newtheorem{remark}[definition]{Remark}
 %\newtheorem{defundsatz}[definition]{Definition und Satz}
 %\newtheorem{conjecture}{Conjecture}
 % \theoremstyle{myplain}
 %\newtheorem{prop}[definition]{Proposition}
+\theoremstyle{plain}
 \newtheorem{theorem}[definition]{Theorem}
 %\newtheorem*{satz*}{Satz}
-\newtheorem{lemma}[definition]{Lemma}
-\newtheorem{proposition}[definition]{Proposition}
+% \newtheorem{lemma}[definition]{Lemma}
+% \newtheorem{proposition}[definition]{Proposition}
 %\newtheorem{cor}[definition]{Corollary}
 
 %\theoremstyle{myremark}
