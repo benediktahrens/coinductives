@@ -379,6 +379,11 @@ Similarly to relative comonads, comodules over these are functorial:
    
 \end{theorem}
 
+\section{Some more comodules}
+
+In the following we present some more constructions of comodules which can be used to specify the type of 
+destructors.
+
 Precomposition with \enquote{product with $E$} as in \Cref{def:product_in_context} is a special case of the following
 general construction:
 
@@ -394,6 +399,22 @@ general construction:
   Any comodule $M$ over $T$ with target category $\E$ then yields a comodule $MK$ with comodule operation
   \[ \mcobind^{MK}(f) := \mcobind^M(\extend_K(f)) \enspace . \]
 \end{definition}
+
+\begin{definition}[Postcomposition with a functor]\label{def:postcomposition_functor}
+  Let $T$ be a comonad relative to $F:\C\to\D$, and let $M$ be a comodule over $T$ with codomain category $\E$.
+ Let $K : \E \to \X$ be a functor. Then we define the comodule $KM$ to be the comodule over $T$ with codomain category $\X$
+  sending any object $A:\C_0$ to $K(MA)$.
+  The comodule operation is defined by
+  \[ \mcobind^{KM}(f) := K (\mcobind(f)) \enspace . 
+  \]
+\end{definition}
+
+\begin{example}[Infinite branching trees]
+  Let $B$ a set. We consider $B$ as a setoid via the functor $\eq:\Set\to\Setoid$, which we silently apply.
+  The hom functor $Y \mapsto \Setoid(B,Y)$ is an endofunctor on the category $\Setoid$: for any two setoids $X,Y$, 
+   the set of setoid morphisms $\Setoid(X,Y)$ is itself equiped with an equivalence relation.
+   Branching is given by postcomposition (\Cref{def:postcomposition_functor}) with such a hom functor.
+\end{example}
 
 
 
