@@ -379,6 +379,25 @@ Similarly to relative comonads, comodules over these are functorial:
    
 \end{theorem}
 
+Precomposition with \enquote{product with $E$} as in \Cref{def:product_in_context} is a special case of the following
+general construction:
+
+\begin{definition}[Precomposition with a functor]
+  Let $T$ be a comonad relative to $F:\C\to\D$. 
+  Let $K : \C\to\C$ be an endofunctor, and $K' : \D\to\D$ be another one, and let 
+  $\alpha : TK \to K'T$ and $\beta : K'F \to FK$ be natural transformations.
+  We then define
+  \begin{align*} \extend_K : \D(TA,FB) &\to \D(TKA,FKB)  \enspace , \\ 
+                                  f  &\mapsto \comp{\alpha_{A}}{\comp{K'f}{\beta_B}}  \enspace .
+  \end{align*}
+%
+  Any comodule $M$ over $T$ with target category $\E$ then yields a comodule $MK$ with comodule operation
+  \[ \mcobind^{MK}(f) := \mcobind^M(\extend_K(f)) \enspace . \]
+\end{definition}
+
+
+
+
 \section{Formalization in \texttt{Coq}}\label{sec:formal}
 
 All our definitions and theorems are implemented in the proof assistant \texttt{Coq} \parencite{coq}.
@@ -413,7 +432,8 @@ we do not make any use of that.
 
 \section{Conclusions}
 
-
+\subsection*{Acknowledgments}
+ We thank Ralph Matthes and Paige North for awesome discussions about stuff.
 
 \printbibliography
 
