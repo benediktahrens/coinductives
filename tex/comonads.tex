@@ -132,17 +132,32 @@ Instances of relative comonads are given by some coinductive datatypes:
 \begin{example}\label{ex:tri_comonad}
   \textcite{DBLP:conf/types/MatthesP11} study the coinductive datatype of infinite triangular matrices:
 Let $E$ be an arbitrary fixed type.
-   Infinite triangular matrices are given by the following coinductive definition in pseudo-\textsf{Coq} syntax: 
-  \begin{lstlisting}
-Coinductive Tri (E : Set) : Set -> Set :=
-   head : forall A : Set, Tri (A) -> A.
- | tail : forall A : Set, Tri (A) -> Tri (E x A).
-  \end{lstlisting}
-%TODO: that's shitty. should have inference rules for destructors here, not coq code
-%TODO: use bussproofs to put inference rules
-   \textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that infinite triangular matrices
-  are an instance of such a comonad.
-   
+   Infinite triangular matrices of type $A$ are given by the destructors shown in \Cref{fig:tri_destructors}.
+%   \begin{lstlisting}
+% Coinductive Tri (E : Set) : Set -> Set :=
+%    head : forall A : Set, Tri (A) -> A.
+%  | tail : forall A : Set, Tri (A) -> Tri (E x A).
+%   \end{lstlisting}
+% 
+\begin{figure}[hbt]
+  \centering
+  \fbox{
+    % \begin{minipage}{20em}
+     \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+    \AxiomC{$t : \Tri(A)$}\doubleLine
+     \UnaryInfC{$\head(t) : A$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$t : \Tri(A)$}\doubleLine
+                                       \UnaryInfC{$\tail(t) : \Tri(E\times A)$}
+                                       \DisplayProof
+     % \end{minipage}
+       }
+  \caption{Destructors of the $\Tri$ coinductive family} \label{fig:tri_destructors}
+\end{figure}
+\textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that infinite triangular matrices
+  are an instance of such a comonad. 
   A weak constructive comonad as defined in \parencite{DBLP:conf/types/MatthesP11}, however, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
   This yields our first example of relative comonads. 
@@ -364,7 +379,7 @@ Similarly to relative comonads, comodules over these are functorial:
    
 \end{theorem}
 
-\section{Formalization in \texttt{Coq}}
+\section{Formalization in \texttt{Coq}}\label{sec:formal}
 
 All our definitions and theorems are implemented in the proof assistant \texttt{Coq} \parencite{coq}.
 In fact we use a non-standard version of \texttt{Coq} featuring \fat{universe polymorphism}, implemented by 
@@ -402,6 +417,7 @@ we do not make any use of that.
 
 \printbibliography
 
+\newpage
 \appendix
 
 \input{formal_table}

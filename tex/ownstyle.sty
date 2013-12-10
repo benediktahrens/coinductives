@@ -29,7 +29,7 @@
 \definecolor{dk2green}{rgb}{0.4,0,0}
 \definecolor{dkviolet}{rgb}{0.6,0,0.8}
 
-%\RequirePackage{mdwlist}
+\RequirePackage{bussproofs}
 
 \RequirePackage{verbatim}
 \RequirePackage{graphicx}
@@ -51,6 +51,7 @@
 %\renewcommand{\theenumi}{\alph{enumi}}
 \renewcommand{\labelenumi}{\theenumi .}
 
+\newcommand{\constfont}[1]{\ensuremath{\mathsf{#1}}}
 
 
 \RequirePackage[colorlinks=true,linkcolor=DarkBlue,citecolor=DarkBlue,breaklinks]{hyperref}
@@ -320,3 +321,7 @@ plainpages = false
 \newcommand{\pr}{\ensuremath{\mathsf{pr}}}
 \newcommand{\cut}{\ensuremath{\mathsf{cut}}}
 \newcommand{\extend}{\ensuremath{\mathsf{extend}}}
+
+\newcommand{\Tri}{\constfont{Tri}}
+\newcommand{\head}{\constfont{head}}
+\newcommand{\tail}{\constfont{tail}}

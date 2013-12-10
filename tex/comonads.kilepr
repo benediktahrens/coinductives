@@ -36,6 +36,16 @@ Indentation Mode=normal
 Mode=LaTeX
 ReadWrite=true
 
+[document-settings,item:ownstyle.sty]
+Bookmarks=
+Encoding=UTF-8
+FoldedColumns=
+FoldedLines=
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+ReadWrite=true
+
 [item:comonads.kilepr]
 archive=true
 column=120
@@ -48,10 +58,10 @@ order=-1
 
 [item:comonads.tex]
 archive=true
-column=37
+column=6
 encoding=UTF-8
 highlight=LaTeX
-line=366
+line=141
 mode=LaTeX
 open=true
 order=0
@@ -66,14 +76,30 @@ mode=LaTeX
 open=true
 order=1
 
+[item:ownstyle.sty]
+archive=true
+column=25
+encoding=UTF-8
+highlight=LaTeX
+line=157
+mode=LaTeX
+open=true
+order=2
+
 [view-settings,view=0,item:comonads.tex]
-CursorColumn=37
-CursorLine=366
+CursorColumn=6
+CursorLine=141
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:formal_table.tex]
 CursorColumn=63
 CursorLine=14
+JumpList=
+ViMarks=
+
+[view-settings,view=0,item:ownstyle.sty]
+CursorColumn=25
+CursorLine=157
 JumpList=
 ViMarks=
