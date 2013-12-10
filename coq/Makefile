@@ -25,7 +25,8 @@ FILES=\
 	  Category/RComod.v                                  \
 	  Category/RComonad.v                                \
 	  Category/Categories.v                              \
-	  Theory/InitialTerminal.v
+	  Theory/InitialTerminal.v                           \
+	  Theory/Product.v
 
 ALL= $(FILES)
 
