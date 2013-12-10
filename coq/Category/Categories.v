@@ -33,5 +33,5 @@ Proof.
 Qed.
 
 Definition 𝑪𝒂𝒕 : Category :=
-  Category.make left_id right_id compose_assoc.
+  mkCategory left_id right_id compose_assoc.
 
