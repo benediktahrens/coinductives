@@ -1,70 +1,88 @@
-(*----------------------------------------------------------------------------*)
-(*    Category definition                                                     *)
-(*----------------------------------------------------------------------------*)
-
 Require Export Misc.Unicode.
 Require Export Theory.Notations.
-Require Export SetoidClass.
+Require Export Theory.SetoidType.
 
-(*
- * Category structure without laws
- *)
-Structure category : Type :=
-  { Obj     :> Type
-  ; Hom     : Obj → Obj → Type where "A ⇒ B" := (Hom A B)
-  ; id      : ∀ {A}, A ⇒ A
-  ; compose : ∀ {A B C}, B ⇒ C → A ⇒ B → A ⇒ C
-  ; Hom_eq  : ∀ {A B}, Rel (A ⇒ B) }.
+Generalizable All Variables.
+Set Implicit Arguments.
+Unset Strict Implicit.
 
-Arguments Hom     {_} _ _ , _ _ _.
-Arguments id      {_} {_}.
-Arguments compose {_} {A B C} _ _.
-Arguments Hom_eq  {_} {A B} _ _, _ {A B} _ _.
+(*------------------------------------------------------------------------------
+  -- ＣＡＴＥＧＯＲＹ  ＤＥＦＩＮＩＴＩＯＮ
+  ----------------------------------------------------------------------------*)
 
-Notation "_∘_" := compose.
-Infix "∘"      := compose.
+Polymorphic Structure Category : Type := mkCategory
+{ Obj           :> Type
+; Hom           :  Obj → Obj → Setoid where "A ⇒ B" := (Hom A B)
+; id            :  ∀ {A}, A ⇒ A
+; compose       :  ∀ {A B C}, [ B ⇒ C ⟶ A ⇒ B ⟶ A ⇒ C ] where "g ∘ f" := (compose g f)
+; left_id       :  ∀ {A B} {f : A ⇒ B}, id ∘ f ≈ f
+; right_id      :  ∀ {A B} {f : A ⇒ B}, f ∘ id ≈ f
+; compose_assoc :  ∀ {A B C D} {f : A ⇒ B} {g : B ⇒ C} {h : C ⇒ D}, h ∘ g ∘ f ≈ h ∘ (g ∘ f) }.
 
-Notation "_⇒_" := Hom.
-Infix "⇒"      := Hom.
+Notation "_⇒_" := Hom (only parsing).
+Infix "⇒" := Hom.
 
-Notation "'id[' X ]" := (@id _ X) (only parsing).
+Notation "_∘_" := compose (only parsing).
+Infix "∘" := compose.
 
-(* Notations for equality on RawCategory *)
-Notation "_≈ᶜ_" := Hom_eq.
-Infix "≈ᶜ"      := Hom_eq (at level 70).
-Notation "x ≈ᶜ y :> C [ A , B ]" := (@Hom_eq C A B x y) (at level 70, y at next level).
+Notation "'id[' X ]" := (id (A := X)) (only parsing).
+Notation "T '⋅id'" := (id (c := T)) (at level 0, only parsing).
+Notation "T '⋅id[' X ]" := (id (c := T) (A := X)) (at level 0, only parsing).
 
-(*
- * Laws on RawCategory
- *)
-Class IsCategory (𝒞 : category) : Prop :=
-  { Hom_eq_Equivalence :> ∀ {A B : 𝒞}, Equivalence (@Hom_eq _ A B)
-  ; left_id            : ∀ {A B : 𝒞} {f : A ⇒ B}, id ∘ f ≈ᶜ f
-  ; right_id           : ∀ {A B : 𝒞} {f : A ⇒ B}, f ∘ id ≈ᶜ f
-  ; compose_assoc      : ∀ {A B C D : 𝒞} {h : C ⇒ D} {g : B ⇒ C} {f : A ⇒ B}, h ∘ g ∘ f ≈ᶜ h ∘ (g ∘ f)
-  ; compose_cong       :> ∀ {A B C : 𝒞}, (@compose _ A B C) Preserves₂ _≈ᶜ_ ⟶ _≈ᶜ_ ⟶ _≈ᶜ_ }.
+Notation make Hom id compose := (@mkCategory _ Hom id compose _ _ _).
 
-Instance: ∀ {𝒞 : category}, IsCategory 𝒞 → ∀ {A B : 𝒞}, Setoid (A ⇒ B) := { equiv := Hom_eq }.
+(*------------------------------------------------------------------------------
+  -- ＨＥＴＥＲＯＧＥＮＥＯＵＳ  ＥＱＵＡＬＩＴＹ
+  ----------------------------------------------------------------------------*)
 
-Export SetoidNotations.
+Require Import Program.Equality. (* JMeq_eq Axiom *)
 
-(*
- * Category
- *)
+Inductive Heq_Hom {𝒞 : Category} {A B : 𝒞} (f : A ⇒ B) : ∀ {C D : 𝒞} (g : C ⇒ D), Prop :=
+  heq_hom : ∀ {g : A ⇒ B}, f ≈ g → Heq_Hom f g.
 
-Structure Category : Type :=
-  { _category :> category
-  ; isCategory : IsCategory _category }.
+Notation "_∼_" := Heq_Hom (only parsing).
+Infix    "∼"   := Heq_Hom (at level 70).
 
-Existing Instance isCategory.
+Section Heq.
 
-(*
- * Notation for morphisms
- *)
-Class Morphism (A : Type) : Type :=
-  mor : A → A → Type.
+  Variable (𝒞 : Category).
 
-Notation "_⟹_" := mor.
-Infix "⟹"      := mor (at level 60, right associativity).
+  Lemma domain_eq : ∀ {A B C D : 𝒞} {f : A ⇒ B} {g : C ⇒ D}, f ∼ g → A = C.
+  Proof.
+    intros. now elim H.
+  Qed.
 
-Instance: ∀ (𝒞 : category), Morphism 𝒞 := λ 𝒞 ∙ Hom (c := 𝒞).
+  Lemma codomain_eq : ∀ {A B C D : 𝒞} {f : A ⇒ B} {g : C ⇒ D}, f ∼ g → B = D.
+  Proof.
+    intros. now elim H.
+  Qed.
+
+  Lemma Heq_refl : ∀ {A B : 𝒞} {f : A ⇒ B},  f ∼ f.
+  Proof.
+    intros A B f. constructor. reflexivity.
+  Qed.
+
+  Lemma Heq_sym : ∀ {A B C D : 𝒞} {f : A ⇒ B} {g : C ⇒ D}, f ∼ g → g ∼ f.
+  Proof.
+    intros.
+    destruct H.
+    constructor.
+    now symmetry.
+  Qed.
+
+  Lemma Heq_trans : ∀ {A B C D E F : 𝒞} {f : A ⇒ B} {g : C ⇒ D} {h : E ⇒ F}, f ∼ g → g ∼ h → f ∼ h.
+  Proof.
+    intros. destruct H. destruct H0. constructor. etransitivity; eauto.
+  Qed.
+
+  Lemma Heq_equiv : ∀ {A B : 𝒞} {f g : A ⇒ B}, f ∼ g → f ≈ g.
+  Proof.
+    intros. dependent destruction H. exact H.
+  Qed.
+
+End Heq.
+
+Notation "∼-refl"  := Heq_refl (only parsing).
+Notation "∼-sym"   := Heq_sym (only parsing).
+Notation "∼-trans" := Heq_trans (only parsing).
+Notation "∼⇒≈"     := Heq_equiv (only parsing).

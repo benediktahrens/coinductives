@@ -5,81 +5,43 @@
 Require Import Theory.Category.
 Require Import Theory.Functor.
 Require Import Theory.RelativeComonad.
-Require Import Setoid.
+Require Import Theory.SetoidType.
 
 Generalizable All Variables.
+Set Implicit Arguments.
+Unset Strict Implicit.
 
-(*
- * Raw category
- *)
+(*------------------------------------------------------------------------------
+  -- ＣＡＴＥＧＯＲＹ  ＯＦ  ＣＯＭＯＤＵＬＥＳ
+  ----------------------------------------------------------------------------*)
 
-Section category_def.
+Section Definitions.
 
   Context `(F : Functor 𝒞 𝒟).
 
-  Notation RComonad := (RelativeComonad F).
+  Implicit Types (A B C D : RelativeComonad F).
 
-  Definition Id (T : RComonad) : T ⟹ T.
-    constructor 1 with {| T_mor := λ C ∙ id[ T C ] |}.
-    abstract (
-        (* IsRelativeComonadMor *) constructor;
-        [ (* T_mor_counit *)
-          intro C; simpl; rewrite right_id; reflexivity
-        | (* T_mor_cobind *)
-          intros C D f; simpl; rewrite left_id; do 2 rewrite right_id; reflexivity ]
-    ).
-  Defined.
+  Import Morphism.
 
-  Definition Compose (M N P : RComonad) (f : N ⟹ P) (g : M ⟹ N) : M ⟹ P.
-    constructor 1 with {| T_mor := λ C ∙ (f C) ∘ (g C) |}.
-    abstract (
-        (* IsRelativeComonadMor *) constructor;
-        [ (* T_mor_counit *)
-          intros C; simpl; rewrite <- compose_assoc;
-          do 2 rewrite <- T_mor_counit; reflexivity
-        | (* T_mor_cobind *)
-        intros C D h; simpl; setoid_rewrite <- compose_assoc at 2;
-        rewrite <- T_mor_commutes; rewrite compose_assoc;
-        setoid_rewrite <- compose_assoc at 2; rewrite T_mor_commutes;
-        rewrite <- compose_assoc; reflexivity ]
-    ).
-  Defined.
+  Infix "⇛" := Hom (at level 70).
+  Infix "⟨∘⟩" := compose (at level 40, left associativity).
 
-  Definition Eq (M N : RComonad) (f g : M ⟹ N) : Prop := ∀ (C : 𝒞), f C ≈ᶜ g C.
+  Lemma left_id A B  (f : A ⇛ B) : id ⟨∘⟩ f ≈ f.
+  Proof.
+    intro x; simpl. rewrite left_id. reflexivity.
+  Qed.
 
-  Definition rcomonad : category :=
-  {| Obj     := RComonad
-   ; Hom     := _⟹_
-   ; id      := Id
-   ; compose := Compose
-   ; Hom_eq  := Eq |}.
+  Lemma right_id A B (f : A ⇛ B) : f ⟨∘⟩ id ≈ f.
+  Proof.
+    intro x; simpl. now rewrite right_id.
+  Qed.
 
-End category_def.
+  Lemma compose_assoc A B C D (f : A ⇛ B) (g : B ⇛ C) (h : C ⇛ D) : h ⟨∘⟩ g ⟨∘⟩ f ≈ h ⟨∘⟩ (g ⟨∘⟩ f).
+  Proof.
+    intro x; simpl. now rewrite compose_assoc.
+  Qed.
 
-(*
- * IsCategory
- *)
-Definition rcomonad_IsCategory `{F : Functor 𝒞 𝒟} : IsCategory (rcomonad F).
-Proof. constructor.
-  - (* Hom_eq_equivalence *)
-    intros T S. constructor; hnf; simpl.
-    + (* reflexivity *)
-      intros f C. reflexivity.
-    + (* symmetry *)
-      intros f g eq_sym C. symmetry. apply eq_sym.
-    + (* transitivity *)
-      intros f g h eq_fg eq_gh C. etransitivity. apply eq_fg. apply eq_gh.
-  - (* left_id *)
-    intros T S f C. simpl. rewrite left_id. reflexivity.
-  - (* right_id *)
-    intros T S f C. simpl. rewrite right_id. reflexivity.
-  - (* assoc *)
-    intros T S P Q h g f C; simpl. rewrite compose_assoc. reflexivity.
-  - (* compose_cong *)
-    intros T S U f₁ f₂ eq_f₁f₂ g₁ g₂ eq_g₁g₂ C. simpl.
-    rewrite (eq_f₁f₂ C), (eq_g₁g₂ C). reflexivity.
-Qed.
+  Definition 𝑹𝑪𝒐𝒎𝒐𝒏𝒂𝒅 : Category :=
+    mkCategory left_id right_id compose_assoc.
 
-Definition 𝑹𝑪𝒐𝒎𝒐𝒏𝒂𝒅 `(F : Functor 𝒞 𝒟) : Category :=
-  {| _category := rcomonad F
-   ; isCategory := rcomonad_IsCategory |}.
+End Definitions.

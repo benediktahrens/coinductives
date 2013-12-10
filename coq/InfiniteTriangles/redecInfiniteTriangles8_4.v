@@ -742,7 +742,7 @@ Add Parametric Relation (A: Type): (TriS A) (@bisimilarS A)
 Instance EqStImpBisimS (A: Type): subrelation (@EqSt (A * Stream E))(@bisimilarS A).
 Proof.
   cofix Hc.
-  do 4 red; intros s1 s2 Hyp.
+  hnf; intros s1 s2 Hyp.
   destruct s1 as [[a1 es1] r1]; destruct s2 as [[a2 es2] r2].
   destruct Hyp as [H1 H2].
   simpl in H1.
@@ -1441,7 +1441,7 @@ Lemma comonad3Sgen (A B C: Type) (f: Stream A -> B) (g: Stream B -> C) (t: Strea
 Proof.
   unfold redecSgen.
   rewrite <- map_fct2.
-  fold ((map f) o (@tails A)).
+  change (fun t => map f (tails t)) with ((map f) o (@tails A)).
   rewrite <- map_fct2.
   apply map_cong.
   rewrite tailscomonadS3.

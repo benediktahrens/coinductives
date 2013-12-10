@@ -1,121 +1,121 @@
-(*----------------------------------------------------------------------------*)
-(*    Relative Comonad definition                                             *)
-(*----------------------------------------------------------------------------*)
-
 Require Import Theory.Category.
 Require Import Theory.Functor.
+Require Import Theory.SetoidType.
 
+Set Implicit Arguments.
+Unset Strict Implicit.
 Generalizable All Variables.
 
-(*
- * Relative Comonad without laws
- *)
-Structure relative_comonad `(F : functor 𝒞 𝒟) : Type :=
-  { T      :> 𝒞 → 𝒟
-  ; counit : ∀ {X : 𝒞}, T X ⇒ F X
-  ; cobind : ∀ {X Y : 𝒞}, T X ⇒ F Y → T X ⇒ T Y }.
+(*------------------------------------------------------------------------------
+  -- ＲＥＬＡＴＩＶＥ  ＣＯＭＯＮＡＤ  ＤＥＦＩＮＩＴＩＯＮ
+  ----------------------------------------------------------------------------*)
 
-Arguments counit {_} {_} {_} {_} {X}.
-Arguments cobind {_} {_} {_} {_} {X Y} _.
+Structure RelativeComonad `(F : Functor 𝒞 𝒟) : Type := make
+{ T              :> 𝒞 → 𝒟
+; counit         : ∀ {X}, T X ⇒ F X
+; cobind         : ∀ {X Y}, [ (T X ⇒ F Y) ⟶ T X ⇒ T Y ]
+; cobind_counit  : ∀ {X}, cobind counit ≈ id[ T X ]
+; counit_cobind  : ∀ {X Y} {f : T X ⇒ F Y}, counit ∘ cobind(f) ≈ f
+; cobind_compose : ∀ {X Y Z} {f : T X ⇒ F Y} {g : T Y ⇒ F Z}, cobind(g) ∘ cobind(f) ≈ cobind(g ∘ cobind(f)) }.
 
-Notation "'counit[' X ]" := (@counit _ _ _ _ X) (only parsing).
+Notation "'counit[' X ]" := (counit _ (X := X)) (only parsing).
+Notation "T '⋅counit'" := (counit T) (at level 0, only parsing).
+Notation "T '⋅counit[' X ]" := (counit T (X := X)) (at level 0, only parsing).
 
-(*
- * Relative Comonad laws
- *)
-Class IsRelativeComonad `{F : functor 𝒞 𝒟} (T : relative_comonad F) : Prop :=
-  { cobind_counit   : ∀ {X : 𝒞}, cobind (counit[ X ]) ≈ᶜ id[ T X ]
-  ; counit_cobind   : ∀ {X Y : 𝒞} {f : T X ⇒ F Y}, counit ∘ cobind(f) ≈ᶜ f
-  ; cobind_compose  : ∀ {X Y Z : 𝒞} {f : T X ⇒ F Y} {g : T Y ⇒ F Z},
-                        cobind(g) ∘ cobind(f) ≈ᶜ cobind(g ∘ cobind(f))
-  ; cobind_cong     :> ∀ {X Y : 𝒞}, (cobind (r := T) (X := X) (Y := Y)) Preserves _≈ᶜ_ ⟶ _≈ᶜ_ }.
+Notation "T '⋅cobind'" := (cobind T) (at level 0, only parsing).
 
-(*
- * Relative Comonad
- *)
-Structure RelativeComonad `(F : Functor 𝒞 𝒟) : Type :=
-  { _relative_comonad :> relative_comonad F
-  ; isRelativeComonad  : IsRelativeComonad _relative_comonad }.
 
-Existing Instance isRelativeComonad.
+(*------------------------------------------------------------------------------
+  -- ＦＵＮＣＴＯＲ
+  ----------------------------------------------------------------------------*)
 
-(*
- * Relative Comonad ⟹ Functor
- *)
+Section Functor.
 
-Section RComonad_Functor.
+  Context `{F : Functor 𝒞 𝒟} (T : RelativeComonad F).
 
-  Definition lift `{F : functor 𝒞 𝒟} (T : relative_comonad F) {A B : 𝒞} (f : A ⇒ B) : T A ⇒ T B :=
-    cobind (F⋅f ∘ counit).
+  Program Definition lift {A B} : [ (A ⇒ B) ⟶ T A ⇒ T B ] :=
+    Π.make (λ f ∙ T⋅cobind (F⋅f ∘ T⋅counit)).
+  Next Obligation.
+    intros f g eq_fg. now rewrite eq_fg.
+  Qed.
 
-  Section Lift_Functoriality.
+  Lemma lift_id : ∀ A, id[ T A ] ≈ lift id[ A ].
+  Proof.
+    intros A; simpl; unfold lift.
+    rewrite <- identity, left_id, cobind_counit.
+    reflexivity.
+  Qed.
 
-    Context `{F : Functor 𝒞 𝒟} {T : RelativeComonad F}.
+  Lemma lift_compose : ∀ A B C (f : A ⇒ B) (g : B ⇒ C), lift (g ∘ f) ≈ (lift g) ∘ (lift f).
+  Proof.
+    intros A B C g f; simpl; unfold lift.
+    rewrite cobind_compose,
+            compose_assoc,
+            counit_cobind,
+            <- compose_assoc,
+            <- map_compose.
+    reflexivity.
+  Qed.
 
-    Lemma lift_id : ∀ (A : 𝒞), id[ T A ] ≈ lift T id[ A ].
-    Proof.
-      intro A; simpl; unfold lift.
-      rewrite <- identity, left_id, cobind_counit.
-      reflexivity.
+  Definition Lift : Functor 𝒞 𝒟 := mkFunctor lift_id lift_compose.
+
+End Functor.
+
+
+(*------------------------------------------------------------------------------
+  -- ＭＯＲＰＨＩＳＭ
+  ----------------------------------------------------------------------------*)
+
+Module Morphism.
+
+  Structure Morphism `(F : Functor 𝒞 𝒟) (T S : RelativeComonad F) : Type := make
+  { τ          :> ∀ C, T C ⇒ S C
+  ; τ_counit   : ∀ {C}, T⋅counit[ C ] ≈ S⋅counit[ C ] ∘ τ(C)
+  ; τ_commutes : ∀ {C D} {f : S C ⇒ F D}, τ(D) ∘ T⋅cobind (f ∘ τ(C)) ≈ S⋅cobind f ∘ τ(C) }.
+
+  (* -- Ｉｄｅｎｔｉｔｙ  /  Ｃｏｍｐｏｓｉｔｉｏｎ                      -- *)
+  Section id_composition.
+
+    Context `{F : Functor 𝒞 𝒟}.
+
+    Implicit Types (T S U : RelativeComonad F).
+
+    Program Definition Hom T S : Setoid :=
+      Setoid.make (Morphism T S) (λ f g ∙ ∀ x, f x ≈ g x).
+    Next Obligation.
+      constructor.
+      - intros f x; reflexivity.
+      - intros f g eq_fg x. symmetry. apply eq_fg.
+      - intros f g h eq_fg eq_gh; etransitivity; eauto.
     Qed.
 
-    Lemma lift_compose : ∀ (A B C : 𝒞) (g : B ⇒ C) (f : A ⇒ B), lift T (g ∘ f) ≈ (lift T g) ∘ (lift T f).
-    Proof.
-      intros A B C g f; simpl; unfold lift.
-      rewrite cobind_compose,
-              compose_assoc,
-              counit_cobind,
-              <- compose_assoc,
-              <- Fhom_compose.
-      reflexivity.
+    Infix "⇛" := Hom (at level 70).
+
+    Program Definition id {S} : S ⇛ S :=
+      make (τ := λ C ∙ id[ S C ]) _ _.
+    Next Obligation.
+      now rewrite right_id.
+    Qed.
+    Next Obligation.
+      rewrite left_id; now do 2 rewrite right_id.
     Qed.
 
-    Lemma lift_cong : ∀ (A B : 𝒞), (lift T (A := A) (B := B)) Preserves _≈_ ⟶ _≈_.
-    Proof.
-      intros A B f g eq_fg.
-      unfold lift. now rewrite eq_fg.
+    Program Definition compose {S T U} : [ T ⇛ U ⟶ S ⇛ T ⟶ S ⇛ U ] :=
+      Π₂.make (λ g f ∙ make (τ := λ C ∙ g(C) ∘ f(C)) _ _ ).
+    Next Obligation.
+      rewrite <- compose_assoc; now do 2 rewrite <- τ_counit.
+    Qed.
+    Next Obligation.
+      setoid_rewrite <- compose_assoc at 2.
+      rewrite <- τ_commutes. rewrite compose_assoc.
+      setoid_rewrite <- compose_assoc at 2. rewrite τ_commutes.
+      rewrite <- compose_assoc. reflexivity.
+    Qed.
+    Next Obligation.
+      intros f₁ f₂ eq_f₁f₂ g₁ g₂ eq_g₁g₂ x. simpl.
+      now rewrite eq_f₁f₂, eq_g₁g₂.
     Qed.
 
-  End Lift_Functoriality.
+  End id_composition.
 
-  Program Definition RelativeComonad_Functor `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) : 𝒞 ⟹ 𝒟 :=
-    {| _functor := {| Fobj := T ; Fhom := λ A B ∙ lift T (A := A) (B := B) |}
-     ; isFunctor  := {| identity := lift_id ; Fhom_compose := lift_compose ; Fhom_cong := lift_cong |} |}.
-
-End RComonad_Functor.
-
-(*
- * Morphism between Relative comonads
- *)
-
-Section RelativeComonad_Morphism.
-
-  Notation cobind T f := (cobind (r := T) f).
-  Notation counit T X := (counit (r := T) (X := X)).
-
-  Structure relative_comonad_mor `{F : functor 𝒞 𝒟} (T S : relative_comonad F) : Type :=
-    { T_mor :> ∀ (C : 𝒞), T C ⇒ S C }.
-
-  Class IsRelativeComonadMor `{F : functor 𝒞 𝒟} {T S : relative_comonad F}
-          (τ : relative_comonad_mor T S) : Prop :=
-    { T_mor_counit   : ∀ {C : 𝒞}, T.(counit) C ≈ᶜ S.(counit) C ∘ τ(C)
-    ; T_mor_commutes : ∀ {C D : 𝒞} {f : S C ⇒ F D}, τ(D) ∘ T.(cobind) (f ∘ τ(C)) ≈ᶜ S.(cobind) f ∘ τ(C) }.
-
-  Structure RelativeComonadMor `{F : Functor 𝒞 𝒟} (T S : RelativeComonad F) : Type :=
-    { _relative_comonad_mor :> relative_comonad_mor T S
-    ; isRelativeComonadMor  : IsRelativeComonadMor _relative_comonad_mor }.
-
-  Global Existing Instance isRelativeComonadMor.
-
-
-  (*
-   * Morphism instances
-   *)
-
-  Global Instance: ∀ `{F : functor 𝒞 𝒟}, Morphism (relative_comonad F) :=
-    {| mor := relative_comonad_mor |}.
-
-  Global Instance: ∀ `{F : Functor 𝒞 𝒟}, Morphism (RelativeComonad F) :=
-    {| mor := RelativeComonadMor |}.
-
-End RelativeComonad_Morphism.
+End Morphism.

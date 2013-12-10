@@ -12,6 +12,7 @@ COQDEP=$(COQBIN)coqdep $(LIBS)
 FILES=\
 	  Misc/Unicode.v                                     \
 	  Theory/Notations.v                                 \
+	  Theory/SetoidType.v                                \
 	  Theory/Category.v                                  \
 	  Theory/Functor.v                                   \
 	  Theory/RelativeComonad.v                           \
@@ -22,7 +23,8 @@ FILES=\
 	  Category/RelativeComonad/InfiniteTriangles.v       \
 	  Theory/Comodule.v                                  \
 	  Category/RComod.v                                  \
-	  Category/RComonad.v
+	  Category/RComonad.v                                \
+	  Category/Categories.v
 
 ALL= $(FILES)
 

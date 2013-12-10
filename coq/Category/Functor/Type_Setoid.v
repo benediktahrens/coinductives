@@ -1,36 +1,37 @@
-(*----------------------------------------------------------------------------*)
-(*    Free functor betwen 𝑻𝒚𝒑𝒆 and 𝑺𝒆𝒕𝒐𝒊𝒅                                      *)
-(*----------------------------------------------------------------------------*)
-
 Require Import Theory.Category.
 Require Import Theory.Functor.
 Require Import Category.Type.
 Require Import Category.Setoid.
+Require Import Theory.SetoidType.
 
-(*
- * RawFunctor
- *)
-Program Definition TS_functor : functor 𝑻𝒚𝒑𝒆 𝑺𝒆𝒕𝒐𝒊𝒅 :=
-  {| Fobj := FreeSetoid
-   ; Fhom := λ A B f ∙ {| setoid_hom := f |} |}.
+Set Implicit Arguments.
+Unset Strict Implicit.
 
-(*
- * IsFunctor
- *)
-Definition TS_IsFunctor : IsFunctor TS_functor.
-Proof. constructor.
-  + (* identity *)
-    intros X. simpl; auto.
-  + (* resp_compose *)
-    intros A B C g f; simpl.
-    intros x y eq_xy; now rewrite eq_xy.
-  + (* Fhom_cong *)
-    intros A B f g eq_fg; simpl.
-    intros x y eq_xy. now rewrite eq_xy.
-Defined.
+(*------------------------------------------------------------------------------
+  -- ＦＵＮＣＴＯＲ  ＥＱ
+  ----------------------------------------------------------------------------*)
 
-Definition TS : 𝑻𝒚𝒑𝒆 ⟹ 𝑺𝒆𝒕𝒐𝒊𝒅 :=
-  {| _functor := TS_functor
-   ; isFunctor  := TS_IsFunctor |}.
+Definition F : 𝑻𝒚𝒑𝒆 → 𝑺𝒆𝒕𝒐𝒊𝒅 := Setoid.eq_setoid.
 
-Notation "'𝑻𝒚𝒑𝒆⟹𝑺𝒆𝒕𝒐𝒊𝒅'" := TS.
+Program Definition map {A B} : [ A ⇒ B ⟶ F A ⇒ F B ] :=
+  Π.make (λ f ∙ Π.make f).
+Next Obligation.
+  idtac.
+  intros x y eq_xy. rewrite eq_xy.
+  reflexivity.
+Qed.
+Next Obligation.
+  intros f g eq_fg x y eq_xy. simpl. rewrite eq_xy. apply eq_fg.
+Qed.
+
+Definition identity A : id[ F A ] ≈ map id[ A ].
+Proof.
+  intros x y eq_xy. now rewrite eq_xy.
+Qed.
+
+Definition map_compose A B C (f : A ⇒ B) (g : B ⇒ C) : map (g ∘ f) ≈ (map g) ∘ (map f).
+Proof.
+  intros x y eq_xy. now rewrite eq_xy.
+Qed.
+
+Definition 𝑬𝑸 : Functor 𝑻𝒚𝒑𝒆 𝑺𝒆𝒕𝒐𝒊𝒅 := mkFunctor identity map_compose.
