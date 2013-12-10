@@ -132,14 +132,15 @@ Instances of relative comonads are given by some coinductive datatypes:
 \begin{example}\label{ex:tri_comonad}
   \textcite{DBLP:conf/types/MatthesP11} study the coinductive datatype of infinite triangular matrices:
 Let $E$ be an arbitrary fixed type.
-   Infinite triangular matrices are given by the following coinductive definition: 
+   Infinite triangular matrices are given by the following coinductive definition in pseudo-\textsf{Coq} syntax: 
   \begin{lstlisting}
-Coinductive Tri : Set -> Set :=
+Coinductive Tri (E : Set) : Set -> Set :=
    head : forall A : Set, Tri (A) -> A.
  | tail : forall A : Set, Tri (A) -> Tri (E x A).
   \end{lstlisting}
-%
-  \textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that infinite triangular matrices
+%TODO: that's shitty. should have inference rules for destructors here, not coq code
+%TODO: use bussproofs to put inference rules
+   \textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that infinite triangular matrices
   are an instance of such a comonad.
    
   A weak constructive comonad as defined in \parencite{DBLP:conf/types/MatthesP11}, however, is \emph{precisely}
