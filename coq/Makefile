@@ -24,7 +24,8 @@ FILES=\
 	  Theory/Comodule.v                                  \
 	  Category/RComod.v                                  \
 	  Category/RComonad.v                                \
-	  Category/Categories.v
+	  Category/Categories.v                              \
+	  Theory/InitialTerminal.v
 
 ALL= $(FILES)
 
