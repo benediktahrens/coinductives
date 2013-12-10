@@ -59,6 +59,8 @@
   In \Cref{sec:preliminaries} we introduce the notions and notations used later on.
   In \Cref{sec:comonads} we recall the definition of relative comonads and define comodules over such comonads.
   Some constructions of comodules are given.
+  We state our main theorem (\Cref{ex:final_sem_tri}).
+  In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \textsf{Coq}.
  
 \section{Preliminaries}\label{sec:preliminaries}
 
@@ -215,10 +217,12 @@ Similarly to relative comonads, comodules over these are functorial:
 \end{remark}
 
 
-\begin{definition}[Constant comodule]
-  Given $e:\E_0$, the function $\C_0\to\E_0$ sending any object of $\C$ to $e$ is equiped with
-  the structure of a comodule over $T$.
-\end{definition}
+
+%TODO: not needed for now
+% \begin{definition}[Constant comodule]
+%   Given $e:\E_0$, the function $\C_0\to\E_0$ sending any object of $\C$ to $e$ is equiped with
+%   the structure of a comodule over $T$.
+% \end{definition}
 
 %TODO: is not needed
 % \begin{definition}[Product comodule]
@@ -336,7 +340,7 @@ Similarly to relative comonads, comodules over these are functorial:
 
 
 
-\begin{example}[Coinitial semantics for triangular matrices]\label{ex:final_sem_tri}
+\begin{theorem}[Coinitial semantics for triangular matrices]\label{ex:final_sem_tri}
    Let $\mathcal{T}$ be the category where an object is a pair $(T,t)$ of a relative comonad $T$ over the functor
    $\eq: \Set \to \Setoid$ together with a morphism of comodules $t : T \to T(E \times \_)$.
    A morphism $\tau : (T,t) \to (S,s)$ is given by a morphism of relative comonads $\tau : T \to S$ such that
@@ -357,7 +361,7 @@ Similarly to relative comonads, comodules over these are functorial:
    Then the relative comonad of \Cref{ex:tri_comonad}, equiped with the morphism of comodules of \Cref{ex:tail_comodule},
    constitutes the terminal---\enquote{coinitial}---object in this category.
    
-\end{example}
+\end{theorem}
 
 \section{Formalization in \texttt{Coq}}
 
