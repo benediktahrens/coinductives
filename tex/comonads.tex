@@ -459,6 +459,7 @@ general construction:
 All our definitions and theorems are implemented in the proof assistant \texttt{Coq} \parencite{coq}.
 In fact we use a non-standard version of \texttt{Coq} featuring \fat{universe polymorphism}, implemented by 
 M.\ Sozeau.
+The exact version we use is \parencite{coq_polymorphic}.
 % TODO: give reference. is there one?
 
 \subsection{Implementation choices}
@@ -487,12 +488,22 @@ we do not make any use of that.
 %TODO: constructors vs destructors
 % TODO: cite abel's work on coinductive types through destructors
 
+The biggest discrepancy between formal and informal definition arises in the construction of the terminal object itself:
+in \textsf{Coq}, coinductive types are specified through \fat{constructors} rather than \fat{destructors}.
+Work on the the declaration of coinductive types via destructors is done in \textsf{Agda}, cf.\ \parencite{DBLP:conf/popl/AbelPTS13}.
+
 \section{Conclusions and future work}
 
 %TODO: expand
- Notion of signature by postcomposition and precomposition with suitable functors.
+
+In the future we would like to define a suitable notion of \emph{signature} 
+by postcomposition and precomposition with suitable functors. In this framework, the \emph{arity} of 
+a destructor $d$ of some coinductive type $T$ will be given as $d : T \to K'TK$, where $K$ and $K'$ are 
+functors satisfying some properties sufficient for ensuring existence of the terminal object---typically some 
+positivity condition and a condition involving the comonadic operations.
  
 %TODO: expand
+Another potential goal is the integration of \emph{equations} into the notion of signature. 
  Equations, e.g., branching modulo permutation of subtrees
 
 \subsection*{Acknowledgments}
