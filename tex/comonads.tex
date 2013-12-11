@@ -21,19 +21,30 @@
 \author{Benedikt Ahrens}
 \author{R\'egis Spadotti}
 
-\title[Comodules over relative comonads for coinitial semantics]{Comodules over relative comonads \\ for coinitial semantics}
-
+\title[Coinitial semantics for redecoration of triangular matrices]{Coinitial semantics \\ for redecoration of triangular matrices}
+% Comodules over relative comonads for coinitial semantics
 \newcommand{\fat}[1]{\textbf{#1}}
 
 \begin{document}
 
 
 \begin{abstract}
-  We give a category-theoretic characterisation of heterogeneous coinductive datatypes as terminal---\enquote{coinitial}---objects.
+  Infinite triangular matrices and, in particular, the \emph{redecoration} operation on them, 
+  were studied by \citeauthor{DBLP:conf/types/MatthesP11}. They characterize redecoration
+  as the cobind operation of what they call a \enquote{weak constructive comonad}.
   
-  The right notion of sameness for terms of a coinductive datatype is not equality but \emph{bisimulation}.
-  Consequently, we model coinductive datatypes that are parametrized by a set not as a comonad on the category of sets,
-  but as a \emph{relative} comonad from sets to setoids, over a suitable functor.
+  In this work, we identify weak constructive comonads as an instance of the more general notion of 
+  \emph{relative comonad}.
+  Building up on the work by \citeauthor{DBLP:conf/types/MatthesP11}, we give a category-theoretic
+  characterisation of infinite triangular matrices---equiped with the redecoration operation---as the \emph{terminal object}
+  in some category.
+%   We give a category-theoretic characterisation of heterogeneous coinductive datatypes as terminal---\enquote{coinitial}---objects.
+% 
+  For this, we develop the notion of \emph{comodule over a relative comonad} and provide some constructions of such comodules.
+
+%   The right notion of sameness for terms of a coinductive datatype is not equality but \emph{bisimulation}.
+%   Consequently, we model coinductive datatypes that are parametrized by a set not as a comonad on the category of sets,
+%   but as a \emph{relative} comonad from sets to setoids, over a suitable functor.
 \end{abstract}
 
 \maketitle
@@ -44,14 +55,17 @@
 
  Simple inductive types---\textsf{W}-types---are characterised categorically as initial algebras of
  a polynomial functor.
- This characterisation has been extended to heterogeneous datatypes, e.g., the type of $\lambda$-terms,
- in various formulations \parencite{fpt, ahrens_relmonads}.
- 
  Similarly, simple coinductive types are characterised as terminal---coinitial---algebras of polynomial functors.
- In this work we extend this characterisation to heterogeneous coinductive types.
- Our motivating example is given by the coinductive datatype of infinite triangular matrices as studied by
+ The characterisation of inductive types as initial algebras 
+ has been extended to heterogeneous datatypes, e.g., the type of $\lambda$-terms,
+ in various formulations \parencite{fpt, ahrens_relmonads}.
+ In this work we give an analogous extension of this characterisation to an instance of heterogeneous \fat{co}inductive types,
+ namely the coinductive datatype of infinite triangular matrices as studied by
  \textcite{DBLP:conf/types/MatthesP11}.
 
+ Our framework should generalize to heterogeneous coinductive datatypes specified by signatures in the spirit of \parencite{ahrens_relmonads},
+ but we lack interesting examples other than the considered triangular matrices.
+ 
  All our definitions, examples and lemmas have been implemented in the proof assistant \textsf{Coq} \parencite{coq}.
  In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
  
@@ -327,19 +341,22 @@ Similarly to relative comonads, comodules over these are functorial:
 \end{remark}
 
 %TODO: wrong, i leave it in for reference
-\begin{definition}[Pullback comodule, WRONG]\label{def:pullback_comodule}
-  Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
-  comodule over $S$ towards a category $\E$. We define the \fat{pullback comodule} $\tau^*M$ to be the comodule over $T$ given by
-  \[  \tau^*M(c) := Mc \]
-  and 
-   \[ \mcobind^{\tau^*M}(f) := \mcobind^M(\comp{\tau_c}{f}) \enspace . \]
-   
-  \noindent
-  Pullback is functorial: if $M$ and $N$ are comodules over $S$ with codomain category $\E$, and $\alpha : M\to N$ is 
-    a morphism of comodules, then we define \[\tau^*\alpha : \tau^*M \to \tau^*N\] 
-    as the family of morphisms
-     \[ \tau^*\alpha_c := \alpha_c \enspace . \]
-\end{definition}
+% \begin{definition}[Pullback comodule, WRONG]\label{def:pullback_comodule}
+%   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
+%   comodule over $S$ towards a category $\E$. We define the \fat{pullback comodule} $\tau^*M$ to be the comodule over $T$ given by
+%   \[  \tau^*M(c) := Mc \]
+%   and 
+%    \[ \mcobind^{\tau^*M}(f) := \mcobind^M(\comp{\tau_c}{f}) \enspace . \]
+%    
+%   \noindent
+%   Pullback is functorial: if $M$ and $N$ are comodules over $S$ with codomain category $\E$, and $\alpha : M\to N$ is 
+%     a morphism of comodules, then we define \[\tau^*\alpha : \tau^*M \to \tau^*N\] 
+%     as the family of morphisms
+%      \[ \tau^*\alpha_c := \alpha_c \enspace . \]
+% \end{definition}
+
+
+Given a morphism of comonads, we can \enquote{transport} comodules over the source comonad to comodules over the target comonad:
 
 
 \begin{definition}[Pushforward comodule]\label{def:pushforward_comodule}
@@ -373,7 +390,7 @@ Similarly to relative comonads, comodules over these are functorial:
 
 
 
-\begin{theorem}[Coinitial semantics for triangular matrices]\label{ex:final_sem_tri}
+\begin{theorem}[Coinitial semantics for triangular matrices with redecoration]\label{ex:final_sem_tri}
    Let $\mathcal{T}$ be the category where an object is a pair $(T,t)$ of a relative comonad $T$ over the functor
    $\eq: \Set \to \Setoid$ together with a morphism of comodules $t : T \to T(E \times \_)$.
    A morphism $\tau : (T,t) \to (S,s)$ is given by a morphism of relative comonads $\tau : T \to S$ such that
@@ -436,6 +453,7 @@ general construction:
 
 
 
+
 \section{Formalization in \texttt{Coq}}\label{sec:formal}
 
 All our definitions and theorems are implemented in the proof assistant \texttt{Coq} \parencite{coq}.
@@ -467,8 +485,15 @@ we do not make any use of that.
 \subsection{Formal vs.\ informal definitions}
 
 %TODO: constructors vs destructors
+% TODO: cite abel's work on coinductive types through destructors
 
-\section{Conclusions}
+\section{Conclusions and future work}
+
+%TODO: expand
+ Notion of signature by postcomposition and precomposition with suitable functors.
+ 
+%TODO: expand
+ Equations, e.g., branching modulo permutation of subtrees
 
 \subsection*{Acknowledgments}
  We thank Ralph Matthes and Paige North for awesome discussions about stuff.
