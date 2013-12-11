@@ -350,10 +350,11 @@ Similarly to relative comonads, comodules over these are functorial:
    \[ \mcobind^{\tau_*M}(f) := \mcobind^M(\comp{\tau_A}{f}) \enspace . \]
    
   \noindent
-  Pullback is functorial: if $M$ and $N$ are comodules over $S$ with codomain category $\E$, and $\alpha : M\to N$ is 
-    a morphism of comodules, then we define \[\tau^*\alpha : \tau^*M \to \tau^*N\] 
+  Pushforward is functorial: if $M$ and $N$ are comodules over $S$ with codomain category $\E$, and $\alpha : M\to N$ is 
+    a morphism of comodules, then we define \[\tau_*\alpha : \tau_*M \to \tau_*N\] 
     as the family of morphisms
-     \[ \tau^*\alpha_c := \alpha_c \enspace . \]
+     \[ \tau_*\alpha_c := \alpha_c \enspace . \]
+  It is easy to check that this is a morphism of comodules between $\tau_*M$ and $\tau_*N$.
 \end{definition}
 
 
