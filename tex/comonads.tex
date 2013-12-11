@@ -326,8 +326,8 @@ Similarly to relative comonads, comodules over these are functorial:
  Fix a functor $F : \C\to\D$. Relative comonads over $F$ and their morphisms form a category.
 \end{remark}
 
-
-\begin{definition}[Pullback comodule]\label{def:pullback_comodule}
+%TODO: wrong, i leave it in for reference
+\begin{definition}[Pullback comodule, WRONG]\label{def:pullback_comodule}
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
   comodule over $S$ towards a category $\E$. We define the \fat{pullback comodule} $\tau^*M$ to be the comodule over $T$ given by
   \[  \tau^*M(c) := Mc \]
@@ -341,17 +341,33 @@ Similarly to relative comonads, comodules over these are functorial:
      \[ \tau^*\alpha_c := \alpha_c \enspace . \]
 \end{definition}
 
+
+\begin{definition}[Pushforward comodule]\label{def:pushforward_comodule}
+  Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
+  comodule over $T$ towards a category $\E$. We define the \fat{pushforward comodule} $\tau_*M$ to be the comodule over $S$ given by
+  \[  \tau_*M(c) := Mc \]
+  and, for $f : \D(SA,FB)$,
+   \[ \mcobind^{\tau_*M}(f) := \mcobind^M(\comp{\tau_A}{f}) \enspace . \]
+   
+  \noindent
+  Pullback is functorial: if $M$ and $N$ are comodules over $S$ with codomain category $\E$, and $\alpha : M\to N$ is 
+    a morphism of comodules, then we define \[\tau^*\alpha : \tau^*M \to \tau^*N\] 
+    as the family of morphisms
+     \[ \tau^*\alpha_c := \alpha_c \enspace . \]
+\end{definition}
+
+
 \begin{definition}[Morphism of comonads induces morphism of comodules]
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$.
-  Then $\tau$ gives rise to a morphism of comodules over $T$ from the tautological comodule
-  of $T$ to the pullback along $\tau$ of the tautological comodule over $S$,
-  \[ \tau : T \to \tau^*S \enspace . \]
+  Then $\tau$ gives rise to a morphism of comodules over $S$ from the pushforward of the tautological comodule
+  of $T$ along $\tau$ of the tautological comodule over $S$,
+  \[ \tau : \tau_*T \to S \enspace . \]
 \end{definition}
 
 
 \begin{remark}\label{rem:prod_pullback_commute}
- Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pullback_comodule} commute in the sense that
- we have an isomorphism of comodules \[\tau^*(M(E\times \_)) \cong (\tau^*M)(E \times \_) \enspace . \]
+ Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pushforward_comodule} commute in the sense that
+ we have an isomorphism of comodules \[\tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_) \enspace . \]
 \end{remark}
 
 
@@ -360,19 +376,19 @@ Similarly to relative comonads, comodules over these are functorial:
    Let $\mathcal{T}$ be the category where an object is a pair $(T,t)$ of a relative comonad $T$ over the functor
    $\eq: \Set \to \Setoid$ together with a morphism of comodules $t : T \to T(E \times \_)$.
    A morphism $\tau : (T,t) \to (S,s)$ is given by a morphism of relative comonads $\tau : T \to S$ such that
-   the following diagram of comodule morphisms in the category $\RComod(T,\E)$ commutes,
+   the following diagram of comodule morphisms in the category $\RComod(S,\E)$ commutes,
    
-   \[     \comp{t}{\tau(E\times \_)} = \comp{\tau}{\tau^*s} \enspace , \]
+   \[     \comp{\tau_*t}{\tau(E\times \_)} = \comp{\tau}{s} \enspace , \]
    i.e.\, diagrammatically,   
    \[ \begin{xy}
-       \xymatrix{   T  \ar[r]^t \ar[d]_{\tau}  &  **[r]T (E\times \_ )\ar[d]^{\tau(E\times \_)} \\
-                    \tau^*S  \ar[r]_{\tau^*s}  &  **[r] \tau^*S (E\times \_ )
+       \xymatrix{   \tau_*T  \ar[r]^{\tau_*t} \ar[d]_{\tau}  &  **[r] \tau_*T (E\times \_ )\ar[d]^{\tau(E\times \_)} \\
+                    S  \ar[r]_{s}  &  **[r] S (E\times \_ )
         }
       \end{xy}
    \]
 
    \noindent
-   Here in the lower right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
+   Here in the upper right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
    
    Then the relative comonad of \Cref{ex:tri_comonad}, equiped with the morphism of comodules of \Cref{ex:tail_comodule},
    constitutes the terminal---\enquote{coinitial}---object in this category.
