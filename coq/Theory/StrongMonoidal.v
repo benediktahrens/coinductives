@@ -1,5 +1,4 @@
 Require Import Theory.Category.
-Require Import Theory.Morphism.
 Require Import Theory.Product.
 
 Generalizable All Variables.

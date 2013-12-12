@@ -65,6 +65,6 @@ Section Definitions.
   Qed.
 
   Definition 𝑻𝑹𝑰 : RelativeComonad 𝑬𝑸 :=
-    make Redec_Top Top_Redec Redec_compose.
+    Core.make Redec_Top Top_Redec Redec_compose.
 
 End Definitions.

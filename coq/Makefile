@@ -16,6 +16,7 @@ FILES=\
 	  Theory/Category/Core.v                             \
 	  Theory/Category/Functor.v                          \
 	  Theory/Category/InitialTerminal.v                  \
+	  Theory/Category/Isomorphism.v                      \
 	  Theory/Category.v                                  \
 	  Theory/RelativeComonad/Core.v                      \
 	  Theory/RelativeComonad/Morphism.v                  \
@@ -32,7 +33,6 @@ FILES=\
 	  Theory/Comodule.v                                  \
 	  Category/Categories.v                              \
 	  Theory/Product.v                                   \
-	  Theory/Morphism.v                                  \
 	  Theory/StrongMonoidal.v
 
 
