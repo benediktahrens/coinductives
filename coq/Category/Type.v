@@ -42,7 +42,7 @@ Proof.
   hnf ; intuition.
 Qed.
 
-Definition 𝑻𝒚𝒑𝒆 : Category :=
+Canonical Structure 𝑻𝒚𝒑𝒆 : Category :=
   mkCategory left_id right_id compose_assoc.
 
 

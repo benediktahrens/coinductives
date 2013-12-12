@@ -32,6 +32,6 @@ Proof.
   apply Heq_refl.
 Qed.
 
-Definition 𝑪𝒂𝒕 : Category :=
+Canonical Structure 𝑪𝒂𝒕 : Category :=
   mkCategory left_id right_id compose_assoc.
 

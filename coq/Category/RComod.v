@@ -37,7 +37,7 @@ Section Definitions.
     intro x; simpl. now rewrite compose_assoc.
   Qed.
 
-  Definition 𝑹𝑪𝒐𝒎𝒐𝒅 : Category :=
+  Canonical Structure 𝑹𝑪𝒐𝒎𝒐𝒅 : Category :=
     mkCategory cm_left_id cm_right_id cm_compose_assoc.
 
 End Definitions.

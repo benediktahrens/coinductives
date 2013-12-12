@@ -39,7 +39,7 @@ Proof.
   intros x y eq_xy; now rewrite eq_xy.
 Qed.
 
-Definition 𝑺𝒆𝒕𝒐𝒊𝒅 : Category :=
+Canonical Structure 𝑺𝒆𝒕𝒐𝒊𝒅 : Category :=
   mkCategory left_id right_id compose_assoc.
 
 
