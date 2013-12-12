@@ -1,4 +1,7 @@
-Require Import Theory.Category.
+Require Import Misc.Unicode.
+Require Import Theory.Notations.
+Require Import Theory.Category.SetoidType.
+Require Import Theory.Category.Core.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

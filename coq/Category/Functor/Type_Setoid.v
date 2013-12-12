@@ -1,8 +1,6 @@
 Require Import Theory.Category.
-Require Import Theory.Functor.
 Require Import Category.Type.
 Require Import Category.Setoid.
-Require Import Theory.SetoidType.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

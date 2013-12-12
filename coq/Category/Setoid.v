@@ -1,5 +1,4 @@
 Require Import Theory.Category.
-Require Import Theory.SetoidType.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

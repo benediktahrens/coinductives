@@ -1,11 +1,9 @@
-Require Import InfiniteTriangles.redecInfiniteTriangles8_4.
 Require Import Category.Setoid.
 Require Import Category.Type.
 Require Import Category.Functor.Type_Setoid.
 Require Import Theory.Category.
-Require Import Theory.Functor.
 Require Import Theory.RelativeComonad.
-Require Import Theory.SetoidType.
+Require Import InfiniteTriangles.redecInfiniteTriangles8_4.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -67,6 +65,6 @@ Section Definitions.
   Qed.
 
   Definition 𝑻𝑹𝑰 : RelativeComonad 𝑬𝑸 :=
-    RelativeComonad.make Redec_Top Top_Redec Redec_compose.
+    make Redec_Top Top_Redec Redec_compose.
 
 End Definitions.

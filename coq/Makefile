@@ -12,20 +12,25 @@ COQDEP=$(COQBIN)coqdep $(LIBS)
 FILES=\
 	  Misc/Unicode.v                                     \
 	  Theory/Notations.v                                 \
-	  Theory/SetoidType.v                                \
+	  Theory/Category/SetoidType.v                       \
+	  Theory/Category/Core.v                             \
+	  Theory/Category/Functor.v                          \
+	  Theory/Category/InitialTerminal.v                  \
 	  Theory/Category.v                                  \
-	  Theory/Functor.v                                   \
+	  Theory/RelativeComonad/Core.v                      \
+	  Theory/RelativeComonad/Morphism.v                  \
+	  Category/RComonad.v                                \
 	  Theory/RelativeComonad.v                           \
 	  Category/Type.v                                    \
 	  Category/Setoid.v                                  \
 	  Category/Functor/Type_Setoid.v                     \
 	  InfiniteTriangles/redecInfiniteTriangles8_4.v      \
 	  Category/RelativeComonad/InfiniteTriangles.v       \
-	  Theory/Comodule.v                                  \
+	  Theory/Comodule/Core.v                             \
+	  Theory/Comodule/Morphism.v                         \
 	  Category/RComod.v                                  \
-	  Category/RComonad.v                                \
+	  Theory/Comodule.v                                  \
 	  Category/Categories.v                              \
-	  Theory/InitialTerminal.v                           \
 	  Theory/Product.v                                   \
 	  Theory/Morphism.v                                  \
 	  Theory/StrongMonoidal.v
