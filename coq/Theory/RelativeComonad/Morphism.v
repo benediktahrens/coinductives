@@ -4,7 +4,7 @@ Require Import Theory.RelativeComonad.Core.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Generalizable All Variables.
-    
+
 (*------------------------------------------------------------------------------
   -- ＭＯＲＰＨＩＳＭ
   ----------------------------------------------------------------------------*)
