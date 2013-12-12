@@ -41,8 +41,18 @@ Definition 𝑬𝑸 : Functor 𝑻𝒚𝒑𝒆 𝑺𝒆𝒕𝒐𝒊𝒅 := mkFun
 Require Import Theory.Product.
 Require Import Theory.StrongMonoidal.
 
-Program Instance 𝑬𝑸_SM : StrongMonoidal 𝑬𝑸 :=
-  λ (A B : 𝑻𝒚𝒑𝒆) ∙ Isomorphism.make ⟨ 𝑬𝑸 ⋅ π₁ , 𝑬𝑸 ⋅ π₂ ⟩ (λ x ↦ x).
-Next Obligation. (* id_cong *)
+Definition 𝑬𝑸_α (A B : 𝑻𝒚𝒑𝒆) : 𝑬𝑸 (A × B) ⇒ 𝑬𝑸 A × 𝑬𝑸 B := ⟨ 𝑬𝑸 ⋅ π₁ , 𝑬𝑸 ⋅ π₂ ⟩.
+Program Definition α_𝑬𝑸 (A B : 𝑻𝒚𝒑𝒆) : 𝑬𝑸 A × 𝑬𝑸 B ⇒ 𝑬𝑸 (A × B) :=
+  λ x ↦ x.
+Next Obligation.
   intros [x x'] [y y'] [eq_xx' eq_yy']; now f_equal.
+Qed.
+
+Program Instance 𝑬𝑸_SM : StrongMonoidal 𝑬𝑸_α := {| inv_α := α_𝑬𝑸 |}.
+Next Obligation.
+  constructor.
+  - (* iso_left *)
+    intros [x x'] [y y'] [eq_xx' eq_yy']; split; auto.
+  - (* iso_right *)
+    intros [x x'] [y y']; auto.
 Qed.
