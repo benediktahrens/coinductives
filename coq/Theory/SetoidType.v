@@ -25,6 +25,7 @@ Module Setoid.
   Program Definition eq_setoid (T : Type) : Setoid := make T eq.
 
   Notation "_≈_" := equiv                    (only parsing).
+  Notation "x ≈ y :> T" := (equiv (A := T) x y) (at level 70, y at next level, no associativity).
   Notation "x ≈ y" := (equiv x y)            (at level 70, no associativity).
   Notation "x ≉ y" := (complement equiv x y) (at level 70, no associativity).
 
