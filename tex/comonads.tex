@@ -278,8 +278,16 @@ Similarly to relative comonads, comodules over these are functorial:
 %                \cut_A: \C(T(E\times A), TA), \quad \cut_A := \cobind_{E \times A, A}(\comp{\counit_{E \times A}}{\pr_1}) \enspace .
 % \end{align*}
 
+Equivalently,
+  \[ f   \mapsto \comp{\comp{\langle T(\pr_1) , T(\pr_2) \rangle}{(f\times\counit_E)}}{\alpha_{E,B}^{-1}} \enspace .
+  \]
 
-
+  
+Equivalently,
+  \[ f   \mapsto \comp{\langle \comp{T(\pr_1)}{f} , F(\pr_2) \rangle}{\alpha_{E,B}^{-1}} \enspace .
+  \]
+  
+  
 \end{definition}
 
 
