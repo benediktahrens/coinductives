@@ -44,10 +44,16 @@ Notation make 𝒞 pr prm pr1 pr2 :=
   -- ＰＲＯＤＵＣＴ  ＬＡＷＳ
   ----------------------------------------------------------------------------*)
 
-Definition prod_mor `{BinaryProduct 𝒞} `(f : A ⇒ A') `(g : B ⇒ B') : A × B ⇒ A' × B' :=
+Definition prod_mor `{BinaryProduct 𝒞} {A A' B B' : 𝒞} (f : A ⇒ A') (g : B ⇒ B') : A × B ⇒ A' × B' :=
   ⟨ f ∘ π₁ , g ∘ π₂ ⟩.
 
-Infix "-×-" := prod_mor (at level 35).
+Program Definition Prod_mor `{BinaryProduct 𝒞} {A A' B B' : 𝒞} : [ A ⇒ A' ⟶ B ⇒ B' ⟶ A × B ⇒ A' × B' ] :=
+  λ f g ↦₂ prod_mor f g.
+Next Obligation.
+  intros f f' eq_ff' g g' eq_gg'. unfold prod_mor. now rewrite eq_ff', eq_gg'.
+Qed.
+
+Infix "-×-" := Prod_mor (at level 35).
 
 Lemma product_postcompose `{BinaryProduct 𝒞} {A B C C' : 𝒞} {f : B ⇒ C} {g : B ⇒ C'} {p : A ⇒ B} :
   ⟨ f ∘ p , g ∘ p ⟩ ≈ ⟨ f , g ⟩ ∘ p    :> A ⇒ C × C'.
@@ -61,8 +67,8 @@ Lemma product_precompose `{BinaryProduct 𝒞} {A B C D E : 𝒞}
       {f : B ⇒ D} {g : C ⇒ E} {h : A ⇒ B} {k : A ⇒ C} : f-×-g ∘ ⟨ h , k ⟩ ≈ ⟨ f ∘ h , g ∘ k ⟩    :> A ⇒ D × E.
 Proof.
   apply Pmor_universal.
-  - rewrite <- compose_assoc. unfold "-×-". rewrite π₁_compose. rewrite compose_assoc. now rewrite π₁_compose.
-  - rewrite <- compose_assoc. unfold "-×-". rewrite π₂_compose. rewrite compose_assoc. now rewrite π₂_compose.
+  - rewrite <- compose_assoc. simpl. unfold prod_mor. rewrite π₁_compose. rewrite compose_assoc. now rewrite π₁_compose.
+  - rewrite <- compose_assoc. simpl. unfold prod_mor. rewrite π₂_compose. rewrite compose_assoc. now rewrite π₂_compose.
 Qed.
 
 Notation "∘-×" := product_postcompose (only parsing).
