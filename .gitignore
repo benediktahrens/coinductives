@@ -19,5 +19,6 @@ tex/*.pdf
 *.o
 *.glob
 *.v.d
+coq/html
 coq/.depend
 
