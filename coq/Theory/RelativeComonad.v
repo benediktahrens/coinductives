@@ -130,7 +130,7 @@ End Morphism.
   ----------------------------------------------------------------------------*)
 
 Require Import Theory.Product.
-Require Import Theory.Morphism.
+Require Import Theory.Isomorphism.
 Require Import Theory.StrongMonoidal.
 
 Section ExtendConstruction.

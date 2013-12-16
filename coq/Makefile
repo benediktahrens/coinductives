@@ -27,7 +27,7 @@ FILES=\
 	  Category/Categories.v                              \
 	  Theory/InitialTerminal.v                           \
 	  Theory/Product.v                                   \
-	  Theory/Morphism.v                                  \
+	  Theory/Isomorphism.v                               \
 	  Theory/StrongMonoidal.v
 
 

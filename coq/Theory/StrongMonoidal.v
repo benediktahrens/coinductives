@@ -1,5 +1,5 @@
 Require Import Theory.Category.
-Require Import Theory.Morphism.
+Require Import Theory.Isomorphism.
 Require Import Theory.Functor.
 Require Import Theory.Product.
 
