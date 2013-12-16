@@ -44,8 +44,15 @@ Require Import Theory.Product.
 Require Import Theory.Isomorphism.
 Require Import Theory.StrongMonoidal.
 
-Program Instance 𝑬𝑸_SM : StrongMonoidal 𝑬𝑸 :=
-  λ (A B : 𝑻𝒚𝒑𝒆) ∙ Isomorphism.make ⟨ 𝑬𝑸 ⋅ π₁ , 𝑬𝑸 ⋅ π₂ ⟩ (λ x ↦ x).
-Next Obligation. (* id_cong *)
-  intros [x x'] [y y'] [eq_xx' eq_yy']; now f_equal.
+Program Instance 𝑬𝑸_SM : CartesianStrongMonoidal 𝑬𝑸 :=
+  StrongMonoidal.make (λ A B ∙ λ x ↦ x).
+Next Obligation.
+  intros [x x'] [y y'] [eq_xx' eq_yy']. now f_equal.
+Qed.
+Next Obligation.
+  constructor.
+  - (* iso_left *)
+    intros f g eq_fg. exact eq_fg.
+  - (* iso_right *)
+    intros f g eq_fg. simpl in *. destruct f. auto.
 Qed.

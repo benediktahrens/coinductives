@@ -11,8 +11,16 @@ Unset Strict Implicit.
   -- ＳＴＲＯＮＧ  ＭＯＮＯＩＤＡＬ  ＦＵＮＣＴＯＲ  ＤＥＦＩＮＩＴＩＯＮ
   ----------------------------------------------------------------------------*)
 
-(** ¡¡ Very 'direct' definition !! **)
-Class StrongMonoidal `{BinaryProduct 𝒞} `{BinaryProduct 𝒟} (F : Functor 𝒞 𝒟) :=
-  strong_monoidal : ∀ {A B : 𝒞}, F (A × B) ≅ F A × F B.
+Section StrongMonoidal.
 
-Notation "F -×" := (strong_monoidal (F0 := F)) (at level 0, only parsing).
+  Context `{BinaryProduct 𝒞} `{BinaryProduct 𝒟} (F : Functor 𝒞 𝒟).
+
+  Definition φ (A B : 𝒞) : F (A × B) ⇒ F A × F B := ⟨ F ⋅ π₁ , F ⋅ π₂ ⟩.
+
+  Class CartesianStrongMonoidal := mkCartesianStrongMonoidal
+  { φ_inv        : ∀ A B, F A × F B ⇒ F (A × B)
+  ; φ_is_inverse :> ∀ A B, IsInverse (φ A B) (φ_inv A B) }.
+
+End StrongMonoidal.
+
+Notation make φ := (mkCartesianStrongMonoidal (φ_inv := φ) _) (only parsing).

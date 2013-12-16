@@ -123,29 +123,3 @@ Module Morphism.
   End id_composition.
 
 End Morphism.
-
-
-(*------------------------------------------------------------------------------
-  -- ＥＸＴＥＮＤ  ＣＯＮＳＴＲＵＣＴＩＯＮ
-  ----------------------------------------------------------------------------*)
-
-Require Import Theory.Product.
-Require Import Theory.Isomorphism.
-Require Import Theory.StrongMonoidal.
-
-Section ExtendConstruction.
-
-  Context `{BinaryProduct 𝒞} `{BinaryProduct 𝒟}
-          `{F : Functor 𝒞 𝒟} `{!StrongMonoidal F}
-           {T : RelativeComonad F} {E : 𝒞}.
-
-  Notation "'α[E,A]'" := (F-×).
-
-  Program Definition extend (A B : 𝒞) : [ T A ⇒ F B ⟶ T (E × A) ⇒ F (E × B) ] :=
-    λ f ↦ α[E,A]⁻¹ ∘ ⟨ π₁[ F E , F A ] ∘ α[E,A] ∘ T⋅counit , f ∘ Lift(T) ⋅ π₂[ E , A ] ⟩.
-  Next Obligation.
-    intros f g eq_fg.
-    now rewrite eq_fg.
-  Qed.
-
-End ExtendConstruction.
