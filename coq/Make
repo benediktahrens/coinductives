@@ -4,7 +4,7 @@
 ./Theory/Notations.v
 ./Theory/Comodule/Morphism.v
 ./Theory/Comodule/Core.v
-./Theory/Comodule/ProductInContext.v
+# ./Theory/Comodule/ProductInContext.v
 ./Theory/Product.v
 ./Theory/Category.v
 ./Theory/Comodule.v
@@ -20,9 +20,9 @@
 ./Category/RComonad.v
 ./Category/Categories.v
 ./Category/RComod.v
-./Category/RelativeComonad/InfiniteTriangles.v
+# ./Category/RelativeComonad/InfiniteTriangles.v
 ./Category/Setoid.v
-./Category/Functor/Type_Setoid.v
+# ./Category/Functor/Type_Setoid.v
 ./Misc/Unicode.v
 ./InfiniteTriangles/redecInfiniteTriangles8_4.v
-./InfiniteTriangles/redecInfiniteTriangles8_3.v
+# ./InfiniteTriangles/redecInfiniteTriangles8_3.v
