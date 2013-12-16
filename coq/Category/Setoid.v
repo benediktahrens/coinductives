@@ -82,7 +82,7 @@ End Product_construction.
 
 
 Program Instance 𝑺𝒆𝒕𝒐𝒊𝒅_BinaryProduct : BinaryProduct 𝑺𝒆𝒕𝒐𝒊𝒅 :=
-  Product.make 𝑺𝒆𝒕𝒐𝒊𝒅 product (@product_mor _ _) proj_l proj_r.
+  BinaryProduct.make 𝑺𝒆𝒕𝒐𝒊𝒅 product (@product_mor _ _) proj_l proj_r.
 Next Obligation. (* Pmor_cong₂ *)
   intros f₁ f₂ eq_f₁f₂ g₁ g₂ eq_g₁g₂ x y eq_xy; simpl; split.
   - now apply eq_f₁f₂.

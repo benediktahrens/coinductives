@@ -11,7 +11,7 @@ Generalizable All Variables.
   -- ＣＯＭＯＤＵＬＥ  ＯＶＥＲ  ＲＥＬＡＴＩＶＥ  ＣＯＭＯＮＡＤＥ  ＤＥＦＩＮＩＴＩＯＮ
   ----------------------------------------------------------------------------*)
 
-Structure Comodule `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) (ℰ : Category) : Type := make
+Structure Comodule `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) (ℰ : Category) : Type := mkComodule
 { M               :> 𝒞 → ℰ
 ; mcobind         : ∀ {C D}, [ T C ⇒ F D ⟶ M C ⇒ M D ]
 ; mcobind_counit  : ∀ {C}, mcobind counit[ C ] ≈ id[ M C ]
@@ -20,6 +20,7 @@ Structure Comodule `{F : Functor 𝒞 𝒟} (T : RelativeComonad F) (ℰ : Categ
 
 Notation "M '⋅mcobind'" := (mcobind M) (at level 0, only parsing).
 
+Notation make M mcobind := (mkComodule (M := M) (mcobind := mcobind) _ _) (only parsing).
 
 (*------------------------------------------------------------------------------
   -- ＦＵＮＣＴＯＲ
@@ -61,11 +62,13 @@ End Functor.
   -- ＭＯＲＰＨＩＳＭ
   ----------------------------------------------------------------------------*)
 
+Structure Morphism `{F : Functor 𝒞 𝒟} {T : RelativeComonad F} {ℰ} (M N : Comodule T ℰ) : Type := mkMorphism
+{ α          :> ∀ C, M C ⇒ N C
+; α_commutes : ∀ {C D} {f : T C ⇒ F D}, α(D) ∘ M⋅mcobind f ≈ N⋅mcobind f ∘ α(C) }.
+
 Module Morphism.
 
-  Structure Morphism `{F : Functor 𝒞 𝒟} {T : RelativeComonad F} {ℰ} (M N : Comodule T ℰ) : Type := make
-  { α          :> ∀ C, M C ⇒ N C
-  ; α_commutes : ∀ {C D} {f : T C ⇒ F D}, α(D) ∘ M⋅mcobind f ≈ N⋅mcobind f ∘ α(C) }.
+  Notation make α := (mkMorphism (α := α) _) (only parsing).
 
   (* -- Ｉｄｅｎｔｉｔｙ  /  Ｃｏｍｐｏｓｉｔｉｏｎ                      -- *)
   Section id_composition.
@@ -84,13 +87,13 @@ Module Morphism.
     Infix "⇛" := Hom (at level 70).
 
     Program Definition id {M : Comodule T ℰ} : M ⇛ M :=
-      make (α := λ C ∙ id[ M C ]) _.
+      make (λ C ∙ id[ M C ]).
     Next Obligation.
       now rewrite left_id, right_id.
     Qed.
 
     Program Definition compose {M N P : Comodule T ℰ} : [ N ⇛ P ⟶ M ⇛ N ⟶ M ⇛ P ] :=
-      λ g f ↦₂ make (α := λ C ∙ g(C) ∘ f(C)) _.
+      λ g f ↦₂ make (λ C ∙ g(C) ∘ f(C)).
     Next Obligation.
       rewrite <- compose_assoc; rewrite <- α_commutes.
       rewrite compose_assoc; rewrite α_commutes; rewrite compose_assoc.

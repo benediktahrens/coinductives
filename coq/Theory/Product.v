@@ -26,7 +26,6 @@ Notation "P '⋅π₂'" := (π₂ (p := P)) (at level 0, only parsing).
 Notation "'π₁[' A , B ]" := (π₁ (A := A) (B := B)) (only parsing).
 Notation "'π₂[' A , B ]" := (π₂ (A := A) (B := B)) (only parsing).
 
-
 (*------------------------------------------------------------------------------
   -- ＨＡＳ  ＢＩＮＡＲＹ  ＰＲＯＤＵＣＴ
   ----------------------------------------------------------------------------*)
@@ -36,8 +35,10 @@ Class BinaryProduct (𝒞 : Category) :=
 
 Infix "×" := product (at level 20).
 
-Notation make 𝒞 pr prm pr1 pr2 :=
-  (λ (A B : 𝒞) ∙ @mkProduct _ A B (pr A B) (λ C ∙ Π₂.make (prm C)) pr1 pr2 _ _ _).
+Module BinaryProduct.
+  Notation make 𝒞 pr prm pr1 pr2 :=
+    (λ (A B : 𝒞) ∙ @mkProduct _ A B (pr A B) (λ C ∙ Π₂.make (prm C)) pr1 pr2 _ _ _).
+End BinaryProduct.
 
 
 (*------------------------------------------------------------------------------
@@ -50,9 +51,9 @@ Definition prod_mor `{BinaryProduct 𝒞} `(f : A ⇒ A') `(g : B ⇒ B') : A ×
 Infix "-×-" := prod_mor (at level 35).
 
 Lemma product_postcompose `{BinaryProduct 𝒞} {A B C C' : 𝒞} {f : B ⇒ C} {g : B ⇒ C'} {p : A ⇒ B} :
-  ⟨ f ∘ p , g ∘ p ⟩ ≈ ⟨ f , g ⟩ ∘ p    :> A ⇒ C × C'.
+   ⟨ f , g ⟩ ∘ p ≈ ⟨ f ∘ p , g ∘ p ⟩    :> A ⇒ C × C'.
 Proof.
-  symmetry. apply Pmor_universal.
+  apply Pmor_universal.
   - rewrite <- compose_assoc. now rewrite π₁_compose.
   - rewrite <- compose_assoc. now rewrite π₂_compose.
 Qed.

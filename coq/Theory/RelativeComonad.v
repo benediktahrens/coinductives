@@ -10,7 +10,7 @@ Generalizable All Variables.
   -- ＲＥＬＡＴＩＶＥ  ＣＯＭＯＮＡＤ  ＤＥＦＩＮＩＴＩＯＮ
   ----------------------------------------------------------------------------*)
 
-Structure RelativeComonad `(F : Functor 𝒞 𝒟) : Type := make
+Structure RelativeComonad `(F : Functor 𝒞 𝒟) : Type := mkRelativeComonad
 { T              :> 𝒞 → 𝒟
 ; counit         : ∀ {X}, T X ⇒ F X
 ; cobind         : ∀ {X Y}, [ (T X ⇒ F Y) ⟶ T X ⇒ T Y ]
@@ -24,6 +24,8 @@ Notation "T '⋅counit[' X ]" := (counit T (X := X)) (at level 0, only parsing).
 
 Notation "T '⋅cobind'" := (cobind T) (at level 0, only parsing).
 
+Notation make T counit cobind :=
+  (mkRelativeComonad (T := T) (counit := counit) (cobind := cobind) _ _ _) (only parsing).
 
 (*------------------------------------------------------------------------------
   -- ＦＵＮＣＴＯＲ
@@ -66,12 +68,14 @@ End Functor.
   -- ＭＯＲＰＨＩＳＭ
   ----------------------------------------------------------------------------*)
 
+Structure Morphism `(F : Functor 𝒞 𝒟) (T S : RelativeComonad F) : Type := mkMorphism
+{ τ          :> ∀ C, T C ⇒ S C
+; τ_counit   : ∀ {C}, T⋅counit[ C ] ≈ S⋅counit[ C ] ∘ τ(C)
+; τ_commutes : ∀ {C D} {f : S C ⇒ F D}, τ(D) ∘ T⋅cobind (f ∘ τ(C)) ≈ S⋅cobind f ∘ τ(C) }.
+
 Module Morphism.
 
-  Structure Morphism `(F : Functor 𝒞 𝒟) (T S : RelativeComonad F) : Type := make
-  { τ          :> ∀ C, T C ⇒ S C
-  ; τ_counit   : ∀ {C}, T⋅counit[ C ] ≈ S⋅counit[ C ] ∘ τ(C)
-  ; τ_commutes : ∀ {C D} {f : S C ⇒ F D}, τ(D) ∘ T⋅cobind (f ∘ τ(C)) ≈ S⋅cobind f ∘ τ(C) }.
+  Notation make τ := (mkMorphism (τ := τ) _ _) (only parsing).
 
   (* -- Ｉｄｅｎｔｉｔｙ  /  Ｃｏｍｐｏｓｉｔｉｏｎ                      -- *)
   Section id_composition.
@@ -92,7 +96,7 @@ Module Morphism.
     Infix "⇛" := Hom (at level 70).
 
     Program Definition id {S} : S ⇛ S :=
-      make (τ := λ C ∙ id[ S C ]) _ _.
+      make (λ C ∙ id[ S C ]).
     Next Obligation.
       now rewrite right_id.
     Qed.
@@ -101,7 +105,7 @@ Module Morphism.
     Qed.
 
     Program Definition compose {S T U} : [ T ⇛ U ⟶ S ⇛ T ⟶ S ⇛ U ] :=
-      λ g f ↦₂ make (τ := λ C ∙ g(C) ∘ f(C)) _ _.
+      λ g f ↦₂ make (λ C ∙ g(C) ∘ f(C)).
     Next Obligation.
       rewrite <- compose_assoc; now do 2 rewrite <- τ_counit.
     Qed.

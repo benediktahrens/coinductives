@@ -54,7 +54,7 @@ Definition 𝑻𝒚𝒑𝒆 : Category :=
 Require Import Theory.Product.
 
 Program Instance 𝑻𝒚𝒑𝒆_BinaryProduct : BinaryProduct 𝑻𝒚𝒑𝒆 :=
-  Product.make 𝑻𝒚𝒑𝒆 _⟨×⟩_ (λ C f g (c : C) ∙ (f c , g c)) fst snd.
+  BinaryProduct.make 𝑻𝒚𝒑𝒆 _⟨×⟩_ (λ C f g (c : C) ∙ (f c , g c)) fst snd.
 Next Obligation. (* Pmor_cong₂ *)
   intros f₁ f₂ eq_f₁f₂ g₁ g₂ eq_g₁g₂ x. now f_equal.
 Qed.
