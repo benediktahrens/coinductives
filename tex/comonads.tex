@@ -127,9 +127,10 @@ object is neutral with respect to the multiplication. Functors preserving the mo
 are called \emph{strong monoidal}:
 
 \begin{definition}[Strong monoidal functor]\label{def:monoidal_functor}
- A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if the morphisms
+ A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if, for any two objects $A$ and $B$ of $\C$,
+  the morphism
  \[ \alpha_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
- are isomorphisms.
+ is an isomorphisms.
  (Note that for \emph{cartesian} monoidal categories, the family $\alpha$ of morphisms automatically makes commute the 
   diagrams necessary to have a strong monoidal functor, since it is given by universal property. 
   We shall not need more general strong monoidal functors between arbitrary monoidal categories.)
@@ -150,14 +151,14 @@ The dual notion is that of a relative \emph{co}monad:
   Let $F:\C\to\D$ be a functor. A \fat{relative comonad $T$ over $F$} is given by
   \begin{packitem}
    \item a map $T:\C_0 \to \D_0$ on the objects of the categories involved;
-   \item an operation $\counit : \forall c : \C_0, \D(Tc,Fc)$;
-   \item an operation $\cobind: \forall c,d:\C_0, \D(Tc,Fd) \to \D(Tc,Td)$
+   \item an operation $\counit : \forall A : \C_0, \D(TA,FA)$;
+   \item an operation $\cobind: \forall A,B:\C_0, \D(TA,FB) \to \D(TA,TB)$
   \end{packitem}
   such that 
   \begin{packitem}
-   \item $\forall c,d:\C_0, \forall f:\D(Tc,Fd), \comp{\cobind(f)}{\counit_d} = f$;
-   \item $\forall c : \C_0, \cobind(\counit_c) = \id_c$;
-   \item $\forall a,b,c:\C_0, \forall f : \D(Ta,Fb),\forall g:\D(Tb,Fc), \\
+   \item $\forall A,B:\C_0, \forall f:\D(TA,FB), \comp{\cobind(f)}{\counit_B} = f$;
+   \item $\forall A : \C_0, \cobind(\counit_A) = \id_A$;
+   \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
         \comp{\cobind(f)}{\cobind(g)} = \cobind(\comp{\cobind(f)}{g})$.
   \end{packitem} 
 \end{definition}
@@ -168,7 +169,7 @@ studied by \textcite{DBLP:conf/types/MatthesP11}:
 
 
 \begin{example}\label{ex:tri_comonad}
-Let $E$ be an arbitrary fixed type.
+Let $E$ be an arbitrary fixed set.
    Infinite triangular matrices over the (variable) type $A$ are given by the destructors shown in \Cref{fig:tri_destructors},
     equiped with a coinductively defined equivalence relation, a \emph{bisimulation}.
     We write $t \sim t'$ for related matrices $t$ and $t'$.
@@ -235,9 +236,9 @@ Let $E$ be an arbitrary fixed type.
 
 Just like relative monads, relative comonads are functorial:
 \begin{definition}[Functoriality for relative comonads]
- Let $T$ be a relative comonad over $F:\C\to\D$.
- For $f : \C(c,d)$ we define
-  \[ \lift^T(f) := \cobind(\comp{\counit_c}{Ff}) .  \]
+ Let $T$ be a  comonad relative to $F:\C\to\D$.
+ For $f : \C(A,B)$ we define
+  \[ \lift^T(f) := \cobind(\comp{\counit_A}{Ff}) .  \]
  The functor properties are easily checked.
 \end{definition}
 
@@ -251,19 +252,19 @@ over a relative comonad}:
  A \fat{comodule over T towards $\E$} consists of
    \begin{packitem}
    \item a map $:\C_0 \to \E_0$ on the objects of the categories involved;
-   \item an operation $\mcobind: \forall c,d:\C_0, \D(Tc,Fd) \to \E(Mc,Md)$
+   \item an operation $\mcobind: \forall A,B:\C_0, \D(TA,FB) \to \E(MA,MB)$
   \end{packitem}
   such that 
   \begin{packitem}
-   \item $\forall c : \C_0, \mcobind(\counit_c) = \id_c$;
-   \item $\forall a,b,c:\C_0, \forall f : \D(Ta,Fb),\forall g:\D(Tb,Fc), \\
+   \item $\forall A : \C_0, \mcobind(\counit_A) = \id_A$;
+   \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
         \comp{\mcobind(f)}{\mcobind(g)} = \mcobind(\comp{\cobind(f)}{g})$ .
   \end{packitem}
 
 \end{definition}
 
 \begin{example}[Tautological comodule]\label{def:tautological_comodule}
-  Given a relative comonad $T : \C\stackrel{F}{\to}\D$, the assignment $c \mapsto Tc$ yields a comodule over $T$ 
+  Given a comonad $T$ relative to $F:\C\to\D$, the assignment $A \mapsto TA$ yields a comodule over $T$ 
   with target category $\D$, the \textbf{tautological comodule} of $T$, also called $T$.
   The comodule operation is given by
     \[  \mcobind^T(f) := \cobind^T(f) \enspace . \]
@@ -274,11 +275,11 @@ A \emph{morphism of comodules} is given by a family of morphisms that is compati
 the module operation:
 
 \begin{definition}[Morphism of comodules]\label{def:morphism_of_comodules}
- Let $M, N : \C \to \E$ be comodules over the relative comonad $T : \C \stackrel{F}{\to} \D$.
+ Let $M, N : \C \to \E$ be comodules over the comonad $T$ relative to  $F:\C \to \D$.
  A \fat{morphism of comodules} from $M$ to $N$ is given by a family of morphisms 
-   \[ \alpha_c:\E(Mc,Nc) \]
- such that for any $c,d:\C_0$ and $f : \D(Tc,Fd)$ one has
- \[   \comp{\mcobind^M(f)}{\alpha_d} = \comp{\alpha_c}{\mcobind^N(f)} \enspace . \]
+   \[ \alpha_A:\E(MA,NA) \]
+ such that for any $A,B:\C_0$ and $f : \D(TA,FB)$ one has
+ \[   \comp{\mcobind^M(f)}{\alpha_B} = \comp{\alpha_A}{\mcobind^N(f)} \enspace . \]
 \end{definition}
 
 
@@ -293,8 +294,8 @@ over a fixed comonad, towards a fixed target category:
 Similarly to relative comonads, comodules over these are functorial:
 
 \begin{definition}[Functoriality for modules over relative comonads]\label{def:comodule_lift}
- Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(c,d)$ we define
-  \[ \mlift^S(f) := \mcobind(\comp{\counit_c}{Ff}) .  \]
+ Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
+  \[ \mlift^S(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
 \end{definition}
 
 
@@ -324,7 +325,7 @@ Similarly to relative comonads, comodules over these are functorial:
 \begin{definition}\label{def:extend}
  Let $F : \C\to \D$ be a strong monoidal functor between (cartesian) monoidal categories, 
  i.e.\ we have a family of isomorphisms
-  \[ \alpha_{A,B} : F(A\times B) \stackrel{\sim}{\to} FA\times FB\enspace . \] 
+  \[ \alpha_{A,B} : F(A\times B) \xrightarrow{\sim} FA\times FB\enspace . \] 
   Let $T$ be a relative comonad over $F$, and let $E : \C$ be an object of $\C$.
  We define
  \begin{align*} \extend_{A,B} : \D(TA,FB) &\to \D\bigl(T(E\times A),F(E\times B)\bigr)\\
@@ -397,10 +398,10 @@ Equivalently,
 
 \begin{definition}[Morphism of relative comonads]
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
-  is given by a family of morphisms \[\tau_c : \D(Tc,Sc)\] such that for any $c : \C_0$,
-     \[  \counit^T_c = \comp{\tau_c}{\counit^S_c} \]
-   and for any $c,d : \C_0$ and $f : \D(Sc,Fd)$,
-   \[  \comp{\cobind^T(\comp{\tau_c}{f})}{\tau_d} = \comp{\tau_c}{\cobind^S(f)} \enspace .  \]
+  is given by a family of morphisms \[\tau_A : \D(TA,SA)\] such that for any $A : \C_0$,
+     \[  \counit^T_A = \comp{\tau_A}{\counit^S_A} \]
+   and for any $A,B : \C_0$ and $f : \D(SA,FB)$,
+   \[  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)} \enspace .  \]
 \end{definition}
 
 \begin{remark}[Category of relative comonads]
@@ -429,7 +430,7 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
 \begin{definition}[Pushforward comodule]\label{def:pushforward_comodule}
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
   comodule over $T$ towards a category $\E$. We define the \fat{pushforward comodule} $\tau_*M$ to be the comodule over $S$ given by
-  \[  \tau_*M(c) := Mc \]
+  \[  \tau_*M(A) := MA \]
   and, for $f : \D(SA,FB)$,
    \[ \mcobind^{\tau_*M}(f) := \mcobind^M(\comp{\tau_A}{f}) \enspace . \]
    
@@ -437,7 +438,7 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
   Pushforward is functorial: if $M$ and $N$ are comodules over $S$ with codomain category $\E$, and $\alpha : M\to N$ is 
     a morphism of comodules, then we define \[\tau_*\alpha : \tau_*M \to \tau_*N\] 
     as the family of morphisms
-     \[ \tau_*\alpha_c := \alpha_c \enspace . \]
+     \[ (\tau_*\alpha)_A := \alpha_A \enspace . \]
   It is easy to check that this is a morphism of comodules between $\tau_*M$ and $\tau_*N$.
 \end{definition}
 
