@@ -152,7 +152,9 @@ Instances of relative comonads are given by some coinductive datatypes:
 \begin{example}\label{ex:tri_comonad}
   \textcite{DBLP:conf/types/MatthesP11} study the coinductive datatype of infinite triangular matrices:
 Let $E$ be an arbitrary fixed type.
-   Infinite triangular matrices of type $A$ are given by the destructors shown in \Cref{fig:tri_destructors}.
+   Infinite triangular matrices of type $A$ are given by the destructors shown in \Cref{fig:tri_destructors},
+    equiped with a coinductively defined equivalence relation $\constfont{\bisim}$, a \emph{bisimulation} (\Cref{fig:tri_bisim}).
+    We write $t \sim t'$ for related matrices $t$ and $t'$.
 %   \begin{lstlisting}
 % Coinductive Tri (E : Set) : Set -> Set :=
 %    head : forall A : Set, Tri (A) -> A.
@@ -172,10 +174,27 @@ Let $E$ be an arbitrary fixed type.
                                        \AxiomC{$t : \Tri(A)$}\doubleLine
                                        \UnaryInfC{$\tail(t) : \Tri(E\times A)$}
                                        \DisplayProof
-     % \end{minipage}
+     % \end{minipage} 
        }
   \caption{Destructors of the $\Tri$ coinductive family} \label{fig:tri_destructors}
 \end{figure}
+\begin{figure}[hbt]
+  \centering
+  \fbox{
+                                            \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+    \AxiomC{$t \sim t'$}\doubleLine
+     \UnaryInfC{$\head(t) = \head(t')$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$t \sim t'$}\doubleLine
+                                       \UnaryInfC{$ \tail(t) \sim \tail(t')$}
+                                       \DisplayProof
+     % \end{minipage} 
+       }
+  \caption{Bisimulation relation for $\Tri$} \label{fig:tri_bisim}
+\end{figure}
+
 \textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that infinite triangular matrices
   are an instance of such a comonad. 
   A weak constructive comonad as defined in \parencite{DBLP:conf/types/MatthesP11}, however, is \emph{precisely}
@@ -186,13 +205,15 @@ Let $E$ be an arbitrary fixed type.
 
 Just like relative monads, relative comonads are functorial:
 \begin{definition}[Functoriality for relative comonads]
+ Let $T$ be a relative comonad over $F:\C\to\D$.
  For $f : \C(c,d)$ we define
   \[ \lift^T(f) := \cobind(\comp{\counit_c}{Ff}) .  \]
  The functor properties are easily checked.
 \end{definition}
 
 
-In order to characterise the destructors of coinductive datatypes, we introduce the notion of \emph{comodule
+In order to characterise the destructors of coinductive datatypes---and, in particular, their interplay with the comonadic structure---, 
+we introduce the notion of \emph{comodule
 over a relative comonad}:
 
 \begin{definition}[Comodule over relative comonad]\label{def:comodule}
