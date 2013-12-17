@@ -107,10 +107,10 @@
 
 
 \begin{definition}\label{def:eq}
- We define $\eq : \Set\to\Setoid$ as the left adjoint to the forgetful functor 
+ We define the functor $\eq : \Set\to\Setoid$ as the left adjoint to the forgetful functor 
   $U : \Setoid \to \Set$.
-  More explicitly, the functor $\eq$ sends any set $X$ to the setoid $(X,=_X)$ given by the set $X$ itself, together
-  with the equality relation.
+  Explicitly, the functor $\eq$ sends any set $X$ to the setoid $(X,=_X)$ given by the set $X$ itself, together
+  with the equality relation $=_X$ on $X$.
 \end{definition}
 
 
@@ -122,7 +122,7 @@
   $\comp{\langle f,g\rangle}{\pr_1} = f$ and $\comp{\langle f,g\rangle}{\pr_2} = g$.
 \end{remark}
 
-Both of the categories of \Cref{def:set_setoid} have binary products, they are \emph{cartesian monoidal}, i.e.\ the terminal 
+Both of the categories of \Cref{def:set_setoid} have binary products; they are \emph{cartesian monoidal}, i.e.\ the terminal 
 object is neutral with respect to the multiplication. Functors preserving the monoidal structure \textbf{up to isomorphism}
 are called \emph{strong monoidal}:
 
@@ -142,7 +142,8 @@ are called \emph{strong monoidal}:
 
 \section{Relative comonads and comodules over such comonads}\label{sec:comonads}
 
-\emph{Relative monads} were defined by \textcite{DBLP:conf/fossacs/AltenkirchCU10}.
+\emph{Relative monads} were defined by \textcite{DBLP:conf/fossacs/AltenkirchCU10} as a notion of monad-like structure
+whose underlying functor is not necessarily an endofunctor.
 The dual notion is that of a relative \emph{co}monad:
 
 \begin{definition}[Relative comonad]\label{def:rel_comonad}
@@ -161,14 +162,15 @@ The dual notion is that of a relative \emph{co}monad:
   \end{packitem} 
 \end{definition}
 
-Instances of relative comonads are given by some coinductive datatypes:
+Relative comonads over the identity functor are exactly comonads.
+A nontrivial instance of relative comonads is given by the coinductive datatype of infinite triangular matrices
+studied by \textcite{DBLP:conf/types/MatthesP11}:
 
 
 \begin{example}\label{ex:tri_comonad}
-  \textcite{DBLP:conf/types/MatthesP11} study the coinductive datatype of infinite triangular matrices:
 Let $E$ be an arbitrary fixed type.
-   Infinite triangular matrices of type $A$ are given by the destructors shown in \Cref{fig:tri_destructors},
-    equiped with a coinductively defined equivalence relation $\constfont{\bisim}$, a \emph{bisimulation} (\Cref{fig:tri_bisim}).
+   Infinite triangular matrices over the (variable) type $A$ are given by the destructors shown in \Cref{fig:tri_destructors},
+    equiped with a coinductively defined equivalence relation, a \emph{bisimulation}.
     We write $t \sim t'$ for related matrices $t$ and $t'$.
 %   \begin{lstlisting}
 % Coinductive Tri (E : Set) : Set -> Set :=
@@ -176,9 +178,9 @@ Let $E$ be an arbitrary fixed type.
 %  | tail : forall A : Set, Tri (A) -> Tri (E x A).
 %   \end{lstlisting}
 % 
+
 \begin{figure}[hbt]
-  \centering
-  \fbox{
+  \begin{center}
     % \begin{minipage}{20em}
      \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
@@ -188,14 +190,11 @@ Let $E$ be an arbitrary fixed type.
                         \hspace{3ex}
                                        \AxiomC{$t : \Tri(A)$}\doubleLine
                                        \UnaryInfC{$\tail(t) : \Tri(E\times A)$}
-                                       \DisplayProof
+                                       \DisplayProof%
      % \end{minipage} 
-       }
-  \caption{Destructors of the $\Tri$ coinductive family} \label{fig:tri_destructors}
-\end{figure}
-\begin{figure}[hbt]
-  \centering
-  \fbox{
+  \end{center}
+\vspace{2ex}
+  \begin{center}
                                             \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
     \AxiomC{$t \sim t'$}\doubleLine
@@ -204,17 +203,33 @@ Let $E$ be an arbitrary fixed type.
                         \hspace{3ex}
                                        \AxiomC{$t \sim t'$}\doubleLine
                                        \UnaryInfC{$ \tail(t) \sim \tail(t')$}
-                                       \DisplayProof
-     % \end{minipage} 
-       }
-  \caption{Bisimulation relation for $\Tri$} \label{fig:tri_bisim}
+                                       \DisplayProof   
+  \end{center}
+  \caption{Destructors and bisimulation for the coinductive family $\Tri$} \label{fig:tri_destructors}
 \end{figure}
+% \begin{figure}[tb]
+%   \centering
+% %   \fbox{
+%                                             \def\extraVskip{3pt}
+%      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+%     \AxiomC{$t \sim t'$}\doubleLine
+%      \UnaryInfC{$\head(t) = \head(t')$}
+%       \DisplayProof
+%                         \hspace{3ex}
+%                                        \AxiomC{$t \sim t'$}\doubleLine
+%                                        \UnaryInfC{$ \tail(t) \sim \tail(t')$}
+%                                        \DisplayProof
+%      % \end{minipage} 
+% %        }
+%   \caption{Bisimulation relation for $\Tri$} \label{fig:tri_bisim}
+% \end{figure}
+%
 
-\textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that infinite triangular matrices
-  are an instance of such a comonad. 
+\noindent
+\textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that the datatype $\Tri$
+  is an instance of such a comonad. 
   A weak constructive comonad as defined in \parencite{DBLP:conf/types/MatthesP11}, however, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
-  This yields our first example of relative comonads. 
 \end{example}
 
 
