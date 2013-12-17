@@ -285,7 +285,7 @@ Similarly to relative comonads, comodules over these are functorial:
 % \end{align*}
 
 Equivalently,
-  \[ f   \mapsto \comp{\comp{\langle T(\pr_1) , T(\pr_2) \rangle}{(f\times\counit_E)}}{\alpha_{E,B}^{-1}} \enspace .
+  \[ f   \mapsto \comp{\comp{\langle T(\pr_1) , T(\pr_2) \rangle}{(\counit_E\times f)}}{\alpha_{E,B}^{-1}} \enspace .
   \]
 
   
@@ -293,7 +293,9 @@ Equivalently,
   \[ f   \mapsto \comp{\langle \comp{T(\pr_1)}{f} , F(\pr_2) \rangle}{\alpha_{E,B}^{-1}} \enspace .
   \]
   
-  
+Equivalently,
+  \[f  \mapsto \comp{\bigl\langle \comp{\counit_{E\times A}}{F(\pr_1(E,A))}, \comp{\lift(\pr_2(E,A))}{f} \bigr\rangle}{\alpha_{E,B}^{-1}} \enspace .
+  \]
 \end{definition}
 
 
