@@ -19,8 +19,6 @@ FILES=\
 	  Category/Type.v                                    \
 	  Category/Setoid.v                                  \
 	  Category/Functor/Type_Setoid.v                     \
-	  InfiniteTriangles/redecInfiniteTriangles8_4.v      \
-	  Category/RelativeComonad/InfiniteTriangles.v       \
 	  Theory/Comodule.v                                  \
 	  Category/RComod.v                                  \
 	  Category/RComonad.v                                \
@@ -29,8 +27,9 @@ FILES=\
 	  Theory/Product.v                                   \
 	  Theory/Isomorphism.v                               \
 	  Theory/StrongMonoidal.v                            \
-	  Theory/ProductInContext.v
-
+	  Theory/ProductInContext.v                          \
+	  Theory/PushforwardComodule.v                       \
+	  InfiniteTriangles/triangle.v
 
 ALL= $(FILES)
 
