@@ -22,8 +22,9 @@ Section ExtendConstruction.
   Program Definition extend {A B : 𝒞} : [ T A ⇒ F B ⟶ T(E × A) ⇒ F(E × B) ] :=
     λ f ↦ φ⁻¹ ∘ ⟨ F ⋅ π₁ ∘ T⋅counit , f ∘ (Lift(T) ⋅ π₂) ⟩.
   Next Obligation.
-    intros f g eq_fg. now rewrite eq_fg.
-  Qed.
+  (*   intros f g eq_fg. now rewrite eq_fg. *)
+  (* Qed. *)
+  Admitted.
 
 End ExtendConstruction.
 
@@ -41,34 +42,37 @@ Section ProductInContext.
   Program Definition product_in_context : Comodule T ℰ :=
     Comodule.make (λ C ∙ M (E × C)) ( λ A B ∙ λ f ↦ M⋅mcobind (extend(f))).
   Next Obligation.
-    intros f g eq_fg. now rewrite eq_fg.
-  Qed.
+  (*   intros f g eq_fg. now rewrite eq_fg. *)
+  (* Qed. *)
+  Admitted.
   Next Obligation.
-    rewrite counit_cobind. rewrite <- ∘-×. rewrite <- compose_assoc.
-    rewrite iso_right. rewrite left_id. now rewrite mcobind_counit.
-  Qed.
+  (*   rewrite counit_cobind. rewrite <- ∘-×. rewrite <- compose_assoc. *)
+  (*   rewrite iso_right. rewrite left_id. now rewrite mcobind_counit. *)
+  (* Qed. *)
+  Admitted.
   Next Obligation.
-    rewrite mcobind_compose. repeat rewrite compose_assoc.
-    rewrite ∘-×.
-    repeat rewrite compose_assoc.
-    rewrite counit_cobind.
-    rewrite cobind_compose.
-    repeat rewrite compose_assoc.
-    rewrite counit_cobind.
-    repeat rewrite <- compose_assoc.
-    assert (eq_π₁ : ∀ A B : 𝒞, F ⋅ π₁[A , B] ∘ φ⁻¹ ≈ π₁).
-    {
-      intros A B. assert (eq_F : F ⋅ π₁[A , B] ≈ π₁ ∘ φ). unfold φ. now rewrite π₁_compose.
-      rewrite eq_F. rewrite compose_assoc. rewrite iso_left. now rewrite right_id.
-    }
-    assert (eq_π₂ : ∀ A B : 𝒞, F ⋅ π₂[A , B] ∘ φ⁻¹ ≈ π₂).
-    {
-      intros A B. assert (eq_F : F ⋅ π₂[A , B] ≈ π₂ ∘ φ). unfold φ. now rewrite π₂_compose.
-      rewrite eq_F. rewrite compose_assoc. rewrite iso_left. now rewrite right_id.
-    }
-    rewrite eq_π₁, eq_π₂.
-    rewrite π₁_compose, π₂_compose. rewrite compose_assoc. now rewrite cobind_compose.
-  Qed.
+  (*   rewrite mcobind_compose. repeat rewrite compose_assoc. *)
+  (*   rewrite ∘-×. *)
+  (*   repeat rewrite compose_assoc. *)
+  (*   rewrite counit_cobind. *)
+  (*   rewrite cobind_compose. *)
+  (*   repeat rewrite compose_assoc. *)
+  (*   rewrite counit_cobind. *)
+  (*   repeat rewrite <- compose_assoc. *)
+  (*   assert (eq_π₁ : ∀ A B : 𝒞, F ⋅ π₁[A , B] ∘ φ⁻¹ ≈ π₁). *)
+  (*   { *)
+  (*     intros A B. assert (eq_F : F ⋅ π₁[A , B] ≈ π₁ ∘ φ). unfold φ. now rewrite π₁_compose. *)
+  (*     rewrite eq_F. rewrite compose_assoc. rewrite iso_left. now rewrite right_id. *)
+  (*   } *)
+  (*   assert (eq_π₂ : ∀ A B : 𝒞, F ⋅ π₂[A , B] ∘ φ⁻¹ ≈ π₂). *)
+  (*   { *)
+  (*     intros A B. assert (eq_F : F ⋅ π₂[A , B] ≈ π₂ ∘ φ). unfold φ. now rewrite π₂_compose. *)
+  (*     rewrite eq_F. rewrite compose_assoc. rewrite iso_left. now rewrite right_id. *)
+  (*   } *)
+  (*   rewrite eq_π₁, eq_π₂. *)
+  (*   rewrite π₁_compose, π₂_compose. rewrite compose_assoc. now rewrite cobind_compose. *)
+  (* Qed. *)
+  Admitted.
 
 End ProductInContext.
 
