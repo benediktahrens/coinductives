@@ -102,7 +102,7 @@
 
 \begin{remark}[Notation for product]
   We denote the category-theoretic binary product of objects $A$ and $B$ of a category $\C$ by $A\times B$.
-  We write $\pr_1(A,B) : A\times B \to A$ and $\pr_2(A,B) : A\times B \to B$ for the projections, and we omit the 
+  We write $\pr_1(A,B) : \C(A\times B, A)$ and $\pr_2(A,B) :\C(A\times B, B)$ for the projections, and we omit the 
   argument $(A,B)$ when it is clear from the context.
   Given $f : \C(A, B)$ and $g : \C(A,C)$, we write $\langle f,g\rangle : \C(A,B\times C)$ for the induced map into the product such that
   $\comp{\langle f,g\rangle}{\pr_1} = f$ and $\comp{\langle f,g\rangle}{\pr_2} = g$.
@@ -337,8 +337,8 @@ Equivalently,
 
 
 \begin{example}\label{ex:tail_comodule}
- The destructor \lstinline!tail! of \Cref{ex:tri_comonad} is a morphism of comodules over the comonad \lstinline!Tri! 
-  from the tautological comodule  $\text{\lstinline!Tri!}(\_)$ to $\text{\lstinline!Tri!}(E\times \_)$.
+ The destructor \constfont{\tail} of \Cref{ex:tri_comonad} is a morphism of comodules over the comonad $\Tri$ 
+  from the tautological comodule  $\Tri$ to $\Tri(E\times \_)$.
 \end{example}
 
 
@@ -422,7 +422,8 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
    \noindent
    Here in the upper right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
    
-   Then the relative comonad of \Cref{ex:tri_comonad}, equiped with the morphism of comodules of \Cref{ex:tail_comodule},
+   Then the pair $(\Tri, \tail)$ consisting of the relative comonad $\Tri$ of \Cref{ex:tri_comonad} together with 
+    the morphism of comodules $\tail$ of \Cref{ex:tail_comodule},
    constitutes the terminal---\enquote{coinitial}---object in this category.
    
 \end{theorem}
