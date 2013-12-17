@@ -36,7 +36,8 @@
   In this work, we identify weak constructive comonads as an instance of the more general notion of 
   \emph{relative comonad}.
   Building up on the work by \citeauthor{DBLP:conf/types/MatthesP11}, we give a category-theoretic
-  characterisation of infinite triangular matrices---equiped with the redecoration operation---as the \emph{terminal object}
+  characterisation of infinite triangular matrices---equiped with the canonical bisimulation relation and a 
+  compatible comonadic $\cobind$ operation---as the \emph{terminal object}
   in some category.
 %   We give a category-theoretic characterisation of heterogeneous coinductive datatypes as terminal---\enquote{coinitial}---objects.
 % 
@@ -54,14 +55,19 @@
 \section{Introduction}
 
  Simple inductive types---\textsf{W}-types---are characterised categorically as initial algebras of
- a polynomial functor.
- Similarly, simple coinductive types are characterised as terminal---coinitial---algebras of polynomial functors.
+ a polynomial functor \parencite{DBLP:journals/apal/MoerdijkP00}.
  The characterisation of inductive types as initial algebras 
- has been extended to heterogeneous datatypes, e.g., the type of $\lambda$-terms,
+ has been extended to \emph{heterogeneous}---also called \emph{nested}---inductive datatypes, e.g., the type of $\lambda$-terms,
  in various formulations \parencite{fpt, ahrens_relmonads}.
- In this work we give an analogous extension of this characterisation to an instance of heterogeneous \fat{co}inductive types,
+ 
+ For infinite, \emph{coinductive}, types, the meta-theoretic notion of equality is not adequate. Another notion of sameness for inhabitants of such types, 
+ \emph{bisimulation}, was introduced by \textcite{aczel_nonwellfounded}, together with 
+ a new proof principle called \emph{coinduction}. 
+ Such coinductive datatypes are characterised as terminal---coinitial---algebras of polynomial functors.
+
+ In this work we give an extension of this characterisation to an instance of heterogeneous \fat{co}inductive types,
  namely the coinductive datatype of infinite triangular matrices as studied by
- \textcite{DBLP:conf/types/MatthesP11}.
+ \textcite{DBLP:conf/types/MatthesP11}. This extension is in the spirit of \parencite{ahrens_relmonads}.
 
  Our framework should generalize to heterogeneous coinductive datatypes specified by signatures in the spirit of \parencite{ahrens_relmonads},
  but we lack interesting examples other than the considered triangular matrices.
