@@ -231,16 +231,54 @@ Let $E$ be an arbitrary fixed set.
   is an instance of such a comonad. 
   A weak constructive comonad as defined in \parencite{DBLP:conf/types/MatthesP11}, however, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
+  The $\counit$ is given by the operation $\head$.
+  The $\cobind$ operation---called \emph{redecoration} or $\redec$ in \parencite{DBLP:conf/types/MatthesP11}--- of type
+   \[ \redec_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B )\] is defined 
+  corecursively, for $f:\Setoid(\Tri A,\eq B)$  and $t : \Tri A$ by
+      \begin{align*}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \\
+                     \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\extend~f\bigr)(\tail~t) \enspace . 
+      \end{align*}
+Here, the family of functions 
+     \[\extend_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid\bigr(\Tri (E \times A),\eq(E\times B)\bigr)\]
+  is suitably defined to account for the change of the type of argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
+  rather than $t : \Tri A$. We refer to our implementation in the proof assistant \textsf{Coq} for the precise definition.
 \end{example}
 
 
 Just like relative monads, relative comonads are functorial:
-\begin{definition}[Functoriality for relative comonads]
+\begin{definition}[Functoriality for relative comonads]\label{def:lift}
  Let $T$ be a  comonad relative to $F:\C\to\D$.
  For $f : \C(A,B)$ we define
   \[ \lift^T(f) := \cobind(\comp{\counit_A}{Ff}) .  \]
  The functor properties are easily checked.
 \end{definition}
+
+
+
+\begin{definition}[Morphism of relative comonads]
+ Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
+  is given by a family of morphisms \[\tau_A : \D(TA,SA)\] such that for any $A : \C_0$,
+     \[  \counit^T_A = \comp{\tau_A}{\counit^S_A} \]
+   and for any $A,B : \C_0$ and $f : \D(SA,FB)$,
+   \[  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)} \enspace .  \]
+\end{definition}
+
+A morphism $\tau : T\to S$ of relative comonads over a functor $F:\C\to\D$ is a natural transformation
+with respect to the functorial action of \Cref{def:lift}.
+
+\begin{remark}[Category of relative comonads]
+ Fix a functor $F : \C\to\D$. Relative comonads over $F$ and their morphisms form a category.
+\end{remark}
+
+\begin{remark}
+  Let $T$ be a comonad relative to a strong monoidal functor $F:\C\to\D$ between cartesian monoidal categories,
+  and let $E:\C_0$ be an object of $\C$.
+ The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$.
+ One might thus try to characterize the destructor $\tail$ of the triangular matrices of \Cref{ex:tri_comonad}
+ as a morphism of relative comonads, of type $\Tri \to \Tri(E\times \_)$.
+ However, this fails for similar reasons as for heterogeneous inductive datatypes, see \parencite[Ex.\ 3.18]{ahrens_zsido}.
+\end{remark}
+
 
 
 In order to characterise the destructors of coinductive datatypes---and, in particular, their interplay with the comonadic structure---, 
@@ -263,12 +301,14 @@ over a relative comonad}:
 
 \end{definition}
 
-\begin{example}[Tautological comodule]\label{def:tautological_comodule}
+Every relative comonad comes with a canonical comodule over it, the \emph{tautological comodule}:
+
+\begin{definition}[Tautological comodule]\label{def:tautological_comodule}
   Given a comonad $T$ relative to $F:\C\to\D$, the assignment $A \mapsto TA$ yields a comodule over $T$ 
   with target category $\D$, the \textbf{tautological comodule} of $T$, also called $T$.
   The comodule operation is given by
     \[  \mcobind^T(f) := \cobind^T(f) \enspace . \]
-\end{example}
+\end{definition}
 
 
 A \emph{morphism of comodules} is given by a family of morphisms that is compatible with 
@@ -396,17 +436,7 @@ Equivalently,
 \end{example}
 
 
-\begin{definition}[Morphism of relative comonads]
- Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
-  is given by a family of morphisms \[\tau_A : \D(TA,SA)\] such that for any $A : \C_0$,
-     \[  \counit^T_A = \comp{\tau_A}{\counit^S_A} \]
-   and for any $A,B : \C_0$ and $f : \D(SA,FB)$,
-   \[  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)} \enspace .  \]
-\end{definition}
 
-\begin{remark}[Category of relative comonads]
- Fix a functor $F : \C\to\D$. Relative comonads over $F$ and their morphisms form a category.
-\end{remark}
 
 %TODO: wrong, i leave it in for reference
 % \begin{definition}[Pullback comodule, WRONG]\label{def:pullback_comodule}
