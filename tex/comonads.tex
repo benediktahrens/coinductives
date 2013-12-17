@@ -8,6 +8,7 @@
 
 
 \usepackage[style=numeric,
+ backref=true,
  isbn=false,
  maxnames=3,
  maxbibnames=99 ,                
@@ -346,17 +347,7 @@ Similarly to relative comonads, comodules over these are functorial:
 
 
 
-%TODO: not needed for now
-% \begin{definition}[Constant comodule]
-%   Given $e:\E_0$, the function $\C_0\to\E_0$ sending any object of $\C$ to $e$ is equiped with
-%   the structure of a comodule over $T$.
-% \end{definition}
 
-%TODO: is not needed
-% \begin{definition}[Product comodule]
-%  Given two comodules $M,N$ over $T$, then the pointwise product is equiped with the structure of 
-%  a comodule over $T$.
-% \end{definition}
 
 
 
@@ -414,17 +405,6 @@ Equivalently,
 
 \end{definition}
 
-% \begin{definition}[Identity comodule]
-% 
-%   WRONG, it isn't 
-%   
-%   i don't delete this yet
-% 
-%  %TODO: identity comodule (i.e. identity functor forms a comodule over any relative comonad
-%  
-%  %
-%  
-% \end{definition}
 
 
 
@@ -437,21 +417,6 @@ Equivalently,
 
 
 
-
-%TODO: wrong, i leave it in for reference
-% \begin{definition}[Pullback comodule, WRONG]\label{def:pullback_comodule}
-%   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
-%   comodule over $S$ towards a category $\E$. We define the \fat{pullback comodule} $\tau^*M$ to be the comodule over $T$ given by
-%   \[  \tau^*M(c) := Mc \]
-%   and 
-%    \[ \mcobind^{\tau^*M}(f) := \mcobind^M(\comp{\tau_c}{f}) \enspace . \]
-%    
-%   \noindent
-%   Pullback is functorial: if $M$ and $N$ are comodules over $S$ with codomain category $\E$, and $\alpha : M\to N$ is 
-%     a morphism of comodules, then we define \[\tau^*\alpha : \tau^*M \to \tau^*N\] 
-%     as the family of morphisms
-%      \[ \tau^*\alpha_c := \alpha_c \enspace . \]
-% \end{definition}
 
 
 Given a morphism of comonads, we can \enquote{transport} comodules over the source comonad to comodules over the target comonad:
@@ -517,6 +482,20 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
 In the following we present some more constructions of comodules which can be used to specify the type of 
 destructors.
 
+
+%TODO: constant comodule
+% \begin{definition}[Constant comodule]
+%   Given $e:\E_0$, the function $\C_0\to\E_0$ sending any object of $\C$ to $e$ is equiped with
+%   the structure of a comodule over $T$.
+% \end{definition}
+
+%TODO: product of two comodules
+% \begin{definition}[Product comodule]
+%  Given two comodules $M,N$ over $T$, then the pointwise product is equiped with the structure of 
+%  a comodule over $T$.
+% \end{definition}
+
+
 Precomposition with \enquote{product with $E$} as in \Cref{def:product_in_context} is a special case of the following
 general construction:
 
@@ -563,7 +542,7 @@ The exact version we use is \parencite{coq_polymorphic}.
 
 \subsection{Implementation choices}
 
-%TODO: setoids
+
 
 \subsubsection{Setoids}
 
@@ -584,8 +563,6 @@ we do not make any use of that.
 
 \subsection{Formal vs.\ informal definitions}
 
-%TODO: constructors vs destructors
-% TODO: cite abel's work on coinductive types through destructors
 
 The biggest discrepancy between formal and informal definition arises in the construction of the terminal object itself:
 in \textsf{Coq}, coinductive types are specified through \fat{constructors} rather than \fat{destructors}.
@@ -593,7 +570,7 @@ Work on the the declaration of coinductive types via destructors is done in \tex
 
 \section{Conclusions and future work}
 
-%TODO: expand
+%TODO: expand on signatures
 
 In the future we would like to define a suitable notion of \emph{signature} 
 by postcomposition and precomposition with suitable functors. In this framework, the \emph{arity} of 
@@ -601,7 +578,7 @@ a destructor $d$ of some coinductive type $T$ will be given as $d : T \to K'TK$,
 functors satisfying some properties sufficient for ensuring existence of the terminal object---typically some 
 positivity condition and a condition involving the comonadic operations.
  
-%TODO: expand
+%TODO: expand on equations
 Another potential goal is the integration of \emph{equations} into the notion of signature. 
  Equations, e.g., branching modulo permutation of subtrees
 
@@ -610,7 +587,7 @@ Another potential goal is the integration of \emph{equations} into the notion of
 
 \printbibliography
 
-\newpage
+% \newpage
 \appendix
 
 \input{formal_table}
@@ -621,4 +598,21 @@ Another potential goal is the integration of \emph{equations} into the notion of
 %TODO: other arities, e.g.
 %    - T(A) ---->  (E -> T(A))
 %    - http://www2.tcs.ifi.lmu.de/~rodrigue/docs/types.html
+
+%TODO: precomposition with coproduct rather than product
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
