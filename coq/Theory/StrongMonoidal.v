@@ -23,4 +23,6 @@ Section StrongMonoidal.
 
 End StrongMonoidal.
 
+Arguments φ {_ _ _ _ _ _ _}.
+
 Notation make φ := (mkCartesianStrongMonoidal (φ_inv := φ) _) (only parsing).

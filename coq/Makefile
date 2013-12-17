@@ -28,7 +28,8 @@ FILES=\
 	  Theory/InitialTerminal.v                           \
 	  Theory/Product.v                                   \
 	  Theory/Isomorphism.v                               \
-	  Theory/StrongMonoidal.v
+	  Theory/StrongMonoidal.v                            \
+	  Theory/ProductInContext.v
 
 
 ALL= $(FILES)
