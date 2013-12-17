@@ -58,7 +58,7 @@
  a polynomial functor \parencite{DBLP:journals/apal/MoerdijkP00}.
  The characterisation of inductive types as initial algebras 
  has been extended to \emph{heterogeneous}---also called \emph{nested}---inductive datatypes, e.g., the type of $\lambda$-terms,
- in various formulations \parencite{fpt, ahrens_relmonads}.
+ in various formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
  
  For infinite, \emph{coinductive}, types, the meta-theoretic notion of equality is not adequate. Another notion of sameness for inhabitants of such types, 
  \emph{bisimulation}, was introduced by \textcite{aczel_nonwellfounded}, and also
@@ -67,8 +67,22 @@
 
  In this work we give an extension of this characterisation as terminal object to an instance of \emph{heterogeneous} coinductive types,
  namely the coinductive datatype of infinite triangular matrices as studied by
- \textcite{DBLP:conf/types/MatthesP11}. This extension is in the spirit of \parencite{ahrens_relmonads}.
-
+ \textcite{DBLP:conf/types/MatthesP11}. 
+ The type of such matrices is parametrized by a fixed set for entries not on the diagonal, and indexed by another, \emph{variable}, set for entries on 
+ the diagonal.
+ This extension is in the spirit of the work by \textcite{DBLP:journals/iandc/HirschowitzM10}, which uses the notion of \emph{monad} and
+ \emph{module over a monad} to characterize substitution.
+ However, in order to characterize the cosubstition---\emph{redecoration}---of infinite triangular matrices, 
+ a simple dualisation of that work is not sufficient: since coinductive datatypes such as the aforementioned matrices 
+ live naturally in the category of 
+ \emph{setoids}, i.e.\ of sets equiped with an equivalence relation---the \fat{bisimulation} relation---rather than in the category of sets,
+ comonads are not good enough; we need a notion of comonad where the underlying functor is not necessarily endo.
+ This is precisely the raison d'\^etre of \emph{relative} comonads---the dual notion to the relative monads defined in 
+  \parencite{DBLP:conf/fossacs/AltenkirchCU10}. 
+ The notion of module over a monad was generalized to relative monads in \parencite{ahrens_relmonads}.
+ In the present work, we dualize this generalization to obtain comodules over relative comonads, and use this gadget to 
+ give a category-theoretic characterisation of redecoration for infinite triangular matrices.
+ 
  Our framework should generalize to heterogeneous coinductive datatypes specified by signatures in the spirit of \parencite{ahrens_relmonads},
  but we lack interesting examples other than the considered triangular matrices.
  
@@ -113,11 +127,12 @@ object is neutral with respect to the multiplication. Functors preserving the mo
 are called \emph{strong monoidal}:
 
 \begin{definition}[Strong monoidal functor]\label{def:monoidal_functor}
- A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if the maps
+ A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if the morphisms
  \[ \alpha_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
  are isomorphisms.
  (Note that for \emph{cartesian} monoidal categories, the family $\alpha$ of morphisms automatically makes commute the 
-  diagrams necessary to have a strong monoidal functor, since it is given by universal property.)
+  diagrams necessary to have a strong monoidal functor, since it is given by universal property. 
+  We shall not need more general strong monoidal functors between arbitrary monoidal categories.)
 \end{definition}
 
 \begin{example}
