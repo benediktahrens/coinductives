@@ -207,7 +207,7 @@ Proof.
   apply (bisimilar_injr H2).
 Qed.
 
-Add Parametric Relation (A: Type): (Tri A) (bisimilar(A:= A)) 
+Global Add Parametric Relation (A: Type): (Tri A) (bisimilar(A:= A)) 
   reflexivity proved by (bisimilar_refl(A:= A))
   symmetry proved by (bisimilar_sym(A:= A))
   transitivity proved by (bisimilar_trans(A:= A))
@@ -223,7 +223,7 @@ Proof.
   reflexivity.
 Qed.
   
-Add Parametric Morphism (A: Type): (top(A:= A))
+Global Add Parametric Morphism (A: Type): (top(A:= A))
   with signature (bisimilar(A:= A)) ==> (eq(A:= A))
   as topM.
 Proof.
@@ -238,7 +238,7 @@ Proof.
   assumption.
 Qed.
   
-Add Parametric Morphism (A: Type): (rest(A:= A))
+Global Add Parametric Morphism (A: Type): (rest(A:= A))
   with signature (bisimilar(A:= A)) ==> (bisimilar(A:= E * A))
   as restM.
 Proof.
@@ -256,7 +256,7 @@ Proof.
   apply (bisimilar_injr H).
 Qed.
 
-Add Parametric Morphism (A: Type): (cut(A:= A))
+Global Add Parametric Morphism (A: Type): (cut(A:= A))
   with signature (bisimilar(A:= E * A)) ==> (bisimilar(A:= A))
   as cutM.
 Proof.
@@ -276,7 +276,7 @@ Proof.
   apply (bisimilar_injr H).
 Qed.
 
-Add Parametric Morphism (A: Type)(es: Stream E): (add_es es)
+Global Add Parametric Morphism (A: Type)(es: Stream E): (add_es es)
   with signature (bisimilar(A:= A)) ==> (bisimilar(A:= E * A))
   as add_esM.
 Proof.
@@ -308,7 +308,7 @@ Proof.
   transitivity (g a); (apply H1 || apply H2).
 Qed.
 
-Add Parametric Relation (A B: Type): (A -> B) (@fequiv A B) 
+Global Add Parametric Relation (A B: Type): (A -> B) (@fequiv A B) 
   reflexivity proved by (fequiv_refl(A:= A)(B:= B))
   symmetry proved by (fequiv_sym(A:= A)(B:= B))
   transitivity proved by (fequiv_trans(A:= A)(B:= B))
@@ -511,7 +511,7 @@ Infix "==" := EqSt (at level 60).
 (* end hide *)
 (** [EqSt] is displayed as the infix $\equiv$#==#. *)
 
-Add Parametric Relation (A: Type): (Stream A) (EqSt(A:= A))
+Global Add Parametric Relation (A: Type): (Stream A) (EqSt(A:= A))
   reflexivity proved by (EqSt_reflex(A:= A))
   symmetry proved by (sym_EqSt(A:= A))
   transitivity proved by (trans_EqSt(A:= A))
@@ -542,7 +542,7 @@ Proof.
   intros [H1 _]; assumption.
 Qed.
 
-Add Parametric Morphism (A: Type): (@hd A)
+Global Add Parametric Morphism (A: Type): (@hd A)
   with signature (@EqSt A) ==> (@eq A)
   as hdM.
 Proof.
@@ -555,7 +555,7 @@ Proof.
   assumption.
 Qed.
 
-Add Parametric Morphism (A: Type):  (@tl A)
+Global Add Parametric Morphism (A: Type):  (@tl A)
   with signature (@EqSt A) ==> (@EqSt A)
   as tlM.
 Proof.
@@ -588,7 +588,7 @@ Proof.
   assumption.
 Qed.
 
-Add Parametric Morphism (A: Type): (@Cons A)
+Global Add Parametric Morphism (A: Type): (@Cons A)
   with signature (@eq A) ==> (@EqSt A) ==> (@EqSt A)
   as ConsM2.
 Proof.
@@ -635,7 +635,7 @@ Proof.
   apply (Hc _ _ H2).
 Qed.
 
-Add Parametric Morphism (A B: Type) (f: A -> B): (map f)
+Global Add Parametric Morphism (A B: Type) (f: A -> B): (map f)
   with signature (@EqSt A) ==> (@EqSt B)
   as mapM.
 Proof.
@@ -733,7 +733,7 @@ Proof.
   transitivity (restS t2); assumption.
 Qed.
 
-Add Parametric Relation (A: Type): (TriS A) (@bisimilarS A)
+Global Add Parametric Relation (A: Type): (TriS A) (@bisimilarS A)
   reflexivity proved by (@bisimilarS_refl A)
   symmetry proved by (@bisimilarS_sym A)
   transitivity proved by (@bisimilarS_trans A)
@@ -762,7 +762,7 @@ Proof.
   assumption.
 Qed.
 
-Add Parametric Morphism (A: Type) : (@topAS A)
+Global Add Parametric Morphism (A: Type) : (@topAS A)
   with signature ((@bisimilarS A) ==> (@eq _))
   as topASM.
 Proof.
@@ -776,7 +776,7 @@ Proof.
   assumption.
 Qed.
 
-Add Parametric Morphism (A: Type) : (@topEsS A)
+Global Add Parametric Morphism (A: Type) : (@topEsS A)
   with signature ((@bisimilarS A) ==> (@EqSt _))
   as topEsSM.
 Proof.
@@ -790,7 +790,7 @@ Proof.
   assumption.
 Qed.
 
-Add Parametric Morphism (A: Type) : (@restS A)
+Global Add Parametric Morphism (A: Type) : (@restS A)
   with signature ((@bisimilarS A) ==> (@bisimilarS A))
   as restSM.
 Proof.
@@ -829,14 +829,14 @@ Proof.
   apply (bisimilar_injr H1).
 Qed.
 
-Add Parametric Morphism (A: Type) : (@es_cut A)
+Global Add Parametric Morphism (A: Type) : (@es_cut A)
   with signature ((@bisimilar (E *A)) ==> (@EqSt _))
   as es_cutM.
 Proof.
   exact (@es_cut_cong A).
 Qed.
 
-Add Parametric Morphism (A: Type) : (@toStreamRep A)
+Global Add Parametric Morphism (A: Type) : (@toStreamRep A)
   with signature ((@bisimilar A) ==> (@bisimilarS A))
   as toStreamRepM.
 Proof.
@@ -896,7 +896,7 @@ Proof.
   apply Hc ; assumption.
 Qed.
 
-Add Parametric Morphism (A: Type) : (@fromStreamRep A)
+Global Add Parametric Morphism (A: Type) : (@fromStreamRep A)
   with signature ((@bisimilarS A) ==> (@bisimilar A))
   as fromStreamRepM.
 Proof.
@@ -1149,7 +1149,7 @@ Proof.
   assumption.
 Qed.
 
-Add Parametric Morphism (A B: Type)(f: Tri A -> B)(Hf: Morphisms.Proper (@bisimilar _ ==> @eq _) f):  (redec f)
+Global Add Parametric Morphism (A B: Type)(f: Tri A -> B)(Hf: Morphisms.Proper (@bisimilar _ ==> @eq _) f):  (redec f)
   with signature (@bisimilar _) ==> (@bisimilar _)
   as redecM.
 Proof.

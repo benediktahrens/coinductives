@@ -8,8 +8,6 @@ Unset Strict Implicit.
   -- ＣＡＴＥＧＯＲＹ  ＯＦ  ＴＹＰＥＳ
   ----------------------------------------------------------------------------*)
 
-Module Def.
-
 Definition Obj := Type.
 
 Program Definition Hom (A B : Obj) : Setoid := Setoid.make (A → B) (λ f g ∙ ∀ x, f x = g x).
@@ -45,11 +43,8 @@ Proof.
   hnf ; intuition.
 Qed.
 
-End Def.
-
 Canonical Structure 𝑻𝒚𝒑𝒆 : Category :=
-  mkCategory Def.left_id Def.right_id Def.compose_assoc.
-
+  mkCategory (Obj := Type) left_id right_id compose_assoc.
 
 (*------------------------------------------------------------------------------
   -- ＴＹＰＥＳ  ＨＡＶＥ  ＢＩＮＡＲＹ  ＰＲＯＤＵＣＴ

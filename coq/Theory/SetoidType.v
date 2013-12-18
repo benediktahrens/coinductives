@@ -17,7 +17,7 @@ Module Setoid.
   { Carrier :> Type
   ; _       : SetoidClass.Setoid Carrier }.
 
-  Instance Setoid_Setoid (S : Setoid) : SetoidClass.Setoid S :=
+  Instance Setoid_Setoid (S : Setoid) : SetoidClass.Setoid S | 10 :=
     let 'mkSetoid s := S in s.
 
   Notation make c eq := (@mkSetoid c (@Build_Setoid _ eq _)) (only parsing).

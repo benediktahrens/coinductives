@@ -36,7 +36,11 @@ Section defs.
   Program Definition THom_Setoid (T S : TObj) : Setoid :=
     Setoid.make (THom T S) (λ g f ∙ (Tτ g) ≈ (Tτ f)).
   Next Obligation.
-  Admitted.
+    constructor.
+    - repeat intro. now rewrite H.
+    - repeat intro. symmetry; now rewrite H.
+    - repeat intro; etransitivity; eauto. now apply H0.
+  Qed.
 
   Infix "⇛" := THom_Setoid (at level 70).
 
@@ -72,6 +76,28 @@ Section defs.
     apply H.
     reflexivity.
   Qed.
+
+  Infix "⟨∘⟩" := T_compose (at level 40, left associativity).
+
+  Lemma left_id : ∀ T S (f : T ⇛ S), T_id ⟨∘⟩ f ≈ f.
+  Proof.
+    intros. simpl. intros. rewrite H.
+    reflexivity.
+  Qed.
+
+  Lemma right_id : ∀ T S (f : T ⇛ S), f ⟨∘⟩ T_id ≈ f.
+  Proof.
+    repeat intro. simpl. now rewrite H.
+  Qed.
+
+  Lemma compose_assoc A B C D (f : A ⇛ B) (g : B ⇛ C) (h : C ⇛ D) : h ⟨∘⟩ g ⟨∘⟩ f ≈ h ⟨∘⟩ (g ⟨∘⟩ f).
+  Proof.
+    repeat intro.
+    simpl. now rewrite H.
+  Qed.
+
+  Canonical Structure 𝑻𝒓𝒊𝒂𝒏𝒈𝒍𝒆 : Category :=
+    mkCategory left_id right_id compose_assoc.
 
 End defs.
 

@@ -214,4 +214,164 @@ Section Triangles.
     intros; now apply comonad2'.
   Qed.
 
+  Definition Lift {A B} (f : A → B) (t : tri A) : tri B :=
+    redec (λ x ∙ f (top x)) t.
+
+  Lemma top_Lift : ∀ {A B} (f : A → B) (t : tri A), top (Lift f t) = f (top t).
+  Proof.
+    reflexivity.
+  Qed.
+
+  Lemma rest_Lift : ∀ {A B} (f : A → B) (t : tri A), rest(Lift f t) = Lift (λ x ∙ (fst x, f (snd x))) (rest t).
+  Proof.
+    reflexivity.
+  Qed.
+
+  Hint Rewrite -> @top_Lift : coind.
+  Hint Rewrite -> @rest_Lift : coind.
+
+  Lemma lift_map : ∀ {A B} (f : A → B) (t : tri A),
+                     Lift f t ∼ map f t.
+  Proof.
+    prove_bisim.
+    reflexivity.
+  Qed.
+
+  Definition fcompat A B (f : tri A → B) : Prop := ∀ t t', t ∼ t' → f t = f t'.
+
+  CoFixpoint cut A (t : Trap A) : tri A :=
+    constr (snd (top t)) (cut (rest t)).
+
+  Lemma top_cut : ∀ A (t : Trap A), top (cut t) = snd (top t).
+  Proof.
+    reflexivity.
+  Qed.
+
+  Lemma rest_cut : ∀ A (t : Trap A), rest (cut t) = cut (rest t).
+  Proof.
+    reflexivity.
+  Qed.
+
+  Hint Rewrite -> @top_cut : coind.
+  Hint Rewrite -> @rest_cut : coind.
+
+  (* Lemma cut_map : ∀ A (f : tri (E ⟨×⟩ A) → A) (t : Trap A), *)
+  (*                   (∀ t, f t = snd (top t)) → cut t ∼ redec f t. *)
+  (* Proof. *)
+  (*   cofix Hc; intros. *)
+  (*   constructor. *)
+  (*   - simpl. symmetry. apply H. *)
+  (*   - simpl. apply Hc. *)
+  (*     intros. unfold extend. destruct t0. *)
+  (*     simpl. *)
+  (*     rewrite H. simpl. *)
+  (*     destruct p. *)
+  (*     simpl. destruct p. simpl. f_equal. *)
+
+  (*     intros [[e a] r]. unfold extend. simpl. destruct a. simpl. *)
+  (*     unfold extend. *)
+  (*     specialize (Hc (E ⟨×⟩ A)). *)
+
+  (*     apply Hc. *)
+
+
+  (* Lemma rest_cut : ∀ A (t : tri (E ⟨×⟩ A)), rest (cut t) = cut (rest t). *)
+  (* Proof. *)
+  (*   intros. *)
+  (*   unfold cut at 1. *)
+  (*   rewrite rest_map. unfold cut. unfold Prod_fun. *)
+
+(*   Proof. *)
+(*     cofix Hc. *)
+(*     intros A B f [[e a] t]. *)
+(*     constructor. *)
+(*     - reflexivity. *)
+(*     - simpl. *)
+(*       unfold cut in Hc. *)
+(*       unfold extend at 3.  *)
+(*     prove_bisim. *)
+(*     - simpl. reflexivity. *)
+(*     -  *)
+(*   cofix Hc. *)
+(*   intros A B f [[e a] t]. *)
+(*   apply constrB; simpl. *)
+(*   reflexivity. *)
+(*   apply Hc. *)
+(* Qed. *)
+
+  (* Lemma xxxx : ∀ A B C (f : tri A → B) (g : E ⟨×⟩ B → B) (t : tri (E ⟨×⟩ A)), *)
+  (*                Lift g (redec (extend f) t) ∼ redec f (Lift g t). *)
+
+  Lemma xxxx : ∀ A B (f : tri A → B) (gA : E ⟨×⟩ A → A) (gB : E ⟨×⟩ B → B) (t : tri (E ⟨×⟩ A)), 
+                 fcompat f →
+                 gA ≗ snd → gB ≗ snd → redec f (map gA t) ∼ map gB (redec (extend f) t).
+  Proof.
+    cofix Hc. intros.
+    constructor.
+    - admit.
+    - autorewrite with coind.
+      unfold Prod_fun.
+      apply Hc.
+      admit.
+    prove_bisim.
+    - rewrite H1. apply H. now apply map_cong.
+    - admit.
+    - rewrite H0. simpl. f_equal.
+    - reflexivity.
+    - apply COFIX.
+
+  Lemma extend_redec : ∀ A B C (f: tri A → B) (g : tri B → C),
+                         fcompat g → extend (λ x ∙ g (redec f x)) ≗ λ x ∙ extend g (redec (extend f) x).
+  Proof.
+    intros.
+    unfold extend. simpl.
+    f_equal. apply H.
+
+    intros.
+  Admitted.
+
+
+  (* Lemma xxx : ∀ A B C (x : A ⟨×⟩ (B ⟨×⟩ C)), snd (snd x) = snd ((λ x ∙ ((fst x, fst (snd x)), snd (snd x))) x). *)
+  (* Proof. *)
+  (*   intros A B C [x [y z]]. *)
+  (*   simpl. reflexivity. *)
+
+  Lemma comonad3' : ∀ A B C (f : tri A → B) (g : tri B → C) (h : tri A → C) (t : tri A),
+                       fcompat g → h ∼≗ (λ x ∙ g (redec f x)) → redec h t ∼ redec g (redec f t).
+  Proof.
+    prove_bisim.
+    - apply H0. reflexivity.
+    - admit.
+    - 
+    cofix Hc; intros.
+    (* assert (extend_redec' : ∀ A B C (f : tri A → B) (g : tri B → C), *)
+    (*                        fcompat g → extend (λ x ∙ g (redec f x)) ≗ λ x ∙ extend g (redec (extend f) x)). *)
+    (* intros. *)
+    unfold 
+    constructor.
+    - simpl. now apply H0.
+    - simpl.
+      apply Hc.
+      admit.
+  extend_redec' : ∀ A B C (f : tri A → B) (g : tri B → C),
+                           fcompat g → extend (λ x ∙ g (redec f x)) ≗ λ x ∙ extend g (redec (extend f) x).
+
+
+    intr
+    prove_bisim.
+    - apply H0. reflexivity.
+    - intros u v eq_uv. apply extend_cong. apply H. apply eq_uv.
+    - 
+    - intros u v eq_uv. etransitivity. eapply extend_cong. apply H0. apply eq_uv.
+      now rewrite extend_redec.
+  Qed.
+
+  Lemma comonad3 : ∀ A B C (f : tri A → B) (g : tri B → C) (t : tri A),
+                       fcompat g → redec (λ x ∙ g (redec f x)) t ∼ redec g (redec f t).
+  Proof.
+    intros. apply comonad3'.
+    apply H.
+    reflexivity.
+  Qed.
+
 End Triangles.
