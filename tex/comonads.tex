@@ -130,7 +130,7 @@ are called \emph{strong monoidal}:
 \begin{definition}[Strong monoidal functor]\label{def:monoidal_functor}
  A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if, for any two objects $A$ and $B$ of $\C$,
   the morphism
- \[ \alpha_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
+ \[ \alpha^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
  is an isomorphisms.
  (Note that for \emph{cartesian} monoidal categories, the family $\alpha$ of morphisms automatically makes commute the 
   diagrams necessary to have a strong monoidal functor, since it is given by universal property. 
@@ -280,6 +280,34 @@ with respect to the functorial action of \Cref{def:lift}.
  However, this fails for similar reasons as for heterogeneous inductive datatypes, see \parencite[Ex.\ 3.18]{ahrens_zsido}.
 \end{remark}
 
+In the following we consider relative comonads with an extra operation, which we call the $\cut$ operation:
+
+\begin{definition}[Relative comonad with cut]\label{def:rel_comonad_with_cut}
+ Let $\C$ and $\D$ be categories with binary products and $F:\C\to\D$ a strong monoidal functor. Let $E:\C_0$ be an object of $\C$.
+ We define a \fat{relative comonad over $F$ with cut} to be a comonad $T$ relative to $F$ together with a $\cut$ operation 
+    \[ \cut : \forall~A:\C_0, T(E\times A) \to TA \]
+ satisfying the following axioms:
+  \begin{itemize}
+   \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{\counit_{E\times A}}{F(\pr_2(E,A))}$;
+   \item $\forall~A~B:C_0,\forall~f:\D(TA,FB), \comp{\cut_A}{\cobind(f)} = \comp{\cobind(\extend~f)}{\cut_B}$,
+  \end{itemize}
+
+  \noindent
+  where, for $f:\D(TA,FB)$, we define $\extend(f) : \D\bigl(T(E\times A),F(E\times B)\bigr)$ as
+       \[ \extend(f) := \comp{\comp{\langle T(\pr_1) , \cut \rangle}{(\counit_E\times f)}}{{\alpha^{F}_{E,B}}^{-1}} \enspace . \]
+  
+\end{definition}
+
+\begin{example}[$\cut$ for $\Tri$]
+  The relative comonad $\Tri$ from \Cref{ex:tri_comonad} comes with a $\cut$ operation as in \Cref{def:rel_comonad_with_cut},
+  defined coinductively by
+   \begin{align*}\head\bigl(\cut~t\bigr) &:= \pr_2(\head~t) \quad\text{ and } \\
+                     \tail\bigl(\cut~t\bigr) &:= \cut(\tail~t) \enspace . 
+      \end{align*}
+  This definition of $\cut$ is actually used in the definition of the $\extend$ operation of \Cref{ex:tri_comonad}.
+  Note that while $\Tri(\pr_2)$ does have the same type as $\cut$, it is \emph{not} the correct operation to use in place of $\cut$;
+  the third comonad law is not satisfied when using $\cut:=T(\pr_2)$ for $\Tri$.
+\end{example}
 
 
 In order to characterise the destructors of coinductive datatypes---and, in particular, their interplay with the comonadic structure---, 
@@ -353,7 +381,7 @@ Similarly to relative comonads, comodules over these are functorial:
 
 
 
-\begin{definition}\label{def:extend}
+\begin{definition}[IS ALREADY IN rel comonad with cut]\label{def:extend}
  Let $F : \C\to \D$ be a strong monoidal functor between (cartesian) monoidal categories, 
  i.e.\ we have a family of isomorphisms
   \[ \alpha_{A,B} : F(A\times B) \xrightarrow{\sim} FA\times FB\enspace . \] 
@@ -384,7 +412,8 @@ Equivalently,
 
 
 \begin{definition}[Product in context]\label{def:product_in_context}
- Suppose $F:\C\to\D$ strong monoidal as in \Cref{def:extend}, and $T$ a comonad relative to $F$.
+ Suppose $F:\C\to\D$ strong monoidal as in \Cref{def:extend}, and $T$ a comonad relative to $F$ with a $\cut$ operation 
+ as in \Cref{def:rel_comonad_with_cut}.
  Given a comodule $M$ over $T$ and an object $E:\C_0$, then precomposition with \enquote{product with $E$}
  gives a comodule $M(E\times\_)$ over $T$.
  
@@ -410,7 +439,7 @@ Equivalently,
 
 
 
-\begin{example}\label{ex:tail_comodule}
+\begin{example}[$\tail$ is a comodule morphism]\label{ex:tail_comodule}
  The destructor \constfont{\tail} of \Cref{ex:tri_comonad} is a morphism of comodules over the comonad $\Tri$ 
   from the tautological comodule  $\Tri$ to $\Tri(E\times \_)$.
 \end{example}
