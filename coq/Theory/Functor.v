@@ -15,7 +15,7 @@ Structure Functor (𝒞 𝒟 : Category) : Type := mkFunctor
 
 Notation "F ⋅ f" := (map F f) (at level 35, no associativity).
 
-Local Notation make F map := (mkFunctor (F := F) (map0 := map) _ _).
+Notation make F map := (mkFunctor (F := F) (map0 := map) _ _).
 
 (*------------------------------------------------------------------------------
   -- ＣＡＴＥＧＯＲＹ  ＭＯＲＰＨＩＳＭ
