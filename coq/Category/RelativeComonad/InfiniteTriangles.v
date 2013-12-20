@@ -2,18 +2,37 @@ Require Import InfiniteTriangles.redecInfiniteTriangles8_4.
 Require Import Category.Setoid.
 Require Import Category.Type.
 Require Import Category.Functor.Type_Setoid.
+Require Import Category.RComod.
+Require Import Category.RComonad.
 Require Import Theory.Category.
 Require Import Theory.Functor.
 Require Import Theory.RelativeComonad.
+Require Import Theory.Comodule.
 Require Import Theory.Product.
 Require Import Theory.ProductInContext.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
+Generalizable All Variables.
 
 (*------------------------------------------------------------------------------
   -- ＴＲＩ  ＩＳ  Ａ  ＲＥＬＡＴＩＶＥ  ＣＯＭＯＮＡＤ
   ----------------------------------------------------------------------------*)
+
+Section TAUTO.
+
+  Context `{F : Functor 𝒞 𝒟} (T : RelativeComonad F).
+
+  Program Definition tauto : Comodule T 𝒟 :=
+    Comodule.make _ (@cobind _ _ _ T).
+  Next Obligation.
+    now rewrite cobind_counit.
+  Qed.
+  Next Obligation.
+    now rewrite cobind_compose.
+  Qed.
+
+End TAUTO.
 
 Section Definitions.
 
@@ -93,6 +112,26 @@ Section Definitions.
     destruct f as [f f_compat].
     simpl. apply f_compat. now apply cut_cong.
     exact H.
+  Qed.
+
+  Definition 𝑴𝑻𝑹𝑰 : Comodule tri_cut 𝑺𝒆𝒕𝒐𝒊𝒅 := tauto tri_cut.
+
+  Definition 𝑴𝑻𝑹𝑰_prod : Comodule tri_cut 𝑺𝒆𝒕𝒐𝒊𝒅 :=
+    product_in_context (F := 𝑬𝑸) (T := tri_cut) E 𝑴𝑻𝑹𝑰.
+
+  Program Definition tail (A : 𝑻𝒚𝒑𝒆) : 𝑴𝑻𝑹𝑰 A ⇒ 𝑴𝑻𝑹𝑰_prod A :=
+    λ t ↦ @rest E A t.
+  Next Obligation.
+    intros x y eq_xy. now destruct eq_xy.
+  Qed.
+
+  Program Definition TAIL_MOR : 𝑴𝑻𝑹𝑰 ⇒ 𝑴𝑻𝑹𝑰_prod :=
+    Comodule.Morphism.make tail.
+  Next Obligation.
+    apply redec_cong.
+    repeat intro. f_equal. f_equal. now apply top_cong.
+    destruct f as [f f_compat]. apply f_compat. now apply cut_cong.
+    now apply rest_cong.
   Qed.
 
 End Definitions.
