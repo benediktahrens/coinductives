@@ -5,7 +5,8 @@ Require Import Category.Functor.Type_Setoid.
 Require Import Theory.Category.
 Require Import Theory.Functor.
 Require Import Theory.RelativeComonad.
-Require Import Theory.SetoidType.
+Require Import Theory.Product.
+Require Import Theory.ProductInContext.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -68,5 +69,30 @@ Section Definitions.
 
   Definition 𝑻𝑹𝑰 : RelativeComonad 𝑬𝑸 :=
     mkRelativeComonad Redec_Top Top_Redec Redec_compose.
+
+  Program Definition cut A : 𝑻𝑹𝑰 (E × A) ⇒ 𝑻𝑹𝑰 A :=
+    λ t ↦ @redecInfiniteTriangles8_4.cut E A t.
+  Next Obligation.
+    intros t t' eq_tt'.
+    apply cut_cong.
+    exact eq_tt'.
+  Qed.
+
+  Program Definition tri_cut : RelativeComonadWithCut 𝑬𝑸 E :=
+    ProductInContext.make 𝑻𝑹𝑰 cut.
+  Next Obligation.
+    assert (top (redecInfiniteTriangles8_4.cut x) = snd (top x)).
+    apply cut_top.
+    simpl in H0. rewrite H0. f_equal. now apply top_cong.
+  Qed.
+  Next Obligation.
+    eapply bisimilar_trans. apply redec_cut.
+    unfold redecInfiniteTriangles8_4.lift. apply cut_cong.
+    apply redec_cong.
+    repeat intro. f_equal. f_equal. now apply top_cong.
+    destruct f as [f f_compat].
+    simpl. apply f_compat. now apply cut_cong.
+    exact H.
+  Qed.
 
 End Definitions.

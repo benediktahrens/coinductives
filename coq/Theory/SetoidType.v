@@ -50,6 +50,11 @@ Module Π.
   Instance Π_Proper From To (f : Π From To) : f Preserves _≈_ ⟶ _≈_ :=
     let 'mkΠ p := f in p.
 
+  Lemma Π_cong From To (f : Π From To) : ∀ x y, x ≈ y → f x ≈ f y.
+  Proof.
+    intros x y eq_xy; now rewrite eq_xy.
+  Qed.
+
   Program Definition setoid (From To : Setoid) : Setoid :=
     Setoid.make (Π From To) (λ f g ∙ ∀ x y, x ≈ y → f x ≈ g y).
   Next Obligation.
@@ -92,6 +97,11 @@ Module Π₂.
 
   Instance Π_Proper A B C (f : Π₂ A B C) : f Preserves₂ _≈_ ⟶ _≈_ ⟶ _≈_ :=
     let 'mkΠ₂ p := f in p.
+
+  Lemma Π_cong₂ A B C (f : Π₂ A B C) : ∀ x x' y y', x ≈ x' → y ≈ y' → f x y ≈ f x' y'.
+  Proof.
+    intros x x' y y' eq_xx' eq_yy'; now rewrite eq_xx', eq_yy'.
+  Qed.
 
   Notation "[ A ⟶ B ⟶ C ]" := (Π₂ A B C).
 
