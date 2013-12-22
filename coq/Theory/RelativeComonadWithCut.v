@@ -70,6 +70,15 @@ Section MDefs.
   ; τ_cobind : ∀ {C D} {f : S C ⇒ F D}, τ(D) ∘ T⋅cobind (f ∘ τ(C)) ≈ S⋅cobind f ∘ τ(C)
   ; τ_cut    : ∀ {A}, cut S ∘ τ(E × A) ≈ τ(A) ∘ cut T }.
 
+  Program Definition rcm {T S : RelativeComonadWithCut F E} (M : Morphism T S) : RelativeComonad.Morphism T S :=
+    RelativeComonad.Morphism.make M.
+  Next Obligation.
+    now apply τ_counit.
+  Qed.
+  Next Obligation.
+    now apply τ_cobind.
+  Qed.
+
 End MDefs.
 
 Module Morphism.

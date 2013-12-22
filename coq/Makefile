@@ -31,7 +31,8 @@ FILES=\
 	  Theory/StrongMonoidal.v                            \
 	  Theory/RelativeComonadWithCut.v                    \
 	  Category/RComonadWithCut.v                         \
-	  Theory/ProductInContext.v
+	  Theory/ProductInContext.v                          \
+	  Theory/PushforwardComodule.v
 
 
 ALL= $(FILES)
