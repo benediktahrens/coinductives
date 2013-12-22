@@ -7,6 +7,7 @@ Require Import Category.RComonad.
 Require Import Theory.Category.
 Require Import Theory.Functor.
 Require Import Theory.RelativeComonad.
+Require Import Theory.RelativeComonadWithCut.
 Require Import Theory.Comodule.
 Require Import Theory.Product.
 Require Import Theory.ProductInContext.
@@ -98,7 +99,7 @@ Section Definitions.
   Qed.
 
   Program Definition tri_cut : RelativeComonadWithCut 𝑬𝑸 E :=
-    ProductInContext.make 𝑻𝑹𝑰 cut.
+    RelativeComonadWithCut.make 𝑻𝑹𝑰 cut.
   Next Obligation.
     assert (top (redecInfiniteTriangles8_4.cut x) = snd (top x)).
     apply cut_top.

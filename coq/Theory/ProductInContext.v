@@ -2,6 +2,7 @@ Require Import Theory.Category.
 Require Import Theory.Functor.
 Require Import Theory.Isomorphism.
 Require Import Theory.RelativeComonad.
+Require Import Theory.RelativeComonadWithCut.
 Require Import Theory.Comodule.
 Require Import Theory.Product.
 Require Import Theory.StrongMonoidal.
@@ -13,44 +14,6 @@ Unset Strict Implicit.
 (*------------------------------------------------------------------------------
   -- ＲＥＬＡＴＩＶＥ  ＣＯＭＯＮＡＤ  ＤＥＦＩＮＩＴＩＯＮ  ＷＩＴＨ  ＣＵＴ
   ----------------------------------------------------------------------------*)
-
-Section Defs.
-
-  Context `{BinaryProduct 𝒞} `{BinaryProduct 𝒟}
-          (F : Functor 𝒞 𝒟) (E : 𝒞) `{!CartesianStrongMonoidal F}.
-
-  Section ExtendConstruction.
-
-    Context {T : RelativeComonad F}
-            (cut : ∀ A, T (E × A) ⇒ T A).
-
-    Program Definition Extend {A B} : [ T A ⇒ F B ⟶ T (E × A) ⇒ F (E × B) ] :=
-      λ f ↦ φ⁻¹ ∘ ⟨ F ⋅ π₁ ∘ T⋅counit , f ∘ cut A ⟩.
-    Next Obligation.
-      intros f g eq_fg. now rewrite eq_fg.
-    Qed.
-
-  End ExtendConstruction.
-
-  Structure RelativeComonadWithCut := mkRelativeComonadWithCut
-  { Tc  :> RelativeComonad F
-  ; cut : ∀ {A}, Tc (E × A) ⇒ Tc A
-  ; cut_counit : ∀ A, Tc⋅counit[A] ∘ cut ≈ F ⋅ π₂ ∘ Tc⋅counit
-  ; cut_cobind : ∀ A B (f : Tc A ⇒ F B), Tc⋅cobind(f) ∘ cut ≈ cut ∘ Tc⋅cobind (Extend (@cut) f) }.
-
-  Definition extend {T : RelativeComonadWithCut} {A B} : [ T A ⇒ F B ⟶ T (E × A) ⇒ F (E × B) ] :=
-    Extend (@cut T).
-
-End Defs.
-
-Notation "'cut[' X ]" := (cut _ (A := X)) (only parsing).
-Notation "T '⋅cut'" := (cut T) (at level 0, only parsing).
-Notation "T '⋅cut[' X ]" := (cut T (A := X)) (at level 0, only parsing).
-
-Notation make T cut :=
-  (mkRelativeComonadWithCut (Tc := T) (cut := cut) _ _) (only parsing).
-
-Arguments RelativeComonadWithCut {_ _ _ _} _ _ {_}.
 
 (*------------------------------------------------------------------------------
   -- ＰＲＯＤＵＣＴ  ＩＮ  ＣＯＮＴＥＸＴ

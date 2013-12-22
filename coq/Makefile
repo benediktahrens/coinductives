@@ -29,6 +29,8 @@ FILES=\
 	  Theory/Product.v                                   \
 	  Theory/Isomorphism.v                               \
 	  Theory/StrongMonoidal.v                            \
+	  Theory/RelativeComonadWithCut.v                    \
+	  Category/RComonadWithCut.v                         \
 	  Theory/ProductInContext.v
 
 
