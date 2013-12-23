@@ -116,15 +116,31 @@ Section Definitions.
   Qed.
 
   Definition 𝑴𝑻𝑹𝑰 : Comodule tri_cut 𝑺𝒆𝒕𝒐𝒊𝒅 := tauto tri_cut.
+Require Import Cat.Theory.PushforwardComodule.
+  Definition 𝑴𝑻𝑹𝑰_alt : Comodule tri_cut 𝑺𝒆𝒕𝒐𝒊𝒅 := tcomod tri_cut.
 
+(*  Goal  𝑴𝑻𝑹𝑰 = 𝑴𝑻𝑹𝑰_alt.
+    reflexivity.
+*)
   Definition 𝑴𝑻𝑹𝑰_prod : Comodule tri_cut 𝑺𝒆𝒕𝒐𝒊𝒅 :=
     product_in_context (F := 𝑬𝑸) (T := tri_cut) E 𝑴𝑻𝑹𝑰.
+
+Definition 𝑴𝑻𝑹𝑰_prod_alt : Comodule tri_cut 𝑺𝒆𝒕𝒐𝒊𝒅 :=
+    product_in_context (F := 𝑬𝑸) (T := tri_cut) E 𝑴𝑻𝑹𝑰_alt.
+
 
   Program Definition tail (A : 𝑻𝒚𝒑𝒆) : 𝑴𝑻𝑹𝑰 A ⇒ 𝑴𝑻𝑹𝑰_prod A :=
     λ t ↦ @rest E A t.
   Next Obligation.
     intros x y eq_xy. now destruct eq_xy.
   Qed.
+
+  Program Definition tail_alt (A : 𝑻𝒚𝒑𝒆) : 𝑴𝑻𝑹𝑰_alt A ⇒ 𝑴𝑻𝑹𝑰_prod_alt A :=
+    λ t ↦ @rest E A t.
+  Next Obligation.
+    intros x y eq_xy. now destruct eq_xy.
+  Qed.
+
 
   Program Definition TAIL_MOR : 𝑴𝑻𝑹𝑰 ⇒ 𝑴𝑻𝑹𝑰_prod :=
     Comodule.Morphism.make tail.
@@ -134,5 +150,16 @@ Section Definitions.
     destruct f as [f f_compat]. apply f_compat. now apply cut_cong.
     now apply rest_cong.
   Qed.
+
+
+  Program Definition TAIL_MOR_alt : 𝑴𝑻𝑹𝑰_alt ⇒ 𝑴𝑻𝑹𝑰_prod_alt :=
+    Comodule.Morphism.make tail.
+  Next Obligation.
+    apply redec_cong.
+    repeat intro. f_equal. f_equal. now apply top_cong.
+    destruct f as [f f_compat]. apply f_compat. now apply cut_cong.
+    now apply rest_cong.
+  Qed.
+
 
 End Definitions.
