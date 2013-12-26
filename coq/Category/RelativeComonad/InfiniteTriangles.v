@@ -4,6 +4,8 @@ Require Import Category.Type.
 Require Import Category.Functor.Type_Setoid.
 Require Import Category.RComod.
 Require Import Category.RComonad.
+Require Import Category.RComonadWithCut.
+Require Import Category.Triangle.
 Require Import Theory.Category.
 Require Import Theory.Functor.
 Require Import Theory.RelativeComonad.
@@ -11,6 +13,7 @@ Require Import Theory.RelativeComonadWithCut.
 Require Import Theory.Comodule.
 Require Import Theory.Product.
 Require Import Theory.ProductInContext.
+Require Import Theory.PushforwardComodule.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -19,21 +22,6 @@ Generalizable All Variables.
 (*------------------------------------------------------------------------------
   -- ＴＲＩ  ＩＳ  Ａ  ＲＥＬＡＴＩＶＥ  ＣＯＭＯＮＡＤ
   ----------------------------------------------------------------------------*)
-
-Section TAUTO.
-
-  Context `{F : Functor 𝒞 𝒟} (T : RelativeComonad F).
-
-  Program Definition tauto : Comodule T 𝒟 :=
-    Comodule.make _ (@cobind _ _ _ T).
-  Next Obligation.
-    now rewrite cobind_counit.
-  Qed.
-  Next Obligation.
-    now rewrite cobind_compose.
-  Qed.
-
-End TAUTO.
 
 Section Definitions.
 
@@ -98,7 +86,7 @@ Section Definitions.
     exact eq_tt'.
   Qed.
 
-  Program Definition tri_cut : RelativeComonadWithCut 𝑬𝑸 E :=
+  Program Definition TRI : RelativeComonadWithCut 𝑬𝑸 E :=
     RelativeComonadWithCut.make 𝑻𝑹𝑰 cut.
   Next Obligation.
     assert (top (redecInfiniteTriangles8_4.cut x) = snd (top x)).
@@ -115,10 +103,10 @@ Section Definitions.
     exact H.
   Qed.
 
-  Definition 𝑴𝑻𝑹𝑰 : Comodule tri_cut 𝑺𝒆𝒕𝒐𝒊𝒅 := tauto tri_cut.
+  Definition 𝑴𝑻𝑹𝑰 : Comodule TRI 𝑺𝒆𝒕𝒐𝒊𝒅 := tcomod TRI.
 
-  Definition 𝑴𝑻𝑹𝑰_prod : Comodule tri_cut 𝑺𝒆𝒕𝒐𝒊𝒅 :=
-    product_in_context (F := 𝑬𝑸) (T := tri_cut) E 𝑴𝑻𝑹𝑰.
+  Definition 𝑴𝑻𝑹𝑰_prod : Comodule TRI 𝑺𝒆𝒕𝒐𝒊𝒅 :=
+    product_in_context (F := 𝑬𝑸) (T := TRI) E 𝑴𝑻𝑹𝑰.
 
   Program Definition tail (A : 𝑻𝒚𝒑𝒆) : 𝑴𝑻𝑹𝑰 A ⇒ 𝑴𝑻𝑹𝑰_prod A :=
     λ t ↦ @rest E A t.
@@ -134,5 +122,194 @@ Section Definitions.
     destruct f as [f f_compat]. apply f_compat. now apply cut_cong.
     now apply rest_cong.
   Qed.
+
+  Section CoIniatiality.
+
+    Variable (Tr : TObj E).
+
+    (** Notations for T **)
+    Let T : RelativeComonadWithCut 𝑬𝑸 E := TCarrier Tr.
+    Notation "'T⋅top'" := (T⋅counit).
+    Notation "'T⋅top[' A ]" := (T⋅counit[ A ]).
+    Notation "'T⋅rest'" := (TMor Tr _).
+    Notation "'T⋅rest[' A ]" := (TMor Tr A).
+    Notation "'[T]'" := (tcomod T).
+    Notation "'[T]-×'" := (product_in_context E [T]).
+    Notation "'T⋅cut'" := (RelativeComonadWithCut.cut T).
+    Notation "'T⋅cut[' A ]" := (RelativeComonadWithCut.cut T (A := A)).
+    Notation "'T⋅extend'" := (extend (T0 := T)).
+
+    (** Notations for TRI **)
+    Notation "'TRI⋅top'" := (Top).
+    Notation "'TRI⋅rest'" := (TAIL_MOR _).
+    Notation "'TRI⋅extend'" := (extend (T0 := TRI)).
+    Notation "'[TRI]'" := (tcomod TRI).
+    Notation "'[TRI]-×'" := (product_in_context E [TRI]).
+
+    Definition bisim_ext {A B} (f g : A ⇒ TRI B) : Prop :=
+      ∀ x, f x ≈ g x.
+
+    Infix "∼" := bisim_ext (at level 70).
+
+    Lemma bisim_ext_bisim : ∀ A B (f g : A ⇒ TRI B), f ∼ g → f ≈ g.
+    Proof.
+      intros. destruct f as [f f_cong]; destruct g as [g g_cong]; simpl in *.
+      intros. eapply bisimilar_trans. apply f_cong. apply H0.
+      apply H.
+    Qed.
+
+    Lemma bisim_bisim_ext : ∀ A B (f g : A ⇒ TRI B), f ≈ g → f ∼ g.
+    Proof.
+      intros. simpl in *. intro. apply H. reflexivity.
+    Qed.
+
+    (** Definition of τ : ∀ A, T A ⇒ TRI A **)
+    CoFixpoint tau A (t : T A) : TRI A :=
+      constr (T⋅top t) (tau (T⋅rest t)).
+
+    Lemma top_tau : ∀ A (t : T A), top (tau t) = T⋅top t.
+    Proof.
+      reflexivity.
+    Qed.
+
+    Lemma rest_tau : ∀ A (t : T A), rest (tau t) = tau (T⋅rest t).
+    Proof.
+      reflexivity.
+    Qed.
+
+    Lemma tau_cong : ∀ A (x y : T A), x ≈ y → tau x ≈ tau y.
+    Proof.
+      cofix Hc; intros; constructor; simpl.
+      - now rewrite H.
+      - apply Hc. now rewrite H.
+    Qed.
+
+    Program Definition τ A : T A ⇒ TRI A :=
+      λ t ↦ tau t.
+    Next Obligation.
+      repeat intro; now apply tau_cong.
+    Qed.
+
+    Arguments τ _.
+
+    Lemma Rest_τ : ∀ {A}, TRI⋅rest ∘ τ(A) ≈ τ(E×A) ∘ T⋅rest.
+    Proof.
+      repeat intro; simpl. apply tau_cong. now rewrite H.
+    Qed.
+
+    (**** 1ˢᵗ law ****)
+    Lemma τ_counit : ∀ A, T⋅top[A] ≈ TRI⋅top ∘ τ(A).
+    Proof.
+      intro A. symmetry. repeat intro. now rewrite H.
+    Qed.
+
+    (**** 3ʳᵈ law ****)
+    Hypothesis T_cut_rest : ∀ A,  T⋅rest ∘ T⋅cut[A] ≈ T⋅cut ∘ T⋅rest.
+
+    Lemma τ_cut_trans : ∀ A x t₁ t₂, t₁ ≈ τ(A) (T⋅cut x) → TRI⋅cut (τ(E × A) x) ≈ t₂ → t₁ ≈ t₂.
+    Proof.
+      cofix Hc; intros A x t₁ t₂ eq_t₁ eq_t₂; constructor.
+      - (* set up goal *)
+        etransitivity; [apply top_cong; apply eq_t₁ |]; clear eq_t₁ t₁.
+        etransitivity; [| apply top_cong; apply eq_t₂]; clear eq_t₂ t₂.
+        (***********************************************************)
+        match goal with
+          | H : _ |- _ = top ?x => let x' := eval simpl in x in change x with x'
+        end.
+        rewrite cut_top. rewrite top_tau. simpl.
+        generalize (@cut_counit _ _ _ _ _ _ _ T); intro cc.
+        now apply cc.
+      - (* set up goal *)
+        apply Hc with (T⋅rest x);
+        [ etransitivity; [apply rest_cong; apply eq_t₁|]; clear eq_t₁ eq_t₂ t₁ t₂;
+          revert x; change (TRI⋅rest ∘ (τ(A) ∘ T⋅cut[A]) ∼ τ(E×A) ∘ (T⋅cut[E×A] ∘ T⋅rest))
+        | etransitivity; [| apply rest_cong; apply eq_t₂]; clear eq_t₁ eq_t₂ t₁ t₂;
+          revert x; change (TRI⋅cut ∘ (τ (E × (E × A)) ∘ T⋅rest) ∼ TRI⋅rest ∘ (TRI⋅cut ∘ τ (E × A)))
+        ]; apply bisim_bisim_ext.
+        (************************************************************)
+        + rewrite <- compose_assoc.
+          etransitivity. apply Π_cong₂; [ apply Rest_τ | reflexivity ].
+          etransitivity. apply compose_assoc.
+          apply Π_cong₂; [reflexivity|].
+          apply T_cut_rest.
+        + rewrite <- compose_assoc. symmetry.
+          cut (TRI⋅rest ∘ TRI⋅cut[A] ≈ TRI⋅cut ∘ TRI⋅rest); intro.
+          etransitivity. apply Π_cong₂. apply H. reflexivity.
+          rewrite compose_assoc. apply Π_cong₂; [reflexivity|].
+          apply Rest_τ.
+          intros.
+          etransitivity; [ now rewrite H |].
+          change (bisimilar (rest (redecInfiniteTriangles8_4.cut y)) (redecInfiniteTriangles8_4.cut (rest y))).
+          rewrite cut_rest. apply bisimilar_refl.
+    Qed.
+
+    Lemma τ_cut : ∀ A, τ(A) ∘ T⋅cut ≈ TRI⋅cut ∘ τ(E×A).
+    Proof.
+      repeat intro.
+      etransitivity. now rewrite H.
+      apply τ_cut_trans with y; reflexivity.
+    Qed.
+
+
+    (**** 2ⁿᵈ law ****)
+    Lemma τ_cobind_trans : ∀ A B (f : TRI A ⇒ 𝑬𝑸 B) x t₁ t₂,
+                             t₁ ≈ τ(B) (T⋅cobind (f ∘ τ(A)) x) → TRI⋅cobind f (τ(A) x) ≈ t₂ → t₁ ≈ t₂.
+    Proof.
+      cofix Hc; intros A B f x t₁ t₂ eq_t₁ eq_t₂; constructor.
+      - (* set up goal *)
+        etransitivity; [ apply top_cong; apply eq_t₁ |]; clear eq_t₁ t₁.
+        etransitivity; [| apply top_cong; apply eq_t₂]; clear eq_t₂ t₂.
+        (**************************************************************)
+        simpl. generalize(@counit_cobind _ _ _ T); intro cc.
+        etransitivity. apply cc. reflexivity. reflexivity.
+      - (* set up goal *)
+        apply Hc with (f := extend (T0 := TRI) f) (x := T⋅rest x);
+        [ etransitivity; [apply rest_cong; apply eq_t₁ |]; clear eq_t₁ eq_t₂ t₁ t₂;
+          revert x; change (TRI⋅rest ∘ (τ(B) ∘ T⋅cobind (f ∘ τ(A)))
+                                 ∼ τ (E × B) ∘ (T⋅cobind (extend (T0 := TRI) f ∘ τ(E × A)) ∘ T⋅rest))
+        | etransitivity; [| apply rest_cong; apply eq_t₂]; clear eq_t₁ eq_t₂ t₁ t₂;
+          revert x; change (TRI⋅cobind (extend (T0 := TRI) f) ∘ (τ (E × A) ∘ T⋅rest)
+                             ∼ TRI⋅rest ∘ (TRI⋅cobind f ∘ τ(A)))
+        ]; apply bisim_bisim_ext.
+        (***************************************************************)
+        + rewrite <- compose_assoc.
+          etransitivity. apply Π_cong₂; [apply Rest_τ | reflexivity].
+          etransitivity. apply compose_assoc. apply Π_cong₂; [reflexivity |].
+          etransitivity. generalize (@α_commutes); intro cc.
+          specialize (cc _ _ _ _ _ _ _ (TMor Tr)).
+          apply cc.
+          apply Π_cong₂; [| reflexivity].
+          transitivity (T⋅cobind (T⋅extend (f ∘ τ(A)))).
+          reflexivity.
+          apply Π_cong. repeat intro. simpl.
+          f_equal. f_equal. now rewrite H.
+          destruct f as [f f_cong]. apply f_cong.
+          etransitivity. apply τ_cut. apply H. reflexivity.
+        + rewrite <- compose_assoc. symmetry.
+          generalize (@α_commutes); intro cc.
+          specialize (cc _ _ _ _ _ _ _ TAIL_MOR).
+          transitivity (TRI⋅rest ∘ (mcobind [TRI]) f ∘ τ A).
+          reflexivity.
+          etransitivity. apply Π_cong₂; [| reflexivity].
+          apply cc.
+          rewrite compose_assoc.
+          etransitivity. apply Π_cong₂; [reflexivity|].
+          apply Rest_τ. reflexivity.
+    Qed.
+
+    Lemma τ_cobind : ∀ A B (f : TRI A ⇒ 𝑬𝑸 B), τ(B) ∘ T⋅cobind (f ∘ τ(A)) ≈ TRI⋅cobind f ∘ τ(A).
+    Proof.
+      repeat intro. etransitivity. now rewrite H.
+      apply τ_cobind_trans with (f := f) (x := y); reflexivity.
+    Qed.
+
+    Definition TAU : T ⇒ TRI.
+      apply RelativeComonadWithCut.mkMorphism with τ.
+      - apply τ_counit.
+      - apply τ_cobind.
+      - intro A; symmetry; apply τ_cut.
+    Defined.
+
+  End CoIniatiality.
 
 End Definitions.
