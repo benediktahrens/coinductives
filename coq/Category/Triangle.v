@@ -24,7 +24,6 @@ Section defs.
   ; TMor     :> (tcomod TCarrier) ⇒ (product_in_context E (tcomod TCarrier))
   ; TMor_cut : ∀ A, (α TMor _) ∘ TCarrier⋅cut[A] ≈ TCarrier⋅cut ∘ (α TMor _) }.
 
-    (* Hypothesis T_cut_rest : ∀ A,  T⋅rest ∘ T⋅cut[A] ≈ T⋅cut ∘ T⋅rest. *)
   Infix "*" := pushforward.
 
   Structure THom (T S : TObj) : Type := mkTHom
