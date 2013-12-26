@@ -123,9 +123,19 @@ Section Definitions.
     now apply rest_cong.
   Qed.
 
+  Definition 𝑻𝒓𝒊 : 𝑻𝒓𝒊𝒂𝒏𝒈𝒍𝒆 E.
+    exists TRI TAIL_MOR.
+    abstract (
+    repeat intro; rewrite H;
+    match goal with
+                    | H : _ |- _ ≈ ?x => let x' := eval simpl in x in change x with x'
+                  end;
+    rewrite <- cut_rest; apply bisimilar_refl).
+  Defined.
+
   Section CoIniatiality.
 
-    Variable (Tr : TObj E).
+    Variable (Tr : 𝑻𝒓𝒊𝒂𝒏𝒈𝒍𝒆 E).
 
     (** Notations for T **)
     Let T : RelativeComonadWithCut 𝑬𝑸 E := TCarrier Tr.
@@ -204,8 +214,6 @@ Section Definitions.
     Qed.
 
     (**** 3ʳᵈ law ****)
-    Hypothesis T_cut_rest : ∀ A,  T⋅rest ∘ T⋅cut[A] ≈ T⋅cut ∘ T⋅rest.
-
     Lemma τ_cut_trans : ∀ A x t₁ t₂, t₁ ≈ τ(A) (T⋅cut x) → TRI⋅cut (τ(E × A) x) ≈ t₂ → t₁ ≈ t₂.
     Proof.
       cofix Hc; intros A x t₁ t₂ eq_t₁ eq_t₂; constructor.
@@ -231,7 +239,7 @@ Section Definitions.
           etransitivity. apply Π_cong₂; [ apply Rest_τ | reflexivity ].
           etransitivity. apply compose_assoc.
           apply Π_cong₂; [reflexivity|].
-          apply T_cut_rest.
+          apply TMor_cut.
         + rewrite <- compose_assoc. symmetry.
           cut (TRI⋅rest ∘ TRI⋅cut[A] ≈ TRI⋅cut ∘ TRI⋅rest); intro.
           etransitivity. apply Π_cong₂. apply H. reflexivity.
@@ -312,4 +320,42 @@ Section Definitions.
 
   End CoIniatiality.
 
+  Definition TAUm (T : 𝑻𝒓𝒊𝒂𝒏𝒈𝒍𝒆 E) : T ⇒ 𝑻𝒓𝒊.
+    exists (TAU T).
+    - abstract (simpl; intros; apply tau_cong; now rewrite H).
+  Defined.
+
+  Lemma TAU_unique_trans : ∀ (T : 𝑻𝒓𝒊𝒂𝒏𝒈𝒍𝒆 E) (f g : T ⇒ 𝑻𝒓𝒊) u v t₁ t₂, t₁ ≈ (Tτ f) u v → (Tτ g) u v ≈ t₂ → t₁ ≈ t₂.
+    cofix Hc; intros; constructor.
+    - (* set up goal *)
+      etransitivity; [ apply top_cong; apply H |]; clear H t₁.
+      etransitivity; [| apply top_cong; apply H0]; clear H0 t₂.
+      generalize (@RelativeComonadWithCut.τ_counit); intro cc.
+      specialize (cc _ _ _ _ _ _ _ _ _ (Tτ f)).
+      simpl in cc. etransitivity. symmetry. apply cc. reflexivity. clear cc.
+      generalize (@RelativeComonadWithCut.τ_counit); intro cc.
+      specialize (cc _ _ _ _ _ _ _ _ _ (Tτ g)). now apply cc.
+    - eapply Hc.
+      + etransitivity. apply rest_cong. apply H.
+        generalize (@Tτ_commutes); intro cc. specialize (cc _ _ _ f). simpl in cc.
+        symmetry. apply cc. reflexivity.
+      + etransitivity; [| apply rest_cong; apply H0].
+        generalize (@Tτ_commutes); intro cc. specialize (cc _ _ _ g). simpl in cc.
+        apply cc. reflexivity.
+  Qed.
+
+  Lemma TAU_unique : ∀ (T : 𝑻𝒓𝒊𝒂𝒏𝒈𝒍𝒆 E) (f g : T ⇒ 𝑻𝒓𝒊), f ≈ g.
+  Proof.
+    repeat intro. etransitivity. now rewrite H.
+    apply TAU_unique_trans with (f := f) (g := g) (v := y); reflexivity.
+  Qed.
+
+  Require Import Theory.InitialTerminal.
+  Definition CoInitiality : Terminal (𝑻𝒓𝒊𝒂𝒏𝒈𝒍𝒆 E).
+    exists 𝑻𝒓𝒊 TAUm.
+    - abstract (intros; apply TAU_unique).
+  Defined.
+
 End Definitions.
+
+Print Assumptions CoInitiality.

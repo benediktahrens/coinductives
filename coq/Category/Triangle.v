@@ -21,8 +21,10 @@ Section defs.
 
   Structure TObj : Type :=
   { TCarrier :> 𝑹𝑪𝒐𝒎𝒐𝒏𝒂𝒅𝑾𝒊𝒕𝒉𝑪𝒖𝑡 E (F := 𝑬𝑸)
-  ; TMor     :> (tcomod TCarrier) ⇒ (product_in_context E (tcomod TCarrier)) }.
+  ; TMor     :> (tcomod TCarrier) ⇒ (product_in_context E (tcomod TCarrier))
+  ; TMor_cut : ∀ A, (α TMor _) ∘ TCarrier⋅cut[A] ≈ TCarrier⋅cut ∘ (α TMor _) }.
 
+    (* Hypothesis T_cut_rest : ∀ A,  T⋅rest ∘ T⋅cut[A] ≈ T⋅cut ∘ T⋅rest. *)
   Infix "*" := pushforward.
 
   Structure THom (T S : TObj) : Type := mkTHom
