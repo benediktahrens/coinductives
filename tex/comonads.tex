@@ -284,14 +284,6 @@ with respect to the functorial action of \Cref{def:lift}.
  Fix a functor $F : \C\to\D$. Relative comonads over $F$ and their morphisms form a category.
 \end{remark}
 
-\begin{remark}
-  Let $T$ be a comonad relative to a strong monoidal functor $F:\C\to\D$ between cartesian monoidal categories,
-  and let $E:\C_0$ be an object of $\C$.
- The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$.
- One might thus try to characterize the destructor $\tail$ of the triangular matrices of \Cref{ex:tri_comonad}
- as a morphism of relative comonads, of type $\Tri \to \Tri(E\times \_)$.
- However, this fails for similar reasons as for heterogeneous inductive datatypes, see \parencite[Ex.\ 3.18]{ahrens_zsido}.
-\end{remark}
 
 In the following we consider relative comonads with an extra operation, which we call the $\cut$ operation:
 
@@ -321,6 +313,21 @@ In the following we consider relative comonads with an extra operation, which we
   Note that while $\Tri(\pr_2)$ does have the same type as $\cut$, it is \emph{not} the correct operation to use in place of $\cut$;
   the third comonad law is not satisfied when using $\cut:=T(\pr_2)$ for $\Tri$.
 \end{example}
+
+
+\begin{remark}[$\tail$ is not a morphism of comonads]
+  Let $T$ be a comonad with cut relative to a strong monoidal functor $F:\C\to\D$ between cartesian monoidal categories,
+  and let $E:\C_0$ be an object of $\C$.
+ The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$: the 
+ counit is defined as
+   \[ \counit^{T(E\times \_)}_A := \comp{\counit^T_{E\times A}}{F\pr_2(E,A)} \]
+  and the cobind operation as
+   \[ \cobind^{T(E\times \_)}_{A,B}(f) :=  \cobind^T(\extend~f)\]
+  with $\extend$ defined as in \Cref{def:rel_comonad_with_cut}.
+ One might thus try to characterize the destructor $\tail$ of the triangular matrices of \Cref{ex:tri_comonad}
+ as a morphism of relative comonads, of type $\Tri \to \Tri(E\times \_)$.
+ However, this fails for similar reasons as for heterogeneous inductive datatypes, see \parencite[Ex.\ 3.18]{ahrens_zsido}.
+\end{remark}
 
 
 In order to characterise the destructors of coinductive datatypes---and, in particular, their interplay with the comonadic structure---, 
