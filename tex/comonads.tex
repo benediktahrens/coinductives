@@ -31,12 +31,12 @@
 
 \begin{abstract}
   Infinite triangular matrices and, in particular, the \emph{redecoration} operation on them, 
-  were studied by \citeauthor{DBLP:conf/types/MatthesP11}. They characterize redecoration
-  as the cobind operation of what they call a \enquote{weak constructive comonad}.
+  were studied by \citeauthor{DBLP:conf/types/MatthesP11}. In their work,  redecoration is characterized
+  as the cobind operation of what the authors call a \enquote{weak constructive comonad}.
   
   In this work, we identify weak constructive comonads as an instance of the more general notion of 
   \emph{relative comonad}.
-  Building up on the work by \citeauthor{DBLP:conf/types/MatthesP11}, we give a category-theoretic
+  Afterwards, building upon the work by \citeauthor{DBLP:conf/types/MatthesP11}, we give a category-theoretic
   characterisation of infinite triangular matrices---equiped with the canonical bisimulation relation and a 
   compatible comonadic $\cobind$ operation---as the \emph{terminal object}
   in some category.
@@ -101,8 +101,11 @@
 
 
 \begin{definition}[Some categories]\label{def:set_setoid}
- We denote by $\Set$ the category of sets. The category $\Setoid$ has as objects sets equiped with an equivalence relation,
- and as morphisms set-theoretic functions that are compatible with the equivalence relations of the source and target setoids.
+ We denote by $\Set$ the category of sets and total functions. 
+ 
+ We denote by $\Setoid$ the category an object of which is a set equiped with an equivalence relation.
+ A morphism between setoids is a set-theoretic function between the underlying sets that is compatible with the equivalence relations of the source and target setoids.
+ Given a setoid $T$, we write $t\sim t'$ for related elements $t$ and $t'$ in $T$.
 \end{definition}
 
 
@@ -169,7 +172,7 @@ A nontrivial instance of relative comonads is given by the coinductive datatype 
 studied by \textcite{DBLP:conf/types/MatthesP11}:
 
 
-\begin{example}\label{ex:tri_comonad}
+\begin{example}[\textcite{DBLP:conf/types/MatthesP11}]\label{ex:tri_comonad}
 Let $E$ be an arbitrary fixed set.
    Infinite triangular matrices over the (variable) type $A$ are given by the destructors shown in \Cref{fig:tri_destructors},
     equiped with a coinductively defined equivalence relation, a \emph{bisimulation}.
@@ -187,11 +190,11 @@ Let $E$ be an arbitrary fixed set.
      \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
     \AxiomC{$t : \Tri(A)$}\doubleLine
-     \UnaryInfC{$\head(t) : A$}
+     \UnaryInfC{$\head_A(t) : A$}
       \DisplayProof
                         \hspace{3ex}
                                        \AxiomC{$t : \Tri(A)$}\doubleLine
-                                       \UnaryInfC{$\tail(t) : \Tri(E\times A)$}
+                                       \UnaryInfC{$\tail_A(t) : \Tri(E\times A)$}
                                        \DisplayProof%
      % \end{minipage} 
   \end{center}
@@ -230,7 +233,7 @@ Let $E$ be an arbitrary fixed set.
 \noindent
 \textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that the datatype $\Tri$
   is an instance of such a comonad. 
-  A weak constructive comonad as defined in \parencite{DBLP:conf/types/MatthesP11}, however, is \emph{precisely}
+  Such a weak constructive comonad, however, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
   The $\counit$ is given by the operation $\head$.
   The $\cobind$ operation---called \emph{redecoration} or $\redec$ in \parencite{DBLP:conf/types/MatthesP11}--- of type
@@ -242,7 +245,17 @@ Let $E$ be an arbitrary fixed set.
 Here, the family of functions 
      \[\extend_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid\bigr(\Tri (E \times A),\eq(E\times B)\bigr)\]
   is suitably defined to account for the change of the type of argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
-  rather than $t : \Tri A$. We refer to our implementation in the proof assistant \textsf{Coq} for the precise definition.
+  rather than $t : \Tri A$, namely
+  \[ \extend(f) := \langle \comp{\head_{E\times A}}{\pr_1(E,A)} , \comp{\cut_A}{f} \rangle \enspace . \]
+  The auxiliary function $\cut_A : \Tri(E\times A) \to \Tri A$ is defined corecursively via
+   \begin{align*}\head\bigl(\cut~t\bigr) &:= \pr_2(\head~t) \quad\text{ and } \\
+                     \tail\bigl(\cut~t\bigr) &:= \cut(\tail~t) \enspace . 
+      \end{align*}
+ Note that what is called $\extend$ here is called \textit{lift} in \parencite{DBLP:conf/types/MatthesP11}.
+  
+  
+  
+%   We refer to our implementation in the proof assistant \textsf{Coq} for the precise definition.
 \end{example}
 
 
