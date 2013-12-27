@@ -286,6 +286,8 @@ Relative comonads over a fixed functor $F$ and their morphisms form a category.
 % \end{remark}
 
 In the definition of the $\extend$ operation in \Cref{ex:tri_comonad} the auxiliary operation $\cut$ plays a central r\^ole.
+For an arbitrary comonad $T$ relative to a suitable functor $F$, an analogue operation $\cut^T_A : \D(T(E\times A),TA)$
+does not seem to be deducible from 
 
 In the following we consider relative comonads with an extra operation, which we call the $\cut$ operation:
 
@@ -304,6 +306,17 @@ In the following we consider relative comonads with an extra operation, which we
        \[ \extend(f) := \comp{\comp{\langle T(\pr_1) , \cut \rangle}{(\counit_E\times f)}}{{\alpha^{F}_{E,B}}^{-1}} \enspace . \]
   
 \end{definition}
+
+
+
+%TODO: any comonad becomes a comonad with cut by setting cut := T(pr_2)
+
+\begin{remark}[canonical $\cut$ operation]
+ Any comonad $T$ relative to a functor $F$ as in \Cref{def:rel_comonad_with_cut} can be equiped with a $\cut$ operation by setting
+   \[ \cut^T_A := \lift^T\bigl(\pr_2(E,A)\bigr) \enspace . \]
+\end{remark}
+
+
 
 \begin{example}[$\cut$ for $\Tri$]
   The relative comonad $\Tri$ from \Cref{ex:tri_comonad} comes with a $\cut$ operation as in \Cref{def:rel_comonad_with_cut},
