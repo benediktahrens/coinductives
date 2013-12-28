@@ -145,7 +145,7 @@ are called \emph{strong monoidal}:
 \end{example}
 
 
-\section{Relative comonads and comodules over such comonads}\label{sec:comonads}
+\section{Relative comonads and their morphisms}\label{sec:comonads}
 
 \emph{Relative monads} were defined by \textcite{DBLP:conf/fossacs/AltenkirchCU10} as a notion of monad-like structure
 whose underlying functor is not necessarily an endofunctor.
@@ -286,10 +286,31 @@ Relative comonads over a fixed functor $F$ and their morphisms form a category.
 % \end{remark}
 
 In the definition of the $\extend$ operation in \Cref{ex:tri_comonad} the auxiliary operation $\cut$ plays a central r\^ole.
-For an arbitrary comonad $T$ relative to a suitable functor $F$, an analogue operation $\cut^T_A : \D(T(E\times A),TA)$
-does not seem to be deducible from 
+It should be remarked here that, using functoriality of $\Tri$, one can define another operation of the same type, namely the family of 
+maps $\Tri(\pr_2(E,A)) : \Tri(E\times A) \to \Tri A$ for
+all sets $A$. Had we used this operation rather than the corecursively defined $\cut$ of \Cref{ex:tri_comonad}, 
+then the third comonad law would have failed; we refer to \parencite{DBLP:conf/types/MatthesS07} for details.
 
-In the following we consider relative comonads with an extra operation, which we call the $\cut$ operation:
+
+\section{Coalgebras for infinite triangular matrices}
+
+
+Our goal is to define \fat{coalgebras} for the signature of infinite triangular matrices such that 
+the codata type $\Tri$ defined in \Cref{ex:tri_comonad} constitutes the \fat{terminal such coalgebra}.
+Since $\Tri$ forms a comonad relative to the functor $\eq:\Set\to\Setoid$, it seems reasonable to define
+an arbitrary coalgebra as such a relative comonad as well, equiped with some extra structure which remains to be defined.
+A morphism of coalgebras would then be defined as a morphism of relative comonads that is compatible with that extra structure.
+It is the purpose of this section to define this extra structure.
+
+It will be crucial in the following that the $\extend$ operation for infinite triangular matrices is defined using the specific
+$\cut$ operation corecursively defined in \Cref{ex:tri_comonad}. 
+For the definition of our coalgebras, we thus consider relative comonads \emph{with a specified $\cut$ operation}:
+
+
+% For an arbitrary comonad $T$ relative to a suitable functor $F$, an analogue operation $\cut^T_A : \D(T(E\times A),TA)$
+% does not seem to be deducible from 
+
+
 
 \begin{definition}[Relative comonad with cut]\label{def:rel_comonad_with_cut}
  Let $\C$ and $\D$ be categories with binary products and $F:\C\to\D$ a strong monoidal functor. Let $E:\C_0$ be an object of $\C$.
@@ -307,7 +328,7 @@ In the following we consider relative comonads with an extra operation, which we
   
 \end{definition}
 
-
+Any comonad $T$ relative to a suitable functor can be equiped with a $\cut$ operation, using functoriality of $T$:
 
 %TODO: any comonad becomes a comonad with cut by setting cut := T(pr_2)
 
@@ -329,7 +350,7 @@ In the following we consider relative comonads with an extra operation, which we
   the third comonad law is not satisfied when using $\cut:=T(\pr_2)$ for $\Tri$.
 \end{example}
 
-
+%TODO: counterexample should go at the beginning of the section
 \begin{remark}[$\tail$ is not a morphism of comonads]
   Let $T$ be a comonad relative to a strong monoidal functor $F:\C\to\D$ between cartesian monoidal categories,
   and let $E:\C_0$ be an object of $\C$.
