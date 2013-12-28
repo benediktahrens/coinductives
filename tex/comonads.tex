@@ -269,7 +269,7 @@ Here, the family of functions
 
 
 
-\begin{definition}[Morphism of relative comonads]
+\begin{definition}[Morphism of relative comonads]\label{def:comonad_morphism}
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
   is given by a family of morphisms \[\tau_A : \D(TA,SA)\] such that for any $A : \C_0$,
      \[  \counit^T_A = \comp{\tau_A}{\counit^S_A} \]
@@ -300,7 +300,35 @@ the codata type $\Tri$ defined in \Cref{ex:tri_comonad} constitutes the \fat{ter
 Since $\Tri$ forms a comonad relative to the functor $\eq:\Set\to\Setoid$, it seems reasonable to define
 an arbitrary coalgebra as such a relative comonad as well, equiped with some extra structure which remains to be defined.
 A morphism of coalgebras would then be defined as a morphism of relative comonads that is compatible with that extra structure.
-It is the purpose of this section to define this extra structure.
+
+The purpose of this extra structure has to be to characterize the destructor $\tail$, that is, its \emph{type} as well as
+its \emph{behaviour with respect to the redecoration operation}.
+At first glance, one might hope for $\tail$ to constitute the carrier of a morphism of relative comonads, i.e.\ one might 
+guess that the axioms of comonad morphism capture the commutativity of $\tail$ with the operations $\head$ and $\tail$.
+
+%TODO: counterexample should go at the beginning of the section
+\begin{remark}[$\tail$ is not a morphism of comonads]
+  Let $T$ be a comonad relative to a strong monoidal functor $F:\C\to\D$ between cartesian monoidal categories,
+  and let $E:\C_0$ be an object of $\C$.
+ The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$: the 
+ counit is defined as
+   \[ \counit^{T(E\times \_)}_A := \comp{\counit^T_{E\times A}}{F\pr_2(E,A)} \]
+  and the cobind operation as
+   \begin{align*} 
+            \cobind^{T(E\times \_)}_{A,B} : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A),T(E\times B)\bigr) \\
+%              \cobind^{T(E\times \_)}_{A,B}
+              f &\mapsto  \cobind^T(\extend'~f)
+   \end{align*}
+  with $\extend'$ defined as 
+  \begin{align*} \extend' : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A), F(E\times B)\bigr) \enspace , \\ 
+                                            f & \mapsto \comp{\langle \comp{T(\pr_1)}{\counit^T_E}, f \rangle}{{\alpha^{F}_{E,B}}^{-1}} \enspace .
+  \end{align*}
+ One might thus try to characterize the destructor $\tail$ of the triangular matrices of \Cref{ex:tri_comonad}
+ as a morphism of relative comonads, of type $\Tri \to \Tri(E\times \_)$.
+ However, this fails for similar reasons as for heterogeneous inductive datatypes, see \parencite[Ex.\ 3.18]{ahrens_zsido}.
+ %TODO: give explicit counterexample
+\end{remark}
+
 
 It will be crucial in the following that the $\extend$ operation for infinite triangular matrices is defined using the specific
 $\cut$ operation corecursively defined in \Cref{ex:tri_comonad}. 
@@ -332,7 +360,7 @@ Any comonad $T$ relative to a suitable functor can be equiped with a $\cut$ oper
 
 %TODO: any comonad becomes a comonad with cut by setting cut := T(pr_2)
 
-\begin{remark}[canonical $\cut$ operation]
+\begin{remark}[Canonical $\cut$ operation]
  Any comonad $T$ relative to a functor $F$ as in \Cref{def:rel_comonad_with_cut} can be equiped with a $\cut$ operation by setting
    \[ \cut^T_A := \lift^T\bigl(\pr_2(E,A)\bigr) \enspace . \]
 \end{remark}
@@ -340,38 +368,25 @@ Any comonad $T$ relative to a suitable functor can be equiped with a $\cut$ oper
 
 
 \begin{example}[$\cut$ for $\Tri$]
-  The relative comonad $\Tri$ from \Cref{ex:tri_comonad} comes with a $\cut$ operation as in \Cref{def:rel_comonad_with_cut},
-  defined coinductively by
-   \begin{align*}\head\bigl(\cut~t\bigr) &:= \pr_2(\head~t) \quad\text{ and } \\
-                     \tail\bigl(\cut~t\bigr) &:= \cut(\tail~t) \enspace . 
-      \end{align*}
-  This definition of $\cut$ is actually used in the definition of the $\extend$ operation of \Cref{ex:tri_comonad}.
-  Note that while $\Tri(\pr_2)$ does have the same type as $\cut$, it is \emph{not} the correct operation to use in place of $\cut$;
-  the third comonad law is not satisfied when using $\cut:=T(\pr_2)$ for $\Tri$.
+  The relative comonad $\Tri$ from \Cref{ex:tri_comonad}, together with the $\cut$ operation defined there, 
+  is a comonad with cut as in \Cref{def:rel_comonad_with_cut}.
+      
+%   This definition of $\cut$ is actually used in the definition of the $\extend$ operation of \Cref{ex:tri_comonad}.
+%   Note that while $\Tri(\pr_2)$ does have the same type as $\cut$, it is \emph{not} the correct operation to use in place of $\cut$;
+%   the third comonad law is not satisfied when using $\cut:=T(\pr_2)$ for $\Tri$.
 \end{example}
 
-%TODO: counterexample should go at the beginning of the section
-\begin{remark}[$\tail$ is not a morphism of comonads]
-  Let $T$ be a comonad relative to a strong monoidal functor $F:\C\to\D$ between cartesian monoidal categories,
-  and let $E:\C_0$ be an object of $\C$.
- The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$: the 
- counit is defined as
-   \[ \counit^{T(E\times \_)}_A := \comp{\counit^T_{E\times A}}{F\pr_2(E,A)} \]
-  and the cobind operation as
-   \begin{align*} 
-            \cobind^{T(E\times \_)}_{A,B} : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A),T(E\times B)\bigr) \\
-%              \cobind^{T(E\times \_)}_{A,B}
-              f &\mapsto  \cobind^T(\extend'~f)
-   \end{align*}
-  with $\extend'$ defined as 
-  \begin{align*} \extend' : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A), F(E\times B)\bigr) \enspace , \\ 
-                                            f & \mapsto \comp{\langle \comp{T(\pr_1)}{\counit^T_E}, f \rangle}{{\alpha^{F}_{E,B}}^{-1}} \enspace .
-  \end{align*}
- One might thus try to characterize the destructor $\tail$ of the triangular matrices of \Cref{ex:tri_comonad}
- as a morphism of relative comonads, of type $\Tri \to \Tri(E\times \_)$.
- However, this fails for similar reasons as for heterogeneous inductive datatypes, see \parencite[Ex.\ 3.18]{ahrens_zsido}.
- %TODO: give explicit counterexample
-\end{remark}
+
+\begin{definition}[Morphism of comonads with cut]\label{def:morphism_comonad_cut}
+ Let $T$ and $S$ be two comonads with cut relative to a functor $F$ as in \Cref{def:rel_comonad_with_cut}.
+ A \emph{morphism of comonads with cut} is a comonad morphism $\tau$ between the underlying comonads as in \Cref{def:comonad_morphism} that 
+ commutes suitably with the respective $\cut$ operations, i.e.\ for any $A : \C_0$,
+  \[ \comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A} \enspace . \]
+%  TODO: where is tau_cut used?
+\end{definition}
+
+
+
 
 
 In order to characterise the destructors of coinductive datatypes---and, in particular, their interplay with the comonadic structure---, 
