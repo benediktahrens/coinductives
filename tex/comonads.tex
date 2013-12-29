@@ -309,7 +309,7 @@ guess that the axioms of comonad morphism capture the commutativity of $\tail$ w
 %TODO: counterexample should go at the beginning of the section
 \begin{remark}[$\tail$ is not a morphism of comonads]
   Let $T$ be a comonad relative to a strong monoidal functor $F:\C\to\D$ between cartesian monoidal categories,
-  and let $E:\C_0$ be an object of $\C$.
+  and let $E:\C_0$ be a fixed object of $\C$.
  The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$: the 
  counit is defined as
    \[ \counit^{T(E\times \_)}_A := \comp{\counit^T_{E\times A}}{F\pr_2(E,A)} \]
@@ -332,7 +332,9 @@ guess that the axioms of comonad morphism capture the commutativity of $\tail$ w
 
 It will be crucial in the following that the $\extend$ operation for infinite triangular matrices is defined using the specific
 $\cut$ operation corecursively defined in \Cref{ex:tri_comonad}. 
-For the definition of our coalgebras, we thus consider relative comonads \emph{with a specified $\cut$ operation}:
+For the definition of our coalgebras, we thus consider relative comonads \emph{with a specified $\cut$ operation} for some arbitrary,
+but fixed object $E$ of the category $\C$:
+% In what follows, we fix an object $E$ of the category $\C$.
 
 
 % For an arbitrary comonad $T$ relative to a suitable functor $F$, an analogue operation $\cut^T_A : \D(T(E\times A),TA)$
@@ -341,7 +343,7 @@ For the definition of our coalgebras, we thus consider relative comonads \emph{w
 
 
 \begin{definition}[Relative comonad with cut]\label{def:rel_comonad_with_cut}
- Let $\C$ and $\D$ be categories with binary products and $F:\C\to\D$ a strong monoidal functor. Let $E:\C_0$ be an object of $\C$.
+ Let $\C$ and $\D$ be categories with binary products and $F:\C\to\D$ a strong monoidal functor. Let $E:\C_0$ be a fixed object of $\C$.
  We define a \fat{relative comonad over $F$ with cut} to be a comonad $T$ relative to $F$ together with a $\cut$ operation 
     \[ \cut : \forall~A:\C_0, T(E\times A) \to TA \]
  satisfying the following axioms:
@@ -367,7 +369,7 @@ Any comonad $T$ relative to a suitable functor can be equiped with a $\cut$ oper
 
 
 
-\begin{example}[$\cut$ for $\Tri$]
+\begin{example}[$\cut$ for $\Tri$]\label{def:cut_for_tri}
   The relative comonad $\Tri$ from \Cref{ex:tri_comonad}, together with the $\cut$ operation defined there, 
   is a comonad with cut as in \Cref{def:rel_comonad_with_cut}.
       
@@ -441,7 +443,7 @@ over a fixed comonad, towards a fixed target category:
 
 Similarly to relative comonads, comodules over these are functorial:
 
-\begin{definition}[Functoriality for modules over relative comonads]\label{def:comodule_lift}
+\begin{definition}[Functoriality for comodules]\label{def:comodule_lift}
  Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
   \[ \mlift^S(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
 \end{definition}
@@ -459,7 +461,7 @@ Similarly to relative comonads, comodules over these are functorial:
 
 
 
-
+\begin{comment}
 \begin{definition}[IS ALREADY IN rel comonad with cut]\label{def:extend}
  Let $F : \C\to \D$ be a strong monoidal functor between (cartesian) monoidal categories, 
  i.e.\ we have a family of isomorphisms
@@ -487,30 +489,28 @@ Equivalently,
   \[f  \mapsto \comp{\bigl\langle \comp{\counit_{E\times A}}{F(\pr_1(E,A))}, \comp{\lift(\pr_2(E,A))}{f} \bigr\rangle}{\alpha_{E,B}^{-1}} \enspace .
   \]
 \end{definition}
+\end{comment}
 
 
-
-\begin{definition}[Product in context]\label{def:product_in_context}
- Suppose $F:\C\to\D$ strong monoidal as in \Cref{def:extend}, and $T$ a comonad relative to $F$ with a $\cut$ operation 
+\begin{definition}[Precomposition with product]\label{def:product_in_context}
+ Suppose $F:\C\to\D$ is a strong monoidal functor, and $T$ is a comonad relative to $F$ with a $\cut$ operation 
  as in \Cref{def:rel_comonad_with_cut}.
- Given a comodule $M$ over $T$ and an object $E:\C_0$, then precomposition with \enquote{product with $E$}
- gives a comodule $M(E\times\_)$ over $T$.
- 
+ Given a comodule $M$ over $T$ and a fixed object $E:\C_0$, then precomposition with \enquote{product with $E$}
+ gives a comodule $M(E\times\_)$ over $T$,
+  \[    M(E\times \_) : A \mapsto M(E\times A) \enspace . \]
  The comodule operation is deduced from that of $M$ by 
- \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \D(TA,FB)&\to \E(M(E\times A), M(E\times B)) \enspace ,\\
-                                                      f &\mapsto \mcobind^M_{E\times A,E\times B}(\extend(f)) \enspace .
+ \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \D(TA,FB)&\to \E\bigl(M(E\times A), M(E\times B)\bigr) \enspace ,\\
+                                                      f &\mapsto \mcobind^M_{E\times A,E\times B}(\extend(f)) \enspace ,
   \end{align*}                                        
-
- \noindent
+where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_cut}.
+ 
  Furthermore, given two comodules $M$ and $N$ over $\T$ with target category $\E$, and a comodule morphism $\alpha : M \to N$, then 
  we can define a comodule morphism \[\alpha(E\times \_) : M(E\times \_) \to N(E\times \_) \] by setting
           \[ \alpha(E \times \_)_A := \alpha_{E\times A} \enspace . \]
   
   \noindent
   We thus obtain an endofunctor on the category of comodules over $T$ towards $\E$,
-   \[ M(\_) \mapsto  M (E\times \_) : \RComod(T,\E) \to \RComod(T,\E) \enspace . \]
- 
-
+   \[ M \mapsto  M (E\times \_) : \RComod(T,\E) \to \RComod(T,\E) \enspace . \]
 \end{definition}
 
 
@@ -530,7 +530,7 @@ Equivalently,
 Given a morphism of comonads, we can \enquote{transport} comodules over the source comonad to comodules over the target comonad:
 
 
-\begin{definition}[Pushforward comodule]\label{def:pushforward_comodule}
+\begin{definition}[Pushforward comodule]\label{def:pushforward_comodule} % checked
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
   comodule over $T$ towards a category $\E$. We define the \fat{pushforward comodule} $\tau_*M$ to be the comodule over $S$ given by
   \[  \tau_*M(A) := MA \]
@@ -538,19 +538,20 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
    \[ \mcobind^{\tau_*M}(f) := \mcobind^M(\comp{\tau_A}{f}) \enspace . \]
    
   \noindent
-  Pushforward is functorial: if $M$ and $N$ are comodules over $S$ with codomain category $\E$, and $\alpha : M\to N$ is 
+  Pushforward is functorial: if $M$ and $N$ are comodules over $T$ with codomain category $\E$, and $\alpha : M\to N$ is 
     a morphism of comodules, then we define \[\tau_*\alpha : \tau_*M \to \tau_*N\] 
     as the family of morphisms
      \[ (\tau_*\alpha)_A := \alpha_A \enspace . \]
-  It is easy to check that this is a morphism of comodules between $\tau_*M$ and $\tau_*N$.
+  It is easy to check that this is a morphism of comodules (over $S$) between $\tau_*M$ and $\tau_*N$.
+  Pushforward thus yields a functor $\tau_*:\RComod(T,\E) \to \RComod(S,\E)$.
 \end{definition}
 
 
-\begin{definition}[Morphism of comonads induces morphism of comodules]
+\begin{definition}[Morphism of comonads induces morphism of comodules] % checked
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$.
   Then $\tau$ gives rise to a morphism of comodules over $S$ from the pushforward of the tautological comodule
   of $T$ along $\tau$ to the tautological comodule over $S$,
-  \[ \tau : \tau_*T \to S \enspace . \]
+  \[ \induced{\tau} : \tau_*T \to S \enspace , \quad \induced{\tau}_A := \tau_A \enspace . \]
 \end{definition}
 
 
@@ -559,19 +560,35 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
  we have an isomorphism of comodules \[\tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_) \enspace . \]
 \end{remark}
 
+%TODO: notation for pointwise bisimilarity of functions, we use f \sim g
 
-
-\begin{theorem}[Coinitial semantics for triangular matrices with redecoration]\label{ex:final_sem_tri}
-   Let $\mathcal{T}$ be the category where an object is a pair $(T,t)$ of a relative comonad $T$ over the functor
-   $\eq: \Set \to \Setoid$ together with a morphism of comodules $t : T \to T(E \times \_)$.
-   A morphism $\tau : (T,t) \to (S,s)$ is given by a morphism of relative comonads $\tau : T \to S$ such that
+\begin{theorem}[Coinitial semantics for triangular matrices with redecoration]\label{ex:final_sem_tri} % checked
+   Let $E:\Set_0$ be a set.
+   Let $\mathcal{T} = \mathcal{T}_E$ be the category where an object consists of
+   \begin{itemize}
+    \item a comonad $T$ over the functor $\eq:\Set\to\Setoid$ with cut relative to $E$ and
+    \item a morphism $\tail$ of comodules over $T$ of type $T \to T(E\times \_)$
+   \end{itemize}
+   such that for any set $A$,
+    \[ \comp{\cut^T_A}{\tail_A} \sim  \comp{\tail_{E\times A}}{\cut^T_{E\times A}} \enspace . \]
+% TODO: finish this def
+   
+   
+   A morphism between two such objects $(T,\tail^T)$ and $(S,\tail^S)$
+%    
+% %    pair $(T,t)$ of a relative comonad $T$ over the functor
+% %    $\eq: \Set \to \Setoid$ together with a morphism of comodules $t : T \to T(E \times \_)$.
+%    A morphism $\tau : (T,t) \to (S,s)$ 
+%    
+%    
+   is given by a morphism of relative comonads with cut $\tau : T \to S$ such that
    the following diagram of comodule morphisms in the category $\RComod(S,\E)$ commutes,
    
-   \[     \comp{\tau_*t}{\tau(E\times \_)} = \comp{\tau}{s} \enspace , \]
-   i.e.\, diagrammatically,   
+%    \[     \comp{\tau_*t}{\tau(E\times \_)} = \comp{\tau}{s} \enspace , \]
+%    i.e.\, diagrammatically,   
    \[ \begin{xy}
-       \xymatrix{   \tau_*T  \ar[r]^{\tau_*t} \ar[d]_{\tau}  &  **[r] \tau_*T (E\times \_ )\ar[d]^{\tau(E\times \_)} \\
-                    S  \ar[r]_{s}  &  **[r] S (E\times \_ )
+       \xymatrix{   \tau_*T  \ar[r]^{\tau_*(\tail^T)} \ar[d]_{\induced{\tau}}  &  **[r] \tau_*T (E\times \_ )\ar[d]^{\induced{\tau}(E\times \_)} \\
+                    S  \ar[r]_{\tail^S}  &  **[r] S (E\times \_ )
         }
       \end{xy}
    \]
@@ -579,11 +596,15 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
    \noindent
    Here in the upper right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
    
-   Then the pair $(\Tri, \tail)$ consisting of the relative comonad $\Tri$ of \Cref{ex:tri_comonad} together with 
+   Then the pair $(\Tri, \tail)$ consisting of the relative comonad with cut $\Tri$ of \Cref{def:cut_for_tri} together with 
     the morphism of comodules $\tail$ of \Cref{ex:tail_comodule},
    constitutes the terminal---\enquote{coinitial}---object in this category.
    
 \end{theorem}
+
+
+
+\begin{comment}
 
 \section{Some more comodules}
 
@@ -591,13 +612,13 @@ In the following we present some more constructions of comodules which can be us
 destructors.
 
 
-%TODO: constant comodule
+
 % \begin{definition}[Constant comodule]
 %   Given $e:\E_0$, the function $\C_0\to\E_0$ sending any object of $\C$ to $e$ is equiped with
 %   the structure of a comodule over $T$.
 % \end{definition}
 
-%TODO: product of two comodules
+
 % \begin{definition}[Product comodule]
 %  Given two comodules $M,N$ over $T$, then the pointwise product is equiped with the structure of 
 %  a comodule over $T$.
@@ -635,7 +656,7 @@ general construction:
    the set of setoid morphisms $\Setoid(X,Y)$ is itself equiped with an equivalence relation.
    Branching is given by postcomposition (\Cref{def:postcomposition_functor}) with such a hom functor.
 \end{example}
-
+\end{comment}
 
 
 
