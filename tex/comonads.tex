@@ -64,54 +64,81 @@
  a new proof principle called \emph{coinduction}. 
  Modulo this slight complication, it looks like it suffices to dualize the theory of inductive types in order to obtain
  a complete picture of coinductive types.
- It turns out that the story is not that easy when considering \emph{heterogeneous} (co)inductive types:
+%  It turns out that the story is not that easy when considering \emph{heterogeneous} (co)inductive types:
  
  The characterisation of inductive types as initial algebras 
  has been extended to \emph{heterogeneous}---also called \emph{nested}---inductive datatypes, e.g., the type of $\lambda$-terms,
  in various formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
+ The main goal of these works is not just to characterize the data type via a universal property, but rather the data type
+ \emph{equiped with a well-behaved substitution operation}.
  
  
 %  Such coinductive datatypes are characterised as terminal---coinitial---algebras of polynomial functors.
 
- In this work we set off to characterize a specific \emph{co}inductive heterogeneous datatype---the type of 
- infinite triangular matrices as studied by \textcite{DBLP:conf/types/MatthesP11}---as a terminal object of some 
- category, by dualizing the approach by \textcite{DBLP:journals/iandc/HirschowitzM10}.
- The crucial notions used in that work are the notion
-%  TODO: continue here
+ In this work we set off to characterize a specific \emph{co}inductive heterogeneous datatype---the type family $\Tri$ of 
+ infinite triangular matrices as studied by \textcite{DBLP:conf/types/MatthesP11}, equiped with a \emph{co}substitution operation---as a terminal object of some 
+ category. For this, we start dualizing the approach by \textcite{DBLP:journals/iandc/HirschowitzM10}, where 
+ the crucial notions are the notion of monad and, more importantly, \emph{module over a monad}.
+ It turns out that more work than a simple dualization is necessary, for two reasons which we indicate in the following.
+ 
+ 
+
 %  give an extension of the characterisation as terminal coalgebra to an instance of \emph{heterogeneous} coinductive types,
 %  namely the coinductive datatype of infinite triangular matrices as studied by
 %  \textcite{DBLP:conf/types/MatthesP11}. 
- The type of such matrices is parametrized by a fixed set for entries not on the diagonal, and indexed by another, \emph{variable}, set for entries on 
- the diagonal. Its specifying destructors are given in \Cref{fig:tri_destructors}.
+ 
+ The codata type family $\Tri$ of infinite triangular matrices is parametrized by a fixed set for entries not on the diagonal, 
+ and indexed by another, \emph{variable}, set for entries on 
+ the diagonal. The respective types of its specifying destructors $\head$ and $\tail$ are given in \Cref{fig:tri_destructors}.
+ A first difference to the inductive case of the lambda calculus springs to mind:
+ while the lambda calculus is essentially a monad---hence an \emph{endo}functor---on sets, the codata type $\Tri$ cannot be considered as such;
+ for a given set $A$, the type $\Tri A$, equiped with a suitable \fat{bisimulation} relation, 
+ constitutes a \emph{setoid}---a set equiped with an equivalence relation---rather than a set.
+ Instead of considering comonads---as the dual notion to monads---we thus have to consider a notion of comonad whose underlying functor is not necessarily endo.
+ This is precisely the raison d'\^etre of \emph{relative} comonads (defined below)---the dual notion to the relative monads defined in 
+  \parencite{DBLP:conf/fossacs/AltenkirchCU10}. 
+ Fortunately, relative comonads have all the nice properties we could ask for; 
+ in particular, the notion of module over a monad of \parencite{DBLP:journals/iandc/HirschowitzM10} extends to modules over \emph{relative} monads
+ \parencite{ahrens_relmonads}, which can be dualized to obtain comodules over relative comonads.
+ 
+ The other, more important difference between the inductive and the coinductive case stems from \emph{heterogeneity}:
+ Two dual operations are responsible for the heterogeneity of the data type of lambda terms and the codata type of infinite triangular
+ matrices: while we precompose with taking a \emph{co}product in the case of the abstraction of the lambda calculus---in order to account
+ for context extension when passing under a binder---,
+ we precompose with taking a \emph{product} when giving the target of the $\tail$ destructor of $\Tri$.
+ However, as it turns out, the treatment of the $\tail$ destructor is far more complicated than a dualization of that of the abstraction 
+ constructor of the lambda calculus. Explaining our treatment is the main purpose of the present work.
+ 
 %  Our extension is in the spirit of the work by \textcite{DBLP:journals/iandc/HirschowitzM10}, which uses the notion of \emph{monad} and
 %  \emph{module over a monad} to characterize substitution.
- However, in order to characterize the cosubstition---\emph{redecoration}---of infinite triangular matrices, 
- a simple dualisation of that work is not sufficient: since coinductive datatypes such as the aforementioned matrices 
- live naturally in the category of 
- \emph{setoids}, i.e.\ of sets equiped with an equivalence relation---the \fat{bisimulation} relation---rather than in the category of sets,
- comonads are not good enough; we need a notion of comonad where the underlying functor is not necessarily endo.
- This is precisely the raison d'\^etre of \emph{relative} comonads---the dual notion to the relative monads defined in 
-  \parencite{DBLP:conf/fossacs/AltenkirchCU10}. 
- The notion of module over a monad was generalized to relative monads in \parencite{ahrens_relmonads}.
- In the present work, we dualize this generalization to obtain comodules over relative comonads, and use this gadget to 
- give a category-theoretic characterisation of redecoration for infinite triangular matrices.
- 
- At first glance, infinite triangular matrices look dual to, say, the lambda calulus as a heterogeneous datatype \parencite{DBLP:journals/iandc/HirschowitzM10}
- in every aspect: 
- . We have already mentioned a first aspect that makes the coinductive case more complicated: the need for 
- \emph{relative} comonads rather than traditional comonads.
- 
- Our framework should generalize to heterogeneous coinductive datatypes specified by signatures in the spirit of \parencite{ahrens_relmonads},
- but we lack interesting examples other than the considered triangular matrices.
+%  However, in order to characterize the cosubstition---\emph{redecoration}---of infinite triangular matrices, 
+%  a simple dualisation of that work is not sufficient: since coinductive datatypes such as the aforementioned matrices 
+%  live naturally in the category of 
+%  \emph{setoids}, i.e.\ of sets equiped with an equivalence relation---the \fat{bisimulation} relation---rather than in the category of sets,
+%  comonads are not good enough; we need a notion of comonad where the underlying functor is not necessarily endo.
+%  
+%  The notion of module over a monad was generalized to relative monads in \parencite{ahrens_relmonads}.
+%  In the present work, we dualize this generalization to obtain comodules over relative comonads, and use this gadget to 
+%  give a category-theoretic characterisation of redecoration for infinite triangular matrices.
+%  
+%  At first glance, infinite triangular matrices look dual to, say, the lambda calulus as a heterogeneous datatype \parencite{DBLP:journals/iandc/HirschowitzM10}
+%  in every aspect: 
+%  . We have already mentioned a first aspect that makes the coinductive case more complicated: the need for 
+%  \emph{relative} comonads rather than traditional comonads.
+%  
+%  Our framework should generalize to heterogeneous coinductive datatypes specified by signatures in the spirit of \parencite{ahrens_relmonads},
+%  but we lack interesting examples other than the considered triangular matrices.
  
  All our definitions, examples and lemmas have been implemented in the proof assistant \texttt{Coq} \parencite{coq84pl3}.
  In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
  
 \subsection*{Organisation of the paper}
-  In \Cref{sec:preliminaries} we introduce the notions and notations used later on.
-  In \Cref{sec:comonads} we recall the definition of relative comonads and define comodules over such comonads.
-  Some constructions of comodules are given.
-  We state our main theorem (\Cref{ex:final_sem_tri}).
+  In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
+  In \Cref{sec:comonads} we define the category of comonads relative to a fixed functor.
+  In \Cref{sec:comodules} we define comodules over relative comonads and give some constructions of comodules.
+  In \Cref{sec:coalgebras_for_tri} we explain an important difference between the lambda calculus and infinite triangular matrices
+    as heterogeneous data types. We then set up the necessary definitions to state our main theorem (\Cref{ex:final_sem_tri}), 
+    characterizing the codata type $\Tri$ as terminal object in some category.
   In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \textsf{Coq}.
  
 \section{Preliminaries}\label{sec:preliminaries}
@@ -262,9 +289,9 @@ Let $E$ be an arbitrary fixed set.
   The $\cobind$ operation---called \emph{redecoration} or $\redec$ in \parencite{DBLP:conf/types/MatthesP11}--- of type
    \[ \redec_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B )\] is defined 
   corecursively, for $f:\Setoid(\Tri A,\eq B)$  and $t : \Tri A$ by
-      \begin{align*}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \\
-                     \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\extend~f\bigr)(\tail~t) \enspace . 
-      \end{align*}
+      \begin{align}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
+                     \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\extend~f\bigr)(\tail~t) \enspace . \label{eq:rest_redec}
+      \end{align}
 Here, the family of functions 
      \[\extend_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid\bigr(\Tri (E \times A),\eq(E\times B)\bigr)\]
   is suitably defined to account for the change of the type of argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
@@ -309,7 +336,103 @@ all sets $A$. Had we used this operation rather than the corecursively defined $
 then the third comonad law would have failed; we refer to \parencite{DBLP:conf/types/MatthesS07} for details.
 
 
-\section{Coalgebras for infinite triangular matrices}
+
+\section{Comodules over relative comonads}\label{sec:comodules}
+
+In this section we dualize the notion of module over a relative monad as developed in \parencite{ahrens_relmonads}.
+This dualization is straightforward.
+
+
+\begin{definition}[Comodule over relative comonad]\label{def:comodule}
+ Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
+ A \fat{comodule over T towards $\E$} consists of
+   \begin{packitem}
+   \item a map $:\C_0 \to \E_0$ on the objects of the categories involved;
+   \item an operation $\mcobind: \forall A,B:\C_0, \D(TA,FB) \to \E(MA,MB)$
+  \end{packitem}
+  such that 
+  \begin{packitem}
+   \item $\forall A : \C_0, \mcobind(\counit_A) = \id_A$;
+   \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
+        \comp{\mcobind(f)}{\mcobind(g)} = \mcobind(\comp{\cobind(f)}{g})$ .
+  \end{packitem}
+
+\end{definition}
+
+Every relative comonad comes with a canonical comodule over it, the \emph{tautological comodule}:
+
+\begin{definition}[Tautological comodule]\label{def:tautological_comodule}
+  Given a comonad $T$ relative to $F:\C\to\D$, the assignment $A \mapsto TA$ yields a comodule over $T$ 
+  with target category $\D$, the \textbf{tautological comodule} of $T$, also called $T$.
+  The comodule operation is given by
+    \[  \mcobind^T(f) := \cobind^T(f) \enspace . \]
+\end{definition}
+
+
+A \emph{morphism of comodules} is given by a family of morphisms that is compatible with 
+the comodule operation:
+
+\begin{definition}[Morphism of comodules]\label{def:morphism_of_comodules}
+ Let $M, N : \C \to \E$ be comodules over the comonad $T$ relative to  $F:\C \to \D$.
+ A \fat{morphism of comodules} from $M$ to $N$ is given by a family of morphisms 
+   \[ \alpha_A:\E(MA,NA) \]
+ such that for any $A,B:\C_0$ and $f : \D(TA,FB)$ one has
+ \[   \comp{\mcobind^M(f)}{\alpha_B} = \comp{\alpha_A}{\mcobind^N(f)} \enspace . \]
+\end{definition}
+
+
+Composition and identity of comodule morphisms happens pointwise. We thus obtain a category of comodules
+over a fixed comonad, towards a fixed target category:
+
+\begin{remark}[Category of comodules]
+ Fix a comonad $T$ relative to $F:\C\to\D$ and a category $\E$.
+ Comodules over $T$ towards $\E$ and their morphisms  form a category $\RComod(T,\E)$.
+\end{remark}
+
+Similarly to relative comonads, comodules over these are functorial:
+
+\begin{definition}[Functoriality for comodules]\label{def:comodule_lift}
+ Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
+  \[ \mlift^S(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
+\end{definition}
+
+
+\begin{remark}
+  The family of morphisms constituting a comodule morphism is actually natural with respect to the functoriality 
+  defined in \Cref{def:comodule_lift}.
+\end{remark}
+
+Given a morphism of comonads, we can \enquote{transport} comodules over the source comonad to comodules over the target comonad:
+
+
+\begin{definition}[Pushforward comodule]\label{def:pushforward_comodule} % checked
+  Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
+  comodule over $T$ towards a category $\E$. We define the \fat{pushforward comodule} $\tau_*M$ to be the comodule over $S$ given by
+  \[  \tau_*M(A) := MA \]
+  and, for $f : \D(SA,FB)$,
+   \[ \mcobind^{\tau_*M}(f) := \mcobind^M(\comp{\tau_A}{f}) \enspace . \]
+   
+  \noindent
+  Pushforward is functorial: if $M$ and $N$ are comodules over $T$ with codomain category $\E$, and $\alpha : M\to N$ is 
+    a morphism of comodules, then we define \[\tau_*\alpha : \tau_*M \to \tau_*N\] 
+    as the family of morphisms
+     \[ (\tau_*\alpha)_A := \alpha_A \enspace . \]
+  It is easy to check that this is a morphism of comodules (over $S$) between $\tau_*M$ and $\tau_*N$.
+  Pushforward thus yields a functor $\tau_*:\RComod(T,\E) \to \RComod(S,\E)$.
+\end{definition}
+
+
+\begin{definition}[Morphism of comonads induces morphism of comodules] % checked
+  Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$.
+  Then $\tau$ gives rise to a morphism of comodules over $S$ from the pushforward of the tautological comodule
+  of $T$ along $\tau$ to the tautological comodule over $S$,
+  \[ \induced{\tau} : \tau_*T \to S \enspace , \quad \induced{\tau}_A := \tau_A \enspace . \]
+\end{definition}
+
+
+
+
+\section{Coalgebras for infinite triangular matrices}\label{sec:coalgebras_for_tri}
 
 
 Our goal is to define \fat{coalgebras} for the signature of infinite triangular matrices such that 
@@ -318,13 +441,14 @@ Since $\Tri$ forms a comonad relative to the functor $\eq:\Set\to\Setoid$, it se
 an arbitrary coalgebra as such a relative comonad as well, equiped with some extra structure which remains to be defined.
 A morphism of coalgebras would then be defined as a morphism of relative comonads that is compatible with that extra structure.
 
-The purpose of this extra structure has to be to characterize the destructor $\tail$, that is, its \emph{type} as well as
+The purpose of this extra structure is to characterize the destructor $\tail$, that is, its \emph{type} as well as
 its \emph{behaviour with respect to the redecoration operation}.
-At first glance, one might hope for $\tail$ to constitute the carrier of a morphism of relative comonads, i.e.\ one might 
-guess that the axioms of comonad morphism capture the commutativity of $\tail$ with the operations $\head$ and $\tail$.
 
-%TODO: counterexample should go at the beginning of the section
+
+
 \begin{remark}[$\tail$ is not a morphism of comonads]
+At first glance, one might hope for $\tail$ to constitute the carrier of a morphism of relative comonads, i.e.\ one might 
+guess that the axioms of comonad morphism capture the commutativity of $\tail$ with the operations $\head$ and $\tail$:
   Let $T$ be a comonad relative to a strong monoidal functor $F:\C\to\D$ between cartesian monoidal categories,
   and let $E:\C_0$ be a fixed object of $\C$.
  The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$: the 
@@ -347,10 +471,42 @@ guess that the axioms of comonad morphism capture the commutativity of $\tail$ w
 \end{remark}
 
 
-It will be crucial in the following that the $\extend$ operation for infinite triangular matrices is defined using the specific
-$\cut$ operation corecursively defined in \Cref{ex:tri_comonad}. 
-For the definition of our coalgebras, we thus consider relative comonads \emph{with a specified $\cut$ operation} for some arbitrary,
-but fixed object $E$ of the category $\C$:
+We now take a closer look at how the $\extend$ operation for $\Tri$ is defined. Its purpose is to 
+modify the function $f$ used for redecoration, when redecorating $\tail~t : \Tri(E\times A)$ rather than $t : \Tri A$.
+First we note an important difference between the $\extend$ operation and its analogue in the inductive case:
+
+\begin{remark}[$\shift$ operation for the lambda calculus]
+  The heterogeneous data type of lambda terms comes with a term constructor $\abs_A : \ULC(A^*) \to \ULC A$, which 
+  is the constructor responsible for the heterogeneity of that data type.
+  We compare the $\extend$ operation to the one with analogue purpose in the case of the lambda calculus,
+  the $\shift$ operation, of type
+  \begin{equation}  \shift_{A,B} : \Set(A,\ULC B) \to \Set\bigl(A^*,\ULC(B^*)\bigr) \enspace .\label{eq:shift}\end{equation}
+  Here $\ULC A$ denotes the set of lambda terms in context $A$, and $A^*:=1 + A$ denotes the context $A$ extended by a distinguished 
+  variable---the variable bound by the abstraction constructor.
+  
+  The $\shift$ operation is used in the definition of the monadic substitution operation
+  \[ \subst_{A,B} : \Set(A,\ULC B) \to \Set(\ULC A,\ULC B) \]
+  of the lambda calculus, when recursively substituting under an abstraction:
+   \[ \subst~f~(\abs~t):= \abs\bigl(\subst~(\shift~f)~t\bigr) \enspace . \]
+  The reader is encouraged to compare this equation to \Cref{eq:rest_redec}.
+  
+  The $\shift$ operation can be defined in monadic terms, for any monad $T$ on the category of sets such that,
+  when $T$ is instantiated by the monad $\ULC$, it becomes the specific $\shift$ operation of \Cref{eq:shift}.
+  
+  However, we were \emph{not} able to express the $\extend$ operation of $\Tri$ entirely in terms of categorical and comonadic operations. Indeed, if
+  one dualizes the categorical definition of $\shift$, one obtains an operation that has the same type as $\extend$, 
+  but for which, when used to define the redecoration, some comonadic property of redecoration fails.
+  More specifically, it is the auxiliary $\cut$ operation as defined in \Cref{ex:tri_comonad} which does not seem to be 
+  definable in categorical terms. There is an operation of the same type which is categorical---see \Cref{canonical_cut}---but
+  which, when used for the definition of the $\extend$ operation, yields a \enquote{redecoration} operation for which the third comonad law fails.
+  Details are given in an article by \textcite{DBLP:conf/types/MatthesS07}.
+\end{remark}
+
+
+The failure to describe the $\extend$ operation---more precisely, the auxiliary $\cut$---in categorical terms leads us 
+to considering comonads that come with a specified $\cut$ operation for some fixed object $E$ in the source category:
+
+
 % In what follows, we fix an object $E$ of the category $\C$.
 
 
@@ -390,9 +546,9 @@ Comonads with cut relative to a fixed functor $F:\C\to\D$ and $E:\C_0$ form a ca
 There is the obvious forgetful functor from $\RComonadWC(F,E)$ to $\RComonad(F)$.
 Conversely, any comonad $T$ relative to a suitable functor can be equiped with a $\cut$ operation, using functoriality of $T$:
 
-%TODO: any comonad becomes a comonad with cut by setting cut := T(pr_2)
 
-\begin{remark}[Canonical $\cut$ operation]
+
+\begin{remark}[Canonical $\cut$ operation]\label{canonical_cut}
  Any comonad $T$ relative to a functor $F$ as in \Cref{def:rel_comonad_with_cut} can be equiped with a $\cut$ operation by setting
    \[ \cut^T_A := \lift^T\bigl(\pr_2(E,A)\bigr) \enspace . \]
  It follows from the axioms of comonad morphism that a comonad morphism $\tau : T\to S$ satisfies the equation of \Cref{def:morphism_comonad_cut} 
@@ -415,68 +571,6 @@ Our prime example of relative comonad comes with a $\cut$ operation that is not 
 
 
 
-In order to characterise the destructors of coinductive datatypes---and, in particular, their interplay with the comonadic structure---, 
-we introduce the notion of \emph{comodule
-over a relative comonad}:
-
-\begin{definition}[Comodule over relative comonad]\label{def:comodule}
- Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
- A \fat{comodule over T towards $\E$} consists of
-   \begin{packitem}
-   \item a map $:\C_0 \to \E_0$ on the objects of the categories involved;
-   \item an operation $\mcobind: \forall A,B:\C_0, \D(TA,FB) \to \E(MA,MB)$
-  \end{packitem}
-  such that 
-  \begin{packitem}
-   \item $\forall A : \C_0, \mcobind(\counit_A) = \id_A$;
-   \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
-        \comp{\mcobind(f)}{\mcobind(g)} = \mcobind(\comp{\cobind(f)}{g})$ .
-  \end{packitem}
-
-\end{definition}
-
-Every relative comonad comes with a canonical comodule over it, the \emph{tautological comodule}:
-
-\begin{definition}[Tautological comodule]\label{def:tautological_comodule}
-  Given a comonad $T$ relative to $F:\C\to\D$, the assignment $A \mapsto TA$ yields a comodule over $T$ 
-  with target category $\D$, the \textbf{tautological comodule} of $T$, also called $T$.
-  The comodule operation is given by
-    \[  \mcobind^T(f) := \cobind^T(f) \enspace . \]
-\end{definition}
-
-
-A \emph{morphism of comodules} is given by a family of morphisms that is compatible with 
-the module operation:
-
-\begin{definition}[Morphism of comodules]\label{def:morphism_of_comodules}
- Let $M, N : \C \to \E$ be comodules over the comonad $T$ relative to  $F:\C \to \D$.
- A \fat{morphism of comodules} from $M$ to $N$ is given by a family of morphisms 
-   \[ \alpha_A:\E(MA,NA) \]
- such that for any $A,B:\C_0$ and $f : \D(TA,FB)$ one has
- \[   \comp{\mcobind^M(f)}{\alpha_B} = \comp{\alpha_A}{\mcobind^N(f)} \enspace . \]
-\end{definition}
-
-
-Composition and identity of comodule morphisms happens pointwise. We thus obtain a category of comodules
-over a fixed comonad, towards a fixed target category:
-
-\begin{remark}[Category of comodules]
- Fix a comonad $T$ relative to $F:\C\to\D$ and a category $\E$.
- Comodules over $T$ towards $\E$ and their morphisms  form a category $\RComod(T,\E)$.
-\end{remark}
-
-Similarly to relative comonads, comodules over these are functorial:
-
-\begin{definition}[Functoriality for comodules]\label{def:comodule_lift}
- Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
-  \[ \mlift^S(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
-\end{definition}
-
-
-\begin{remark}
-  The family of morphisms constituting a comodule morphism is actually natural with respect to the functoriality 
-  defined in \Cref{def:comodule_lift}.
-\end{remark}
 
 
 
@@ -516,10 +610,15 @@ Equivalently,
 \end{comment}
 
 
+
+Given a comodule over a relative comonad with cut, we define a new comodule over the same comonad, given by precomposition with
+\enquote{product with a fixed object $E$}:
+
+
 \begin{definition}[Precomposition with product]\label{def:product_in_context}
  Suppose $F:\C\to\D$ is a strong monoidal functor, and $T$ is a comonad relative to $F$ with a $\cut$ operation 
- as in \Cref{def:rel_comonad_with_cut}.
- Given a comodule $M$ over $T$ and a fixed object $E:\C_0$, then precomposition with \enquote{product with $E$}
+ relative to $E:\C_0$ as in \Cref{def:rel_comonad_with_cut}.
+ Given a comodule $M$ over $T$,  precomposition with \enquote{product with $E$}
  gives a comodule $M(E\times\_)$ over $T$,
   \[    M(E\times \_) : A \mapsto M(E\times A) \enspace . \]
  The comodule operation is deduced from that of $M$ by 
@@ -552,32 +651,6 @@ where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_c
 
 
 
-Given a morphism of comonads, we can \enquote{transport} comodules over the source comonad to comodules over the target comonad:
-
-
-\begin{definition}[Pushforward comodule]\label{def:pushforward_comodule} % checked
-  Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
-  comodule over $T$ towards a category $\E$. We define the \fat{pushforward comodule} $\tau_*M$ to be the comodule over $S$ given by
-  \[  \tau_*M(A) := MA \]
-  and, for $f : \D(SA,FB)$,
-   \[ \mcobind^{\tau_*M}(f) := \mcobind^M(\comp{\tau_A}{f}) \enspace . \]
-   
-  \noindent
-  Pushforward is functorial: if $M$ and $N$ are comodules over $T$ with codomain category $\E$, and $\alpha : M\to N$ is 
-    a morphism of comodules, then we define \[\tau_*\alpha : \tau_*M \to \tau_*N\] 
-    as the family of morphisms
-     \[ (\tau_*\alpha)_A := \alpha_A \enspace . \]
-  It is easy to check that this is a morphism of comodules (over $S$) between $\tau_*M$ and $\tau_*N$.
-  Pushforward thus yields a functor $\tau_*:\RComod(T,\E) \to \RComod(S,\E)$.
-\end{definition}
-
-
-\begin{definition}[Morphism of comonads induces morphism of comodules] % checked
-  Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$.
-  Then $\tau$ gives rise to a morphism of comodules over $S$ from the pushforward of the tautological comodule
-  of $T$ along $\tau$ to the tautological comodule over $S$,
-  \[ \induced{\tau} : \tau_*T \to S \enspace , \quad \induced{\tau}_A := \tau_A \enspace . \]
-\end{definition}
 
 
 \begin{remark}[Pushforward commutes with product in context]\label{rem:prod_pullback_commute}
@@ -586,6 +659,7 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
 \end{remark}
 
 
+We now have all the ingredients to state (and prove) our main theorem:
 
 \begin{theorem}[Coinitial semantics for triangular matrices with redecoration]\label{ex:final_sem_tri} % checked
    Let $E:\Set_0$ be a set.
@@ -688,9 +762,11 @@ general construction:
 
 \section{Formalization in \texttt{Coq}}\label{sec:formal}
 
-All our definitions and theorems are implemented in the proof assistant \texttt{Coq} \parencite{coq84pl3}.
+All our definitions and theorems are mechanized in the proof assistant \texttt{Coq} \parencite{coq84pl3}.
+In the following we explain some of our design choices for this mechanization
+and point out differences between the pen-and-paper definitions and the mechanized ones.
 
-% TODO: give reference. is there one?
+
 
 \subsection{Implementation choices}
 
@@ -722,17 +798,21 @@ Work on the the declaration of coinductive types via destructors is done in \tex
 
 \section{Conclusions and future work}
 
-%TODO: expand on signatures
 
-In the future we would like to define a suitable notion of \emph{signature} 
-by postcomposition and precomposition with suitable functors. In this framework, the \emph{arity} of 
-a destructor $d$ of some coinductive type $T$ will be given as $d : T \to K'TK$, where $K$ and $K'$ are 
-functors satisfying some properties sufficient for ensuring existence of the terminal object---typically some 
-positivity condition and a condition involving the comonadic operations.
+
+We have given a category-theoretic characterisation, via a universal property, of infinite triangular matrices
+equiped with a comonadic redecoration operation.
+
+While a significant part of our work---surmounting the non-categoricity of the $\cut$ operation---seems to be specific to this particular codata type,
+we believe that our work proves the suitability of the notion of relative (co)monads and (co)modules thereover for 
+a categorical treatment of coinductive data types.
+
+
+We plan to pursue two obvious lines of work:
+Firstly, we will work on a suitable notion of \emph{signature} for the specification of coinductive data types.
+Secondly, we hope to integrate \emph{equations} into the notion of signature, equations which 
+will allow, e.g, considering branching trees modulo permutation of subtrees.
  
-%TODO: expand on equations
-Another potential goal is the integration of \emph{equations} into the notion of signature. 
- Equations, e.g., branching modulo permutation of subtrees
 
 \subsection*{Acknowledgments}
  We thank Ralph Matthes and Paige North for awesome discussions about stuff.
@@ -751,7 +831,7 @@ Another potential goal is the integration of \emph{equations} into the notion of
 %    - T(A) ---->  (E -> T(A))
 %    - http://www2.tcs.ifi.lmu.de/~rodrigue/docs/types.html
 
-%TODO: precomposition with coproduct rather than product
+
 
 
 
