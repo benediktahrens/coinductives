@@ -40,9 +40,10 @@
   characterisation of infinite triangular matrices---equiped with the canonical bisimulation relation and a 
   compatible comonadic $\cobind$ operation---as the \emph{terminal object}
   in some category.
+  
 %   We give a category-theoretic characterisation of heterogeneous coinductive datatypes as terminal---\enquote{coinitial}---objects.
 % 
-  For this, we develop the notion of \emph{comodule over a relative comonad} and provide some constructions of such comodules.
+%   For this, we develop the notion of \emph{comodule over a relative comonad} and provide some constructions of such comodules.
 
 %   The right notion of sameness for terms of a coinductive datatype is not equality but \emph{bisimulation}.
 %   Consequently, we model coinductive datatypes that are parametrized by a set not as a comonad on the category of sets,
@@ -57,22 +58,33 @@
 
  Simple inductive types---\textsf{W}-types---are characterised categorically as initial algebras of
  a polynomial functor \parencite{DBLP:journals/apal/MoerdijkP00}.
+ Dually, infinite, \emph{coinductive} types are characterised as terminal \emph{co}algebras of suitable functors.
+ In the case of coinductive types, the meta-theoretic notion of equality is not adequate. Another notion of sameness for inhabitants of such types, 
+ \emph{bisimulation}, was introduced by \textcite{aczel_nonwellfounded}, and also
+ a new proof principle called \emph{coinduction}. 
+ Modulo this slight complication, it looks like it suffices to dualize the theory of inductive types in order to obtain
+ a complete picture of coinductive types.
+ It turns out that the story is not that easy when considering \emph{heterogeneous} (co)inductive types:
+ 
  The characterisation of inductive types as initial algebras 
  has been extended to \emph{heterogeneous}---also called \emph{nested}---inductive datatypes, e.g., the type of $\lambda$-terms,
  in various formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
  
- For infinite, \emph{coinductive}, types, the meta-theoretic notion of equality is not adequate. Another notion of sameness for inhabitants of such types, 
- \emph{bisimulation}, was introduced by \textcite{aczel_nonwellfounded}, and also
- a new proof principle called \emph{coinduction}. 
- Such coinductive datatypes are characterised as terminal---coinitial---algebras of polynomial functors.
+ 
+%  Such coinductive datatypes are characterised as terminal---coinitial---algebras of polynomial functors.
 
- In this work we give an extension of this characterisation as terminal object to an instance of \emph{heterogeneous} coinductive types,
- namely the coinductive datatype of infinite triangular matrices as studied by
- \textcite{DBLP:conf/types/MatthesP11}. 
+ In this work we set off to characterize a specific \emph{co}inductive heterogeneous datatype---the type of 
+ infinite triangular matrices as studied by \textcite{DBLP:conf/types/MatthesP11}---as a terminal object of some 
+ category, by dualizing the approach by \textcite{DBLP:journals/iandc/HirschowitzM10}.
+ The crucial notions used in that work are the notion
+%  TODO: continue here
+%  give an extension of the characterisation as terminal coalgebra to an instance of \emph{heterogeneous} coinductive types,
+%  namely the coinductive datatype of infinite triangular matrices as studied by
+%  \textcite{DBLP:conf/types/MatthesP11}. 
  The type of such matrices is parametrized by a fixed set for entries not on the diagonal, and indexed by another, \emph{variable}, set for entries on 
- the diagonal.
- This extension is in the spirit of the work by \textcite{DBLP:journals/iandc/HirschowitzM10}, which uses the notion of \emph{monad} and
- \emph{module over a monad} to characterize substitution.
+ the diagonal. Its specifying destructors are given in \Cref{fig:tri_destructors}.
+%  Our extension is in the spirit of the work by \textcite{DBLP:journals/iandc/HirschowitzM10}, which uses the notion of \emph{monad} and
+%  \emph{module over a monad} to characterize substitution.
  However, in order to characterize the cosubstition---\emph{redecoration}---of infinite triangular matrices, 
  a simple dualisation of that work is not sufficient: since coinductive datatypes such as the aforementioned matrices 
  live naturally in the category of 
@@ -84,10 +96,15 @@
  In the present work, we dualize this generalization to obtain comodules over relative comonads, and use this gadget to 
  give a category-theoretic characterisation of redecoration for infinite triangular matrices.
  
+ At first glance, infinite triangular matrices look dual to, say, the lambda calulus as a heterogeneous datatype \parencite{DBLP:journals/iandc/HirschowitzM10}
+ in every aspect: 
+ . We have already mentioned a first aspect that makes the coinductive case more complicated: the need for 
+ \emph{relative} comonads rather than traditional comonads.
+ 
  Our framework should generalize to heterogeneous coinductive datatypes specified by signatures in the spirit of \parencite{ahrens_relmonads},
  but we lack interesting examples other than the considered triangular matrices.
  
- All our definitions, examples and lemmas have been implemented in the proof assistant \textsf{Coq} \parencite{coq}.
+ All our definitions, examples and lemmas have been implemented in the proof assistant \texttt{Coq} \parencite{coq84pl3}.
  In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
  
 \subsection*{Organisation of the paper}
@@ -282,7 +299,7 @@ with respect to the functorial action of \Cref{def:lift}.
 % 
 % \begin{remark}[Category of relative comonads]
 %  Fix a functor $F : \C\to\D$. 
-Relative comonads over a fixed functor $F$ and their morphisms form a category.
+Relative comonads over a fixed functor $F$ and their morphisms form a category $\RComonad(F)$.
 % \end{remark}
 
 In the definition of the $\extend$ operation in \Cref{ex:tri_comonad} the auxiliary operation $\cut$ plays a central r\^ole.
@@ -344,7 +361,7 @@ but fixed object $E$ of the category $\C$:
 
 \begin{definition}[Relative comonad with cut]\label{def:rel_comonad_with_cut}
  Let $\C$ and $\D$ be categories with binary products and $F:\C\to\D$ a strong monoidal functor. Let $E:\C_0$ be a fixed object of $\C$.
- We define a \fat{relative comonad over $F$ with cut} to be a comonad $T$ relative to $F$ together with a $\cut$ operation 
+ We define a \fat{comonad relative to $F$ with cut relative to $E$} to be a comonad $T$ relative to $F$ together with a $\cut$ operation 
     \[ \cut : \forall~A:\C_0, T(E\times A) \to TA \]
  satisfying the following axioms:
   \begin{itemize}
@@ -358,34 +375,41 @@ but fixed object $E$ of the category $\C$:
   
 \end{definition}
 
-Any comonad $T$ relative to a suitable functor can be equiped with a $\cut$ operation, using functoriality of $T$:
+Morphisms of comonads with cut are morphisms of comonads that are compatible with the respective $\cut$ operations:
+
+\begin{definition}[Morphism of comonads with cut]\label{def:morphism_comonad_cut}
+ Let $T$ and $S$ be two comonads relative to a functor $F$ with cut relative to $E$ as in \Cref{def:rel_comonad_with_cut}.
+ A \emph{morphism of comonads with cut} is a comonad morphism $\tau$ between the underlying comonads as in \Cref{def:comonad_morphism} that 
+ commutes suitably with the respective $\cut$ operations, i.e.\ for any $A : \C_0$,
+  \[ \comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A} \enspace . \]
+%  TODO: where is tau_cut used?
+\end{definition}
+
+
+Comonads with cut relative to a fixed functor $F:\C\to\D$ and $E:\C_0$ form a category $\RComonadWC(F,E)$.
+There is the obvious forgetful functor from $\RComonadWC(F,E)$ to $\RComonad(F)$.
+Conversely, any comonad $T$ relative to a suitable functor can be equiped with a $\cut$ operation, using functoriality of $T$:
 
 %TODO: any comonad becomes a comonad with cut by setting cut := T(pr_2)
 
 \begin{remark}[Canonical $\cut$ operation]
  Any comonad $T$ relative to a functor $F$ as in \Cref{def:rel_comonad_with_cut} can be equiped with a $\cut$ operation by setting
    \[ \cut^T_A := \lift^T\bigl(\pr_2(E,A)\bigr) \enspace . \]
+ It follows from the axioms of comonad morphism that a comonad morphism $\tau : T\to S$ satisfies the equation of \Cref{def:morphism_comonad_cut} 
+ for the thus defined operations $\cut^T$ and $\cut^S$, hence constitutes a morphism of comonads with cut from $(T,\cut^T)$ to $(S,\cut^S)$.
 \end{remark}
 
+The functor given by the canonical $\cut$ operation, followed by the forgetful functor, yields the identity. We can thus view
+relative comonads with cut as a generalization of relative comonads.
 
+Our prime example of relative comonad comes with a $\cut$ operation that is not the canonical one:
 
 \begin{example}[$\cut$ for $\Tri$]\label{def:cut_for_tri}
   The relative comonad $\Tri$ from \Cref{ex:tri_comonad}, together with the $\cut$ operation defined there, 
   is a comonad with cut as in \Cref{def:rel_comonad_with_cut}.
-      
-%   This definition of $\cut$ is actually used in the definition of the $\extend$ operation of \Cref{ex:tri_comonad}.
-%   Note that while $\Tri(\pr_2)$ does have the same type as $\cut$, it is \emph{not} the correct operation to use in place of $\cut$;
-%   the third comonad law is not satisfied when using $\cut:=T(\pr_2)$ for $\Tri$.
 \end{example}
 
 
-\begin{definition}[Morphism of comonads with cut]\label{def:morphism_comonad_cut}
- Let $T$ and $S$ be two comonads with cut relative to a functor $F$ as in \Cref{def:rel_comonad_with_cut}.
- A \emph{morphism of comonads with cut} is a comonad morphism $\tau$ between the underlying comonads as in \Cref{def:comonad_morphism} that 
- commutes suitably with the respective $\cut$ operations, i.e.\ for any $A : \C_0$,
-  \[ \comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A} \enspace . \]
-%  TODO: where is tau_cut used?
-\end{definition}
 
 
 
@@ -437,8 +461,8 @@ Composition and identity of comodule morphisms happens pointwise. We thus obtain
 over a fixed comonad, towards a fixed target category:
 
 \begin{remark}[Category of comodules]
- Fix a relative comonad $\T : \C\stackrel{F}{\to}\D$ and a category $\E$.
- Comodules over $T$ towards $\E$ and their morphisms (\Cref{def:morphism_of_comodules}) form a category $\RComod(T,\E)$.
+ Fix a comonad $T$ relative to $F:\C\to\D$ and a category $\E$.
+ Comodules over $T$ towards $\E$ and their morphisms  form a category $\RComod(T,\E)$.
 \end{remark}
 
 Similarly to relative comonads, comodules over these are functorial:
@@ -519,6 +543,7 @@ where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_c
 
 
 \begin{example}[$\tail$ is a comodule morphism]\label{ex:tail_comodule}
+ Consider the comonad $\Tri$, equiped with the $\cut$ operation of \Cref{def:cut_for_tri}.
  The destructor \constfont{\tail} of \Cref{ex:tri_comonad} is a morphism of comodules over the comonad $\Tri$ 
   from the tautological comodule  $\Tri$ to $\Tri(E\times \_)$.
 \end{example}
@@ -560,7 +585,7 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
  we have an isomorphism of comodules \[\tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_) \enspace . \]
 \end{remark}
 
-%TODO: notation for pointwise bisimilarity of functions, we use f \sim g
+
 
 \begin{theorem}[Coinitial semantics for triangular matrices with redecoration]\label{ex:final_sem_tri} % checked
    Let $E:\Set_0$ be a set.
@@ -570,8 +595,8 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
     \item a morphism $\tail$ of comodules over $T$ of type $T \to T(E\times \_)$
    \end{itemize}
    such that for any set $A$,
-    \[ \comp{\cut^T_A}{\tail_A} \sim  \comp{\tail_{E\times A}}{\cut^T_{E\times A}} \enspace . \]
-% TODO: finish this def
+    \[ \comp{\cut^T_A}{\tail_A} = \comp{\tail_{E\times A}}{\cut^T_{E\times A}} \enspace . \]
+
    
    
    A morphism between two such objects $(T,\tail^T)$ and $(S,\tail^S)$
@@ -588,7 +613,7 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
 %    i.e.\, diagrammatically,   
    \[ \begin{xy}
        \xymatrix{   \tau_*T  \ar[r]^{\tau_*(\tail^T)} \ar[d]_{\induced{\tau}}  &  **[r] \tau_*T (E\times \_ )\ar[d]^{\induced{\tau}(E\times \_)} \\
-                    S  \ar[r]_{\tail^S}  &  **[r] S (E\times \_ )
+                    S  \ar[r]_{\tail^S}  &  **[r] S (E\times \_ ) \enspace .
         }
       \end{xy}
    \]
@@ -663,10 +688,8 @@ general construction:
 
 \section{Formalization in \texttt{Coq}}\label{sec:formal}
 
-All our definitions and theorems are implemented in the proof assistant \texttt{Coq} \parencite{coq}.
-In fact we use a non-standard version of \texttt{Coq} featuring \fat{universe polymorphism}, implemented by 
-M.\ Sozeau.
-The exact version we use is \parencite{coq_polymorphic}.
+All our definitions and theorems are implemented in the proof assistant \texttt{Coq} \parencite{coq84pl3}.
+
 % TODO: give reference. is there one?
 
 \subsection{Implementation choices}
