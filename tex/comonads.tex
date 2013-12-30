@@ -107,7 +107,8 @@
  for context extension when passing under a binder---,
  we precompose with taking a \emph{product} when giving the target of the $\tail$ destructor of $\Tri$.
  However, as it turns out, the treatment of the $\tail$ destructor is far more complicated than a dualization of that of the abstraction 
- constructor of the lambda calculus. Explaining our treatment is the main purpose of the present work.
+ constructor of the lambda calculus---see \Cref{rem:shift} for a detailed explanation of the difference. 
+ Describing our approach to a category-theoretic treatment of the $\tail$ destructor is the main purpose of the present work.
  
 %  Our extension is in the spirit of the work by \textcite{DBLP:journals/iandc/HirschowitzM10}, which uses the notion of \emph{monad} and
 %  \emph{module over a monad} to characterize substitution.
@@ -475,7 +476,7 @@ We now take a closer look at how the $\extend$ operation for $\Tri$ is defined. 
 modify the function $f$ used for redecoration, when redecorating $\tail~t : \Tri(E\times A)$ rather than $t : \Tri A$.
 First we note an important difference between the $\extend$ operation and its analogue in the inductive case:
 
-\begin{remark}[$\shift$ operation for the lambda calculus]
+\begin{remark}[$\shift$ operation for the lambda calculus]\label{rem:shift}
   The heterogeneous data type of lambda terms comes with a term constructor $\abs_A : \ULC(A^*) \to \ULC A$, which 
   is the constructor responsible for the heterogeneity of that data type.
   We compare the $\extend$ operation to the one with analogue purpose in the case of the lambda calculus,

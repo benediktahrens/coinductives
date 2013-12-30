@@ -68,64 +68,64 @@ order=-1
 
 [item:comonads.tex]
 archive=true
-column=95
+column=84
 encoding=UTF-8
 highlight=LaTeX
-line=304
+line=110
 mode=LaTeX
 open=true
 order=0
 
 [item:formal_table.tex]
 archive=true
-column=44
+column=26
 encoding=UTF-8
 highlight=LaTeX
-line=14
+line=10
 mode=LaTeX
 open=true
 order=1
 
 [item:literature.bib]
 archive=true
-column=16
+column=41
 encoding=UTF-8
 highlight=BibTeX
-line=121
+line=60
 mode=BibTeX
 open=true
 order=3
 
 [item:ownstyle.sty]
 archive=true
-column=17
+column=37
 encoding=UTF-8
 highlight=LaTeX
-line=326
+line=338
 mode=LaTeX
 open=true
 order=2
 
 [view-settings,view=0,item:comonads.tex]
-CursorColumn=95
-CursorLine=304
+CursorColumn=84
+CursorLine=110
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:formal_table.tex]
-CursorColumn=44
-CursorLine=14
+CursorColumn=26
+CursorLine=10
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:literature.bib]
-CursorColumn=16
-CursorLine=121
+CursorColumn=41
+CursorLine=60
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:ownstyle.sty]
-CursorColumn=17
-CursorLine=326
+CursorColumn=37
+CursorLine=338
 JumpList=
 ViMarks=
