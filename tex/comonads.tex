@@ -130,7 +130,7 @@
 %  Our framework should generalize to heterogeneous coinductive datatypes specified by signatures in the spirit of \parencite{ahrens_relmonads},
 %  but we lack interesting examples other than the considered triangular matrices.
  
- All our definitions, examples and lemmas have been implemented in the proof assistant \texttt{Coq} \parencite{coq84pl3}.
+ All our definitions, examples and lemmas have been implemented in the proof assistant \coq \parencite{coq84pl3}. 
  In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
  
 \subsection*{Organisation of the paper}
@@ -140,7 +140,7 @@
   In \Cref{sec:coalgebras_for_tri} we explain an important difference between the lambda calculus and infinite triangular matrices
     as heterogeneous data types. We then set up the necessary definitions to state our main theorem (\Cref{ex:final_sem_tri}), 
     characterizing the codata type $\Tri$ as terminal object in some category.
-  In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \textsf{Coq}.
+  In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
  
 \section{Preliminaries}\label{sec:preliminaries}
 
@@ -303,10 +303,6 @@ Here, the family of functions
                      \tail\bigl(\cut~t\bigr) &:= \cut(\tail~t) \enspace . 
       \end{align*}
  Note that what is called $\extend$ here is called \textit{lift} in \parencite{DBLP:conf/types/MatthesP11}.
-  
-  
-  
-%   We refer to our implementation in the proof assistant \textsf{Coq} for the precise definition.
 \end{example}
 
 
@@ -761,9 +757,13 @@ general construction:
 
 
 
-\section{Formalization in \texttt{Coq}}\label{sec:formal}
+\section{Formalization in \coq}\label{sec:formal}
 
-All our definitions and theorems are mechanized in the proof assistant \texttt{Coq} \parencite{coq84pl3}.
+All our definitions and theorems are mechanized in the proof assistant \coq \parencite{coq84pl3}.
+The formalization of infinite triangular matrices is taken from the work by \textcite{DBLP:conf/types/MatthesP11},
+and only slightly adapted to compile with the version of \coq we use.
+
+
 In the following we explain some of our design choices for this mechanization
 and point out differences between the pen-and-paper definitions and the mechanized ones.
 
@@ -777,25 +777,40 @@ and point out differences between the pen-and-paper definitions and the mechaniz
 
 We choose to implement categories using \fat{setoids} for the dependent family of morphisms, as was first done by
 \textcite{aczel_galois} in the proof assistant \texttt{LEGO}, and also used by \textcite{concat} in their library
-of category theory in \texttt{Coq}.
+of category theory in \coq.
 The reason for this choice is explained in \parencite[Sec.\ 3.1.2]{ahrens_zsido}.
 
-This choice is encouraged also by our use of a version of the \texttt{Coq} theorem prover which features \fat{universe polymorphism},
+This choice is encouraged also by our use of a version of the \coq theorem prover which features \fat{universe polymorphism},
 allowing to use a definition of setoids where the carrier is a \emph{field} rather than a \emph{parameter}.
 % TODO: give code
 In comparison, in the work by \textcite{concat}, the definitions of setoids and categories had to be repeated in order to avoid
 universe inconsistencies.
-As a side note, the universe polymorphism in the \texttt{Coq} version we use also allows to define the category of categories, even though
+As a side note, the universe polymorphism in the \coq version we use also allows to define the category of categories, even though
 we do not make any use of that.
 
 \subsubsection{Records vs.\ classes}
+Two approaches to the formalization of mathematical structures have been used extensively in \coq: on the one hand, packaging structures
+in \emph{record types}  in combination with use of \emph{canonical structures}, is used with success, e.g., in 
+the formalisation of algebraic structure in the context of the proof of the Feit-Thompson theorem \parencite{DBLP:conf/tphol/GarillotGMR09}.
+On the other hand, \textcite{DBLP:journals/mscs/SpittersW11} suggest the use of \emph{type classes}, in particular when multiple inheritance
+is an issue.
+
+In the present formalization, we decide to use records rather than classes, since the strongest argument for type classes---multiple inheritance---does 
+not occur.
+We make use of canonical structures in order for \coq to deduce instance of categories when we mention objects of a category; 
+in particular, this is used to allow for overloading of the notation for morphisms of a category.
+We can thus conveniently use the same arrow symbol to denote the type of morphisms between two comonads, between two comodules and so on.
+
 
 \subsection{Formal vs.\ informal definitions}
 
-
-The biggest discrepancy between formal and informal definition arises in the construction of the terminal object itself:
-in \textsf{Coq}, coinductive types are specified through \fat{constructors} rather than \fat{destructors}.
-Work on the the declaration of coinductive types via destructors is done in \textsf{Agda}, cf.\ \parencite{DBLP:conf/popl/AbelPTS13}.
+The only noteworthy discrepancy between formal and informal definition arises in the definition of the codata type of infinite 
+triangular matrices:
+in \coq, coinductive types are specified through \fat{constructors} rather than \fat{destructors}.
+However, one can easily define inverse functions and work in terms of destructors afterwards.
+Work on the the declaration of coinductive types via destructors is done in \agda, cf.\ \parencite{DBLP:conf/popl/AbelPTS13}.
+Other than that, the informal definitions correspond closely to the formalized ones---which might also stem from the fact that 
+the formalization was used as a research tool, playing an essential r\^ole in the development of this work.
 
 \section{Conclusions and future work}
 
