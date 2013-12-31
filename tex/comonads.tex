@@ -87,7 +87,11 @@
 %  namely the coinductive datatype of infinite triangular matrices as studied by
 %  \textcite{DBLP:conf/types/MatthesP11}. 
  
- The codata type family $\Tri$ of infinite triangular matrices is parametrized by a fixed set for entries not on the diagonal, 
+ For a beautiful description and analysis of the codata type of infinite triangular matrices we refer to the article by
+ \textcite{DBLP:conf/types/MatthesP11} which is available via open access. The reader is strongly urged to read (the first two sections of) that work 
+ before the present one; here we only recall the most important
+ definitions:
+ the codata type family $\Tri$ of infinite triangular matrices is parametrized by a fixed set for entries not on the diagonal, 
  and indexed by another, \emph{variable}, set for entries on 
  the diagonal. The respective types of its specifying destructors $\head$ and $\tail$ are given in \Cref{fig:tri_destructors}.
  A first difference to the inductive case of the lambda calculus springs to mind:
@@ -220,7 +224,8 @@ Just like relative monads, relative comonads are functorial:
 \end{definition}
 Relative comonads over the identity functor are exactly comonads.
 A nontrivial instance of relative comonads is given by the coinductive datatype of infinite triangular matrices
-studied by \textcite{DBLP:conf/types/MatthesP11}:
+studied by \textcite{DBLP:conf/types/MatthesP11}. We suggest the reader consults the first two sections of their work
+in order to understand this example.
 
 
 \begin{example}[\textcite{DBLP:conf/types/MatthesP11}]\label{ex:tri_comonad}
@@ -379,7 +384,7 @@ that turns $\tail$ into a morphism of comonads.
  which fails each time the first two entries on the diagonal are not equal.
  We leave it up to the reader to find counterexamples for the comonad law involving $\cobind$.
 
-For heterogeneous inductive types, \textcite{DBLP:journals/iandc/HirschowitzM10} solve an analogue question by introducing the notion of
+For heterogeneous inductive types, \textcite{DBLP:journals/iandc/HirschowitzM10} solve an analogue question by considering the notion of
 \emph{module over a monad}. We  dualize their approach by introducing comodules over (relative) comonads.
 
 
