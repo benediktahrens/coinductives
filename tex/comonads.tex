@@ -547,7 +547,7 @@ Conversely, any comonad $T$ relative to a suitable functor can be equiped with a
 
 \begin{remark}[Canonical $\cut$ operation]\label{canonical_cut}
  Any comonad $T$ relative to a functor $F$ as in \Cref{def:rel_comonad_with_cut} can be equiped with a $\cut$ operation by setting
-   \[ \cut^T_A := \lift^T\bigl(\pr_2(E,A)\bigr) \enspace . \]
+   \[ \cut_A := \lift^T\bigl(\pr_2(E,A)\bigr) \enspace . \]
  It follows from the axioms of comonad morphism that a comonad morphism $\tau : T\to S$ satisfies the equation of \Cref{def:morphism_comonad_cut} 
  for the thus defined operations $\cut^T$ and $\cut^S$, hence constitutes a morphism of comonads with cut from $(T,\cut^T)$ to $(S,\cut^S)$.
 \end{remark}
@@ -639,7 +639,7 @@ the functoriality of comodules defined in \Cref{def:comodule_lift}, where the ta
 the source comodule is given by precomposition with product of the tautological comodule.
 
 
-
+% TODO: reformulate def of morphism of comonads with cut using the diagram for rest
 
 \begin{example}[$\tail$ is a comodule morphism]\label{ex:tail_comodule}
  Consider the comonad $\Tri$, equiped with the $\cut$ operation of \Cref{def:cut_for_tri}.
