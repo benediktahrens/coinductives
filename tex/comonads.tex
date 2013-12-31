@@ -634,6 +634,9 @@ where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_c
 \end{definition}
 
 
+It easily follows that the operation $\cut : T\to T(E\times \_)$  of any comonad $T$ with cut is natural with respect to 
+the functoriality of comodules defined in \Cref{def:comodule_lift}, where the target comodule is the tautological comodule of $T$ and
+the source comodule is given by precomposition with product of the tautological comodule.
 
 
 
@@ -662,12 +665,13 @@ We now have all the ingredients to state (and prove) our main theorem:
    Let $E:\Set_0$ be a set.
    Let $\mathcal{T} = \mathcal{T}_E$ be the category where an object consists of
    \begin{itemize}
-    \item a comonad $T$ over the functor $\eq:\Set\to\Setoid$ with cut relative to $E$ and
+    \item a comonad $T$ over the functor $\eq:\Set\to\Setoid$ with $\cut$ relative to $E$ and
     \item a morphism $\tail$ of comodules over $T$ of type $T \to T(E\times \_)$
    \end{itemize}
    such that for any set $A$,
-    \[ \comp{\cut^T_A}{\tail_A} = \comp{\tail_{E\times A}}{\cut^T_{E\times A}} \enspace . \]
+    \[ \comp{\cut_A}{\tail_A} = \comp{\tail_{E\times A}}{\cut_{E\times A}} \enspace . \]
 
+%     TODO: should read   cut o rest = cut(E \times \_ ) o rest(E\times \_)
    
    
    A morphism between two such objects $(T,\tail^T)$ and $(S,\tail^S)$
