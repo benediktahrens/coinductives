@@ -305,9 +305,22 @@ Here, the family of functions
  Note that what is called $\extend$ here is called \textit{lift} in \parencite{DBLP:conf/types/MatthesP11}.
 \end{example}
 
+\begin{remark}
+In the definition of the $\extend$ operation in \Cref{ex:tri_comonad} the auxiliary operation $\cut$ plays a central r\^ole.
+It should be remarked here that, using functoriality of $\Tri$, one can define another operation of the same type, namely the family of 
+maps $\Tri(\pr_2(E,A)) : \Tri(E\times A) \to \Tri A$ for
+all sets $A$. Had we used this operation rather than the corecursively defined $\cut$ of \Cref{ex:tri_comonad}, 
+then the third comonad law would have failed; we refer to \parencite{DBLP:conf/types/MatthesS07} for details.
+\end{remark}
 
+The notion of relative comonad captures many properties of $\Tri$ and its redecoration operation, in particular the interplay
+of redecoration with the destructor $\head$ via the first two comonad laws.
+Much of the rest of the present work is concerned with finding a suitable categorical notion that captures the interplay 
+of redecoration with the other destructor, $\tail$. Once we have found such a categorical notion, we can use 
+it to give a definition of what a \enquote{coalgebra} for the signature of infinite triangular matrices is, 
+where the codata type $\Tri$ is supposed to constitute the terminal object.
 
-
+A first attempt might be to characterize $\tail$ as a \emph{morphism of comonads}:
 
 
 \begin{definition}[Morphism of relative comonads]\label{def:comonad_morphism}
@@ -318,19 +331,56 @@ Here, the family of functions
    \[  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)} \enspace .  \]
 \end{definition}
 
+Relative comonads over a fixed functor $F$ and their morphisms form a category $\RComonad(F)$.
+
+\begin{remark}
 A morphism $\tau : T\to S$ of relative comonads over a functor $F:\C\to\D$ is  \emph{natural}
 with respect to the functorial action of \Cref{def:lift}.
+\end{remark}
 % 
 % \begin{remark}[Category of relative comonads]
 %  Fix a functor $F : \C\to\D$. 
-Relative comonads over a fixed functor $F$ and their morphisms form a category $\RComonad(F)$.
+
 % \end{remark}
 
-In the definition of the $\extend$ operation in \Cref{ex:tri_comonad} the auxiliary operation $\cut$ plays a central r\^ole.
-It should be remarked here that, using functoriality of $\Tri$, one can define another operation of the same type, namely the family of 
-maps $\Tri(\pr_2(E,A)) : \Tri(E\times A) \to \Tri A$ for
-all sets $A$. Had we used this operation rather than the corecursively defined $\cut$ of \Cref{ex:tri_comonad}, 
-then the third comonad law would have failed; we refer to \parencite{DBLP:conf/types/MatthesS07} for details.
+
+
+
+
+% \begin{remark}[$\tail$ is not a morphism of comonads?]
+At first glance, one might hope for $\tail$ to constitute the carrier of a morphism of relative comonads, i.e.\ one might 
+guess that the axioms of comonad morphism capture the interplay of redecoration with the destructors $\head$ and $\tail$.
+Indeed, it is possible to equip the target $\Tri(E\times \_)$ of $\tail$ with the structure of comonad---we show one such
+possibility in \Cref{product_comonad}. However, we have \emph{not} found any way to endow $\Tri$ and $\Tri(E\times \_)$ with a comonad structure in a way
+that turns $\tail$ into a morphism of comonads.
+% \end{remark}
+
+\begin{definition}\label{product_comonad}
+  Let $T$ be a comonad relative to a strong monoidal functor $F:\C\to\D$ between cartesian monoidal categories,
+  and let $E:\C_0$ be a fixed object of $\C$.
+ The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$: the 
+ counit is defined as
+   \[ \counit_A := \comp{\counit^T_{E\times A}}{F\pr_2(E,A)} \]
+  and the cobind operation as
+   \begin{align*} 
+            \cobind_{A,B} : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A),T(E\times B)\bigr) \\
+%              \cobind^{T(E\times \_)}_{A,B}
+              f &\mapsto  \cobind^T(\extend'~f)
+   \end{align*}
+  with $\extend'$ defined as 
+  \begin{align*} \extend' : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A), F(E\times B)\bigr) \enspace , \\ 
+                                            f & \mapsto \comp{\langle \comp{T(\pr_1)}{\counit^T_E}, f \rangle}{{\alpha^{F}_{E,B}}^{-1}} \enspace .
+  \end{align*}
+\end{definition}
+ Using such a comonad as the target comonad for $\tail$, one might now 
+ try to characterize the destructor $\tail$ of the triangular matrices of \Cref{ex:tri_comonad}
+ as a morphism of relative comonads.
+ However, this fails already for the law involving $\counit$: we would have to prove $\head = \comp{\tail}{\comp{\head}{\pr_2}}$,
+ which fails each time the first two entries on the diagonal are not equal.
+ We leave it up to the reader to find counterexamples for the comonad law involving $\cobind$.
+
+For heterogeneous inductive types, \textcite{DBLP:journals/iandc/HirschowitzM10} solve an analogue question by introducing the notion of
+\emph{module over a monad}. We  dualize their approach by introducing comodules over (relative) comonads.
 
 
 
@@ -440,35 +490,13 @@ A morphism of coalgebras would then be defined as a morphism of relative comonad
 
 The purpose of this extra structure is to characterize the destructor $\tail$, that is, its \emph{type} as well as
 its \emph{behaviour with respect to the redecoration operation}.
+Dualizing the approach of \textcite{DBLP:journals/iandc/HirschowitzM10}, we hope to characterize $\tail$ as a morphism of 
+comodules of specified type, which would allow us to define the extra structure of an arbitrary coalgebra
+as a suitable comodule morphism as well.
 
-
-
-\begin{remark}[$\tail$ is not a morphism of comonads]
-At first glance, one might hope for $\tail$ to constitute the carrier of a morphism of relative comonads, i.e.\ one might 
-guess that the axioms of comonad morphism capture the commutativity of $\tail$ with the operations $\head$ and $\tail$:
-  Let $T$ be a comonad relative to a strong monoidal functor $F:\C\to\D$ between cartesian monoidal categories,
-  and let $E:\C_0$ be a fixed object of $\C$.
- The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$: the 
- counit is defined as
-   \[ \counit^{T(E\times \_)}_A := \comp{\counit^T_{E\times A}}{F\pr_2(E,A)} \]
-  and the cobind operation as
-   \begin{align*} 
-            \cobind^{T(E\times \_)}_{A,B} : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A),T(E\times B)\bigr) \\
-%              \cobind^{T(E\times \_)}_{A,B}
-              f &\mapsto  \cobind^T(\extend'~f)
-   \end{align*}
-  with $\extend'$ defined as 
-  \begin{align*} \extend' : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A), F(E\times B)\bigr) \enspace , \\ 
-                                            f & \mapsto \comp{\langle \comp{T(\pr_1)}{\counit^T_E}, f \rangle}{{\alpha^{F}_{E,B}}^{-1}} \enspace .
-  \end{align*}
- One might thus try to characterize the destructor $\tail$ of the triangular matrices of \Cref{ex:tri_comonad}
- as a morphism of relative comonads, of type $\Tri \to \Tri(E\times \_)$.
- However, this fails for similar reasons as for heterogeneous inductive datatypes, see \parencite[Ex.\ 3.18]{ahrens_zsido}.
- %TODO: give explicit counterexample
-\end{remark}
-
-
-We now take a closer look at how the $\extend$ operation for $\Tri$ is defined. Its purpose is to 
+In order to turn $\tail$ into a morphism of comodules, the crucial task is to suitably endow the source and target functors
+$\Tri$ and $\Tri(E\times \_)$, respectively, with a comodule structure over the comonad $\Tri$.
+For this, we now take a closer look at how the $\extend$ operation for $\Tri$ is defined. Its purpose is to 
 modify the function $f$ used for redecoration, when redecorating $\tail~t : \Tri(E\times A)$ rather than $t : \Tri A$.
 First we note an important difference between the $\extend$ operation and its analogue in the inductive case:
 
@@ -608,7 +636,7 @@ Equivalently,
 
 
 
-Given a comodule over a relative comonad with cut, we define a new comodule over the same comonad, given by precomposition with
+Given a comodule $M$ over a relative comonad with cut, we define a comodule over the same comonad obtained by precomposition of $M$ with
 \enquote{product with a fixed object $E$}:
 
 
