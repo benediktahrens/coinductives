@@ -773,20 +773,30 @@ and point out differences between the pen-and-paper definitions and the mechaniz
 
 
 
-\subsubsection{Setoids}
-
-We choose to implement categories using \fat{setoids} for the dependent family of morphisms, as was first done by
-\textcite{aczel_galois} in the proof assistant \texttt{LEGO}, and also used by \textcite{concat} in their library
+\subsubsection{Setoids for hom-sets}
+We formalize categories to be given by a type of objects and a dependent type---indexed by pairs of objects---of morphisms,
+equiped with suitable composition and identity operations satisfying appropriate axioms.
+More precisely, the family of morphisms is given by a family of \emph{setoids}, where the setoidal equivalence relation on each
+type of morphisms denotes the equality relation on these morphisms. This approach was first used by
+\textcite{aczel_galois} in the proof assistant \texttt{LEGO}, and also by \textcite{concat}  in their library
 of category theory in \coq.
-The reason for this choice is explained in \parencite[Sec.\ 3.1.2]{ahrens_zsido}.
+Alternatively, we could have chosen to consider morphisms modulo propositional equality.
 
-This choice is encouraged also by our use of a version of the \coq theorem prover which features \fat{universe polymorphism},
-allowing to use a definition of setoids where the carrier is a \emph{field} rather than a \emph{parameter}.
-% TODO: give code
-In comparison, in the work by \textcite{concat}, the definitions of setoids and categories had to be repeated in order to avoid
-universe inconsistencies.
-As a side note, the universe polymorphism in the \coq version we use also allows to define the category of categories, even though
-we do not make any use of that.
+Indeed, the morphisms we consider---morphisms of comonads and comodules---are given by structures
+bundling a lot of data and properties; in order to consider two such morphisms as equal, we usually only compare one field of the 
+corresponding records. Furthermore, this field usually consists of a (dependent) function.
+It would be rather cumbersome to reduce equality of two such records to extensional equality of one of their fields, 
+necessitating the use of the axioms of propositional and functional extensionality.
+Using setoids for morphisms instead seems to come with less overhead and conceptually cleaner.
+
+
+% This choice is encouraged also by our use of a version of the \coq theorem prover which features \fat{universe polymorphism},
+% allowing to use a definition of setoids where the carrier is a \emph{field} rather than a \emph{parameter}.
+% % TODO: give code
+% In comparison, in the work by \textcite{concat}, the definitions of setoids and categories had to be repeated in order to avoid
+% universe inconsistencies.
+% As a side note, the universe polymorphism in the \coq version we use also allows to define the category of categories, even though
+% we do not make any use of that.
 
 \subsubsection{Records vs.\ classes}
 Two approaches to the formalization of mathematical structures have been used extensively in \coq: on the one hand, packaging structures
