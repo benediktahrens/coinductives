@@ -583,6 +583,7 @@ Conversely, any comonad $T$ relative to a suitable functor can be equiped with a
 The functor given by the canonical $\cut$ operation, followed by the forgetful functor, yields the identity. We can thus view
 relative comonads with cut as a generalization of relative comonads.
 
+
 Our prime example of relative comonad comes with a $\cut$ operation that is not the canonical one:
 
 \begin{example}[$\cut$ for $\Tri$]\label{def:cut_for_tri}
@@ -662,9 +663,13 @@ where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_c
 \end{definition}
 
 
+Before we give an example---really, the reason we did all this work---using such a comodule, we state some more facts about 
+the construction just described:
+
 \begin{remark}[Pushforward commutes with product in context]\label{rem:prod_pullback_commute}
  Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pushforward_comodule} commute in the sense that
- we have an isomorphism of comodules \[\tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_) \enspace . \]
+ we have an isomorphism of comodules \[\tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_)  \]
+ given pointwise by identity morphisms.
 \end{remark}
 
 
@@ -688,6 +693,10 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
 
 % TODO: reformulate def of morphism of comonads with cut using the diagram for rest
 
+The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ deconstructor---%
+more precisely, of \Cref{eq:rest_redec}, via the notion of comodule morphism:
+
+
 \begin{example}[$\tail$ is a comodule morphism]\label{ex:tail_comodule}
  Consider the comonad $\Tri$, equiped with the $\cut$ operation of \Cref{def:cut_for_tri}.
  The destructor \constfont{\tail} of \Cref{ex:tri_comonad} is a morphism of comodules over the comonad $\Tri$ 
@@ -702,7 +711,8 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
 
 
 
-We now have all the ingredients to state (and prove) our main theorem:
+We now have all the ingredients to state (and prove) our main theorem, obtained by collecting all the information we have gathered so
+far about $\Tri$, and abstracting from this particular comonad:
 
 \begin{theorem}[Coinitial semantics for triangular matrices with redecoration]\label{ex:final_sem_tri} % checked
    Let $E:\Set_0$ be a set.
