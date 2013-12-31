@@ -531,7 +531,7 @@ to considering comonads that come with a specified $\cut$ operation for some fix
 Morphisms of comonads with cut are morphisms of comonads that are compatible with the respective $\cut$ operations:
 
 \begin{definition}[Morphism of comonads with cut]\label{def:morphism_comonad_cut}
- Let $T$ and $S$ be two comonads relative to a functor $F$ with cut relative to $E$ as in \Cref{def:rel_comonad_with_cut}.
+ Let $(T,\cut^T)$ and $(S,\cut^S)$ be two comonads relative to a functor $F$ with cut relative to $E$ as in \Cref{def:rel_comonad_with_cut}.
  A \emph{morphism of comonads with cut} is a comonad morphism $\tau$ between the underlying comonads as in \Cref{def:comonad_morphism} that 
  commutes suitably with the respective $\cut$ operations, i.e.\ for any $A : \C_0$,
   \[ \comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A} \enspace . \]
@@ -634,9 +634,28 @@ where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_c
 \end{definition}
 
 
-It easily follows that the operation $\cut : T\to T(E\times \_)$  of any comonad $T$ with cut is natural with respect to 
-the functoriality of comodules defined in \Cref{def:comodule_lift}, where the target comodule is the tautological comodule of $T$ and
-the source comodule is given by precomposition with product of the tautological comodule.
+\begin{remark}[Pushforward commutes with product in context]\label{rem:prod_pullback_commute}
+ Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pushforward_comodule} commute in the sense that
+ we have an isomorphism of comodules \[\tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_) \enspace . \]
+\end{remark}
+
+
+
+It directly follows from the definition that the cut operation of any comonad $T$ with cut 
+constitutes a comodule morphism $\cut : T(E\times \_) \to T$.
+We can thus restate the definiton of a morphism of comonads with cut as in \Cref{def:morphism_comonad_cut} by asking the following diagram 
+of comodule morphisms (in the category $\RComod(S,\D)$) to commute
+(where in the upper left corner we silently add an isomorphism as in \Cref{rem:prod_pullback_commute}):
+ \[ \begin{xy}
+       \xymatrix{  **[l] \tau_*T(E\times \_ )  \ar[r]^{\tau_*(\cut^T)} \ar[d]_{\induced{\tau}(E\times \_)}  &  **[r] \tau_*T \ar[d]^{\induced{\tau}} \\
+                   **[l]  S (E\times \_ ) \ar[r]_{\cut^S}  &  **[r] S  \enspace .
+        }
+      \end{xy}
+   \]
+
+% is natural with respect to 
+% the functoriality of comodules defined in \Cref{def:comodule_lift}, where the target comodule is the tautological comodule of $T$ and
+% the source comodule is given by precomposition with product of the tautological comodule.
 
 
 % TODO: reformulate def of morphism of comonads with cut using the diagram for rest
@@ -653,10 +672,6 @@ the source comodule is given by precomposition with product of the tautological 
 
 
 
-\begin{remark}[Pushforward commutes with product in context]\label{rem:prod_pullback_commute}
- Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pushforward_comodule} commute in the sense that
- we have an isomorphism of comodules \[\tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_) \enspace . \]
-\end{remark}
 
 
 We now have all the ingredients to state (and prove) our main theorem:
@@ -670,6 +685,8 @@ We now have all the ingredients to state (and prove) our main theorem:
    \end{itemize}
    such that for any set $A$,
     \[ \comp{\cut_A}{\tail_A} = \comp{\tail_{E\times A}}{\cut_{E\times A}} \enspace . \]
+   The last equation can be stated as an equality of comodule morphisms as
+     \[ \comp{\cut}{\tail} = \comp{\tail(E\times \_)}{\cut(E\times\_)} \quad \bigl( = (\comp{\tail}{\cut})(E\times \_)\bigr)\enspace . \]
 
 %     TODO: should read   cut o rest = cut(E \times \_ ) o rest(E\times \_)
    
