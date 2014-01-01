@@ -111,8 +111,18 @@
  for context extension when passing under a binder---,
  we precompose with taking a \emph{product} when giving the target of the $\tail$ destructor of $\Tri$.
  However, as it turns out, the treatment of the $\tail$ destructor is far more complicated than a dualization of that of the abstraction 
- constructor of the lambda calculus---see \Cref{rem:shift} for a detailed explanation of the difference. 
+ constructor of the lambda calculus---see \Cref{rem:shift} for a detailed explanation. 
  Describing our approach to a category-theoretic treatment of the $\tail$ destructor is the main purpose of the present work.
+ 
+ All our definitions, examples and lemmas have been implemented in the proof assistant \coq \parencite{coq84pl3}. 
+ In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
+ 
+ 
+ \subsection*{Some more related work}
+ Some related work has been mentioned in the introduction.
+ Traditional comonads for functional programming with homogeneous codata types are studied in \parencite{DBLP:conf/sfp/UustaluV01}.
+ Redecoration for both finite and infinite triangular matrices is used in \parencite{DBLP:journals/tcs/AbelMU05} to exemplify 
+ the expressivity of the studied recursion schemes.
  
 %  Our extension is in the spirit of the work by \textcite{DBLP:journals/iandc/HirschowitzM10}, which uses the notion of \emph{monad} and
 %  \emph{module over a monad} to characterize substitution.
@@ -134,8 +144,7 @@
 %  Our framework should generalize to heterogeneous coinductive datatypes specified by signatures in the spirit of \parencite{ahrens_relmonads},
 %  but we lack interesting examples other than the considered triangular matrices.
  
- All our definitions, examples and lemmas have been implemented in the proof assistant \coq \parencite{coq84pl3}. 
- In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
+ 
  
 \subsection*{Organisation of the paper}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
@@ -148,6 +157,10 @@
  
 \section{Preliminaries}\label{sec:preliminaries}
 
+In this paper we work in a type-theoretic foundational system and thus use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
+Whenever an operation takes several arguments, we write some of them as indices; these indices might be omitted when 
+they can be deduced from the type of the later arguments.
+We assume basic knowledge of category theory; any instances used are defined in the following.
 
 \begin{definition}[Some categories]\label{def:set_setoid}
  We denote by $\Set$ the category of sets and total functions. 
@@ -160,9 +173,9 @@
 
 
 \begin{definition}\label{def:eq}
- We define the functor $\eq : \Set\to\Setoid$ as the left adjoint to the forgetful functor 
+ The functor $\eq : \Set\to\Setoid$ is defined as the left adjoint to the forgetful functor 
   $U : \Setoid \to \Set$.
-  Explicitly, the functor $\eq$ sends any set $X$ to the setoid $(X,=_X)$ given by the set $X$ itself, together
+  Explicitly, the functor $\eq$ sends any set $X$ to the setoid $(X,=_X)$ given by the set $X$ itself, equiped
   with the equality relation $=_X$ on $X$.
 \end{definition}
 
