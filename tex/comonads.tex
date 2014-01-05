@@ -156,7 +156,7 @@
     as heterogeneous data types. We then set up the necessary definitions to state our main theorem (\Cref{ex:final_sem_tri}), 
     characterizing the codata type $\Tri$ as terminal object in some category.
   In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
- 
+  A table with the correspondances between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
 \section{Preliminaries}\label{sec:preliminaries}
 
 In this paper we work in a type-theoretic foundational system and thus use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
@@ -489,7 +489,7 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
 \end{definition}
 
 
-\begin{definition}[Morphism of comonads induces morphism of comodules] % checked
+\begin{definition}[Morphism of comonads induces morphism of comodules]\label{def:induced} % checked
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$.
   Then $\tau$ gives rise to a morphism of comodules over $S$ from the pushforward of the tautological comodule
   of $T$ along $\tau$ to the tautological comodule over $S$,
@@ -730,11 +730,15 @@ more precisely, of \Cref{eq:rest_redec}, via the notion of comodule morphism:
 
 
 
+We now define a category in which the codata type of triangular matrices, equiped with the bisimulation relation of \Cref{ex:tri_comonad}
+and the comonadic redecoration, constitutes the terminal object. We call an object of this category a \emph{coalgebra of triangular matrices}, 
+even though we do not define the category as a category of coalgebras of a given endofunctor.
 
-We now have all the ingredients to state (and prove) our main theorem, obtained by collecting all the information we have gathered so
-far about $\Tri$, and abstracting from this particular comonad:
+The definition of such a coalgebra is obtained by collecting all the information we have gathered so
+far about the comonad $\Tri$, and abstracting from this particular comonad:
 
-\begin{theorem}[Coinitial semantics for triangular matrices with redecoration]\label{ex:final_sem_tri} % checked
+
+\begin{definition}[Coalgebras of infinite triangualar matrices]\label{def:cat_tri}
    Let $E:\Set_0$ be a set.
    Let $\mathcal{T} = \mathcal{T}_E$ be the category where an object consists of
    \begin{itemize}
@@ -770,12 +774,32 @@ far about $\Tri$, and abstracting from this particular comonad:
 
    \noindent
    Here in the upper right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
+\end{definition}   
    
-   Then the pair $(\Tri, \tail)$ consisting of the relative comonad with cut $\Tri$ of \Cref{def:cut_for_tri} together with 
+We now have all the ingredients to state (and prove) our main theorem:
+\begin{theorem}[Coinitial semantics for triangular matrices with redecoration]\label{ex:final_sem_tri} % checked   
+   The pair $(\Tri, \tail)$ consisting of the relative comonad with cut $\Tri$ of \Cref{def:cut_for_tri} together with 
     the morphism of comodules $\tail$ of \Cref{ex:tail_comodule},
-   constitutes the terminal---\enquote{coinitial}---object in this category.
-   
+   constitutes the terminal---\enquote{coinitial}---coalgebra of triangular matrices.
 \end{theorem}
+
+\begin{proof}[Proof sketch]
+   For a given coalgebra $(T,\tail^T)$, the (terminal) morphism $\bigcirc = \bigcirc_T:T\to\Tri$ is defined via the corecursive equations
+    \begin{align}\head\bigl(\bigcirc~t\bigr) &:= \counit^T~t \quad\text{ and } \label{eq:terminal_top}\\
+                     \tail\bigl(\bigcirc~t\bigr) &:= \bigcirc(\tail^T~t) \enspace . \label{eq:terminal_rest}
+      \end{align}
+      By coinduction we show that the map $\bigcirc$ is compatible with $\cobind$ and $\cut$ operations of the source and 
+   target coalgebras. We omit these calculations, which can be consulted in the \coq source files.
+   
+   Note that there is actually no choice in this definition: \Cref{eq:terminal_top} is forced upon us since we want $\bigcirc$ to constitute 
+   a morphism of comonads---the equation directly corresponds to one of the axioms.
+   \Cref{eq:terminal_rest} is forced upon us by the diagram a morphism of coalgebras has to make commute.
+   
+   The same argument is used to show, again by coinduction, that any two morphisms of coalgebras $\tau,\rho : (T,\tail^T) \to (\Tri,\tail)$
+   are equal (i.e.\ extensionally bisimilar), thus concluding the proof.
+   
+   
+\end{proof}
 
 
 

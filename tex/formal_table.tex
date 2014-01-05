@@ -1,19 +1,34 @@
 
 \section{Correspondance of informal and formal definitions}\label{sec:table_formal_informal}
 
+{
+
+\Crefname{definition}{Def.}{Defs.}
+\Crefname{theorem}{Thm.}{Thms.}
+\Crefname{example}{Ex.}{Exs.}
+
 \begin{center}
 {\renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lll}
 Informal & Reference & Formal \\ \hline
-Category &  & \\
-Functor &  & \\
-Relative comonad & \Cref{def:rel_comonad} & \\
-Comodule over comonad & \Cref{def:comodule} & \\
-Tautological comodule & \Cref{def:tautological_comodule} &\\
-Morphism of comodules & \Cref{def:morphism_of_comodules}& \\
-Precomposition with product & \Cref{def:product_in_context} &\\
-Pushforward comodule & \Cref{def:pushforward_comodule} & \\
-Triangular matrices are terminal & \Cref{ex:final_sem_tri} & \\
+Category &  & \lstinline!Category!\\
+Functor &  & \lstinline!Functor!\\
+Relative comonad & \Cref{def:rel_comonad} & \lstinline!RelativeComonad!\\
+Triangular matrices as comonad & \Cref{ex:tri_comonad} & \lstinline!Tri!\\
+Comodule over comonad & \Cref{def:comodule} & \lstinline!Comodule!\\
+% Morphism of comodules & \Cref{def:morphism_of_comodules}& \lstinline!Comodule.Morphism!\\
+Tautological comodule & \Cref{def:tautological_comodule} &\lstinline!tcomod!\\
+
+Pushforward comodule & \Cref{def:pushforward_comodule} & \lstinline!pushforward!\\
+Induced comodule morphism &\Cref{def:induced} & \lstinline!induced_morphism!\\
+Relative comonad with cut &\Cref{def:rel_comonad_with_cut} & \lstinline!RelativeComonadWithCut!\\
+Precomposition with product & \Cref{def:product_in_context} &\lstinline!precomposition_with_product!\\
+$\tail$ is comodule morphism &\Cref{ex:tail_comodule} & \lstinline!Rest!\\
+Coalgebras of triangular matrices & \Cref{def:cat_tri} & \lstinline!TriMat!\\
+Triangular matrices are terminal & \Cref{ex:final_sem_tri} & \lstinline!Coinitiality!\\
 \end{tabular}
 }
 \end{center}
+
+
+}
