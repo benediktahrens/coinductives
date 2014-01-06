@@ -25,7 +25,7 @@
 \author{R\'egis Spadotti}
 
 \title[Coinitial semantics for redecoration of triangular matrices]{Coinitial semantics \\ for redecoration of triangular matrices}
-% Comodules over relative comonads for coinitial semantics
+
 \newcommand{\fat}[1]{\textbf{#1}}
 
 \begin{document}
@@ -42,19 +42,11 @@
   characterisation of infinite triangular matrices---equiped with the canonical bisimulation relation and a 
   compatible comonadic $\cobind$ operation---as the \emph{terminal object}
   in some category.
-  
-%   We give a category-theoretic characterisation of heterogeneous coinductive datatypes as terminal---\enquote{coinitial}---objects.
-% 
-%   For this, we develop the notion of \emph{comodule over a relative comonad} and provide some constructions of such comodules.
-
-%   The right notion of sameness for terms of a coinductive datatype is not equality but \emph{bisimulation}.
-%   Consequently, we model coinductive datatypes that are parametrized by a set not as a comonad on the category of sets,
-%   but as a \emph{relative} comonad from sets to setoids, over a suitable functor.
-\end{abstract}
+  \end{abstract}
 
 \maketitle
 
-% \tableofcontents
+\tableofcontents
 
 \section{Introduction}
 
@@ -66,7 +58,7 @@
  a new proof principle called \emph{coinduction}. 
  Modulo this slight complication, it looks like it suffices to dualize the theory of inductive types in order to obtain
  a complete picture of coinductive types.
-%  It turns out that the story is not that easy when considering \emph{heterogeneous} (co)inductive types:
+
  
  The characterisation of inductive types as initial algebras 
  has been extended to \emph{heterogeneous}---also called \emph{nested}---inductive datatypes, e.g., the type of $\lambda$-terms,
@@ -75,7 +67,6 @@
  \emph{equiped with a well-behaved substitution operation}.
  
  
-%  Such coinductive datatypes are characterised as terminal---coinitial---algebras of polynomial functors.
 
  In this work we set off to characterize a specific \emph{co}inductive heterogeneous datatype---the type family $\Tri$ of 
  infinite triangular matrices as studied by \textcite{DBLP:conf/types/MatthesP11}, equiped with a \emph{co}substitution operation---as a terminal object of some 
@@ -83,12 +74,7 @@
  the crucial notions are the notion of monad and, more importantly, \emph{module over a monad}.
  It turns out that more work than a simple dualization is necessary, for two reasons which we indicate in the following.
  
- 
-
-%  give an extension of the characterisation as terminal coalgebra to an instance of \emph{heterogeneous} coinductive types,
-%  namely the coinductive datatype of infinite triangular matrices as studied by
-%  \textcite{DBLP:conf/types/MatthesP11}. 
- 
+  
  For a beautiful description and analysis of the codata type of infinite triangular matrices we refer to the article by
  \textcite{DBLP:conf/types/MatthesP11} which is available via open access. The reader is strongly urged to read (the first two sections of) that work 
  before the present one; here we only recall the most important
@@ -125,26 +111,6 @@
  Traditional comonads for functional programming with homogeneous codata types are studied in \parencite{DBLP:conf/sfp/UustaluV01}.
  Redecoration for both finite and infinite triangular matrices is used in \parencite{DBLP:journals/tcs/AbelMU05} to exemplify 
  the expressivity of the studied recursion schemes.
- 
-%  Our extension is in the spirit of the work by \textcite{DBLP:journals/iandc/HirschowitzM10}, which uses the notion of \emph{monad} and
-%  \emph{module over a monad} to characterize substitution.
-%  However, in order to characterize the cosubstition---\emph{redecoration}---of infinite triangular matrices, 
-%  a simple dualisation of that work is not sufficient: since coinductive datatypes such as the aforementioned matrices 
-%  live naturally in the category of 
-%  \emph{setoids}, i.e.\ of sets equiped with an equivalence relation---the \fat{bisimulation} relation---rather than in the category of sets,
-%  comonads are not good enough; we need a notion of comonad where the underlying functor is not necessarily endo.
-%  
-%  The notion of module over a monad was generalized to relative monads in \parencite{ahrens_relmonads}.
-%  In the present work, we dualize this generalization to obtain comodules over relative comonads, and use this gadget to 
-%  give a category-theoretic characterisation of redecoration for infinite triangular matrices.
-%  
-%  At first glance, infinite triangular matrices look dual to, say, the lambda calulus as a heterogeneous datatype \parencite{DBLP:journals/iandc/HirschowitzM10}
-%  in every aspect: 
-%  . We have already mentioned a first aspect that makes the coinductive case more complicated: the need for 
-%  \emph{relative} comonads rather than traditional comonads.
-%  
-%  Our framework should generalize to heterogeneous coinductive datatypes specified by signatures in the spirit of \parencite{ahrens_relmonads},
-%  but we lack interesting examples other than the considered triangular matrices.
  
  
  
@@ -248,16 +214,10 @@ Let $E$ be an arbitrary fixed set.
    Infinite triangular matrices over the (variable) type $A$ are given by the destructors shown in \Cref{fig:tri_destructors},
     equiped with a coinductively defined equivalence relation, a \emph{bisimulation}.
     We write $t \sim t'$ for related matrices $t$ and $t'$.
-%   \begin{lstlisting}
-% Coinductive Tri (E : Set) : Set -> Set :=
-%    head : forall A : Set, Tri (A) -> A.
-%  | tail : forall A : Set, Tri (A) -> Tri (E x A).
-%   \end{lstlisting}
-% 
 
 \begin{figure}[hbt]
   \begin{center}
-    % \begin{minipage}{20em}
+
      \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
     \AxiomC{$t : \Tri(A)$}\doubleLine
@@ -267,7 +227,7 @@ Let $E$ be an arbitrary fixed set.
                                        \AxiomC{$t : \Tri(A)$}\doubleLine
                                        \UnaryInfC{$\tail_A(t) : \Tri(E\times A)$}
                                        \DisplayProof%
-     % \end{minipage} 
+
   \end{center}
 \vspace{2ex}
   \begin{center}
@@ -283,23 +243,6 @@ Let $E$ be an arbitrary fixed set.
   \end{center}
   \caption{Destructors and bisimulation for the coinductive family $\Tri$} \label{fig:tri_destructors}
 \end{figure}
-% \begin{figure}[tb]
-%   \centering
-% %   \fbox{
-%                                             \def\extraVskip{3pt}
-%      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-%     \AxiomC{$t \sim t'$}\doubleLine
-%      \UnaryInfC{$\head(t) = \head(t')$}
-%       \DisplayProof
-%                         \hspace{3ex}
-%                                        \AxiomC{$t \sim t'$}\doubleLine
-%                                        \UnaryInfC{$ \tail(t) \sim \tail(t')$}
-%                                        \DisplayProof
-%      % \end{minipage} 
-% %        }
-%   \caption{Bisimulation relation for $\Tri$} \label{fig:tri_bisim}
-% \end{figure}
-%
 
 \noindent
 \textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that the datatype $\Tri$
@@ -357,23 +300,16 @@ Relative comonads over a fixed functor $F$ and their morphisms form a category $
 A morphism $\tau : T\to S$ of relative comonads over a functor $F:\C\to\D$ is  \emph{natural}
 with respect to the functorial action of \Cref{def:lift}.
 \end{remark}
-% 
-% \begin{remark}[Category of relative comonads]
-%  Fix a functor $F : \C\to\D$. 
-
-% \end{remark}
 
 
 
 
-
-% \begin{remark}[$\tail$ is not a morphism of comonads?]
 At first glance, one might hope for $\tail$ to constitute the carrier of a morphism of relative comonads, i.e.\ one might 
 guess that the axioms of comonad morphism capture the interplay of redecoration with the destructors $\head$ and $\tail$.
 Indeed, it is possible to equip the target $\Tri(E\times \_)$ of $\tail$ with the structure of comonad---we show one such
 possibility in \Cref{product_comonad}. However, we have \emph{not} found any way to endow $\Tri$ and $\Tri(E\times \_)$ with a comonad structure in a way
 that turns $\tail$ into a morphism of comonads.
-% \end{remark}
+
 
 \begin{definition}\label{product_comonad}
   Let $T$ be a comonad relative to a strong monoidal functor $F:\C\to\D$ between cartesian monoidal categories,
@@ -384,7 +320,6 @@ that turns $\tail$ into a morphism of comonads.
   and the cobind operation as
    \begin{align*} 
             \cobind_{A,B} : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A),T(E\times B)\bigr) \\
-%              \cobind^{T(E\times \_)}_{A,B}
               f &\mapsto  \cobind^T(\extend'~f)
    \end{align*}
   with $\extend'$ defined as 
@@ -552,12 +487,6 @@ The failure to describe the $\extend$ operation---more precisely, the auxiliary 
 to considering comonads that come with a specified $\cut$ operation for some fixed object $E$ in the source category:
 
 
-% In what follows, we fix an object $E$ of the category $\C$.
-
-
-% For an arbitrary comonad $T$ relative to a suitable functor $F$, an analogue operation $\cut^T_A : \D(T(E\times A),TA)$
-% does not seem to be deducible from 
-
 
 
 \begin{definition}[Relative comonad with cut]\label{def:rel_comonad_with_cut}
@@ -583,7 +512,6 @@ Morphisms of comonads with cut are morphisms of comonads that are compatible wit
  A \emph{morphism of comonads with cut} is a comonad morphism $\tau$ between the underlying comonads as in \Cref{def:comonad_morphism} that 
  commutes suitably with the respective $\cut$ operations, i.e.\ for any $A : \C_0$,
   \[ \comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A} \enspace . \]
-%  TODO: where is tau_cut used?
 \end{definition}
 
 
@@ -612,48 +540,6 @@ Our prime example of relative comonad comes with a $\cut$ operation that is not 
 \end{example}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{comment}
-\begin{definition}[IS ALREADY IN rel comonad with cut]\label{def:extend}
- Let $F : \C\to \D$ be a strong monoidal functor between (cartesian) monoidal categories, 
- i.e.\ we have a family of isomorphisms
-  \[ \alpha_{A,B} : F(A\times B) \xrightarrow{\sim} FA\times FB\enspace . \] 
-  Let $T$ be a relative comonad over $F$, and let $E : \C$ be an object of $\C$.
- We define
- \begin{align*} \extend_{A,B} : \D(TA,FB) &\to \D\bigl(T(E\times A),F(E\times B)\bigr)\\
-                                   f   &\mapsto \comp{\bigl\langle \comp{\counit_{E\times A}}{\comp{\alpha_{E,A}}{\pr_1(FE,FA)}}, \comp{\lift(\pr_2(E,A))}{f} \bigr\rangle}{\alpha_{E,B}^{-1}} \enspace .
-\end{align*}
-% with 
-% \begin{align*}
-%                \cut_A: \C(T(E\times A), TA), \quad \cut_A := \cobind_{E \times A, A}(\comp{\counit_{E \times A}}{\pr_1}) \enspace .
-% \end{align*}
-
-Equivalently,
-  \[ f   \mapsto \comp{\comp{\langle T(\pr_1) , T(\pr_2) \rangle}{(\counit_E\times f)}}{\alpha_{E,B}^{-1}} \enspace .
-  \]
-
-  
-Equivalently,
-  \[ f   \mapsto \comp{\langle \comp{T(\pr_1)}{f} , F(\pr_2) \rangle}{\alpha_{E,B}^{-1}} \enspace .
-  \]
-  
-Equivalently,
-  \[f  \mapsto \comp{\bigl\langle \comp{\counit_{E\times A}}{F(\pr_1(E,A))}, \comp{\lift(\pr_2(E,A))}{f} \bigr\rangle}{\alpha_{E,B}^{-1}} \enspace .
-  \]
-\end{definition}
-\end{comment}
 
 
 
@@ -706,12 +592,6 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
       \end{xy}
    \]
 
-% is natural with respect to 
-% the functoriality of comodules defined in \Cref{def:comodule_lift}, where the target comodule is the tautological comodule of $T$ and
-% the source comodule is given by precomposition with product of the tautological comodule.
-
-
-% TODO: reformulate def of morphism of comonads with cut using the diagram for rest
 
 The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ deconstructor---%
 more precisely, of \Cref{eq:rest_redec}, via the notion of comodule morphism:
@@ -750,21 +630,12 @@ far about the comonad $\Tri$, and abstracting from this particular comonad:
    The last equation can be stated as an equality of comodule morphisms as
      \[ \comp{\cut}{\tail} = \comp{\tail(E\times \_)}{\cut(E\times\_)} \quad \bigl( = (\comp{\tail}{\cut})(E\times \_)\bigr)\enspace . \]
 
-%     TODO: should read   cut o rest = cut(E \times \_ ) o rest(E\times \_)
-   
+  
    
    A morphism between two such objects $(T,\tail^T)$ and $(S,\tail^S)$
-%    
-% %    pair $(T,t)$ of a relative comonad $T$ over the functor
-% %    $\eq: \Set \to \Setoid$ together with a morphism of comodules $t : T \to T(E \times \_)$.
-%    A morphism $\tau : (T,t) \to (S,s)$ 
-%    
-%    
    is given by a morphism of relative comonads with cut $\tau : T \to S$ such that
    the following diagram of comodule morphisms in the category $\RComod(S,\E)$ commutes,
    
-%    \[     \comp{\tau_*t}{\tau(E\times \_)} = \comp{\tau}{s} \enspace , \]
-%    i.e.\, diagrammatically,   
    \[ \begin{xy}
        \xymatrix{   \tau_*T  \ar[r]^{\tau_*(\tail^T)} \ar[d]_{\induced{\tau}}  &  **[r] \tau_*T (E\times \_ )\ar[d]^{\induced{\tau}(E\times \_)} \\
                     S  \ar[r]_{\tail^S}  &  **[r] S (E\times \_ ) \enspace .
@@ -800,62 +671,6 @@ We now have all the ingredients to state (and prove) our main theorem:
    
    
 \end{proof}
-
-
-
-\begin{comment}
-
-\section{Some more comodules}
-
-In the following we present some more constructions of comodules which can be used to specify the type of 
-destructors.
-
-
-
-% \begin{definition}[Constant comodule]
-%   Given $e:\E_0$, the function $\C_0\to\E_0$ sending any object of $\C$ to $e$ is equiped with
-%   the structure of a comodule over $T$.
-% \end{definition}
-
-
-% \begin{definition}[Product comodule]
-%  Given two comodules $M,N$ over $T$, then the pointwise product is equiped with the structure of 
-%  a comodule over $T$.
-% \end{definition}
-
-
-Precomposition with \enquote{product with $E$} as in \Cref{def:product_in_context} is a special case of the following
-general construction:
-
-\begin{definition}[Precomposition with a functor]
-  Let $T$ be a comonad relative to $F:\C\to\D$. 
-  Let $K : \C\to\C$ be an endofunctor, and $K' : \D\to\D$ be another one, and let 
-  $\alpha : TK \to K'T$ and $\beta : K'F \to FK$ be natural transformations.
-  We then define
-  \begin{align*} \extend_K : \D(TA,FB) &\to \D(TKA,FKB)  \enspace , \\ 
-                                  f  &\mapsto \comp{\alpha_{A}}{\comp{K'f}{\beta_B}}  \enspace .
-  \end{align*}
-%
-  Any comodule $M$ over $T$ with target category $\E$ then yields a comodule $MK$ with comodule operation
-  \[ \mcobind^{MK}(f) := \mcobind^M(\extend_K(f)) \enspace . \]
-\end{definition}
-
-\begin{definition}[Postcomposition with a functor]\label{def:postcomposition_functor}
-  Let $T$ be a comonad relative to $F:\C\to\D$, and let $M$ be a comodule over $T$ with codomain category $\E$.
- Let $K : \E \to \X$ be a functor. Then we define the comodule $KM$ to be the comodule over $T$ with codomain category $\X$
-  sending any object $A:\C_0$ to $K(MA)$.
-  The comodule operation is defined by
-  \[ \mcobind^{KM}(f) := K (\mcobind(f)) \enspace . 
-  \]
-\end{definition}
-
-\begin{example}[Infinite branching trees]
-  Let $B$ a set. We consider $B$ as a setoid via the functor $\eq:\Set\to\Setoid$, which we silently apply.
-  The hom functor $Y \mapsto \Setoid(B,Y)$ is an endofunctor on the category $\Setoid$: for any two setoids $X,Y$, 
-   the set of setoid morphisms $\Setoid(X,Y)$ is itself equiped with an equivalence relation.
-   Branching is given by postcomposition (\Cref{def:postcomposition_functor}) with such a hom functor.
-\end{example}
-\end{comment}
 
 
 
@@ -895,13 +710,6 @@ necessitating the use of the axioms of propositional and functional extensionali
 Using setoids for morphisms instead seems to come with less overhead and conceptually cleaner.
 
 
-% This choice is encouraged also by our use of a version of the \coq theorem prover which features \fat{universe polymorphism},
-% allowing to use a definition of setoids where the carrier is a \emph{field} rather than a \emph{parameter}.
-% % TODO: give code
-% In comparison, in the work by \textcite{concat}, the definitions of setoids and categories had to be repeated in order to avoid
-% universe inconsistencies.
-% As a side note, the universe polymorphism in the \coq version we use also allows to define the category of categories, even though
-% we do not make any use of that.
 
 \subsubsection{Records vs.\ classes}
 Two approaches to the formalization of mathematical structures have been used extensively in \coq: on the one hand, packaging structures
@@ -951,17 +759,13 @@ will allow, e.g, considering branching trees modulo permutation of subtrees.
 
 \printbibliography
 
-% \newpage
+
 \appendix
 
 \input{formal_table}
 
 \end{document}
 
-
-%TODO: other arities, e.g.
-%    - T(A) ---->  (E -> T(A))
-%    - http://www2.tcs.ifi.lmu.de/~rodrigue/docs/types.html
 
 
 
