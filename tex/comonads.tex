@@ -2,7 +2,7 @@
 
 \pdfoutput=1
 
-\documentclass{amsart}
+\documentclass[conference,10pt]{IEEEtran}
 
 \usepackage[utf8]{inputenc}
 
@@ -21,15 +21,22 @@
 \usepackage{ownstyle}
 
 
-\author{Benedikt Ahrens}
-\author{R\'egis Spadotti}
 
-\title[Coinitial semantics for redecoration of triangular matrices]{Coinitial semantics \\ for redecoration of triangular matrices}
+
+
 
 \newcommand{\fat}[1]{\textbf{#1}}
 
 \begin{document}
 
+\title{Coinitial semantics \\ for redecoration of triangular matrices}
+\author{
+\IEEEauthorblockN{Benedikt Ahrens and R\'egis Spadotti}
+\IEEEauthorblockA{Institut de Recherche en Informatique de Toulouse\\
+Universit\'e Paul Sabatier\\France
+}}
+
+\maketitle
 
 \begin{abstract}
   The heterogeneous codata type of infinite triangular matrices and, in particular, the \emph{redecoration} operation on it, 
@@ -42,10 +49,15 @@
   characterisation of infinite triangular matrices---equiped with the canonical bisimulation relation and a 
   compatible comonadic $\cobind$ operation---as the \emph{terminal object}
   in some category.
-  \end{abstract}
+\end{abstract}
 
-\maketitle
+\begin{IEEEkeywords}
+heterogeneous coinductive types,
+relative comonads,
+terminal semantics
+\end{IEEEkeywords}
 
+  
 % \tableofcontents
 
 \section{Introduction}
@@ -761,6 +773,7 @@ will allow, e.g, considering branching trees modulo permutation of subtrees.
 \printbibliography
 
 
+\cleardoublepage
 \appendix
 
 \input{formal_table}
