@@ -68,10 +68,10 @@ order=-1
 
 [item:comonads.tex]
 archive=true
-column=11
+column=108
 encoding=UTF-8
 highlight=LaTeX
-line=17
+line=686
 mode=LaTeX
 open=true
 order=0
@@ -88,10 +88,10 @@ order=1
 
 [item:literature.bib]
 archive=true
-column=35
+column=61
 encoding=UTF-8
 highlight=BibTeX
-line=1
+line=4
 mode=BibTeX
 open=true
 order=3
@@ -107,8 +107,8 @@ open=true
 order=2
 
 [view-settings,view=0,item:comonads.tex]
-CursorColumn=11
-CursorLine=17
+CursorColumn=108
+CursorLine=686
 JumpList=
 ViMarks=
 
@@ -119,8 +119,8 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:literature.bib]
-CursorColumn=35
-CursorLine=1
+CursorColumn=61
+CursorLine=4
 JumpList=
 ViMarks=
 
