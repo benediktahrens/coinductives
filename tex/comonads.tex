@@ -321,7 +321,7 @@ that turns $\tail$ into a morphism of comonads.
   and let $E:\C_0$ be a fixed object of $\C$.
  The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$: the 
  counit is defined as
-   \[ \counit_A := \comp{\counit^T_{E\times A}}{F\pr_2(E,A)} \]
+   \[ \counit_A := \comp{\lift^T(\pr_2(E,A))}{\counit^T_{A}} \]
   and the cobind operation as
    \begin{align*} 
             \cobind_{A,B} : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A),T(E\times B)\bigr) \\
@@ -499,7 +499,8 @@ to considering comonads that come with a specified $\cut$ operation for some fix
     \[ \cut : \forall~A:\C_0, T(E\times A) \to TA \]
  satisfying the following axioms:
   \begin{itemize}
-   \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{\counit_{E\times A}}{F(\pr_2(E,A))}$;
+%    \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{\counit_{E\times A}}{F(\pr_2(E,A))}$;
+   \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{\lift^T(\pr_2(E,A))}{\counit_{A}}$;
    \item $\forall~A~B:C_0,\forall~f:\D(TA,FB), \comp{\cut_A}{\cobind(f)} = \comp{\cobind(\extend~f)}{\cut_B}$,
   \end{itemize}
 
