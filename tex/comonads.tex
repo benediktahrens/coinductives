@@ -210,7 +210,7 @@ The dual notion is that of a relative \emph{co}monad:
   such that 
   \begin{packitem}
    \item $\forall A,B:\C_0, \forall f:\D(TA,FB), \comp{\cobind(f)}{\counit_B} = f$;
-   \item $\forall A : \C_0, \cobind(\counit_A) = \id_A$;
+   \item $\forall A : \C_0, \cobind(\counit_A) = \id_{TA}$;
    \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
         \comp{\cobind(f)}{\cobind(g)} = \cobind(\comp{\cobind(f)}{g})$.
   \end{packitem} 
@@ -219,11 +219,11 @@ Just like relative monads, relative comonads are functorial:
 \begin{definition}[Functoriality for relative comonads]\label{def:lift}
  Let $T$ be a  comonad relative to $F:\C\to\D$.
  For $f : \C(A,B)$ we define
-  \[ \lift^T(f) := \cobind(\comp{\counit_A}{Ff}) .  \]
+  \[ \lift^T(f) := \cobind(\comp{\counit_A}{Ff}) \enspace .  \]
  The functor properties are easily checked.
 \end{definition}
 Relative comonads over the identity functor are exactly comonads.
-A nontrivial instance of relative comonads is given by the coinductive datatype of infinite triangular matrices
+A nontrivial instance of relative comonads is given by the coinductive data type of infinite triangular matrices
 studied by \textcite{DBLP:conf/types/MatthesP11}. We suggest the reader consults the first two sections of their work
 in order to understand this example.
 
@@ -264,7 +264,7 @@ Let $E$ be an arbitrary fixed set.
 \end{figure}
 
 \noindent
-\textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that the datatype $\Tri$
+\textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that the data type $\Tri$
   is an instance of such a comonad. 
   Such a weak constructive comonad, however, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
@@ -277,7 +277,7 @@ Let $E$ be an arbitrary fixed set.
       \end{align}
 Here, the family of functions 
      \[\extend_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid\bigr(\Tri (E \times A),\eq(E\times B)\bigr)\]
-  is suitably defined to account for the change of the type of argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
+  is suitably defined to account for the change of the type of the argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
   rather than $t : \Tri A$, namely
   \[ \extend(f) := \langle \comp{\head_{E\times A}}{\pr_1(E,A)} , \comp{\cut_A}{f} \rangle \enspace . \]
   The auxiliary function $\cut_A : \Tri(E\times A) \to \Tri A$ is defined corecursively via
@@ -351,9 +351,9 @@ that turns $\tail$ into a morphism of comonads.
  as a morphism of relative comonads.
  However, this fails already for the law involving $\counit$: we would have to prove $\head = \comp{\tail}{\comp{\head}{\pr_2}}$,
  which fails each time the first two entries on the diagonal are not equal.
- We leave it up to the reader to find counterexamples for the comonad law involving $\cobind$.
+ We leave it to the reader to find counterexamples for the comonad law involving $\cobind$.
 
-For heterogeneous inductive types, \textcite{DBLP:journals/iandc/HirschowitzM10} solve an analogue question by considering the notion of
+For heterogeneous inductive types, \textcite{DBLP:journals/iandc/HirschowitzM10} solve an analogous question by considering the notion of
 \emph{module over a monad}. We  dualize their approach by introducing comodules over (relative) comonads.
 
 
