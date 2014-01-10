@@ -28,7 +28,6 @@
 
 \newcommand{\fat}[1]{\textbf{#1}}
 
-\renewcommand{\alpha}{\phi}
 
 \begin{document}
 
@@ -168,9 +167,9 @@ are called \emph{strong monoidal}:
 \begin{definition}[Strong monoidal functor]\label{def:monoidal_functor}
  A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if, for any two objects $A$ and $B$ of $\C$,
   the morphism
- \[ \alpha^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
+ \[ \phi^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
  is an isomorphism.
- (Note that for \emph{cartesian} monoidal categories, the family $\alpha$ of morphisms automatically 
+ (Note that for \emph{cartesian} monoidal categories, the family $\phi$ of morphisms automatically 
   is compatible with the unitators and associators of the source and target categories, 
   since it is given by a universal property. 
   We shall not need strong monoidal functors between arbitrary monoidal categories.)
@@ -330,7 +329,7 @@ that turns $\tail$ into a morphism of comonads.
    \end{align*}
   with $\extend'$ defined as 
   \begin{align*} \extend' : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A), F(E\times B)\bigr) \enspace , \\ 
-                                            f & \mapsto \comp{\langle \comp{T(\pr_1)}{\counit^T_E}, f \rangle}{{\alpha^{F}_{E,B}}^{-1}} \enspace .
+                                            f & \mapsto \comp{\langle \comp{T(\pr_1)}{\counit^T_E}, f \rangle}{{\phi^{F}_{E,B}}^{-1}} \enspace .
   \end{align*}
 \end{definition}
  Using such a comonad as the target comonad for $\tail$, one might now 
@@ -506,7 +505,7 @@ to considering comonads that come with a specified $\cut$ operation for some fix
 
   \noindent
   where, for $f:\D(TA,FB)$, we define $\extend(f) : \D\bigl(T(E\times A),F(E\times B)\bigr)$ as
-       \[ \extend(f) := \comp{\comp{\langle T(\pr_1) , \cut \rangle}{(\counit_E\times f)}}{{\alpha^{F}_{E,B}}^{-1}} \enspace . \]
+       \[ \extend(f) := \comp{\comp{\langle T(\pr_1) , \cut \rangle}{(\counit_E\times f)}}{{\phi^{F}_{E,B}}^{-1}} \enspace . \]
   
 \end{definition}
 
