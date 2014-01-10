@@ -204,7 +204,7 @@ The dual notion is that of a relative \emph{co}monad:
   \begin{packitem}
    \item a map $T:\C_0 \to \D_0$ on the objects of the categories involved;
    \item an operation $\counit : \forall A : \C_0, \D(TA,FA)$;
-   \item an operation $\cobind: \forall A,B:\C_0, \D(TA,FB) \to \D(TA,TB)$
+   \item an operation \[\cobind: \forall A,B:\C_0, \D(TA,FB) \to \D(TA,TB)\]
   \end{packitem}
   such that 
   \begin{packitem}
@@ -279,8 +279,8 @@ Let $E$ be an arbitrary fixed set.
       \begin{align}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
                      \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\extend~f\bigr)(\tail~t) \enspace . \label{eq:rest_redec}
       \end{align}
-Here, the family of functions 
-     \[\extend_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid\bigr(\Tri (E \times A),\eq(E\times B)\bigr)\]
+Here, the family of functions $\extend_{A,B}$ of type
+     \[\Setoid(\Tri A,\eq B) \to \Setoid\bigr(\Tri (E \times A),\eq(E\times B)\bigr)\]
   is suitably defined to account for the change of the type of the argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
   rather than $t : \Tri A$, namely
   \[ \extend(f) := \langle \comp{\head_{E\times A}}{\pr_1(E,A)} , \comp{\cut_A}{f} \rangle \enspace . \]
@@ -351,7 +351,7 @@ that turns $\tail$ into a morphism of comonads.
    \end{align*}
   with $\extend'$ defined as 
   \begin{align*} \extend' : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A), F(E\times B)\bigr) \enspace , \\ 
-                                            f & \mapsto \comp{\langle \comp{T(\pr_1)}{\counit^T_E}, f \rangle}{{\phi^{F}_{E,B}}^{-1}} \enspace .
+                                            f  \mapsto &\comp{\langle \comp{T(\pr_1)}{\counit^T_E}, f \rangle}{{\phi^{F}_{E,B}}^{-1}}.
   \end{align*}
 \end{definition}
  Using such a comonad as the target comonad for $\tail$, one might now 
@@ -377,7 +377,7 @@ This dualization is straightforward.
  A \fat{comodule over T towards $\E$} consists of
    \begin{packitem}
    \item a map $M:\C_0 \to \E_0$ on the objects of the categories involved;
-   \item an operation $\mcobind: \forall A,B:\C_0, \D(TA,FB) \to \E(MA,MB)$
+   \item an operation \[\mcobind: \forall A,B:\C_0, \D(TA,FB) \to \E(MA,MB)\]
   \end{packitem}
   such that 
   \begin{packitem}
@@ -523,11 +523,11 @@ to considering comonads that come with a specified $\cut$ operation for some fix
   \begin{itemize}
 %    \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{\counit_{E\times A}}{F(\pr_2(E,A))}$;
    \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{\lift^T(\pr_2(E,A))}{\counit_{A}}$;
-   \item $\forall~A~B:C_0,\forall~f:\D(TA,FB), \comp{\cut_A}{\cobind(f)} = \comp{\cobind(\extend~f)}{\cut_B}$,
+   \item $\forall~A~B:C_0,\forall~f:\D(TA,FB), \\ \comp{\cut_A}{\cobind(f)} = \comp{\cobind(\extend~f)}{\cut_B}$,
   \end{itemize}
 
   \noindent
-  where, for $f:\D(TA,FB)$, we define $\extend(f) : \D\bigl(T(E\times A),F(E\times B)\bigr)$ as
+  where, for $f:\D(TA,FB)$, we define \[\extend(f) : \D\bigl(T(E\times A),F(E\times B)\bigr)\] as
        \[ \extend(f) := \comp{\comp{\langle T(\pr_1) , \cut \rangle}{(\counit_E\times f)}}{{\phi^{F}_{E,B}}^{-1}} \enspace . \]
   
 \end{definition}
@@ -587,8 +587,8 @@ Given a comodule $M$ over a relative comonad with cut, we define a comodule over
  gives a comodule $M(E\times\_)$ over $T$,
   \[    M(E\times \_) : A \mapsto M(E\times A) \enspace . \]
  The comodule operation is deduced from that of $M$ by 
- \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \D(TA,FB)&\to \E\bigl(M(E\times A), M(E\times B)\bigr) \enspace ,\\
-                                                      f &\mapsto \mcobind^M_{E\times A,E\times B}(\extend(f)) \enspace ,
+ \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \D(TA,FB)&\to \E\bigl(M(E\times A), M(E\times B)\bigr) ,\\
+                                                      f \mapsto \mcobind^M_{E\times A,E\times B}&(\extend(f)) \enspace ,
   \end{align*}                                        
 where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_cut}.
  
