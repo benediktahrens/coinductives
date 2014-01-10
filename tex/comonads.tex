@@ -28,6 +28,8 @@
 
 \newcommand{\fat}[1]{\textbf{#1}}
 
+\renewcommand{\alpha}{\phi}
+
 \begin{document}
 
 
@@ -52,9 +54,9 @@
 
 \section{Introduction}
 
- Simple inductive types---\textsf{W}-types---are characterised categorically as initial algebras of
+ Simple inductive types---\textsf{W}-types---are characterized categorically as initial algebras of
  a polynomial functor \parencite{DBLP:journals/apal/MoerdijkP00}.
- Dually, infinite, \emph{coinductive} types are characterised as terminal \emph{co}algebras of suitable functors.
+ Dually, infinite, \emph{coinductive} types are characterized as terminal \emph{co}algebras of suitable functors.
  In the case of coinductive types, the meta-theoretic notion of equality is not adequate. Another notion of sameness for inhabitants of such types, 
  \emph{bisimulation}, was introduced by \textcite{aczel_nonwellfounded}, and also
  a new proof principle called \emph{coinduction}. 
@@ -62,16 +64,16 @@
  a complete picture of coinductive types.
 
  
- The characterisation of inductive types as initial algebras 
- has been extended to \emph{heterogeneous}---also called \emph{nested}---inductive datatypes, e.g., the type of $\lambda$-terms,
+ The characterization of inductive types as initial algebras 
+ has been extended to \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
  in various formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
  The main goal of these works is not just to characterize the data type via a universal property, but rather the data type
- \emph{equiped with a well-behaved substitution operation}.
+ \emph{equipped with a well-behaved substitution operation}.
  
  
 
- In this work we set off to characterize a specific \emph{co}inductive heterogeneous datatype---the type family $\Tri$ of 
- infinite triangular matrices as studied by \textcite{DBLP:conf/types/MatthesP11}, equiped with a \emph{co}substitution operation---as a terminal object of some 
+ In this work we set off to characterize a specific \emph{co}inductive heterogeneous data type---the type family $\Tri$ of 
+ infinite triangular matrices as studied by \textcite{DBLP:conf/types/MatthesP11}, equipped with a \emph{co}substitution operation---as a terminal object of some 
  category. For this, we start dualizing the approach by \textcite{DBLP:journals/iandc/HirschowitzM10}, where 
  the crucial notions are the notion of monad and, more importantly, \emph{module over a monad}.
  It turns out that more work than a simple dualization is necessary, for two reasons which we indicate in the following.
@@ -86,8 +88,8 @@
  the diagonal. The respective types of its specifying destructors $\head$ and $\tail$ are given in \Cref{fig:tri_destructors}.
  A first difference to the inductive case of the lambda calculus springs to mind:
  while the lambda calculus is essentially a monad---hence an \emph{endo}functor---on sets, the codata type $\Tri$ cannot be considered as such;
- for a given set $A$, the type $\Tri A$, equiped with a suitable \fat{bisimulation} relation, 
- constitutes a \emph{setoid}---a set equiped with an equivalence relation---rather than a set.
+ for a given set $A$, the type $\Tri A$, equipped with a suitable \fat{bisimulation} relation, 
+ constitutes a \emph{setoid}---a set equipped with an equivalence relation---rather than a set.
  Instead of considering comonads---as the dual notion to monads---we thus have to consider a notion of comonad whose underlying functor is not necessarily endo.
  This is precisely the raison d'\^etre of \emph{relative} comonads (defined below)---the dual notion to the relative monads defined in 
   \parencite{DBLP:conf/fossacs/AltenkirchCU10}. 
@@ -125,7 +127,7 @@
     as heterogeneous data types. We then set up the necessary definitions to state our main theorem (\Cref{ex:final_sem_tri}), 
     characterizing the codata type $\Tri$ as terminal object in some category.
   In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
-  A table with the correspondances between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
+  A table with the correspondence between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
 \section{Preliminaries}\label{sec:preliminaries}
 
 In this paper we work in a type-theoretic foundational system and thus use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
@@ -136,7 +138,7 @@ We assume basic knowledge of category theory; any instances used are defined in 
 \begin{definition}[Some categories]\label{def:set_setoid}
  We denote by $\Set$ the category of sets and total functions. 
  
- We denote by $\Setoid$ the category an object of which is a set equiped with an equivalence relation.
+ We denote by $\Setoid$ the category an object of which is a set equipped with an equivalence relation.
  A morphism between setoids is a set-theoretic function between the underlying sets that is compatible with the equivalence relations of the source and target setoids.
  Given a setoid $T$, we write $t\sim t'$ for related elements $t$ and $t'$ in $T$.
 \end{definition}
@@ -146,7 +148,7 @@ We assume basic knowledge of category theory; any instances used are defined in 
 \begin{definition}\label{def:eq}
  The functor $\eq : \Set\to\Setoid$ is defined as the left adjoint to the forgetful functor 
   $U : \Setoid \to \Set$.
-  Explicitly, the functor $\eq$ sends any set $X$ to the setoid $(X,=_X)$ given by the set $X$ itself, equiped
+  Explicitly, the functor $\eq$ sends any set $X$ to the setoid $(X,=_X)$ given by the set $X$ itself, equipped
   with the equality relation $=_X$ on $X$.
 \end{definition}
 
@@ -167,10 +169,11 @@ are called \emph{strong monoidal}:
  A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if, for any two objects $A$ and $B$ of $\C$,
   the morphism
  \[ \alpha^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
- is an isomorphisms.
- (Note that for \emph{cartesian} monoidal categories, the family $\alpha$ of morphisms automatically makes commute the 
-  diagrams necessary to have a strong monoidal functor, since it is given by universal property. 
-  We shall not need more general strong monoidal functors between arbitrary monoidal categories.)
+ is an isomorphism.
+ (Note that for \emph{cartesian} monoidal categories, the family $\alpha$ of morphisms automatically 
+  is compatible with the unitators and associators of the source and target categories, 
+  since it is given by a universal property. 
+  We shall not need strong monoidal functors between arbitrary monoidal categories.)
 \end{definition}
 
 \begin{example}
