@@ -274,7 +274,7 @@ Here, the family of functions
  Note that what is called $\extend$ here is called \textit{lift} in \parencite{DBLP:conf/types/MatthesP11}.
 \end{example}
 
-\begin{remark}
+\begin{remark}\label{rem:wrong_cut}
 In the definition of the $\extend$ operation in \Cref{ex:tri_comonad} the auxiliary operation $\cut$ plays a central r\^ole.
 It should be remarked here that, using functoriality of $\Tri$, one can define another operation of the same type, namely the family of 
 maps $\Tri(\pr_2(E,A)) : \Tri(E\times A) \to \Tri A$ for
@@ -355,12 +355,12 @@ This dualization is straightforward.
  Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
  A \fat{comodule over T towards $\E$} consists of
    \begin{packitem}
-   \item a map $:\C_0 \to \E_0$ on the objects of the categories involved;
+   \item a map $M:\C_0 \to \E_0$ on the objects of the categories involved;
    \item an operation $\mcobind: \forall A,B:\C_0, \D(TA,FB) \to \E(MA,MB)$
   \end{packitem}
   such that 
   \begin{packitem}
-   \item $\forall A : \C_0, \mcobind(\counit_A) = \id_A$;
+   \item $\forall A : \C_0, \mcobind(\counit_A) = \id_{MA}$;
    \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
         \comp{\mcobind(f)}{\mcobind(g)} = \mcobind(\comp{\cobind(f)}{g})$ .
   \end{packitem}
@@ -401,7 +401,7 @@ Similarly to relative comonads, comodules over these are functorial:
 
 \begin{definition}[Functoriality for comodules]\label{def:comodule_lift}
  Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
-  \[ \mlift^S(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
+  \[ \mlift^M(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
 \end{definition}
 
 
@@ -446,13 +446,13 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
 Our goal is to define \fat{coalgebras} for the signature of infinite triangular matrices such that 
 the codata type $\Tri$ defined in \Cref{ex:tri_comonad} constitutes the \fat{terminal such coalgebra}.
 Since $\Tri$ forms a comonad relative to the functor $\eq:\Set\to\Setoid$, it seems reasonable to define
-an arbitrary coalgebra as such a relative comonad as well, equiped with some extra structure which remains to be defined.
+an arbitrary coalgebra for that signature as such a relative comonad as well, equiped with some extra structure which remains to be defined.
 A morphism of coalgebras would then be defined as a morphism of relative comonads that is compatible with that extra structure.
 
 The purpose of this extra structure is to characterize the destructor $\tail$, that is, its \emph{type} as well as
 its \emph{behaviour with respect to the redecoration operation}.
 Dualizing the approach of \textcite{DBLP:journals/iandc/HirschowitzM10}, we hope to characterize $\tail$ as a morphism of 
-comodules of specified type, which would allow us to define the extra structure of an arbitrary coalgebra
+comodules of specified type, which would allow us to define the extra structure of an arbitrary coalgebra for that signature
 as a suitable comodule morphism as well.
 
 In order to turn $\tail$ into a morphism of comodules, the crucial task is to suitably endow the source and target functors
@@ -462,7 +462,7 @@ modify the function $f$ used for redecoration, when redecorating $\tail~t : \Tri
 First we note an important difference between the $\extend$ operation and its analogue in the inductive case:
 
 \begin{remark}[$\shift$ operation for the lambda calculus]\label{rem:shift}
-  The heterogeneous data type of lambda terms comes with a term constructor $\abs_A : \ULC(A^*) \to \ULC A$, which 
+  The heterogeneous data type of lambda terms comes with a term constructor $\abs_A : \ULC (A^*) \to \ULC A$, which 
   is the constructor responsible for the heterogeneity of that data type.
   We compare the $\extend$ operation to the one with analogue purpose in the case of the lambda calculus,
   the $\shift$ operation, of type
@@ -484,8 +484,7 @@ First we note an important difference between the $\extend$ operation and its an
   but for which, when used to define the redecoration, some comonadic property of redecoration fails.
   More specifically, it is the auxiliary $\cut$ operation as defined in \Cref{ex:tri_comonad} which does not seem to be 
   definable in categorical terms. There is an operation of the same type which is categorical---see \Cref{canonical_cut}---but
-  which, when used for the definition of the $\extend$ operation, yields a \enquote{redecoration} operation for which the third comonad law fails.
-  Details are given in an article by \textcite{DBLP:conf/types/MatthesS07}.
+  which does not yield a comonadic redecoration operation (cf.\ \Cref{rem:wrong_cut}).
 \end{remark}
 
 
@@ -528,17 +527,23 @@ Conversely, any comonad $T$ relative to a suitable functor can be equiped with a
 
 
 \begin{remark}[Canonical $\cut$ operation]\label{canonical_cut}
- Any comonad $T$ relative to a functor $F$ as in \Cref{def:rel_comonad_with_cut} can be equiped with a $\cut$ operation by setting
-   \[ \cut_A := \lift^T\bigl(\pr_2(E,A)\bigr) \enspace . \]
+ Any comonad $T$ relative to a strong monoidal functor $F:\C\to\D$  can be equiped with a $\cut$ operation relative to 
+ $E:\C_0$ satisfying the properties of \Cref{def:rel_comonad_with_cut} by setting
+   \[ \ccut_A := \cut_A := \lift^T\bigl(\pr_2(E,A)\bigr) \enspace . \]
+ (The extra \enquote{c} of $\ccut$ stands for \enquote{canonical}.)
  It follows from the axioms of comonad morphism that a comonad morphism $\tau : T\to S$ satisfies the equation of \Cref{def:morphism_comonad_cut} 
- for the thus defined operations $\cut^T$ and $\cut^S$, hence constitutes a morphism of comonads with cut from $(T,\cut^T)$ to $(S,\cut^S)$.
+ for the thus defined operations $\ccut^T$ and $\ccut^S$, hence constitutes a morphism of comonads with cut from $(T,\ccut^T)$ to $(S,\ccut^S)$.
+ We thus obtain a functor 
+ \[ \ccut_{F,E} : \RComonad(F) \to \RComonadWC(F,E)\]
+ from relative comonads over $F$ to relative comonads over $F$ with cut relative to a fixed object $E:\C_0$ given on 
+ objects by $T\mapsto (T,\ccut^T)$.
 \end{remark}
 
-The functor given by the canonical $\cut$ operation, followed by the forgetful functor, yields the identity. We can thus view
+The functor $\ccut_{F,E}$, followed by the forgetful functor, yields the identity. We can thus view
 relative comonads with cut as a generalization of relative comonads.
 
 
-Our prime example of relative comonad comes with a $\cut$ operation that is not the canonical one:
+Our prime example of relative comonad comes with a $\cut$ operation that is \emph{not} the canonical one:
 
 \begin{example}[$\cut$ for $\Tri$]\label{def:cut_for_tri}
   The relative comonad $\Tri$ from \Cref{ex:tri_comonad}, together with the $\cut$ operation defined there, 
@@ -565,7 +570,7 @@ Given a comodule $M$ over a relative comonad with cut, we define a comodule over
   \end{align*}                                        
 where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_cut}.
  
- Furthermore, given two comodules $M$ and $N$ over $\T$ with target category $\E$, and a comodule morphism $\alpha : M \to N$, then 
+ Furthermore, given two comodules $M$ and $N$ over $\T$ with target category $\E$, and a comodule morphism $\alpha : M \to N$,  
  we can define a comodule morphism \[\alpha(E\times \_) : M(E\times \_) \to N(E\times \_) \] by setting
           \[ \alpha(E \times \_)_A := \alpha_{E\times A} \enspace . \]
   
@@ -624,7 +629,7 @@ The definition of such a coalgebra is obtained by collecting all the information
 far about the comonad $\Tri$, and abstracting from this particular comonad:
 
 
-\begin{definition}[Coalgebras of infinite triangualar matrices]\label{def:cat_tri}
+\begin{definition}[Coalgebras of infinite triangular matrices]\label{def:cat_tri}
    Let $E:\Set_0$ be a set.
    Let $\mathcal{T} = \mathcal{T}_E$ be the category where an object consists of
    \begin{itemize}
@@ -714,7 +719,7 @@ bundling a lot of data and properties; in order to consider two such morphisms a
 corresponding records. Furthermore, this field usually consists of a (dependent) function.
 It would be rather cumbersome to reduce equality of two such records to extensional equality of one of their fields, 
 necessitating the use of the axioms of propositional and functional extensionality.
-Using setoids for morphisms instead seems to come with less overhead and conceptually cleaner.
+Using setoids for morphisms instead seems to come with less overhead and to be conceptually cleaner.
 
 
 
@@ -727,7 +732,7 @@ is an issue.
 
 In the present formalization, we decide to use records rather than classes, since the strongest argument for type classes---multiple inheritance---does 
 not occur.
-We make use of canonical structures in order for \coq to deduce instance of categories when we mention objects of a category; 
+We make use of canonical structures in order for \coq to deduce instances of categories when we mention objects of a category; 
 in particular, this is used to allow for overloading of the notation for morphisms of a category.
 We can thus conveniently use the same arrow symbol to denote the type of morphisms between two comonads, between two comodules and so on.
 
@@ -738,7 +743,7 @@ The only noteworthy discrepancy between formal and informal definition arises in
 triangular matrices:
 in \coq, coinductive types are specified through \fat{constructors} rather than \fat{destructors}.
 However, one can easily define inverse functions and work in terms of destructors afterwards.
-Work on the the declaration of coinductive types via destructors is done in \agda, cf.\ \parencite{DBLP:conf/popl/AbelPTS13}.
+Work on the declaration of coinductive types via destructors is done in \agda, cf.\ \parencite{DBLP:conf/popl/AbelPTS13}.
 Other than that, the informal definitions correspond closely to the formalized ones---which might also stem from the fact that 
 the formalization was used as a research tool, playing an essential r\^ole in the development of this work.
 
@@ -757,7 +762,7 @@ a categorical treatment of coinductive data types.
 We plan to pursue two obvious lines of work:
 Firstly, we will work on a suitable notion of \emph{signature} for the specification of coinductive data types.
 Secondly, we hope to integrate \emph{equations} into the notion of signature, equations which 
-will allow, e.g, considering branching trees modulo permutation of subtrees.
+will allow, e.g., considering branching trees modulo permutation of subtrees.
  
 
 \subsection*{Acknowledgments}
