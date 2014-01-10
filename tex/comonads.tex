@@ -229,9 +229,12 @@ in order to understand this example.
 
 \begin{example}[\textcite{DBLP:conf/types/MatthesP11}]\label{ex:tri_comonad}
 Let $E$ be an arbitrary fixed set.
-   Infinite triangular matrices over the (variable) type $A$ are given by the destructors shown in \Cref{fig:tri_destructors},
+    The type family $\Tri(A)$ of infinite triangular matrices over the (variable) type $A$ are given by the destructors shown in \Cref{fig:tri_destructors},
     equipped with a coinductively defined equivalence relation, a \emph{bisimulation}.
     We write $t \sim t'$ for related matrices $t$ and $t'$.
+    By abuse of notation, we denote by $\Tri (A)$ (or shorter $\Tri A$) not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
+    underlying \emph{set}. However, the two inference rules of \Cref{fig:tri_destructors} are the only place this 
+    abuse actually happens. In the following, $\Tri A$ usually denotes the \emph{setoid} of infinite triangular matrices over the set $A$.
 
 \begin{figure}[hbt]
   \begin{center}
@@ -259,7 +262,7 @@ Let $E$ be an arbitrary fixed set.
                                        \UnaryInfC{$ \tail(t) \sim \tail(t')$}
                                        \DisplayProof   
   \end{center}
-  \caption{Destructors and bisimulation for the coinductive family $\Tri$} \label{fig:tri_destructors}
+  \caption{Destructors and bisimulation for the coinductive family of setoids $\Tri$} \label{fig:tri_destructors}
 \end{figure}
 
 \noindent
@@ -267,7 +270,9 @@ Let $E$ be an arbitrary fixed set.
   is an instance of such a comonad. 
   Such a weak constructive comonad, however, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
-  The $\counit$ is given by the operation $\head$.
+  The $\counit$ is given by the operation $\head$, which we thus consider as a family of morphisms of setoids $\head_A : \Setoid(\Tri A, \eq A)$;
+  the proof that $\head$ is indeed compatible with the respective equivalence relations of source and target corresponds
+  precisely to one of the inference rules.
   The $\cobind$ operation---called \emph{redecoration} or $\redec$ in \parencite{DBLP:conf/types/MatthesP11}--- of type
    \[ \redec_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B )\] is defined 
   corecursively, for $f:\Setoid(\Tri A,\eq B)$  and $t : \Tri A$ by
@@ -283,6 +288,10 @@ Here, the family of functions
    \begin{align*}\head\bigl(\cut~t\bigr) &:= \pr_2(\head~t) \quad\text{ and } \\
                      \tail\bigl(\cut~t\bigr) &:= \cut(\tail~t) \enspace . 
       \end{align*}
+  More precisely, the function $\cut$ constitutes a family of morphisms of setoids \[\cut_A : \Setoid(\Tri(E\times A),\Tri A) \enspace ,\]
+  but for the sake of readability, we will leave this compatibility implicit in the following and simply write $\Tri A \to \Tri B$
+  instead of $\Setoid(\Tri A,\Tri B)$.
+  
  Note that what is called $\extend$ here is called \textit{lift} in \parencite{DBLP:conf/types/MatthesP11}.
 \end{example}
 
@@ -691,11 +700,11 @@ We now have all the ingredients to state (and prove) our main theorem:
    \Cref{eq:terminal_rest} is forced upon us by the diagram a morphism of coalgebras has to make commute.
    
    The same argument is used to show, again by coinduction, that any two morphisms of coalgebras $\tau,\rho : (T,\tail^T) \to (\Tri,\tail)$
-   are equal, thus concluding the proof.
-   
-   
+   are equal, thus concluding the proof.   
 \end{proof}
 
+This universal property of coinitiality characterizes not only the codata type of infinite triangular matrices, but also
+the \fat{bisimulation} relation on it as well as the \fat{redecoration} operation.
 
 
 
