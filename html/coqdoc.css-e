@@ -162,55 +162,55 @@ tr.infrulemiddle hr {/*
 
 .id {/* display: inline; */}
 
-.id[data-type="constructor"] {/* 
+.id[type="constructor"] {/* 
     color: rgb(60%,0%,0%);
 */}
 
-.id[data-type="var"] {/* 
+.id[type="var"] {/* 
     color: rgb(40%,0%,40%);
 */}
 
-.id[data-type="variable"] {/* 
+.id[type="variable"] {/* 
     color: rgb(40%,0%,40%);
 */}
 
-.id[data-type="definition"] {/* 
+.id[type="definition"] {/* 
     color: rgb(0%,40%,0%);
 */}
 
-.id[data-type="abbreviation"] {/* 
+.id[type="abbreviation"] {/* 
     color: rgb(0%,40%,0%);
 */}
 
-.id[data-type="lemma"] {/* 
+.id[type="lemma"] {/* 
     color: rgb(0%,40%,0%);
 */}
 
-.id[data-type="instance"] {/* 
+.id[type="instance"] {/* 
     color: rgb(0%,40%,0%);
 */}
 
-.id[data-type="projection"] {/* 
+.id[type="projection"] {/* 
     color: rgb(0%,40%,0%);
 */}
 
-.id[data-type="method"] {/* 
+.id[type="method"] {/* 
     color: rgb(0%,40%,0%);
 */}
 
-.id[data-type="inductive"] {/* 
+.id[type="inductive"] {/* 
     color: rgb(0%,0%,80%);
 */}
 
-.id[data-type="record"] {/* 
+.id[type="record"] {/* 
     color: rgb(0%,0%,80%);
 */}
 
-.id[data-type="class"] {/* 
+.id[type="class"] {/* 
     color: rgb(0%,0%,80%);
 */}
 
-.id[data-type="keyword"] {/* 
+.id[type="keyword"] {/* 
  color : #cf1d1d;
      color: black;
 */}
@@ -285,42 +285,42 @@ ul.doclist {/*
 	text-decoration: none;
 }
 
-.id[data-type="var"] {
+.id[type="var"] {
 	color:black;
 }
 
-.id[data-type="variable"] {
+.id[type="variable"] {
 	color:black;
 }
 
-.id[data-type="keyword"] {
+.id[type="keyword"] {
 	/* color:#6A6AFF; */
 	color:rgb(45,98,178);
 }
 
-.id[data-type="definition"] {
+.id[type="definition"] {
 	color:rgb(56,148,4);
 }
 
-.id[data-type="lemma"] {
+.id[type="lemma"] {
 	color:rgb(200,46,14);
 	font-style:italic;
 }
 
-.id[data-type="notation"] {
+.id[type="notation"] {
 	/* color:rgb(44,15,94); */
 	color:rgb(89,17,136);
 }
 
-.id[data-type="record"] {
+.id[type="record"] {
 	color:rgb(44,15,94);
 }
 
-.id[data-type="projection"] {
+.id[type="projection"] {
 	color:rgb(151,0,126);
 }
 
-.id[data-type="method"] {
+.id[type="method"] {
 	color:rgb(151,0,126);
 }
 

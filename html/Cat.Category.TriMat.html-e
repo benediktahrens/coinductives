@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Cat.Category.TriMat</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<div class="code">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab43"></a><h1 class="section">Category of triangular matrices</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab44"></a><h2 class="section">Object and morphism definitions</h2>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Module</span> <a name="TriMat"><span class="id" type="module">TriMat</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Structure</span> <a name="TriMat.Obj"><span class="id" type="record">Obj</span></a> (<span class="id" type="var">E</span> : <a class="idref" href="Cat.Category.Types.html#𝑻𝒚𝒑𝒆"><span class="id" type="definition">𝑻𝒚𝒑𝒆</span></a>) : <span class="id" type="keyword">Type</span> := <a name="TriMat.mkObj"><span class="id" type="constructor">mkObj</span></a><br/>
+&nbsp;&nbsp;{ <a name="TriMat.T"><span class="id" type="projection">T</span></a>        :&gt; <a class="idref" href="Cat.Category.RComonadWithCut.html#𝑹𝑪𝒐𝒎𝒐𝒏𝒂𝒅𝑾𝒊𝒕𝒉𝑪𝒖𝒕"><span class="id" type="definition">𝑹𝑪𝒐𝒎𝒐𝒏𝒂𝒅𝑾𝒊𝒕𝒉𝑪𝒖𝒕</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#𝑬𝑸"><span class="id" type="definition">𝑬𝑸</span></a> <a class="idref" href="Cat.Category.TriMat.html#E"><span class="id" type="variable">E</span></a><br/>
+&nbsp;&nbsp;; <a name="TriMat.α"><span class="id" type="projection">α</span></a>        :&gt; <a class="idref" href="Cat.Theory.PushforwardComodule.html#::'['_x_']'"><span class="id" type="notation">[</span></a><a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="method">T</span></a><a class="idref" href="Cat.Theory.PushforwardComodule.html#::'['_x_']'"><span class="id" type="notation">]</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.PushforwardComodule.html#::'['_x_']'"><span class="id" type="notation">[</span></a><a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="method">T</span></a><a class="idref" href="Cat.Theory.PushforwardComodule.html#::'['_x_']'"><span class="id" type="notation">]</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'['_x_'×─'_']'"><span class="id" type="notation">[</span></a><a class="idref" href="Cat.Category.TriMat.html#E"><span class="id" type="variable">E</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'['_x_'×─'_']'"><span class="id" type="notation">×─]</span></a><br/>
+&nbsp;&nbsp;; <a name="TriMat.α_cut"><span class="id" type="projection">α_cut</span></a>    : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" type="notation">∀</span></a> {<span class="id" type="var">A</span>}<a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="Cat.Category.TriMat.html#α"><span class="id" type="method">α</span></a>(<a class="idref" href="Cat.Category.TriMat.html#A"><span class="id" type="variable">A</span></a>) <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="method">T</span></a><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::x_'⋅cut'"><span class="id" type="notation">⋅</span></a><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::x_'⋅cut'"><span class="id" type="notation">cut</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" type="notation">≈</span></a> <a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="method">T</span></a><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::x_'⋅cut'"><span class="id" type="notation">⋅</span></a><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::x_'⋅cut'"><span class="id" type="notation">cut</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.TriMat.html#α"><span class="id" type="method">α</span></a>(<a class="idref" href="Cat.Category.TriMat.html#E"><span class="id" type="variable">E</span></a> <a class="idref" href="Cat.Theory.Product.html#::x_'×'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Cat.Category.TriMat.html#A"><span class="id" type="variable">A</span></a>) }.<br/>
+
+<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Notation</span> <a name="TriMat.::'TriMat.make'_'⦃'_'T'_'≔'_x_';'_'α'_'≔'_x_'⦄'"><span class="id" type="notation">"</span></a>'TriMat.make' ⦃ 'T' ≔ T ; 'α' ≔ α ⦄" :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(@<a class="idref" href="Cat.Category.TriMat.html#TriMat.mkObj"><span class="id" type="constructor">mkObj</span></a> <span class="id" type="var">_</span> <span class="id" type="var">T</span> <span class="id" type="var">α</span> <span class="id" type="var">_</span>) (<span class="id" type="var">only</span> <span class="id" type="var">parsing</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Structure</span> <a name="TriMat.Morphism"><span class="id" type="record">Morphism</span></a> {<span class="id" type="var">E</span>} (<span class="id" type="var">T</span> <span class="id" type="var">S</span> : <a class="idref" href="Cat.Category.TriMat.html#TriMat.Obj"><span class="id" type="record">Obj</span></a> <a class="idref" href="Cat.Category.TriMat.html#E"><span class="id" type="variable">E</span></a>) : <span class="id" type="keyword">Type</span> := <a name="TriMat.mkMorphism"><span class="id" type="constructor">mkMorphism</span></a><br/>
+&nbsp;&nbsp;{ <a name="TriMat.τ"><span class="id" type="projection">τ</span></a> :&gt; <a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="variable">T</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.TriMat.html#S"><span class="id" type="variable">S</span></a><br/>
+&nbsp;&nbsp;; <a name="TriMat.τ_commutes"><span class="id" type="projection">τ</span></a><a name="TriMat.τ_commutes"><span class="id" type="projection">_commutes</span></a> : <a class="idref" href="Cat.Theory.PushforwardComodule.html#::'⟨'_x_'⟩'"><span class="id" type="notation">⟨</span></a><a class="idref" href="Cat.Category.TriMat.html#τ"><span class="id" type="method">τ</span></a><a class="idref" href="Cat.Theory.PushforwardComodule.html#::'⟨'_x_'⟩'"><span class="id" type="notation">⟩</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'［'_x_'×─'_'］'"><span class="id" type="notation">［</span></a><a class="idref" href="Cat.Category.TriMat.html#E"><span class="id" type="variable">E</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'［'_x_'×─'_'］'"><span class="id" type="notation">×─］</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Theory.PushforwardComodule.html#Φ"><span class="id" type="definition">Φ</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.TriMat.html#τ"><span class="id" type="method">τ</span></a><a class="idref" href="Cat.Theory.PushforwardComodule.html#::x_'⁎'"><span class="id" type="notation">⁎</span></a><a class="idref" href="Cat.Theory.Functor.html#::x_'⋅'_x"><span class="id" type="notation">⋅</span></a><a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="variable">T</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" type="notation">≈</span></a> <a class="idref" href="Cat.Category.TriMat.html#S"><span class="id" type="variable">S</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Theory.PushforwardComodule.html#::'⟨'_x_'⟩'"><span class="id" type="notation">⟨</span></a><a class="idref" href="Cat.Category.TriMat.html#τ"><span class="id" type="method">τ</span></a><a class="idref" href="Cat.Theory.PushforwardComodule.html#::'⟨'_x_'⟩'"><span class="id" type="notation">⟩</span></a> }.<br/>
+
+<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Notation</span> <a name="TriMat.::'TriMat.make'_'⦃'_'τ'_'≔'_x_'⦄'"><span class="id" type="notation">"</span></a>'TriMat.make' ⦃ 'τ' ≔ τ ⦄" := (@<a class="idref" href="Cat.Category.TriMat.html#TriMat.mkMorphism"><span class="id" type="constructor">mkMorphism</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> τ <span class="id" type="var">_</span>) (<span class="id" type="var">only</span> <span class="id" type="var">parsing</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Program Definition</span> <a name="TriMat.Hom"><span class="id" type="definition">Hom</span></a> {<span class="id" type="var">E</span>} (<span class="id" type="var">T</span> <span class="id" type="var">S</span> : <a class="idref" href="Cat.Category.TriMat.html#TriMat.Obj"><span class="id" type="record">Obj</span></a> <a class="idref" href="Cat.Category.TriMat.html#E"><span class="id" type="variable">E</span></a>) : <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.Setoid"><span class="id" type="record">Setoid</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">Setoid.make</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">Carrier</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">≔</span></a> <a class="idref" href="Cat.Category.TriMat.html#TriMat.Morphism"><span class="id" type="record">Morphism</span></a> <a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="variable">T</span></a> <a class="idref" href="Cat.Category.TriMat.html#S"><span class="id" type="variable">S</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">;</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">Equiv</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">≔</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">(</span></a><a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" type="notation">λ</span></a> <span class="id" type="var">g</span> <span class="id" type="var">f</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" type="notation">∙</span></a> <a class="idref" href="Cat.Category.TriMat.html#g"><span class="id" type="variable">g</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" type="notation">≈</span></a> <a class="idref" href="Cat.Category.TriMat.html#f"><span class="id" type="variable">f</span></a><a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">)</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">⦄</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Cat.Category.TriMat.html#"><span class="id" type="module">TriMat</span></a>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab45"></a><h2 class="section">Identity and compositon definitions</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <a name="Defs"><span class="id" type="section">Defs</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> (<a name="Defs.E"><span class="id" type="variable">E</span></a> : <a class="idref" href="Cat.Category.Types.html#𝑻𝒚𝒑𝒆"><span class="id" type="definition">𝑻𝒚𝒑𝒆</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Types</span> (<span class="id" type="var">T</span> <span class="id" type="var">S</span> <span class="id" type="var">R</span> <span class="id" type="var">U</span> : <a class="idref" href="Cat.Category.TriMat.html#TriMat.Obj"><span class="id" type="record">Obj</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.E"><span class="id" type="variable">E</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Infix</span> <a name="Defs.::x_'⇒'_x"><span class="id" type="notation">"</span></a>⇒" := <a class="idref" href="Cat.Category.TriMat.html#TriMat.Hom"><span class="id" type="definition">Hom</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Program Definition</span> <a name="id"><span class="id" type="definition">id</span></a> {<span class="id" type="var">T</span>} : <a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="variable">T</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="variable">T</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Category.TriMat.html#TriMat.::'TriMat.make'_'⦃'_'τ'_'≔'_x_'⦄'"><span class="id" type="notation">TriMat.make</span></a> <a class="idref" href="Cat.Category.TriMat.html#TriMat.::'TriMat.make'_'⦃'_'τ'_'≔'_x_'⦄'"><span class="id" type="notation">⦃</span></a> <a class="idref" href="Cat.Category.TriMat.html#TriMat.::'TriMat.make'_'⦃'_'τ'_'≔'_x_'⦄'"><span class="id" type="notation">τ</span></a> <a class="idref" href="Cat.Category.TriMat.html#TriMat.::'TriMat.make'_'⦃'_'τ'_'≔'_x_'⦄'"><span class="id" type="notation">≔</span></a> <a class="idref" href="Cat.Theory.Category.html#::'id['_x_']'"><span class="id" type="notation">id</span></a><a class="idref" href="Cat.Theory.Category.html#::'id['_x_']'"><span class="id" type="notation">[</span></a><a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="variable">T</span></a><a class="idref" href="Cat.Theory.Category.html#::'id['_x_']'"><span class="id" type="notation">]</span></a> <a class="idref" href="Cat.Category.TriMat.html#TriMat.::'TriMat.make'_'⦃'_'τ'_'≔'_x_'⦄'"><span class="id" type="notation">⦄</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Obligation</span> <span class="id" type="keyword">Tactic</span> := <span class="id" type="tactic">idtac</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Program Definition</span> <a name="compose"><span class="id" type="definition">compose</span></a> {<span class="id" type="var">T</span> <span class="id" type="var">S</span> <span class="id" type="var">R</span>} : <a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'['_x_'⟶'_x_'⟶'_x_']'"><span class="id" type="notation">[</span></a> <a class="idref" href="Cat.Category.TriMat.html#S"><span class="id" type="variable">S</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.TriMat.html#R"><span class="id" type="variable">R</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'['_x_'⟶'_x_'⟶'_x_']'"><span class="id" type="notation">⟶</span></a> <a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="variable">T</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.TriMat.html#S"><span class="id" type="variable">S</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'['_x_'⟶'_x_'⟶'_x_']'"><span class="id" type="notation">⟶</span></a> <a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="variable">T</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.TriMat.html#R"><span class="id" type="variable">R</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'['_x_'⟶'_x_'⟶'_x_']'"><span class="id" type="notation">]</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'λ'_x_'..'_x_'↦₂'_x"><span class="id" type="notation">λ</span></a> <span class="id" type="var">g</span> <span class="id" type="var">f</span> <a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'λ'_x_'..'_x_'↦₂'_x"><span class="id" type="notation">↦</span></a><a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'λ'_x_'..'_x_'↦₂'_x"><span class="id" type="notation">₂</span></a> <a class="idref" href="Cat.Category.TriMat.html#TriMat.::'TriMat.make'_'⦃'_'τ'_'≔'_x_'⦄'"><span class="id" type="notation">TriMat.make</span></a> <a class="idref" href="Cat.Category.TriMat.html#TriMat.::'TriMat.make'_'⦃'_'τ'_'≔'_x_'⦄'"><span class="id" type="notation">⦃</span></a> <a class="idref" href="Cat.Category.TriMat.html#TriMat.::'TriMat.make'_'⦃'_'τ'_'≔'_x_'⦄'"><span class="id" type="notation">τ</span></a> <a class="idref" href="Cat.Category.TriMat.html#TriMat.::'TriMat.make'_'⦃'_'τ'_'≔'_x_'⦄'"><span class="id" type="notation">≔</span></a> <a class="idref" href="Cat.Category.TriMat.html#g"><span class="id" type="variable">g</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.TriMat.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Cat.Category.TriMat.html#TriMat.::'TriMat.make'_'⦃'_'τ'_'≔'_x_'⦄'"><span class="id" type="notation">⦄</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Infix</span> <a name="Defs.::x_'∘'_x"><span class="id" type="notation">"</span></a>∘" := <a class="idref" href="Cat.Category.TriMat.html#compose"><span class="id" type="definition">compose</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="left_id"><span class="id" type="lemma">left_id</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" type="notation">∀</span></a> <span class="id" type="var">T</span> <span class="id" type="var">S</span> (<span class="id" type="var">f</span> : <a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="variable">T</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.TriMat.html#S"><span class="id" type="variable">S</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" type="notation">),</span></a> <a class="idref" href="Cat.Category.TriMat.html#id"><span class="id" type="definition">id</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.TriMat.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" type="notation">≈</span></a> <a class="idref" href="Cat.Category.TriMat.html#f"><span class="id" type="variable">f</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="right_id"><span class="id" type="lemma">right_id</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" type="notation">∀</span></a> <span class="id" type="var">T</span> <span class="id" type="var">S</span> (<span class="id" type="var">f</span> : <a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="variable">T</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.TriMat.html#S"><span class="id" type="variable">S</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" type="notation">),</span></a> <a class="idref" href="Cat.Category.TriMat.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.TriMat.html#id"><span class="id" type="definition">id</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" type="notation">≈</span></a> <a class="idref" href="Cat.Category.TriMat.html#f"><span class="id" type="variable">f</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="compose_assoc"><span class="id" type="lemma">compose_assoc</span></a> <span class="id" type="var">T</span> <span class="id" type="var">R</span> <span class="id" type="var">S</span> <span class="id" type="var">U</span> (<span class="id" type="var">f</span> : <a class="idref" href="Cat.Category.TriMat.html#T"><span class="id" type="variable">T</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.TriMat.html#R"><span class="id" type="variable">R</span></a>) (<span class="id" type="var">g</span> : <a class="idref" href="Cat.Category.TriMat.html#R"><span class="id" type="variable">R</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.TriMat.html#S"><span class="id" type="variable">S</span></a>) (<span class="id" type="var">h</span> : <a class="idref" href="Cat.Category.TriMat.html#S"><span class="id" type="variable">S</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.TriMat.html#U"><span class="id" type="variable">U</span></a>) : <a class="idref" href="Cat.Category.TriMat.html#h"><span class="id" type="variable">h</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.TriMat.html#g"><span class="id" type="variable">g</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.TriMat.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" type="notation">≈</span></a> <a class="idref" href="Cat.Category.TriMat.html#h"><span class="id" type="variable">h</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'∘'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Cat.Category.TriMat.html#g"><span class="id" type="variable">g</span></a> <a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.TriMat.html#f"><span class="id" type="variable">f</span></a><a class="idref" href="Cat.Category.TriMat.html#Defs.::x_'∘'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Canonical</span> <span class="id" type="keyword">Structure</span> 𝑻𝒓𝒊𝑴𝒂𝒕 : <a class="idref" href="Cat.Theory.Category.html#Category"><span class="id" type="record">Category</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Category.html#mkCategory"><span class="id" type="constructor">mkCategory</span></a> <a class="idref" href="Cat.Category.TriMat.html#left_id"><span class="id" type="lemma">left_id</span></a> <a class="idref" href="Cat.Category.TriMat.html#right_id"><span class="id" type="lemma">right_id</span></a> <a class="idref" href="Cat.Category.TriMat.html#compose_assoc"><span class="id" type="lemma">compose_assoc</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Cat.Category.TriMat.html#Defs"><span class="id" type="section">Defs</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
