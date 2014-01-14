@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Cat.Category.RComonad</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<div class="code">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab53"></a><h1 class="section">Category of Relative comonads</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab54"></a><h2 class="section">Category definition</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <a name="Definitions"><span class="id" type="section">Definitions</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Context</span> `(<span class="id" type="var">F</span> : <a class="idref" href="Cat.Theory.Functor.html#Functor"><span class="id" type="record">Functor</span></a> 𝒞 𝒟).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Types</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> <span class="id" type="var">C</span> <span class="id" type="var">D</span> : <a class="idref" href="Cat.Theory.RelativeComonad.html#RelativeComonad"><span class="id" type="record">RelativeComonad</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.F"><span class="id" type="variable">F</span></a>).<br/>
+
+<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Infix</span> <a name="Definitions.::x_'⇒'_x"><span class="id" type="notation">"</span></a>⇒" := <a class="idref" href="Cat.Theory.RelativeComonad.html#Morphism.Hom"><span class="id" type="definition">Hom</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Infix</span> <a name="Definitions.::x_'∘'_x"><span class="id" type="notation">"</span></a>∘" := <a class="idref" href="Cat.Theory.RelativeComonad.html#Morphism.compose"><span class="id" type="definition">compose</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="left_id"><span class="id" type="lemma">left_id</span></a> <span class="id" type="var">A</span> <span class="id" type="var">B</span>  (<span class="id" type="var">f</span> : <a class="idref" href="Cat.Category.RComonad.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.RComonad.html#B"><span class="id" type="variable">B</span></a>) : <a class="idref" href="Cat.Theory.RelativeComonad.html#Morphism.id"><span class="id" type="definition">id</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.RComonad.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" type="notation">≈</span></a> <a class="idref" href="Cat.Category.RComonad.html#f"><span class="id" type="variable">f</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="right_id"><span class="id" type="lemma">right_id</span></a> <span class="id" type="var">A</span> <span class="id" type="var">B</span> (<span class="id" type="var">f</span> : <a class="idref" href="Cat.Category.RComonad.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.RComonad.html#B"><span class="id" type="variable">B</span></a>) : <a class="idref" href="Cat.Category.RComonad.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Theory.RelativeComonad.html#Morphism.id"><span class="id" type="definition">id</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" type="notation">≈</span></a> <a class="idref" href="Cat.Category.RComonad.html#f"><span class="id" type="variable">f</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="compose_assoc"><span class="id" type="lemma">compose_assoc</span></a> <span class="id" type="var">A</span> <span class="id" type="var">B</span> <span class="id" type="var">C</span> <span class="id" type="var">D</span> (<span class="id" type="var">f</span> : <a class="idref" href="Cat.Category.RComonad.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.RComonad.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">g</span> : <a class="idref" href="Cat.Category.RComonad.html#B"><span class="id" type="variable">B</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.RComonad.html#C"><span class="id" type="variable">C</span></a>) (<span class="id" type="var">h</span> : <a class="idref" href="Cat.Category.RComonad.html#C"><span class="id" type="variable">C</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.RComonad.html#D"><span class="id" type="variable">D</span></a>) : <a class="idref" href="Cat.Category.RComonad.html#h"><span class="id" type="variable">h</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.RComonad.html#g"><span class="id" type="variable">g</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.RComonad.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" type="notation">≈</span></a> <a class="idref" href="Cat.Category.RComonad.html#h"><span class="id" type="variable">h</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'∘'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Cat.Category.RComonad.html#g"><span class="id" type="variable">g</span></a> <a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.RComonad.html#f"><span class="id" type="variable">f</span></a><a class="idref" href="Cat.Category.RComonad.html#Definitions.::x_'∘'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Canonical</span> <span class="id" type="keyword">Structure</span> 𝑹𝑪𝒐𝒎𝒐𝒏𝒂𝒅 : <a class="idref" href="Cat.Theory.Category.html#Category"><span class="id" type="record">Category</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Category.html#mkCategory"><span class="id" type="constructor">mkCategory</span></a> <a class="idref" href="Cat.Category.RComonad.html#left_id"><span class="id" type="lemma">left_id</span></a> <a class="idref" href="Cat.Category.RComonad.html#right_id"><span class="id" type="lemma">right_id</span></a> <a class="idref" href="Cat.Category.RComonad.html#compose_assoc"><span class="id" type="lemma">compose_assoc</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Cat.Category.RComonad.html#Definitions"><span class="id" type="section">Definitions</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

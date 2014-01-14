@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Cat.Category.Types_Setoids</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<div class="code">
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab37"></a><h1 class="section">Functor 𝑬𝑸 : 𝑻𝒚𝒑𝒆 → 𝑺𝒆𝒕𝒐𝒊𝒅</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab38"></a><h2 class="section">Definition</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Program Definition</span> <a name="F"><span class="id" type="definition">F</span></a> : <a class="idref" href="Cat.Category.Types.html#𝑻𝒚𝒑𝒆"><span class="id" type="definition">𝑻𝒚𝒑𝒆</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" type="notation">→</span></a> <a class="idref" href="Cat.Category.Setoids.html#𝑺𝒆𝒕𝒐𝒊𝒅"><span class="id" type="definition">𝑺𝒆𝒕𝒐𝒊𝒅</span></a> := <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" type="notation">λ</span></a> <span class="id" type="var">T</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" type="notation">∙</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">Setoids.make</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">⦃</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">Carrier</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">≔</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#T"><span class="id" type="variable">T</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">;</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">Equiv</span></a>   <a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">≔</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#eq"><span class="id" type="inductive">eq</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" type="notation">⦄</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Program Definition</span> <a name="map"><span class="id" type="definition">map</span></a> {<span class="id" type="var">A</span> <span class="id" type="var">B</span>} : <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'['_x_'⟶'_x_']'"><span class="id" type="notation">[</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#B"><span class="id" type="variable">B</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'['_x_'⟶'_x_']'"><span class="id" type="notation">⟶</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#F"><span class="id" type="definition">F</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#F"><span class="id" type="definition">F</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#B"><span class="id" type="variable">B</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'['_x_'⟶'_x_']'"><span class="id" type="notation">]</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Cat.Theory.SetoidType.html#Π.::'λ'_x_'..'_x_'↦'_x"><span class="id" type="notation">λ</span></a> <span class="id" type="var">f</span> <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'λ'_x_'..'_x_'↦'_x"><span class="id" type="notation">↦</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.Morphism.make"><span class="id" type="abbreviation">Setoids.Morphism.make</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#f"><span class="id" type="variable">f</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="id"><span class="id" type="definition">id</span></a> <span class="id" type="var">A</span> : <a class="idref" href="Cat.Theory.Category.html#::'id['_x_']'"><span class="id" type="notation">id</span></a><a class="idref" href="Cat.Theory.Category.html#::'id['_x_']'"><span class="id" type="notation">[</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#F"><span class="id" type="definition">F</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::'id['_x_']'"><span class="id" type="notation">]</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" type="notation">≈</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#map"><span class="id" type="definition">map</span></a> <a class="idref" href="Cat.Theory.Category.html#::'id['_x_']'"><span class="id" type="notation">id</span></a><a class="idref" href="Cat.Theory.Category.html#::'id['_x_']'"><span class="id" type="notation">[</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::'id['_x_']'"><span class="id" type="notation">]</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="map_compose"><span class="id" type="definition">map_compose</span></a> <span class="id" type="var">A</span> <span class="id" type="var">B</span> <span class="id" type="var">C</span> (<span class="id" type="var">f</span> : <a class="idref" href="Cat.Category.Types_Setoids.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">g</span> : <a class="idref" href="Cat.Category.Types_Setoids.html#B"><span class="id" type="variable">B</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" type="notation">⇒</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#C"><span class="id" type="variable">C</span></a>) : <a class="idref" href="Cat.Category.Types_Setoids.html#map"><span class="id" type="definition">map</span></a> (<a class="idref" href="Cat.Category.Types_Setoids.html#g"><span class="id" type="variable">g</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#f"><span class="id" type="variable">f</span></a>) <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" type="notation">≈</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Cat.Category.Types_Setoids.html#map"><span class="id" type="definition">map</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#g"><span class="id" type="variable">g</span></a><a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">∘</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Cat.Category.Types_Setoids.html#map"><span class="id" type="definition">map</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#f"><span class="id" type="variable">f</span></a><a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="𝑬𝑸"><span class="id" type="definition">𝑬𝑸</span></a> : <a class="idref" href="Cat.Theory.Functor.html#Functor"><span class="id" type="record">Functor</span></a> <a class="idref" href="Cat.Category.Types.html#𝑻𝒚𝒑𝒆"><span class="id" type="definition">𝑻𝒚𝒑𝒆</span></a> <a class="idref" href="Cat.Category.Setoids.html#𝑺𝒆𝒕𝒐𝒊𝒅"><span class="id" type="definition">𝑺𝒆𝒕𝒐𝒊𝒅</span></a> := <a class="idref" href="Cat.Theory.Functor.html#mkFunctor"><span class="id" type="constructor">mkFunctor</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#id"><span class="id" type="definition">id</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#map_compose"><span class="id" type="definition">map_compose</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab39"></a><h2 class="section">𝑬𝑸 is strong monoidal</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Program Instance</span> <a name="𝑬𝑸_SM"><span class="id" type="instance">𝑬𝑸</span></a><a name="𝑬𝑸_SM"><span class="id" type="instance">_SM</span></a> : <a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#CartesianStrongMonoidal"><span class="id" type="class">CartesianStrongMonoidal</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#𝑬𝑸"><span class="id" type="definition">𝑬𝑸</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#::'CartesianStrongMonoidal.make'_'⦃'_'φ'_'≔'_x_'⦄'"><span class="id" type="notation">CartesianStrongMonoidal.make</span></a> <a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#::'CartesianStrongMonoidal.make'_'⦃'_'φ'_'≔'_x_'⦄'"><span class="id" type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#::'CartesianStrongMonoidal.make'_'⦃'_'φ'_'≔'_x_'⦄'"><span class="id" type="notation">φ</span></a> <a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#::'CartesianStrongMonoidal.make'_'⦃'_'φ'_'≔'_x_'⦄'"><span class="id" type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" type="notation">λ</span></a> <span class="id" type="var">A</span> <span class="id" type="var">B</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" type="notation">∙</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.Morphism.make"><span class="id" type="abbreviation">Setoids.Morphism.make</span></a> (<a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" type="notation">λ</span></a> <span class="id" type="var">x</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" type="notation">∙</span></a> <a class="idref" href="Cat.Category.Types_Setoids.html#x"><span class="id" type="variable">x</span></a>) <a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#::'CartesianStrongMonoidal.make'_'⦃'_'φ'_'≔'_x_'⦄'"><span class="id" type="notation">⦄</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
