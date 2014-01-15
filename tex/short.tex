@@ -81,6 +81,35 @@ Toulouse}
  together with the generating rules for the bisimulation relation on it.
  This codata type, equipped with the redecoration operation on it, is shown by \textcite{DBLP:conf/types/MatthesP11}
  to constitute what they call a \enquote{weak constructive comonad}.
+ \begin{figure}[bt]
+  \begin{center}
+
+     \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+    \AxiomC{$t : \Tri(A)$}\doubleLine
+     \UnaryInfC{$\head_A(t) : A$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$t : \Tri(A)$}\doubleLine
+                                       \UnaryInfC{$\tail_A(t) : \Tri(E\times A)$}
+                                       \DisplayProof%
+
+   \end{center}
+%  \vspace{1ex}
+   \begin{center}
+                                            \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+    \AxiomC{$t \sim t'$}\doubleLine
+     \UnaryInfC{$\head(t) = \head(t')$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$t \sim t'$}\doubleLine
+                                       \UnaryInfC{$ \tail(t) \sim \tail(t')$}
+                                       \DisplayProof   
+  \end{center}
+  \caption{Destructors and bisimulation for the coinductive family of setoids $\Tri$} \label{fig:tri_destructors}
+\end{figure}
+
  
  Here, we firstly identify those weak constructive comonads as an instance of the more general notion of \emph{relative comonad};
  indeed, a weak constructive comonad is precisely a comonad relative to the functor $\eq:\Set\to\Setoid$ from the category of sets to the 
@@ -105,34 +134,6 @@ Toulouse}
  
  
 
-\begin{figure}[bt]
-  \begin{center}
-
-     \def\extraVskip{3pt}
-     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t : \Tri(A)$}\doubleLine
-     \UnaryInfC{$\head_A(t) : A$}
-      \DisplayProof
-                        \hspace{3ex}
-                                       \AxiomC{$t : \Tri(A)$}\doubleLine
-                                       \UnaryInfC{$\tail_A(t) : \Tri(E\times A)$}
-                                       \DisplayProof%
-
-  \end{center}
-\vspace{1ex}
-  \begin{center}
-                                            \def\extraVskip{3pt}
-     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t \sim t'$}\doubleLine
-     \UnaryInfC{$\head(t) = \head(t')$}
-      \DisplayProof
-                        \hspace{3ex}
-                                       \AxiomC{$t \sim t'$}\doubleLine
-                                       \UnaryInfC{$ \tail(t) \sim \tail(t')$}
-                                       \DisplayProof   
-  \end{center}
-  \caption{Destructors and bisimulation for the coinductive family of setoids $\Tri$} \label{fig:tri_destructors}
-\end{figure}
 
 
   Once we have found such a categorical notion, we can use 
