@@ -142,7 +142,7 @@ Toulouse}
   it to give a definition of what a \enquote{coalgebra} for the signature of infinite triangular matrices is, 
   where the codata type $\Tri$ is supposed to constitute the terminal object.
   Any such coalgebra comes with a comonad relative to the aforementioned functor $\eq : \Set\to\Setoid$
-  and a suitable comodule over this comonad, modelling in some sense the destructor $\tail$.
+  and a suitable comodule over this comonad, modeling in some sense the destructor $\tail$.
   Our main result then states that this category of coalgebras of the signature of triangular matrices 
   has a terminal object, built from the codata type $\Tri$ and its destructor $\tail$,
   seen as a relative comonad and a comodule over that relative comonad, respectively.
@@ -229,9 +229,9 @@ This universal property of coinitiality characterizes not only the codata type o
 the \fat{bisimulation} relation on it as well as the \fat{redecoration} operation.
  All our definitions, examples and lemmas have been implemented in the proof assistant \coq. % \parencite{coq84pl3}.
  The \coq source files and HTML documentation are available on the project web page \parencite{trimat_coq}.
- While a significant part of our work---surmounting the non-categoricity of the $\cut$ operation---seems to be specific to this particular codata type,
+ While parts of our work seem to be specific to the particular codata type $\Tri$,
  we believe that our work proves the suitability of the notion of relative (co)monads and (co)modules thereover for 
- a categorical treatment of coinductive data types.
+ a categorical characterization of coinductive data types.
 
 
 % We plan to pursue two obvious lines of work:
