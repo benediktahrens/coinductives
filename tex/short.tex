@@ -10,7 +10,7 @@
 
 
 \usepackage[style=numeric,
- backref=true,
+%  backref=true,
  isbn=false,
  maxnames=3,
  maxbibnames=99 ,                
@@ -111,21 +111,23 @@ Toulouse}
 \end{figure}
 
  
- Here, we firstly identify those weak constructive comonads as an instance of the more general notion of \emph{relative comonad};
+ In this work, we firstly identify those weak constructive comonads as an instance of the more general notion of \emph{relative comonad};
  indeed, a weak constructive comonad is precisely a comonad relative to the functor $\eq:\Set\to\Setoid$ from the category of sets to the 
  category of setoids that is 
  left adjoint to the forgetful functor.
  
- Afterwards, we characterize this codata type, equipped with the cosubstitution operation of redecoration, as a terminal object of some category.
- For this, we dualize the approach by \textcite{DBLP:journals/iandc/HirschowitzM10}, where 
- the crucial notions are the notion of monad and, more importantly, \emph{module over a monad}.
+ Afterwards, we characterize the codata type $\Tri$, equipped with the cosubstitution operation of redecoration, as a terminal object of some category.
+ For this, we dualize the approach by \textcite{DBLP:journals/iandc/HirschowitzM10},
+ who characterize the heterogeneous inductive type of lambda terms---equipped with a suitable substitution operation---as an initial object in
+ a category of algebras for the signature of lambda terms.
+ In their work, the crucial notions are the notion of monad and, more importantly, \emph{module over a monad}.
  It turns out that more work than a simple dualization is necessary, for two reasons:
  \begin{itemize}
   \item the lambda calculus can be seen as a monad on sets and thus, in particular, as an endofunctor.
         The codata type $\Tri$, however, associates to any \emph{set} of potential diagonal elements a \emph{setoid}
         of triangular matrices. We thus need a notion of comonad whose underlying functor is not necessarily endo---
         the already mentioned \emph{relative} comonads.
-  \item the category-theoretic analysis of the destructor $\tail$ is more complicated than the heterogeneous 
+  \item the category-theoretic analysis of the destructor $\tail$ is more complicated than that of the heterogeneous 
            constructor of abstraction of the lambda calculus.
  \end{itemize}
  Finding a suitable categorical notion to capture the destructor $\tail$ and, more importantly, its interplay with
@@ -142,8 +144,8 @@ Toulouse}
   Any such coalgebra comes with a comonad relative to the aforementioned functor $\eq : \Set\to\Setoid$
   and a suitable comodule over this comonad, modelling in some sense the destructor $\tail$.
   Our main result then states that this category of coalgebras of the signature of triangular matrices 
-  has a terminal object, given by the pair $(\Tri,\tail)$ of the relative comonad $\Tri$ and
-  the comodule $\tail$ over that relative comonad.
+  has a terminal object, built from the codata type $\Tri$ and its destructor $\tail$,
+  seen as a relative comonad and a comodule over that relative comonad, respectively.
 % 
 % 
 % 
@@ -225,13 +227,11 @@ Toulouse}
 % 
 This universal property of coinitiality characterizes not only the codata type of infinite triangular matrices, but also
 the \fat{bisimulation} relation on it as well as the \fat{redecoration} operation.
-
-
- All our definitions, examples and lemmas have been implemented in the proof assistant \coq \parencite{coq84pl3}.
+ All our definitions, examples and lemmas have been implemented in the proof assistant \coq. % \parencite{coq84pl3}.
  The \coq source files and HTML documentation are available on the project web page \parencite{trimat_coq}.
-While a significant part of our work---surmounting the non-categoricity of the $\cut$ operation---seems to be specific to this particular codata type,
-we believe that our work proves the suitability of the notion of relative (co)monads and (co)modules thereover for 
-a categorical treatment of coinductive data types.
+ While a significant part of our work---surmounting the non-categoricity of the $\cut$ operation---seems to be specific to this particular codata type,
+ we believe that our work proves the suitability of the notion of relative (co)monads and (co)modules thereover for 
+ a categorical treatment of coinductive data types.
 
 
 % We plan to pursue two obvious lines of work:
@@ -241,8 +241,8 @@ a categorical treatment of coinductive data types.
  
 
 
-
-\printbibliography
+\renewcommand*{\bibfont}{\small}
+\printbibliography[heading=none]
 
 
 
