@@ -74,12 +74,12 @@ Toulouse}
  
 
  In the present work we study a specific \emph{co}inductive \emph{heterogeneous} data type---the type family $\Tri$ of 
- infinite triangular matrices and its \emph{redecoration} operation:
+ infinite triangular matrices---and its \emph{redecoration} operation:
  this codata type is parametrized by a fixed set $E$ for entries not on the diagonal, 
  and indexed by another, \emph{variable}, set $A$ for entries on 
  the diagonal. The respective types of its specifying destructors $\head$ and $\tail$ are given in \Cref{fig:tri_destructors},
  together with the generating rules for the bisimulation relation on it.
- This codata type, equipped with the redecoration operation on it, is shown by \textcite{DBLP:conf/types/MatthesP11}
+ Equipped with the redecoration operation, the type $\Tri$ is shown by \textcite{DBLP:conf/types/MatthesP11}
  to constitute what they call a \enquote{weak constructive comonad}.
  \begin{figure}[bt]
   \begin{center}
@@ -126,12 +126,12 @@ Toulouse}
   \item the lambda calculus can be seen as a monad on sets and thus, in particular, as an endofunctor.
         The codata type $\Tri$, however, associates to any \emph{set} of potential diagonal elements a \emph{setoid}
         of triangular matrices. We thus need a notion of comonad whose underlying functor is not necessarily endo---
-        the already mentioned \emph{relative} comonads.
+        the already mentioned \emph{relative} comonads;
   \item the category-theoretic analysis of the destructor $\tail$ is more complicated than that of the heterogeneous 
            constructor of abstraction of the lambda calculus.
  \end{itemize}
  Finding a suitable categorical notion to capture the destructor $\tail$ and, more importantly, its interplay with
- the comonadic redecoration operation on $\Tri$, constitutes the main work and contribution of the present work.
+ the comonadic redecoration operation on $\Tri$, constitutes the main contribution of the present work.
  These rather technical details shall not be explained in this extended abstract, though.
  
  
@@ -140,7 +140,7 @@ Toulouse}
 
   Once we have found such a categorical notion, we can use 
   it to give a definition of what a \enquote{coalgebra} for the signature of infinite triangular matrices is, 
-  where the codata type $\Tri$ is supposed to constitute the terminal object.
+  where the codata type $\Tri$ will constitute the terminal object.
   Any such coalgebra comes with a comonad relative to the aforementioned functor $\eq : \Set\to\Setoid$
   and a suitable comodule over this comonad, modeling in some sense the destructor $\tail$.
   Our main result then states that this category of coalgebras of the signature of triangular matrices 
