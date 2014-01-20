@@ -5,14 +5,93 @@
 <style>
 h2 {
 	padding-bottom:2px;
-	border-bottom:1px solid #ccc;width:75%
+	border-bottom:1px solid #ccc;width:75%;
 }
 .footer {
-	font-size:small
+	font-size:small;
 }
+@font-face {
+	font-family: 'Symbola';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Symbola'), url('Symbola.woff') format('woff');
+	unicode-range: U+255-10FFFF
+}
+* {
+	font-family: 'Helvetica', 'Symbola';
+}
+
+.table-nav-top {
+	width:100%;
+	display:table;
+	border-width:2px;
+	border-color:#ccc;
+	border-top-style:solid;
+	border-bottom-style:solid;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin-bottom:10px;
+	font-size:small;
+}
+
+.table-nav-bottom {
+	width:100%;
+	display:table;
+	border-width:2px;
+	border-color:#ccc;
+	border-top-style:solid;
+	border-bottom-style:solid;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin-top:20px;
+	font-size:small;
+}
+
+.table-nav-top > div {
+	display:table-cell;
+}
+.table-nav-bottom > div {
+	display:table-cell;
+}
+
+.sep-nav {
+	width:30px;
+	text-align:center;
+}
+
+.toc-nav {
+	width:175px;
+	border-width:1px;
+	border-color:#ccc;
+	border-left-style:solid;
+	border-right-style:solid;
+	text-align:center;
+}
+
+.index-nav {
+	width:175px;
+	text-align:center;
+	border-width:1px;
+	border-color:#ccc;
+	border-right-style:solid;
+}
+
 </style>
 <title>Coinitial semantics for redecoration of triangular matrices</title></head>
 <body>
+<div class="table-nav-top">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
+</div>
 <h1>Coinitial semantics for redecoration of triangular matrices</h1>
 
 <p>This table of contents give pointers in the Coq formalisation following the sectioning of the <a href="http://arxiv.org/abs/1401.1053">paper</a></p>
@@ -21,12 +100,12 @@ h2 {
 
 <ul>
 <li><a href="Cat.Theory.Category.html#Category">Category definition</a></li>
-<li><a href="Cat.Category.Types.html#𝑻𝒚𝒑𝒆">Category of Sets</a></li>
+<li><a href="Cat.Category.Sets.html#𝑺𝒆𝒕">Category of Sets</a></li>
 <li><a href="Cat.Category.Setoids.html#𝑺𝒆𝒕𝒐𝒊𝒅">Category of Setoids</a></li>
-<li><a href="Cat.Category.Types_Setoids.html#𝑬𝑸">Functor 𝑬𝑸 : Set -> Setoid</a></li>
+<li><a href="Cat.Category.Sets_Setoids.html#𝑬𝑸">Functor 𝑬𝑸 : Set -> Setoid</a></li>
 <li><a href="Cat.Theory.CartesianStrongMonoidal.html#CartesianStrongMonoidal">Cartesian strong monoidal functors</a>
 <ul>
-<li><a href="Cat.Category.Types_Setoids.html#𝑬𝑸_SM">Functor 𝑬𝑸 is strong monoidal</a></li>
+<li><a href="Cat.Category.Sets_Setoids.html#𝑬𝑸_SM">Functor 𝑬𝑸 is strong monoidal</a></li>
 </ul></li>
 </ul>
 
@@ -57,17 +136,24 @@ h2 {
 <li><a href="Cat.Theory.RelativeComonadWithCut.html#RelativeComonadWithCut">Relative comonad with cut definition</a></li>
 <li><a href="Cat.Theory.RelativeComonadWithCut.html#Morphism">Morphism of relative comonads with cut</a></li>
 <li><a href="Cat.Category.RComonadWithCut.html#𝑹𝑪𝒐𝒎𝒐𝒏𝒂𝒅𝑾𝒊𝒕𝒉𝑪𝒖𝒕">Category of relative comonads with cut</a></li>
-<li><a href="TODO">Canonical cut operation</a></li>
+<li><a href="Cat.Category.RComonad_RComonadWithCut.html">Canonical cut operation</a></li>
 <li><a href="Cat.Theory.PrecompositionWithProduct.html#PrecompositionWithProduct">Precomposition with product</a></li>
 <li><a href="Cat.Theory.PushforwardComodule.html#Commutes">Pushforward commutes with precomposition with product</a></li>
 <li><a href="Cat.Category.TriMat.html#𝑻𝒓𝒊𝑴𝒂𝒕">Category of triangular matrices</a></li>
 <li><a href="Cat.Category.Coinitiality.html#Coinitiality">Coinitial semantics for triangular matrices with redecoration</a></li>
 </ul>
-<hr/>
-<p class="footer">
-Benedikt Ahrens and Régis Spadotti&mdash;
-<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
-</p>
-<hr/>
+<div class="table-nav-bottom">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
+</div>
 </body>
 </html>

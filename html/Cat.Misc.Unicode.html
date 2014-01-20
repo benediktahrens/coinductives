@@ -1,45 +1,52 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link href="coqdoc.css" rel="stylesheet" data-type="text/css"/>
-<title>Cat.Misc.Unicode</title>
+<meta charset="utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" data-type="text/css" />
+<title>Coinitial semantics for redecoration of triangular matrices</title>
 </head>
-
 <body>
-
-<div id="page">
-
-<div id="header">
+<div class="table-nav-top">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
 </div>
-
-<div id="main">
-
-<div class="code"><span class="id" data-type="keyword">Notation</span> <a name=":type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">"</span></a>∀  x .. y , P" := (<span class="id" data-type="keyword">∀</span> <span class="id" data-type="var">x</span>, .. (<span class="id" data-type="keyword">∀</span> <span class="id" data-type="var">y</span>, <span class="id" data-type="var">P</span>) ..)<br/>
+<div class="code"><span class="id" data-type="keyword">Notation</span> <a name=":type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">"</span></a>∀  x .. y , P" ≔ (<span class="id" data-type="keyword">∀</span> <span class="id" data-type="var">x</span>, .. (<span class="id" data-type="keyword">∀</span> <span class="id" data-type="var">y</span>, <span class="id" data-type="var">P</span>) ..)<br/>
 &nbsp;&nbsp;(<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 200, <span class="id" data-type="var">x</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="var">y</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
-<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:'∃'_x_'..'_x_','_x"><span class="id" data-type="notation">"</span></a>∃  x .. y , P" := (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">∃</span></a> <span class="id" data-type="var">x</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> .. (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">∃</span></a> <span class="id" data-type="var">y</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <span class="id" data-type="var">P</span>) ..)<br/>
+<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:'∃'_x_'..'_x_','_x"><span class="id" data-type="notation">"</span></a>∃  x .. y , P" ≔ (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">∃</span></a> <span class="id" data-type="var">x</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> .. (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">∃</span></a> <span class="id" data-type="var">y</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <span class="id" data-type="var">P</span>) ..)<br/>
 &nbsp;&nbsp;(<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 200, <span class="id" data-type="var">x</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="var">y</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
 <br/>
-<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'∨'_x"><span class="id" data-type="notation">"</span></a>x ∨ y" := (<span class="id" data-type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" data-type="notation">∨</span></a> <span class="id" data-type="var">y</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 85, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
-<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'∧'_x"><span class="id" data-type="notation">"</span></a>x ∧ y" := (<span class="id" data-type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" data-type="notation">∧</span></a> <span class="id" data-type="var">y</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 80, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
-<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'→'_x"><span class="id" data-type="notation">"</span></a>x → y" := (<span class="id" data-type="var">x</span> → <span class="id" data-type="var">y</span>)<br/>
+<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'∨'_x"><span class="id" data-type="notation">"</span></a>x ∨ y" ≔ (<span class="id" data-type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" data-type="notation">∨</span></a> <span class="id" data-type="var">y</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 85, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
+<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'∧'_x"><span class="id" data-type="notation">"</span></a>x ∧ y" ≔ (<span class="id" data-type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" data-type="notation">∧</span></a> <span class="id" data-type="var">y</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 80, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
+<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'→'_x"><span class="id" data-type="notation">"</span></a>x → y" ≔ (<span class="id" data-type="var">x</span> → <span class="id" data-type="var">y</span>)<br/>
 &nbsp;&nbsp;(<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 90, <span class="id" data-type="var">y</span> <span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 200, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>): <span class="id" data-type="var">type_scope</span>.<br/>
 <br/>
-<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'↔'_x"><span class="id" data-type="notation">"</span></a>x ↔ y" := (<span class="id" data-type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" data-type="notation">↔</span></a> <span class="id" data-type="var">y</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 95, <span class="id" data-type="keyword">no</span> <span class="id" data-type="keyword">associativity</span>): <span class="id" data-type="var">type_scope</span>.<br/>
-<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:'¬'_x"><span class="id" data-type="notation">"</span></a>¬ x" := (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" data-type="notation">¬</span></a><span class="id" data-type="var">x</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 75, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
-<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'≠'_x"><span class="id" data-type="notation">"</span></a>x ≠ y" := (<span class="id" data-type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" data-type="notation">≠</span></a> <span class="id" data-type="var">y</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 70) : <span class="id" data-type="var">type_scope</span>.<br/>
+<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'↔'_x"><span class="id" data-type="notation">"</span></a>x ↔ y" ≔ (<span class="id" data-type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" data-type="notation">↔</span></a> <span class="id" data-type="var">y</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 95, <span class="id" data-type="keyword">no</span> <span class="id" data-type="keyword">associativity</span>): <span class="id" data-type="var">type_scope</span>.<br/>
+<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:'¬'_x"><span class="id" data-type="notation">"</span></a>¬ x" ≔ (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" data-type="notation">¬</span></a><span class="id" data-type="var">x</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 75, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
+<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'≠'_x"><span class="id" data-type="notation">"</span></a>x ≠ y" ≔ (<span class="id" data-type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" data-type="notation">≠</span></a> <span class="id" data-type="var">y</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 70) : <span class="id" data-type="var">type_scope</span>.<br/>
 <br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">"</span></a>'λ'  x .. y ∙ t" := (<span class="id" data-type="keyword">fun</span> <span class="id" data-type="var">x</span> ⇒ .. (<span class="id" data-type="keyword">fun</span> <span class="id" data-type="var">y</span> ⇒ <span class="id" data-type="var">t</span>) ..)<br/>
+<span class="id" data-type="keyword">Notation</span> <a name="::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">"</span></a>'λ'  x .. y ∙ t" ≔ (<span class="id" data-type="keyword">fun</span> <span class="id" data-type="var">x</span> ⇒ .. (<span class="id" data-type="keyword">fun</span> <span class="id" data-type="var">y</span> ⇒ <span class="id" data-type="var">t</span>) ..)<br/>
 &nbsp;&nbsp;(<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 200, <span class="id" data-type="var">x</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="var">y</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>).<br/>
 </div>
+<div class="table-nav-bottom">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
 </div>
-
-<div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
-</div>
-
-</div>
-
 </body>
 </html>

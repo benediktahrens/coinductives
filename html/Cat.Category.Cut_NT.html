@@ -1,21 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link href="coqdoc.css" rel="stylesheet" data-type="text/css"/>
-<title>Cat.Category.Cut_NT</title>
+<meta charset="utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" data-type="text/css" />
+<title>Coinitial semantics for redecoration of triangular matrices</title>
 </head>
-
 <body>
-
-<div id="page">
-
-<div id="header">
+<div class="table-nav-top">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
 </div>
-
-<div id="main">
-
 <div class="code"></div>
 
 <div class="doc">
@@ -33,27 +35,32 @@
 Functor 𝑻 : 𝒞 → 𝒟 
 </div>
 <div class="code">
-&nbsp;&nbsp;<span class="id" data-type="keyword">Notation</span> <a name="𝑻"><span class="id" data-type="abbreviation">𝑻</span></a> := (<a class="idref" href="Cat.Theory.RelativeComonad.html#Lift"><span class="id" data-type="definition">Lift</span></a>(<a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.T"><span class="id" data-type="variable">T</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Notation</span> <a name="𝑻"><span class="id" data-type="abbreviation">𝑻</span></a> ≔ (<a class="idref" href="Cat.Theory.RelativeComonad.html#Lift"><span class="id" data-type="definition">Lift</span></a>(<a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.T"><span class="id" data-type="variable">T</span></a>)).<br/>
 <br/>
-&nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="T_Ex"><span class="id" data-type="definition">T_Ex</span></a> : <a class="idref" href="Cat.Theory.Functor.html#Functor"><span class="id" data-type="record">Functor</span></a> <a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.𝒞"><span class="id" data-type="variable">𝒞</span></a> <a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.𝒟"><span class="id" data-type="variable">𝒟</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="T_Ex"><span class="id" data-type="definition">T_Ex</span></a> : <a class="idref" href="Cat.Theory.Functor.html#Functor"><span class="id" data-type="record">Functor</span></a> <a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.𝒞"><span class="id" data-type="variable">𝒞</span></a> <a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.𝒟"><span class="id" data-type="variable">𝒟</span></a> ≔<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">Functor.make</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">F</span></a>   <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">A</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.T"><span class="id" data-type="variable">T</span></a> (<a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.E"><span class="id" data-type="variable">E</span></a> <a class="idref" href="Cat.Theory.Product.html#::x_'×'_x"><span class="id" data-type="notation">×</span></a> <a class="idref" href="Cat.Category.Cut_NT.html#A"><span class="id" data-type="variable">A</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">map</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'λ'_x_'..'_x_'↦'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">f</span> <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'λ'_x_'..'_x_'↦'_x"><span class="id" data-type="notation">↦</span></a> <a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.T"><span class="id" data-type="variable">T</span></a><a class="idref" href="Cat.Theory.RelativeComonad.html#::x_'⋅cobind'"><span class="id" data-type="notation">⋅</span></a><a class="idref" href="Cat.Theory.RelativeComonad.html#::x_'⋅cobind'"><span class="id" data-type="notation">cobind</span></a> (<a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.T"><span class="id" data-type="variable">T</span></a><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::x_'⋅extend'"><span class="id" data-type="notation">⋅</span></a><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::x_'⋅extend'"><span class="id" data-type="notation">extend</span></a> (<a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.F"><span class="id" data-type="variable">F</span></a><a class="idref" href="Cat.Theory.Functor.html#::x_'⋅'_x"><span class="id" data-type="notation">⋅</span></a><a class="idref" href="Cat.Category.Cut_NT.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" data-type="notation">∘</span></a> <a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.T"><span class="id" data-type="variable">T</span></a><a class="idref" href="Cat.Theory.RelativeComonad.html#::x_'⋅counit'"><span class="id" data-type="notation">⋅</span></a><a class="idref" href="Cat.Theory.RelativeComonad.html#::x_'⋅counit'"><span class="id" data-type="notation">counit</span></a>)) <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/>
 <br/>
-&nbsp;&nbsp;<span class="id" data-type="keyword">Notation</span> <a name="CUT_NT.::'𝑻(𝑬×─)'"><span class="id" data-type="notation">"</span></a>'𝑻(𝑬×─)'" := <a class="idref" href="Cat.Category.Cut_NT.html#T_Ex"><span class="id" data-type="definition">T_Ex</span></a> (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 0).<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Notation</span> <a name="CUT_NT.::'𝑻(𝑬×─)'"><span class="id" data-type="notation">"</span></a>'𝑻(𝑬×─)'" ≔ <a class="idref" href="Cat.Category.Cut_NT.html#T_Ex"><span class="id" data-type="definition">T_Ex</span></a> (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 0).<br/>
 <br/>
-&nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="𝑪𝒖𝒕"><span class="id" data-type="definition">𝑪𝒖𝒕</span></a> : <a class="idref" href="Cat.Theory.NaturalTransformation.html#NaturalTransformation"><span class="id" data-type="record">NaturalTransformation</span></a> <a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.::'𝑻(𝑬×─)'"><span class="id" data-type="notation">𝑻</span></a>(𝑬×─) <a class="idref" href="Cat.Category.Cut_NT.html#𝑻"><span class="id" data-type="abbreviation">𝑻</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="𝑪𝒖𝒕"><span class="id" data-type="definition">𝑪𝒖𝒕</span></a> : <a class="idref" href="Cat.Theory.NaturalTransformation.html#NaturalTransformation"><span class="id" data-type="record">NaturalTransformation</span></a> <a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.::'𝑻(𝑬×─)'"><span class="id" data-type="notation">𝑻</span></a>(𝑬×─) <a class="idref" href="Cat.Category.Cut_NT.html#𝑻"><span class="id" data-type="abbreviation">𝑻</span></a> ≔<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.NaturalTransformation.html#::'NaturalTransformation.make'_'⦃'_'η'_'≔'_x_'⦄'"><span class="id" data-type="notation">NaturalTransformation.make</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#::'NaturalTransformation.make'_'⦃'_'η'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#::'NaturalTransformation.make'_'⦃'_'η'_'≔'_x_'⦄'"><span class="id" data-type="notation">η</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#::'NaturalTransformation.make'_'⦃'_'η'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">A</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT.T"><span class="id" data-type="variable">T</span></a><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::x_'⋅cut'"><span class="id" data-type="notation">⋅</span></a><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::x_'⋅cut'"><span class="id" data-type="notation">cut</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#::'NaturalTransformation.make'_'⦃'_'η'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/>
 <br/>
 <span class="id" data-type="keyword">End</span> <a class="idref" href="Cat.Category.Cut_NT.html#CUT_NT"><span class="id" data-type="section">CUT_NT</span></a>.<br/>
 <br/>
 </div>
+<div class="table-nav-bottom">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
 </div>
-
-<div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
-</div>
-
-</div>
-
 </body>
 </html>

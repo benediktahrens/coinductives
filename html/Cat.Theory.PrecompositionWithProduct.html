@@ -1,29 +1,31 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link href="coqdoc.css" rel="stylesheet" data-type="text/css"/>
-<title>Cat.Theory.PrecompositionWithProduct</title>
+<meta charset="utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" data-type="text/css" />
+<title>Coinitial semantics for redecoration of triangular matrices</title>
 </head>
-
 <body>
-
-<div id="page">
-
-<div id="header">
+<div class="table-nav-top">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
 </div>
-
-<div id="main">
-
 <div class="code"></div>
 
 <div class="doc">
-<a name="lab16"></a><h1 class="section">Precomposition with product</h1>
+<a name="lab18"></a><h1 class="section">Precomposition with product</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab17"></a><h2 class="section">Definitions</h2>
+<a name="lab19"></a><h2 class="section">Definitions</h2>
 
 </div>
 <div class="code"><span class="id" data-type="keyword">Section</span> <a name="PrecompositionWithProduct"><span class="id" data-type="section">PrecompositionWithProduct</span></a>.<br/>
@@ -32,18 +34,18 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" data-type="var">E</span> : <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#𝒞"><span class="id" data-type="variable">𝒞</span></a>} `{!<a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#CartesianStrongMonoidal"><span class="id" data-type="class">CartesianStrongMonoidal</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#F"><span class="id" data-type="variable">F</span></a>} {<span class="id" data-type="var">T</span> : <a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#RelativeComonadWithCut"><span class="id" data-type="record">RelativeComonadWithCut</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#F"><span class="id" data-type="variable">F</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#E"><span class="id" data-type="variable">E</span></a>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" data-type="var">ℰ</span> : <a class="idref" href="Cat.Theory.Category.html#Category"><span class="id" data-type="record">Category</span></a>} (<span class="id" data-type="var">M</span> : <a class="idref" href="Cat.Theory.Comodule.html#Comodule"><span class="id" data-type="record">Comodule</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#ℰ"><span class="id" data-type="variable">ℰ</span></a>).<br/>
 <br/>
-&nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="precomposition_with_product"><span class="id" data-type="definition">precomposition_with_product</span></a> : <a class="idref" href="Cat.Theory.Comodule.html#Comodule"><span class="id" data-type="record">Comodule</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#PrecompositionWithProduct.T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#PrecompositionWithProduct.ℰ"><span class="id" data-type="variable">ℰ</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="precomposition_with_product"><span class="id" data-type="definition">precomposition_with_product</span></a> : <a class="idref" href="Cat.Theory.Comodule.html#Comodule"><span class="id" data-type="record">Comodule</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#PrecompositionWithProduct.T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#PrecompositionWithProduct.ℰ"><span class="id" data-type="variable">ℰ</span></a> ≔<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'M'_'≔'_x_';'_'mcobind'_'≔'_x_'⦄'"><span class="id" data-type="notation">Comodule.make</span></a> <a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'M'_'≔'_x_';'_'mcobind'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'M'_'≔'_x_';'_'mcobind'_'≔'_x_'⦄'"><span class="id" data-type="notation">M</span></a>       <a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'M'_'≔'_x_';'_'mcobind'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">C</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#PrecompositionWithProduct.M"><span class="id" data-type="variable">M</span></a> (<a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#PrecompositionWithProduct.E"><span class="id" data-type="variable">E</span></a> <a class="idref" href="Cat.Theory.Product.html#::x_'×'_x"><span class="id" data-type="notation">×</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#C"><span class="id" data-type="variable">C</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'M'_'≔'_x_';'_'mcobind'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'M'_'≔'_x_';'_'mcobind'_'≔'_x_'⦄'"><span class="id" data-type="notation">mcobind</span></a> <a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'M'_'≔'_x_';'_'mcobind'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'λ'_x_'..'_x_'↦'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">f</span> <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'λ'_x_'..'_x_'↦'_x"><span class="id" data-type="notation">↦</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#PrecompositionWithProduct.M"><span class="id" data-type="variable">M</span></a><a class="idref" href="Cat.Theory.Comodule.html#::x_'⋅mcobind'"><span class="id" data-type="notation">⋅</span></a><a class="idref" href="Cat.Theory.Comodule.html#::x_'⋅mcobind'"><span class="id" data-type="notation">mcobind</span></a> (<a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#PrecompositionWithProduct.T"><span class="id" data-type="variable">T</span></a><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::x_'⋅extend'"><span class="id" data-type="notation">⋅</span></a><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::x_'⋅extend'"><span class="id" data-type="notation">extend</span></a>(<a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#f"><span class="id" data-type="variable">f</span></a>)) <a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'M'_'≔'_x_';'_'mcobind'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/>
 <br/>
 <span class="id" data-type="keyword">End</span> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#PrecompositionWithProduct"><span class="id" data-type="section">PrecompositionWithProduct</span></a>.<br/>
 <br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::x_'['_x_'×─'_']'"><span class="id" data-type="notation">"</span></a>M [ E '×─' ] " := (<a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#precomposition_with_product"><span class="id" data-type="definition">precomposition_with_product</span></a> <span class="id" data-type="var">E</span> <span class="id" data-type="var">M</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 0).<br/>
+<span class="id" data-type="keyword">Notation</span> <a name="::x_'['_x_'×─'_']'"><span class="id" data-type="notation">"</span></a>M [ E '×─' ] " ≔ (<a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#precomposition_with_product"><span class="id" data-type="definition">precomposition_with_product</span></a> <span class="id" data-type="var">E</span> <span class="id" data-type="var">M</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 0).<br/>
 <br/>
 </div>
 
 <div class="doc">
-<a name="lab18"></a><h2 class="section">Precomposition with product on morphisms</h2>
+<a name="lab20"></a><h2 class="section">Precomposition with product on morphisms</h2>
 
 </div>
 <div class="code">
@@ -53,20 +55,25 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" data-type="var">E</span> : <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#𝒞"><span class="id" data-type="variable">𝒞</span></a>) `{!<a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#CartesianStrongMonoidal"><span class="id" data-type="class">CartesianStrongMonoidal</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#F"><span class="id" data-type="variable">F</span></a>} (<span class="id" data-type="var">T</span> : <a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#RelativeComonadWithCut"><span class="id" data-type="record">RelativeComonadWithCut</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#F"><span class="id" data-type="variable">F</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#E"><span class="id" data-type="variable">E</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" data-type="var">ℰ</span> : <a class="idref" href="Cat.Theory.Category.html#Category"><span class="id" data-type="record">Category</span></a>) (<span class="id" data-type="var">M</span> : <a class="idref" href="Cat.Theory.Comodule.html#Comodule"><span class="id" data-type="record">Comodule</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#ℰ"><span class="id" data-type="variable">ℰ</span></a>) (<span class="id" data-type="var">N</span> : <a class="idref" href="Cat.Theory.Comodule.html#Comodule"><span class="id" data-type="record">Comodule</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#ℰ"><span class="id" data-type="variable">ℰ</span></a>) (<span class="id" data-type="var">α</span> : <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#M"><span class="id" data-type="variable">M</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#N"><span class="id" data-type="variable">N</span></a>).<br/>
 <br/>
-&nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="precomposition_with_product_mor"><span class="id" data-type="definition">precomposition_with_product_mor</span></a> : <a class="idref" href="Cat.Theory.Notations.html#::'‵'_x_'′'"><span class="id" data-type="notation">‵</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#Morphisms.M"><span class="id" data-type="variable">M</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'['_x_'×─'_']'"><span class="id" data-type="notation">[</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#Morphisms.E"><span class="id" data-type="variable">E</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'['_x_'×─'_']'"><span class="id" data-type="notation">×─]</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#Morphisms.N"><span class="id" data-type="variable">N</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'['_x_'×─'_']'"><span class="id" data-type="notation">[</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#Morphisms.E"><span class="id" data-type="variable">E</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'['_x_'×─'_']'"><span class="id" data-type="notation">×─]</span></a> <a class="idref" href="Cat.Theory.Notations.html#::'‵'_x_'′'"><span class="id" data-type="notation">′</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="precomposition_with_product_mor"><span class="id" data-type="definition">precomposition_with_product_mor</span></a> : <a class="idref" href="Cat.Theory.Notations.html#::'‵'_x_'′'"><span class="id" data-type="notation">‵</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#Morphisms.M"><span class="id" data-type="variable">M</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'['_x_'×─'_']'"><span class="id" data-type="notation">[</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#Morphisms.E"><span class="id" data-type="variable">E</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'['_x_'×─'_']'"><span class="id" data-type="notation">×─]</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#Morphisms.N"><span class="id" data-type="variable">N</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'['_x_'×─'_']'"><span class="id" data-type="notation">[</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#Morphisms.E"><span class="id" data-type="variable">E</span></a><a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#::x_'['_x_'×─'_']'"><span class="id" data-type="notation">×─]</span></a> <a class="idref" href="Cat.Theory.Notations.html#::'‵'_x_'′'"><span class="id" data-type="notation">′</span></a> ≔<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'α'_'≔'_x_'⦄'"><span class="id" data-type="notation">Comodule.make</span></a> <a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'α'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'α'_'≔'_x_'⦄'"><span class="id" data-type="notation">α</span></a> <a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'α'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">A</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#Morphisms.α"><span class="id" data-type="variable">α</span></a> (<a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#Morphisms.E"><span class="id" data-type="variable">E</span></a> <a class="idref" href="Cat.Theory.Product.html#::x_'×'_x"><span class="id" data-type="notation">×</span></a> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#A"><span class="id" data-type="variable">A</span></a>) <a class="idref" href="Cat.Theory.Comodule.html#::'Comodule.make'_'⦃'_'α'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/>
 <br/>
 <span class="id" data-type="keyword">End</span> <a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#Morphisms"><span class="id" data-type="section">Morphisms</span></a>.<br/>
 <br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::x_'［'_x_'×─'_'］'"><span class="id" data-type="notation">"</span></a>α ［ E '×─' ］" := (<a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#precomposition_with_product_mor"><span class="id" data-type="definition">precomposition_with_product_mor</span></a> <span class="id" data-type="var">E</span> <span class="id" data-type="var">α</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 0).<br/>
+<span class="id" data-type="keyword">Notation</span> <a name="::x_'［'_x_'×─'_'］'"><span class="id" data-type="notation">"</span></a>α ［ E '×─' ］" ≔ (<a class="idref" href="Cat.Theory.PrecompositionWithProduct.html#precomposition_with_product_mor"><span class="id" data-type="definition">precomposition_with_product_mor</span></a> <span class="id" data-type="var">E</span> <span class="id" data-type="var">α</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 0).<br/>
 </div>
+<div class="table-nav-bottom">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
 </div>
-
-<div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
-</div>
-
-</div>
-
 </body>
 </html>

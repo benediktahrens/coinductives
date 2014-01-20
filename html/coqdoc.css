@@ -1,3 +1,17 @@
+@import url(http://fonts.googleapis.com/css?family=Cousine);
+.footer {
+	font-size:small
+}
+@font-face {
+	font-family: 'Symbola';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Symbola'), url('Symbola.woff') format('woff');
+	unicode-range: U+255-10FFFF
+}
+body {
+	font-family: 'Helvetica', sans-serif, 'Symbola';
+}
 body {/* padding: 0px 0px;
        margin: 0px 0px; 
        background-color: white */}
@@ -78,16 +92,6 @@ h4.section {/*
                    font-style : bold;
                    text-decoration : underline;
  */}
-
-#main .doc {/* margin: 0px;
-             font-family: sans-serif;
-             font-size: 100%;
-	     line-height: 125%;
-             max-width: 40em;
-             color: black;
-	     padding: 10px;
-             background-color: #90bdff;
-             border-style: plain*/}
 
 .inlinecode {/* 
     display: inline;
@@ -276,7 +280,7 @@ ul.doclist {/*
 /* custom */
 
 .code {
-	font-family: "Menlo", monospace;
+	font-family: "Cousine", "Symbola", monospace;
 	font-size:small ;
 }
 
@@ -327,4 +331,59 @@ ul.doclist {/*
 h2 {
 	padding-bottom:2px;
 	border-bottom:1px solid #ccc;width:75%
+}
+
+.table-nav-top {
+	width:100%;
+	display:table;
+	border-width:2px;
+	border-color:#ccc;
+	border-top-style:solid;
+	border-bottom-style:solid;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin-bottom:10px;
+	font-size:small;
+}
+
+.table-nav-bottom {
+	width:100%;
+	display:table;
+	border-width:2px;
+	border-color:#ccc;
+	border-top-style:solid;
+	border-bottom-style:solid;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin-top:20px;
+	font-size:small;
+}
+
+.table-nav-top > div {
+	display:table-cell;
+}
+.table-nav-bottom > div {
+	display:table-cell;
+}
+
+.sep-nav {
+	width:30px;
+	text-align:center;
+}
+
+.toc-nav {
+	width:175px;
+	border-width:1px;
+	border-color:#ccc;
+	border-left-style:solid;
+	border-right-style:solid;
+	text-align:center;
+}
+
+.index-nav {
+	width:175px;
+	text-align:center;
+	border-width:1px;
+	border-color:#ccc;
+	border-right-style:solid;
 }

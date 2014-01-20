@@ -1,46 +1,53 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link href="coqdoc.css" rel="stylesheet" data-type="text/css"/>
-<title>Cat.Theory.Notations</title>
+<meta charset="utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" data-type="text/css" />
+<title>Coinitial semantics for redecoration of triangular matrices</title>
 </head>
-
 <body>
-
-<div id="page">
-
-<div id="header">
+<div class="table-nav-top">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
 </div>
-
-<div id="main">
-
-<div class="code"><span class="id" data-type="keyword">Notation</span> <a name="::'⊤'"><span class="id" data-type="notation">"</span></a>⊤" := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#True"><span class="id" data-type="inductive">True</span></a>.<br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::'⊥'"><span class="id" data-type="notation">"</span></a>⊥" := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#False"><span class="id" data-type="inductive">False</span></a>.<br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::'_⟨⊎⟩_'"><span class="id" data-type="notation">"</span></a>_⟨⊎⟩_" := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#sum"><span class="id" data-type="inductive">sum</span></a> (<span class="id" data-type="var">only</span> <span class="id" data-type="var">parsing</span>).<br/>
-<span class="id" data-type="keyword">Infix</span> <a name="::x_'⟨⊎⟩'_x"><span class="id" data-type="notation">"</span></a>⟨⊎⟩" := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#sum"><span class="id" data-type="inductive">sum</span></a> (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 25, <span class="id" data-type="tactic">left</span> <span class="id" data-type="keyword">associativity</span>).<br/>
-<span class="id" data-type="keyword">Infix</span> <a name="::x_'⟨×⟩'_x"><span class="id" data-type="notation">"</span></a>⟨×⟩" := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#prod"><span class="id" data-type="inductive">prod</span></a> (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 20, <span class="id" data-type="tactic">left</span> <span class="id" data-type="keyword">associativity</span>).<br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::'_⟨×⟩_'"><span class="id" data-type="notation">"</span></a>_⟨×⟩_" := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#prod"><span class="id" data-type="inductive">prod</span></a> (<span class="id" data-type="var">only</span> <span class="id" data-type="var">parsing</span>).<br/>
+<div class="code"><span class="id" data-type="keyword">Notation</span> <a name="::'⊤'"><span class="id" data-type="notation">"</span></a>⊤" ≔ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#True"><span class="id" data-type="inductive">True</span></a>.<br/>
+<span class="id" data-type="keyword">Notation</span> <a name="::'⊥'"><span class="id" data-type="notation">"</span></a>⊥" ≔ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#False"><span class="id" data-type="inductive">False</span></a>.<br/>
+<span class="id" data-type="keyword">Notation</span> <a name="::'_⟨⊎⟩_'"><span class="id" data-type="notation">"</span></a>_⟨⊎⟩_" ≔ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#sum"><span class="id" data-type="inductive">sum</span></a> (<span class="id" data-type="var">only</span> <span class="id" data-type="var">parsing</span>).<br/>
+<span class="id" data-type="keyword">Infix</span> <a name="::x_'⟨⊎⟩'_x"><span class="id" data-type="notation">"</span></a>⟨⊎⟩" ≔ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#sum"><span class="id" data-type="inductive">sum</span></a> (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 25, <span class="id" data-type="tactic">left</span> <span class="id" data-type="keyword">associativity</span>).<br/>
+<span class="id" data-type="keyword">Infix</span> <a name="::x_'⟨×⟩'_x"><span class="id" data-type="notation">"</span></a>⟨×⟩" ≔ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#prod"><span class="id" data-type="inductive">prod</span></a> (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 20, <span class="id" data-type="tactic">left</span> <span class="id" data-type="keyword">associativity</span>).<br/>
+<span class="id" data-type="keyword">Notation</span> <a name="::'_⟨×⟩_'"><span class="id" data-type="notation">"</span></a>_⟨×⟩_" ≔ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#prod"><span class="id" data-type="inductive">prod</span></a> (<span class="id" data-type="var">only</span> <span class="id" data-type="var">parsing</span>).<br/>
 </div>
 
 <div class="doc">
 Force coercion to Type (used with program) 
 </div>
 <div class="code">
-<span class="id" data-type="keyword">Notation</span> <a name="::'‵'_x_'′'"><span class="id" data-type="notation">"</span></a>‵ T ′" := (<span class="id" data-type="var">T</span> : <span class="id" data-type="keyword">Type</span>) (<span class="id" data-type="var">only</span> <span class="id" data-type="var">parsing</span>).<br/>
+<span class="id" data-type="keyword">Notation</span> <a name="::'‵'_x_'′'"><span class="id" data-type="notation">"</span></a>‵ T ′" ≔ (<span class="id" data-type="var">T</span> : <span class="id" data-type="keyword">Type</span>) (<span class="id" data-type="var">only</span> <span class="id" data-type="var">parsing</span>).<br/>
 <br/>
 <span class="id" data-type="keyword">Reserved Notation</span> "A ⇒ B" (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 30, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>).<br/>
 <span class="id" data-type="keyword">Reserved Notation</span> "f ∘ g" (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 40, <span class="id" data-type="tactic">left</span> <span class="id" data-type="keyword">associativity</span>).<br/>
 <span class="id" data-type="keyword">Reserved Notation</span> "⟨ f , g ⟩" (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 0, <span class="id" data-type="keyword">no</span> <span class="id" data-type="keyword">associativity</span>).<br/>
 </div>
+<div class="table-nav-bottom">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
 </div>
-
-<div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
-</div>
-
-</div>
-
 </body>
 </html>

@@ -1,41 +1,48 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link href="coqdoc.css" rel="stylesheet" data-type="text/css"/>
-<title>Cat.Theory.NaturalTransformation</title>
+<meta charset="utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" data-type="text/css" />
+<title>Coinitial semantics for redecoration of triangular matrices</title>
 </head>
-
 <body>
-
-<div id="page">
-
-<div id="header">
+<div class="table-nav-top">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
 </div>
-
-<div id="main">
-
 <div class="code"></div>
 
 <div class="doc">
-<a name="lab2"></a><h1 class="section">Natural transformation</h1>
+<a name="lab2"></a><h1 class="section">Natural transformation definition</h1>
 
 </div>
-<div class="code"><span class="id" data-type="keyword">Structure</span> <a name="NaturalTransformation"><span class="id" data-type="record">NaturalTransformation</span></a> {𝒞 𝒟 : <a class="idref" href="Cat.Theory.Category.html#Category"><span class="id" data-type="record">Category</span></a>} (<span class="id" data-type="var">F</span> <span class="id" data-type="var">G</span> : <a class="idref" href="Cat.Theory.Functor.html#Functor"><span class="id" data-type="record">Functor</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#𝒞"><span class="id" data-type="variable">𝒞</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#𝒟"><span class="id" data-type="variable">𝒟</span></a>) := <a name="mkNaturalTransformation"><span class="id" data-type="constructor">mkNaturalTransformation</span></a><br/>
+<div class="code"><span class="id" data-type="keyword">Structure</span> <a name="NaturalTransformation"><span class="id" data-type="record">NaturalTransformation</span></a> {𝒞 𝒟 : <a class="idref" href="Cat.Theory.Category.html#Category"><span class="id" data-type="record">Category</span></a>} (<span class="id" data-type="var">F</span> <span class="id" data-type="var">G</span> : <a class="idref" href="Cat.Theory.Functor.html#Functor"><span class="id" data-type="record">Functor</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#𝒞"><span class="id" data-type="variable">𝒞</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#𝒟"><span class="id" data-type="variable">𝒟</span></a>) ≔ <a name="mkNaturalTransformation"><span class="id" data-type="constructor">mkNaturalTransformation</span></a><br/>
 { <a name="η"><span class="id" data-type="projection">η</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> <span class="id" data-type="var">A</span><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#F"><span class="id" data-type="variable">F</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#G"><span class="id" data-type="variable">G</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#A"><span class="id" data-type="variable">A</span></a><br/>
 ; <a name="η_commutes"><span class="id" data-type="projection">η_commutes</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> {<span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span>} {<span class="id" data-type="var">f</span> : <a class="idref" href="Cat.Theory.NaturalTransformation.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#B"><span class="id" data-type="variable">B</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">},</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#η"><span class="id" data-type="method">η</span></a>(<a class="idref" href="Cat.Theory.NaturalTransformation.html#B"><span class="id" data-type="variable">B</span></a>) <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" data-type="notation">∘</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#F"><span class="id" data-type="variable">F</span></a> <a class="idref" href="Cat.Theory.Functor.html#::x_'⋅'_x"><span class="id" data-type="notation">⋅</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" data-type="notation">≈</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#G"><span class="id" data-type="variable">G</span></a> <a class="idref" href="Cat.Theory.Functor.html#::x_'⋅'_x"><span class="id" data-type="notation">⋅</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" data-type="notation">∘</span></a> <a class="idref" href="Cat.Theory.NaturalTransformation.html#η"><span class="id" data-type="method">η</span></a>(<a class="idref" href="Cat.Theory.NaturalTransformation.html#A"><span class="id" data-type="variable">A</span></a>) }.<br/>
 <br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::'NaturalTransformation.make'_'⦃'_'η'_'≔'_x_'⦄'"><span class="id" data-type="notation">"</span></a>'NaturalTransformation.make' ⦃ 'η' ≔ η ⦄" :=<br/>
+<span class="id" data-type="keyword">Notation</span> <a name="::'NaturalTransformation.make'_'⦃'_'η'_'≔'_x_'⦄'"><span class="id" data-type="notation">"</span></a>'NaturalTransformation.make' ⦃ 'η' ≔ η ⦄" ≔<br/>
 &nbsp;&nbsp;(@<a class="idref" href="Cat.Theory.NaturalTransformation.html#mkNaturalTransformation"><span class="id" data-type="constructor">mkNaturalTransformation</span></a> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">η</span> <span class="id" data-type="var">_</span>) (<span class="id" data-type="var">only</span> <span class="id" data-type="var">parsing</span>).<br/>
 </div>
+<div class="table-nav-bottom">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
 </div>
-
-<div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
-</div>
-
-</div>
-
 </body>
 </html>
