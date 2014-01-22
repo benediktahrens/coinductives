@@ -60,22 +60,22 @@ Toulouse}
 
  Simple inductive types---\textsf{W}-types---are characterized categorically as initial algebras of
  a polynomial functor.
- Dually, infinite, \emph{coinductive} types are characterized as terminal \emph{co}algebras of suitable functors.
- In the case of coinductive types, the meta-theoretic notion of equality is not adequate: instead, the notion of 
+ Dually, \emph{co}inductive types are characterized as terminal \emph{co}algebras of polynomial functors.
+ In the case of coinductive types, the meta-theoretic notion of equality is not adequate: thus, the notion of 
  \emph{bisimulation} was introduced by \textcite{aczel_nonwellfounded}.
 
  
  The characterization of inductive types as initial algebras 
  has been extended to \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
  in various formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
- The main goal of those works is not just to characterize the data type via a universal property, but rather the data type
+ The main goal of those works is to characterize not only the data type via a universal property, but rather the data type
  \emph{equipped with a well-behaved substitution operation}.
  
  
 
  In the present work we study a specific \emph{co}inductive \emph{heterogeneous} data type---the type family $\Tri$ of 
  infinite triangular matrices---and its \emph{redecoration} operation:
- this codata type is parametrized by a fixed set $E$ for entries not on the diagonal, 
+ the codata type is parametrized by a fixed set $E$ for entries not on the diagonal, 
  and indexed by another, \emph{variable}, set $A$ for entries on 
  the diagonal. The respective types of its specifying destructors $\head$ and $\tail$ are given in \Cref{fig:tri_destructors},
  together with the generating rules for the bisimulation relation on it.
@@ -111,9 +111,8 @@ Toulouse}
 \end{figure}
 
  
- In this work, we firstly identify those weak constructive comonads as an instance of the more general notion of \emph{relative comonad};
- indeed, a weak constructive comonad is precisely a comonad relative to the functor $\eq:\Set\to\Setoid$ from the category of sets to the 
- category of setoids that is 
+ In this work, we first identify those weak constructive comonads as an instance of the more general notion of \emph{relative comonad}.
+ Indeed, a weak constructive comonad is precisely a comonad relative to the functor $\eq:\Set\to\Setoid$ from the category of sets to that of setoids that is 
  left adjoint to the forgetful functor.
  
  Afterwards, we characterize the codata type $\Tri$, equipped with the cosubstitution operation of redecoration, as a terminal object of some category.
@@ -121,31 +120,32 @@ Toulouse}
  who characterize the heterogeneous inductive type of lambda terms---equipped with a suitable substitution operation---as an initial object in
  a category of algebras for the signature of lambda terms.
  In their work, the crucial notions are the notion of monad and, more importantly, \emph{module over a monad}.
- It turns out that more work than a simple dualization is necessary, for two reasons:
+ It turns out that more work than a simple dualization is necessary for two reasons:
  \begin{itemize}
   \item the lambda calculus can be seen as a monad on sets and thus, in particular, as an endofunctor.
         The codata type $\Tri$, however, associates to any \emph{set} of potential diagonal elements a \emph{setoid}
-        of triangular matrices. We thus need a notion of comonad whose underlying functor is not necessarily endo---the 
+        of triangular matrices. We thus need a notion of comonad whose underlying functor is not necessarily endo: the 
         already mentioned \emph{relative} comonads;
   \item the category-theoretic analysis of the destructor $\tail$ is more complicated than that of the heterogeneous 
            constructor of abstraction of the lambda calculus.
  \end{itemize}
  Finding a suitable categorical notion to capture the destructor $\tail$ and, more importantly, its interplay with
  the comonadic redecoration operation on $\Tri$, constitutes the main contribution of the present work.
- These rather technical details shall not be explained in this extended abstract, though.
+ These rather technical details shall not be explained in this extended abstract.
  
  
 
 
 
   Once we have found such a categorical notion, we can use 
-  it to give a definition of what a \enquote{coalgebra} for the signature of infinite triangular matrices is, 
-  where the codata type $\Tri$ will constitute the terminal object.
-  Any such coalgebra comes with a comonad relative to the aforementioned functor $\eq : \Set\to\Setoid$
+  it to give a definition of a \enquote{coalgebra} for the signature of infinite triangular matrices, 
+  together with a suitable notion of \emph{morphism} of such coalgebras.
+   We thus obtain a category of coalgebras for that signature.
+  Any object of this category comes with a comonad relative to the aforementioned functor $\eq : \Set\to\Setoid$
   and a suitable comodule over this comonad, modeling in some sense the destructor $\tail$.
-  Our main result then states that this category of coalgebras of the signature of triangular matrices 
-  has a terminal object, built from the codata type $\Tri$ and its destructor $\tail$,
-  seen as a relative comonad and a comodule over that relative comonad, respectively.
+  Our main result then states that this category 
+  has a terminal object built from the codata type $\Tri$ and its destructor $\tail$,
+  which are seen as a relative comonad and a comodule over that relative comonad, respectively.
 % 
 % 
 % 
@@ -225,9 +225,10 @@ Toulouse}
 % \end{theorem}
 % 
 % 
-This universal property of coinitiality characterizes not only the codata type of infinite triangular matrices, but also
+This universal property of coinitiality characterizes not only the codata type of infinite triangular matrices but also
 the \fat{bisimulation} relation on it as well as the \fat{redecoration} operation.
- All our definitions, examples and lemmas have been implemented in the proof assistant \coq. % \parencite{coq84pl3}.
+ 
+ All our definitions, examples, and lemmas have been implemented in the proof assistant \coq. % \parencite{coq84pl3}.
  The \coq source files and HTML documentation are available on the project web page \parencite{trimat_coq}.
  While parts of our work seem to be specific to the particular codata type $\Tri$,
  we believe that our work proves the suitability of the notion of relative (co)monads and (co)modules thereover for 
