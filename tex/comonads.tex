@@ -40,7 +40,7 @@
   In this work, we identify weak constructive comonads as an instance of the more general notion of 
   \emph{relative comonad}.
   Afterwards, building upon the work by \citeauthor{DBLP:conf/types/MatthesP11}, we give a category-theoretic
-  characterization of infinite triangular matrices---equipped with the canonical bisimulation relation and a 
+  characterization of infinite triangular matrices---equipped with the canonical bisimilarity relation and a 
   compatible comonadic $\cobind$ operation---as the \emph{terminal object}
   in some category.
   
@@ -57,7 +57,7 @@
  a polynomial functor \parencite{DBLP:journals/apal/MoerdijkP00}.
  Dually, infinite, \emph{coinductive} types are characterized as terminal \emph{co}algebras of suitable functors.
  In the case of coinductive types, the meta-theoretic notion of equality is not adequate. Another notion of sameness for inhabitants of such types, 
- \emph{bisimulation}, was introduced by \textcite{aczel_nonwellfounded}, and also
+ \emph{bisimilarity}, was introduced by \textcite{aczel_nonwellfounded}, and also
  a new proof principle called \emph{coinduction}. 
  Modulo this slight complication, it looks like it suffices to dualize the theory of inductive types in order to obtain
  a complete picture of coinductive types.
@@ -87,7 +87,7 @@
  the diagonal. The respective types of its specifying destructors $\head$ and $\tail$ are given in \Cref{fig:tri_destructors}.
  A first difference to the inductive case of the lambda calculus springs to mind:
  while the lambda calculus is essentially a monad---hence an \emph{endo}functor---on sets, the codata type $\Tri$ cannot be considered as such;
- for a given set $A$, the type $\Tri A$, equipped with a suitable \fat{bisimulation} relation, 
+ for a given set $A$, the type $\Tri A$, equipped with its canonical \fat{bisimilarity} relation, 
  constitutes a \emph{setoid}---a set equipped with an equivalence relation---rather than a set.
  Instead of considering comonads---as the dual notion to monads---we thus have to consider a notion of comonad whose underlying functor is not necessarily endo.
  This is precisely the raison d'\^etre of \emph{relative} comonads (defined below)---the dual notion to the relative monads defined in 
@@ -217,8 +217,8 @@ in order to understand this example.
 \begin{example}[\textcite{DBLP:conf/types/MatthesP11}]\label{ex:tri_comonad}
 Let $E$ be an arbitrary fixed set.
     The type family $\Tri(A)$ of infinite triangular matrices over the (variable) type $A$ are given by the destructors shown in \Cref{fig:tri_destructors},
-    equipped with a coinductively defined equivalence relation, a \emph{bisimulation}.
-    We write $t \sim t'$ for related matrices $t$ and $t'$.
+    equipped with a coinductively defined equivalence relation, a \emph{bisimilarity}.
+    We write $t \sim t'$ for bisimilar matrices $t$ and $t'$.
     By abuse of notation, we denote by $\Tri (A)$ (or shorter $\Tri A$) not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
     underlying \emph{set}. However, the two inference rules of \Cref{fig:tri_destructors} are the only place this 
     abuse actually happens. In the following, $\Tri A$ usually denotes the \emph{setoid} of infinite triangular matrices over the set $A$.
@@ -249,7 +249,7 @@ Let $E$ be an arbitrary fixed set.
                                        \UnaryInfC{$ \tail(t) \sim \tail(t')$}
                                        \DisplayProof   
   \end{center}
-  \caption{Destructors and bisimulation for the coinductive family of setoids $\Tri$} \label{fig:tri_destructors}
+  \caption{Destructors and bisimilarity for the coinductive family of setoids $\Tri$} \label{fig:tri_destructors}
 \end{figure}
 
 \noindent
@@ -630,7 +630,7 @@ more precisely, of \Cref{eq:rest_redec}, via the notion of comodule morphism:
 
 
 
-We now define a category in which the codata type of triangular matrices, equipped with the bisimulation relation of \Cref{ex:tri_comonad}
+We now define a category in which the codata type of triangular matrices, equipped with the bisimilarity relation of \Cref{ex:tri_comonad}
 and the comonadic redecoration, constitutes the terminal object. We call an object of this category a \emph{coalgebra of triangular matrices}, 
 even though we do not define the category as a category of coalgebras of a given endofunctor.
 
@@ -691,7 +691,7 @@ We now have all the ingredients to state (and prove) our main theorem:
 \end{proof}
 
 This universal property of coinitiality characterizes not only the codata type of infinite triangular matrices, but also
-the \fat{bisimulation} relation on it as well as the \fat{redecoration} operation.
+the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operation.
 
 
 
