@@ -1,0 +1,343 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ownstylesansthm}%[ownstyle article helper]
+
+
+%Optionen werden ausgefhrt
+\ProcessOptions
+
+
+% Weitere Pakete werden geladen
+%\RequirePackage{ngerman, ifthen}
+\RequirePackage[all,2cell]{xy}\SelectTips{cm}{10}\SilentMatrices\UseAllTwocells  % commutative diagrams
+\RequirePackage{amsmath, amssymb, amsfonts}
+% \RequirePackage{amsthm}
+%\RequirePackage[latin1]{inputenc}
+%\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+% \RequirePackage{lmodern}
+
+\RequirePackage[english]{babel}
+\RequirePackage{csquotes}
+%\RequirePackage{geometry}
+%\usepackage{textcomp}
+
+\RequirePackage{xcolor}
+
+\definecolor{dkblue}{rgb}{0,0.1,0.5}
+\definecolor{lightblue}{rgb}{0,0.5,0.5}
+\definecolor{dkgreen}{rgb}{0,0.4,0}
+\definecolor{dk2green}{rgb}{0.4,0,0}
+\definecolor{dkviolet}{rgb}{0.6,0,0.8}
+
+\RequirePackage{bussproofs}
+
+
+\RequirePackage{xspace}
+\RequirePackage{verbatim}
+\RequirePackage{graphicx}
+\RequirePackage{url}
+\urlstyle{sf}
+
+\RequirePackage{listings}
+\def\lstlanguagefiles{defManSSR.tex}
+\lstset{language=SSR}
+
+
+% \RequirePackage{float}
+% \floatstyle{plain}
+% \newfloat{program}{hbt}{lop}
+% \floatname{program}{Program}
+ 
+%\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand{\theenumi}{\arabic{enumi}}
+%\renewcommand{\theenumi}{\alph{enumi}}
+\renewcommand{\labelenumi}{\theenumi .}
+
+\newcommand{\constfont}[1]{\ensuremath{\mathsf{#1}}}
+
+
+\RequirePackage[colorlinks=true,linkcolor=DarkBlue,citecolor=DarkBlue,breaklinks]{hyperref}
+\hypersetup{
+%pdftex % Param\'etrage de la navigation
+%bookmarks = true, % Signets
+bookmarksopen=false, % bool: D\'epliement des signets
+bookmarksnumbered=true, % bool: Num\'erotation des signets (Signets num\'erot\'es)
+%pdfpagelayout=TwoColumnsRight,% affichage des pages : SinglePage, TwoColumnsRight/Left, OneColumn    ben:important
+pdfpagemode=UseOutlines, % agencement au d\'emarrage : UseOutlines, UseThumbs, None, FullScreen
+pdfstartview=FitH, % Fit, FitH, FitB, FitBH : vue de la page au d\'epart (pleine largeur...)
+colorlinks = true, % bool: Liens en couleur
+urlcolor = DarkBlue, % Couleur des liens externes
+%pdfborder = {0 0 0} % Style de bordure : ici, rien (ne pas encadrer les liens)
+linkcolor=DarkBlue, % Couleur des liens
+urlcolor=blue, % url
+anchorcolor=black, % du texte
+citecolor=red, % Couleur de citation
+frenchlinks=false, % bool: Utiliser des petites majuscules pour les liens, plut\^ot que de la couleur
+pdffitwindow=true, % bool: Maximiser
+pdftoolbar=true, % bool: Affichage de la barre d'outils
+pdfmenubar=true, % bool: Affichage de la barre de menus
+pdfauthor={}, % Auteur
+pdftitle={}, % Titre
+pdfkeywords = {}, % Mots-clefs
+pdfcreator=PDFLaTeX, %
+pdfproducer=PDFLaTeX, %
+plainpages = false
+}
+
+\definecolor{DarkBlue}{rgb}{0,0.08,0.45}
+
+
+
+% \newenvironment{examp}[2]{
+% \par \vspace{.5ex}\noindent
+% {\bf {#1}}
+% {{{#2}}}:
+% %\par\noindent
+% }
+% {%\newline 
+% %\newline
+% }
+
+\newenvironment{packenum}
+     {\begin{enumerate}
+  %      \setlength{\itemsep}{1pt}
+  %      \setlength{\parskip}{0pt}
+  %      \setlength{\parsep}{0pt}
+     }   	
+     {\end{enumerate}}
+
+\newenvironment{packitem}
+     {\begin{itemize}
+   %     \setlength{\itemsep}{1pt}
+   %     \setlength{\parskip}{0pt}
+   %     \setlength{\parsep}{0pt}
+     }   	
+     {\end{itemize}}
+
+% % \newtheoremstyle{mydefinition}
+% %  {\topsep} % Platz vor dem Theorem
+% %  {\topsep} % Platz nach dem Theorem
+% %  {} % Schrift im Theorem
+% %  {} % Einrueckung (empty = keine Einrueckung, \parindent = Normale Paragrapheneinrueckung)
+% %  {} % Schrift in der Kopfzeile des Theorems
+% %  {} % Punktation nach dem Theoremkopf
+% %  {0.5em} %     Space after thm head (\newline = linebreak)
+% %  {{\bfseries\thmnumber{#1 }\thmname{#2}}{\thmnote{ (#3)}}:} % Kopfformatierung
+% % 
+% % \newtheoremstyle{myplain}
+% %  {\topsep} % Platz vor dem Theorem
+% %  {\topsep} % Platz nach dem Theorem
+% %  {\itshape} % Schrift im Theorem
+% %  {} % Einrueckung (empty = keine Einrueckung, \parindent = Normale Paragrapheneinrueckung)
+% %  {} % Schrift in der Kopfzeile des Theorems
+% %  {} % Punktation nach dem Theoremkopf
+% %  {10pt} %     Space after thm head (\newline = linebreak)
+% %  {{\bfseries\thmnumber{#1 }\thmname{#2}}\thmnote{ (#3)}:} % Kopfformatierung
+% % 
+% % \newtheoremstyle{myremark}
+% %  {\topsep} % Platz vor dem Theorem
+% %  {\topsep} % Platz nach dem Theorem
+% %  {} % Schrift im Theorem
+% %  {} % Einrueckung (empty = keine Einrueckung, \parindent = Normale Paragrapheneinrueckung)
+% %  {} % Schrift in der Kopfzeile des Theorems
+% %  {} % Punktation nach dem Theoremkopf
+% %  {10pt} %     Space after thm head (\newline = linebreak)
+% %  {{\bfseries\thmnumber{#2 }\thmname{#1}}\emph{\thmnote{ #3}}:} % Kopfformatierung
+% % 
+% % \newtheoremstyle{mybeweis}
+% %  {\topsep} % Platz vor dem Theorem
+% %  {\topsep} % Platz nach dem Theorem
+% %  {} % Schrift im Theorem
+% %  {} % Einrueckung (empty = keine Einrueckung, \parindent = Normale Paragrapheneinrueckung)
+% %  {\itshape} % Schrift in der Kopfzeile des Theorems
+% %  {} % Punktation nach dem Theoremkopf
+% %  {7pt} %     Space after thm head (\newline = linebreak)
+% %  {\thmnumber{#2}\thmname{#1}\thmnote{ #3}:} % Kopfformatierung
+% % %{\thmnumber{ #2 }\thmname{#1}\thmnote{#3}:} % Kopfformatierung
+
+% Theoremumgebungen fuer das Skript definieren
+% \theoremstyle{mydefinition}
+
+\RequirePackage{cleveref}
+
+% \theoremstyle{definition}
+% \newtheorem{definition}{Definition}%[section]
+% \newtheorem{example}[definition]{Example}
+% % \theoremstyle{remark}
+%  \newtheorem{remark}[definition]{Remark}
+% %\newtheorem{defundsatz}[definition]{Definition und Satz}
+% %\newtheorem{conjecture}{Conjecture}
+% % \theoremstyle{myplain}
+% %\newtheorem{prop}[definition]{Proposition}
+% \theoremstyle{plain}
+% \newtheorem{theorem}[definition]{Theorem}
+% %\newtheorem*{satz*}{Satz}
+% % \newtheorem{lemma}[definition]{Lemma}
+% % \newtheorem{proposition}[definition]{Proposition}
+% %\newtheorem{cor}[definition]{Corollary}
+
+%\theoremstyle{myremark}
+
+%\newtheorem*{example*}{Example}
+
+%\newtheorem{notation}[definition]{Notation}
+%\newtheorem*{remark*}{Remark}
+
+% \theoremstyle{mybeweis}
+% \newtheorem*{pro}{Proof}
+
+\numberwithin{equation}{section}
+
+
+
+
+
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\MP}{MP}
+\DeclareMathOperator{\Gen}{Gen}
+\DeclareMathOperator{\Ax}{Ax}
+\DeclareMathOperator{\true}{true}
+\DeclareMathOperator{\false}{false}
+\DeclareMathOperator{\charmap}{char}
+\DeclareMathOperator{\Img}{Im}
+\DeclareMathOperator{\Sub}{Sub}
+\DeclareMathOperator{\Open}{Open}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Mod}{Mod}
+\DeclareMathOperator{\RMod}{RMod}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\target}{target}
+\DeclareMathOperator{\source}{source}
+\DeclareMathOperator{\WPT}{WPT}
+\DeclareMathOperator{\RZC}{RZC}
+\DeclareMathOperator{\ZFC}{ZFC}
+%\DeclareMathOperator{\shift}{shift}
+
+\DeclareMathOperator{\Pb}{Pb}
+\DeclareMathOperator{\unit}{unit}
+\DeclareMathOperator{\default}{def}
+
+%\DeclareMathOperator{\PO}{PO}
+\DeclareMathOperator{\IP}{IP}
+\DeclareMathOperator{\Bool}{Bool}
+\DeclareMathOperator{\Nat}{Nat}
+\DeclareMathOperator{\App}{App}
+\DeclareMathOperator{\Abs}{Abs}
+\DeclareMathOperator{\app}{app}
+
+\DeclareMathOperator{\Rec}{Rec}
+\DeclareMathOperator{\Rep}{\mathsf{Rep}}
+\DeclareMathOperator{\Term}{Term}
+\DeclareMathOperator{\Der}{D}
+\DeclareMathOperator{\opt}{opt}
+\DeclareMathOperator{\blowup}{blowup}
+
+\DeclareMathOperator{\Fin}{\textrm{\sf Fin}}
+\DeclareMathOperator{\defaultmap}{default}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Fib}{Fib}
+\DeclareMathOperator{\POop}{\textrm{\sf Pre}}
+\DeclareMathOperator{\PSop}{\textrm{\sf wPre}}
+\DeclareMathOperator{\SETop}{Set}
+
+\DeclareMathOperator{\substop}{subst}
+\DeclareMathOperator{\LMod}{LMod}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\rmlift}{rmlift}
+\DeclareMathOperator{\inl}{inl}
+\DeclareMathOperator{\inr}{inr}
+
+\DeclareMathOperator{\Monop}{\mathsf{Mon}}
+\DeclareMathOperator{\RMonop}{\mathsf{RMon}}
+
+
+\newcommand{\Mon}[1]{\Monop({#1})}
+\newcommand{\RMon}[1]{\RMonop({#1})}
+\newcommand{\RComod}{\ensuremath{\mathsf{RComod}}}
+
+\newcommand{\kl}[2][]{\sigma^{#1}({#2)}}
+\newcommand{\mkl}[2][]{\varsigma^{#1}({#2})}
+
+
+\newcommand{\we}{\eta}
+\newcommand{\comp}[2]{\ensuremath{{#2} \circ {#1}}}
+\newcommand{\halmos}{\quad\hfill\mbox{$\Box$}}  % Beweisendezeichen
+%\newcommand{\spspace}{~\vspace{-6mm}}
+\newcommand{\C}{{\mathcal{C}}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\X}{\mathcal{X}}
+
+
+\newcommand{\Diag}{\Delta}
+%\newcommand{\PO}{\mathbf{PO}}
+\newcommand{\PO}{{\POop}}
+\newcommand{\PS}{{\PSop}}
+\newcommand{\Set}{\ensuremath{\mathsf{Set}}}
+\newcommand{\Setoid}{\ensuremath{\mathsf{Setoid}}}
+\newcommand{\eq}{\ensuremath{\mathsf{eq}}}
+% \newcommand{\SET}{\SETop}
+\newcommand{\ULC}{\ULCop}
+\newcommand{\ULCB}{\mathrm{LC}\beta}
+\newcommand{\Si}{\ensuremath{\Sigma}}
+
+
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\ot}{\leftarrow}
+\newcommand{\monic}{\rightarrowtail}
+%\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\xrap}{\to}
+\newcommand{\si}{{\sigma}}
+\newcommand{\pu}{\partial_u}
+\newcommand{\TSet}{{T\text{-}\Set}}
+\newcommand{\TauSet}{{\T\text{-}\Set}}
+\newcommand{\es}{\emptyset}
+\newcommand{\Type}{\mathbf{Type}}
+\newcommand{\IType}[1]{\ensuremath{\mathbf{Type_{#1}}}}
+%\newcommand{\PCF}{{\bf PCF}}
+
+
+\newcommand{\popl}{{\sc PoplMark} }
+\newcommand{\sub}{\textunderscore}
+\newcommand{\ren}[2]{\ensuremath{\overline{#1}^{#2}}}
+
+
+\newcommand{\code}[1]{{\tt {#1}}}
+%\def\myurl{\hfil\penalty 100 \hfilneg \hbox}
+
+
+\newcommand{\Rar}{\Rightarrow}
+\newcommand{\st}{{\mathcal T}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\STLC}{\mathsf{STLC}}
+
+\newcommand{\bind}[2]{{#1}\gg \hspace{-.5ex}={#2}}
+
+\newcommand{\counit}{\constfont{counit}}
+\newcommand{\cobind}{\constfont{cobind}}
+\newcommand{\mcobind}{\constfont{mcobind}}
+\newcommand{\mlift}{\constfont{mlift}}
+\newcommand{\id}{\constfont{id}}
+\newcommand{\lift}{\constfont{lift}}
+\newcommand{\pr}{\constfont{pr}}
+\newcommand{\extend}{\ensuremath{\mathsf{extend}}}
+
+\newcommand{\Tri}{\constfont{Tri}}
+\newcommand{\head}{\constfont{top}}
+\newcommand{\tail}{\constfont{rest}}
+\newcommand{\bisim}{\constfont{bisim}}
+\newcommand{\redec}{\constfont{redec}}
+\newcommand{\cut}{\constfont{cut}}
+\newcommand{\ccut}{\constfont{ccut}}
+\newcommand{\RComonad}{\constfont{RComonad}}
+\newcommand{\RComonadWC}{\constfont{\RComonad wCut}}
+\newcommand{\ULCop}{\constfont{LC}}
+\newcommand{\induced}[1]{\ensuremath{\langle {#1} \rangle}}
+
+\newcommand{\shift}{\constfont{shift}}
+\newcommand{\abs}{\constfont{abs}}
+\newcommand{\subst}{\constfont{subst}}
+
+\newcommand{\coq}{\texttt{Coq}\xspace}
+\newcommand{\agda}{\texttt{Agda}\xspace}
