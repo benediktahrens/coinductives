@@ -80,7 +80,7 @@ Toulouse}
  the codata type is parametrized by a fixed set $E$ for entries not on the diagonal, 
  and indexed by another, \emph{variable}, set $A$ for entries on 
  the diagonal. The respective types of its specifying destructors $\head$ and $\tail$ are given in \Cref{fig:tri_destructors},
- together with the generating rules for the bisimulation relation on it.
+ together with the generating rules for the bisimilarity relation on it.
  Equipped with the redecoration operation, the type $\Tri$ is shown by \textcite{DBLP:conf/types/MatthesP11}
  to constitute what they call a \enquote{weak constructive comonad}.
  \begin{figure}[htb]
@@ -109,7 +109,7 @@ Toulouse}
                                        \UnaryInfC{$ \tail(t) \sim \tail(t')$}
                                        \DisplayProof   
   \end{center}
-  \caption{Destructors and bisimulation for the coinductive family of setoids $\Tri$} \label{fig:tri_destructors}
+  \caption{Destructors and bisimilarity for the coinductive family of setoids $\Tri$} \label{fig:tri_destructors}
 \end{figure}
 
  
@@ -228,7 +228,7 @@ Toulouse}
 % 
 % 
 This universal property of coinitiality characterizes not only the codata type of infinite triangular matrices but also
-the \fat{bisimulation} relation on it as well as the \fat{redecoration} operation.
+the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operation.
  
  All our definitions, examples, and lemmas have been implemented in the proof assistant \coq. % \parencite{coq84pl3}.
  The \coq source files and HTML documentation are available on the project web page \parencite{trimat_coq}.
