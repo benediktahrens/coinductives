@@ -1,8 +1,56 @@
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8"/>
-<link href="coqdoc.css" rel="stylesheet" data-type="text/css" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
 <title>Coinitial semantics for redecoration of triangular matrices</title>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+$ (function () {
+	$ ("div.code:contains('Require')").first ().remove ();
+	$ ('div.proof').each (function () {
+		var html = $ (this).html ();
+		var indent = html.match (/^\s*((?:&nbsp;)*)/)[1];
+		var indentsize = indent.length / 6;
+		$ (this).html (html.replace (new RegExp (indent + "([^&])", 'g'), '$1')).css ('margin-left', indentsize + 'ex');
+	});
+	$ ('div.code').each (function () {
+		var first = $ ($ (this).children ()[0]);
+		if (first.prop ('tagName') === 'A' && first.hasClass ('proof')) {
+			var prev = $ (this).prev ();
+			if (prev.hasClass ('doc')) {
+				first.next ().next ().prepend ("<div class=\"proofcomment\">" + prev.html () + "</div>");
+				prev.remove ();
+				prev = $ (this).prev ();
+				if (prev.hasClass ('code')) {
+					prev.append ($ (this).contents ());
+					$ (this).remove ();
+				}
+			}
+		}
+	});
+	$ ('div.proof').each (function () {
+		var next = $ (this).next ();
+		while (next.prop ('tagName') === 'A' && next.hasClass ('proof')) {
+			next.remove ();
+			$ (this).next ().remove (); // <br />
+			next = $ (this).next (); // <div class="proof">
+			if (!$ (next.children ()[0]).hasClass ('proofcomment')) {
+				$ (this).append ('<hr />');
+			}
+			$ (this).append (next.contents ());
+			next.remove ();
+			next = $ (this).next ();
+		}
+	});
+	$ ('a.proof').click (function (e) {
+		e.preventDefault ();
+		var proof = $ (this).next ().next ();
+		$ (this).text ((proof.css ('display') === 'none' ? 'Hide' : 'Show') + ' proof.');
+		proof.slideToggle ();
+	});
+});
+</script>
 </head>
 <body>
 <div class="table-nav-top">
@@ -18,7 +66,11 @@
 	</div>
 	<div class="sep-nav"> </div>
 </div>
-<div class="code"></div>
+<div class="code"><span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Theory.Category.html#"><span class="id" data-type="library">Theory.Category</span></a>.<br/>
+<br/>
+<span class="id" data-type="keyword">Generalizable</span> <span class="id" data-type="keyword">All</span> <span class="id" data-type="keyword">Variables</span>.<br/>
+<br/>
+</div>
 
 <div class="doc">
 <a name="lab29"></a><h2 class="section">Initial object definition</h2>
@@ -29,8 +81,10 @@
 ; <a name="bottom"><span class="id" data-type="projection">bottom</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">{</span></a><span class="id" data-type="var">A</span> : <a class="idref" href="Cat.Theory.InitialTerminal.html#𝒞"><span class="id" data-type="variable">𝒞</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">},</span></a> <a class="idref" href="Cat.Theory.InitialTerminal.html#empty"><span class="id" data-type="method">empty</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.InitialTerminal.html#A"><span class="id" data-type="variable">A</span></a><br/>
 ; <a name="bottom_unique"><span class="id" data-type="projection">bottom_unique</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">`{</span></a><span class="id" data-type="var">f</span> : <a class="idref" href="Cat.Theory.InitialTerminal.html#empty"><span class="id" data-type="method">empty</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <span class="id" data-type="var">A</span><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">},</span></a> <a class="idref" href="Cat.Theory.InitialTerminal.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" data-type="notation">≈</span></a> <a class="idref" href="Cat.Theory.InitialTerminal.html#bottom"><span class="id" data-type="method">bottom</span></a> }.<br/>
 <br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::'⟨⊥⟩'"><span class="id" data-type="notation">"</span></a>⟨⊥⟩"      ≔ <a class="idref" href="Cat.Theory.InitialTerminal.html#empty"><span class="id" data-type="projection">empty</span></a>.<br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::'!-⊥'"><span class="id" data-type="notation">"</span></a>!-⊥"      ≔ <a class="idref" href="Cat.Theory.InitialTerminal.html#bottom"><span class="id" data-type="projection">bottom</span></a>.<br/>
+<table>
+<tr><td><span class="id" data-type="keyword">Notation</span> <a name="::'⟨⊥⟩'"><span class="id" data-type="notation">"</span></a>⟨⊥⟩"</td><td colspan="2">≔ <a class="idref" href="Cat.Theory.InitialTerminal.html#empty"><span class="id" data-type="projection">empty</span></a>.<br/></td></tr>
+<tr><td><span class="id" data-type="keyword">Notation</span> <a name="::'!-⊥'"><span class="id" data-type="notation">"</span></a>!-⊥"</td><td>≔ <a class="idref" href="Cat.Theory.InitialTerminal.html#bottom"><span class="id" data-type="projection">bottom</span></a>.<br/></td></tr>
+</table>
 <span class="id" data-type="keyword">Notation</span> <a name="::'⊥-unique'"><span class="id" data-type="notation">"</span></a>⊥-unique" ≔ <a class="idref" href="Cat.Theory.InitialTerminal.html#bottom_unique"><span class="id" data-type="projection">bottom_unique</span></a>.<br/>
 <br/>
 <span class="id" data-type="keyword">Notation</span> <a name="::'Initial.make'_'⦃'_'empty'_'≔'_x_';'_'bottom'_'≔'_x_'⦄'"><span class="id" data-type="notation">"</span></a>'Initial.make' ⦃ 'empty' ≔ empty ; 'bottom' ≔ bottom ⦄" ≔<br/>
@@ -47,8 +101,10 @@
 ; <a name="top"><span class="id" data-type="projection">top</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">{</span></a><span class="id" data-type="var">A</span> : <a class="idref" href="Cat.Theory.InitialTerminal.html#𝒞"><span class="id" data-type="variable">𝒞</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">},</span></a> <a class="idref" href="Cat.Theory.InitialTerminal.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.InitialTerminal.html#one"><span class="id" data-type="method">one</span></a><br/>
 ; <a name="top_unique"><span class="id" data-type="projection">top_unique</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">`{</span></a><span class="id" data-type="var">f</span> : <span class="id" data-type="var">A</span> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.InitialTerminal.html#one"><span class="id" data-type="method">one</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">},</span></a> <a class="idref" href="Cat.Theory.InitialTerminal.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" data-type="notation">≈</span></a> <a class="idref" href="Cat.Theory.InitialTerminal.html#top"><span class="id" data-type="method">top</span></a> }.<br/>
 <br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::'⟨⊤⟩'"><span class="id" data-type="notation">"</span></a>⟨⊤⟩"      ≔ <a class="idref" href="Cat.Theory.InitialTerminal.html#one"><span class="id" data-type="projection">one</span></a>.<br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::'!-⊤'"><span class="id" data-type="notation">"</span></a>!-⊤"      ≔ <a class="idref" href="Cat.Theory.InitialTerminal.html#top"><span class="id" data-type="projection">top</span></a>.<br/>
+<table>
+<tr><td><span class="id" data-type="keyword">Notation</span> <a name="::'⟨⊤⟩'"><span class="id" data-type="notation">"</span></a>⟨⊤⟩"</td><td colspan="2">≔ <a class="idref" href="Cat.Theory.InitialTerminal.html#one"><span class="id" data-type="projection">one</span></a>.<br/></td></tr>
+<tr><td><span class="id" data-type="keyword">Notation</span> <a name="::'!-⊤'"><span class="id" data-type="notation">"</span></a>!-⊤"</td><td>≔ <a class="idref" href="Cat.Theory.InitialTerminal.html#top"><span class="id" data-type="projection">top</span></a>.<br/></td></tr>
+</table>
 <span class="id" data-type="keyword">Notation</span> <a name="::'⊤-unique'"><span class="id" data-type="notation">"</span></a>⊤-unique" ≔ <a class="idref" href="Cat.Theory.InitialTerminal.html#top_unique"><span class="id" data-type="projection">top_unique</span></a>.<br/>
 <br/>
 <span class="id" data-type="keyword">Notation</span> <a name="::'Terminal.make'_'⦃'_'one'_'≔'_x_';'_'top'_'≔'_x_'⦄'"><span class="id" data-type="notation">"</span></a>'Terminal.make' ⦃ 'one' ≔ one ; 'top' ≔ top ⦄" ≔ (@<a class="idref" href="Cat.Theory.InitialTerminal.html#mkTerminal"><span class="id" data-type="constructor">mkTerminal</span></a> <span class="id" data-type="var">_</span> <span class="id" data-type="var">one</span> <span class="id" data-type="var">top</span> <span class="id" data-type="var">_</span>) (<span class="id" data-type="var">only</span> <span class="id" data-type="var">parsing</span>).<br/>

@@ -1,8 +1,56 @@
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8"/>
-<link href="coqdoc.css" rel="stylesheet" data-type="text/css" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
 <title>Coinitial semantics for redecoration of triangular matrices</title>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+$ (function () {
+	$ ("div.code:contains('Require')").first ().remove ();
+	$ ('div.proof').each (function () {
+		var html = $ (this).html ();
+		var indent = html.match (/^\s*((?:&nbsp;)*)/)[1];
+		var indentsize = indent.length / 6;
+		$ (this).html (html.replace (new RegExp (indent + "([^&])", 'g'), '$1')).css ('margin-left', indentsize + 'ex');
+	});
+	$ ('div.code').each (function () {
+		var first = $ ($ (this).children ()[0]);
+		if (first.prop ('tagName') === 'A' && first.hasClass ('proof')) {
+			var prev = $ (this).prev ();
+			if (prev.hasClass ('doc')) {
+				first.next ().next ().prepend ("<div class=\"proofcomment\">" + prev.html () + "</div>");
+				prev.remove ();
+				prev = $ (this).prev ();
+				if (prev.hasClass ('code')) {
+					prev.append ($ (this).contents ());
+					$ (this).remove ();
+				}
+			}
+		}
+	});
+	$ ('div.proof').each (function () {
+		var next = $ (this).next ();
+		while (next.prop ('tagName') === 'A' && next.hasClass ('proof')) {
+			next.remove ();
+			$ (this).next ().remove (); // <br />
+			next = $ (this).next (); // <div class="proof">
+			if (!$ (next.children ()[0]).hasClass ('proofcomment')) {
+				$ (this).append ('<hr />');
+			}
+			$ (this).append (next.contents ());
+			next.remove ();
+			next = $ (this).next ();
+		}
+	});
+	$ ('a.proof').click (function (e) {
+		e.preventDefault ();
+		var proof = $ (this).next ().next ();
+		$ (this).text ((proof.css ('display') === 'none' ? 'Hide' : 'Show') + ' proof.');
+		proof.slideToggle ();
+	});
+});
+</script>
 </head>
 <body>
 <div class="table-nav-top">
@@ -18,7 +66,11 @@
 	</div>
 	<div class="sep-nav"> </div>
 </div>
-<div class="code"></div>
+<div class="code"><span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Theory.Category.html#"><span class="id" data-type="library">Theory.Category</span></a>.<br/>
+<br/>
+<span class="id" data-type="keyword">Generalizable</span> <span class="id" data-type="keyword">All</span> <span class="id" data-type="keyword">Variables</span>.<br/>
+<br/>
+</div>
 
 <div class="doc">
 <a name="lab25"></a><h1 class="section">Isomorphism</h1>
@@ -29,10 +81,16 @@
 
 </div>
 <div class="code"><span class="id" data-type="keyword">Class</span> <a name="IsInverse"><span class="id" data-type="record">IsInverse</span></a> {𝒞 : <a class="idref" href="Cat.Theory.Category.html#Category"><span class="id" data-type="record">Category</span></a>} {<span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#𝒞"><span class="id" data-type="variable">𝒞</span></a>} (<span class="id" data-type="var">f</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a>) (<span class="id" data-type="var">g</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a>) : <span class="id" data-type="keyword">Prop</span> ≔ <a name="mkInverse"><span class="id" data-type="constructor">mkInverse</span></a><br/>
-{ <a name="iso_left"><span class="id" data-type="projection">iso_left</span></a>  : <a class="idref" href="Cat.Theory.Isomorphism.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" data-type="notation">∘</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#g"><span class="id" data-type="variable">g</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" data-type="notation">≈</span></a> <a class="idref" href="Cat.Theory.Category.html#id"><span class="id" data-type="projection">id</span></a><br/>
+<table>
+<tr><td>{ <a name="iso_left"><span class="id" data-type="projection">iso_left</span></a></td><td colspan="2">: <a class="idref" href="Cat.Theory.Isomorphism.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" data-type="notation">∘</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#g"><span class="id" data-type="variable">g</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" data-type="notation">≈</span></a> <a class="idref" href="Cat.Theory.Category.html#id"><span class="id" data-type="projection">id</span></a><br/></td></tr>
+</table>
 ; <a name="iso_right"><span class="id" data-type="projection">iso_right</span></a> : <a class="idref" href="Cat.Theory.Isomorphism.html#g"><span class="id" data-type="variable">g</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" data-type="notation">∘</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::x_'≈'_x"><span class="id" data-type="notation">≈</span></a> <a class="idref" href="Cat.Theory.Category.html#id"><span class="id" data-type="projection">id</span></a> }.<br/>
 <br/>
+<span class="id" data-type="keyword">Arguments</span> <a class="idref" href="Cat.Theory.Isomorphism.html#mkInverse"><span class="id" data-type="constructor">mkInverse</span></a> {<span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span>} <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span>.<br/>
+<br/>
 <span class="id" data-type="keyword">Definition</span> <a name="inverse_of"><span class="id" data-type="definition">inverse_of</span></a> {𝒞 : <a class="idref" href="Cat.Theory.Category.html#Category"><span class="id" data-type="record">Category</span></a>} {<span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#𝒞"><span class="id" data-type="variable">𝒞</span></a>} {<span class="id" data-type="var">g</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a>} (<span class="id" data-type="var">f</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a>) `{!<a class="idref" href="Cat.Theory.Isomorphism.html#IsInverse"><span class="id" data-type="class">IsInverse</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#g"><span class="id" data-type="variable">g</span></a>} : <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a> ≔ <a class="idref" href="Cat.Theory.Isomorphism.html#g"><span class="id" data-type="variable">g</span></a>.<br/>
+<br/>
+<span class="id" data-type="keyword">Arguments</span> <a class="idref" href="Cat.Theory.Isomorphism.html#inverse_of"><span class="id" data-type="definition">inverse_of</span></a> {<span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span>} <span class="id" data-type="var">_</span> {<span class="id" data-type="var">_</span>}.<br/>
 <br/>
 <span class="id" data-type="keyword">Notation</span> <a name="::x_'⁻¹'"><span class="id" data-type="notation">"</span></a>f ⁻¹" ≔ (<a class="idref" href="Cat.Theory.Isomorphism.html#inverse_of"><span class="id" data-type="definition">inverse_of</span></a> <span class="id" data-type="var">f</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 0, <span class="id" data-type="keyword">no</span> <span class="id" data-type="keyword">associativity</span>).<br/>
 <br/>
@@ -44,9 +102,21 @@
 </div>
 <div class="code">
 <span class="id" data-type="keyword">Structure</span> <a name="Iso"><span class="id" data-type="record">Iso</span></a> {𝒞 : <a class="idref" href="Cat.Theory.Category.html#Category"><span class="id" data-type="record">Category</span></a>} (<span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#𝒞"><span class="id" data-type="variable">𝒞</span></a>) ≔ <a name="mkIso"><span class="id" data-type="constructor">mkIso</span></a><br/>
-{ <a name="iso_from"><span class="id" data-type="projection">iso_from</span></a>    :&gt; <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a><br/>
-; <a name="iso_to"><span class="id" data-type="projection">iso_to</span></a>      : <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a><br/>
+<table>
+<tr><td>{ <a name="iso_from"><span class="id" data-type="projection">iso_from</span></a></td><td colspan="2">:&gt; <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a><br/></td></tr>
+<tr><td>; <a name="iso_to"><span class="id" data-type="projection">iso_to</span></a></td><td>: <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a><br/></td></tr>
+</table>
 ; <a name="iso_inverse"><span class="id" data-type="projection">iso_inverse</span></a> : <a class="idref" href="Cat.Theory.Isomorphism.html#IsInverse"><span class="id" data-type="class">IsInverse</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_from"><span class="id" data-type="method">iso_from</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_to"><span class="id" data-type="method">iso_to</span></a> }.<br/>
+<br/>
+<span class="id" data-type="var">Existing</span> <span class="id" data-type="keyword">Instance</span> <span class="id" data-type="var">iso_inverse</span>.<br/>
+<br/>
+<table>
+<tr><td><span class="id" data-type="keyword">Arguments</span> <a class="idref" href="Cat.Theory.Isomorphism.html#mkIso"><span class="id" data-type="constructor">mkIso</span></a></td><td colspan="2">{<span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span>} <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span>.<br/></td></tr>
+</table>
+<span class="id" data-type="keyword">Arguments</span> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_from"><span class="id" data-type="projection">iso_from</span></a> {<span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span>} <span class="id" data-type="var">_</span>.<br/>
+<table>
+<tr><td><span class="id" data-type="keyword">Arguments</span> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_to"><span class="id" data-type="projection">iso_to</span></a></td><td colspan="2">{<span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span> <span class="id" data-type="var">_</span>} <span class="id" data-type="var">_</span>.<br/></td></tr>
+</table>
 <br/>
 <span class="id" data-type="keyword">Infix</span> <a name="::x_'≅'_x"><span class="id" data-type="notation">"</span></a>≅" ≔ <a class="idref" href="Cat.Theory.Isomorphism.html#Iso"><span class="id" data-type="record">Iso</span></a> (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 70).<br/>
 <span class="id" data-type="keyword">Notation</span> <a name="::x_'⋅≅-left'"><span class="id" data-type="notation">"</span></a>I '⋅≅-left'"≔ (<a class="idref" href="Cat.Theory.Isomorphism.html#iso_left"><span class="id" data-type="method">iso_left</span></a> <span class="id" data-type="var">I</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 0, <span class="id" data-type="var">only</span> <span class="id" data-type="var">parsing</span>).<br/>
@@ -68,15 +138,35 @@
 <br/>
 &nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="refl"><span class="id" data-type="definition">refl</span></a> {<span class="id" data-type="var">A</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#Iso_Equivalence.𝒞"><span class="id" data-type="variable">𝒞</span></a>} : <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::x_'≅'_x"><span class="id" data-type="notation">≅</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a> ≔<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">Iso.make</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">from</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Theory.Category.html#id"><span class="id" data-type="projection">id</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">to</span></a>   <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Theory.Category.html#id"><span class="id" data-type="projection">id</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/>
+<table>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">to</span></a></td><td colspan="2"><a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Theory.Category.html#id"><span class="id" data-type="projection">id</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/></td></tr>
+</table>
+&nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof"> &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">rewrite</span> <a class="idref" href="Cat.Theory.Category.html#left_id"><span class="id" data-type="projection">left_id</span></a>.<br/>
+</div>
+&nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof"> &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">rewrite</span> <a class="idref" href="Cat.Theory.Category.html#right_id"><span class="id" data-type="projection">right_id</span></a>.<br/>
+</div>
 <br/>
 &nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="sym"><span class="id" data-type="definition">sym</span></a> {<span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#Iso_Equivalence.𝒞"><span class="id" data-type="variable">𝒞</span></a>} (<span class="id" data-type="var">iso_AB</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::x_'≅'_x"><span class="id" data-type="notation">≅</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a>) : <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::x_'≅'_x"><span class="id" data-type="notation">≅</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a> ≔<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">Iso.make</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">from</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_AB"><span class="id" data-type="variable">iso_AB⁻¹</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">to</span></a>   <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_AB"><span class="id" data-type="variable">iso_AB</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/>
+<table>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">to</span></a></td><td colspan="2"><a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_AB"><span class="id" data-type="variable">iso_AB</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/></td></tr>
+</table>
+&nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof"> &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">rewrite</span> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_right"><span class="id" data-type="method">iso_right</span></a>.<br/>
+</div>
+&nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof"> &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">rewrite</span> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_left"><span class="id" data-type="method">iso_left</span></a>.<br/>
+</div>
 <br/>
 &nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="trans"><span class="id" data-type="definition">trans</span></a> {<span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> <span class="id" data-type="var">C</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#Iso_Equivalence.𝒞"><span class="id" data-type="variable">𝒞</span></a>} (<span class="id" data-type="var">iso_AB</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::x_'≅'_x"><span class="id" data-type="notation">≅</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a>) (<span class="id" data-type="var">iso_BC</span> : <a class="idref" href="Cat.Theory.Isomorphism.html#B"><span class="id" data-type="variable">B</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::x_'≅'_x"><span class="id" data-type="notation">≅</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#C"><span class="id" data-type="variable">C</span></a>) : <a class="idref" href="Cat.Theory.Isomorphism.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::x_'≅'_x"><span class="id" data-type="notation">≅</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#C"><span class="id" data-type="variable">C</span></a> ≔<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">Iso.make</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">from</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_BC"><span class="id" data-type="variable">iso_BC</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" data-type="notation">∘</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_AB"><span class="id" data-type="variable">iso_AB</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">to</span></a>   <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_AB"><span class="id" data-type="variable">iso_AB</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::x_'⁻¹'"><span class="id" data-type="notation">⁻¹</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" data-type="notation">∘</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_BC"><span class="id" data-type="variable">iso_BC</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::x_'⁻¹'"><span class="id" data-type="notation">⁻¹</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/>
+<table>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">to</span></a></td><td colspan="2"><a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_AB"><span class="id" data-type="variable">iso_AB</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::x_'⁻¹'"><span class="id" data-type="notation">⁻¹</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" data-type="notation">∘</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_BC"><span class="id" data-type="variable">iso_BC</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::x_'⁻¹'"><span class="id" data-type="notation">⁻¹</span></a> <a class="idref" href="Cat.Theory.Isomorphism.html#::'Iso.make'_'⦃'_'from'_'≔'_x_';'_'to'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/></td></tr>
+</table>
+&nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof"> &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">rewrite</span> <a class="idref" href="Cat.Theory.Category.html#compose_assoc"><span class="id" data-type="projection">compose_assoc</span></a>; <span class="id" data-type="tactic">setoid_rewrite</span> &lt;- <a class="idref" href="Cat.Theory.Category.html#compose_assoc"><span class="id" data-type="projection">compose_assoc</span></a> <span class="id" data-type="tactic">at</span> 2.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">rewrite</span> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_left"><span class="id" data-type="method">iso_left</span></a>, <a class="idref" href="Cat.Theory.Category.html#left_id"><span class="id" data-type="projection">left_id</span></a>, <a class="idref" href="Cat.Theory.Isomorphism.html#iso_left"><span class="id" data-type="method">iso_left</span></a>.<br/>
+</div>
+&nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof"> &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">rewrite</span> <a class="idref" href="Cat.Theory.Category.html#compose_assoc"><span class="id" data-type="projection">compose_assoc</span></a>; <span class="id" data-type="tactic">setoid_rewrite</span> &lt;- <a class="idref" href="Cat.Theory.Category.html#compose_assoc"><span class="id" data-type="projection">compose_assoc</span></a> <span class="id" data-type="tactic">at</span> 2.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">rewrite</span> <a class="idref" href="Cat.Theory.Isomorphism.html#iso_right"><span class="id" data-type="method">iso_right</span></a>, <a class="idref" href="Cat.Theory.Category.html#left_id"><span class="id" data-type="projection">left_id</span></a>, <a class="idref" href="Cat.Theory.Isomorphism.html#iso_right"><span class="id" data-type="method">iso_right</span></a>.<br/>
+</div>
 <br/>
 <span class="id" data-type="keyword">End</span> <a class="idref" href="Cat.Theory.Isomorphism.html#Iso_Equivalence"><span class="id" data-type="section">Iso_Equivalence</span></a>.<br/>
 <br/>

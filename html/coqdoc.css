@@ -328,6 +328,10 @@ ul.doclist {/*
 	color:rgb(151,0,126);
 }
 
+.id[data-type="tactic"] {
+	color:#0074D9
+}
+
 h2 {
 	padding-bottom:2px;
 	border-bottom:1px solid #ccc;width:75%
@@ -386,4 +390,28 @@ h2 {
 	border-width:1px;
 	border-color:#ccc;
 	border-right-style:solid;
+}
+
+div.proof {
+	display: none;
+	border-left: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	padding: 5px;
+}
+
+a.proof {
+	font-style: italic;
+}
+
+div.proofcomment {
+	font-family: 'Helvetica', sans-serif, 'Symbola';
+	font-style: italic;
+	margin-top: 10px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #aaa;
+}
+
+div.proof div.proofcomment:first-child {
+	margin-top: 0;
 }

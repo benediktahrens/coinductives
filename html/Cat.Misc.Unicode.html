@@ -1,8 +1,56 @@
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8"/>
-<link href="coqdoc.css" rel="stylesheet" data-type="text/css" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
 <title>Coinitial semantics for redecoration of triangular matrices</title>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+$ (function () {
+	$ ("div.code:contains('Require')").first ().remove ();
+	$ ('div.proof').each (function () {
+		var html = $ (this).html ();
+		var indent = html.match (/^\s*((?:&nbsp;)*)/)[1];
+		var indentsize = indent.length / 6;
+		$ (this).html (html.replace (new RegExp (indent + "([^&])", 'g'), '$1')).css ('margin-left', indentsize + 'ex');
+	});
+	$ ('div.code').each (function () {
+		var first = $ ($ (this).children ()[0]);
+		if (first.prop ('tagName') === 'A' && first.hasClass ('proof')) {
+			var prev = $ (this).prev ();
+			if (prev.hasClass ('doc')) {
+				first.next ().next ().prepend ("<div class=\"proofcomment\">" + prev.html () + "</div>");
+				prev.remove ();
+				prev = $ (this).prev ();
+				if (prev.hasClass ('code')) {
+					prev.append ($ (this).contents ());
+					$ (this).remove ();
+				}
+			}
+		}
+	});
+	$ ('div.proof').each (function () {
+		var next = $ (this).next ();
+		while (next.prop ('tagName') === 'A' && next.hasClass ('proof')) {
+			next.remove ();
+			$ (this).next ().remove (); // <br />
+			next = $ (this).next (); // <div class="proof">
+			if (!$ (next.children ()[0]).hasClass ('proofcomment')) {
+				$ (this).append ('<hr />');
+			}
+			$ (this).append (next.contents ());
+			next.remove ();
+			next = $ (this).next ();
+		}
+	});
+	$ ('a.proof').click (function (e) {
+		e.preventDefault ();
+		var proof = $ (this).next ().next ();
+		$ (this).text ((proof.css ('display') === 'none' ? 'Hide' : 'Show') + ' proof.');
+		proof.slideToggle ();
+	});
+});
+</script>
 </head>
 <body>
 <div class="table-nav-top">
@@ -18,9 +66,13 @@
 	</div>
 	<div class="sep-nav"> </div>
 </div>
-<div class="code"><span class="id" data-type="keyword">Notation</span> <a name=":type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">"</span></a>∀  x .. y , P" ≔ (<span class="id" data-type="keyword">∀</span> <span class="id" data-type="var">x</span>, .. (<span class="id" data-type="keyword">∀</span> <span class="id" data-type="var">y</span>, <span class="id" data-type="var">P</span>) ..)<br/>
+<div class="code"><table>
+<tr><td><span class="id" data-type="keyword">Notation</span> <a name=":type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">"</span></a>∀</td><td colspan="2">x .. y , P" ≔ (<span class="id" data-type="keyword">∀</span> <span class="id" data-type="var">x</span>, .. (<span class="id" data-type="keyword">∀</span> <span class="id" data-type="var">y</span>, <span class="id" data-type="var">P</span>) ..)<br/></td></tr>
+</table>
 &nbsp;&nbsp;(<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 200, <span class="id" data-type="var">x</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="var">y</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
-<span class="id" data-type="keyword">Notation</span> <a name=":type_scope:'∃'_x_'..'_x_','_x"><span class="id" data-type="notation">"</span></a>∃  x .. y , P" ≔ (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">∃</span></a> <span class="id" data-type="var">x</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> .. (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">∃</span></a> <span class="id" data-type="var">y</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <span class="id" data-type="var">P</span>) ..)<br/>
+<table>
+<tr><td><span class="id" data-type="keyword">Notation</span> <a name=":type_scope:'∃'_x_'..'_x_','_x"><span class="id" data-type="notation">"</span></a>∃</td><td colspan="2">x .. y , P" ≔ (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">∃</span></a> <span class="id" data-type="var">x</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> .. (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">∃</span></a> <span class="id" data-type="var">y</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <span class="id" data-type="var">P</span>) ..)<br/></td></tr>
+</table>
 &nbsp;&nbsp;(<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 200, <span class="id" data-type="var">x</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="var">y</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
 <br/>
 <span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'∨'_x"><span class="id" data-type="notation">"</span></a>x ∨ y" ≔ (<span class="id" data-type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" data-type="notation">∨</span></a> <span class="id" data-type="var">y</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 85, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
@@ -32,7 +84,9 @@
 <span class="id" data-type="keyword">Notation</span> <a name=":type_scope:'¬'_x"><span class="id" data-type="notation">"</span></a>¬ x" ≔ (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" data-type="notation">¬</span></a><span class="id" data-type="var">x</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 75, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>) : <span class="id" data-type="var">type_scope</span>.<br/>
 <span class="id" data-type="keyword">Notation</span> <a name=":type_scope:x_'≠'_x"><span class="id" data-type="notation">"</span></a>x ≠ y" ≔ (<span class="id" data-type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" data-type="notation">≠</span></a> <span class="id" data-type="var">y</span>) (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 70) : <span class="id" data-type="var">type_scope</span>.<br/>
 <br/>
-<span class="id" data-type="keyword">Notation</span> <a name="::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">"</span></a>'λ'  x .. y ∙ t" ≔ (<span class="id" data-type="keyword">fun</span> <span class="id" data-type="var">x</span> ⇒ .. (<span class="id" data-type="keyword">fun</span> <span class="id" data-type="var">y</span> ⇒ <span class="id" data-type="var">t</span>) ..)<br/>
+<table>
+<tr><td><span class="id" data-type="keyword">Notation</span> <a name="::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">"</span></a>'λ'</td><td colspan="2">x .. y ∙ t" ≔ (<span class="id" data-type="keyword">fun</span> <span class="id" data-type="var">x</span> ⇒ .. (<span class="id" data-type="keyword">fun</span> <span class="id" data-type="var">y</span> ⇒ <span class="id" data-type="var">t</span>) ..)<br/></td></tr>
+</table>
 &nbsp;&nbsp;(<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 200, <span class="id" data-type="var">x</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="var">y</span> <span class="id" data-type="var">binder</span>, <span class="id" data-type="tactic">right</span> <span class="id" data-type="keyword">associativity</span>).<br/>
 </div>
 <div class="table-nav-bottom">
