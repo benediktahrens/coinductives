@@ -11,6 +11,10 @@
 *.swp
 *-blx.bib
 tex/*.pdf
+tex/*.nav
+tex/*.snm
+tex/*.toc
+tex/*.vrb
 *.vo
 *.cmi
 *.cmx
