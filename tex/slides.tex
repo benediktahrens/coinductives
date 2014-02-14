@@ -17,6 +17,10 @@
  \setbeamertemplate{navigation symbols}{}
 \usepackage[T1]{fontenc}
 
+\usepackage{csquotes}	
+
+
+
 \usepackage{verbatim}
 \usepackage{tikz}
 \usetikzlibrary{shapes}                
@@ -38,10 +42,10 @@
 % \usepackage{ascii}
 %  \usepackage{tikz}
 
-\RequirePackage{xcolor}
+ \RequirePackage{xcolor}
 \RequirePackage[color,all,2cell]{xy}\SelectTips{cm}{12}\SilentMatrices\UseAllTwocells  % commutative diagrams
 
-
+\usepackage{bussproofs}
 
 \definecolor{dkblue}{rgb}{0,0.1,0.5}
 \definecolor{lightblue}{rgb}{0,0.5,0.5}
@@ -87,10 +91,30 @@
   \vskip0pt%
 }
 
+\newcommand{\constfont}[1]{\ensuremath{\mathsf{#1}}}
+
 \newcommand{\C}{\mathcal{C}}
 \newcommand{\D}{\mathcal{D}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\bind}[2]{{#1}\mathbin{\gg\hspace{-.8ex}=}{#2}}
+\newcommand{\Tri}{\constfont{Tri}}
+\newcommand{\head}{\constfont{top}}
+\newcommand{\tail}{\constfont{rest}}
+\newcommand{\bisim}{\constfont{bisim}}
+\newcommand{\redec}{\constfont{redec}}
+\newcommand{\cut}{\constfont{cut}}
+\newcommand{\ccut}{\constfont{ccut}}
+\newcommand{\RComonad}{\constfont{RComonad}}
+\newcommand{\RComonadWC}{\constfont{\RComonad wCut}}
+\newcommand{\ULCop}{\constfont{LC}}
+\newcommand{\induced}[1]{\ensuremath{\langle {#1} \rangle}}
+
+\newcommand{\shift}{\constfont{shift}}
+\newcommand{\abs}{\constfont{abs}}
+\newcommand{\subst}{\constfont{subst}}
+
+\newcommand{\coq}{\texttt{Coq}\xspace}
+
 %  \newcommand{\bind}[2]{{#1} \blacktriangleright {#2}}
 % \newcommand{\bind}[2]{{#1} \mathbin{\vartriangleright} {#2}}
 % \newcommand{\bind}[2]{{#1} \mathbin{\mathbf{\rhd}} {#2}}
@@ -102,7 +126,7 @@
 \newcommand{\PCF}{\mathsf{PCF}}
 
 \newcommand{\Id}{\mathsf{Id}}
-\newcommand{\shift}[1]{\mathsf{shift}({#1})}
+
 
 \newcommand{\Set}{\mathsf{Set}}
 \newcommand{\PreOrd}{\mathsf{Pre}}
@@ -147,19 +171,30 @@
   \end{itemize}
  \end{block}
 
- \begin{block}{Initiality for \fat{binding} signatures}
-   \begin{itemize}
-    \item prime example: syntax of lambda calculus
-    \item LICS'99: different techniques of modelling binders
+ \begin{block}{Initiality for \fat{binding} signatures (e.g.\ $\lambda$-calculus)}
+%    \begin{itemize}
+%     \item 
+    Different techniques of modelling binders:
       \begin{itemize}
-        \item Gabbay \& Pitts (nominal)
-        \item Hofmann (HOAS)
-        \item Fiore, Plotkin \& Turi (algebraic de Bruijn, \fat{nested} datatypes)
+        \item nominal (Gabbay, Pitts)
+        \item Higher Order Abstract Syntax (Hofmann)
+        \item \fat{nested datatype} (algebraic de Bruijn)  (Fiore, Plotkin, Turi) 
       \end{itemize}
-    \item variant using monads: Altenkirch \& Reus '99, Hirschowitz \& Maggesi '07, '10
-   \end{itemize}
+%     \item variant using monads: Altenkirch \& Reus '99, Hirschowitz \& Maggesi '07, '10
+%    \end{itemize}
  \end{block}
+ 
+%TODO: signatures via nested datatypes
+ 
 \end{frame}
+
+\begin{frame}
+ \frametitle{Languages as particular nested datatypes}
+ 
+%  TODO: languages as particular nested datatypes
+ 
+\end{frame}
+
 
 \begin{frame}
  \frametitle{Binding signatures with (in)equations}
@@ -170,6 +205,7 @@
      \item Hirschowitz \& Maggesi %TODO: which paper?
     \end{itemize}
    \end{block}
+   
   \begin{block}{Reduction rules via \fat{in}equations}
    \begin{itemize}
     \item A., PhD thesis: 
@@ -189,6 +225,7 @@
 
 \begin{frame}
  \frametitle{An example of cosyntax: infinite triangular matrices}
+ 
    \begin{block}{Infinite triangular matrices}
      \begin{itemize}
       \item omit redundant information below the diagonal
@@ -196,30 +233,161 @@
       \item a fixed type $E$ of elements for rest of matrix
      \end{itemize}
    \end{block}
-
-\begin{comment}
+   
+   
+\begin{center}
+   
   \begin{tikzpicture}[scale = 0.6]
+     \foreach \y in {0,...,2}
+     {\foreach \x in {\y,...,2}
+       \draw (\x+1, -\y) node[color=blue]{$E$} ;
+     }
+     \foreach \x in {0,...,3} \draw (\x, -\x) node[color=red]{$A$} ;
+     \draw(4,-1) node{$\ldots$};
+%      \draw[style = dashed](0.5,0.2) -- (0.5,-1.2);
+%      \draw[style = dashed](1.5,0.2) -- (1.5,-2.2);
+%      \draw[style = dashed, thin](2.5,0.2) -- (2.5,-3.2);
+     
+%      \draw[color=green]  (3,0.5) -- (0.3,0.5) -- (0.3,
+%      -1.2)  -- (2.8,-3.6);
+%      \draw[color=green, dashed]  (3,0.5) -- (4,0.5);
+%      \draw[color=green, dashed]  (2.8,-3.6) -- (3.5,-4.2);
+ \end{tikzpicture}
+
+\end{center}
+ 
+
+   
+\end{frame}
+
+\begin{frame}
+ \frametitle{Matrices through trapezes}
+ 
+ 
+ 
+\begin{columns}
+
+ \column{.5\textwidth}
+ 
+  \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+    \AxiomC{$t : \Tri(A)$}\doubleLine
+     \UnaryInfC{$\head_A(t) : A$}
+      \DisplayProof
+                      
+ 
+ 
+ \column{.5\textwidth}
+  \begin{tikzpicture}[scale = 0.6]
+     \foreach \y in {0,...,2}
+     {\foreach \x in {\y,...,2}
+       \draw (\x+1, -\y) node[color=blue]{$E$} ;
+     }
+     \foreach \x in {0,...,3} \draw (\x, -\x) node[color=red]{$A$} ;
+     \draw(4,-1) node{$\ldots$};
+%      \draw[style = dashed](0.5,0.2) -- (0.5,-1.2);
+%      \draw[style = dashed](1.5,0.2) -- (1.5,-2.2);
+%      \draw[style = dashed, thin](2.5,0.2) -- (2.5,-3.2);
+     
+     \draw[color=green]  (3,0.5) -- (0.5,0.5) -- (0.5,
+     -1.2)  -- (2.8,-3.6);
+     \draw[color=green, dashed]  (3,0.5) -- (4,0.5);
+     \draw[color=green, dashed]  (2.8,-3.6) -- (3.5,-4.2);
+ \end{tikzpicture}
+ 
+\end{columns}
+
+ 
+\begin{center} 
+  \begin{tikzpicture}[scale = 0.6]
+     \foreach \y in {0,...,2}
+     {\foreach \x in {\y,...,2}
+       \draw (\x+1, -\y) node[color=blue]{$E$} ;
+     }
+     \foreach \x in {0,...,3} \draw (\x, -\x) node[color=red]{$A$} ;
+     \draw(4,-1) node{$\ldots$};
+%      \draw[style = dashed](0.5,0.2) -- (0.5,-1.2);
+%      \draw[style = dashed](1.5,0.2) -- (1.5,-2.2);
+%      \draw[style = dashed, thin](2.5,0.2) -- (2.5,-3.2);
+     
+     \draw[color=green]  (3,0.5) -- (0.5,0.5) -- (0.5,
+     -1.2)  -- (2.8,-3.6);
+     \draw[color=green, dashed]  (3,0.5) -- (4,0.5);
+     \draw[color=green, dashed]  (2.8,-3.6) -- (3.5,-4.2);
+ \end{tikzpicture}
+ 
+ \begin{tikzpicture}[scale = 0.6]
     \foreach \y in {0,...,2}
     {\foreach \x in {\y,...,2}
       \draw (\x+1, -\y) node[color=blue]{E} ;
     }
-    \foreach \x in {0,...,3} \draw (\x, -\x) node[color=red]{A} ;
-    \draw(4,-1) node{$\ldots$};
-    \draw[style = dashed](0.5,0.2) -- (0.5,-1.2);
-    \draw[style = dashed](1.5,0.2) -- (1.5,-2.2);
-    \draw[style = dashed, thin](2.5,0.2) -- (2.5,-3.2);
+    \foreach \x in {0,...,3} \draw (\x, -\x-1) node[color=red]{A} ;
+    \foreach \x in {0,...,3} \draw (\x, -\x)
+    node[color=blue]{\textbf{E}} ;
+    \draw(4,-2) node{$\ldots$};
+
+    \foreach \y in {0,...,2}
+    {\foreach \x in {\y,...,2}
+      \draw (1.5*\x+10.5, -\y) node[color=blue]{E} ;
+    }
+    \foreach \x in {0,...,3} \draw (1.5*\x+9, -\x)
+    node{{\color{blue}\textbf{E}} $\times$ {\color{red} A}} ;
+    \draw(14.5,-1.5) node{$\ldots$};
     
-    \draw[color=green]  (3,0.5) -- (0.3,0.5) -- (0.3,
-    -1.2)  -- (2.8,-3.6);
-    \draw[color=green, dashed]  (3,0.5) -- (4,0.5);
-    \draw[color=green, dashed]  (2.8,-3.6) -- (3.5,-4.2);
+    \draw[->] (5,-1.5) to node[swap, auto, above]{triangle}
+    (8,-1.5) ; 
+    
+    \draw[<-] (5,-2.5) to node[swap, auto, below]{trapezium}
+    (8,-2.5) ; 
+
+    \draw[color=green] (2.8,0.4) -- (-0.5,0.4) -- (-0.5, -1.1) --
+    (2.8,-4.5)  ; 
+    \draw[color=green, dashed] (2.8,0.4) -- (3.6,0.4) ; 
+    \draw[color=green, dashed] (2.8,-4.5) -- (3.5,-5.3) ; 
+
+    \draw[color=green] (13.5,0.4) -- (7.2,0.4) -- (13.5, -4); 
+    \draw[color=green, dashed] (13.5,0.4) -- (14.4,0.4) ; 
+    \draw[color=green, dashed] (13.5,-4) -- (14.3,-4.6) ; 
+
+    \draw[color=orange](0, -0.5) ellipse (12pt and 25pt) ;  
+    \draw[color=orange](1, -1.5) ellipse (12pt and 25pt) ;  
+    \draw[color=orange](2, -2.5) ellipse (12pt and 25pt) ;  
+    \draw[color=orange](3, -3.5) ellipse (12pt and 25pt) ;  
   \end{tikzpicture}
-\end{comment} %TODO: make tikz work
-   
+\end{center}
+ 
+ {\small Images used with kind permission of Matthes and Picard}
+ \end{frame}
+
+\begin{frame}
+ \frametitle{Redecoration}
+ 
+   have beautiful image of redecoration operation
+  
+\end{frame}
+
+\section{Algebraic characterization of redecoration}
+
+\begin{frame}
+ \frametitle{Weak constructive comonad}
+ \begin{block}{Monads capture substitution and its properties}
+   \begin{itemize}
+    \item Lambda calculus as monad: Altenkirch \& Reus '99
+   \end{itemize}
+ \end{block}
+
+\begin{block}{Dually, comonads capture redecoration}
+   \begin{itemize}
+    \item finite triangular matrices: comonads
+    \item infinite triangular matrices need \fat{bisimilarity}
+    \item notion of \enquote{weak constructive comonad} introduced by Matthes \& Picard
+   \end{itemize}
+\end{block}
+
+ 
+ 
 \end{frame}
 
 
-\section{Algebraic characterization of redecoration}
 
 % \begin{frame}
 %  \frametitle{Outline}
