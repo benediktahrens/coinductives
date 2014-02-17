@@ -216,7 +216,7 @@
 \begin{block}{Question}
   \begin{itemize}
     \item 
-        Can we use the techniques of H.\ and M.\ to characterize codata types with cosubstitution as
+        Can we use (dual) techniques of H.\ and M.\ to characterize codata types with cosubstitution as
         \fat{terminal} object?
     \item I.e.: Given some codata type, what is the category in which that codata type is terminal?
   \end{itemize}
@@ -266,17 +266,23 @@
 \begin{frame}
  \frametitle{An example of cosyntax: infinite triangular matrices}
  
-   \begin{block}{Infinite triangular matrices}
+   \begin{block}{TriMat: the codata type of infinite triangular matrices}
      \begin{itemize}
       \item omit redundant information below the diagonal
-      \item have a type $A$ of diagonal elements (e.g.\ invertible elements)
+      \item have a \fat{variable} type $A$ of diagonal elements 
+        \begin{itemize} 
+          \item e.g.\ invertible elements
+        \end{itemize}
       \item a fixed type $E$ of elements for rest of matrix
+      \item usage: Pascal matrices (binomial coefficients), mathematical physics (infinite-dim.\ problems)
      \end{itemize}
    \end{block}
    
    
 \begin{center}
    
+ 
+%
   \begin{tikzpicture}[scale = 0.6]
      \foreach \y in {0,...,2}
      {\foreach \x in {\y,...,2}
@@ -301,13 +307,15 @@
 \end{frame}
 
 \begin{frame}
- \frametitle{Matrices through trapezes}
+ \frametitle{Matrices through trapezes: the destructors of TriMat}
  
  
  
 \begin{columns}
 
- \column{.5\textwidth}
+ \column{.4\textwidth}
+ 
+ \begin{center}
  
   \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
     \AxiomC{$t : \Tri(A)$}\doubleLine
@@ -315,8 +323,20 @@
       \DisplayProof
                       
  
+ \vspace{15ex}
+ 
+  \AxiomC{$t : \Tri(A)$}\doubleLine
+                                       \UnaryInfC{$\tail_A(t) : \Tri(E\times A)$}
+                                       \DisplayProof%
+ 
+ \end{center}
+ 
+ \vspace{5ex}
  
  \column{.5\textwidth}
+
+\vspace{2em}
+ 
   \begin{tikzpicture}[scale = 0.6]
      \foreach \y in {0,...,2}
      {\foreach \x in {\y,...,2}
@@ -334,69 +354,58 @@
      \draw[color=green, dashed]  (2.8,-3.6) -- (3.5,-4.2);
  \end{tikzpicture}
  
-\end{columns}
-
+\vspace{5ex}
  
-\begin{center} 
-  \begin{tikzpicture}[scale = 0.6]
-     \foreach \y in {0,...,2}
-     {\foreach \x in {\y,...,2}
-       \draw (\x+1, -\y) node[color=blue]{$E$} ;
-     }
-     \foreach \x in {0,...,3} \draw (\x, -\x) node[color=red]{$A$} ;
-     \draw(4,-1) node{$\ldots$};
-%      \draw[style = dashed](0.5,0.2) -- (0.5,-1.2);
-%      \draw[style = dashed](1.5,0.2) -- (1.5,-2.2);
-%      \draw[style = dashed, thin](2.5,0.2) -- (2.5,-3.2);
-     
-     \draw[color=green]  (3,0.5) -- (0.5,0.5) -- (0.5,
-     -1.2)  -- (2.8,-3.6);
-     \draw[color=green, dashed]  (3,0.5) -- (4,0.5);
-     \draw[color=green, dashed]  (2.8,-3.6) -- (3.5,-4.2);
- \end{tikzpicture}
+  \begin{overprint}
+    \onslide<2>
+\hspace{1em}    
+	  \begin{tikzpicture}[scale = 0.6]
+	  \foreach \y in {0,...,2}
+	    {\foreach \x in {\y,...,2}
+	      \draw (1.5*\x+10.5, -\y) node[color=blue]{E} ;
+	    }
+	    \foreach \x in {0,...,3} \draw (1.5*\x+9, -\x)
+	    node{{\color{blue}\textbf{E}} $\times$ {\color{red} A}} ;
+	    \draw(14.5,-1.5) node{$\ldots$};
+	    
+	    \draw[color=green] (13.5,0.4) -- (7.2,0.4) -- (13.5, -4); 
+	    \draw[color=green, dashed] (13.5,0.4) -- (14.4,0.4) ; 
+	    \draw[color=green, dashed] (13.5,-4) -- (14.3,-4.6) ; 
+	  \end{tikzpicture}
+    \onslide<1>
+\hspace{1em}
+	    \begin{tikzpicture}[scale = 0.6]
+	    % matrix coefficients
+	    \foreach \y in {0,...,2}
+	    {\foreach \x in {\y,...,2}
+	      \draw (\x+1, -\y) node[color=blue]{E} ;
+	    }
+	    \foreach \x in {0,...,3} \draw (\x, -\x-1) node[color=red]{A} ;
+	    \foreach \x in {0,...,3} \draw (\x, -\x)
+	    node[color=blue]{\textbf{E}} ;
+	    \draw(4,-2) node{$\ldots$};
+	    
+	    % green border
+	    \draw[color=green] (2.8,0.4) -- (-0.5,0.4) -- (-0.5, -1.1) --
+	    (2.8,-4.5)  ; 
+	    \draw[color=green, dashed] (2.8,0.4) -- (3.6,0.4) ; 
+	    \draw[color=green, dashed] (2.8,-4.5) -- (3.5,-5.3) ; 
+	    
+	    % ellipses around pairs of A and E
+	    \draw[color=orange](0, -0.5) ellipse (12pt and 25pt) ;  
+	    \draw[color=orange](1, -1.5) ellipse (12pt and 25pt) ;  
+	    \draw[color=orange](2, -2.5) ellipse (12pt and 25pt) ;  
+	    \draw[color=orange](3, -3.5) ellipse (12pt and 25pt) ;  
+	  \end{tikzpicture}
+  \end{overprint}
  
- \begin{tikzpicture}[scale = 0.6]
-    \foreach \y in {0,...,2}
-    {\foreach \x in {\y,...,2}
-      \draw (\x+1, -\y) node[color=blue]{E} ;
-    }
-    \foreach \x in {0,...,3} \draw (\x, -\x-1) node[color=red]{A} ;
-    \foreach \x in {0,...,3} \draw (\x, -\x)
-    node[color=blue]{\textbf{E}} ;
-    \draw(4,-2) node{$\ldots$};
-
-    \foreach \y in {0,...,2}
-    {\foreach \x in {\y,...,2}
-      \draw (1.5*\x+10.5, -\y) node[color=blue]{E} ;
-    }
-    \foreach \x in {0,...,3} \draw (1.5*\x+9, -\x)
-    node{{\color{blue}\textbf{E}} $\times$ {\color{red} A}} ;
-    \draw(14.5,-1.5) node{$\ldots$};
-    
-    \draw[->] (5,-1.5) to node[swap, auto, above]{triangle}
-    (8,-1.5) ; 
-    
-    \draw[<-] (5,-2.5) to node[swap, auto, below]{trapezium}
-    (8,-2.5) ; 
-
-    \draw[color=green] (2.8,0.4) -- (-0.5,0.4) -- (-0.5, -1.1) --
-    (2.8,-4.5)  ; 
-    \draw[color=green, dashed] (2.8,0.4) -- (3.6,0.4) ; 
-    \draw[color=green, dashed] (2.8,-4.5) -- (3.5,-5.3) ; 
-
-    \draw[color=green] (13.5,0.4) -- (7.2,0.4) -- (13.5, -4); 
-    \draw[color=green, dashed] (13.5,0.4) -- (14.4,0.4) ; 
-    \draw[color=green, dashed] (13.5,-4) -- (14.3,-4.6) ; 
-
-    \draw[color=orange](0, -0.5) ellipse (12pt and 25pt) ;  
-    \draw[color=orange](1, -1.5) ellipse (12pt and 25pt) ;  
-    \draw[color=orange](2, -2.5) ellipse (12pt and 25pt) ;  
-    \draw[color=orange](3, -3.5) ellipse (12pt and 25pt) ;  
-  \end{tikzpicture}
-\end{center}
  
- {\small Images used with kind permission of Matthes and Picard}
- \end{frame}
+  \end{columns}
+\end{frame}  
+
+
+  
+ 
 
 \begin{frame}
  \frametitle{Redecoration}
