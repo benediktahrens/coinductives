@@ -5,7 +5,7 @@
 
 
 \documentclass[
-% handout
+%  handout,
 serif,
 mathsans,
 ]
@@ -180,10 +180,10 @@ mathsans,
  
   \begin{itemize}
     \item Fiore, Plotkin, Turi '99, Hirschowitz and Maggesi '07
-    \item motivation: characterization of \fat{binding signatures} (e.g.\ $\lambda$-calculus)
+    \item motivation: characterization of \fat{binding syntax} ($\lambda$-calculus)
     \item binding modelled through \fat{heterogeneous} data type
            \[  \lambda : \LC(X + 1) \to \LC(X) \]
-    \item characterizes not only data, but also \fat{substitution} operation
+    \item characterizes not only data but also \fat{substitution} %operation
 %    \begin{itemize}
 %     \item 
   \end{itemize}
@@ -205,7 +205,7 @@ mathsans,
  \begin{itemize}
   \item Lambda calculus as \fat{inital} monad 
      \begin{itemize}
-       \item [$\leadsto$]actually: monad + extra structure for constructors
+       \item [$\leadsto$]actually: monad + \enquote{algebra} structure for constructors
      \end{itemize}
   \item notion of \fat{module over a monad} 
      \begin{itemize}
@@ -234,9 +234,7 @@ mathsans,
     \item the codata type of infinite triangular matrices
     \item with \fat{redecoration} operation
   \end{itemize}
-\end{block}
-
- 
+\end{block} 
 \end{frame}
 
 
@@ -499,8 +497,40 @@ mathsans,
  $\Tri$ forms a \fat{relative comonad}, relative to $\eq:\Set\to\Setoid$.
 \end{lemma}
 
-
+\begin{definition}[\fat{Relative} (co)monad, Altenkirch et al '10]
+  \begin{itemize} 
+   \item a notion of (co)monad whose underlying functor is \fat{not} necessarily \fat{endo}
+   \item needs \enquote{mediating} functor (above: $\eq$)
+  \end{itemize}
+\end{definition}
 \end{frame}
+
+\begin{frame}
+ \frametitle{(Co)modules over (relative) (co)monads}
+ \begin{block}{Modules over monads---better, morphisms of\ldots}
+  \begin{itemize}
+   \item used in work by Hirschowitz and Maggesi
+   \item characterize distributivity of substitution over constructors
+      \begin{align*} \bind{App(M,N)}{f} \quad &= \quad App(\bind{M}{f},\bind{N}{f}) \\
+                     \bind{Abs(M)}{f}       \quad &= \quad Abs(\bind{M}{\shift~f})
+      \end{align*}
+  \end{itemize}
+ \end{block}
+
+ \begin{block}{generalize/dualize to comodules over relative comonads}
+  \begin{itemize}
+   \item characterize distributivity of cosubstitution over destructors
+   \item example of morphism of comodules:  \[\tail : \Tri A \to \Tri(E\times A)\]
+  \end{itemize}
+ \end{block}
+ 
+\end{frame}
+
+
+\begin{frame}
+ \frametitle{Coinitiality for $\Tri + \redec$}
+\end{frame}
+
 
 
 \begin{frame}
@@ -517,10 +547,7 @@ mathsans,
     \item infinite triangular matrices need \fat{bisimilarity}
     \item notion of \enquote{weak constructive comonad} introduced by Matthes \& Picard
    \end{itemize}
-\end{block}
-
- 
- 
+\end{block} 
 \end{frame}
 
 

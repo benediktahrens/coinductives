@@ -68,7 +68,7 @@ order=-1
 
 [item:comonads.tex]
 archive=true
-column=108
+column=105
 encoding=UTF-8
 highlight=LaTeX
 line=686
@@ -107,7 +107,7 @@ open=true
 order=2
 
 [view-settings,view=0,item:comonads.tex]
-CursorColumn=108
+CursorColumn=105
 CursorLine=686
 JumpList=
 ViMarks=
