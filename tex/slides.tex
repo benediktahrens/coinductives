@@ -4,8 +4,11 @@
 
 
 
-\documentclass
-% [handout]
+\documentclass[
+% handout
+serif,
+mathsans,
+]
 {beamer}
 \usepackage[utf8]{inputenc}
 % \usetheme[width=6ex]{Marburg}
@@ -110,8 +113,11 @@
 \newcommand{\induced}[1]{\ensuremath{\langle {#1} \rangle}}
 
 \newcommand{\shift}{\constfont{shift}}
+\newcommand{\lift}{\constfont{lift}}
 \newcommand{\abs}{\constfont{abs}}
 \newcommand{\subst}{\constfont{subst}}
+\newcommand{\Setoid}{\constfont{Setoid}}
+\newcommand{\eq}{\ensuremath{\mathsf{eq}}}
 
 \newcommand{\coq}{\texttt{Coq}\xspace}
 
@@ -266,7 +272,7 @@
 \begin{frame}
  \frametitle{An example of cosyntax: infinite triangular matrices}
  
-   \begin{block}{TriMat: the codata type of infinite triangular matrices}
+   \begin{block}{\Tri: the codata type of infinite triangular matrices}
      \begin{itemize}
       \item omit redundant information below the diagonal
       \item have a \fat{variable} type $A$ of diagonal elements 
@@ -410,11 +416,92 @@
 \begin{frame}
  \frametitle{Redecoration}
  
-   have beautiful image of redecoration operation
+ 
+ \[\redec_{A,B} : (\Tri A \to B) \to (\Tri A \to \Tri B) \]
+ \centering
+ \begin{tikzpicture}[scale = 0.6]
+    \foreach \y in {0,...,2}
+    {\foreach \x in {\y,...,2}
+      \draw (\x+1, -\y) node[color=blue]{E} ;
+    }
+    \foreach \x in {0,...,3} \draw (\x, -\x) node[color=red]{A} ;
+    \draw(4,-1) node{$\ldots$};
+
+    \foreach \y in {0,...,2}
+    {\foreach \x in {\y,...,2}
+      \draw (\x+10, -\y) node[color=blue]{E} ;
+    }
+    \foreach \x in {0,...,3} \draw (\x+9, -\x) node[color=violet]{B} ;
+    \draw(13,-1) node{$\ldots$};
+    \draw[color=purple!70]  (2.4, -3) --
+    (0.6,-1.2) -- (0.6,0.4) -- (2.4,0.4);
+    \draw[color=purple!70, dashed]  (2.4,0.4) -- (3.4,0.4);
+    \draw[color=purple!70, dashed]  (2.4,-3) -- (3.2,-3.7);
+ 
+    \draw[color=orange] (1.8,-1.5) circle(2.7cm);
+
+    \draw[color=purple!70]  (11.4, -3) --
+    (9.6,-1.2) -- (9.6,0.4) -- (11.4,0.4);
+    \draw[color=purple!70, dashed]  (11.4,0.4) -- (12.6,0.4);
+    \draw[color=purple!70, dashed]  (11.4,-3) -- (12.5,-4.05);
+    
+    \draw[color=orange] (9,0) circle(0.4cm);
+    
+    \draw[->,color = orange] (3.9,0.5) to [bend left] node[auto,
+    swap, above]{$f$} (8.8,0.5) ; 
+
+    \draw[->,color = purple!70, dashed] (3.6,-2) to (10.2,-2) ; 
+  \end{tikzpicture}
+ 
+ When redecorating the $\tail$ of the matrix, we need a function \[\lift~f : \Tri(E\times A) \to E \times B\]
+   
+\end{frame}
+
+\begin{frame}
+ \frametitle{Sameness for infinite triangular matrices}
+  \begin{block}{Sameness = \fat{bisimilarity}}
+    Bisimilarity $\sim$ coinductively defined via destructors
+     
+    \begin{center}
+                                            \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+    \AxiomC{$t \sim t'$}\doubleLine
+     \UnaryInfC{$\head(t) = \head(t')$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$t \sim t'$}\doubleLine
+                                       \UnaryInfC{$ \tail(t) \sim \tail(t')$}
+                                       \DisplayProof   
+   \end{center}                                    
+  \end{block}
+  
+  \begin{block}{Consequences}
+    \begin{itemize}
+     \item consider $\Tri A$ as a \fat{setoid} rather than a set
+     \item \[ \redec_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B )\]
+             with $\eq : \Set \to \Setoid$
+    \end{itemize}
+  \end{block}
+
   
 \end{frame}
 
+
 \section{Algebraic characterization of redecoration}
+
+\begin{frame}
+ \frametitle{$\Tri$ as a comonad}
+\begin{lemma}[Matthes and Picard '11]
+ $\Tri$ forms a \enquote{weak constructive comonad}.
+\end{lemma}
+
+\begin{lemma}[Equivalent to MP'11]
+ $\Tri$ forms a \fat{relative comonad}, relative to $\eq:\Set\to\Setoid$.
+\end{lemma}
+
+
+\end{frame}
+
 
 \begin{frame}
  \frametitle{Weak constructive comonad}
