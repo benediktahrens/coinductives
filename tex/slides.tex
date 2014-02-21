@@ -586,13 +586,54 @@ mathsans,
     \item definition of 
              \[\lift_A: (\Tri A \to B) \to (\Tri(E\times A) \to E\times B) \]
           requires auxiliary function $\cut_A : \Tri (E\times A) \to \Tri A$
-    \item were not able to define $\cut$ categorically
+    \item we were not able to define $\cut$ categorically
     \item consequence: every coalgebra comes with a \fat{specified} operation
        \[ \cut_A : T (E\times A) \to TA \]
+          and equations characterizing $\cut$
+    \item $\cut$ for $\Tri$ uniquely determined through these equations
    \end{itemize}
-%   TODO: finish here
 \end{frame}
 
+\begin{frame}
+ \frametitle{Closing remarks}
+ 
+   \begin{block}{Higher order compatibility}
+    Observing that $\Setoid$ is cartesian closed, on can encode
+       \[ f \sim g  \Longrightarrow \redec~f \sim \redec~g\]
+    in definition of coalgebra for signature of $\Tri$
+   \end{block}
+
+ 
+   \begin{block}{Mechanization in the proof assistant \texttt{Coq}}
+      \begin{itemize}
+       \item helped to find a mistake we made (already made by Abel, Matthes \& Uustalu)
+       \item tedious: coinduction in \texttt{Coq} cumbersome
+      \end{itemize}
+   \end{block}
+
+  \pause
+  \begin{center}Thanks for your attention.\end{center}
+   
+\end{frame}
+
+
+\begin{frame}
+ \frametitle{Some references}
+ 
+  
+  
+  \begin{block}{Some references}
+   \begin{itemize}
+    \item Altenkirch, Chapman \& Uustalu: \emph{Monads need not be endofunctors}
+    \item Hirschowitz \& Maggesi: \emph{Modules over Monads and Linearity}
+    \item Matthes \& Picard: \emph{Verification of Redecoration for Infinite Triangular Matrices using Coinduction}
+    \item preprint about this work on the arXiv
+   \end{itemize}
+
+  \end{block}
+
+ 
+\end{frame}
 
 
 
