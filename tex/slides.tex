@@ -118,7 +118,8 @@ mathsans,
 \newcommand{\subst}{\constfont{subst}}
 \newcommand{\Setoid}{\constfont{Setoid}}
 \newcommand{\eq}{\ensuremath{\mathsf{eq}}}
-
+\newcommand{\App}{\constfont{App}}
+\newcommand{\Abs}{\constfont{Abs}}
 \newcommand{\coq}{\texttt{Coq}\xspace}
 
 %  \newcommand{\bind}[2]{{#1} \blacktriangleright {#2}}
@@ -311,7 +312,7 @@ mathsans,
 \end{frame}
 
 \begin{frame}
- \frametitle{Matrices through trapezes: the destructors of TriMat}
+ \frametitle{Matrices through trapezes: the destructors of $\Tri$}
  
  
  
@@ -366,10 +367,10 @@ mathsans,
 	  \begin{tikzpicture}[scale = 0.6]
 	  \foreach \y in {0,...,2}
 	    {\foreach \x in {\y,...,2}
-	      \draw (1.5*\x+10.5, -\y) node[color=blue]{E} ;
+	      \draw (1.5*\x+10.5, -\y) node[color=blue]{$E$} ;
 	    }
 	    \foreach \x in {0,...,3} \draw (1.5*\x+9, -\x)
-	    node{{\color{blue}\textbf{E}} $\times$ {\color{red} A}} ;
+	    node{{\color{blue}\textbf{$E$}} $\times$ {\color{red} $A$}} ;
 	    \draw(14.5,-1.5) node{$\ldots$};
 	    
 	    \draw[color=green] (13.5,0.4) -- (7.2,0.4) -- (13.5, -4); 
@@ -382,11 +383,11 @@ mathsans,
 	    % matrix coefficients
 	    \foreach \y in {0,...,2}
 	    {\foreach \x in {\y,...,2}
-	      \draw (\x+1, -\y) node[color=blue]{E} ;
+	      \draw (\x+1, -\y) node[color=blue]{$E$} ;
 	    }
-	    \foreach \x in {0,...,3} \draw (\x, -\x-1) node[color=red]{A} ;
+	    \foreach \x in {0,...,3} \draw (\x, -\x-1) node[color=red]{$A$} ;
 	    \foreach \x in {0,...,3} \draw (\x, -\x)
-	    node[color=blue]{\textbf{E}} ;
+	    node[color=blue]{\textbf{$E$}} ;
 	    \draw(4,-2) node{$\ldots$};
 	    
 	    % green border
@@ -416,20 +417,20 @@ mathsans,
  
  
  \[\redec_{A,B} : (\Tri A \to B) \to (\Tri A \to \Tri B) \]
- \centering
+ \begin{center}
  \begin{tikzpicture}[scale = 0.6]
     \foreach \y in {0,...,2}
     {\foreach \x in {\y,...,2}
-      \draw (\x+1, -\y) node[color=blue]{E} ;
+      \draw (\x+1, -\y) node[color=blue]{$E$} ;
     }
-    \foreach \x in {0,...,3} \draw (\x, -\x) node[color=red]{A} ;
+    \foreach \x in {0,...,3} \draw (\x, -\x) node[color=red]{$A$} ;
     \draw(4,-1) node{$\ldots$};
 
     \foreach \y in {0,...,2}
     {\foreach \x in {\y,...,2}
-      \draw (\x+10, -\y) node[color=blue]{E} ;
+      \draw (\x+10, -\y) node[color=blue]{$E$} ;
     }
-    \foreach \x in {0,...,3} \draw (\x+9, -\x) node[color=violet]{B} ;
+    \foreach \x in {0,...,3} \draw (\x+9, -\x) node[color=violet]{$B$} ;
     \draw(13,-1) node{$\ldots$};
     \draw[color=purple!70]  (2.4, -3) --
     (0.6,-1.2) -- (0.6,0.4) -- (2.4,0.4);
@@ -446,17 +447,27 @@ mathsans,
     \draw[color=orange] (9,0) circle(0.4cm);
     
     \draw[->,color = orange] (3.9,0.5) to [bend left] node[auto,
-    swap, above]{$f$} (8.8,0.5) ; 
+    swap, above]{$f:\Tri A \to B$} (8.8,0.5) ; 
 
     \draw[->,color = purple!70, dashed] (3.6,-2) to (10.2,-2) ; 
   \end{tikzpicture}
+ \end{center}
  
- When redecorating the $\tail$ of the matrix, we need a function \[\lift~f : \Tri(E\times A) \to E \times B\]
+%  When redecorating the $\tail$ of the matrix, we need a function \[\lift~f : \Tri(E\times A) \to E \times B\]
+%   \[ \tail (\redec~f~t) \quad = \redec~(\lift~f) (\tail~t) \]
+  
+  \vspace{-6ex}
+  
+   \begin{align*}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \\
+                     \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\lift~f\bigr)(\tail~t) \enspace .
+   \end{align*}
+  
+  with $\quad\lift~f : \Tri(E\times A) \to E \times B$
    
 \end{frame}
 
 \begin{frame}
- \frametitle{Sameness for infinite triangular matrices}
+ \frametitle{$\Tri$ is a weak constructive comonad}
   \begin{block}{Sameness = \fat{bisimilarity}}
     Bisimilarity $\sim$ coinductively defined via destructors
      
@@ -473,7 +484,19 @@ mathsans,
    \end{center}                                    
   \end{block}
   
-  \begin{block}{Consequences}
+  \begin{lemma}[Matthes and Picard '11]
+      $\Tri : \Set \to \Set$ forms a \enquote{weak constructive comonad}.
+  \end{lemma}
+  
+  \begin{itemize}
+   \item [$\leadsto$] \enquote{weak constructive} refers to compatibility conditions with bisimilarity
+  \end{itemize}
+
+\end{frame}
+   
+\begin{frame}
+ \frametitle{$\Tri$ is a relative comonad}
+  \begin{block}{Alternatively,}
     \begin{itemize}
      \item consider $\Tri A$ as a \fat{setoid} rather than a set
      \item \[ \redec_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B )\]
@@ -481,642 +504,95 @@ mathsans,
     \end{itemize}
   \end{block}
 
-  
-\end{frame}
-
-
-\section{Algebraic characterization of redecoration}
-
-\begin{frame}
- \frametitle{$\Tri$ as a comonad}
-\begin{lemma}[Matthes and Picard '11]
- $\Tri$ forms a \enquote{weak constructive comonad}.
-\end{lemma}
-
-\begin{lemma}[Equivalent to MP'11]
+  \begin{lemma}[Equivalent to MP'11]
  $\Tri$ forms a \fat{relative comonad}, relative to $\eq:\Set\to\Setoid$.
 \end{lemma}
-
 \begin{definition}[\fat{Relative} (co)monad, Altenkirch et al '10]
   \begin{itemize} 
-   \item a notion of (co)monad whose underlying functor is \fat{not} necessarily \fat{endo}
+   \item underlying functor is \fat{not} necessarily \fat{endo}
    \item needs \enquote{mediating} functor (above: $\eq$)
   \end{itemize}
 \end{definition}
 \end{frame}
 
+
+\section{Coinitiality for $\Tri$}
+
+\begin{frame}
+ \frametitle{Towards \enquote{coalgebras} for the signature of $\Tri$}
+ 
+  \begin{block}{Goal: define \enquote{coalgebra} s.t.\ $\Tri$ is one}
+    More specifically:
+    \begin{itemize}
+     \item define a notion of morphism for destructor $\tail$
+     \item requirement: want to capture interplay of $\tail$ and $\redec$:
+       \[\tail\bigl(\redec~f~t\bigr) = \redec\bigl(\lift~f\bigr)(\tail~t)\]
+    \end{itemize}
+  \end{block}
+
+ \begin{block}{Analogous situtation for syntax:}
+   For the lambda calculus with monadic substitution:
+      \[ \subst~f~(\Abs~t) = \Abs~(\subst~(\shift~f)~t) \]
+ \end{block}
+
+ 
+\end{frame}
+
+
 \begin{frame}
  \frametitle{(Co)modules over (relative) (co)monads}
- \begin{block}{Modules over monads---better, morphisms of\ldots}
+ \begin{block}{\fat{Modules over monads}---better, morphisms of\ldots}
   \begin{itemize}
    \item used in work by Hirschowitz and Maggesi
    \item characterize distributivity of substitution over constructors
-      \begin{align*} \bind{App(M,N)}{f} \quad &= \quad App(\bind{M}{f},\bind{N}{f}) \\
-                     \bind{Abs(M)}{f}       \quad &= \quad Abs(\bind{M}{\shift~f})
+      \begin{align*} \bind{\App~(s,t)}{f} \quad &= \quad \App~(\bind{s}{f},\bind{t}{f}) \\
+                     \bind{\Abs~t}{f}       \quad &= \quad \Abs~(\bind{t}{\shift~f})
       \end{align*}
   \end{itemize}
  \end{block}
 
- \begin{block}{generalize/dualize to comodules over relative comonads}
+ \begin{block}{generalize/dualize to \fat{comodules over relative comonads}}
   \begin{itemize}
-   \item characterize distributivity of cosubstitution over destructors
-   \item example of morphism of comodules:  \[\tail : \Tri A \to \Tri(E\times A)\]
+   \item characterize distributivity of \redec oration over destructors
+   \item example of morphism of comodules:  \[\tail : \Tri \to \Tri(E\times \_)\]
   \end{itemize}
- \end{block}
- 
+ \end{block} 
+\end{frame}
+
+\begin{frame}
+ \frametitle{Coalgebras for the signature of $\Tri$}
+  \begin{definition}[Category of coalgebras]
+    A coalgebra for the signature of $\Tri$ is given by
+    \begin{itemize}
+     \item a comonad $T$ relative to $\eq: \Set \to \Setoid$
+     \item a morphism of comodules over $T$
+        \[  r : T \to T(E \times \_) \]
+    \end{itemize}
+   Morphisms: \ldots
+  \end{definition}
+
+ \begin{lemma}
+  $(\Tri,\tail)$ is the terminal object in the above category.
+ \end{lemma}
+
+ That's \fat{almost} how it works \ldots
+  
 \end{frame}
 
 
 \begin{frame}
- \frametitle{Coinitiality for $\Tri + \redec$}
-\end{frame}
-
-
-
-\begin{frame}
- \frametitle{Weak constructive comonad}
- \begin{block}{Monads capture substitution and its properties}
+ \frametitle{Technical difficulty: definition of $\lift$}
    \begin{itemize}
-    \item Lambda calculus as monad: Altenkirch \& Reus '99
+    \item definition of 
+             \[\lift_A: (\Tri A \to B) \to (\Tri(E\times A) \to E\times B) \]
+          requires auxiliary function $\cut_A : \Tri (E\times A) \to \Tri A$
+    \item were not able to define $\cut$ categorically
+    \item consequence: every coalgebra comes with a \fat{specified} operation
+       \[ \cut_A : T (E\times A) \to TA \]
    \end{itemize}
- \end{block}
-
-\begin{block}{Dually, comonads capture redecoration}
-   \begin{itemize}
-    \item finite triangular matrices: comonads
-    \item infinite triangular matrices need \fat{bisimilarity}
-    \item notion of \enquote{weak constructive comonad} introduced by Matthes \& Picard
-   \end{itemize}
-\end{block} 
+%   TODO: finish here
 \end{frame}
 
-
-
-% \begin{frame}
-%  \frametitle{Outline}
-%   \tableofcontents
-% \end{frame}
-
-
-
-\section*{Introduction}
-
-
-\begin{frame}
- \frametitle{Universal algebra}
- 
- \begin{columns}
-  
-  \column{.45\textwidth}
-
-  \begin{block}{Goal of Universal algebra}
-   specify
-   \begin{itemize}
-    \item terms
-    \item equations of terms
-   \end{itemize}
-   by a signature
-  \end{block}
-
-  \begin{exampleblock}{\textbf{Signature} of group theory:}
-     \begin{itemize}
-      \item $e : 0$
-      \item $(\_)^{-1} : 1$
-      \item $ * : 2$
-      \item [+] equations
-     \end{itemize}
-  \end{exampleblock}
-  
-  
-   \column{.4\textwidth}
- 
- \begin{exampleblock}{A group $G$ is a set $G$ with}
- 
-    operations and equations:
-   \begin{itemize}
-    \item $e : G$
-    \item $(\_)^{-1} : G \to G$
-    \item $(*) : G \times G \to G$
-%    \end{itemize}
-%    equations:
-%    \begin{itemize}
-    \item $ e * g = g$
-    \item $g * g^{-1} = e$
-    \item \ldots
-   \end{itemize}
-
-  \end{exampleblock}
-  
-  \begin{block}{The \textbf{free} group of a set $X$} 
-     inductively generated by the signature.
-  \end{block}
-
-  
- \end{columns}
- 
- 
-\end{frame}
-
-
-\begin{frame}
- \frametitle{Goal: Universal algebra for programming languages}
-  
-   \begin{block}{Goal: signatures for languages \textbf{with variable binding}}
-    \begin{itemize}
-     \item want \textbf{in}equalities rather than equalities between terms
-     \item [$\rightsquigarrow$] model reductions more faithfully
-     \item characterize language specified by signature categorically
-    \end{itemize}
-
-  \end{block}
-  
- \begin{columns}
-  
-  \column{.45\textwidth}
-  \begin{block}{Signatures specifying}
-      \begin{itemize}
-        \item types + 
-                    terms
-        \item reduction rules
-      \end{itemize}
-  \end{block}
-  
-  \column{.45\textwidth}
-  \begin{block}{Characterization of generated language}
-      \begin{itemize}
-         \item category of \textbf{models} of signature
-        \item language as \textbf{initial} model % object in some category of \textbf{models} of that signature
-      \end{itemize}
-  \end{block}
-\end{columns}
-\end{frame}
-
-
-\begin{frame}
- \frametitle{Universal algebra with variable binding: related work}
-%   \begin{block}{Related work:}
-    \begin{itemize}
-     \item Gabbay \& Pitts 
-        \begin{itemize}
-           \item nominal syntax, no equations
-        \end{itemize}
-     \item Hofmann, Miculan \& Scagnetto 
-          \begin{itemize}
-             \item HOAS, no equations
-          \end{itemize}
-     \item Fiore 
-        \begin{itemize}
-           \item algebraic de Bruijn, equations
-        \end{itemize}
-     \item Hirschowitz \& Maggesi
-        \begin{itemize}
-           \item algebraic de Bruijn, equations
-        \end{itemize}
-    \end{itemize}
-%   \end{block}
-  
-  \begin{block}{My work}
-    \begin{itemize}
-     \item inspired by Hirschowitz \& Maggesi
-     \item adapted to 
-      \begin{itemize}
-        \item \textbf{in}equalities
-        \item simple typing
-      \end{itemize}
-    \end{itemize}
-
-  \end{block}
-
-  
-\end{frame}
-
-
-\begin{frame}
- \frametitle{Content of this talk}
-  
-   \begin{block}{In this talk:}
-    \begin{itemize}
-     \item \textbf{Models} of the untyped $\lambda$-calculus with $\beta$-reduction
-     \item the $\lambda$-calculus as \textbf{initial} such model
-    \end{itemize}
-   \end{block}
-
-   \begin{block}{\textbf{Not} in this talk --- but elsewhere:}
-    \begin{itemize}
-     \item General notion of \textbf{signature} for languages with reduction
-     \item Signatures and models for \textbf{simply-typed} languages with term reductions
-    \end{itemize}
-   \end{block}
-
-   First: take a look at H \& M's work on $\lambda$-calculus without reductions
-   
-\end{frame}
-
-\section{Review of Hirschowitz \& Maggesi's work}
-
-\begin{frame}
- \tableofcontents %[currentsection]
-\end{frame}
-
-
-\begin{frame}[fragile]
- \frametitle{$\lambda$-calculus as a monad on $\Set$ (Altenkirch \& Reus '99)}
- 
- \begin{lstlisting}
- Inductive LC (V : Set) : Set := 
-    | Var : V -> LC(V)
-    | Abs : LC(option V) -> LC(V)
-    | App : LC(V) x LC(V) -> LC(V)
-\end{lstlisting}
- 
- \begin{itemize}
-  \item  Monad: set of terms over free variables
-        \[ \LC(V) = \text{ set of lambda terms over free variables in set } V \]
-  \item Monad structure: ``Variables--as--terms'' and substitution
-        \begin{align*} Var_{V} &: V \to \LC(V) \\
-                       (\bind{}{})_{V,W} &: \LC(V) \times \bigl(V \to \LC(W)\bigr) \to \LC(W)
-        \end{align*}
-
-  \item Monad axioms: properties of variable substitution
- \end{itemize}
-
- 
-\end{frame}
-
-\begin{frame}
- \frametitle{Constructors and substitution}
-  \begin{block}{Goal: capture the interplay between constructors and substitution}
-  \vspace{-1.5em}
-    \begin{align*}
-\bind{App(M,N)}{f} \enspace &= \enspace App(\bind{M}{f},\bind{N}{f}) \\
-\bind{Abs(M)}{f} \enspace &= \enspace Abs \bigl(\bind{M}{\shift{f}}\bigr)
-    \end{align*}
-  \vspace{-1.5em}
-  \end{block}
-  
- \begin{block}{First try: are $Abs$ and $App$  \textbf{monad morphisms}?}
-  \vspace{-1.5em}
-       \begin{align*}
-                    Abs &: \LC^* \to \LC \qquad\qquad \text{with } \LC^*:V \mapsto \LC(\text{option }V) \\
-                    App &: \LC \times \LC  \to \LC
-       \end{align*}
-\vspace{-1.5em}
-
-\textbf{Fails:} 
-   \begin{itemize} 
-      \item $\LC^*$ a monad, but $Abs$ \textbf{not}  monad morphism 
-      \item $\LC \times \LC$ not a monad in a reasonable sense
-   \end{itemize}
-
-  \end{block}
-
-
-
- 
-\end{frame}
-
-\begin{frame}
- \frametitle{Modules over monads}
-  \begin{block}{\textbf{Modules over monads} generalize monads...}
-    and the functors
-      \vspace{-1.5em}\begin{align*}
-             \LC &: V \mapsto \LC(V)\\
-             \LC^* &: V \mapsto \LC(\text{option }V) \\
-             \LC\times\LC &: V \mapsto \LC(V) \times \LC(V)
-      \end{align*} 
-      
-      \vspace{-.5em} are modules over the monad $\LC$.
- 
-  \end{block}
-
- \begin{block}{and the constructors are \textbf{module morphisms}:}
-  \vspace{-1.5em}
-     \begin{align*}
-                               Abs &: \LC^* \to \LC \\
-                    App &: \LC \times \LC  \to \LC
-    \end{align*}
-    
-\vspace{-0.5em}Expresses precisely distributivity of substitution over $App$ and $Abs$.
-
- \end{block}
-\end{frame}
-
-
-\begin{frame}
- \frametitle{Initiality for pure syntax}
- \begin{columns}
-  \column{.4\textwidth}
-  \begin{block}{Summary: we have}
-    \begin{itemize}
-     \item monad $\LC$
-     \item module morphisms
-     \vspace{-.5em}
-               \begin{align*}
-                    App &: \LC \times \LC  \to \LC\\
-                    Abs &: \LC^* \to \LC
-    \end{align*}
-             
-    \end{itemize}
-
-  \end{block}
-  \column{.4\textwidth}
-  
-  \begin{block}{Def.: model of $\lambda$-calculus}
-    \begin{itemize}
-     \item monad $P$
-     \item module morphisms
-     \vspace{-.5em}
-               \begin{align*}
-                    App^P &: P \times P  \to P\\
-                    Abs^P &: P^* \to P
-    \end{align*}
-    \end{itemize}
-  \end{block}
-  
- \end{columns}
- 
- \begin{theorem}[Hirschowitz \& Maggesi]
-    $(LC, App, Abs)$ is the initial object in the category of models.
- \end{theorem}
- 
- Now: integrating reduction rules.
- 
-\end{frame}
-
-
-
-
-\section{Integrating reduction rules}
-
-
-
-\begin{frame}
- \tableofcontents[currentsection]
-\end{frame}
-
-
-
-
-
-
-
-
-
-
-\begin{frame}
- \frametitle{Integrating Semantics, untyped}
-%\vspace{1ex}
-
-
-\begin{block}{Goal: define ``model of $\lambda$-calculus \textbf{with $\beta$-reduction}''}
-     such that $\lambda$-calculus with 
-
-             \[   \lambda x . M(N) \quad \rightsquigarrow \quad M [x:=N] \]
-             
- is the initial model.
- \end{block}
-   
-   
-  \begin{block}{Main question:}
-   
-   How should ``$\rightsquigarrow$'' be modelled mathematically?
-   
-  \begin{itemize}
-   \item[\alert{X}] Terms modulo relations, quotienting 
-   \item[\alert{X}] Monads $\quad \PreOrd \to \PreOrd$  
-   \item[\checkmark] \emph{Relative} Monads $\quad\Set \to \PreOrd$ 
-   \item [] with $\PreOrd :=$ category of preordered sets
-  \end{itemize}
-
-  \end{block}
-
-  \end{frame}
-  
-
-\begin{frame}
- \frametitle{Relative monads}
- 
- \begin{definition}[Monad on $\C$]
-  %
-  %Monad : Endofunctor with substitution
-   \begin{itemize}
-%     \item[+] $F : \C \to \D\qquad$ %mediating between $\C$ and $\D$
-    \item $P : \C \to \C$
-    \item $\eta_X : \C(X , PX)$
-    \item $\sigma_{X,Y} : \C(X,PY) \to \C(PX,PY) \quad$
-    \item  monad laws
-   \end{itemize}
-\end{definition}
- 
-\begin{definition}[Relative monad over a functor $F$ --- Altenkirch et al.]
-  %
-  %Monad : Endofunctor with substitution
-   \begin{itemize}
-    \item[\alert{+}] $F : \C \to \D\qquad$ %mediating between $\C$ and $\D$
-    \item $P : \C \to \alert{\D}$
-    \item $\eta_X : \alert{\D}(\alert{F}X , PX)$
-    \item $\sigma_{X,Y} : \alert{\D}(\alert{F}X,PY) \to \alert{\D}(PX,PY) \quad$
-    \item relative monad laws
-   \end{itemize}
-\end{definition}
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{The functor $\Delta:\Set\to\PreOrd$}
- \begin{definition}[$\Delta:\Set\to\PreOrd$]
-$\Delta : \Set\to\PreOrd := \text{ left adjoint to forgetful } U : \PreOrd\to\Set$, i.e.
-
-\[ \Delta : X \mapsto (X,diagonal) \]
-
-% to be the left adjoint of the forgetful functor
-%   $U:\Pre\PreOrd\to \Set$.
- \end{definition}
- 
-
- \begin{definition}
-    
-    \[  \LC_{\beta}(V) := \text{\textbf{preordered} set of } \lambda\text{-terms over variables in }V  \]
-    
-     \begin{itemize}
-          \item [$\blacktriangleright$] preorder given by reflexive-transitive closure of $\beta$-reduction
-    \end{itemize}
-       
- \end{definition}
-
-
-
-\end{frame}
-
-\begin{frame}
-\frametitle{$\lambda$-calculus as relative monad}
-
- 
- 
-%  \begin{block}{$\lambda$-calculus with $\beta$ as relative monad over $\Delta:\Set\to\PreOrd$}
- 
-%  \begin{itemize}\setlength{\itemsep}{1em}
-%   \item %Relative monad: \textbf{preordered} set of terms over a context
-%      \begin{align*}
-%        $
-%       \LC_{\beta}(V) := \text{\textbf{preordered} set of } \lambda\text{-terms over variables in }V 
-%        $
-%       \end{align*}
-     
-%      \vspace{-.7em}
-   
-    
-  \begin{block}{Relative monad structure on $\LC_\beta$}  
-    
-   \begin{itemize} 
-    
-   \item Relative monad structure: Variables and substitution
-        \begin{align*} Var_{V} &: \Set\bigl(V, \LC(V)\bigr) \\
-                       \sigma_{V,W} &: \Set\bigl(V, \LC(W)\bigr) \to \PreOrd\bigl(\LC_\beta(V),\LC_\beta(W)\bigr)
-        \end{align*}
-  
-  \vspace{-.7em}
-     \begin{itemize}
-         \item   $\sigma \equiv (\bind{}{})$ modulo currying
-         \item needs proof that $(\bind{}{})$ is compatible with $\beta$ in 1.\ argument
-    \end{itemize}
-    
-  \item relative monad laws: substitution properties as before 
-    
- \end{itemize}
- 
- \end{block}
- 
- \begin{block}{There are also modules over relative monads}
-    and morphisms of such modules describe distributivity of substitution over $App$ and $Abs$.
- \end{block}
-
-\end{frame}
-
-
-\begin{frame}
- \frametitle{Initiality for syntax with reductions}
- 
- 
- 
- \begin{columns}
-  \column{.5\textwidth}
-  \begin{block}{Summary: we have}
-    \begin{itemize}
-     \item relative monad $\LC_{\beta}$ over $\Delta$
-     \item rel.\ module morphisms
-     \vspace{-.5em}
-               \begin{align*}
-                    App_{\beta} &: \LC_{\beta} \times \LC_{\beta}  \to \LC_{\beta}\\
-                    Abs_{\beta} &: \LC^*_{\beta} \to \LC_{\beta}
-    \end{align*}
-             
-    \end{itemize}
-
-  \end{block}
-  \column{.45\textwidth}
-  
-  \begin{block}{Def.: model of $\lambda$-calculus w.\ $\beta$}
-    \begin{itemize}
-     \item relative monad $P$ over $\Delta$
-     \item rel.\ module morphisms
-     \vspace{-.5em}
-               \begin{align*}
-                    App^P &: P \times P  \to P\\
-                    Abs^P &: P^* \to P
-    \end{align*}
-    \end{itemize}
-  \end{block}
-  
- \end{columns}
- 
- \begin{theorem}
-    $(LC_{\beta}, App_{\beta}, Abs_{\beta})$ is the initial object in the category of models.
- \end{theorem}
- 
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Refinement: integrate higher-order compatibility}
-
-  \begin{block}{Substitution is compatible with $\beta$-reduction}
-    also in the \textbf{higher-order} argument:
-     \begin{align*} \sigma_{V,W} : \PreOrd\bigl(\Delta(V), \LC_\beta(W)\bigr) &\to \PreOrd\bigl(\LC_\beta(V),\LC_\beta(W)\bigr) \\
-                                          f \rightsquigarrow g   \qquad      &\Longrightarrow  \qquad \sigma(f) \rightsquigarrow \sigma(g) \\
-                                           \text{pointwise}  \qquad & \qquad \qquad \text{pointwise}
-      \end{align*}
-%     \[(\bind{}{})_{V,W} : \LC_\beta(V) \times \PreOrd\bigl(\Delta(V) , \LC_\beta(W)\bigr) \to \LC_\beta(W) \]
-  \end{block}
-
- Captured by relative monad towards category \textbf{enriched over itself}:
- 
- \begin{definition}[Relative monad over a functor $F:\C\to\D$]
- 
-  with $\D$ enriched over itself (e.g., $\PreOrd$):
- 
-  %
-  %Monad : Endofunctor with substitution
-%    \begin{itemize}
-%     \item[\alert{+}] $F : \C \to \D\qquad$ %mediating between $\C$ and $\D$
-%     \item $P : \C \to \D$
-%     \item $\eta_X : \D(FX , PX)$
-     \[\sigma_{X,Y} : \D\bigl(\D(FX,PY) , \D(PX,PY) \bigr) \]
-%     \item relative monad laws
-%    \end{itemize}
- \end{definition}
-
-
-\end{frame}
-
-
-
-\begin{frame}
- \frametitle{What I have not told}
- 
- \begin{itemize}\setlength{\itemsep}{1.5em}
-  \item Signatures
-  \item works with types, too
-  \item allows to define translations with \textbf{good properties by construction}
-  \item implemented in the proof assistant \textsf{Coq}
- \end{itemize}
- 
-\end{frame}
-
-
-
-\begin{frame}
-\frametitle{Future work}
-
- \begin{itemize}\setlength{\itemsep}{1.2em}
-  \item Automation in Coq for specifying inequalities
-    \begin{itemize}
-       \item [$\rightsquigarrow$] automate proofs of compatibility properties
-    \end{itemize}
-  \item more fine-grained modeling of reduction
-      \begin{itemize}
-       \item [$\rightsquigarrow$] by using a better category than $\PreOrd$
-    \end{itemize}
-  \item Non-wellfounded syntax 
-    \begin{itemize}
-       \item [$\rightsquigarrow$] as relative monads from sets to setoids
-    \end{itemize}
-  \item Coinductive data types as relative comonads
- \end{itemize}
-
-
-
-\pause
-
- ~ \\
-
- 
- \begin{center}
-Thanks for your attention!
- \end{center}
- 
-\end{frame}
 
 
 
