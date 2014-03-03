@@ -180,11 +180,11 @@ mathsans,
  \begin{block}{Extended to some \fat{heterogeneous} data types}
  
   \begin{itemize}
-    \item Fiore, Plotkin, Turi '99, Hirschowitz and Maggesi '07
-    \item motivation: characterization of \fat{binding syntax} ($\lambda$-calculus)
-    \item binding modelled through \fat{heterogeneous} data type
-           \[  \lambda : \LC(X + 1) \to \LC(X) \]
-    \item characterizes not only data but also \fat{substitution} %operation
+    \item motivation: \fat{binding syntax} modelled through %($\lambda$-calculus)  
+                  \fat{heterogeneous} data type
+           \[ \LC(X) \enspace ::= \enspace \lambda : \LC(X + 1) \to \LC(X) \enspace | \enspace \ldots \]
+    \item Fiore, Plotkin and Turi '99, Hirschowitz and Maggesi '07
+    \item characterizes not only data type but also \fat{substitution} %operation
 %    \begin{itemize}
 %     \item 
   \end{itemize}
@@ -225,7 +225,7 @@ mathsans,
     \item 
         Can we use (dual) techniques of H.\ and M.\ to characterize codata types with cosubstitution as
         \fat{terminal} object?
-    \item I.e.: Given some codata type, what is the category in which that codata type is terminal?
+    \item I.e.: Given a heterogeneous codata type, what is the category in which that codata type is terminal?
   \end{itemize}
 \end{block}
   
@@ -532,7 +532,7 @@ mathsans,
 
  \begin{block}{Analogous situtation for syntax:}
    For the lambda calculus with monadic substitution:
-      \[ \subst~f~(\Abs~t) = \Abs~(\subst~(\shift~f)~t) \]
+      \[ \subst~f~(\lambda~t) = \lambda~(\subst~(\shift~f)~t) \]
  \end{block}
 
  
@@ -546,7 +546,7 @@ mathsans,
    \item used in work by Hirschowitz and Maggesi
    \item characterize distributivity of substitution over constructors
       \begin{align*} \bind{\App~(s,t)}{f} \quad &= \quad \App~(\bind{s}{f},\bind{t}{f}) \\
-                     \bind{\Abs~t}{f}       \quad &= \quad \Abs~(\bind{t}{\shift~f})
+                     \bind{\lambda~t}{f}       \quad &= \quad \lambda~(\bind{t}{\shift~f})
       \end{align*}
   \end{itemize}
  \end{block}
@@ -587,11 +587,15 @@ mathsans,
              \[\lift_A: (\Tri A \to B) \to (\Tri(E\times A) \to E\times B) \]
           requires auxiliary function $\cut_A : \Tri (E\times A) \to \Tri A$
     \item we were not able to define $\cut$ categorically
-    \item consequence: every coalgebra comes with a \fat{specified} operation
-       \[ \cut_A : T (E\times A) \to TA \]
-          and equations characterizing $\cut$
+    \item fix: every coalgebra comes with a \fat{specified}
+       \[ \cut^T_A : T (E\times A) \to TA \]
+          and equations characterizing $\cut^T$
     \item $\cut$ for $\Tri$ uniquely determined through these equations
    \end{itemize}
+ \begin{lemma}[for real this time]
+  $(\Tri,\cut,\tail)$ is terminal in the category of coalgebras.
+ \end{lemma}
+
 \end{frame}
 
 \begin{frame}
