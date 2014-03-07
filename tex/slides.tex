@@ -162,9 +162,14 @@ mathsans,
 \begin{document}
 
 \begin{frame}
-\titlepage
-
+ \titlepage
 \end{frame}
+
+\begin{frame}
+ \frametitle{Outline}
+ \tableofcontents
+\end{frame}
+
 
 \section{Initiality for W-types and heterogeneous inductives}
 
@@ -177,7 +182,7 @@ mathsans,
   \end{itemize}
  \end{block}
 
- \begin{block}{Extended to some \fat{heterogeneous} data types}
+ \begin{block}{Extended to some \fat{heterogeneous} inductive data types}
  
   \begin{itemize}
     \item motivation: \fat{binding syntax} modelled through %($\lambda$-calculus)  
@@ -521,10 +526,10 @@ mathsans,
 \begin{frame}
  \frametitle{Towards \enquote{coalgebras} for the signature of $\Tri$}
  
-  \begin{block}{Goal: define \enquote{coalgebra} s.t.\ $\Tri$ is one}
+  \begin{block}{Goal: define \enquote{coalgebra} s.t.\ $\Tri$ is (the terminal) one}
     More specifically:
     \begin{itemize}
-     \item define a notion of morphism for destructor $\tail$
+     \item define a notion of \enquote{morphism} for destructor $\tail$
      \item requirement: want to capture interplay of $\tail$ and $\redec$:
        \[\tail\bigl(\redec~f~t\bigr) = \redec\bigl(\lift~f\bigr)(\tail~t)\]
     \end{itemize}
@@ -551,7 +556,7 @@ mathsans,
   \end{itemize}
  \end{block}
 
- \begin{block}{generalize/dualize to \fat{comodules over relative comonads}}
+ \begin{block}{generalize/dualize to \fat{co}modules over \fat{relative co}monads}
   \begin{itemize}
    \item characterize distributivity of \redec oration over destructors
    \item example of morphism of comodules:  \[\tail : \Tri \to \Tri(E\times \_)\]
@@ -590,7 +595,7 @@ mathsans,
     \item fix: every coalgebra comes with a \fat{specified}
        \[ \cut^T_A : T (E\times A) \to TA \]
           and equations characterizing $\cut^T$
-    \item $\cut$ for $\Tri$ uniquely determined through these equations
+    \item $\cut$ for $\Tri$ uniquely determined by these equations
    \end{itemize}
  \begin{lemma}[for real this time]
   $(\Tri,\cut,\tail)$ is terminal in the category of coalgebras.
@@ -635,7 +640,7 @@ mathsans,
    \end{itemize}
   \end{block}
 
-  TikZ pictures used with friendly permission by Matthes and Picard
+  TikZ pictures used with permission from Matthes and Picard
  
 \end{frame}
 
