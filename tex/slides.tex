@@ -619,7 +619,7 @@ mathsans,
 
  \begin{block}{Analogous situation for syntax:}
    For the lambda calculus with monadic substitution:
-      \[ \subst~f~(\lambda~t) = \lambda~(\subst~(\shift~f)~t) \]
+      \[ \subst~f~(\Abs~t) = \Abs~(\subst~(\shift~f)~t) \]
  \end{block}
 
  
@@ -633,7 +633,7 @@ mathsans,
    \item used in work by Hirschowitz and Maggesi
    \item characterize distributivity of substitution over constructors
       \begin{align*} \bind{\App~(s,t)}{f} \quad &= \quad \App~(\bind{s}{f},\bind{t}{f}) \\
-                     \bind{\lambda~t}{f}       \quad &= \quad \lambda~(\bind{t}{\shift~f})
+                     \bind{\Abs~t}{f}       \quad &= \quad \Abs~(\bind{t}{\shift~f})
       \end{align*}
   \end{itemize}
  \end{block}
