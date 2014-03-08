@@ -122,6 +122,7 @@ mathsans,
 \newcommand{\Abs}{\constfont{Abs}}
 \newcommand{\Var}{\constfont{Var}}
 \newcommand{\var}{\constfont{var}}
+\newcommand{\unit}{\constfont{unit}}
 \newcommand{\coq}{\texttt{Coq}\xspace}
 
 %  \newcommand{\bind}[2]{{#1} \blacktriangleright {#2}}
@@ -166,6 +167,27 @@ mathsans,
 \begin{frame}
  \titlepage
 \end{frame}
+
+
+\begin{frame}
+ \frametitle{Goal}
+ 
+   \begin{itemize}\setlength{\itemsep}{1em}
+    \item give category-theoretic characterization of \fat{heterogeneous} coinductive data types
+    \item [$\leadsto$] develop a notion of \enquote{coalgebra} for a given signature
+    \item incorporate canonical cosubstitution
+   \end{itemize}
+
+  \begin{block}{In this talk}
+   \begin{itemize}
+    \item we consider the codata type of infinite triangular matrices
+   \end{itemize}
+  \end{block}
+
+%   TODO: make goal slide
+ 
+\end{frame}
+
 
 \begin{frame}
  \frametitle{Outline}
@@ -214,19 +236,61 @@ mathsans,
       \end{itemize}
     \end{block}
 
-    \begin{block}{Reformulation by H \& M}
+  Basis for this reformulation:
+    
+    \begin{lemma}[Substitution is monadic: Altenkirch \& Reus '99]
        \begin{itemize}
-           \item uses Altenkirch \& Reus '99 \\ lambda calculus \fat{+ substitution} forms a \fat{monad}
-           \item Lambda calculus as \fat{initial} monad 
-              \begin{itemize}
-                 \item [$\leadsto$]actually: monad + \enquote{algebra} structure for constructors
-              \end{itemize}
-           \item notion of \fat{module over a monad} 
-               \begin{itemize}
-                 \item [$\leadsto$]used to characterize constructors of lambda calculus
-               \end{itemize}
+         \item [] $(\LC, \Var, \subst)$ forms a monad (in Kleisli form)
        \end{itemize}
-    \end{block}
+
+    \end{lemma}
+
+    
+%     
+%     \begin{block}{Reformulation by H \& M}
+%        \begin{itemize}
+%            \item uses Altenkirch \& Reus '99 \\ lambda calculus \fat{+ substitution} forms a \fat{monad}
+%            \item Lambda calculus as \fat{initial} monad 
+%               \begin{itemize}
+%                  \item [$\leadsto$]actually: monad + \enquote{algebra} structure for constructors
+%               \end{itemize}
+%            \item notion of \fat{module over a monad} 
+%                \begin{itemize}
+%                  \item [$\leadsto$]used to characterize constructors of lambda calculus
+%                \end{itemize}
+%        \end{itemize}
+%     \end{block}
+
+\end{frame}
+
+\begin{frame}
+ \frametitle{Initial semantics for $\lambda$-calculus using monads}
+   \begin{definition}[Algebra for signature of $\LC$, H \& M '07]
+     \begin{itemize}
+      \item a monad $(T, \unit, \bind{}{})$ on $\Set$
+      \item two \fat{morphisms of modules} over $T$,
+         \vspace{-.5em}
+          \begin{align*}
+               App &: T \times T \to T \\
+               Abs &: T(\_ + 1) \to T   
+          \end{align*}
+          
+         \vspace{-1.5em}
+         
+     \end{itemize}
+
+   \end{definition}
+   
+   \enquote{Module morphism} expresses \fat{distributivity of substitution}:
+   \begin{align*} \bind{App~(s,t)}{f} \quad &= \quad App~(\bind{s}{f},\bind{t}{f}) \\
+                     \bind{Abs~t}{f}       \quad &= \quad Abs~(\bind{t}{\shift~f})
+      \end{align*}
+   
+   \vspace{-1em}
+   
+   \begin{lemma}[Initial semantics for $\LC$, H \& M '07]
+      $(\LC, \App, \Abs)$ is the initial algebra, where $\LC = (\LC,\Var,\subst)$
+   \end{lemma}
 
 
 \end{frame}
@@ -239,7 +303,7 @@ mathsans,
 \begin{block}{Question}
   \begin{itemize}
     \item 
-        Can we use (dual) techniques of H.\ and M.\ to characterize codata types with cosubstitution as
+        Can we use (dual) techniques of H \& M to characterize codata types with cosubstitution as
         \fat{terminal} object?
     \item I.e.: Given a heterogeneous codata type, what is the category in which that codata type is terminal?
   \end{itemize}
