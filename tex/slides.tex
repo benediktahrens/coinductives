@@ -501,7 +501,7 @@ mathsans,
   \end{block}
   
   \begin{lemma}[Matthes and Picard '11]
-      $\Tri : \Set \to \Set$ forms a \enquote{weak constructive comonad}.
+      $(\Tri : \Set \to \Set, \head, \redec)$ forms a \enquote{weak constructive comonad}.
   \end{lemma}
   
   \begin{itemize}
@@ -512,16 +512,23 @@ mathsans,
    
 \begin{frame}
  \frametitle{$\Tri$ is a relative comonad}
-  \begin{block}{Alternatively,}
-    \begin{itemize}
-     \item consider $\Tri A$ as a \fat{setoid} rather than a set
-     \item \[ \redec_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B )\]
+  \begin{block}{Alternatively, consider $\Tri A$ as a \fat{setoid} rather than a set}
+%     \begin{itemize}
+       \vspace{-2em}
+           \begin{align*} 
+                 \head_A &: \Setoid(\Tri A, \eq A) \\
+                 \redec_{A,B} &: \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B )
+           \end{align*}
+       
+%        \vspace{-1em}
+       
              with $\eq : \Set \to \Setoid$
-    \end{itemize}
+%     \end{itemize}
+
   \end{block}
 
-  \begin{lemma}[Equivalent to MP'11]
- $\Tri$ forms a \fat{relative comonad}, relative to $\eq:\Set\to\Setoid$.
+  \begin{lemma}[Reformulation of Matthes and Picard '11]
+ $(\Tri : \Set\to\Setoid, \head, \redec)$ forms a \fat{comonad relative to} $\eq:\Set\to\Setoid$.
 \end{lemma}
 \begin{definition}[\fat{Relative} (co)monad, Alten., Chapm. \& Uust.\ '10]
   \begin{itemize} 
@@ -578,7 +585,7 @@ mathsans,
 \begin{frame}
  \frametitle{Coalgebras for the signature of $\Tri$}
   \begin{definition}[Category of coalgebras]
-    A coalgebra for the signature of $\Tri$ is given by
+    A coalgebra for the signature of $\Tri$ is given by a pair $(T,r)$:
     \begin{itemize}
      \item a comonad $T$ relative to $\eq: \Set \to \Setoid$
      \item a morphism of comodules over $T$
@@ -598,24 +605,59 @@ mathsans,
 
 \begin{frame}
  \frametitle{Technical difficulty: definition of $\lift$}
-   \begin{itemize}
-    \item definition of 
+%    \begin{itemize}
+     Definition of 
              \[\lift_A: (\Tri A \to B) \to (\Tri(E\times A) \to E\times B) \]
           requires auxiliary function $\cut_A : \Tri (E\times A) \to \Tri A$
+          
+    
+ \begin{center}         
+  \begin{tikzpicture}[scale = 0.6]
+    \foreach \y in {0,...,2}
+    {\foreach \x in {\y,...,2}
+      \draw (\x+1, -\y) node[color=blue]{E} ;
+    }
+    \foreach \x in {1,...,3} \draw (\x, -\x) node[color=red]{A} ;
+    \draw(4,-1) node{$\ldots$};
+
+     \draw (7,-1.5) node{{\color{blue} E} $\times$ {\color{violet} B}} ;
+    \draw[color=orange] (1,0) circle(0.4cm);
+    \draw[color=orange] (6.4,-1.5) circle(0.4cm);
+    \draw[color=purple!70]  (2.8, -3.4) --
+     (0.1,-0.6) -- (2.8,-0.6);
+    \draw[color=purple!70, dashed]  (2.8,-0.6) -- (3.6,-0.6);
+    \draw[color=purple!70, dashed]  (2.8,-3.4) -- (3.5,-4.1);
+
+    \draw[color=purple!70] (7.6,-1.5) circle(0.4cm);
+
+     \draw[->, color = orange] (1,0.5) to [bend left] node[auto,
+     swap, above]{$id$} (6.4,-0.9) ; 
+    \draw[->, color = purple!70] (3.6,-2) to [bend right] node[auto,
+    swap, below]{$f$} (7.5,-2) ; 
+    \draw[color=purple!70]  (2.8,-0.6) --  (0.1,-0.6) -- node[auto, swap,
+    left]{$\cut$}(2.8, -3.4);
+  \end{tikzpicture}
+ \end{center}
+\end{frame}
+
+\begin{frame}
+ \frametitle{A specified $\cut$ for any coalgebra}
+  \begin{itemize}
     \item we were not able to define $\cut$ categorically
     \item fix: every coalgebra comes with a \fat{specified}
-       \[ \cut^T_A : T (E\times A) \to TA \]
+       \[ c_A : T (E\times A) \to TA \]
           and equations characterizing $\cut^T$
-    \item $\cut$ for $\Tri$ uniquely determined by these equations
+    \item $c^{\Tri} := \cut$ for $\Tri$ uniquely determined by these equations
    \end{itemize}
  \begin{lemma}[for real this time]
-  $(\Tri,\cut,\tail)$ is terminal in the category of coalgebras.
+  $(\Tri,\cut,\tail)$ is terminal in the category of coalgebras $(T,c,r)$.
  \end{lemma}
 
 \end{frame}
 
 % TODO: conclusion / summary frame
 
+\begin{comment}
 \begin{frame}
  \frametitle{Closing remarks}
  
@@ -624,19 +666,37 @@ mathsans,
        \[ f \sim g  \Longrightarrow \redec~f \sim \redec~g\]
     in definition of coalgebra for signature of $\Tri$
    \end{block}
-
+\end{frame}
+\end{comment}
  
+\begin{frame}
+  \frametitle{Formalization}
    \begin{block}{Mechanization in the proof assistant \texttt{Coq}}
-      \begin{itemize}
-       \item helped to find a mistake we made (already made by Abel, Matthes \& Uustalu)
+      \begin{itemize}\setlength{\itemsep}{1em}
+       \item helped to find a mistake we made (already made by Abel, Matthes \& Uustalu '05)
+       \item we were able to reuse code by Matthes \& Picard '11
+       \item 3000 lines of code, among which 1500 by MP '11
+       \item fully constructive and axiom-free
        \item tedious: coinduction in \texttt{Coq} cumbersome
       \end{itemize}
    \end{block}
 
-  \pause
-  \begin{center}Thanks for your attention.\end{center}
    
 \end{frame}
+
+\begin{frame}
+ \frametitle{Summary}
+  What I have tried to explain: 
+   \begin{itemize}\setlength{\itemsep}{1em}
+    \item Ad hoc notion of weak constructive comonad is instance of relative comonad
+    \item Terminal algebra semantics for codata family $\Tri$
+    \item bisimilarity and redecoration are part of universal object
+    \item not as straightforward as the $\lambda$-calculus because of $\cut$
+    \item Mechanization in \texttt{Coq}
+   \end{itemize}
+
+\end{frame}
+
 
 
 \begin{frame}
@@ -658,9 +718,9 @@ mathsans,
 \end{frame}
 
 
-
-
-
-
-
 \end{document}
+
+
+% TODO: show cut operation
+% TODO: reuse code
+
