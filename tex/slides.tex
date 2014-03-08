@@ -120,6 +120,8 @@ mathsans,
 \newcommand{\eq}{\ensuremath{\mathsf{eq}}}
 \newcommand{\App}{\constfont{App}}
 \newcommand{\Abs}{\constfont{Abs}}
+\newcommand{\Var}{\constfont{Var}}
+\newcommand{\var}{\constfont{var}}
 \newcommand{\coq}{\texttt{Coq}\xspace}
 
 %  \newcommand{\bind}[2]{{#1} \blacktriangleright {#2}}
@@ -174,22 +176,26 @@ mathsans,
 \section{Initiality for W-types and heterogeneous inductives}
 
 \begin{frame}
- \frametitle{Starting point: W-types in categories}
+ \frametitle{Starting point: W-types and binding syntax in categories}
  
- \begin{block}{Well-founded trees as initial algebra of polynomial functor}
+ \begin{block}{Well-founded trees as \fat{initial algebra} of polynomial functor}
   \begin{itemize}
+   \item example: type of natural numbers, lists, etc.
    \item Dybjer '97, Moerdijk and Palmgren '00
   \end{itemize}
  \end{block}
 
- \begin{block}{Extended to some \fat{heterogeneous} inductive data types}
+ \begin{block}{Initial semantics extended to some \fat{heterogeneous} inductives}
  
   \begin{itemize}
-    \item motivation: \fat{binding syntax} modelled through %($\lambda$-calculus)  
-                  \fat{heterogeneous} data type
-           \[ \LC(X) \enspace ::= \enspace \lambda : \LC(X + 1) \to \LC(X) \enspace | \enspace \ldots \]
-    \item Fiore, Plotkin and Turi '99, Hirschowitz and Maggesi '07
-    \item characterizes not only data type but also \fat{substitution} %operation
+    \item motivation: \fat{binding syntax} 
+%               modelled through %($\lambda$-calculus)    \fat{heterogeneous} data type
+           \begin{align*} \LC(X) \enspace ::=                                              
+                                           \enspace  & \Var : X \to \LC(X) \\
+                                           | \enspace  & \App : \LC(X)\times\LC(X)\to\LC(X) \\ 
+                                           | \enspace &\Abs : \LC(X + 1) \to \LC(X) \enspace
+           \end{align*}
+    \item \fat{heterogeneity:} $\Abs$ has recursive argument with \fat{bigger} type parameter
 %    \begin{itemize}
 %     \item 
   \end{itemize}
@@ -199,27 +205,32 @@ mathsans,
 \end{frame}
 
 \begin{frame}
- \frametitle{Overview over work by Hirschowitz and Maggesi '07}
- \begin{block}{Builds upon Altenkirch and Reus '99}
-  \begin{itemize}
-   \item Lambda calculus as heterogeneous data type
-   \item Lambda calculus \fat{+ substitution} forms a \fat{monad}
-  \end{itemize}
- \end{block}
+ \frametitle{Initial semantics for binding syntax}
+    
+    \begin{block}{Initial semantics for lambda calculus: Fiore, Plotkin \& Turi '99}
+      \begin{itemize}
+       \item characterizes not only data type but also \fat{substitution} %operation
+       \item reformulated using \fat{monads} by Hirschowitz \& Maggesi '07
+      \end{itemize}
+    \end{block}
 
-\begin{block}{Hirschowitz and Maggesi '07}
- \begin{itemize}
-  \item Lambda calculus as \fat{inital} monad 
-     \begin{itemize}
-       \item [$\leadsto$]actually: monad + \enquote{algebra} structure for constructors
-     \end{itemize}
-  \item notion of \fat{module over a monad} 
-     \begin{itemize}
-        \item [$\leadsto$]used to characterize constructors of lambda calculus
-     \end{itemize}
- \end{itemize}
-\end{block}
+    \begin{block}{Reformulation by H \& M}
+       \begin{itemize}
+           \item uses Altenkirch \& Reus '99 \\ lambda calculus \fat{+ substitution} forms a \fat{monad}
+           \item Lambda calculus as \fat{initial} monad 
+              \begin{itemize}
+                 \item [$\leadsto$]actually: monad + \enquote{algebra} structure for constructors
+              \end{itemize}
+           \item notion of \fat{module over a monad} 
+               \begin{itemize}
+                 \item [$\leadsto$]used to characterize constructors of lambda calculus
+               \end{itemize}
+       \end{itemize}
+    \end{block}
+
+
 \end{frame}
+
 
 
 \begin{frame}
@@ -251,7 +262,7 @@ mathsans,
     \begin{itemize}
      \item prime example: lambda calculus modulo $\beta$-equivalence
      \item Fiore with students Hur \& Mahmoud
-     \item Hirschowitz \& Maggesi %TODO: which paper?
+     \item Hirschowitz \& Maggesi 
     \end{itemize}
    \end{block}
    
@@ -266,7 +277,7 @@ mathsans,
   \end{block}
   
   \begin{block}{Goal:}
-   do the same for cosyntax, i.e.\ \fat{nested co}data types %TODO: explain cosyntax
+   do the same for cosyntax, i.e.\ \fat{nested co}data types 
   \end{block}
 \end{frame}
 \end{comment}
@@ -317,7 +328,7 @@ mathsans,
 \end{frame}
 
 \begin{frame}
- \frametitle{Matrices through trapezes: the destructors of $\Tri$}
+ \frametitle{Matrices through trapezia: the destructors of $\Tri$}
  
  
  
@@ -512,7 +523,7 @@ mathsans,
   \begin{lemma}[Equivalent to MP'11]
  $\Tri$ forms a \fat{relative comonad}, relative to $\eq:\Set\to\Setoid$.
 \end{lemma}
-\begin{definition}[\fat{Relative} (co)monad, Altenkirch et al '10]
+\begin{definition}[\fat{Relative} (co)monad, Alten., Chapm. \& Uust.\ '10]
   \begin{itemize} 
    \item underlying functor is \fat{not} necessarily \fat{endo}
    \item needs \enquote{mediating} functor (above: $\eq$)
@@ -535,7 +546,7 @@ mathsans,
     \end{itemize}
   \end{block}
 
- \begin{block}{Analogous situtation for syntax:}
+ \begin{block}{Analogous situation for syntax:}
    For the lambda calculus with monadic substitution:
       \[ \subst~f~(\lambda~t) = \lambda~(\subst~(\shift~f)~t) \]
  \end{block}
@@ -603,11 +614,13 @@ mathsans,
 
 \end{frame}
 
+% TODO: conclusion / summary frame
+
 \begin{frame}
  \frametitle{Closing remarks}
  
    \begin{block}{Higher order compatibility}
-    Observing that $\Setoid$ is cartesian closed, on can encode
+    Observing that $\Setoid$ is cartesian closed, one can encode
        \[ f \sim g  \Longrightarrow \redec~f \sim \redec~g\]
     in definition of coalgebra for signature of $\Tri$
    \end{block}
