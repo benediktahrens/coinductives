@@ -8,6 +8,7 @@
 
 \usepackage[protrusion=true,expansion=true]{microtype}
 
+\usepackage[english]{babel}
 
 \usepackage[style=numeric,
 %  backref=true,
@@ -60,15 +61,15 @@ Toulouse}
 
 
 
- Simple inductive types---\textsf{W}-types---are characterized categorically as initial algebras of
+ In Martin-L\"of type theory, simple inductive types---\textsf{W}-types---are characterized categorically as initial algebras of
  a polynomial functor.
  Dually, \emph{co}inductive types are characterized as terminal \emph{co}algebras of polynomial functors.
- In the case of coinductive types, the meta-theoretic notion of equality is not adequate: thus, the notion of 
- \emph{bisimulation} was introduced by \textcite{aczel_nonwellfounded}.
+ In the case of coinductive types, the meta-theoretic notion of equality given by Martin-L\"of's identity type is too weak: instead, the idea of 
+ \emph{bisimilarity as equality} for coinductive data types was coined by \textcite{aczel_nonwellfounded}.
 
  
  The characterization of inductive types as initial algebras 
- has been extended to \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
+ has been extended to some \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
  in various formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
  The main goal of those works is to characterize not only the data type via a universal property, but rather the data type
  \emph{equipped with a well-behaved substitution operation}.
@@ -114,7 +115,7 @@ Toulouse}
 
  
  In this work, we first identify those weak constructive comonads as an instance of the more general notion of \emph{relative comonad}.
- Indeed, a weak constructive comonad is precisely a comonad relative to the functor $\eq:\Set\to\Setoid$ from the category of sets to that of setoids that is 
+ Indeed, a weak constructive comonad is precisely a comonad relative to the functor $\eq:\Set\to\Setoid$, the 
  left adjoint to the forgetful functor.
  
  Afterwards, we characterize the codata type $\Tri$, equipped with the cosubstitution operation of redecoration, as a terminal object of some category.
@@ -242,7 +243,7 @@ the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operatio
 % Secondly, we hope to integrate \emph{equations} into the notion of signature, equations which 
 % will allow, e.g., considering branching trees modulo permutation of subtrees.
  
-
+We thank the anonymous referees for helpful comments on this abstract.
 
 \renewcommand*{\bibfont}{\small}
 \printbibliography[heading=none]

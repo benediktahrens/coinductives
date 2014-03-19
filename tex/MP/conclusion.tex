@@ -1,0 +1,56 @@
+\section{Conclusion}
+
+In this paper we have presented various verifications of the
+redecoration algorithm for infinite triangles. We have first dualized
+directly the representation for finite triangles by a nested inductive
+datatype to obtain a nested coinductive datatype. In both cases, the
+triangles are visualized by their columns. We have implemented the
+corresponding redecoration algorithm \redec{} (already available \cite{grossestcspaper} in
+higher-order parametric polymorphism) and
+shown that we (only) obtained a constructive weak comonad (because of
+the compatibility hypothesis required). In this part, the redecoration
+algorithm, although deduced directly from the finite case, is quite
+tricky to manipulate because of the cutting and lifting it requires.
+
+We then noticed that we could also consider
+the triangles by their rows, representing this time the triangles by
+purely coinductive datatypes, \TriS{}, where we only took advantage of the
+existing type of streams (\Str). This new visualization allowed us to
+define -- keeping the same algorithmic idea as before -- a function of
+redecoration \redecS{} already simpler than \redec{} and equivalent to
+it, modulo compatibility. But taking advantage of this
+representation by streams, we can simplify again the redecoration algorithm,
+using only standard functions on streams. This new function
+\redecSS{} is fully equivalent to \redecS{}. Generalizing again, we
+get nearly for free the cobind of the comonad \Str{}, \redecSG{}. This
+finally allows us to prove the three comonad laws for \redecSS{}. 
+
+In short, we have shown that the redecoration function, which is a
+quite subtle operation if we translate it directly from the finite
+triangles, reduces to something very basic in the completely infinite
+(i.\,e., in both directions) view of the infinite
+triangles. 
+In this case, it is much easier to work with only infinite elements
+than with partially finite ones in the sense of consisting of
+infinitely many finitely presented columns. In fact, the stream
+representation is even easier to manipulate than the representation of
+finite triangles, and the comonad laws even hold with less
+restrictions due to constructivity. 
+
+Notice that the row-based view would 
+not have given new insights for finite triangles. Indeed, as they are
+symmetric, we would have obtained exactly the same representation as
+for the column-based approach, only perceived with interchanged roles
+of rows and columns.
+
+As a final remark on the Coq side, the improved support for setoid
+rewriting and the class mechanism \cite{DBLP:conf/tphol/SozeauO08} has
+shown to be of great help for the formalization and verification
+decribed in this paper.
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "coredec"
+%%% End:
