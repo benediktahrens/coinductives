@@ -173,14 +173,15 @@ mathsans,
  \frametitle{Goal}
  
    \begin{itemize}\setlength{\itemsep}{1em}
-    \item give category-theoretic characterization of \fat{heterogeneous} coinductive data types
-    \item [$\leadsto$] develop a notion of \enquote{coalgebra} for a given signature
-    \item incorporate canonical cosubstitution
+    \item category-theoretic semantics of \fat{heterogeneous} \fat{co}inductive data types
+          in Martin-L\"of type theory
+    \item [$\leadsto$] develop a notion of \enquote{coalgebra} for the signature of a codata type
+    \item incorporate canonical cosubstitution if definable
    \end{itemize}
 
-  \begin{block}{In this talk}
+  \begin{block}{In this talk we consider}
    \begin{itemize}
-    \item we consider the codata type of infinite triangular matrices
+    \item []  the codata type of \fat{infinite triangular matrices}
    \end{itemize}
   \end{block}
 
@@ -195,19 +196,28 @@ mathsans,
 \end{frame}
 
 
-\section{Initiality for W-types and heterogeneous inductives}
+\section{Syntax: initiality for W-types and heterogeneous inductives}
 
 \begin{frame}
- \frametitle{Starting point: W-types and binding syntax in categories}
+ \frametitle{Starting point: W-types in Martin-L\"of TT}
  
+  
  \begin{block}{Well-founded trees as \fat{initial algebra} of polynomial functor}
+ 
+   Given $x : A \vdash B(x)$, the type $W~A~B$ is the (carrier of) the initial algebra of
+    \[X \mapsto \sum_{a:A}X^{B(a)} \]
+ 
   \begin{itemize}
    \item example: type of natural numbers, lists, etc.
    \item Dybjer '97, Moerdijk and Palmgren '00
   \end{itemize}
  \end{block}
+\end{frame}
 
- \begin{block}{Initial semantics extended to some \fat{heterogeneous} inductives}
+\begin{frame}
+  \frametitle{Heterogeneous data types}
+
+%  \begin{block}{Initial semantics extended to some \fat{heterogeneous} inductives}
  
   \begin{itemize}
     \item motivation: \fat{binding syntax} 
@@ -218,12 +228,17 @@ mathsans,
                                            | \enspace &\Abs : \LC(X + 1) \to \LC(X) \enspace
            \end{align*}
     \item \fat{heterogeneity:} $\Abs$ has recursive argument with \fat{bigger} type parameter
+    
+    \item substitution:
+      
+        \[ \subst_{X,Y} : (X \to \LC Y)
+    
 %    \begin{itemize}
 %     \item 
   \end{itemize}
 %     \item variant using monads: Altenkirch \& Reus '99, Hirschowitz \& Maggesi '07, '10
 %    \end{itemize}
- \end{block} 
+%  \end{block} 
 \end{frame}
 
 \begin{frame}
