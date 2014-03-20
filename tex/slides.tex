@@ -219,23 +219,24 @@ mathsans,
 
 %  \begin{block}{Initial semantics extended to some \fat{heterogeneous} inductives}
  
-  \begin{itemize}
-    \item motivation: \fat{binding syntax} 
+  \begin{description}
+    \item [motivation:] \fat{binding syntax} 
 %               modelled through %($\lambda$-calculus)    \fat{heterogeneous} data type
            \begin{align*} \LC(X) \enspace ::=                                              
                                            \enspace  & \Var : X \to \LC(X) \\
                                            | \enspace  & \App : \LC(X)\times\LC(X)\to\LC(X) \\ 
                                            | \enspace &\Abs : \LC(X + 1) \to \LC(X) \enspace
            \end{align*}
-    \item \fat{heterogeneity:} $\Abs$ has recursive argument with \fat{bigger} type parameter
+    \item [heterogeneity of $\Abs$:] \hfill \\ recursive argument with bigger parameter
     
-    \item substitution:
-      
-        \[ \subst_{X,Y} : (X \to \LC Y)
+    \item [substitution:] \hfill\\        
+       $ \subst_{X,Y} : \bigl(X \to \LC (Y)\bigr) \to \LC (X) \to \LC (Y) $
+    
+    \item [avoiding capture:] \hfill \\ $\shift_{X,Y} : \bigl(X \to \LC(Y)\bigr) \to \LC(X+1) \to \LC(Y+1)$
     
 %    \begin{itemize}
 %     \item 
-  \end{itemize}
+  \end{description}
 %     \item variant using monads: Altenkirch \& Reus '99, Hirschowitz \& Maggesi '07, '10
 %    \end{itemize}
 %  \end{block} 
@@ -315,17 +316,20 @@ mathsans,
 \begin{frame}
  \frametitle{Goal: characterize \fat{co}data types with \fat{co}substitution}
  
-\begin{block}{Question}
+\begin{block}{Goal}
+dualize techniques of H \& M to characterize
   \begin{itemize}
-    \item 
-        Can we use (dual) techniques of H \& M to characterize codata types with cosubstitution as
-        \fat{terminal} object?
-    \item I.e.: Given a heterogeneous codata type, what is the category in which that codata type is terminal?
+    \item
+         \fat{co}data types with 
+    \item\fat{co}substitution 
   \end{itemize}
-\end{block}
+    as  \fat{terminal} object
+%     \item I.e.: Given a heterogeneous codata type, what is the category in which that codata type is terminal?
   
-\begin{block}{In this talk}
- we answer this question for 
+ \end{block}
+  
+\begin{block}{In this talk we consider}
+ 
   \begin{itemize} 
     \item the codata type of infinite triangular matrices
     \item with \fat{redecoration} operation
