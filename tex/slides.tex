@@ -176,7 +176,7 @@ mathsans,
     \item category-theoretic semantics of \fat{heterogeneous} \fat{co}inductive data types
           in Martin-L\"of type theory
     \item [$\leadsto$] develop a notion of \enquote{coalgebra} for the signature of a codata type
-    \item incorporate canonical cosubstitution if definable
+    \item incorporate canonical cosubstitution
    \end{itemize}
 
   \begin{block}{In this talk we consider}
@@ -227,7 +227,7 @@ mathsans,
                                            | \enspace  & \App : \LC(X)\times\LC(X)\to\LC(X) \\ 
                                            | \enspace &\Abs : \LC(X + 1) \to \LC(X) \enspace
            \end{align*}
-    \item [heterogeneity of $\Abs$:] \hfill \\ recursive argument with bigger parameter
+    \item [heterogeneity of $\Abs$:] \hfill \\ recursive argument with bigger parameter $X+1$
     
     \item [substitution:] \hfill\\        
        $ \subst_{X,Y} : \bigl(X \to \LC (Y)\bigr) \to \LC (X) \to \LC (Y) $
@@ -284,7 +284,7 @@ mathsans,
    \begin{definition}[Algebra for signature of $\LC$, H \& M '07]
      \begin{itemize}
       \item a monad $(T, \unit, \bind{}{})$ on $\Set$
-      \item two \fat{morphisms of modules} over $T$,
+      \item two \fat{morphisms of modules over $T$},
          \vspace{-.5em}
           \begin{align*}
                App &: T \times T \to T \\
@@ -690,7 +690,7 @@ dualize techniques of H \& M to characterize
  \frametitle{Technical difficulty: definition of $\lift$}
 %    \begin{itemize}
      Definition of 
-             \[\lift_A: (\Tri A \to B) \to (\Tri(E\times A) \to E\times B) \]
+             \[\lift_A: (\Tri A \to B) \to \Tri(E\times A) \to E\times B \]
           requires auxiliary function $\cut_A : \Tri (E\times A) \to \Tri A$
           
     
@@ -757,7 +757,7 @@ dualize techniques of H \& M to characterize
    \begin{block}{Mechanization in the proof assistant \texttt{Coq}}
       \begin{itemize}\setlength{\itemsep}{1em}
        \item helped to find a mistake we made (already made by Abel, Matthes \& Uustalu '05)
-       \item we were able to reuse code by Matthes \& Picard '11
+       \item reuses code by Matthes \& Picard '11
        \item 3000 lines of code, among which 1500 by MP '11
        \item fully constructive and axiom-free
        \item tedious: coinduction in \texttt{Coq} cumbersome
@@ -772,9 +772,10 @@ dualize techniques of H \& M to characterize
   
    \begin{itemize}\setlength{\itemsep}{1em}
     \item Ad hoc notion of weak constructive comonad is instance of relative comonad
+    \item Develop comodules over relative comonads
     \item Terminal algebra semantics for codata family $\Tri$
-    \item bisimilarity and redecoration are part of universal object
-    \item not as straightforward as the $\lambda$-calculus because of $\cut$
+    \item Bisimilarity and redecoration are part of universal object
+    \item Not as straightforward as the $\lambda$-calculus because of $\cut$
     \item Mechanization in \texttt{Coq}
    \end{itemize}
 
