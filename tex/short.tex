@@ -78,8 +78,8 @@ Toulouse}
 
  In the present work we study a specific \emph{co}inductive \emph{heterogeneous} data type---the type family $\Tri$ of 
  infinite triangular matrices---and its \emph{redecoration} operation:
- the codata type is parametrized by a fixed set $E$ for entries not on the diagonal, 
- and indexed by another, \emph{variable}, set $A$ for entries on 
+ the codata type is parametrized by a fixed type $E$ for entries not on the diagonal, 
+ and indexed by another, \emph{variable}, type $A$ for entries on 
  the diagonal. The respective types of its specifying destructors $\head$ and $\tail$ are given in \Cref{fig:tri_destructors},
  together with the destructors for the coinductively defined bisimilarity relation on it.
  Equipped with the redecoration operation, the type $\Tri$ is shown by \textcite{DBLP:conf/types/MatthesP11}
@@ -116,7 +116,7 @@ Toulouse}
  
  In this work, we first identify those weak constructive comonads as an instance of the more general notion of \emph{relative comonad},
  the dual to relative monads as introduced in \parencite{DBLP:conf/fossacs/AltenkirchCU10}.
- Indeed, a weak constructive comonad is precisely a comonad relative to the functor $\eq:\Set\to\Setoid$, the 
+ Indeed, a weak constructive comonad is precisely a comonad relative to the functor $\eq:\Type\to\Setoid$, the 
  left adjoint to the forgetful functor.
  
  Afterwards, we characterize the codata type $\Tri$, equipped with the cosubstitution operation of redecoration, as a terminal object of some category.
@@ -126,8 +126,8 @@ Toulouse}
  In their work, the crucial notions are the notion of monad and, more importantly, \emph{module over a monad}.
  It turns out that more work than a simple dualization is necessary for two reasons:
  \begin{itemize}
-  \item the lambda calculus can be seen as a monad on sets and thus, in particular, as an endofunctor.
-        The codata type $\Tri$, however, associates to any \emph{set} of potential diagonal elements a \emph{setoid}
+  \item the lambda calculus can be seen as a monad on types and thus, in particular, as an endofunctor.
+        The codata type $\Tri$, however, associates to any \emph{type} of potential diagonal elements a \emph{setoid}
         of triangular matrices. We thus need a notion of comonad whose underlying functor is not necessarily endo: the 
         already mentioned \emph{relative} comonads;
   \item the category-theoretic analysis of the destructor $\tail$ is more complicated than that of the heterogeneous 
@@ -145,106 +145,20 @@ Toulouse}
   it to give a definition of a \enquote{coalgebra} for the signature of infinite triangular matrices, 
   together with a suitable notion of \emph{morphism} of such coalgebras.
    We thus obtain a category of coalgebras for that signature.
-  Any object of this category comes with a comonad relative to the aforementioned functor $\eq : \Set\to\Setoid$
+  Any object of this category comes with a comonad relative to the aforementioned functor $\eq : \Type\to\Setoid$
   and a suitable comodule over this comonad, modeling in some sense the destructor $\tail$.
   Our main result then states that this category 
   has a terminal object built from the codata type $\Tri$ and its destructor $\tail$,
   which are seen as a relative comonad and a comodule over that relative comonad, respectively.
-% 
-% 
-% 
-% 
-% \section{Coalgebras for infinite triangular matrices}\label{sec:coalgebras_for_tri}
-% 
-% 
-% Our goal is to define \fat{coalgebras} for the signature of infinite triangular matrices such that 
-% the codata type $\Tri$ defined in \Cref{ex:tri_comonad} constitutes the \fat{terminal such coalgebra}.
-% Since $\Tri$ forms a comonad relative to the functor $\eq:\Set\to\Setoid$, it seems reasonable to define
-% an arbitrary coalgebra for that signature as such a relative comonad as well, equipped with some extra structure which remains to be defined.
-% A morphism of coalgebras would then be defined as a morphism of relative comonads that is compatible with that extra structure.
-% 
-% The purpose of this extra structure is to characterize the destructor $\tail$, that is, its \emph{type} as well as
-% its \emph{behaviour with respect to the redecoration operation}.
-% Dualizing the approach of \textcite{DBLP:journals/iandc/HirschowitzM10}, we hope to characterize $\tail$ as a morphism of 
-% comodules of specified type, which would allow us to define the extra structure of an arbitrary coalgebra for that signature
-% as a suitable comodule morphism as well.
-% 
-% In order to turn $\tail$ into a morphism of comodules, the crucial task is to suitably endow the source and target functors
-% $\Tri$ and $\Tri(E\times \_)$, respectively, with a comodule structure over the comonad $\Tri$.
-% For this, we now take a closer look at how the $\extend$ operation for $\Tri$ is defined. Its purpose is to 
-% modify the function $f$ used for redecoration, when redecorating $\tail~t : \Tri(E\times A)$ rather than $t : \Tri A$.
-% First we note an important difference between the $\extend$ operation and its analogue in the inductive case:
-% 
-% 
-% 
-% The failure to describe the $\extend$ operation---more precisely, the auxiliary $\cut$---in categorical terms leads us 
-% to considering comonads that come with a specified $\cut$ operation for some fixed object $E$ in the source category:
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% We now define a category in which the codata type of triangular matrices, equipped with the bisimulation relation of \Cref{ex:tri_comonad}
-% and the comonadic redecoration, constitutes the terminal object. We call an object of this category a \emph{coalgebra of triangular matrices}, 
-% even though we do not define the category as a category of coalgebras of a given endofunctor.
-% 
-% The definition of such a coalgebra is obtained by collecting all the information we have gathered so
-% far about the comonad $\Tri$, and abstracting from this particular comonad:
-% 
-% 
-% \begin{definition}[Coalgebras of infinite triangular matrices]\label{def:cat_tri}
-%    Let $E:\Set_0$ be a set.
-%    Let $\mathcal{T} = \mathcal{T}_E$ be the category where an object consists of
-%    \begin{itemize}
-%     \item a comonad $T$ over the functor $\eq:\Set\to\Setoid$ with $\cut$ relative to $E$ and
-%     \item a morphism $\tail$ of comodules over $T$ of type $T \to T(E\times \_)$
-%    \end{itemize}
-%    such that for any set $A$,
-%     \[ \comp{\cut_A}{\tail_A} = \comp{\tail_{E\times A}}{\cut_{E\times A}} \enspace . \]
-%    The last equation can be stated as an equality of comodule morphisms as
-%      \[ \comp{\cut}{\tail} = \comp{\tail(E\times \_)}{\cut(E\times\_)} \quad \bigl( = (\comp{\tail}{\cut})(E\times \_)\bigr)\enspace . \]
-% 
-%   
-%    
-%    A morphism between two such objects $(T,\tail^T)$ and $(S,\tail^S)$
-%    is given by a morphism of relative comonads with cut $\tau : T \to S$ such that
-%    the following diagram of comodule morphisms in the category $\RComod(S,\E)$ commutes,
-%    
-% 
-%    \noindent
-%    Here in the upper right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
-% \end{definition}   
-%    
-% We now have all the ingredients to state (and prove) our main theorem:
-% \begin{theorem}[Coinitial semantics for triangular matrices with redecoration]\label{ex:final_sem_tri} % checked   
-%    The pair $(\Tri, \tail)$ consisting of the relative comonad with cut $\Tri$ of \Cref{def:cut_for_tri} together with 
-%     the morphism of comodules $\tail$ of \Cref{ex:tail_comodule},
-%    constitutes the terminal---\enquote{coinitial}---coalgebra of triangular matrices.
-% \end{theorem}
-% 
-% 
-This universal property of coinitiality characterizes not only the codata type of infinite triangular matrices but also
-the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operation.
+  This universal property of coinitiality characterizes not only the codata type of infinite triangular matrices but also
+  the bisimilarity relation on it as well as the redecoration operation.
  
  All our definitions, examples, and lemmas have been implemented in the proof assistant \coq. % \parencite{coq84pl3}.
  The \coq source files and HTML documentation are available on the project web page \parencite{trimat_coq}.
- While parts of our work seem to be specific to the particular codata type $\Tri$,
- we believe that our work proves the suitability of the notion of relative (co)monads and (co)modules thereover for 
- a categorical characterization of coinductive data types.
 
 
-% We plan to pursue two obvious lines of work:
-% Firstly, we will work on a suitable notion of \emph{signature} for the specification of coinductive data types.
-% Secondly, we hope to integrate \emph{equations} into the notion of signature, equations which 
-% will allow, e.g., considering branching trees modulo permutation of subtrees.
  
-We thank the anonymous referees for helpful comments on this abstract.
+We thank the anonymous referees for their helpful comments on this abstract.
 
 \renewcommand*{\bibfont}{\small}
 \printbibliography[heading=none]
