@@ -66,10 +66,10 @@ mathsans,
 % \usepackage{verbatim}
 
 \title[Coinitial semantics for redecoration]{Coinitial semantics \\ for redecoration of triangular matrices}
-\author{Benedikt Ahrens and R\'egis Spadotti}
+\author[B.\ Ahrens and R.\ Spadotti]{Benedikt Ahrens \\~\\ joint work with R\'egis Spadotti}
 % \date{2011--09--11}
 % \date{Sept 11, 2011}
-\date[put date here]{Conference on stuff}
+\date[2014-03-24/25]{Journées GeoCal 2014}
 %{19th Workshop on \\ Logic, Language,  Information and Computation}
 
 \institute[IRIT] % (optional, but mostly needed)
@@ -173,10 +173,10 @@ mathsans,
  \frametitle{Goal}
  
    \begin{itemize}\setlength{\itemsep}{1em}
-    \item category-theoretic semantics of \fat{heterogeneous} \fat{co}inductive data types
+    \item Category-theoretic semantics of \fat{heterogeneous} \fat{co}inductive data types
           in Martin-L\"of type theory
-    \item [$\leadsto$] develop a notion of \enquote{coalgebra} for the signature of a codata type
-    \item incorporate canonical cosubstitution
+    \item [$\leadsto$] Develop a notion of \enquote{coalgebra} for the signature of a codata type
+    \item Incorporate canonical cosubstitution
    \end{itemize}
 
   \begin{block}{In this talk we consider}
@@ -208,7 +208,7 @@ mathsans,
     \[X \mapsto \sum_{a:A}X^{B(a)} \]
  
   \begin{itemize}
-   \item example: type of natural numbers, lists, etc.
+   \item type of natural numbers $\mathbb{N} := W~A~B$ with: \[A = \{O,S\}, \quad B(O) = \{\}, \quad B(S)=\{*\}\]
    \item Dybjer '97, Moerdijk and Palmgren '00
   \end{itemize}
  \end{block}
@@ -232,7 +232,7 @@ mathsans,
     \item [substitution:] \hfill\\        
        $ \subst_{X,Y} : \bigl(X \to \LC (Y)\bigr) \to \LC (X) \to \LC (Y) $
     
-    \item [avoiding capture:] \hfill \\ $\shift_{X,Y} : \bigl(X \to \LC(Y)\bigr) \to \LC(X+1) \to \LC(Y+1)$
+    \item [avoiding capture:] \hfill \\ $\shift_{X,Y} : \bigl(X \to \LC(Y)\bigr) \to X+1 \to \LC(Y+1)$
     
 %    \begin{itemize}
 %     \item 
