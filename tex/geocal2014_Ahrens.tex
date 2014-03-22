@@ -658,22 +658,28 @@ dualize techniques of H \& M to characterize
 \begin{frame}
  \frametitle{(Co)modules over (relative) (co)monads}
  \begin{block}{Morphisms of modules over monads}
-  \begin{itemize}
+%   \begin{itemize}
 %    \item used in work by Hirschowitz and Maggesi
-   \item characterize distributivity of substitution over constructors
-      \begin{align*} \bind{\App~(s,t)}{f} \quad &= \quad \App~(\bind{s}{f},\bind{t}{f}) \\
-                     \bind{\Abs~t}{f}       \quad &= \quad \Abs~(\bind{t}{\shift~f})
-      \end{align*}
-  \end{itemize}
+%    \item 
+   characterize distributivity of substitution over constructors
+%       \begin{align*} \bind{\App~(s,t)}{f} \quad &= \quad \App~(\bind{s}{f},\bind{t}{f}) \\
+%                      \bind{\Abs~t}{f}       \quad &= \quad \Abs~(\bind{t}{\shift~f}) 
+%       \end{align*}
+%   \end{itemize}
+
+         \[ \Abs : \LC(\_ + 1) \to \LC \]
+         \[ \subst~f~(\Abs~t) = \Abs~(\subst~(\shift~f)~t) \]
+
  \end{block}
 
  \begin{block}{Morphisms of \fat{co}modules over \fat{relative co}monads}
-  \begin{itemize}
-   \item characterize distributivity of \fat{co}substitution over destructors
-   \item %example of morphism of comodules:  
+%   \begin{itemize}
+%    \item 
+   characterize distributivity of \fat{co}substitution over destructors
+%    \item %example of morphism of comodules:  
          \[\tail : \Tri \to \Tri(E\times \_)\]
-             \[\tail\bigl(\redec~f~t\bigr) = \redec\bigl(\lift~f\bigr)(\tail~t) \]
-  \end{itemize}
+             \[\tail~(\redec~f~t) = \redec~(\lift~f)(\tail~t) \]
+%   \end{itemize}
  \end{block} 
 \end{frame}
 
