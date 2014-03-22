@@ -7,23 +7,24 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage[protrusion=true,expansion=true]{microtype}
-
+\usepackage{csquotes}
 \usepackage[english]{babel}
 
-\usepackage[style=numeric,
-%  backref=true,
- isbn=false,
- maxnames=3,
- maxbibnames=99 ,                
- uniquename=init ,
-]{biblatex}
-\bibliography{literature.bib}
-
-\usepackage{ownstylesansthm}
+\usepackage{bussproofs}
+\usepackage{xspace}
 
 
+\usepackage{cleveref}
 
-\newcommand{\fat}[1]{\textbf{#1}}
+
+\newcommand{\constfont}[1]{\ensuremath{\mathsf{#1}}}
+\newcommand{\Tri}{\constfont{Tri}}
+\newcommand{\head}{\constfont{top}}
+\newcommand{\tail}{\constfont{rest}}
+\newcommand{\eq}{\constfont{eq}}
+\newcommand{\Type}{\constfont{Type}}
+\newcommand{\Setoid}{\constfont{Setoid}}
+\newcommand{\coq}{\texttt{Coq}\xspace}
 
 
 \begin{document}
@@ -49,12 +50,12 @@ Toulouse}
  a polynomial functor.
  Dually, \emph{co}inductive types are characterized as terminal \emph{co}algebras of polynomial functors.
  In the case of coinductive types, the meta-theoretic notion of equality given by Martin-L\"of's identity type is too weak: instead, the idea of 
- \emph{bisimilarity as equality} for coinductive data types was coined by \textcite{aczel_nonwellfounded}.
+ \emph{bisimilarity as equality} for coinductive data types was coined by Aczel \cite{aczel_nonwellfounded}.
 
  
  The characterization of inductive types as initial algebras 
  has been extended to some \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
- in various formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
+ in various formulations \cite{fpt, DBLP:journals/iandc/HirschowitzM10}.
  The main goal of those works is to characterize not only the data type via a universal property, but rather the data type
  \emph{equipped with a well-behaved substitution operation}.
  
@@ -66,7 +67,7 @@ Toulouse}
  and indexed by another, \emph{variable}, type $A$ for entries on 
  the diagonal. The respective types of its specifying destructors $\head$ and $\tail$ are given in \Cref{fig:tri_destructors},
  together with the destructors for the coinductively defined bisimilarity relation on it.
- Equipped with the redecoration operation, the type $\Tri$ is shown by \textcite{DBLP:conf/types/MatthesP11}
+ Equipped with the redecoration operation, the type $\Tri$ is shown by Matthes and Picard \cite{DBLP:conf/types/MatthesP11}
  to constitute what they call a \enquote{weak constructive comonad}.
  \begin{figure}[htb]
   \begin{center}
@@ -99,12 +100,12 @@ Toulouse}
 
  
  In this work, we first identify those weak constructive comonads as an instance of the more general notion of \emph{relative comonad},
- the dual to relative monads as introduced in \parencite{DBLP:conf/fossacs/AltenkirchCU10}.
+ the dual to relative monads as introduced in \cite{DBLP:conf/fossacs/AltenkirchCU10}.
  Indeed, a weak constructive comonad is precisely a comonad relative to the functor $\eq:\Type\to\Setoid$, the 
  left adjoint to the forgetful functor.
  
  Afterwards, we characterize the codata type $\Tri$, equipped with the cosubstitution operation of redecoration, as a terminal object of some category.
- For this, we dualize the approach by \textcite{DBLP:journals/iandc/HirschowitzM10},
+ For this, we dualize the approach by Hirschowitz and Maggesi \cite{DBLP:journals/iandc/HirschowitzM10},
  who characterize the heterogeneous inductive type of lambda terms---equipped with a suitable substitution operation---as an initial object in
  a category of algebras for the signature of lambda terms.
  In their work, the crucial notions are the notion of monad and, more importantly, \emph{module over a monad}.
@@ -119,7 +120,7 @@ Toulouse}
  \end{itemize}
  Finding a suitable categorical notion to capture the destructor $\tail$ and, more importantly, its interplay with
  the comonadic redecoration operation on $\Tri$, constitutes the main contribution of the present work.
- These rather technical details shall not be explained in this abstract.
+ These rather technical details shall not be given in this abstract, but are explained in a preprint \cite{trimat_coq}.
  
  
 
@@ -138,14 +139,53 @@ Toulouse}
   the bisimilarity relation on it as well as the redecoration operation.
  
  All our definitions, examples, and lemmas have been implemented in the proof assistant \coq. % \parencite{coq84pl3}.
- The \coq source files and HTML documentation are available on the project web page \parencite{trimat_coq}.
+ The \coq source files and HTML documentation are available on the project web page \cite{trimat_coq}.
 
 
  
 We thank the anonymous referees for their helpful comments on this abstract.
 
-\renewcommand*{\bibfont}{\small}
-\printbibliography [heading=subbibliography]
+
+\bibliographystyle{plain}
+\begin{thebibliography}{1}
+
+\bibitem{aczel_nonwellfounded}
+Peter Aczel.
+\newblock {\em {Non-Well-Founded Sets}}, volume~14 of {\em CSLI Lecture Notes}.
+\newblock Center for the Study of Languages and Information, 1988.
+
+\bibitem{trimat_coq}
+Benedikt Ahrens and R\'egis Spadotti.
+\newblock {Coinitial semantics for redecoration of triangular matrices}.
+\newblock \url{http://benediktahrens.github.io/coinductives/}.
+
+\bibitem{DBLP:conf/fossacs/AltenkirchCU10}
+Thorsten Altenkirch, James Chapman, and Tarmo Uustalu.
+\newblock Monads need not be endofunctors.
+\newblock In C.-H.~Luke Ong, editor, {\em FOSSACS}, volume 6014 of {\em Lecture
+  Notes in Computer Science}, pages 297--311. Springer, 2010.
+
+\bibitem{fpt}
+Marcelo Fiore, Gordon Plotkin, and Daniele Turi.
+\newblock Abstract syntax and variable binding.
+\newblock In {\em Proceedings of the 14th Annual IEEE Symposium on Logic in
+  Computer Science}, LICS '99, pages 193--202, Washington, DC, USA, 1999. IEEE
+  Computer Society.
+
+\bibitem{DBLP:journals/iandc/HirschowitzM10}
+Andr{\'e} Hirschowitz and Marco Maggesi.
+\newblock Modules over monads and initial semantics.
+\newblock {\em Inf. Comput.}, 208(5):545--564, 2010.
+
+\bibitem{DBLP:conf/types/MatthesP11}
+Ralph Matthes and Celia Picard.
+\newblock Verification of redecoration for infinite triangular matrices using
+  coinduction.
+\newblock In Nils~Anders Danielsson and Bengt Nordstr{\"o}m, editors, {\em
+  TYPES}, volume~19 of {\em LIPIcs}, pages 55--69. Schloss Dagstuhl -
+  Leibniz-Zentrum f\"ur Informatik, 2011.
+
+\end{thebibliography}
 
 
 
