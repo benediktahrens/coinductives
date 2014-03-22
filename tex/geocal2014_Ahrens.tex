@@ -6,10 +6,11 @@
 
 \documentclass[
 %  handout,
-serif,
-mathsans,
+% serif,
+% mathsans,
 ]
 {beamer}
+\usefonttheme[stillsansserifmath]{serif}
 \usepackage[utf8]{inputenc}
 % \usetheme[width=6ex]{Marburg}
 % \usetheme[width=6ex]{Goettingen}
@@ -297,12 +298,17 @@ mathsans,
 
    \end{definition}
    
+   
+   \pause
+   
    \enquote{Module morphism} expresses \fat{distributivity of substitution}:
    \begin{align*} \bind{App~(s,t)}{f} \quad &= \quad App~(\bind{s}{f},\bind{t}{f}) \\
-                     \bind{Abs~t}{f}       \quad &= \quad Abs~(\bind{t}{\shift~f})
+                     \bind{Abs~t}{f}       \quad &= \quad Abs~(\bind{t}{\shift^T~f})
       \end{align*}
    
    \vspace{-1em}
+   
+   \pause 
    
    \begin{lemma}[Initial semantics for $\LC$, H \& M '07]
       $(\LC, \App, \Abs)$ is the initial algebra, where $\LC = (\LC,\Var,\subst)$
@@ -610,9 +616,13 @@ dualize techniques of H \& M to characterize
 
   \end{block}
 
+\pause
   \begin{lemma}[Reformulation of Matthes and Picard '11]
  $(\Tri : \Set\to\Setoid, \head, \redec)$ forms a \fat{comonad relative to} $\eq:\Set\to\Setoid$.
 \end{lemma}
+
+\pause
+
 \begin{definition}[\fat{Relative} (co)monad, Alten., Chapm. \& Uust.\ '10]
   \begin{itemize} 
    \item underlying functor is \fat{not} necessarily \fat{endo}
@@ -647,9 +657,9 @@ dualize techniques of H \& M to characterize
 
 \begin{frame}
  \frametitle{(Co)modules over (relative) (co)monads}
- \begin{block}{\fat{Modules over monads}---better, morphisms of\ldots}
+ \begin{block}{Morphisms of modules over monads}
   \begin{itemize}
-   \item used in work by Hirschowitz and Maggesi
+%    \item used in work by Hirschowitz and Maggesi
    \item characterize distributivity of substitution over constructors
       \begin{align*} \bind{\App~(s,t)}{f} \quad &= \quad \App~(\bind{s}{f},\bind{t}{f}) \\
                      \bind{\Abs~t}{f}       \quad &= \quad \Abs~(\bind{t}{\shift~f})
@@ -657,10 +667,12 @@ dualize techniques of H \& M to characterize
   \end{itemize}
  \end{block}
 
- \begin{block}{generalize/dualize to \fat{co}modules over \fat{relative co}monads}
+ \begin{block}{Morphisms of \fat{co}modules over \fat{relative co}monads}
   \begin{itemize}
-   \item characterize distributivity of \redec oration over destructors
-   \item example of morphism of comodules:  \[\tail : \Tri \to \Tri(E\times \_)\]
+   \item characterize distributivity of \fat{co}substitution over destructors
+   \item %example of morphism of comodules:  
+         \[\tail : \Tri \to \Tri(E\times \_)\]
+             \[\tail\bigl(\redec~f~t\bigr) = \redec\bigl(\lift~f\bigr)(\tail~t) \]
   \end{itemize}
  \end{block} 
 \end{frame}
@@ -729,7 +741,7 @@ dualize techniques of H \& M to characterize
     \item we were not able to define $\cut$ categorically
     \item fix: every coalgebra comes with a \fat{specified}
        \[ c_A : T (E\times A) \to TA \]
-          and equations characterizing $\cut^T$
+          and equations characterizing $c$
     \item $c^{\Tri} := \cut$ for $\Tri$ uniquely determined by these equations
    \end{itemize}
  \begin{lemma}[for real this time]
@@ -763,7 +775,6 @@ dualize techniques of H \& M to characterize
        \item tedious: coinduction in \texttt{Coq} cumbersome
       \end{itemize}
    \end{block}
-
    
 \end{frame}
 
@@ -779,6 +790,8 @@ dualize techniques of H \& M to characterize
     \item Mechanization in \texttt{Coq}
    \end{itemize}
 
+   \pause \begin{center} Thanks for your attention \end{center}
+   
 \end{frame}
 
 
