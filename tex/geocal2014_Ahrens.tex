@@ -139,7 +139,7 @@
 \newcommand{\Id}{\mathsf{Id}}
 
 
-\newcommand{\Set}{\mathsf{Set}}
+\newcommand{\Set}{\constfont{Type}}
 \newcommand{\PreOrd}{\mathsf{Pre}}
 
 \newcommand{\PCFar}{\Rightarrow}
@@ -223,7 +223,7 @@
   \begin{description}
     \item [motivation:] \fat{binding syntax} 
 %               modelled through %($\lambda$-calculus)    \fat{heterogeneous} data type
-           \begin{align*} \LC(X) \enspace ::=                                              
+           \begin{align*} \LC(X : \Set) \enspace ::=                                              
                                            \enspace  & \Var : X \to \LC(X) \\
                                            | \enspace  & \App : \LC(X)\times\LC(X)\to\LC(X) \\ 
                                            | \enspace &\Abs : \LC(X + 1) \to \LC(X) \enspace
@@ -678,7 +678,7 @@ dualize techniques of H \& M to characterize
    characterize distributivity of \fat{co}substitution over destructors
 %    \item %example of morphism of comodules:  
          \[\tail : \Tri \to \Tri(E\times \_)\]
-             \[\tail~(\redec~f~t) = \redec~(\lift~f)(\tail~t) \]
+             \[\tail~(\redec~f~t) = \redec~(\lift~f)~(\tail~t) \]
 %   \end{itemize}
  \end{block} 
 \end{frame}
@@ -745,7 +745,7 @@ dualize techniques of H \& M to characterize
  \frametitle{A specified $\cut$ for any coalgebra}
   \begin{itemize}
     \item we were not able to define $\cut$ categorically
-    \item fix: every coalgebra comes with a \fat{specified}
+    \item fix: every coalgebra $(T,r)$ comes with a \fat{specified}
        \[ c_A : T (E\times A) \to TA \]
           and equations characterizing $c$
     \item $c^{\Tri} := \cut$ for $\Tri$ uniquely determined by these equations
