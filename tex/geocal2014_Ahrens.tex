@@ -205,11 +205,16 @@
   
  \begin{block}{Well-founded trees as \fat{initial algebra} of polynomial functor}
  
-   Given $x : A \vdash B(x)$, the type $W~A~B$ is the (carrier of) the initial algebra of
+  \begin{itemize}
+   \item Trees specified by $A$ and $x:A\vdash B(x)$
+   
+   \item Type of natural numbers $\mathbb{N} := W~A~B$ with: \[A = \{O,S\}, \quad B(O) = \{\}, \quad B(S)=\{*\}\]
+ 
+   \item The type $W~A~B$ is the (carrier of) the initial algebra of
     \[X \mapsto \sum_{a:A}X^{B(a)} \]
  
-  \begin{itemize}
-   \item type of natural numbers $\mathbb{N} := W~A~B$ with: \[A = \{O,S\}, \quad B(O) = \{\}, \quad B(S)=\{*\}\]
+ 
+   
    \item Dybjer '97, Moerdijk and Palmgren '00
   \end{itemize}
  \end{block}
@@ -601,7 +606,7 @@ dualize techniques of H \& M to characterize
    
 \begin{frame}
  \frametitle{$\Tri$ is a relative comonad}
-  \begin{block}{Alternatively, consider $\Tri A$ as a \fat{setoid} rather than a set}
+  \begin{block}{Alternatively, $\Tri A$ is a \fat{setoid} rather than a (plain) type}
 %     \begin{itemize}
        \vspace{-2em}
            \begin{align*} 
