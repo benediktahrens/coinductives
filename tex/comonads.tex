@@ -219,26 +219,47 @@ are called \emph{strong monoidal}:
 \section{The codata type of infinite triangular matrices}\label{sec:tri}
 
 In this section we present a particular coinductive type family family in intensional Martin-L\"of type theory, the codata type of
-infinite triangular matrices.
+infinite triangular matrices. It constitutes a source of examples for the categorical structures defined later.
+
 This codata type was studied in an article by
  \textcite{DBLP:conf/types/MatthesP11} which is available via open access. 
  The reader is strongly urged to read (the first two sections of) that work 
  before the present one; here we only recall the most important
- definitions:
- the codata type family $\Tri$ of infinite triangular matrices is parametrized by a fixed set for entries not on the diagonal, 
- and indexed by another, \emph{variable}, set for entries on 
- the diagonal. The respective types of its specifying destructors $\head$ and $\tail$ are given in \Cref{fig:tri_destructors}.
-
-% TODO: put Tri here
-
-% \begin{example}[\textcite{DBLP:conf/types/MatthesP11}]\label{ex:tri_comonad}
-Let $E$ be an arbitrary fixed set.
-    The type family $\Tri(A)$ of infinite triangular matrices over the (variable) type $A$ are given by the destructors shown in \Cref{fig:tri_destructors},
-    equipped with a coinductively defined equivalence relation, a \emph{bisimilarity}.
-    We write $t \sim t'$ for bisimilar matrices $t$ and $t'$.
-    By abuse of notation, we denote by $\Tri (A)$ (or shorter $\Tri A$) not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
-    underlying \emph{set}. However, the two inference rules of \Cref{fig:tri_destructors} are the only place this 
-    abuse actually happens. In the following, $\Tri A$ usually denotes the \emph{setoid} of infinite triangular matrices over the set $A$.
+ definitions. 
+ 
+ 
+ The codata type family $\Tri$ of infinite triangular matrices we are about to define
+ is parametrized by a fixed type $E$ for entries not on the diagonal, 
+ and indexed by another, \emph{variable}, type $A$ for entries on 
+ the diagonal. Schematically, such a matrix looks like in \Cref{fig_tri}.
+ \begin{figure}[hbt]
+ \begin{tikzpicture}[scale = 0.6]
+     \foreach \y in {0,...,2}
+     {\foreach \x in {\y,...,2}
+       \draw (\x+1, -\y) node[color=blue]{$E$} ;
+     }
+     \foreach \x in {0,...,3} \draw (\x, -\x) node[color=red]{$A$} ;
+     \draw(4,-1) node{$\ldots$};
+%      \draw[style = dashed](0.5,0.2) -- (0.5,-1.2);
+%      \draw[style = dashed](1.5,0.2) -- (1.5,-2.2);
+%      \draw[style = dashed, thin](2.5,0.2) -- (2.5,-3.2);
+     
+%      \draw[color=green]  (3,0.5) -- (0.3,0.5) -- (0.3,
+%      -1.2)  -- (2.8,-3.6);
+%      \draw[color=green, dashed]  (3,0.5) -- (4,0.5);
+%      \draw[color=green, dashed]  (2.8,-3.6) -- (3.5,-4.2);
+ \end{tikzpicture}
+  \caption{An infinite triangular matrix over type $A$, schematically}\label{fig_tri}
+ \end{figure}
+ 
+ We define this data type \emph{coinductively}, via two destructors $\head$ and $\tail$, whose types are given in the first line of \Cref{fig:tri_destructors}.
+ We also define a coinductive relation---\emph{bisimilarity}---on the inhabitants of that type, via the destructors of the second line of \Cref{fig:tri_destructors}.    
+ Here we write $t \sim t'$ for bisimilar matrices $t$ and $t'$.
+ This defines a \emph{setoid} $\Tri A$ for any type $A$, given by the type of matrices equipped with bisimilarity as equivalence relation.
+ 
+ By abuse of notation, we denote by $\Tri (A)$ (or shorter $\Tri A$) not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
+ underlying \emph{type}. However, the two inference rules of \Cref{fig:tri_destructors} are the only place this 
+ abuse actually happens. In the following, $\Tri A$ usually denotes the \emph{setoid} of infinite triangular matrices over the type $A$.
 
 \begin{figure}[hbt]
   \begin{center}
@@ -269,14 +290,33 @@ Let $E$ be an arbitrary fixed set.
   \caption{Destructors and bisimilarity for the coinductive family of setoids $\Tri$} \label{fig:tri_destructors}
 \end{figure}
 
-\noindent
-\textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that the data type $\Tri$
-  is an instance of such a comonad. 
-  Such a weak constructive comonad, however, is \emph{precisely}
-  a comonad relative to the functor $\eq : \Set\to\Setoid$.
-  The $\counit$ is given by the operation $\head$, which we thus consider as a family of morphisms of setoids $\head_A : \Setoid(\Tri A, \eq A)$;
-  the proof that $\head$ is indeed compatible with the respective equivalence relations of source and target corresponds
-  precisely to one of the inference rules.
+
+  An operation $\redec$ of type
+    \[ \redec_{A,B} : (\Tri A \to B) \to \Tri A \to \Tri B )\]
+  is defined in \parencite{DBLP:conf/types/MatthesP11}, which is then shown to constitute the cobind
+  operation of a \enquote{weak constructive} comonadic structure on the family $\Tri$. It is given through the equations
+    \begin{align}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
+                     \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\extend~f\bigr)(\tail~t) \enspace . \label{eq:rest_redec}
+    \end{align}
+Here, the family of functions 
+     \[\extend_{A,B} : (\Tri A \to B) \to \Tri (E \times A) \to E\times B \]
+  is suitably defined to account for the change of the type of the argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
+  rather than $t : \Tri A$, namely
+  \[ \extend(f) := \langle \comp{\head_{E\times A}}{\pr_1(E,A)} , \comp{\cut_A}{f} \rangle \enspace . \]
+  The auxiliary function $\cut_A : \Tri(E\times A) \to \Tri A$ is defined corecursively via
+   \begin{align*}\head\bigl(\cut~t\bigr) &:= \pr_2(\head~t) \quad\text{ and } \\
+                     \tail\bigl(\cut~t\bigr) &:= \cut(\tail~t) \enspace . 
+      \end{align*}
+
+  Note that all the operations are suitably compatible with the bisimilarity relation, so that they can be equipped with the types
+  \begin{align*}
+    \redec_{A,B} &: \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B ) \\
+    \extend_{A,B} &: \Setoid(\Tri A,\eq B) \to \Setoid\bigr(\Tri (E \times A),\eq(E\times B)\bigr) \\
+    \cut_A &:  \Setoid(\Tri(E\times A) , \Tri A)
+  \end{align*}
+
+  
+\begin{comment}  
   The $\cobind$ operation---called \emph{redecoration} or $\redec$ in \parencite{DBLP:conf/types/MatthesP11}--- of type
    \[ \redec_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B )\] is defined 
   corecursively, for $f:\Setoid(\Tri A,\eq B)$  and $t : \Tri A$ by
@@ -295,6 +335,8 @@ Here, the family of functions
   More precisely, the function $\cut$ constitutes a family of morphisms of setoids \[\cut_A : \Setoid(\Tri(E\times A),\Tri A) \enspace ,\]
   but for the sake of readability, we will leave this compatibility implicit in the following and simply write $\Tri A \to \Tri B$
   instead of $\Setoid(\Tri A,\Tri B)$.
+\end{comment}
+  
   
  Note that what is called $\extend$ here is called \textit{lift} in \parencite{DBLP:conf/types/MatthesP11}.
 % \end{example}
@@ -337,11 +379,33 @@ Just like relative monads, relative comonads are functorial:
  The functor properties are easily checked.
 \end{definition}
 Relative comonads over the identity functor are exactly comonads.
+
+
+
+
+\begin{example}[Streams in MLTT]
+  %TODO: example: streams as relative comonads 
+\end{example}
+
+
+\begin{example}
+
+  
+  \textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that the data type $\Tri$
+  is an instance of such a comonad. 
+  Such a weak constructive comonad, however, is \emph{precisely}
+  a comonad relative to the functor $\eq : \Set\to\Setoid$.
+  The $\counit$ is given by the operation $\head$, which we thus consider as a family of morphisms of setoids $\head_A : \Setoid(\Tri A, \eq A)$;
+  the proof that $\head$ is indeed compatible with the respective equivalence relations of source and target corresponds
+  precisely to one of the inference rules.
+
+
 A nontrivial instance of relative comonads is given by the coinductive data type of infinite triangular matrices
 studied by \textcite{DBLP:conf/types/MatthesP11}. We suggest the reader consults the first two sections of their work
 in order to understand this example.
 
 % TODO: give example of Tri as rel. comonad
+\end{example}
 
 
 The notion of relative comonad captures many properties of $\Tri$ and its redecoration operation, in particular the interplay
