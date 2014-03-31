@@ -24,7 +24,7 @@
 \author{Benedikt Ahrens}
 \author{R\'egis Spadotti}
 
-\title[]{Comodules over relative comonads for infinite triangular matrices}
+\title[Comodules over relative comonads for streams and infinite matrices]{Comodules over relative comonads \\ for streams and infinite matrices}
 
 \newcommand{\fat}[1]{\textbf{#1}}
 
@@ -34,11 +34,15 @@
 
 \begin{abstract}
 
-  In this work we study relative comonads and comodules over such comonads.
-  
-  Our main examples come from families of coinductive data types in intensional Martin-L\"of type theory.
-  We present a particular, heterogeneous such data type and prove a terminal semantics result for that type family,
-  based on the notion of comodules over relative comonads.
+
+ In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}, and exhibit
+ natural occurrences of these notions in the definition of category-theoretical semantics of coinductive types in 
+ intensional Martin-L\"of type theory.
+ 
+    
+%   Our main examples come from families of coinductive data types in intensional Martin-L\"of type theory.
+%   We present a particular, heterogeneous such data type and prove a terminal semantics result for that type family,
+%   based on the notion of comodules over relative comonads.
   
   
 
@@ -63,33 +67,67 @@
 
 \section{Introduction}
  
+ In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
+ We then use these notions to characterise properties of several coinductive data types and operations on them in intensional Martin-L\"of type theory.
  
+ Relative monads were introduced by \textcite{DBLP:conf/fossacs/AltenkirchCU10} as a generalization of the notion of monad,
+ to allow for a monadic structure on functors that are not necessarily endo.
+ Various data types in type theory can be equipped with the structure of a relative monad, such as 
+ lambda terms over finite sets \parencite{DBLP:conf/fossacs/AltenkirchCU10} as a functor from finite sets to sets,
+ or lambda terms equipped with a reduction preorder \parencite{ahrens_relmonads} as a functor from sets to preorders.
  
- In \emph{extensional} type theory, simple inductive types---\textsf{W}-types---are characterized categorically as initial algebras of
- a polynomial functor \parencite{DBLP:journals/tcs/Dybjer97, DBLP:journals/apal/MoerdijkP00}.
- In this context, the need for an extensional type theory is given by the need to identify maps as equal if they are equal on each input.
+ The purpose of the present work is to present some applications of the dual notion of relative \emph{co}monad in intensional Martin-L\"of 
+ type theory (IMLTT). More precisely, we equip some \emph{co}inductive type families with a relative comonadic structure.
+ The need to consider \emph{relative} comonads for coinductive data types in IMLTT arises from the fact that the 
+ equality relation given by Martin-L\"of's identity type does not yield an adequate notion of \enquote{sameness} for inhabitants of such types.
+ Instead, another notion of sameness for inhabitants of such types, 
+ \emph{bisimilarity}, was coined by \textcite{aczel_nonwellfounded}. 
+ We thus consider such codata types as a \emph{setoid}, that is, a type equipped with an equivalence relation---bisimilarity---rather than 
+ just a plain type.
+ For instance, we consider the codata type of streams over a base type $A$ in IMLTT as a functor 
+ $\stream : \Set \to \Setoid$.
+
  
- The characterization of inductive types as initial algebras 
- has been extended to some \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
- in various formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
- The main goal of these works is not just to characterize the data type via a universal property, but rather the data type
- \emph{equipped with a well-behaved substitution operation}.
+ We furthermore develop the notion of \emph{comodule over a relative comonad} and use it to characterise the \emph{destructors} of the
+ coinductive data types we consider. This constitutes a generalization and dualization of work by \textcite{DBLP:journals/iandc/HirschowitzM10},
+ who use \emph{modules over (plain) monads} to characterise the constructors of certain inductive data types.
  
+ Finally, we give a final coalgebra semantics for the considered codata types, which does not only characterise the terms of those data types,
+ but also the bisimilarity relation on those terms, and a canonical cosubstitution operation.
   
- In this work we study a particular heterogeneous family of \fat{co}inductive data types in Intensional Martin-L\"of type theory.
-  For the study of such coinductive types, the built-in notion of \emph{propositional equality via Martin-L\"of identity types} is not adequate. 
- Another notion of sameness for inhabitants of such types, 
- \emph{bisimilarity}, was coined by \textcite{aczel_nonwellfounded}.
- We first define a structure of \emph{relative comonad} whose underlying is given by the codata type family in question. 
- Afterwards, we define a notion of \emph{coalgebra} for the signature of that codata type, and show that the category of
- such coalgebras has a terminal object, built from the codata type.
- 
+  
+%  In \emph{extensional} type theory, simple inductive types---\textsf{W}-types---are characterized categorically as initial algebras of
+%  a polynomial functor \parencite{DBLP:journals/tcs/Dybjer97, DBLP:journals/apal/MoerdijkP00}.
+%  In this context, the need for an extensional type theory is given by the need to identify maps as equal if they are equal on each input.
+%  
+%  The characterization of inductive types as initial algebras 
+%  has been extended to some \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
+%  in various formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
+%  The main goal of these works is not just to characterize the data type via a universal property, but rather the data type
+%  \emph{equipped with a well-behaved substitution operation}.
+%  
+  
+%  In this work we study a particular heterogeneous family of \fat{co}inductive data types in Intensional Martin-L\"of type theory.
+%   For the study of such coinductive types, the built-in notion of \emph{propositional equality via Martin-L\"of identity types} is not adequate. 
+%  Another notion of sameness for inhabitants of such types, 
+%  \emph{bisimilarity}, was coined by \textcite{aczel_nonwellfounded}.
+%  We first define a structure of \emph{relative comonad} whose underlying is given by the codata type family in question. 
+%  Afterwards, we define a notion of \emph{coalgebra} for the signature of that codata type, and show that the category of
+%  such coalgebras has a terminal object, built from the codata type.
+%  
  All our definitions, examples and lemmas have been implemented in the proof assistant \coq \parencite{coq84pl3}.
  The \coq source files and HTML documentation are available on the project web page \parencite{trimat_coq}.
  In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
  
+ 
+ The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
+While we present them in a type-theoretic style, the definitions and lemmas can trivially be transferred to a set-theoretic setting.
+Throughout this article, we use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
+ Whenever an operation takes several arguments, we write some of them as indices; these indices might be omitted when 
+ they can be deduced from the type of the later arguments.
+ We assume basic knowledge of category theory; any instances used are defined in the following.
   
- \subsubsection*{Related work}
+ \subsection*{Related work}
  The techniques we use to characterize this family of coinductive types are dual to those used by \textcite{DBLP:journals/iandc/HirschowitzM10}, 
  in whose work the crucial notions are those of \emph{monads} and \emph{modules over monads}.
  \textcite{DBLP:journals/iandc/HirschowitzM10} give an initial semantics result for languages with variable binding, 
@@ -105,7 +143,7 @@
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
   In \Cref{sec:tri} we present the coinductive type family $\Tri$ of infinite triangular matrices and some operations on those
             matrices.
-  In \Cref{sec:comonads} we define the category of comonads relative to a fixed functor.
+  In \Cref{sec:comonads} we present \emph{relative comonads} and define the category of comonads relative to a fixed functor.
   In \Cref{sec:comodules} we define comodules over relative comonads and give some constructions of comodules.
   In \Cref{sec:coalgebras_for_tri} we explain an important difference between the lambda calculus and infinite triangular matrices
     as heterogeneous data types. We then set up the necessary definitions to state our main theorem (\Cref{ex:final_sem_tri}), 
@@ -153,17 +191,12 @@
 \section{Preliminaries}\label{sec:preliminaries}
 
 
-The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
-While we present them in a type-theoretic style, the definitions and lemmas can trivially be transferred to a set-theoretic setting.
 
 
 The motivating example we refer to throughout the paper concerns a coinductive type family in Intensional Martin-L\"of type theory (IMLTT), 
 a type-theoretic foundational system.
 
-Throughout this article, we use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
-Whenever an operation takes several arguments, we write some of them as indices; these indices might be omitted when 
-they can be deduced from the type of the later arguments.
-We assume basic knowledge of category theory; any instances used are defined in the following.
+
 
 % \begin{definition}[Category]
 %  A \emph{category} $\C$ in MLTT is given by a type $\C_0$ of objects, a dependent type of morphisms $\C(a,b)$ over objects $a,b : \C_0$, 
@@ -216,11 +249,62 @@ are called \emph{strong monoidal}:
 \end{example}
 
 
-\section{The codata type of infinite triangular matrices}\label{sec:tri}
+\section{Some coinductive data types in Martin-L\"of type theory}\label{sec:tri}
 
-In this section we present a particular coinductive type family family in intensional Martin-L\"of type theory, the codata type of
-infinite triangular matrices. It constitutes a source of examples for the categorical structures defined later.
+In this section we present some coinductive data types which serve as examples in the later sections.
+We also define \emph{bisimilarity} for each codata type, a coinductive equivalence relation which is considered 
+as the appropriate notion of equality on inhabitants of these types.
+We denote bisimilar elements using an infix $\sim$, as in $t \sim t'$.
 
+The first example is the type of \emph{streams} of elements of a given base type $A$:
+\begin{example}
+  Let $A$ by a type. The type of \emph{streams over $A$} is coinductively defined via the following destructors:
+  \begin{figure}[hbt]
+  \begin{center}
+
+     \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+    \AxiomC{$t : \stream(A)$}\doubleLine
+     \UnaryInfC{$\shead_A(t) : A$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$t : \stream(A)$}\doubleLine
+                                       \UnaryInfC{$\stail_A(t) : \stream(A)$}
+                                       \DisplayProof%
+
+  \end{center}
+\vspace{2ex}
+  \begin{center}
+                                            \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+    \AxiomC{$t \sim t'$}\doubleLine
+     \UnaryInfC{$\shead(t) = \shead(t')$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$t \sim t'$}\doubleLine
+                                       \UnaryInfC{$ \stail(t) \sim \stail(t')$}
+                                       \DisplayProof   
+  \end{center}
+  \caption{Destructors and bisimilarity for the coinductive type of streams} \label{fig:tri_destructors}
+\end{figure}
+    
+\end{example}
+
+In the following, we denote by $\stream(A)$ the \emph{setoid} whose underlying type is the type of streams over $A$, equipped with the 
+equivalence relation of bisimilarity. By abuse of notation, we also refer to the underlying type by $\stream(A)$.
+
+
+% TODO: image of stream
+
+% TODO: operations on streams
+
+
+A second example we consider is given by the codata type of
+\emph{infinite triangular matrices}. It is more complicated than the example of streams as one of its destructors is \emph{heterogeneous},
+as explained below.
+
+
+\begin{example}
 This codata type was studied in an article by
  \textcite{DBLP:conf/types/MatthesP11} which is available via open access. 
  The reader is strongly urged to read (the first two sections of) that work 
@@ -252,7 +336,7 @@ This codata type was studied in an article by
   \caption{An infinite triangular matrix over type $A$, schematically}\label{fig_tri}
  \end{figure}
  
- We define this data type \emph{coinductively}, via two destructors $\head$ and $\tail$, whose types are given in the first line of \Cref{fig:tri_destructors}.
+ We define this data type coinductively via two destructors $\head$ and $\tail$, whose types are given in the first line of \Cref{fig:tri_destructors}.
  We also define a coinductive relation---\emph{bisimilarity}---on the inhabitants of that type, via the destructors of the second line of \Cref{fig:tri_destructors}.    
  Here we write $t \sim t'$ for bisimilar matrices $t$ and $t'$.
  This defines a \emph{setoid} $\Tri A$ for any type $A$, given by the type of matrices equipped with bisimilarity as equivalence relation.
@@ -314,7 +398,7 @@ Here, the family of functions
     \extend_{A,B} &: \Setoid(\Tri A,\eq B) \to \Setoid\bigr(\Tri (E \times A),\eq(E\times B)\bigr) \\
     \cut_A &:  \Setoid(\Tri(E\times A) , \Tri A)
   \end{align*}
-
+\end{example}
   
 \begin{comment}  
   The $\cobind$ operation---called \emph{redecoration} or $\redec$ in \parencite{DBLP:conf/types/MatthesP11}--- of type
@@ -341,6 +425,7 @@ Here, the family of functions
  Note that what is called $\extend$ here is called \textit{lift} in \parencite{DBLP:conf/types/MatthesP11}.
 % \end{example}
 
+% TODO: should this comment go away?
 \begin{remark}\label{rem:wrong_cut}
 In the definition of the $\extend$ operation in \Cref{ex:tri_comonad} the auxiliary operation $\cut$ plays a central r\^ole.
 It should be remarked here that, using functoriality of $\Tri$, one can define another operation of the same type, namely the family of 
