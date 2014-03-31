@@ -193,7 +193,7 @@ Throughout this article, we use type-theoretic notation,  writing $t:T$ to indic
 
 
 
-The motivating example we refer to throughout the paper concerns a coinductive type family in Intensional Martin-L\"of type theory (IMLTT), 
+The motivating example we refer to throughout the paper concerns coinductive type families in Intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}, 
 a type-theoretic foundational system.
 
 
@@ -205,7 +205,7 @@ a type-theoretic foundational system.
 % 
 
 \begin{definition}[Some categories]\label{def:set_setoid}
- We denote by $\Set$ the category of types and total functions. 
+ We denote by $\Set$ the category of types (of a fixed universe) and total functions between them in Martin-L\"of type theory. 
  
  We denote by $\Setoid$ the category an object of which is a type equipped with an equivalence relation.
  A morphism between setoids is a type-theoretic function between the underlying types that is compatible with the equivalence relations of the source and target setoids.
@@ -488,7 +488,7 @@ Relative comonads over the identity functor are exactly comonads.
    \item $\counit_A := \shead_A$
    \item $\cobind_{A,B} := \sredec_{A,B}$ 
   \end{itemize}
-  We refrain from showing the proof of the comonadic laws here; they can be found in our \coq library.  
+  We refrain from showing the proof of the comonadic laws here; it can be found in our \coq library.  
   %TODO: example: streams as relative comonads 
 \end{example}
 
