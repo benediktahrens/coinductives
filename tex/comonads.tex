@@ -24,7 +24,7 @@
 \author{Benedikt Ahrens}
 \author{R\'egis Spadotti}
 
-\title[Comodules over relative comonads for streams and infinite matrices]{Comodules over relative comonads \\ for streams and infinite matrices}
+\title[Comodules over relative comonads]{Comodules over relative comonads \\ for streams and infinite matrices}
 
 \newcommand{\fat}[1]{\textbf{#1}}
 
@@ -257,8 +257,8 @@ as the appropriate notion of equality on inhabitants of these types.
 We denote bisimilar elements using an infix $\sim$, as in $t \sim t'$.
 
 The first example is the type of \emph{streams} of elements of a given base type $A$:
-\begin{example}
-  Let $A$ by a type. The type of \emph{streams over $A$} is coinductively defined via the following destructors:
+\begin{example}\label{ex_stream}
+  Let $A$ by a type. The type $\stream(A)$ (or shorter $\stream A$) of \emph{streams over $A$} is coinductively defined via the following destructors:
   \begin{figure}[hbt]
   \begin{center}
 
@@ -288,6 +288,12 @@ The first example is the type of \emph{streams} of elements of a given base type
   \caption{Destructors and bisimilarity for the coinductive type of streams} \label{fig:tri_destructors}
 \end{figure}
     
+   We define a cosubstition operation $\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B$ on streams via the following equations:
+   \begin{align}\shead\bigl(\sredec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
+                     \stail\bigl(\sredec~f~t\bigr) &:= \sredec~f~(\stail~t) \enspace . \label{eq:rest_redec}
+    \end{align}
+%    TODO: check cosubst for stream
+    
 \end{example}
 
 In the following, we denote by $\stream(A)$ the \emph{setoid} whose underlying type is the type of streams over $A$, equipped with the 
@@ -304,7 +310,7 @@ A second example we consider is given by the codata type of
 as explained below.
 
 
-\begin{example}
+\begin{example}\label{ex_tri}
 This codata type was studied in an article by
  \textcite{DBLP:conf/types/MatthesP11} which is available via open access. 
  The reader is strongly urged to read (the first two sections of) that work 
@@ -435,6 +441,13 @@ then the third comonad law would have failed; we refer to \parencite{DBLP:conf/t
 \end{remark}
 
 
+\begin{example}
+%  TODO: signatures generalizing streams
+\end{example}
+
+
+
+
 \section{Relative comonads and their morphisms}\label{sec:comonads}
 
 \emph{Relative monads} were defined by \textcite{DBLP:conf/fossacs/AltenkirchCU10} as a notion of monad-like structure
@@ -469,39 +482,46 @@ Relative comonads over the identity functor are exactly comonads.
 
 
 \begin{example}[Streams in MLTT]
+  The codata type family $\stream : \Set \to \Setoid$ of \Cref{ex_stream} is equipped with a structure of a comonad relative to the functor 
+  $\eq : \Set \to \Setoid$ via the following operations:
+  \begin{itemize}
+   \item $\counit_A := \shead_A$
+   \item $\cobind_{A,B} := \sredec_{A,B}$ 
+  \end{itemize}
+  We refrain from showing the proof of the comonadic laws here; they can be found in our \coq library.  
   %TODO: example: streams as relative comonads 
 \end{example}
 
 
 \begin{example}
+ 
+  The codata type family $\Tri : \Set \to Setoid$ of \Cref{ex_tri} is equipped with a structure of a comonad relative to the functor 
+  $\eq : \Set \to \Setoid$ via the following operations:
+  \begin{itemize}
+   \item $\counit_A := \head_A$
+   \item $\cobind_{A,B} := \redec_{A,B}$ 
+  \end{itemize}
+ Again, the example is completely done in our \coq library.
+\end{example}
 
-  
-  \textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that the data type $\Tri$
+\begin{remark}
+ \textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that the data type $\Tri$
   is an instance of such a comonad. 
   Such a weak constructive comonad, however, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
-  The $\counit$ is given by the operation $\head$, which we thus consider as a family of morphisms of setoids $\head_A : \Setoid(\Tri A, \eq A)$;
-  the proof that $\head$ is indeed compatible with the respective equivalence relations of source and target corresponds
-  precisely to one of the inference rules.
-
-
-A nontrivial instance of relative comonads is given by the coinductive data type of infinite triangular matrices
-studied by \textcite{DBLP:conf/types/MatthesP11}. We suggest the reader consults the first two sections of their work
-in order to understand this example.
-
-% TODO: give example of Tri as rel. comonad
-\end{example}
+\end{remark}
 
 
 The notion of relative comonad captures many properties of $\Tri$ and its redecoration operation, in particular the interplay
 of redecoration with the destructor $\head$ via the first two comonad laws.
 Much of the rest of the present work is concerned with finding a suitable categorical notion that captures the interplay 
-of redecoration with the other destructor, $\tail$. Once we have found such a categorical notion, we can use 
-it to give a definition of what a \enquote{coalgebra} for the signature of infinite triangular matrices is, 
-where the codata type $\Tri$ is supposed to constitute the terminal object.
+of redecoration with the other destructor, $\tail$. 
+This is the purpose of the notion of \emph{comodule over relative comonad} introduced in \Cref{sec:comodules}.
 
-A first attempt might be to characterize $\tail$ as a \emph{morphism of comonads}:
 
+
+
+\emph{Morphisms of relative comonads} are natural transformations that are compatible with the comonadic structure:
 
 \begin{definition}[Morphism of relative comonads]\label{def:comonad_morphism}
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
@@ -520,17 +540,17 @@ with respect to the functorial action of \Cref{def:lift}.
 
 
 \begin{example}
-%  TODO: is tail for streams a morphism of comonads?
+%  TODO: is zip for streams a morphism of comonads?
 \end{example}
 
+\begin{remark}
+ The destructors $\stail$ (for $\stream$) and $\tail$ (for $\Tri$) are \emph{not} comonad morphisms.
+ One can, however, equip the functor given by precomposing $\Tri$ with \enquote{product with $E$}, i.e.\
+ $A \mapsto \Tri (E\times A)$, with a structure of relative comonad, induced by that
+ on $\Tri$, cf.\ \Cref{product_comonad}.
+\end{remark}
 
 
-% TODO: remove "might"
-At first glance, one might hope for $\tail$ to constitute the carrier of a morphism of relative comonads, i.e.\ one might 
-guess that the axioms of comonad morphism capture the interplay of redecoration with the destructors $\head$ and $\tail$.
-Indeed, it is possible to equip the target $\Tri(E\times \_)$ of $\tail$ with the structure of comonad---we show one such
-possibility in \Cref{product_comonad}. However, we have \emph{not} found any way to endow $\Tri$ and $\Tri(E\times \_)$ with a comonad structure in a way
-that turns $\tail$ into a morphism of comonads.
 
 
 \begin{definition}\label{product_comonad}
@@ -549,23 +569,16 @@ that turns $\tail$ into a morphism of comonads.
                                             f & \mapsto \comp{\langle \comp{T(\pr_1)}{\counit^T_E}, f \rangle}{{\phi^{F}_{E,B}}^{-1}} \enspace .
   \end{align*}
 \end{definition}
- Using such a comonad as the target comonad for $\tail$, one might now 
- try to characterize the destructor $\tail$ of the triangular matrices of \Cref{ex:tri_comonad}
- as a morphism of relative comonads.
- However, this fails already for the law involving $\counit$: we would have to prove $\head = \comp{\tail}{\comp{\head}{\pr_2}}$,
- which fails each time the first two entries on the diagonal are not equal.
- We leave it to the reader to find counterexamples for the comonad law involving $\cobind$.
 
-For heterogeneous inductive types, \textcite{DBLP:journals/iandc/HirschowitzM10} solve an analogous question by considering the notion of
+
+Constructors of inductive types are characterised by \textcite{DBLP:journals/iandc/HirschowitzM10} via the notion of
 \emph{module over a monad}. We  dualize their approach by introducing comodules over (relative) comonads.
 
 
 
 \section{Comodules over relative comonads}\label{sec:comodules}
 
-In this section we dualize the notion of module over a relative monad as developed in \parencite{ahrens_relmonads}.
-This dualization is straightforward.
-
+In this section we dualize the notion of module over a relative monad as developed in earlier work \parencite{ahrens_relmonads}.
 
 \begin{definition}[Comodule over relative comonad]\label{def:comodule}
  Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
@@ -583,6 +596,9 @@ This dualization is straightforward.
 
 \end{definition}
 
+
+
+
 Every relative comonad comes with a canonical comodule over it, the \emph{tautological comodule}:
 
 \begin{definition}[Tautological comodule]\label{def:tautological_comodule}
@@ -591,6 +607,16 @@ Every relative comonad comes with a canonical comodule over it, the \emph{tautol
   The comodule operation is given by
     \[  \mcobind^T(f) := \cobind^T(f) \enspace . \]
 \end{definition}
+
+
+A more interesting example of comodule is given by the functor that maps a type $A$ to the setoid $\Tri(E\times A)$:
+\begin{example}
+   The map $A \mapsto \Tri(E\times A)$ is equipped with the structure of a comodule over the relative comonad $\Tri$ by
+   defining the comodule operation $\mcobind$ as
+     \[ \mcobind_{A,B} (f) := \redec (\extend~f) \enspace . \]
+%  TODO: \Tri(E\times \_) as example of comodule
+\end{example}
+
 
 
 A \emph{morphism of comodules} is given by a family of morphisms that is compatible with 
@@ -603,6 +629,10 @@ the comodule operation:
  such that for any $A,B:\C_0$ and $f : \D(TA,FB)$ one has
  \[   \comp{\mcobind^M(f)}{\alpha_B} = \comp{\alpha_A}{\mcobind^N(f)} \enspace . \]
 \end{definition}
+
+ \begin{example}
+  The destructor $\stail_A : \stream A \to \stream A$ is the carrier of a morphism of tautological comodules.
+ \end{example}
 
 
 Composition and identity of comodule morphisms happens pointwise. We thus obtain a category of comodules
@@ -646,6 +676,9 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
 \end{definition}
 
 
+Every (relative) comonad induces a comodule over itself, the tautological comodule (\Cref{def:tautological_comodule}).
+Furthermore, every morphism of relative comonads induces a morphism of comodules:
+
 \begin{definition}[Morphism of comonads induces morphism of comodules]\label{def:induced} % checked
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$.
   Then $\tau$ gives rise to a morphism of comodules over $S$ from the pushforward of the tautological comodule
@@ -658,12 +691,18 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
 
 \section{Coalgebras for infinite triangular matrices}\label{sec:coalgebras_for_tri}
 
+
+
 As an application of comodules over relative comonads, we use that notion to
- define \fat{coalgebras} for the signature of infinite triangular matrices such that 
-the codata type $\Tri$ defined in \Cref{ex:tri_comonad} constitutes the \fat{terminal such coalgebra}.
-Since $\Tri$ forms a comonad relative to the functor $\eq:\Set\to\Setoid$, it seems reasonable to define
-an arbitrary coalgebra for that signature as such a relative comonad as well, equipped with some extra structure which remains to be defined.
-A morphism of coalgebras would then be defined as a morphism of relative comonads that is compatible with that extra structure.
+ define \fat{coalgebras} for the signatures of the example data types we have studied so far.
+ We then show that the codata types specified by the corresponding signatures constitute the respective \emph{terminal}
+ such coalgebra.
+ While this result is hardly surprising, it is still interesting as it characterises not only the codata types themselves,
+ but also the respective bisimilarity relations on them as well as the cosubstitution operations, via a universal property.
+ 
+
+%  TODO: terminality for streams and signatures
+ 
 
 The purpose of this extra structure is to characterize the destructor $\tail$, that is, its \emph{type} as well as
 its \emph{behaviour with respect to the redecoration operation}.
@@ -825,7 +864,7 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
 The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ destructor---%
 more precisely, of \Cref{eq:rest_redec}, via the notion of comodule morphism:
 
-
+% TODO: we already have that example
 \begin{example}[$\tail$ is a comodule morphism]\label{ex:tail_comodule}
  Consider the comonad $\Tri$, equipped with the $\cut$ operation of \Cref{def:cut_for_tri}.
  The destructor \constfont{\tail} of \Cref{ex:tri_comonad} is a morphism of comodules over the comonad $\Tri$ 
@@ -990,11 +1029,11 @@ will allow, e.g., considering branching trees modulo permutation of subtrees.
 \printbibliography
 
 
-\appendix
+% \appendix
 
-\input{formal_table}
+% \input{formal_table}
 
-\input{comparison_inductive}
+% \input{comparison_inductive}
 
 \end{document}
 
