@@ -287,12 +287,12 @@ The first example is the type of \emph{streams} of elements of a given base type
                                        \UnaryInfC{$ \stail(t) \sim \stail(t')$}
                                        \DisplayProof   
   \end{center}
-  \caption{Destructors and bisimilarity for the coinductive type of streams} \label{fig:tri_destructors}
+  \caption{Destructors and bisimilarity for the coinductive type of streams} \label{fig:stream_destructors}
 \end{figure}
     
    We define a cosubstition operation $\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B$ on streams via the following equations:
    \begin{align}\shead\bigl(\sredec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
-                     \stail\bigl(\sredec~f~t\bigr) &:= \sredec~f~(\stail~t) \enspace . \label{eq:rest_redec}
+                     \stail\bigl(\sredec~f~t\bigr) &:= \sredec~f~(\stail~t) \enspace . \label{eq:tail_sredec}
     \end{align}
    
 \end{example}
@@ -493,7 +493,7 @@ Relative comonads over the identity functor are exactly comonads.
 \end{example}
 
 
-\begin{example}[Infinite triangular matrices]
+\begin{example}[Infinite triangular matrices]\label{ex:tri_comonad}
  
   The codata type family $\Tri : \Set \to Setoid$ of \Cref{ex_tri} is equipped with a structure of a comonad relative to the functor 
   $\eq : \Set \to \Setoid$ via the following operations:
@@ -540,7 +540,6 @@ with respect to the functorial action of \Cref{def:lift}.
 
 
 \begin{example}\label{ex_diag}
-%  TODO: is diag for streams a morphism of comonads?
 
 We define $\diagonal_A : \Tri A \to \stream A$ via the following equations:
     \begin{align}\shead~(\diagonal_A~t) &:= \head~t \quad\text{ and } \notag\\
@@ -622,11 +621,11 @@ Every relative comonad comes with a canonical comodule over it, the \emph{tautol
 
 
 A more interesting example of comodule is given by the functor that maps a type $A$ to the setoid $\Tri(E\times A)$:
-\begin{example}
-   The map $A \mapsto \Tri(E\times A)$ is equipped with the structure of a comodule over the relative comonad $\Tri$ by
+\begin{example}\label{ex_tri_prod_comod}
+   The map $A \mapsto \Tri(E\times A)$ is equipped with a comodule structure over the relative comonad $\Tri$ by
    defining the comodule operation $\mcobind$ as
-     \[ \mcobind_{A,B} (f) := \redec (\extend~f) \enspace . \]
-%  TODO: \Tri(E\times \_) as example of comodule
+     \[ \mcobind_{A,B} (f) := \redec (\extend~f) \enspace , \]
+  using the operations defined in \Cref{ex_tri}.
 \end{example}
 
 
@@ -646,6 +645,10 @@ the comodule operation:
   The destructor $\stail_A : \stream A \to \stream A$ is the carrier of a morphism of tautological comodules.
  \end{example}
 
+\begin{example}[$\tail$ is a comodule morphism]\label{ex:tail_comodule}
+ The destructor $\tail$ of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
+  from the tautological comodule  $\Tri$ to $\Tri(E\times \_)$ (cf.\ \Cref{ex_tri_prod_comod}).
+\end{example}
 
 Composition and identity of comodule morphisms happens pointwise. We thus obtain a category of comodules
 over a fixed comonad, towards a fixed target category:
@@ -701,7 +704,7 @@ Furthermore, every morphism of relative comonads induces a morphism of comodules
 
 
 
-\section{Coalgebras for infinite triangular matrices}\label{sec:coalgebras_for_tri}
+\section{Terminality for streams and infinite triangular matrices}\label{sec:coalgebras_for_tri}
 
 
 
@@ -913,7 +916,7 @@ more precisely, of \Cref{eq:rest_redec}, via the notion of comodule morphism:
 % TODO: we already have that example
 \begin{example}[$\tail$ is a comodule morphism]\label{ex:tail_comodule}
  Consider the comonad $\Tri$, equipped with the $\cut$ operation of \Cref{def:cut_for_tri}.
- The destructor \constfont{\tail} of \Cref{ex:tri_comonad} is a morphism of comodules over the comonad $\Tri$ 
+ The destructor $\tail$ of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
   from the tautological comodule  $\Tri$ to $\Tri(E\times \_)$.
 \end{example}
 
@@ -924,7 +927,7 @@ more precisely, of \Cref{eq:rest_redec}, via the notion of comodule morphism:
 
 
 
-We now define a category in which the codata type of triangular matrices, equipped with the bisimilarity relation of \Cref{ex:tri_comonad}
+We now define a category in which the codata type of triangular matrices, equipped with the bisimilarity relation of \Cref{ex_tri}
 and the comonadic redecoration, constitutes the terminal object. We call an object of this category a \emph{coalgebra of triangular matrices}, 
 even though we do not define the category as a category of coalgebras of a given endofunctor.
 
