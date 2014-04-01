@@ -704,6 +704,24 @@ As an application of comodules over relative comonads, we use that notion to
  
 
 %  TODO: terminality for streams and signatures
+
+\begin{definition}[Coalgebras for $\stream$]\label{cat_stream}.
+  We define a \fat{coalgebra for $\stream$} to be given by 
+  \begin{itemize}
+   \item a comonad $S$ relative to $\eq : \Set \to \Setoid$ and
+   \item a morphism $t$ of tautological comodules over $S$, $t : S \to S$.
+  \end{itemize}
+  A coalgebra morphism $(S,t) \to (S',t')$ is given by a comonad morphism $\tau : S \to S'$ such that
+     \[ \comp{\tau_*t}{\induced{\tau}} = \comp{\induced{\tau}}{t'} \enspace . \]
+\end{definition}
+
+This defines a category, with the obvious composition and identity. 
+
+\begin{theorem}
+ The pair $(\stream, \stail)$ is the terminal coalgebra in the category of coalgebras defined in \Cref{cat_stream}.
+\end{theorem}
+
+
  
 
 The purpose of this extra structure is to characterize the destructor $\tail$, that is, its \emph{type} as well as
