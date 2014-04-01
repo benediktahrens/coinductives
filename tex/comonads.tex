@@ -84,8 +84,8 @@
  \emph{bisimilarity}, was coined by \textcite{aczel_nonwellfounded}. 
  We thus consider such codata types as \emph{setoids}, that is, as types equipped with an equivalence relation---bisimilarity---rather than 
  just as plain types.
- For instance, we consider the codata type of streams over a base type $A$ in IMLTT as a functor 
- $\stream : \Set \to \Setoid$.
+ For instance, we consider the codata type of streams in IMLTT as a functor 
+ $\stream : \Set \to \Setoid$, mapping a type $A$ to the setoid of streams over $A$.
 
  
  Furthermore we develop the notion of \emph{comodule over a relative comonad} and use it to characterise the \emph{destructors} of the
@@ -95,7 +95,7 @@
  who use \emph{modules over (plain) monads} to characterise the constructors of certain inductive data types.
  
  Finally, we give a final coalgebra semantics for the considered codata types, which does not only characterise the terms of those data types,
- but also the bisimilarity relation on those terms, and a canonical cosubstitution operation.
+ but also the bisimilarity relation on those terms, and the canonical cosubstitution operation.
   
   
 %  In \emph{extensional} type theory, simple inductive types---\textsf{W}-types---are characterized categorically as initial algebras of
@@ -143,14 +143,17 @@ Throughout this article, we use type-theoretic notation,  writing $t:T$ to indic
  
  \subsection*{Organisation of the paper}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
-  In \Cref{sec:tri} we present the coinductive type family $\Tri$ of infinite triangular matrices and some operations on those
-            matrices.
+  In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those
+           codata types.
   In \Cref{sec:comonads} we present \emph{relative comonads} and define the category of comonads relative to a fixed functor.
+    We give some examples of such structures, using the codata types presented in \Cref{sec:tri}.
   In \Cref{sec:comodules} we define comodules over relative comonads and give some constructions of comodules.
-  In \Cref{sec:coalgebras_for_tri} we explain an important difference between the lambda calculus and infinite triangular matrices
-    as heterogeneous data types. We then set up the necessary definitions to state our main theorem (\Cref{ex:final_sem_tri}), 
-    characterizing the codata type $\Tri$ as terminal object in some category.
-  In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
+     Again, examples of such structures are taken from \Cref{sec:tri}.
+  In \Cref{sec:coalgebras_for_tri} we define categories of coalgebras for the codata types presented in \Cref{sec:tri},
+      based on the category-theoretic notions developped in the previous sections.
+      We then prove that the codata types constitute the terminal coalgebras in the respective categories.
+      Finally, we present an example of a map defined as a terminal map exploiting the universal property of streams.
+   In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
   A table with the correspondence between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
  
 
