@@ -35,8 +35,8 @@
 \begin{abstract}
 
 
- In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}, and exhibit
- natural occurrences of these notions in the definition of category-theoretical semantics of coinductive types in 
+ In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}, and  
+ use these notions to give a category-theoretical semantics for coinductive type families in 
  intensional Martin-L\"of type theory.
  
     
@@ -828,17 +828,14 @@ This defines a category, with the obvious composition and identity.
 
 \subsection{Coalgebras for $\Tri$}
 
-The purpose of this extra structure is to characterize the destructor $\tail$, that is, its \emph{type} as well as
-its \emph{behaviour with respect to the redecoration operation}.
-Dualizing the approach of \textcite{DBLP:journals/iandc/HirschowitzM10}, we hope to characterize $\tail$ as a morphism of 
-comodules of specified type, which would allow us to define the extra structure of an arbitrary coalgebra for that signature
-as a suitable comodule morphism as well.
+In analogy to the definition of coalgebras for the signature of streams (\Cref{cat_stream}), one would define
+a coalgebra for the signature of $\Tri$ as a pair $(T,r)$ of a comonad $T$ relative to $\eq : \Set \to \Setoid$ and 
+a morphism of comodules $r : T \to T(E\times \_)$. 
+It turns out that in this way, one is not capable of obtaining the right auxiliary function $\cut$ for what is
+supposed to be the \emph{terminal} such coalgebra, namely the pair $(\Tri,\tail)$.
+As a remedy, we define a coalgebra to come equipped with a specified operation analogous to $\cut$, and some laws governing
+the behaviour of that operation:
 
-In order to turn $\tail$ into a morphism of comodules, the crucial task is to suitably endow the source and target functors
-$\Tri$ and $\Tri(E\times \_)$, respectively, with a comodule structure over the comonad $\Tri$.
-For this, we now take a closer look at how the $\extend$ operation for $\Tri$ is defined. Its purpose is to 
-modify the function $f$ used for redecoration, when redecorating $\tail~t : \Tri(E\times A)$ rather than $t : \Tri A$.
-First we note an important difference between the $\extend$ operation and its analogue in the inductive case:
 
 \begin{comment}
 \begin{remark}[$\shift$ operation for the lambda calculus]\label{rem:shift}
@@ -927,7 +924,7 @@ relative comonads with cut as a generalization of relative comonads.
 Our prime example of relative comonad comes with a $\cut$ operation that is \emph{not} the canonical one:
 
 \begin{example}[$\cut$ for $\Tri$]\label{def:cut_for_tri}
-  The relative comonad $\Tri$ from \Cref{ex:tri_comonad}, together with the $\cut$ operation defined there, 
+  The relative comonad $\Tri$ from \Cref{ex:tri_comonad}, together with the $\cut$ operation defined in \Cref{ex_tri}, 
   is a comonad with cut as in \Cref{def:rel_comonad_with_cut}.
 \end{example}
 
@@ -1039,11 +1036,11 @@ far about the comonad $\Tri$, and abstracting from this particular comonad:
    Here in the upper right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
 \end{definition}   
    
-We now have all the ingredients to state (and prove) our main theorem:
-\begin{theorem}[Coinitial semantics for triangular matrices with redecoration]\label{ex:final_sem_tri} % checked   
+
+\begin{theorem}\label{ex:final_sem_tri} % checked   
    The pair $(\Tri, \tail)$ consisting of the relative comonad with cut $\Tri$ of \Cref{def:cut_for_tri} together with 
     the morphism of comodules $\tail$ of \Cref{ex:tail_comodule},
-   constitutes the terminal---\enquote{coinitial}---coalgebra of triangular matrices.
+   constitutes the terminal coalgebra of triangular matrices.
 \end{theorem}
 
 \begin{proof}[Proof sketch]
