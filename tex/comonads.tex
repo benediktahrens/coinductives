@@ -304,6 +304,17 @@ equivalence relation of bisimilarity. By abuse of notation, we also refer to the
 % TODO: image of stream
 
 
+Streams are node-labelled trees where every node has exactly one subtree.
+We also consider a type of trees where every node has an arbitrary, but fixed, number of subtrees, 
+parametrized by a type $B$.
+
+\begin{example}[Node-labelled trees]\label{ex_trees}
+ We denote by $\Tree_B(A)$ the codata type given by one destructor $\shead$ and a family of 
+ destructors $(\stail_b)_{b:B}$ with types analogous to those defining $\stream$ of \Cref{ex_stream}.
+ We thus obtain $\stream$ by considering, for $B$, the singleton type.
+\end{example}
+
+
 
 A second example we consider is given by the codata type of
 \emph{infinite triangular matrices}. It is more complicated than the example of streams as one of its destructors is \emph{heterogeneous},
@@ -441,10 +452,6 @@ then the third comonad law would have failed; we refer to \parencite{DBLP:conf/t
 \end{remark}
 
 
-\begin{example}
-%  TODO: signatures generalizing streams
-\end{example}
-
 
 
 
@@ -481,7 +488,7 @@ Relative comonads over the identity functor are exactly comonads.
 
 
 
-\begin{example}[Streams]
+\begin{example}[Streams]\label{ex_stream_comonad}
   The codata type family $\stream : \Set \to \Setoid$ of \Cref{ex_stream} is equipped with a structure of a comonad relative to the functor 
   $\eq : \Set \to \Setoid$ via the following operations:
   \begin{itemize}
@@ -489,7 +496,11 @@ Relative comonads over the identity functor are exactly comonads.
    \item $\cobind_{A,B} := \sredec_{A,B}$ 
   \end{itemize}
   We refrain from showing the proof of the comonadic laws here; it can be found in our \coq library.  
-   
+\end{example}
+
+\begin{example}[Trees]\label{ex_tree_comonad}
+ Fix a type $B$. Analogously to \Cref{ex_stream_comonad}, the map $A \mapsto \Tree_B(A)$
+ is equipped with a structure of a comonad relative to $\eq: \Set\to\Setoid$.
 \end{example}
 
 
@@ -734,7 +745,7 @@ We first consider the homogeneous codata type of streams.
 
 This defines a category, with the obvious composition and identity. 
 
-\begin{theorem}
+\begin{theorem}\label{thm_stream_terminal}
  The pair $(\stream, \stail)$ is the terminal coalgebra in the category of coalgebras of \Cref{cat_stream}.
 \end{theorem}
 
@@ -747,7 +758,11 @@ This defines a category, with the obvious composition and identity.
 \end{example}
 
 
-%  TODO: terminality for signatures
+\begin{remark}
+ Fix a type $B$. A result analogous to \Cref{thm_stream_terminal} holds for trees $\Tree_B$ of \Cref{ex_tree_comonad}. 
+ We refrain from giving a precise statement of this result.
+\end{remark}
+
 
 
 
