@@ -541,9 +541,21 @@ with respect to the functorial action of \Cref{def:lift}.
 \end{remark}
 
 
-\begin{example}
-%  TODO: is zip for streams a morphism of comonads?
+\begin{example}\label{ex_diag}
+%  TODO: is diag for streams a morphism of comonads?
+
+We define $\diagonal_A : \Tri A \to \stream A$ via the following equations:
+    \begin{align}\shead~(\diagonal_A~t) &:= \head~t \quad\text{ and } \notag\\
+                     \stail\bigl(\diagonal_A~t\bigr) &:= \diagonal_A (\cut (\tail~t)) \enspace . \label{eq:diag}
+    \end{align}
+ This defines a morphism of relative comonads $\diagonal : \Tri \to \stream$.
 \end{example}
+
+\begin{example}
+%  TODO: can we define a kind of inverse to diag
+\end{example}
+
+
 
 \begin{remark}
  The destructors $\stail$ (for $\stream$) and $\tail$ (for $\Tri$) are \emph{not} comonad morphisms.
@@ -705,7 +717,7 @@ As an application of comodules over relative comonads, we use that notion to
 
 %  TODO: terminality for streams and signatures
 
-\begin{definition}[Coalgebras for $\stream$]\label{cat_stream}.
+\begin{definition}[Coalgebras for $\stream$]\label{cat_stream}
   We define a \fat{coalgebra for $\stream$} to be given by 
   \begin{itemize}
    \item a comonad $S$ relative to $\eq : \Set \to \Setoid$ and
@@ -721,6 +733,13 @@ This defines a category, with the obvious composition and identity.
  The pair $(\stream, \stail)$ is the terminal coalgebra in the category of coalgebras defined in \Cref{cat_stream}.
 \end{theorem}
 
+\begin{example}
+  We equip the relative comonad $\Tri$ with the structure of a coalgebra for $\stream$ by defining the following 
+  morphism of tautological comodules over $\Tri$:
+   \[ t^{\Tri} := \comp{\tail}{\cut}  : \Tri \to \Tri \enspace . \] 
+  This defines a coalgebra $(\Tri, t^{\Tri})$ and the resulting terminal coalgebra morphism
+   $(\Tri, t^{\Tri}) \to (\stream, \stail)$ is the one defined in \Cref{ex_diag}.
+\end{example}
 
  
 
