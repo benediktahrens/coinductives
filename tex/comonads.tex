@@ -68,18 +68,20 @@
 \section{Introduction}
  
  In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
- We then use these notions to characterise properties of several coinductive data types and operations on them in intensional Martin-L\"of type theory.
+ We then use these notions to characterise several coinductive data types and operations on them in intensional Martin-L\"of type theory
+ via a universal property.
  
  Relative monads were introduced by \textcite{DBLP:conf/fossacs/AltenkirchCU10} as a generalization of the notion of monad,
  to allow for a monadic structure on functors that are not necessarily endo.
- Various data types in type theory can be equipped with the structure of a relative monad, such as 
- lambda terms over finite sets \parencite{DBLP:conf/fossacs/AltenkirchCU10} as a functor from finite sets to sets,
- or lambda terms equipped with a reduction preorder \parencite{ahrens_relmonads} as a functor from sets to preorders.
+ Examples of relative monads include finite-dimensional vector spaces, 
+ lambda terms over finite sets \parencite{DBLP:conf/fossacs/AltenkirchCU10} as functors from finite sets to sets,
+ or lambda terms equipped with a reduction preorder \parencite{ahrens_relmonads} as a functor from sets to preordered sets.
  
  The purpose of the present work is to present some applications of the dual notion of relative \emph{co}monad in intensional Martin-L\"of 
  type theory (IMLTT). More precisely, we equip some \emph{co}inductive type families with a relative comonadic structure.
- The need to consider \emph{relative} comonads for coinductive data types in IMLTT arises from the fact that the 
- equality relation given by Martin-L\"of's identity type does not yield an adequate notion of \enquote{sameness} for inhabitants of such types.
+ Coinductive type families in IMLTT, parametrized by a type variable, are naturally considered not as an endofunctor
+ but as a functor from types to \emph{setoids}:
+ the equality relation given by Martin-L\"of's identity type does not yield an adequate notion of \enquote{sameness} for inhabitants of such coinductive types.
  Instead, another notion of sameness for inhabitants of such types, 
  \emph{bisimilarity}, was coined by \textcite{aczel_nonwellfounded}. 
  We thus consider such codata types as \emph{setoids}, that is, as types equipped with an equivalence relation---bisimilarity---rather than 
@@ -87,16 +89,17 @@
  For instance, we consider the codata type of streams in IMLTT as a functor 
  $\stream : \Set \to \Setoid$, mapping a type $A$ to the setoid of streams over $A$.
 
- 
- Furthermore we develop the notion of \emph{comodule over a relative comonad} and use it to characterise the \emph{destructors} of the
- coinductive data types we consider. More precisely, the notion of \emph{morphism of comodules} captures the interplay between 
- the destructors and the canonical \emph{cosubstitution operation} we define on the considered codata types.
+ The codata types we consider come with a canonical \emph{cosubstitution operation}. In order to give a categorical characterisation
+ of this operation, we develop the notion of \emph{comodule over a relative comonad}. More precisely, this notion is used to characterise the \emph{destructors} of the
+ coinductive data types we consider: \emph{morphism of comodules} capture the interplay between 
+ the destructors and the canonical cosubstitution on the considered codata types.
  This constitutes a generalization and dualization of work by \textcite{DBLP:journals/iandc/HirschowitzM10},
- who use \emph{modules over (plain) monads} to characterise the constructors of certain inductive data types.
+ who use \emph{modules over (plain) monads} to characterise the interplay of constructors and substitution of certain inductive data types.
  
  Finally, we give a final coalgebra semantics for the considered codata types, which does not only characterise the terms of those data types,
  but also the bisimilarity relation on those terms, and the canonical cosubstitution operation.
   
+ As an application, we define a map between two of our example codata types as a terminal coalgebra morphism.
   
 %  In \emph{extensional} type theory, simple inductive types---\textsf{W}-types---are characterized categorically as initial algebras of
 %  a polynomial functor \parencite{DBLP:journals/tcs/Dybjer97, DBLP:journals/apal/MoerdijkP00}.
@@ -1155,7 +1158,8 @@ will allow, e.g., considering branching trees modulo permutation of subtrees.
 
 % \appendix
 
-% \input{formal_table}
+% TODO: complete table formal
+\input{formal_table}
 
 % \input{comparison_inductive}
 
