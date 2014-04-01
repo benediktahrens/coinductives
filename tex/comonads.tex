@@ -63,7 +63,7 @@
 
 \maketitle
 
-% \tableofcontents
+\tableofcontents
 
 \section{Introduction}
  
@@ -294,8 +294,7 @@ The first example is the type of \emph{streams} of elements of a given base type
    \begin{align}\shead\bigl(\sredec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
                      \stail\bigl(\sredec~f~t\bigr) &:= \sredec~f~(\stail~t) \enspace . \label{eq:rest_redec}
     \end{align}
-%    TODO: check cosubst for stream
-    
+   
 \end{example}
 
 In the following, we denote by $\stream(A)$ the \emph{setoid} whose underlying type is the type of streams over $A$, equipped with the 
@@ -304,7 +303,6 @@ equivalence relation of bisimilarity. By abuse of notation, we also refer to the
 
 % TODO: image of stream
 
-% TODO: operations on streams
 
 
 A second example we consider is given by the codata type of
@@ -483,7 +481,7 @@ Relative comonads over the identity functor are exactly comonads.
 
 
 
-\begin{example}[Streams in MLTT]
+\begin{example}[Streams]
   The codata type family $\stream : \Set \to \Setoid$ of \Cref{ex_stream} is equipped with a structure of a comonad relative to the functor 
   $\eq : \Set \to \Setoid$ via the following operations:
   \begin{itemize}
@@ -491,11 +489,11 @@ Relative comonads over the identity functor are exactly comonads.
    \item $\cobind_{A,B} := \sredec_{A,B}$ 
   \end{itemize}
   We refrain from showing the proof of the comonadic laws here; it can be found in our \coq library.  
-  %TODO: example: streams as relative comonads 
+   
 \end{example}
 
 
-\begin{example}
+\begin{example}[Infinite triangular matrices]
  
   The codata type family $\Tri : \Set \to Setoid$ of \Cref{ex_tri} is equipped with a structure of a comonad relative to the functor 
   $\eq : \Set \to \Setoid$ via the following operations:
@@ -514,10 +512,10 @@ Relative comonads over the identity functor are exactly comonads.
 \end{remark}
 
 
-The notion of relative comonad captures many properties of $\Tri$ and its redecoration operation, in particular the interplay
-of redecoration with the destructor $\head$ via the first two comonad laws.
+The notion of relative comonad captures many properties of $\stream$ and $\Tri$ and their respective operations, in particular the interplay
+of cosubstitution/redecoration with the destructors $\shead$ and $\head$ via the first two comonad laws.
 Much of the rest of the present work is concerned with finding a suitable categorical notion that captures the interplay 
-of redecoration with the other destructor, $\tail$. 
+of redecoration with the other destructors, $\stail$ and $\tail$, respectively. 
 This is the purpose of the notion of \emph{comodule over relative comonad} introduced in \Cref{sec:comodules}.
 
 
@@ -714,8 +712,12 @@ As an application of comodules over relative comonads, we use that notion to
  While this result is hardly surprising, it is still interesting as it characterises not only the codata types themselves,
  but also the respective bisimilarity relations on them as well as the cosubstitution operations, via a universal property.
  
+\subsection{Coalgebras for $\stream$}
 
-%  TODO: terminality for streams and signatures
+
+We first consider the homogeneous codata type of streams.
+
+
 
 \begin{definition}[Coalgebras for $\stream$]\label{cat_stream}
   We define a \fat{coalgebra for $\stream$} to be given by 
@@ -730,18 +732,23 @@ As an application of comodules over relative comonads, we use that notion to
 This defines a category, with the obvious composition and identity. 
 
 \begin{theorem}
- The pair $(\stream, \stail)$ is the terminal coalgebra in the category of coalgebras defined in \Cref{cat_stream}.
+ The pair $(\stream, \stail)$ is the terminal coalgebra in the category of coalgebras of \Cref{cat_stream}.
 \end{theorem}
 
 \begin{example}
   We equip the relative comonad $\Tri$ with the structure of a coalgebra for $\stream$ by defining the following 
   morphism of tautological comodules over $\Tri$:
-   \[ t^{\Tri} := \comp{\tail}{\cut}  : \Tri \to \Tri \enspace . \] 
-  This defines a coalgebra $(\Tri, t^{\Tri})$ and the resulting terminal coalgebra morphism
-   $(\Tri, t^{\Tri}) \to (\stream, \stail)$ is the one defined in \Cref{ex_diag}.
+   \[ t^{\diagonal} := \comp{\tail}{\cut}  : \Tri \to \Tri \enspace . \] 
+  This defines a coalgebra $(\Tri, t^{\diagonal})$ and the resulting terminal coalgebra morphism
+   $(\Tri, t^{\diagonal}) \to (\stream, \stail)$ is the one defined in \Cref{ex_diag}.
 \end{example}
 
- 
+
+%  TODO: terminality for signatures
+
+
+
+\subsection{Coalgebras for $\Tri$}
 
 The purpose of this extra structure is to characterize the destructor $\tail$, that is, its \emph{type} as well as
 its \emph{behaviour with respect to the redecoration operation}.
