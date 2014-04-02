@@ -102,8 +102,12 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\bind}[2]{{#1}\mathbin{\gg\hspace{-.8ex}=}{#2}}
 \newcommand{\Tri}{\constfont{Tri}}
+\newcommand{\stream}{\constfont{Stream}}
 \newcommand{\head}{\constfont{top}}
 \newcommand{\tail}{\constfont{rest}}
+\newcommand{\shead}{\constfont{head}}
+\newcommand{\stail}{\constfont{tail}}
+\newcommand{\cosubst}{\constfont{cosubst}}
 \newcommand{\bisim}{\constfont{bisim}}
 \newcommand{\redec}{\constfont{redec}}
 \newcommand{\cut}{\constfont{cut}}
@@ -112,6 +116,8 @@
 \newcommand{\RComonadWC}{\constfont{\RComonad wCut}}
 \newcommand{\ULCop}{\constfont{LC}}
 \newcommand{\induced}[1]{\ensuremath{\langle {#1} \rangle}}
+
+\newcommand{\comp}[2]{\ensuremath{{#2} \circ {#1}}}
 
 \newcommand{\shift}{\constfont{shift}}
 \newcommand{\lift}{\constfont{lift}}
@@ -129,9 +135,6 @@
 %  \newcommand{\bind}[2]{{#1} \blacktriangleright {#2}}
 % \newcommand{\bind}[2]{{#1} \mathbin{\vartriangleright} {#2}}
 % \newcommand{\bind}[2]{{#1} \mathbin{\mathbf{\rhd}} {#2}}
-\newcommand{\TLCar}{\Rightarrow}
-\newcommand{\TS}[1]{Set^{#1}}
-\newcommand{\fibre}[2]{\ensuremath{{#1}[{#2}]}}
 \newcommand{\LC}{\mathsf{LC}}
 \newcommand{\TLC}{\mathsf{TLC}}
 \newcommand{\PCF}{\mathsf{PCF}}
@@ -174,17 +177,17 @@
  \frametitle{Goal}
  
    \begin{itemize}\setlength{\itemsep}{1em}
-    \item Category-theoretic semantics of \fat{heterogeneous} \fat{co}inductive data types
+    \item Category-theoretic semantics of \fat{co}inductive data types
           in Martin-L\"of type theory
     \item [$\leadsto$] Develop a notion of \enquote{coalgebra} for the signature of a codata type
     \item Incorporate canonical cosubstitution
    \end{itemize}
 
-  \begin{block}{In this talk we consider}
-   \begin{itemize}
-    \item []  the codata type of \fat{infinite triangular matrices}
-   \end{itemize}
-  \end{block}
+%   \begin{block}{In this talk we consider}
+%    \begin{itemize}
+%     \item []  the codata type of \fat{infinite triangular matrices}
+%    \end{itemize}
+%   \end{block}
 
 %   TODO: make goal slide
  
@@ -197,8 +200,9 @@
 \end{frame}
 
 
-\section{Syntax: initiality for W-types and heterogeneous inductives}
+\section{Syntax: heterogeneous inductives and substitution}
 
+\begin{comment}
 \begin{frame}
  \frametitle{Starting point: W-types in Martin-L\"of TT}
  
@@ -219,6 +223,7 @@
   \end{itemize}
  \end{block}
 \end{frame}
+\end{comment}
 
 \begin{frame}
   \frametitle{Heterogeneous data types}
@@ -342,7 +347,7 @@ dualize techniques of H \& M to characterize
 \begin{block}{In this talk we consider}
  
   \begin{itemize} 
-    \item the codata type of infinite triangular matrices
+    \item codata types of \fat{streams} and infinite triangular \fat{matrices}
     \item with \fat{redecoration} operation
   \end{itemize}
 \end{block} 
@@ -376,7 +381,145 @@ dualize techniques of H \& M to characterize
 \end{frame}
 \end{comment}
 
-\section{Cosyntax: infinite triangular matrices and redecoration}
+\section{Homogeneous cosyntax: streams}
+
+
+\begin{frame}
+ \frametitle{Streams over a base type}
+ 
+ \begin{itemize}
+   \item Streams = infinite lists over some base type $A$
+ 
+  \begin{center}
+  \begin{tikzpicture}
+      \foreach \x in {0,...,2}{\draw (\x,0) node[color=blue]{$a_{\x}$};};
+      \draw (3,0) node[color=blue]{$\dots$};
+      \draw (0.5,0.25)--(0.5,-0.25);
+      \draw (-0.2,-0.5) node{$\shead$};
+      \draw (1.5,-0.5) node{$\stail$};
+  \end{tikzpicture}
+                                       
+ \end{center}
+ 
+ \item Specified by destructors
+ 
+ \begin{center}
+ 
+  \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+    \AxiomC{$s : \stream(A)$}\doubleLine
+     \UnaryInfC{$\shead_A(s) : A$}
+      \DisplayProof
+      \hspace{3em}
+%                       
+%  
+%  \vspace{15ex}
+%  
+  \AxiomC{$s : \stream(A)$}\doubleLine
+                                       \UnaryInfC{$\stail_A(s) : \stream(A)$}
+                                       \DisplayProof%
+
+ \end{center}
+ 
+   \vspace{2ex}
+
+ \item \enquote{Sameness} = bisimilarity
+  \begin{center}
+                                            \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+    \AxiomC{$s \sim s'$}\doubleLine
+     \UnaryInfC{$\shead(s) = \shead(s')$}
+      \DisplayProof
+                        \hspace{3em}
+                                       \AxiomC{$s \sim s'$}\doubleLine
+                                       \UnaryInfC{$ \stail(s) \sim \stail(s')$}
+                                       \DisplayProof   
+  \end{center}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Structure on streams}
+  
+  \begin{itemize}\setlength{\itemsep}{1em}
+   \item $(\stream(A), \sim)$ is a \emph{setoid}, \[\stream : \Set \to \Setoid\]
+   \item Canonical cosubstitution
+          \[ \cosubst: (\stream A \to B) \to \stream A \to \stream B \]
+         is compatible with bisimilarity:
+          \[ \cosubst: \Setoid(\stream A , \eq B) \to \Setoid(\stream A , \stream B) \]
+         with
+         \[ \eq : \Set \to \Setoid  \qquad \eq \dashv \constfont{forget}\]         
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Structure on streams}
+ 
+ \begin{lemma}
+  $(\stream,\shead,\cosubst)$ is a \fat{comonad relative to $\eq:\Set\to\Setoid$}.
+ \end{lemma}
+
+ \begin{definition}[\fat{Relative} (co)monad, Alten., Chapm. \& Uust.\ '10]
+  \begin{itemize} 
+   \item underlying functor is \fat{not} necessarily \fat{endo}
+   \item needs \enquote{mediating} functor (above: $\eq$)
+  \end{itemize}
+\end{definition}
+\end{frame}
+
+\begin{frame}
+ \frametitle{About the destructor $\stail$}
+ 
+ \begin{block}{Morphisms of modules over monads}
+%   \begin{itemize}
+%    \item used in work by Hirschowitz and Maggesi
+%    \item 
+   characterize distributivity of substitution over constructors
+%       \begin{align*} \bind{\App~(s,t)}{f} \quad &= \quad \App~(\bind{s}{f},\bind{t}{f}) \\
+%                      \bind{\Abs~t}{f}       \quad &= \quad \Abs~(\bind{t}{\shift~f}) 
+%       \end{align*}
+%   \end{itemize}
+
+         \[ \App : \LC\times\LC \to \LC \]
+%          \[ \subst~f~(\App~s~t) = \App~(\subst~f~s)(\subst~f~t) \]
+         \[ \comp{\App}{\subst~f} = \comp{(\subst~f)^2}{\App} \]
+
+ \end{block}
+
+ \begin{block}{Morphisms of \fat{co}modules over \fat{relative co}monads}
+%   \begin{itemize}
+%    \item 
+   characterize distributivity of \fat{co}substitution over destructors
+%    \item %example of morphism of comodules:  
+         \[\stail : \stream \to \stream\]
+%              \[\stail~(\cosubst~f~t) = \cosubst~f~(\stail~t) \]
+          \[ \comp{\cosubst~f}{\stail} = \comp{\stail}{\cosubst~f} \]
+%   \end{itemize}
+ \end{block} 
+ 
+\end{frame}
+
+
+\begin{frame}
+ \frametitle{Terminal semantics for $\stream$}
+ 
+  \begin{definition}[Category of coalgebras]
+    A coalgebra for the signature of $\stream$ is given by a pair $(S,t)$:
+    \begin{itemize}
+     \item a comonad $S$ relative to $\eq: \Set \to \Setoid$
+     \item a morphism of comodules over $S$
+        \[  t : S \to S \]
+    \end{itemize}
+   Morphisms: \ldots
+  \end{definition}
+
+ \begin{lemma}
+  $(\stream,\stail)$ is the terminal object in the above category.
+ \end{lemma}
+  
+\end{frame}
+
+
+\section{Heterogeneous cosyntax: infinite triangular matrices}
 
 \begin{frame}
  \frametitle{An example of cosyntax: infinite triangular matrices}
@@ -626,19 +769,15 @@ dualize techniques of H \& M to characterize
  $(\Tri : \Set\to\Setoid, \head, \redec)$ forms a \fat{comonad relative to} $\eq:\Set\to\Setoid$.
 \end{lemma}
 
-\pause
 
-\begin{definition}[\fat{Relative} (co)monad, Alten., Chapm. \& Uust.\ '10]
-  \begin{itemize} 
-   \item underlying functor is \fat{not} necessarily \fat{endo}
-   \item needs \enquote{mediating} functor (above: $\eq$)
-  \end{itemize}
-\end{definition}
+
+
 \end{frame}
 
 
-\section{Coinitiality for $\Tri$}
+% \section{Coinitiality for $\Tri$}
 
+\begin{comment}
 \begin{frame}
  \frametitle{Towards \enquote{coalgebras} for the signature of $\Tri$}
  
@@ -655,9 +794,8 @@ dualize techniques of H \& M to characterize
    For the lambda calculus with monadic substitution:
       \[ \subst~f~(\Abs~t) = \Abs~(\subst~(\shift~f)~t) \]
  \end{block}
-
- 
 \end{frame}
+\end{comment}
 
 
 \begin{frame}
