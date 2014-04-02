@@ -66,7 +66,7 @@
 %  \usepackage{palatino}\linespread{1.05}
 % \usepackage{verbatim}
 
-\title[Coinitial semantics for redecoration]{Coinitial semantics \\ for redecoration of triangular matrices}
+\title[Comodules over relative comonads]{Comodules over relative comonads \\ for streams and infinite matrices}
 \author[B.\ Ahrens and R.\ Spadotti]{Benedikt Ahrens \\~\\ joint work with R\'egis Spadotti}
 % \date{2011--09--11}
 % \date{Sept 11, 2011}
@@ -811,8 +811,8 @@ dualize techniques of H \& M to characterize
 %   \end{itemize}
 
          \[ \Abs : \LC(\_ + 1) \to \LC \]
-         \[ \subst~f~(\Abs~t) = \Abs~(\subst~(\shift~f)~t) \]
-
+%          \[ \subst~f~(\Abs~t) = \Abs~(\subst~(\shift~f)~t) \]
+         \[ \comp{\Abs}{\subst~f} = \comp{\subst~(\shift~f)}{\Abs} \]
  \end{block}
 
  \begin{block}{Morphisms of \fat{co}modules over \fat{relative co}monads}
@@ -821,7 +821,8 @@ dualize techniques of H \& M to characterize
    characterize distributivity of \fat{co}substitution over destructors
 %    \item %example of morphism of comodules:  
          \[\tail : \Tri \to \Tri(E\times \_)\]
-             \[\tail~(\redec~f~t) = \redec~(\lift~f)~(\tail~t) \]
+%              \[\tail~(\redec~f~t) = \redec~(\lift~f)~(\tail~t) \]
+         \[\comp{\redec~f}{\tail} = \comp{\tail}{\redec~(\lift~f)} \]
 %   \end{itemize}
  \end{block} 
 \end{frame}
