@@ -546,6 +546,17 @@ Just like relative monads, relative comonads are functorial:
 Relative comonads over the identity functor are exactly comonads.
 
 
+\begin{example}[Relative comonads from comonads]\label{ex_relcom_from_com}
+  Let $F : \C \to \D$ be a fully faithful functor and $(M,\counit,\cobind)$ be a (traditional) comonad on $\C$.
+  We define a comonad $FM$ relative to $F$ by setting:
+  \begin{itemize}
+   \item $FM(A) := F(MA)$;
+   \item $\counit^{FM}_A := F(\counit^M_A) : \D(FMA,FA)$;
+   \item $\cobind^{FM}_{A,B} (f) := F\bigl(\cobind^M_{A,B}(F^{-1}f)\bigr)$.
+  \end{itemize}
+  The proof of the axioms is immediate.
+\end{example}
+
 
 
 \begin{example}[Streams]\label{ex_stream_comonad}
@@ -608,6 +619,22 @@ Relative comonads over a fixed functor $F$ and their morphisms form a category $
 A morphism $\tau : T\to S$ of relative comonads over a functor $F:\C\to\D$ is  \emph{natural}
 with respect to the functorial action of \Cref{def:lift}.
 \end{remark}
+
+\begin{example}\label{ex_relcom_from_com_morphism}
+ Continuing \Cref{ex_relcom_from_com} with $M, M'$ two monads on $\C$, given a comonad morphism $\tau : M \to M'$, one obtains a morphism of 
+ relative comonads $F\tau : FM\to FM'$ by setting $F\tau_A := F(\tau_A)$.
+ Again, the axioms are easy to check.
+\end{example}
+
+\begin{remark}
+ The definitions given in \Cref{ex_relcom_from_com} and \Cref{ex_relcom_from_com_morphism} yield a functor from 
+ comonads on $\C$ to comonads relative to $F:\C\to\D$. 
+ If $F$ is a right adjoint with left adjoint $L$, $L\dashv F$, then postcomposing a comonad $T$ relative to $F$ with $L$
+ yields a monad on $\C$. Again, this map extends to comonad morphisms.
+ The two functors thus defined are again adjoints.
+ Writing down the details is lengthy but easy.
+\end{remark}
+
 
 
 \begin{example}\label{ex_diag}
