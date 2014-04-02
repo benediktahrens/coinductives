@@ -36,7 +36,7 @@
 
 
  In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}, and  
- use these notions to give a category-theoretical semantics for coinductive type families in 
+ use these notions to give a terminal coalgebra semantics for coinductive type families in 
  intensional Martin-L\"of type theory.
  
     
@@ -113,6 +113,11 @@
  This constitutes a generalization and dualization of work by \textcite{DBLP:journals/iandc/HirschowitzM10},
  who use \emph{modules over (plain) monads} to characterise the interplay of constructors and substitution of certain inductive data types.
  
+ For a coinductive type family $T(A)$ with a type parameter $A$, one distinguishes \emph{homogeneous} and \emph{heterogeneous} destructors.
+ While for a homogeneous destructor, the output type has the same type parameter as the input type, 
+ heterogeneous destructors output a term of the coinductive type $T$ with a \emph{bigger} type parameter, say, $f(A)$ for some map $f$ on types.
+ In this work we codata types both with homogeneous as well as heterogeneous destructors. 
+ 
  Finally, we give a final coalgebra semantics for the considered codata types, which does not only characterise the terms of those data types,
  but also the bisimilarity relation on those terms, and the canonical cosubstitution operation.
   
@@ -142,9 +147,9 @@
  In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
  
  
- The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
-While we present them in a type-theoretic style, the definitions and lemmas can trivially be transferred to a set-theoretic setting.
-Throughout this article, we use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
+ \subsection*{Disclaimer}The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
+ While we present them in a type-theoretic style, the definitions and lemmas can trivially be transferred to a set-theoretic setting.
+ Throughout this article, we use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
  Whenever an operation takes several arguments, we write some of them as indices; these indices might be omitted when 
  they can be deduced from the type of the later arguments.
  We assume basic knowledge of category theory; any instances used are defined in the following.
@@ -220,7 +225,7 @@ Throughout this article, we use type-theoretic notation,  writing $t:T$ to indic
 
 
 
-The motivating example we refer to throughout the paper concerns coinductive type families in Intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}, 
+The motivating examples we refer to throughout the paper are given by coinductive type families in Intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}, 
 a type-theoretic foundational system.
 
 
@@ -237,6 +242,7 @@ a type-theoretic foundational system.
  We denote by $\Setoid$ the category an object of which is a type equipped with an equivalence relation.
  A morphism between setoids is a type-theoretic function between the underlying types that is compatible with the equivalence relations of the source and target setoids.
  Given a setoid $T$, we write $t\sim t'$ for related elements $t$ and $t'$ in $T$.
+ We consider two parallel morphisms of setoids equal if they are extensionally bisimilar.
 \end{definition}
 
 
