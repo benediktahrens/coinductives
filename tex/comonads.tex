@@ -787,7 +787,7 @@ the comodule operation:
  \[   \comp{\mcobind^M(f)}{\alpha_B} = \comp{\alpha_A}{\mcobind^N(f)} \enspace . \]
 \end{definition}
 
- \begin{example}
+ \begin{example}\label{ex_tail_comodule}
   The destructor $\stail_A : \stream A \to \stream A$ is the carrier of a morphism of tautological comodules (over the relative comonad $\stream$).
  \end{example}
 
@@ -846,14 +846,19 @@ This extends, in some sense, to morphism of relative comonads:
 
 \section{Terminality for streams and infinite triangular matrices}\label{sec:coalgebras_for_tri}
 
+In this section, we define a notion of \enquote{coalgebra} for the signatures of streams and triangular matrices,
+respectively. We then show that the codata types $\stream$ and $\Tri$ constitute the terminal object in
+the respective category of coalgebras.
+We put \enquote{coalgebra} in quotes for the reason that our coalgebras are not defined as coalgebras for a monad or an endofunctor.
 
+The terminal coalgebra result is hardly surprising; however, it is still interesting as it characterises not only the codata types themselves,
+ but also the respective bisimilarity relations and comonadic operations on them, via a universal property.
+ 
+%  While it is obvious how to define a general notion of signature and a category of coalgebras for any such signature,
+% we refrain from doing so for lack of further examples.
 
-As an application of comodules over relative comonads, we use that notion to
- define \fat{coalgebras} for the signatures of the example data types we have studied so far.
- We then show that the codata types specified by the corresponding signatures constitute the respective \emph{terminal}
- such coalgebra.
- While this result is hardly surprising, it is still interesting as it characterises not only the codata types themselves,
- but also the respective bisimilarity relations on them as well as the cosubstitution operations, via a universal property.
+For lack of further examples, we do not strive for a general notion of signature and coalgebras for arbitrary signatures.
+
  
 \subsection{Coalgebras for $\stream$}
 
@@ -863,7 +868,8 @@ We first consider the homogeneous codata type of streams.
 
 
 \begin{definition}[Coalgebras for $\stream$]\label{cat_stream}
-  We define a \fat{coalgebra for $\stream$} to be given by 
+  Inspired by \Cref{ex_stream_comonad} and \Cref{ex_tail_comodule}, we define a \fat{coalgebra for $\stream$} to be given by a pair $(S,t)$ 
+  consisting of
   \begin{itemize}
    \item a comonad $S$ relative to $\eq : \Set \to \Setoid$ and
    \item a morphism $t$ of tautological comodules over $S$, $t : S \to S$.
@@ -882,8 +888,8 @@ This defines a category, with the obvious composition and identity.
   We equip the relative comonad $\Tri$ with the structure of a coalgebra for $\stream$ by defining the following 
   morphism of tautological comodules over $\Tri$:
    \[ t^{\diagonal} := \comp{\tail}{\cut}  : \Tri \to \Tri \enspace . \] 
-  This defines a coalgebra $(\Tri, t^{\diagonal})$ and the resulting terminal coalgebra morphism
-   $(\Tri, t^{\diagonal}) \to (\stream, \stail)$ is the one defined in \Cref{ex_diag}.
+  The resulting terminal coalgebra morphism
+   $(\Tri, t^{\diagonal}) \to (\stream, \stail)$ has as underlying morphism of relative comonads the one defined in \Cref{ex_diag}.
 \end{example}
 
 
@@ -901,7 +907,7 @@ In analogy to the definition of coalgebras for the signature of streams (\Cref{c
 a coalgebra for the signature of $\Tri$ as a pair $(T,r)$ of a comonad $T$ relative to $\eq : \Set \to \Setoid$ and 
 a morphism of comodules $r : T \to T(E\times \_)$. 
 It turns out that in this way, one is not capable of obtaining the right auxiliary function $\cut$ for what is
-supposed to be the \emph{terminal} such coalgebra, namely the pair $(\Tri,\tail)$.
+supposed to be the \emph{terminal} such coalgebra (where $\cut$ is used to define the comodule $\Tri(E\times \_)$), namely the pair $(\Tri,\tail)$.
 As a remedy, we define a coalgebra to come equipped with a specified operation analogous to $\cut$, and some laws governing
 the behaviour of that operation:
 
@@ -1055,25 +1061,14 @@ The construction of \Cref{def:product_in_context} yields a categorical character
 more precisely, of \Cref{eq:rest_redec}, via the notion of comodule morphism:
 
 % TODO: we already have that example
-\begin{example}[$\tail$ is a comodule morphism]\label{ex:tail_comodule}
+\begin{example}\label{ex:tail_comodule_alternative}
+This example is a reformulation of \Cref{ex_tail_comodule}.
  Consider the comonad $\Tri$, equipped with the $\cut$ operation of \Cref{def:cut_for_tri}.
  The destructor $\tail$ of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
   from the tautological comodule  $\Tri$ to $\Tri(E\times \_)$.
+  
 \end{example}
 
-
-
-
-
-
-
-
-We now define a category in which the codata type of triangular matrices, equipped with the bisimilarity relation of \Cref{ex_tri}
-and the comonadic redecoration, constitutes the terminal object. We call an object of this category a \emph{coalgebra of triangular matrices}, 
-even though we do not define the category as a category of coalgebras of a given endofunctor.
-
-The definition of such a coalgebra is obtained by collecting all the information we have gathered so
-far about the comonad $\Tri$, and abstracting from this particular comonad:
 
 
 \begin{definition}[Coalgebras of infinite triangular matrices]\label{def:cat_tri}
@@ -1131,9 +1126,9 @@ far about the comonad $\Tri$, and abstracting from this particular comonad:
 This universal property of coinitiality characterizes not only the codata type of infinite triangular matrices, but also
 the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operation.
 
-\begin{example}
+% \begin{example}
 %  TODO: define codiag via universality
-\end{example}
+% \end{example}
 
 
 \section{Formalization in \coq}\label{sec:formal}
