@@ -632,11 +632,11 @@ Relative comonads over the identity functor are exactly comonads.
 \end{remark}
 
 
-The notion of relative comonad captures many properties of $\stream$ and $\Tri$ and their respective operations, in particular the interplay
-of cosubstitution/redecoration with the destructors $\shead$ and $\head$ via the first two comonad laws.
-Much of the rest of the present work is concerned with finding a suitable categorical notion that captures the interplay 
-of redecoration with the other destructors, $\stail$ and $\tail$, respectively. 
-This is the purpose of the notion of \emph{comodule over relative comonad} introduced in \Cref{sec:comodules}.
+The notion of relative comonad captures many properties of $\stream$ resp.\ $\Tri$ and their respective operations, in particular the interplay
+of cosubstitution resp.\ redecoration with the destructors $\shead$ resp.\ $\head$ via the first two axioms.
+In order to  capture the interplay 
+of cosubstitution resp.\ redecoration with the destructor $\stail$ resp.\ $\tail$,  we develop the notion of \emph{comodule over a relative comonad}
+ in \Cref{sec:comodules}. 
 
 
 
@@ -651,7 +651,7 @@ This is the purpose of the notion of \emph{comodule over relative comonad} intro
    \[  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)} \enspace .  \]
 \end{definition}
 
-Relative comonads over a fixed functor $F$ and their morphisms form a category $\RComonad(F)$.
+Relative comonads over a fixed functor $F$ and their morphisms form a category $\RComonad(F)$ with the obvious identity and composition operations.
 
 \begin{remark}
 A morphism $\tau : T\to S$ of relative comonads over a functor $F:\C\to\D$ is  \emph{natural}
@@ -668,7 +668,7 @@ with respect to the functorial action of \Cref{def:lift}.
  The definitions given in \Cref{ex_relcom_from_com} and \Cref{ex_relcom_from_com_morphism} yield a functor from 
  comonads on $\C$ to comonads relative to $F:\C\to\D$. 
  If $F$ is a right adjoint with left adjoint $L$, $L\dashv F$, then postcomposing a comonad $T$ relative to $F$ with $L$
- yields a monad on $\C$. Again, this map extends to comonad morphisms.
+ yields a monad on $\C$. Again, this map extends to morphisms.
  The two functors thus defined are again adjoints.
  Writing down the details is lengthy but easy.
 \end{remark}
@@ -678,15 +678,18 @@ with respect to the functorial action of \Cref{def:lift}.
 \begin{example}\label{ex_diag}
 
 We define $\diagonal_A : \Tri A \to \stream A$ via the following clauses:
-    \begin{align}\shead~(\diagonal_A~t) &:= \head~t \quad\text{ and } \notag\\
-                     \stail\bigl(\diagonal_A~t\bigr) &:= \diagonal_A (\cut (\tail~t)) \enspace . \label{eq:diag}
+%     \begin{align}\shead~(\diagonal_A~t) &:= \head~t \quad\text{ and } \notag\\
+%                      \stail\bigl(\diagonal_A~t\bigr) &:= \diagonal_A (\cut (\tail~t)) \enspace . \label{eq:diag}
+%     \end{align}
+    \begin{align} \comp{\diagonal_A}{\shead} &:= \head \quad\text{ and } \notag\\
+                  \comp{\diagonal_A}{\stail} &:= \comp{\comp{\tail}{\cut}}{\diagonal_A} \enspace . \label{eq:diag}
     \end{align}
  This defines a morphism of relative comonads $\diagonal : \Tri \to \stream$.
 \end{example}
 
-\begin{example}
+% \begin{example}
 %  TODO: can we define a kind of inverse to diag
-\end{example}
+% \end{example}
 
 
 
@@ -718,14 +721,14 @@ We define $\diagonal_A : \Tri A \to \stream A$ via the following clauses:
 \end{definition}
 
 
-Constructors of inductive types are characterised by \textcite{DBLP:journals/iandc/HirschowitzM10} via the notion of
-\emph{module over a monad}. We  dualize their approach by introducing comodules over (relative) comonads.
+% Constructors of inductive types are characterised by \textcite{DBLP:journals/iandc/HirschowitzM10} via the notion of
+% \emph{module over a monad}. We  dualize their approach by introducing comodules over (relative) comonads.
 
 
 
 \section{Comodules over relative comonads}\label{sec:comodules}
 
-In this section we dualize the notion of module over a relative monad as developed in earlier work \parencite{ahrens_relmonads}.
+In this section we develop the notion of \emph{comodule over a relative comonad}, dualizing the notion of module over a relative monad  developed in earlier work \parencite{ahrens_relmonads}.
 
 \begin{definition}[Comodule over relative comonad]\label{def:comodule}
  Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
@@ -755,6 +758,13 @@ Every relative comonad comes with a canonical comodule over it, the \emph{tautol
     \[  \mcobind^T(f) := \cobind^T(f) \enspace . \]
 \end{definition}
 
+Similarly to relative comonads, comodules over these are functorial:
+
+\begin{definition}[Functoriality for comodules]\label{def:comodule_lift}
+ Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
+  \[ \mlift^M(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
+\end{definition}
+
 
 A more interesting example of comodule is given by the functor that maps a type $A$ to the setoid $\Tri(E\times A)$:
 \begin{example}\label{ex_tri_prod_comod}
@@ -778,12 +788,12 @@ the comodule operation:
 \end{definition}
 
  \begin{example}
-  The destructor $\stail_A : \stream A \to \stream A$ is the carrier of a morphism of tautological comodules.
+  The destructor $\stail_A : \stream A \to \stream A$ is the carrier of a morphism of tautological comodules (over the relative comonad $\stream$).
  \end{example}
 
 \begin{example}[$\tail$ is a comodule morphism]\label{ex:tail_comodule}
  The destructor $\tail$ of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
-  from the tautological comodule  $\Tri$ to $\Tri(E\times \_)$ (cf.\ \Cref{ex_tri_prod_comod}).
+  from the tautological comodule  $\Tri$ to the comodule $\Tri(E\times \_)$ (cf.\ \Cref{ex_tri_prod_comod}).
 \end{example}
 
 Composition and identity of comodule morphisms happens pointwise. We thus obtain a category of comodules
@@ -794,12 +804,6 @@ over a fixed comonad, towards a fixed target category:
  Comodules over $T$ towards $\E$ and their morphisms  form a category $\RComod(T,\E)$.
 \end{remark}
 
-Similarly to relative comonads, comodules over these are functorial:
-
-\begin{definition}[Functoriality for comodules]\label{def:comodule_lift}
- Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
-  \[ \mlift^M(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
-\end{definition}
 
 
 \begin{remark}
@@ -827,8 +831,8 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
 \end{definition}
 
 
-Every (relative) comonad induces a comodule over itself, the tautological comodule (\Cref{def:tautological_comodule}).
-Furthermore, every morphism of relative comonads induces a morphism of comodules:
+As presented in \Cref{def:tautological_comodule}, every relative comonad induces a comodule over itself, the tautological comodule.
+This extends, in some sense, to morphism of relative comonads:
 
 \begin{definition}[Morphism of comonads induces morphism of comodules]\label{def:induced} % checked
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$.
