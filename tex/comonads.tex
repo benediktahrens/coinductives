@@ -150,6 +150,7 @@
  \subsection*{Disclaimer}The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
  While we present them in a type-theoretic style, the definitions and lemmas can trivially be transferred to a set-theoretic setting.
  Throughout this article, we use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
+ For instance, we write $f : \C(A,B)$ to indicate that $f$ is a morphism from object $A$ to object $B$ in category $\C$.
  Whenever an operation takes several arguments, we write some of them as indices; these indices might be omitted when 
  they can be deduced from the type of the later arguments.
  We assume basic knowledge of category theory; any instances used are defined in the following.
@@ -227,6 +228,7 @@
 
 The motivating examples we refer to throughout the paper are given by coinductive type families in Intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}, 
 a type-theoretic foundational system.
+For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ and $b$.
 
 
 
@@ -239,12 +241,14 @@ a type-theoretic foundational system.
 \begin{definition}[Some categories]\label{def:set_setoid}
  We denote by $\Set$ the category of types (of a fixed universe) and total functions between them in Martin-L\"of type theory. 
  
- We denote by $\Setoid$ the category an object of which is a type equipped with an equivalence relation.
- A morphism between setoids is a type-theoretic function between the underlying types that is compatible with the equivalence relations of the source and target setoids.
- Given a setoid $T$, we write $t\sim t'$ for related elements $t$ and $t'$ in $T$.
- We consider two parallel morphisms of setoids equal if they are extensionally bisimilar.
+ We denote by $\Setoid$ the category an object of which is a \emph{setoid}, i.e.\ a type equipped with an equivalence relation.
+ A morphism between setoids is a type-theoretic function between the underlying types that is compatible in the obvious sense with the equivalence relations of the source and target setoids.
+ If $A$ is a setoid, we also use $A$ to refer to its underlying type, and thus write $a:A$ for an element $a$ of the type underlying the setoid $A$. 
+ We write $a\sim a'$ for related elements $a$ and $a'$ in $A$.
+ We consider two parallel morphisms of setoids $f,g:A\to B$ equal if for any $a:A$ we have $fa \sim ga$.
 \end{definition}
 
+We also write $f:A\to B$ for a morphism $f$ between objects $A$ and $B$ in some category.
 
 
 \begin{definition}\label{def:eq}
@@ -263,7 +267,7 @@ a type-theoretic foundational system.
 \end{remark}
 
 Both of the categories of \Cref{def:set_setoid} have binary products; they are \emph{cartesian monoidal}, i.e.\ the terminal 
-object is neutral with respect to the multiplication. Functors preserving the monoidal structure \textbf{up to isomorphism}
+object is neutral with respect to the product. Functors preserving the monoidal structure up to isomorphism
 are called \emph{strong monoidal}:
 
 \begin{definition}[Strong monoidal functor]\label{def:monoidal_functor}
@@ -284,12 +288,14 @@ are called \emph{strong monoidal}:
 
 \section{Some coinductive data types in Martin-L\"of type theory}\label{sec:tri}
 
-In this section we present some coinductive data types which serve as examples in the later sections.
-We also define \emph{bisimilarity} for each codata type, a coinductive equivalence relation which is considered 
-as the appropriate notion of equality on inhabitants of these types.
-We denote bisimilar elements using an infix $\sim$, as in $t \sim t'$.
+In this section we present some coinductive type families which serve as examples in the later sections.
+We also define \emph{bisimilarity} for each codata type, a coinductively defined equivalence relation which is considered 
+as the appropriate notion of sameness on inhabitants of these types.
+A coinductive type with bisimilarity hence forms a setoid as in \Cref{def:set_setoid}, 
+we thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
 
-The first example is the type of \emph{streams} of elements of a given base type $A$:
+The first example is the type of \emph{streams} of elements of a given base type $A$. 
+In the presentation we use the notational convention of \Cref{def:set_setoid}, using the same name for a setoid and its underlying type.
 \begin{example}\label{ex_stream}
   Let $A$ by a type. The type $\stream(A)$ (or shorter $\stream A$) of \emph{streams over $A$} is coinductively defined via the following destructors:
   \begin{figure}[hbt]
@@ -297,12 +303,12 @@ The first example is the type of \emph{streams} of elements of a given base type
 
      \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t : \stream(A)$}\doubleLine
-     \UnaryInfC{$\shead_A(t) : A$}
+    \AxiomC{$t : \stream A$}\doubleLine
+     \UnaryInfC{$\shead_A~t : A$}
       \DisplayProof
                         \hspace{3ex}
-                                       \AxiomC{$t : \stream(A)$}\doubleLine
-                                       \UnaryInfC{$\stail_A(t) : \stream(A)$}
+                                       \AxiomC{$t : \stream A$}\doubleLine
+                                       \UnaryInfC{$\stail_A~t : \stream A$}
                                        \DisplayProof%
 
   \end{center}
@@ -311,25 +317,27 @@ The first example is the type of \emph{streams} of elements of a given base type
                                             \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
     \AxiomC{$t \sim t'$}\doubleLine
-     \UnaryInfC{$\shead(t) = \shead(t')$}
+     \UnaryInfC{$\shead~t = \shead~t'$}
       \DisplayProof
                         \hspace{3ex}
                                        \AxiomC{$t \sim t'$}\doubleLine
-                                       \UnaryInfC{$ \stail(t) \sim \stail(t')$}
+                                       \UnaryInfC{$ \stail~t \sim \stail~t'$}
                                        \DisplayProof   
   \end{center}
   \caption{Destructors and bisimilarity for the coinductive type of streams} \label{fig:stream_destructors}
 \end{figure}
     
-   We define a cosubstition operation $\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B$ on streams via the following equations:
-   \begin{align}\shead\bigl(\sredec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
-                     \stail\bigl(\sredec~f~t\bigr) &:= \sredec~f~(\stail~t) \enspace . \label{eq:tail_sredec}
+   We define a cosubstition operation $\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B$ on streams via the following clauses:
+%    \begin{align} \shead\bigl(\sredec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
+%                      \stail\bigl(\sredec~f~t\bigr) &:= \sredec~f~(\stail~t) \enspace . \label{eq:tail_sredec}
+%     \end{align}
+   \begin{align} \comp{\sredec~f}{\shead} := f \quad\text{ and } \notag\\
+                  \comp{\sredec~f}{\stail} := \comp{\stail}{\sredec~f} \enspace . \label{eq:tail_sredec}
     \end{align}
-   
 \end{example}
 
-In the following, we denote by $\stream(A)$ the \emph{setoid} whose underlying type is the type of streams over $A$, equipped with the 
-equivalence relation of bisimilarity. By abuse of notation, we also refer to the underlying type by $\stream(A)$.
+% In the following, we denote by $\stream A$ the \emph{setoid} whose underlying type is the type of streams over $A$, equipped with the 
+% equivalence relation of bisimilarity. By abuse of notation, we also refer to the underlying type by $\stream(A)$.
 
 
 % TODO: image of stream
@@ -353,14 +361,12 @@ as explained below.
 
 
 \begin{example}\label{ex_tri}
-This codata type was studied in an article by
- \textcite{DBLP:conf/types/MatthesP11} which is available via open access. 
- The reader is strongly urged to read (the first two sections of) that work 
- before the present one; here we only recall the most important
- definitions. 
+This codata type is studied in detail by
+ \textcite{DBLP:conf/types/MatthesP11}.
+ We give a brief summary:
  
  
- The codata type family $\Tri$ of infinite triangular matrices we are about to define
+ The codata type family $\Tri$ of infinite triangular matrices 
  is parametrized by a fixed type $E$ for entries not on the diagonal, 
  and indexed by another, \emph{variable}, type $A$ for entries on 
  the diagonal. Schematically, such a matrix looks like in \Cref{fig_tri}.
@@ -435,29 +441,25 @@ This codata type was studied in an article by
 %      \draw[color=green, dashed]  (2.8,-3.6) -- (3.5,-4.2);
  \end{tikzpicture}
 \end{comment}
-  \caption{An infinite triangular matrix over type $A$, schematically}\label{fig_tri}
+  \caption{An infinite triangular matrix over type $A$ and various operations}\label{fig_tri}
  \end{figure}
  
- We define this data type coinductively via two destructors $\head$ and $\tail$, whose types are given in the first line of \Cref{fig:tri_destructors}.
- We also define a coinductive relation---\emph{bisimilarity}---on the inhabitants of that type, via the destructors of the second line of \Cref{fig:tri_destructors}.    
- Here we write $t \sim t'$ for bisimilar matrices $t$ and $t'$.
- This defines a \emph{setoid} $\Tri A$ for any type $A$, given by the type of matrices equipped with bisimilarity as equivalence relation.
- 
- By abuse of notation, we denote by $\Tri (A)$ (or shorter $\Tri A$) not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
- underlying \emph{type}. However, the two inference rules of \Cref{fig:tri_destructors} are the only place this 
- abuse actually happens. In the following, $\Tri A$ usually denotes the \emph{setoid} of infinite triangular matrices over the type $A$.
+ It is specified via two destructors $\head$ and $\tail$, whose types are given in the first line of \Cref{fig:tri_destructors}.
+ Bisimilarity on the inhabitants of that type is defined via the destructors of the second line of \Cref{fig:tri_destructors}.    
+ As with streams, we denote by $\Tri A$ not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
+ underlying \emph{type}. 
 
 \begin{figure}[hbt]
   \begin{center}
 
      \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t : \Tri(A)$}\doubleLine
-     \UnaryInfC{$\head_A(t) : A$}
+    \AxiomC{$t : \Tri~A$}\doubleLine
+     \UnaryInfC{$\head_A~t : A$}
       \DisplayProof
                         \hspace{3ex}
-                                       \AxiomC{$t : \Tri(A)$}\doubleLine
-                                       \UnaryInfC{$\tail_A(t) : \Tri(E\times A)$}
+                                       \AxiomC{$t : \Tri~A$}\doubleLine
+                                       \UnaryInfC{$\tail_A~t : \Tri(E\times A)$}
                                        \DisplayProof%
 
   \end{center}
@@ -466,11 +468,11 @@ This codata type was studied in an article by
                                             \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
     \AxiomC{$t \sim t'$}\doubleLine
-     \UnaryInfC{$\head(t) = \head(t')$}
+     \UnaryInfC{$\head~t = \head~t'$}
       \DisplayProof
                         \hspace{3ex}
                                        \AxiomC{$t \sim t'$}\doubleLine
-                                       \UnaryInfC{$ \tail(t) \sim \tail(t')$}
+                                       \UnaryInfC{$ \tail~t \sim \tail~t'$}
                                        \DisplayProof   
   \end{center}
   \caption{Destructors and bisimilarity for the coinductive family $\Tri$} \label{fig:tri_destructors}
@@ -479,10 +481,12 @@ This codata type was studied in an article by
 
   An operation $\redec$ of type
     $ \redec_{A,B} : (\Tri A \to B) \to \Tri A \to \Tri B )$
-  is defined in \parencite{DBLP:conf/types/MatthesP11}, which is then shown to constitute the cobind
-  operation of a \enquote{weak constructive} comonadic structure on the family $\Tri$. It is given through the equations
-    \begin{align}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
-                     \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\extend~f\bigr)(\tail~t) \enspace . \label{eq:rest_redec}
+  is defined  through the clauses
+%     \begin{align}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
+%                      \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\extend~f\bigr)(\tail~t) \enspace . \label{eq:rest_redec}
+%     \end{align}
+    \begin{align} \comp{\redec~f}{\head} &:= f \quad\text{ and } \notag\\
+                  \comp{\redec~f}{\tail} &:= \comp{\tail}{\redec~(\extend~f)} \enspace . \label{eq:rest_redec}
     \end{align}
 Here, the family of functions 
      $\extend_{A,B} : (\Tri A \to B) \to \Tri (E \times A) \to E\times B $
@@ -490,18 +494,24 @@ Here, the family of functions
   rather than $t : \Tri A$, namely
   \[ \extend(f) := \langle \comp{\head_{E\times A}}{\pr_1(E,A)} , \comp{\cut_A}{f} \rangle \enspace . \]
   The auxiliary function $\cut_A : \Tri(E\times A) \to \Tri A$ is defined corecursively via
-   \begin{align*}\head\bigl(\cut~t\bigr) := \pr_2(\head~t) \quad\text{ and } \quad
-                     \tail\bigl(\cut~t\bigr) := \cut(\tail~t) \enspace . 
+%    \begin{align*} \head\bigl(\cut~t\bigr) := \pr_2(\head~t) \quad\text{ and } \quad
+%                      \tail\bigl(\cut~t\bigr) := \cut(\tail~t) \enspace . 
+%       \end{align*}
+      \begin{align*} \comp{\cut}{\head} := \comp{\head}{\pr_2} \quad\text{ and } \quad
+                     \comp{\cut}{\tail} := \comp{\tail}{\cut} \enspace . 
       \end{align*}
 %       
-All the operations are suitably compatible with the bisimilarity relation, so that they can be equipped with the types
+All the operations are suitably compatible with the bisimilarity relations, so that they can be equipped with the types
   \begin{align*}
     \redec_{A,B} &: \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B ) \\
     \extend_{A,B} &: \Setoid(\Tri A,\eq B) \to \Setoid\bigr(\Tri (E \times A),\eq(E\times B)\bigr) \\
-    \cut_A &:  \Setoid(\Tri(E\times A) , \Tri A)
+    \cut_A &:  \Setoid(\Tri(E\times A) , \Tri A) \enspace .
   \end{align*}
 \end{example}
-  
+
+Note how heterogeneity of the destructor $\tail$ makes the definition of $\redec$ considerably more complicated than that of
+the analogous operation $\sredec$ on streams.
+
 \begin{comment}  
   The $\cobind$ operation---called \emph{redecoration} or $\redec$ in \parencite{DBLP:conf/types/MatthesP11}--- of type
    \[ \redec_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B )\] is defined 
@@ -524,23 +534,26 @@ Here, the family of functions
 \end{comment}
   
   
- Note that what is called $\extend$ here is called \textit{lift} in \parencite{DBLP:conf/types/MatthesP11}.
+%  Note that what is called $\extend$ here is called \textit{lift} in \parencite{DBLP:conf/types/MatthesP11}.
 % \end{example}
 
 % TODO: should this comment go away?
-\begin{remark}\label{rem:wrong_cut}
-In the definition of the $\extend$ operation in \Cref{ex:tri_comonad} the auxiliary operation $\cut$ plays a central r\^ole.
-It should be remarked here that, using functoriality of $\Tri$, one can define another operation of the same type, namely the family of 
-maps $\Tri(\pr_2(E,A)) : \Tri(E\times A) \to \Tri A$ for
-all sets $A$. Had we used this operation rather than the corecursively defined $\cut$ of \Cref{ex:tri_comonad}, 
-then the third comonad law would have failed; we refer to \parencite{DBLP:conf/types/MatthesS07} for details.
-\end{remark}
+% \begin{remark}\label{rem:wrong_cut}
+% In the definition of the $\extend$ operation in \Cref{ex:tri_comonad} the auxiliary operation $\cut$ plays a central r\^ole.
+% It should be remarked here that, using functoriality of $\Tri$, one can define another operation of the same type, namely the family of 
+% maps $\Tri(\pr_2(E,A)) : \Tri(E\times A) \to \Tri A$ for
+% all sets $A$. Had we used this operation rather than the corecursively defined $\cut$ of \Cref{ex:tri_comonad}, 
+% then the third comonad law would have failed; we refer to \parencite{DBLP:conf/types/MatthesS07} for details.
+% \end{remark}
 
 
 
 
 
 \section{Relative comonads and their morphisms}\label{sec:comonads}
+
+In this section we define the category of \emph{comonads relative to a fixed functor}, and present some examples 
+of such comonads and their morphisms.
 
 \emph{Relative monads} were defined by \textcite{DBLP:conf/fossacs/AltenkirchCU10} as a notion of monad-like structure
 whose underlying functor is not necessarily an endofunctor.
@@ -572,14 +585,14 @@ Relative comonads over the identity functor are exactly comonads.
 
 
 \begin{example}[Relative comonads from comonads]\label{ex_relcom_from_com}
-  Let $F : \C \to \D$ be a fully faithful functor and $(M,\counit,\cobind)$ be a (traditional) comonad on $\C$.
+  Let $F : \C \to \D$ be a fully faithful functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\C$.
   We define a comonad $FM$ relative to $F$ by setting:
   \begin{itemize}
    \item $FM(A) := F(MA)$;
    \item $\counit^{FM}_A := F(\counit^M_A) : \D(FMA,FA)$;
    \item $\cobind^{FM}_{A,B} (f) := F\bigl(\cobind^M_{A,B}(F^{-1}f)\bigr)$.
   \end{itemize}
-  The proof of the axioms is immediate.
+  The proof of the axioms of a relative comonad is immediate.
 \end{example}
 
 
@@ -595,14 +608,14 @@ Relative comonads over the identity functor are exactly comonads.
 \end{example}
 
 \begin{example}[Trees]\label{ex_tree_comonad}
- Fix a type $B$. Analogously to \Cref{ex_stream_comonad}, the map $A \mapsto \Tree_B(A)$
+ Fix a type $B$. Analogously to \Cref{ex_stream_comonad}, the map $A \mapsto \Tree_B(A)$ of \Cref{ex_trees}
  is equipped with a structure of a comonad relative to $\eq: \Set\to\Setoid$.
 \end{example}
 
 
 \begin{example}[Infinite triangular matrices]\label{ex:tri_comonad}
  
-  The codata type family $\Tri : \Set \to Setoid$ of \Cref{ex_tri} is equipped with a structure of a comonad relative to the functor 
+  The codata type family $\Tri : \Set \to \Setoid$ of \Cref{ex_tri} is equipped with a structure of a comonad relative to the functor 
   $\eq : \Set \to \Setoid$ via the following operations:
   \begin{itemize}
    \item $\counit_A := \head_A$
@@ -664,7 +677,7 @@ with respect to the functorial action of \Cref{def:lift}.
 
 \begin{example}\label{ex_diag}
 
-We define $\diagonal_A : \Tri A \to \stream A$ via the following equations:
+We define $\diagonal_A : \Tri A \to \stream A$ via the following clauses:
     \begin{align}\shead~(\diagonal_A~t) &:= \head~t \quad\text{ and } \notag\\
                      \stail\bigl(\diagonal_A~t\bigr) &:= \diagonal_A (\cut (\tail~t)) \enspace . \label{eq:diag}
     \end{align}
