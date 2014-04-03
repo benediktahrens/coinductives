@@ -131,6 +131,7 @@
 \newcommand{\var}{\constfont{var}}
 \newcommand{\unit}{\constfont{unit}}
 \newcommand{\coq}{\texttt{Coq}\xspace}
+\newcommand{\monbind}{\constfont{bind}}
 
 %  \newcommand{\bind}[2]{{#1} \blacktriangleright {#2}}
 % \newcommand{\bind}[2]{{#1} \mathbin{\vartriangleright} {#2}}
@@ -200,7 +201,7 @@
 \end{frame}
 
 
-\section{Syntax: heterogeneous inductives and substitution}
+\section{Syntax: inductives and substitution}
 
 \begin{comment}
 \begin{frame}
@@ -294,7 +295,7 @@
  \frametitle{Initial semantics for $\lambda$-calculus using monads}
    \begin{definition}[Algebra for signature of $\LC$, H \& M '07]
      \begin{itemize}
-      \item a monad $(T, \unit, \bind{}{})$ on $\Set$
+      \item a monad $(T, \unit, \monbind)$ on $\Set$
       \item two \fat{morphisms of modules over $T$},
          \vspace{-.5em}
           \begin{align*}
@@ -312,10 +313,9 @@
    \pause
    
    \enquote{Module morphism} expresses \fat{distributivity of substitution}:
-   \begin{align*} \bind{App~(s,t)}{f} \quad &= \quad App~(\bind{s}{f},\bind{t}{f}) \\
-                     \bind{Abs~t}{f}       \quad &= \quad Abs~(\bind{t}{\shift^T~f})
+   \begin{align*} \comp{App}{\monbind~f} \quad &= \quad \comp{(\monbind~f)^2}{App}  \\
+                  \comp{Abs}{\monbind~f} \quad &= \quad \comp{\monbind~(\shift~f)}{Abs}
       \end{align*}
-   
    \vspace{-1em}
    
    \pause 
@@ -441,7 +441,7 @@ dualize techniques of H \& M to characterize
  \frametitle{Structure on streams}
   
   \begin{itemize}\setlength{\itemsep}{1em}
-   \item $(\stream(A), \sim)$ is a \emph{setoid}, \[\stream : \Set \to \Setoid\]
+   \item $(\stream A, \sim)$ is a \emph{setoid}, \[\stream : \Set \to \Setoid\]
    \item Canonical cosubstitution
           \[ \cosubst: (\stream A \to B) \to \stream A \to \stream B \]
          is compatible with bisimilarity:
@@ -932,9 +932,11 @@ dualize techniques of H \& M to characterize
  \frametitle{Summary}
   
    \begin{itemize}\setlength{\itemsep}{1em}
-    \item Ad hoc notion of weak constructive comonad is instance of relative comonad
+    \item Coinductive type + bisimilarity as setoid
+    \item $\stream$ and $\Tri$ as \fat{relative} comonad
+%     \item Ad hoc notion of weak constructive comonad is instance of relative comonad
     \item Develop comodules over relative comonads
-    \item Terminal algebra semantics for codata family $\Tri$
+    \item Terminal algebra semantics for $\stream$ $\Tri$
     \item Bisimilarity and redecoration are part of universal object
     \item Not as straightforward as the $\lambda$-calculus because of $\cut$
     \item Mechanization in \texttt{Coq}
