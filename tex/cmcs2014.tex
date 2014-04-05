@@ -232,19 +232,19 @@
 %  \begin{block}{Initial semantics extended to some \fat{heterogeneous} inductives}
  
   \begin{description}
-    \item [motivation:] \fat{binding syntax} 
+    \item [Motivation:] \fat{binding syntax} 
 %               modelled through %($\lambda$-calculus)    \fat{heterogeneous} data type
            \begin{align*} \LC(X : \Set) \enspace ::=                                              
                                            \enspace  & \Var : X \to \LC(X) \\
                                            | \enspace  & \App : \LC(X)\times\LC(X)\to\LC(X) \\ 
                                            | \enspace &\Abs : \LC(X + 1) \to \LC(X) \enspace
            \end{align*}
-    \item [heterogeneity of $\Abs$:] \hfill \\ recursive argument with bigger parameter $X+1$
+    \item [Heterogeneity of $\Abs$:] \hfill \\ recursive argument with bigger parameter $X+1$
     
-    \item [substitution:] \hfill\\        
+    \item [Substitution:] \hfill\\        
        $ \subst_{X,Y} : \bigl(X \to \LC (Y)\bigr) \to \LC (X) \to \LC (Y) $
     
-    \item [avoiding capture:] \hfill \\ $\shift_{X,Y} : \bigl(X \to \LC(Y)\bigr) \to X+1 \to \LC(Y+1)$
+    \item [Avoiding capture:] \hfill \\ $\shift_{X,Y} : \bigl(X \to \LC(Y)\bigr) \to X+1 \to \LC(Y+1)$
     
 %    \begin{itemize}
 %     \item 
@@ -312,7 +312,7 @@
    
    \pause
    
-   \enquote{Module morphism} expresses \fat{distributivity of substitution}:
+   \enquote{Module morphism} expresses \fat{commutativity with $\monbind$}:
    \begin{align*} \comp{App}{\monbind~f} \quad &= \quad \comp{(\monbind~f)^2}{App}  \\
                   \comp{Abs}{\monbind~f} \quad &= \quad \comp{\monbind~(\shift~f)}{Abs}
       \end{align*}
@@ -336,7 +336,7 @@
 dualize techniques of H \& M to characterize
   \begin{itemize}
     \item
-         \fat{co}data types with 
+         \fat{co}data types in \fat{intensional ML type theory} with 
     \item\fat{co}substitution 
   \end{itemize}
     as  \fat{terminal} object
@@ -344,12 +344,13 @@ dualize techniques of H \& M to characterize
   
  \end{block}
   
-\begin{block}{In this talk we consider}
+\begin{block}{In this talk}
  
   \begin{itemize} 
-    \item codata types of \fat{streams} and infinite triangular \fat{matrices}
-    \item with \fat{redecoration} operation
+    \item  streams
+    \item  infinite triangular matrices
   \end{itemize}
+  
 \end{block} 
 \end{frame}
 
@@ -623,7 +624,7 @@ dualize techniques of H \& M to characterize
 	      \draw (1.5*\x+10.5, -\y) node[color=blue]{$E$} ;
 	    }
 	    \foreach \x in {0,...,3} \draw (1.5*\x+9, -\x)
-	    node{{\color{blue}\textbf{$E$}} $\times$ {\color{red} $A$}} ;
+	    node{{\color{blue}\textbf{$E$}} \hspace*{-.8em} $\times$ \hspace*{-.8em} {\color{red} $A$}} ;
 	    \draw(14.5,-1.5) node{$\ldots$};
 	    
 	    \draw[color=green] (13.5,0.4) -- (7.2,0.4) -- (13.5, -4); 
@@ -711,8 +712,11 @@ dualize techniques of H \& M to characterize
   
   \vspace{-6ex}
   
-   \begin{align*}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \\
-                     \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\lift~f\bigr)(\tail~t) \enspace .
+%    \begin{align*}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \\
+%                      \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\lift~f\bigr)(\tail~t) \enspace .
+%    \end{align*}
+  \begin{align*} \comp{\redec~f}{\head} &:= f \quad\text{ and } \\
+                 \comp{\redec~f}{\tail} &:= \comp{\tail}{\redec~(\lift~f)} \enspace .
    \end{align*}
   
   with $\quad\lift~f : \Tri(E\times A) \to E \times B$
@@ -932,13 +936,13 @@ dualize techniques of H \& M to characterize
  \frametitle{Summary}
   
    \begin{itemize}\setlength{\itemsep}{1em}
-    \item Coinductive type + bisimilarity as setoid
-    \item $\stream$ and $\Tri$ as \fat{relative} comonad
+    \item Coinductive type + bisimilarity as setoid in IMLTT
+    \item $\stream$ and $\Tri$ are \fat{relative} comonads
 %     \item Ad hoc notion of weak constructive comonad is instance of relative comonad
     \item Develop comodules over relative comonads
     \item Terminal algebra semantics for $\stream$ and $\Tri$
     \item Bisimilarity and redecoration are part of universal object
-    \item Not as straightforward as the $\lambda$-calculus because of $\cut$
+    \item $\Tri$ not as straightforward as the $\lambda$-calculus because of $\cut$
     \item Mechanization in \texttt{Coq}
    \end{itemize}
 
