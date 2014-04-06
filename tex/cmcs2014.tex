@@ -125,9 +125,9 @@
 \newcommand{\subst}{\constfont{subst}}
 \newcommand{\Setoid}{\constfont{Setoid}}
 \newcommand{\eq}{\ensuremath{\mathsf{eq}}}
-\newcommand{\App}{\constfont{App}}
-\newcommand{\Abs}{\constfont{Abs}}
-\newcommand{\Var}{\constfont{Var}}
+\newcommand{\App}{\constfont{app}}
+\newcommand{\Abs}{\constfont{abs}}
+\newcommand{\Var}{\constfont{var}}
 \newcommand{\var}{\constfont{var}}
 \newcommand{\unit}{\constfont{unit}}
 \newcommand{\coq}{\texttt{Coq}\xspace}
@@ -136,7 +136,7 @@
 %  \newcommand{\bind}[2]{{#1} \blacktriangleright {#2}}
 % \newcommand{\bind}[2]{{#1} \mathbin{\vartriangleright} {#2}}
 % \newcommand{\bind}[2]{{#1} \mathbin{\mathbf{\rhd}} {#2}}
-\newcommand{\LC}{\mathsf{LC}}
+\newcommand{\LC}{\mathsf{Lc}}
 \newcommand{\TLC}{\mathsf{TLC}}
 \newcommand{\PCF}{\mathsf{PCF}}
 
@@ -179,7 +179,7 @@
  
    \begin{itemize}\setlength{\itemsep}{1em}
     \item Category-theoretic semantics of \fat{co}inductive data types
-          in intensional Martin-L\"of type theory
+          in intensional Martin-L\"of type theory (IMLTT)
     \item [$\leadsto$] Develop a notion of \enquote{coalgebra} for the signature of a codata type
     \item Incorporate canonical cosubstitution
    \end{itemize}
@@ -232,19 +232,45 @@
 %  \begin{block}{Initial semantics extended to some \fat{heterogeneous} inductives}
  
   \begin{description}
-    \item [Motivation:] \fat{binding syntax} 
+    \item [Motivation:] \fat{binding syntax} in MLTT
 %               modelled through %($\lambda$-calculus)    \fat{heterogeneous} data type
-           \begin{align*} \LC(X : \Set) \enspace ::=                                              
-                                           \enspace  & \Var : X \to \LC(X) \\
-                                           | \enspace  & \App : \LC(X)\times\LC(X)\to\LC(X) \\ 
-                                           | \enspace &\Abs : \LC(X + 1) \to \LC(X) \enspace
-           \end{align*}
+%            \begin{align*} \LC(X : \Set) \enspace ::=                                              
+%                                            \enspace  & \Var : X \to \LC(X) \\
+%                                            | \enspace  & \App : \LC(X)\times\LC(X)\to\LC(X) \\ 
+%                                            | \enspace &\Abs : \LC(X + 1) \to \LC(X) \enspace
+%            \end{align*}
+
+       \[ \LC : \Set \to \Set
+       \]
+
+
+           \begin{center}
+ 
+  \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+    \AxiomC{$x : X$}
+     \UnaryInfC{$\Var(x) : \LC(X)$}
+      \DisplayProof
+      \hspace{.3em}
+%                       
+%  
+%  \vspace{15ex}
+%  
+  \AxiomC{$s,t : \LC X$}
+                                       \UnaryInfC{$\App(s,t) : \LC X$}
+                                       \DisplayProof
+                                       \hspace{.3em}
+\AxiomC{$t : \LC (X+1)$}
+                                       \UnaryInfC{$\Abs(t) : \LC X$}
+                                       \DisplayProof%
+
+ \end{center}
+ 
     \item [Heterogeneity of $\Abs$:] \hfill \\ recursive argument with bigger parameter $X+1$
     
     \item [Substitution:] \hfill\\        
-       $ \subst_{X,Y} : \bigl(X \to \LC (Y)\bigr) \to \LC (X) \to \LC (Y) $
+       $ \subst_{X,Y} : \bigl(X \to \LC Y \bigr) \to \LC X \to \LC Y $
     
-    \item [Avoiding capture:] \hfill \\ $\shift_{X,Y} : \bigl(X \to \LC(Y)\bigr) \to X+1 \to \LC(Y+1)$
+    \item [Avoiding capture:] \hfill \\ $\shift_{X,Y} : \bigl(X \to \LC Y \bigr) \to X+1 \to \LC(Y+1)$
     
 %    \begin{itemize}
 %     \item 
@@ -407,7 +433,7 @@ dualize techniques of H \& M to characterize
  \begin{center}
  
   \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$s : \stream(A)$}\doubleLine
+    \AxiomC{$s : \stream A$}\doubleLine
      \UnaryInfC{$\shead_A(s) : A$}
       \DisplayProof
       \hspace{3em}
@@ -415,8 +441,8 @@ dualize techniques of H \& M to characterize
 %  
 %  \vspace{15ex}
 %  
-  \AxiomC{$s : \stream(A)$}\doubleLine
-                                       \UnaryInfC{$\stail_A(s) : \stream(A)$}
+  \AxiomC{$s : \stream A$}\doubleLine
+                                       \UnaryInfC{$\stail_A(s) : \stream A$}
                                        \DisplayProof%
 
  \end{center}
@@ -444,9 +470,9 @@ dualize techniques of H \& M to characterize
   \begin{itemize}\setlength{\itemsep}{1em}
    \item $(\stream A, \sim)$ is a \emph{setoid}, \[\stream : \Set \to \Setoid\]
    \item Canonical cosubstitution
-          \[ \cosubst: (\stream A \to B) \to \stream A \to \stream B \]
+          \[ \cosubst_{A,B}: (\stream A \to B) \to \stream A \to \stream B \]
          is compatible with bisimilarity:
-          \[ \cosubst: \Setoid(\stream A , \eq B) \to \Setoid(\stream A , \stream B) \]
+          \[ \cosubst_{A,B}: \Setoid(\stream A , \eq B) \to \Setoid(\stream A , \stream B) \]
          with
          \[ \eq : \Set \to \Setoid  \qquad \eq \dashv \constfont{forget}\]         
   \end{itemize}
@@ -577,14 +603,14 @@ dualize techniques of H \& M to characterize
  \begin{center}
  
   \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t : \Tri(A)$}\doubleLine
+    \AxiomC{$t : \Tri A$}\doubleLine
      \UnaryInfC{$\head_A(t) : A$}
       \DisplayProof
                       
  
  \vspace{15ex}
  
-  \AxiomC{$t : \Tri(A)$}\doubleLine
+  \AxiomC{$t : \Tri A$}\doubleLine
                                        \UnaryInfC{$\tail_A(t) : \Tri(E\times A)$}
                                        \DisplayProof%
  
@@ -716,7 +742,7 @@ dualize techniques of H \& M to characterize
 %                      \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\lift~f\bigr)(\tail~t) \enspace .
 %    \end{align*}
   \begin{align*} \comp{\redec~f}{\head} &:= f \quad\text{ and } \\
-                 \comp{\redec~f}{\tail} &:= \comp{\tail}{\redec~(\lift~f)} \enspace .
+                 \comp{\redec~f}{\tail} &:= \comp{\tail}{\redec~(\lift~f)} 
    \end{align*}
   
   with $\quad\lift~f : \Tri(E\times A) \to E \times B$
