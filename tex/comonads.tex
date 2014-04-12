@@ -297,7 +297,11 @@ we thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$.
 The first example is the type of \emph{streams} of elements of a given base type $A$. 
 In the presentation we use the notational convention of \Cref{def:set_setoid}, using the same name for a setoid and its underlying type.
 \begin{example}\label{ex_stream}
-  Let $A$ by a type. The type $\stream(A)$ (or shorter $\stream A$) of \emph{streams over $A$} is coinductively defined via the following destructors:
+  Let $A$ be a type. The type $\stream(A)$ (or shorter $\stream A$) of \emph{streams over $A$} is coinductively defined via the destructors 
+  given in \Cref{fig:stream_destructors}.
+  We use double lines in the inference rules to emphasize that we are considering a \fat{co}inductive type specified via \fat{destructors}.
+  Obviously, via Lambek's lemma, speaking in terms of destructors rather than constructors is merely a notational convention, 
+  since the destructors have a suitable inverse.
   \begin{figure}[hbt]
   \begin{center}
 
@@ -326,14 +330,17 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
   \end{center}
   \caption{Destructors and bisimilarity for the coinductive type of streams} \label{fig:stream_destructors}
 \end{figure}
-    
-   We define a cosubstition operation $\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B$ on streams via the following clauses:
+   
+   
+   We define a \emph{co}substition operation $\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B$ on streams via the following clauses:
 %    \begin{align} \shead\bigl(\sredec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
 %                      \stail\bigl(\sredec~f~t\bigr) &:= \sredec~f~(\stail~t) \enspace . \label{eq:tail_sredec}
 %     \end{align}
    \begin{align} \comp{\sredec~f}{\shead} := f \quad\text{ and } \notag\\
                   \comp{\sredec~f}{\stail} := \comp{\stail}{\sredec~f} \enspace . \label{eq:tail_sredec}
     \end{align}
+  We call such an operation \enquote{cosubstitution} since its type is dual to, e.g., the simultaneous substitution operation 
+  of the lambda calculus \parencite{alt_reus}.
 \end{example}
 
 % In the following, we denote by $\stream A$ the \emph{setoid} whose underlying type is the type of streams over $A$, equipped with the 
@@ -356,14 +363,15 @@ parametrized by a type $B$.
 
 
 A second example we consider is given by the codata type of
-\emph{infinite triangular matrices}. It is more complicated than the example of streams as one of its destructors is \emph{heterogeneous},
-as explained below.
+\emph{infinite triangular matrices}. It is more complicated than the example of streams as one of its destructors is \emph{heterogeneous}:
+
 
 
 \begin{example}\label{ex_tri}
 This codata type is studied in detail by
  \textcite{DBLP:conf/types/MatthesP11}.
- We give a brief summary:
+ We give a brief summary, but urge the reader to consult the given reference 
+ for an in-depth explanation. 
  
  
  The codata type family $\Tri$ of infinite triangular matrices 
@@ -443,8 +451,12 @@ This codata type is studied in detail by
 \end{comment}
   \caption{An infinite triangular matrix over type $A$ and various operations}\label{fig_tri}
  \end{figure}
- 
+%  
  It is specified via two destructors $\head$ and $\tail$, whose types are given in the first line of \Cref{fig:tri_destructors}.
+ Given a matrix over type $A$, its $\tail$ can be considered as a trapezium as indicated by the green line in \Cref{fig_tri}, or alternatively, as
+ a triangular matrix over type $E\times A$, by bundling the entries of the diagonal with those above as indicated by the orange frames in \Cref{fig_tri}.
+ The latter representation is reflected in the type of the destructor $\tail$.
+ 
  Bisimilarity on the inhabitants of that type is defined via the destructors of the second line of \Cref{fig:tri_destructors}.    
  As with streams, we denote by $\Tri A$ not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
  underlying \emph{type}. 
