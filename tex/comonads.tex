@@ -240,6 +240,7 @@ For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ a
 
 \begin{definition}[Some categories]\label{def:set_setoid}
  We denote by $\Set$ the category of types (of a fixed universe) and total functions between them in Martin-L\"of type theory. 
+ A morphism $f$ in this category is denoted by $f : A \to B$.
  
  We denote by $\Setoid$ the category an object of which is a \emph{setoid}, i.e.\ a type equipped with an equivalence relation.
  A morphism between setoids is a type-theoretic function between the underlying types that is compatible in the obvious sense with the equivalence relations of the source and target setoids.
@@ -489,10 +490,10 @@ This codata type is studied in detail by
   \end{center}
   \caption{Destructors and bisimilarity for the coinductive family $\Tri$} \label{fig:tri_destructors}
 \end{figure}
-
-
-  An operation $\redec$ of type
-    $ \redec_{A,B} : (\Tri A \to B) \to \Tri A \to \Tri B )$
+% 
+% 
+  A cosubstitution operation,\enquote{redecoration},
+    $ \redec_{A,B} : (\Tri A \to B) \to \Tri A \to \Tri B$
   is defined  through the clauses
 %     \begin{align}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
 %                      \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\extend~f\bigr)(\tail~t) \enspace . \label{eq:rest_redec}
@@ -1208,11 +1209,13 @@ the formalization was used as a research tool, playing an essential r\^ole in th
 
 
 
-We have given a category-theoretic characterization, via a universal property, of infinite triangular matrices
-equipped with a comonadic redecoration operation.
+We have given a category-theoretic characterization, via a universal property, of streams and of infinite triangular matrices,
+each equipped with a cosubstitution operation,
+in intensional Martin-L\"of type theory
+
 
 While a significant part of our work---surmounting the non-categoricity of the $\cut$ operation---seems to be specific to this particular codata type,
-we believe that our work proves the suitability of the notion of relative (co)monads and (co)modules thereover for 
+our work shows the suitability of the notion of relative (co)monads and (co)modules thereover for 
 a categorical treatment of coinductive data types.
 
 
