@@ -108,7 +108,7 @@
 
  The codata types we consider are parametrized by a type variable and come with a canonical \emph{cosubstitution operation}. 
  The main purpose of this work is to give a categorical characterisation
- of this operation. For this, we develop the notion of \emph{comodule over a relative comonad}: \emph{morphism of comodules} capture the interplay between 
+ of this operation. For this, we develop the notion of \emph{comodule over a relative comonad}: \emph{morphisms of comodules} capture the interplay between 
  the destructors and the canonical cosubstitution on the considered codata types.
  This constitutes a generalization and dualization of work by \textcite{DBLP:journals/iandc/HirschowitzM10},
  who use \emph{modules over (plain) monads} to characterise the interplay of constructors and substitution of certain inductive data types.
@@ -116,7 +116,7 @@
  For a coinductive type family $T(A)$ with a type parameter $A$, one distinguishes \emph{homogeneous} and \emph{heterogeneous} destructors.
  While for a homogeneous destructor, the output type has the same type parameter as the input type, 
  heterogeneous destructors output a term of the coinductive type $T$ with a \emph{bigger} type parameter, say, $f(A)$ for some map $f$ on types.
- In this work we codata types both with homogeneous as well as heterogeneous destructors. 
+ In this work we consider codata types both with homogeneous as well as heterogeneous destructors. 
  
  Finally, we give a final coalgebra semantics for the considered codata types, which does not only characterise the terms of those data types,
  but also the bisimilarity relation on those terms, and the canonical cosubstitution operation.
@@ -158,8 +158,8 @@
  \subsection*{Related work}
  The notion of \emph{module over a monad}, which we dualize and generalize in this work, is used by \textcite{DBLP:journals/iandc/HirschowitzM10}
  to give an initial semantics result for languages with variable binding. 
- Their work it is based on work by \textcite{alt_reus},
- who show that the lambda calculus equipped with a simultaneous substitution constitute a monad on the category of sets (or types).
+ Their work is based on work by \textcite{alt_reus},
+ who show that the lambda calculus equipped with a simultaneous substitution constitutes a monad on the category of sets (or types).
  
  We make use of the notion of \emph{relative comonad}, the dual to relative monads as introduced by \textcite{DBLP:conf/fossacs/AltenkirchCU10}.
  Traditional comonads for functional programming with homogeneous codata types are studied by \textcite{DBLP:conf/sfp/UustaluV01}.
