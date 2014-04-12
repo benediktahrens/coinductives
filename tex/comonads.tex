@@ -68,8 +68,50 @@
 \section{Introduction}
  
  In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
- We then use these notions to characterise several coinductive data types in intensional Martin-L\"of type theory
+ We then use these notions to characterise several \emph{co}inductive data types in intensional Martin-L\"of type theory
  via a universal property.
+ 
+ Intensional Martin-L\"of type theory \parencite{martin_lof} forms the base of two important computer proof assistants, \coq and \agda.
+ One important feature of that type theory is the \emph{identity type}, a type family that associates to any two 
+ inhabitants $a,b : A$ of a same type $A$ the type of \enquote{identities} between them.
+ 
+ Simple inductive types---\textsf{W}-types---in Martin-L\"of type theory are characterized categorically as initial algebras of
+ a polynomial functor \parencite{DBLP:journals/tcs/Dybjer97}. In that work, \emph{extensional} MLTT is used
+ because function extensionality is needed to deduce that there is a \emph{unique} algebra morphism from the initial algebra to any algebra.
+ 
+ \textsf{W}-types in \emph{Homotopy Type Theory} (HoTT), an extension of \emph{intensional} Martin-L\"of type theory, are studied by \textcite{DBLP:conf/lics/AwodeyGS12}.
+ In this extension, function extensionality is provable from the \emph{Univalence Axiom}. 
+ For a suitable definition of \emph{uniqueness}---in the HoTT jargon called \emph{contractibility}---one can then prove unicity of the
+ algebra morphisms out of the one whose carrier is given by the \textsf{W}-type.
+ The work of \textcite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterisation of inductive types as initial algebras carries over 
+ from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of unicity.
+ 
+ The characterization of inductive types as initial algebras 
+ has been extended to some \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
+ in different formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
+ The main goal of these works is not just to characterize the data type via a universal property, but rather the data type
+ \emph{equipped with a canonical, well-behaved substitution operation}.
+ 
+%  TODO: D. Turi and J. Rutten. On the foundations of final coalgebra semantics: non-
+% well-founded sets, partial orders, metric spaces. Math. Structures Comput. Sci.,
+% 8(5):481–540, 1998.
+% B.P.F. Jacobs and J. Rutten. A tutorial on (co)algebras and (co)induction.
+% Bulletin of the EATCS, 62:222–259, 1996.
+
+ 
+ In this work, we study \emph{co}inductive data types, both \emph{homogeneous} (e.g., streams) and \emph{heterogeneous} (e.g., triangular matrices),
+ in intensional Martin-L\"of type theory.
+ 
+ For inhabitants of coinductive types, the aforementioned identity type does \emph{not} yield the right notion of sameness;
+ instead, another notion of sameness for inhabitants of such types, 
+ \emph{bisimilarity}, was coined by \textcite{aczel_nonwellfounded}. 
+ Intuitively, two inhabitants of a coinductive type are the same if they allow for the same observations.
+ Consequently, we consider two maps into a coinductive type to be the same if they are \emph{pointwise bisimilar}.
+ 
+ With these conventions, we give a characterisation of some coinductive data types as \emph{terminal} objects in some category 
+ defined in intensional Martin-L\"of type theory.
+ Dually to the aforementioned example of the lambda calculus, the codata types we consider are equipped with a canonical 
+ \emph{co}substitution operation.
  
  Relative monads were introduced by \textcite{DBLP:conf/fossacs/AltenkirchCU10} as a generalization of the notion of monad,
  to capture monadic structure on functors that are not necessarily endo.
