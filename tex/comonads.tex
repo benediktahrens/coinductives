@@ -75,24 +75,31 @@
  some endofunctor on the category of sets. For instance, the set of natural numbers constitutes the carrier of the 
  initial algebra of the functor $X \mapsto 1 + X$.
  
- In a type-theoretic setting, a similar characterisation is possible, but some attention has to be given to 
+ In a type-theoretic setting as given by Martin-L\"of type theory \parencite{martin_lof}, a similar characterisation is possible, but some attention has to be given to 
  the precise formulation of the type theory in question:
- one generally distinguishes \emph{extensional} and \emph{intensional} type theory.
- For the former, propositional equality as given by the Martin-L\"of identity type \parencite{martin_lof} is reflected 
- into judgmental equality.
-
- Simple inductive types---\textsf{W}-types---in Martin-L\"of type theory are characterized categorically as initial algebras of
- a polynomial functor \parencite{DBLP:journals/tcs/Dybjer97}. In that work, \emph{extensional} MLTT is used
- because function extensionality is needed to deduce that there is a \emph{judgmentally unique} algebra morphism from the initial algebra to any algebra.
- 
- Intensional Martin-L\"of type theory \parencite{martin_lof} forms the base of two important computer proof assistants, \coq and \agda.
  One important feature of that type theory is the \emph{identity type}, a type family that associates to any two 
  inhabitants $a,b : A$ of a same type $A$ the type of \enquote{identities} between them.
+ One distinguishes \emph{extensional} and \emph{intensional} type theory, according to whether terms of identity type
+ are reflected into the internal, judgmental equality of the type theory or not. This difference must be considered when defining the notion of
+ \enquote{initial algebra}, in particular the \emph{uniqueness} part of initiality:
  
- 
- \textsf{W}-types in \emph{Homotopy Type Theory} (HoTT), an extension of \emph{intensional} Martin-L\"of type theory, are studied by \textcite{DBLP:conf/lics/AwodeyGS12}.
+ In extensional type theory, propositional equality as given by the Martin-L\"of identity type \parencite{martin_lof} is reflected 
+ into judgmental equality via a \emph{reflection rule}.
+ This reflection rule equips \emph{extensional} type theory with extensional features similar to those of set theory.
+ As a consequence, the characterisation of a \textsf{W}-type---a member of a particular class of inductive types---in extensional MLTT as initial algebra for some endofunctor on the 
+ category of types \parencite{DBLP:journals/tcs/Dybjer97} works as in the category of sets.
+ Indeed, in extensional MLTT, one has function extensionality available, which suffices to 
+ deduce that there is a \emph{judgmentally unique} algebra morphism from the initial algebra to any algebra.
+
+%  Simple inductive types---\textsf{W}-types---in Martin-L\"of type theory are characterized categorically as initial algebras of
+%  a polynomial functor \parencite{DBLP:journals/tcs/Dybjer97}. In that work, \emph{extensional} MLTT is used
+%  because function extensionality is needed to deduce that there is a \emph{judgmentally unique} algebra morphism from the initial algebra to any algebra.
+%  
+ Intensional Martin-L\"of type theory \parencite{martin_lof} lacks this reflection principle for the sake of decidability of type checking. 
+ It forms the base of two important computer proof assistants, \coq and \agda.
+ \textsf{W}-types in \emph{Homotopy Type Theory} (HoTT), an extension of intensional Martin-L\"of type theory, are studied by \textcite{DBLP:conf/lics/AwodeyGS12}.
  In this extension, function extensionality is provable from the \emph{Univalence Axiom}. 
- For a suitable definition of \emph{uniqueness}---in the HoTT jargon called \emph{contractibility}---one can then prove unicity of the
+ For a suitable definition of \emph{uniqueness}---\emph{contractibility} in HoTT jargon---one can then prove unicity of the
  algebra morphisms out of the one whose carrier is given by the \textsf{W}-type.
  The work of \textcite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterisation of \textsf{W}-types as initial algebras carries over 
  from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of unicity.
@@ -101,7 +108,7 @@
  The characterization of inductive sets/types as initial objects in some category
  has been extended to some \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
  in different formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
- The main goal of these works is not just to characterize the data type via a universal property, but rather the data type
+ The main goal of these works is not just to characterize a data type via a universal property, but rather a data type
  \emph{equipped with a canonical, well-behaved substitution operation}.
  
 %  TODO: D. Turi and J. Rutten. On the foundations of final coalgebra semantics: non-
@@ -110,19 +117,19 @@
 % B.P.F. Jacobs and J. Rutten. A tutorial on (co)algebras and (co)induction.
 % Bulletin of the EATCS, 62:222–259, 1996.
 
- Dually to inductive sets, \fat{co}inductive sets such as streams are characterised as terminal objects, e.g., in work by \textcite{jacobs1997tutorial}.
- Inhabitants of such sets are equal if and only if they are \emph{bisimilar}, see, e.g., \textcite{DBLP:journals/mscs/TuriR98}:
+ Dually to inductive sets, \fat{co}inductive sets such as streams are characterised as terminal objects, e.g., in the work of \textcite{jacobs1997tutorial}.
+ Inhabitants of such sets are equal if and only if they are \emph{bisimilar} (see \textcite{DBLP:journals/mscs/TuriR98}):
  Intuitively, two elements of a coinductive set are the same if they allow for the same observations.
  
- This correspondence between equality and bisimilarity fails in MLTT, i.e.\ when equality is considered to be given by the 
+ This correspondence between equality and bisimilarity fails in MLTT, when equality is considered to be given by the 
  Martin-L\"of identity type. Instead, one defines \emph{bisimilarity} as a coinductive predicate 
- on a coinductive type, and reasoning about the terms of a coinductive type is done modulo that bisimilarity predicate
- rather than identity, as done, e.g., by \textcite{DBLP:conf/types/Coquand93}.
+ on a coinductive type, and one reasons about the terms of a coinductive type modulo the bisimilarity predicate
+ rather than identity \parencite{DBLP:conf/types/Coquand93}.
  Consequently, we consider two maps into a coinductive type to be the same if they are \emph{pointwise bisimilar}---an analogue
  to the aforementioned principle of function extensionality. 
  With these conventions, we give, in the present work, a characterisation of some coinductive data types as \emph{terminal} objects in some category 
  defined in intensional Martin-L\"of type theory.
- Our terminal semantics result does not only characterise the codata types themselves, but also the bisimilarity relation as well as
+ Our terminal semantics result characterises not only the codata types themselves but also the bisimilarity relation and
  a canonical cosubstitution operation on them.
  
  The fact that cosubstitution for coinductive data types is comonadic in a set-theoretic setting is established by \textcite{DBLP:conf/sfp/UustaluV01}.
