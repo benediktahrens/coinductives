@@ -2,7 +2,7 @@
 
 \pdfoutput=1
 
-\documentclass{amsart}
+\documentclass{llncs}
 
 \usepackage[utf8]{inputenc}
 
@@ -10,7 +10,7 @@
 
 
 \usepackage[style=numeric,
- backref=true,
+%  backref=true,
  isbn=false,
  maxnames=3,
  maxbibnames=99 ,                
@@ -18,19 +18,32 @@
 ]{biblatex}
 \bibliography{literature.bib}
 
-\usepackage{ownstyle}
+\usepackage{ownstylesansthm}
 
-
-\author{Benedikt Ahrens}
-\author{R\'egis Spadotti}
-
-\title[Terminal semantics]{Terminal semantics \\ for streams and infinite matrices}
-
-\newcommand{\fat}[1]{\textbf{#1}}
+\usepackage{comment}
+\excludecomment{Long}
 
 
 \begin{document}
 
+\title{Terminal semantics\\for streams and infinite matrices}
+
+\author{Benedikt Ahrens and R\'egis Spadotti}
+
+\institute{
+Institut de Recherche en Informatique de Toulouse\\
+Universit\'e Paul Sabatier, 
+Toulouse}
+
+\newcommand{\fat}[1]{\textbf{#1}}
+
+
+
+
+
+\maketitle
+
+% \tableofcontents
 
 \begin{abstract}
 
@@ -61,9 +74,8 @@
   Our results are fully mechanized in the proof assistant \coq.
   \end{abstract}
 
-\maketitle
 
-% \tableofcontents
+
 
 \section{Introduction}
  
@@ -111,11 +123,7 @@
  The main goal of these works is not just to characterize a data type via a universal property, but rather a data type
  \emph{equipped with a canonical, well-behaved substitution operation}.
  
-%  TODO: D. Turi and J. Rutten. On the foundations of final coalgebra semantics: non-
-% well-founded sets, partial orders, metric spaces. Math. Structures Comput. Sci.,
-% 8(5):481–540, 1998.
-% B.P.F. Jacobs and J. Rutten. A tutorial on (co)algebras and (co)induction.
-% Bulletin of the EATCS, 62:222–259, 1996.
+
 
  Dually to inductive sets, \fat{co}inductive sets such as streams are characterised as terminal objects, e.g., in the work of \textcite{jacobs1997tutorial}.
  Inhabitants of such sets are equal if and only if they are \emph{bisimilar} (see \textcite{DBLP:journals/mscs/TuriR98}):
@@ -225,7 +233,7 @@
  In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
  
  
- \subsection*{Disclaimer}The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
+ \subsubsection*{Disclaimer}The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
  While we present them in a type-theoretic style, the definitions and lemmas can trivially be transferred to a set-theoretic setting.
  Throughout this article, we use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
  For instance, we write $f : \C(A,B)$ to indicate that $f$ is a morphism from object $A$ to object $B$ in category $\C$.
@@ -233,7 +241,7 @@
  they can be deduced from the type of the later arguments.
  We assume basic knowledge of category theory; any instances used are defined in the following.
   
- \subsection*{Related work}
+ \subsubsection*{Related work}
  The notion of \emph{module over a monad}, which we dualize and generalize in this work, is used by \textcite{DBLP:journals/iandc/HirschowitzM10}
  to give an initial semantics result for languages with variable binding. 
  Their work is based on work by \textcite{alt_reus},
@@ -247,7 +255,7 @@
  the expressivity of the studied recursion schemes.
  
  
- \subsection*{Organisation of the paper}
+ \subsubsection*{Organisation of the paper}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
   In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those
            codata types.
@@ -259,9 +267,11 @@
       based on the category-theoretic notions developped in the previous sections.
       We then prove that the codata types constitute the terminal coalgebras in the respective categories.
       Finally, we present an example of a map defined as a terminal map exploiting the universal property of streams.
+      
+\begin{Long}
    In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
   A table with the correspondence between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
- 
+\end{Long}
 
 %  In this work we set off to characterize a specific \emph{co}inductive heterogeneous data type---the type family $\Tri$ of 
 %  infinite triangular matrices as studied by \textcite{DBLP:conf/types/MatthesP11}, equipped with a \emph{co}substitution operation---as a terminal object of some 
@@ -365,7 +375,7 @@ are called \emph{strong monoidal}:
 \end{example}
 
 
-\section{Some coinductive data types in intensional Martin-L\"of type theory}\label{sec:tri}
+\section{Codata types in intensional Martin-L\"of type theory}\label{sec:tri}
 
 In this section we present some coinductive type families which serve as examples in the later sections.
 We also define \emph{bisimilarity} for each codata type, a coinductively defined equivalence relation which is considered 
@@ -383,8 +393,8 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
   We use double lines in the inference rules to emphasize that we are considering a \fat{co}inductive type specified via \fat{destructors}.
   Obviously, via Lambek's lemma, speaking in terms of destructors rather than constructors is merely a notational convention, 
   since the destructors have a suitable inverse.
-  \begin{figure}[hbt]
-  \begin{center}
+  \begin{figure}[bt]
+  \centering
 
      \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
@@ -396,9 +406,10 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
                                        \UnaryInfC{$\stail_A~t : \stream A$}
                                        \DisplayProof%
 
-  \end{center}
+
 \vspace{2ex}
-  \begin{center}
+
+ \centering
                                             \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
     \AxiomC{$t \sim t'$}\doubleLine
@@ -408,7 +419,7 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
                                        \AxiomC{$t \sim t'$}\doubleLine
                                        \UnaryInfC{$ \stail~t \sim \stail~t'$}
                                        \DisplayProof   
-  \end{center}
+%   \end{center}
   \caption{Destructors and bisimilarity for the coinductive type of streams} \label{fig:stream_destructors}
 \end{figure}
    
@@ -459,8 +470,8 @@ This codata type is studied in detail by
  is parametrized by a fixed type $E$ for entries not on the diagonal, 
  and indexed by another, \emph{variable}, type $A$ for entries on 
  the diagonal. Schematically, such a matrix looks like in \Cref{fig_tri}.
- \begin{figure}[hbt]
- 
+ \begin{figure}[bt]
+ \centering
  \begin{tikzpicture}[scale = 0.6]
     \foreach \y in {0,...,2}
     {\foreach \x in {\y,...,2}
@@ -542,8 +553,8 @@ This codata type is studied in detail by
  As with streams, we denote by $\Tri A$ not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
  underlying \emph{type}. 
 
-\begin{figure}[hbt]
-  \begin{center}
+\begin{figure}[bt]
+  \centering
 
      \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
@@ -555,9 +566,9 @@ This codata type is studied in detail by
                                        \UnaryInfC{$\tail_A~t : \Tri(E\times A)$}
                                        \DisplayProof%
 
-  \end{center}
+
 \vspace{2ex}
-  \begin{center}
+
                                             \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
     \AxiomC{$t \sim t'$}\doubleLine
@@ -567,7 +578,7 @@ This codata type is studied in detail by
                                        \AxiomC{$t \sim t'$}\doubleLine
                                        \UnaryInfC{$ \tail~t \sim \tail~t'$}
                                        \DisplayProof   
-  \end{center}
+
   \caption{Destructors and bisimilarity for the coinductive family $\Tri$} \label{fig:tri_destructors}
 \end{figure}
 % 
@@ -1223,7 +1234,7 @@ the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operatio
 %  TODO: define codiag via universality
 % \end{example}
 
-
+\begin{comment}
 \section{Formalization in \coq}\label{sec:formal}
 
 All our definitions and theorems are mechanized in the proof assistant \coq \parencite{coq84pl3}.
@@ -1285,6 +1296,8 @@ Work on the declaration of coinductive types via destructors is done in \agda, c
 Other than that, the informal definitions correspond closely to the formalized ones---which might also stem from the fact that 
 the formalization was used as a research tool, playing an essential r\^ole in the development of this work.
 
+\end{comment}
+
 \section{Conclusions and future work}
 
 
@@ -1315,7 +1328,7 @@ will allow, e.g., considering branching trees modulo permutation of subtrees.
 % \appendix
 
 % TODO: complete table formal
-\input{formal_table}
+% \input{formal_table}
 
 % \input{comparison_inductive}
 
