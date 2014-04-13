@@ -63,7 +63,7 @@
 
 \maketitle
 
-\tableofcontents
+% \tableofcontents
 
 \section{Introduction}
  
@@ -372,6 +372,8 @@ We also define \emph{bisimilarity} for each codata type, a coinductively defined
 as the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93, DBLP:journals/corr/abs-cs-0603119}.
 A coinductive type with bisimilarity hence forms a setoid as in \Cref{def:set_setoid}, 
 we thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
+
+Maps into a coinductive data type are specified by the observations, i.e.\ the value of the destructors, on the output of those maps, as illustrated in \Cref{eq:tail_sredec}.
 
 The first example is the type of \emph{streams} of elements of a given base type $A$. 
 In the presentation we use the notational convention of \Cref{def:set_setoid}, using the same name for a setoid and its underlying type.
@@ -1289,17 +1291,17 @@ the formalization was used as a research tool, playing an essential r\^ole in th
 
 We have given a category-theoretic characterization, via a universal property, of streams and of infinite triangular matrices,
 each equipped with a cosubstitution operation,
-in intensional Martin-L\"of type theory
+in intensional Martin-L\"of type theory.
 
+In a more extensional type theory, such as \emph{Homotopy Type Theory} \parencite{hottbook}, 
+one could hope to reflect bisimilarity into propositional equality by \emph{quotienting},
+thus eliminating the need to work with setoids.
+This will be investigated in future work.
 
-While a significant part of our work---surmounting the non-categoricity of the $\cut$ operation---seems to be specific to this particular codata type,
-our work shows the suitability of the notion of relative (co)monads and (co)modules thereover for 
-a categorical treatment of coinductive data types.
+Furthermore, we will work on a suitable notion of \emph{signature} for the specification of general coinductive data types with
+a cosubstitution operation.
 
-
-We plan to pursue two obvious lines of work:
-Firstly, we will work on a suitable notion of \emph{signature} for the specification of coinductive data types.
-Secondly, we hope to integrate \emph{equations} into the notion of signature, equations which 
+Finally, we would like to integrate \emph{equations} into the notion of signature, equations which 
 will allow, e.g., considering branching trees modulo permutation of subtrees.
  
 
