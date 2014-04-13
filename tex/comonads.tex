@@ -83,7 +83,7 @@
 
  Simple inductive types---\textsf{W}-types---in Martin-L\"of type theory are characterized categorically as initial algebras of
  a polynomial functor \parencite{DBLP:journals/tcs/Dybjer97}. In that work, \emph{extensional} MLTT is used
- because function extensionality is needed to deduce that there is a \emph{unique} algebra morphism from the initial algebra to any algebra.
+ because function extensionality is needed to deduce that there is a \emph{judgmentally unique} algebra morphism from the initial algebra to any algebra.
  
  Intensional Martin-L\"of type theory \parencite{martin_lof} forms the base of two important computer proof assistants, \coq and \agda.
  One important feature of that type theory is the \emph{identity type}, a type family that associates to any two 
@@ -94,11 +94,11 @@
  In this extension, function extensionality is provable from the \emph{Univalence Axiom}. 
  For a suitable definition of \emph{uniqueness}---in the HoTT jargon called \emph{contractibility}---one can then prove unicity of the
  algebra morphisms out of the one whose carrier is given by the \textsf{W}-type.
- The work of \textcite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterisation of inductive types as initial algebras carries over 
+ The work of \textcite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterisation of \textsf{W}-types as initial algebras carries over 
  from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of unicity.
  
  
- The characterization of inductive types as initial algebras 
+ The characterization of inductive sets/types as initial objects in some category
  has been extended to some \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
  in different formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
  The main goal of these works is not just to characterize the data type via a universal property, but rather the data type
@@ -117,7 +117,7 @@
  This correspondence between equality and bisimilarity fails in MLTT, i.e.\ when equality is considered to be given by the 
  Martin-L\"of identity type. Instead, one defines \emph{bisimilarity} as a coinductive predicate 
  on a coinductive type, and reasoning about the terms of a coinductive type is done modulo that bisimilarity predicate
- rather than identity.
+ rather than identity, as done, e.g., by \textcite{DBLP:conf/types/Coquand93}.
  Consequently, we consider two maps into a coinductive type to be the same if they are \emph{pointwise bisimilar}---an analogue
  to the aforementioned principle of function extensionality. 
  With these conventions, we give, in the present work, a characterisation of some coinductive data types as \emph{terminal} objects in some category 
@@ -125,8 +125,11 @@
  Our terminal semantics result does not only characterise the codata types themselves, but also the bisimilarity relation as well as
  a canonical cosubstitution operation on them.
  
- In order to characterize that cosubstitution operation on a given codata type, and its properties with respect to the bisimilarity relation on that type, 
+ The fact that cosubstitution for coinductive data types is comonadic in a set-theoretic setting is established by \textcite{DBLP:conf/sfp/UustaluV01}.
+ In IMLTT however, in order to characterize that cosubstitution operation on a given codata type, and its algebraic properties,
  we develop the notion of \emph{relative comonad} and \emph{comodule over a relative comonad}.
+ The need to consider \emph{relative} comonads arises from the  need to check the algebraic properties of cosubstitution modulo \emph{bisimilarity} rather
+ than modulo identity (in the sense of ML identity types).
  
  We study both \emph{homogeneous}  and \emph{heterogeneous} codata types, namely the type of streams and the type of infinite triangular matrices.
 
@@ -355,11 +358,11 @@ are called \emph{strong monoidal}:
 \end{example}
 
 
-\section{Some coinductive data types in Martin-L\"of type theory}\label{sec:tri}
+\section{Some coinductive data types in intensional Martin-L\"of type theory}\label{sec:tri}
 
 In this section we present some coinductive type families which serve as examples in the later sections.
 We also define \emph{bisimilarity} for each codata type, a coinductively defined equivalence relation which is considered 
-as the appropriate notion of sameness on inhabitants of these types.
+as the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93, DBLP:journals/corr/abs-cs-0603119}.
 A coinductive type with bisimilarity hence forms a setoid as in \Cref{def:set_setoid}, 
 we thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
 
