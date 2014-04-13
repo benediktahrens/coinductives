@@ -2,7 +2,7 @@
 
 \pdfoutput=1
 
-\documentclass{llncs}
+\documentclass[envcountsame]{llncs}
 
 \usepackage[utf8]{inputenc}
 
@@ -254,6 +254,7 @@ Toulouse}
  Redecoration for both finite and infinite triangular matrices is used by \textcite{DBLP:journals/tcs/AbelMU05} to exemplify 
  the expressivity of the studied recursion schemes.
  
+\begin{Long}
  
  \subsubsection*{Organisation of the paper}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
@@ -267,10 +268,9 @@ Toulouse}
       based on the category-theoretic notions developped in the previous sections.
       We then prove that the codata types constitute the terminal coalgebras in the respective categories.
       Finally, we present an example of a map defined as a terminal map exploiting the universal property of streams.
-      
-\begin{Long}
-   In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
+  In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
   A table with the correspondence between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
+
 \end{Long}
 
 %  In this work we set off to characterize a specific \emph{co}inductive heterogeneous data type---the type family $\Tri$ of 
@@ -442,9 +442,13 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
 % TODO: image of stream
 
 
+\begin{Long}
+
 Streams are node-labelled trees where every node has exactly one subtree.
 We also consider a type of trees where every node has an arbitrary, but fixed, number of subtrees, 
 parametrized by a type $B$.
+
+
 
 \begin{example}[Node-labelled trees]\label{ex_trees}
  We denote by $\Tree_B(A)$ the codata type given by one destructor $\shead$ and a family of 
@@ -452,7 +456,7 @@ parametrized by a type $B$.
  We thus obtain $\stream$ by considering, for $B$, the singleton type.
 \end{example}
 
-
+\end{Long}
 
 A second example we consider is given by the codata type of
 \emph{infinite triangular matrices}. It is more complicated than the example of streams as one of its destructors is \emph{heterogeneous}:
@@ -711,11 +715,15 @@ Relative comonads over the identity functor are exactly comonads.
 %   We refrain from showing the proof of the comonadic laws here; it can be found in our \coq library.  
 \end{example}
 
+
+\begin{Long}
+
 \begin{example}[Trees]\label{ex_tree_comonad}
  Fix a type $B$. Analogously to \Cref{ex_stream_comonad}, the map $A \mapsto \Tree_B(A)$ of \Cref{ex_trees}
  is equipped with a structure of a comonad relative to $\eq: \Set\to\Setoid$.
 \end{example}
 
+\end{Long}
 
 \begin{example}[Infinite triangular matrices]\label{ex:tri_comonad}
   The codata type family $\Tri : \Set \to \Setoid$ of \Cref{ex_tri} is equipped with a structure of a comonad relative to the functor 
@@ -796,14 +804,14 @@ We define $\diagonal_A : \Tri A \to \stream A$ via the following clauses:
 
 
 
+\begin{Long}
+
 \begin{remark}
  The destructors $\stail$ (for $\stream$) and $\tail$ (for $\Tri$) are \emph{not} comonad morphisms.
  One can, however, equip the functor given by precomposing $\Tri$ with \enquote{product with $E$}, i.e.\
  $A \mapsto \Tri (E\times A)$, with a structure of relative comonad, induced by that
  on $\Tri$, cf.\ \Cref{product_comonad}.
 \end{remark}
-
-
 
 
 \begin{definition}\label{product_comonad}
@@ -823,6 +831,7 @@ We define $\diagonal_A : \Tri A \to \stream A$ via the following clauses:
   \end{align*}
 \end{definition}
 
+\end{Long}
 
 % Constructors of inductive types are characterised by \textcite{DBLP:journals/iandc/HirschowitzM10} via the notion of
 % \emph{module over a monad}. We  dualize their approach by introducing comodules over (relative) comonads.
@@ -995,13 +1004,14 @@ This defines a category, with the obvious composition and identity.
    $(\Tri, t^{\diagonal}) \to (\stream, \stail)$ has as underlying morphism of relative comonads the one defined in \Cref{ex_diag}.
 \end{example}
 
-
+\begin{Long}
+ 
 \begin{remark}
  Fix a type $B$. A result analogous to \Cref{thm_stream_terminal} holds for trees $\Tree_B$ of \Cref{ex_tree_comonad}. 
  We refrain from giving a precise statement of this result.
 \end{remark}
 
-
+\end{Long}
 
 
 \subsection{Coalgebras for $\Tri$}
