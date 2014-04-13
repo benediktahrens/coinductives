@@ -22,6 +22,7 @@
 
 \usepackage{comment}
 \excludecomment{Long}
+\includecomment{Short}
 
 
 \begin{document}
@@ -617,8 +618,10 @@ All the operations are suitably compatible with the bisimilarity relations, so t
   \end{align*}
 \end{example}
 
+\begin{Long}
 Note how heterogeneity of the destructor $\tail$ makes the definition of $\redec$ considerably more complicated than that of
 the analogous operation $\sredec$ on streams.
+\end{Long}
 
 \begin{comment}  
   The $\cobind$ operation---called \emph{redecoration} or $\redec$ in \parencite{DBLP:conf/types/MatthesP11}--- of type
@@ -673,9 +676,9 @@ The dual notion is that of a relative \emph{co}monad:
    \item a map $T:\C_0 \to \D_0$ on the objects of the categories involved;
    \item an operation $\counit : \forall A : \C_0, \D(TA,FA)$;
    \item an operation $\cobind: \forall A,B:\C_0, \D(TA,FB) \to \D(TA,TB)$
-  \end{packitem}
-  such that 
-  \begin{packitem}
+%   \end{packitem}
+   such that
+%   \begin{packitem}
    \item $\forall A,B:\C_0, \forall f:\D(TA,FB), \comp{\cobind(f)}{\counit_B} = f$;
    \item $\forall A : \C_0, \cobind(\counit_A) = \id_{TA}$;
    \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
@@ -686,11 +689,19 @@ Just like relative monads, relative comonads are functorial:
 \begin{definition}[Functoriality for relative comonads]\label{def:lift}
  Let $T$ be a  comonad relative to $F:\C\to\D$.
  For $f : \C(A,B)$ we define
-  \[ \lift^T(f) := \cobind(\comp{\counit_A}{Ff}) \enspace .  \]
+  $ \lift^T(f) := \cobind(\comp{\counit_A}{Ff})$. 
  The functor properties are easily checked.
 \end{definition}
 Relative comonads over the identity functor are exactly comonads.
 
+
+\begin{Short}
+ Under some conditions on the functor $F$, one can obtain comonads relative to $F$ from (absolute) comonads on the 
+ source category $\C$. Details are given in the long version of this article.
+\end{Short}
+
+
+\begin{Long}
 
 \begin{example}[Relative comonads from comonads]\label{ex_relcom_from_com}
   Let $F : \C \to \D$ be a fully faithful functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\C$.
@@ -703,15 +714,17 @@ Relative comonads over the identity functor are exactly comonads.
   The proof of the axioms of a relative comonad is immediate.
 \end{example}
 
-
+\end{Long}
 
 \begin{example}[Streams]\label{ex_stream_comonad}
   The codata type family $\stream : \Set \to \Setoid$ of \Cref{ex_stream} is equipped with a structure of a comonad relative to the functor 
-  $\eq : \Set \to \Setoid$ via the following operations:
-  \begin{itemize}
-   \item $\counit_A := \shead_A$
-   \item $\cobind_{A,B} := \sredec_{A,B}$ 
-  \end{itemize}
+  $\eq : \Set \to \Setoid$ with
+%   \begin{itemize}
+%    \item 
+   $\counit_A := \shead_A$ and
+%    \item 
+   $\cobind_{A,B} := \sredec_{A,B}$.
+%   \end{itemize}
 %   We refrain from showing the proof of the comonadic laws here; it can be found in our \coq library.  
 \end{example}
 
@@ -727,11 +740,13 @@ Relative comonads over the identity functor are exactly comonads.
 
 \begin{example}[Infinite triangular matrices]\label{ex:tri_comonad}
   The codata type family $\Tri : \Set \to \Setoid$ of \Cref{ex_tri} is equipped with a structure of a comonad relative to the functor 
-  $\eq : \Set \to \Setoid$ via the following operations:
-  \begin{itemize}
-   \item $\counit_A := \head_A$
-   \item $\cobind_{A,B} := \redec_{A,B}$ 
-  \end{itemize}
+  $\eq : \Set \to \Setoid$ with
+%   \begin{itemize}
+%    \item 
+   $\counit_A := \head_A$ and
+%    \item 
+   $\cobind_{A,B} := \redec_{A,B}$.
+%   \end{itemize}
 %  Again, the example is completely done in our \coq library.
 \end{example}
 
@@ -756,10 +771,10 @@ of cosubstitution resp.\ redecoration with the destructor $\stail$ resp.\ $\tail
 
 \begin{definition}[Morphism of relative comonads]\label{def:comonad_morphism}
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
-  is given by a family of morphisms \[\tau_A : \D(TA,SA)\] such that for any $A : \C_0$,
-     \[  \counit^T_A = \comp{\tau_A}{\counit^S_A} \]
+  is given by a family of morphisms $\tau_A : \D(TA,SA)$ such that for any $A : \C_0$,
+     $  \counit^T_A = \comp{\tau_A}{\counit^S_A} $
    and for any $A,B : \C_0$ and $f : \D(SA,FB)$,
-   \[  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)} \enspace .  \]
+   $  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)}$.
 \end{definition}
 
 Relative comonads over a fixed functor $F$ and their morphisms form a category $\RComonad(F)$ with the obvious identity and composition operations.
@@ -769,11 +784,14 @@ A morphism $\tau : T\to S$ of relative comonads over a functor $F:\C\to\D$ is  \
 with respect to the functorial action of \Cref{def:lift}.
 \end{remark}
 
+\begin{Long}
+
 \begin{example}\label{ex_relcom_from_com_morphism}
  Continuing \Cref{ex_relcom_from_com} with $M, M'$ two monads on $\C$, given a comonad morphism $\tau : M \to M'$, one obtains a morphism of 
  relative comonads $F\tau : FM\to FM'$ by setting $F\tau_A := F(\tau_A)$.
  Again, the axioms are easy to check.
 \end{example}
+
 
 \begin{remark}
  The definitions given in \Cref{ex_relcom_from_com} and \Cref{ex_relcom_from_com_morphism} yield a functor from 
@@ -784,18 +802,19 @@ with respect to the functorial action of \Cref{def:lift}.
  Writing down the details is lengthy but easy.
 \end{remark}
 
+\end{Long}
 
 
 \begin{example}\label{ex_diag}
-
-We define $\diagonal_A : \Tri A \to \stream A$ via the following clauses:
+A morphism of relative comonads $\diagonal : \Tri \to \stream$ is defined with carrier
+ $\diagonal_A : \Tri A \to \stream A$ via the following clauses:
 %     \begin{align}\shead~(\diagonal_A~t) &:= \head~t \quad\text{ and } \notag\\
 %                      \stail\bigl(\diagonal_A~t\bigr) &:= \diagonal_A (\cut (\tail~t)) \enspace . \label{eq:diag}
 %     \end{align}
-    \begin{align} \comp{\diagonal_A}{\shead} &:= \head \quad\text{ and } \notag\\
-                  \comp{\diagonal_A}{\stail} &:= \comp{\comp{\tail}{\cut}}{\diagonal_A} \enspace . \label{eq:diag}
+    \begin{align} \comp{\diagonal_A}{\shead} := \head \quad\text{ and } \quad %\notag\\
+                  \comp{\diagonal_A}{\stail} := \comp{\comp{\tail}{\cut}}{\diagonal_A} \enspace . \label{eq:diag}
     \end{align}
- This defines a morphism of relative comonads $\diagonal : \Tri \to \stream$.
+ 
 \end{example}
 
 % \begin{example}
@@ -846,11 +865,11 @@ In this section we develop the notion of \emph{comodule over a relative comonad}
  Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
  A \fat{comodule over T towards $\E$} consists of
    \begin{packitem}
-   \item a map $M:\C_0 \to \E_0$ on the objects of the categories involved;
-   \item an operation $\mcobind: \forall A,B:\C_0, \D(TA,FB) \to \E(MA,MB)$
-  \end{packitem}
-  such that 
-  \begin{packitem}
+   \item a map $M:\C_0 \to \E_0$ on the objects of the categories involved and
+   \item an operation $\mcobind: \forall A,B:\C_0, \D(TA,FB) \to \E(MA,MB)$ such that
+%   \end{packitem}
+%   such that 
+%   \begin{packitem}
    \item $\forall A : \C_0, \mcobind(\counit_A) = \id_{MA}$;
    \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
         \comp{\mcobind(f)}{\mcobind(g)} = \mcobind(\comp{\cobind(f)}{g})$ .
@@ -867,23 +886,28 @@ Every relative comonad comes with a canonical comodule over it, the \emph{tautol
   Given a comonad $T$ relative to $F:\C\to\D$, the assignment $A \mapsto TA$ yields a comodule over $T$ 
   with target category $\D$, the \textbf{tautological comodule} of $T$, also called $T$.
   The comodule operation is given by
-    \[  \mcobind^T(f) := \cobind^T(f) \enspace . \]
+    $  \mcobind^T(f) := \cobind^T(f)$. 
 \end{definition}
 
-Similarly to relative comonads, comodules over these are functorial:
 
+\begin{Short}
+ Similarly to relative comonads, comodules over these are functorial. We omit the details.
+\end{Short}
+
+
+\begin{Long}
+Similarly to relative comonads, comodules over these are functorial:
 \begin{definition}[Functoriality for comodules]\label{def:comodule_lift}
  Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
   \[ \mlift^M(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
 \end{definition}
-
+\end{Long}
 
 A more interesting example of comodule is given by the functor that maps a type $A$ to the setoid $\Tri(E\times A)$:
 \begin{example}\label{ex_tri_prod_comod}
    The map $A \mapsto \Tri(E\times A)$ is equipped with a comodule structure over the relative comonad $\Tri$ by
-   defining the comodule operation $\mcobind$ as
-     \[ \mcobind_{A,B} (f) := \redec (\extend~f) \enspace , \]
-  using the operations defined in \Cref{ex_tri}.
+   defining the comodule operation $\mcobind$ as (cf.\ \Cref{ex_tri})
+     \[ \mcobind_{A,B} (f) := \redec (\extend~f) \enspace . \]
 \end{example}
 
 
@@ -969,7 +993,7 @@ The terminal coalgebra result is hardly surprising; however, it is still interes
 %  While it is obvious how to define a general notion of signature and a category of coalgebras for any such signature,
 % we refrain from doing so for lack of further examples.
 
-For lack of further examples, we do not strive for a general notion of signature and coalgebras for arbitrary signatures.
+% For lack of further examples, we do not strive for a general notion of signature and coalgebras for arbitrary signatures.
 
  
 \subsection{Coalgebras for $\stream$}
@@ -1156,6 +1180,7 @@ the construction just described:
 \end{remark}
 
 
+\begin{Long}
 
 It directly follows from the definition that the cut operation of any comonad $T$ with cut 
 constitutes a comodule morphism $\cut : T(E\times \_) \to T$.
@@ -1169,6 +1194,7 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
       \end{xy}
    \]
 
+\end{Long}
 
 The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ destructor---%
 more precisely, of \Cref{eq:rest_redec}, via the notion of comodule morphism:
@@ -1192,10 +1218,12 @@ This example is a reformulation of \Cref{ex_tail_comodule}.
     \item a morphism $\tail$ of comodules over $T$ of type $T \to T(E\times \_)$
    \end{itemize}
    such that for any set $A$,
-    \[ \comp{\cut_A}{\tail_A} = \comp{\tail_{E\times A}}{\cut_{E\times A}} \enspace . \]
+    $ \comp{\cut_A}{\tail_A} = \comp{\tail_{E\times A}}{\cut_{E\times A}}$.
+    
+ \begin{Long}
    The last equation can be stated as an equality of comodule morphisms as
      \[ \comp{\cut}{\tail} = \comp{\tail(E\times \_)}{\cut(E\times\_)} \quad \bigl( = (\comp{\tail}{\cut})(E\times \_)\bigr)\enspace . \]
-
+\end{Long}
   
    
    A morphism between two such objects $(T,\tail^T)$ and $(S,\tail^S)$
@@ -1329,10 +1357,14 @@ Finally, we would like to integrate \emph{equations} into the notion of signatur
 will allow, e.g., considering branching trees modulo permutation of subtrees.
  
 
-\subsection*{Acknowledgments}
+\begin{Long}
+ 
+\subsubsection*{Acknowledgments}
  We thank Ralph Matthes and Paige North for many helpful discussions, and Andr\'e Hirschowitz for providing feedback on
  a draft of this paper.
 
+\end{Long}
+ 
 \printbibliography
 
 
