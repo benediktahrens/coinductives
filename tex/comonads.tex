@@ -708,7 +708,7 @@ Relative comonads over the identity functor are exactly comonads.
    \item $\counit_A := \shead_A$
    \item $\cobind_{A,B} := \sredec_{A,B}$ 
   \end{itemize}
-  We refrain from showing the proof of the comonadic laws here; it can be found in our \coq library.  
+%   We refrain from showing the proof of the comonadic laws here; it can be found in our \coq library.  
 \end{example}
 
 \begin{example}[Trees]\label{ex_tree_comonad}
@@ -718,14 +718,13 @@ Relative comonads over the identity functor are exactly comonads.
 
 
 \begin{example}[Infinite triangular matrices]\label{ex:tri_comonad}
- 
   The codata type family $\Tri : \Set \to \Setoid$ of \Cref{ex_tri} is equipped with a structure of a comonad relative to the functor 
   $\eq : \Set \to \Setoid$ via the following operations:
   \begin{itemize}
    \item $\counit_A := \head_A$
    \item $\cobind_{A,B} := \redec_{A,B}$ 
   \end{itemize}
- Again, the example is completely done in our \coq library.
+%  Again, the example is completely done in our \coq library.
 \end{example}
 
 \begin{remark}
@@ -832,7 +831,7 @@ We define $\diagonal_A : \Tri A \to \stream A$ via the following clauses:
 
 \section{Comodules over relative comonads}\label{sec:comodules}
 
-In this section we develop the notion of \emph{comodule over a relative comonad}, dualizing the notion of module over a relative monad  developed in earlier work \parencite{ahrens_relmonads}.
+In this section we develop the notion of \emph{comodule over a relative comonad}, dualizing the notion of module over a relative monad \parencite{ahrens_relmonads}.
 
 \begin{definition}[Comodule over relative comonad]\label{def:comodule}
  Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
@@ -1211,6 +1210,7 @@ This example is a reformulation of \Cref{ex_tail_comodule}.
    constitutes the terminal coalgebra of triangular matrices.
 \end{theorem}
 
+\begin{Long}
 \begin{proof}[Proof sketch]
    For a given coalgebra $(T,\tail^T)$, the (terminal) morphism $\bigcirc = \bigcirc_T:T\to\Tri$ is defined via the corecursive equations
     \begin{align}\head\bigl(\bigcirc~t\bigr) &:= \counit^T~t \quad\text{ and } \label{eq:terminal_top}\\
@@ -1226,6 +1226,7 @@ This example is a reformulation of \Cref{ex_tail_comodule}.
    The same argument is used to show, again by coinduction, that any two morphisms of coalgebras $\tau,\rho : (T,\tail^T) \to (\Tri,\tail)$
    are equal, thus concluding the proof.   
 \end{proof}
+\end{Long}
 
 This universal property of coinitiality characterizes not only the codata type of infinite triangular matrices, but also
 the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operation.
