@@ -248,11 +248,10 @@ Toulouse}
  \subsubsection*{Related work}
  The notion of \emph{module over a monad}, which we dualize and generalize in this work, is used by \textcite{DBLP:journals/iandc/HirschowitzM10}
  to give an initial semantics result for languages with variable binding. 
- Their work is based on work by \textcite{alt_reus},
- who show that the lambda calculus equipped with a simultaneous substitution constitutes a monad on the category of sets (or types).
- 
+ Their work is based on work of \textcite{alt_reus},
+ who show that the lambda calculus equipped with a simultaneous substitution constitutes a monad.
  We make use of the notion of \emph{relative comonad}, the dual to relative monads as introduced by \textcite{DBLP:conf/fossacs/AltenkirchCU10}.
- Traditional comonads for functional programming with homogeneous codata types are studied by \textcite{DBLP:conf/sfp/UustaluV01}.
+%  Traditional comonads for functional programming with homogeneous codata types are studied by \textcite{DBLP:conf/sfp/UustaluV01}.
  
  One of our main examples, the codata type of infinite triangular matrices, is studied by \textcite{DBLP:conf/types/MatthesP11}.
  Redecoration for both finite and infinite triangular matrices is used by \textcite{DBLP:journals/tcs/AbelMU05} to exemplify 
@@ -363,15 +362,14 @@ Both of the categories of \Cref{def:set_setoid} have binary products; they are \
 object is neutral with respect to the product. Functors preserving the monoidal structure up to isomorphism
 are called \emph{strong monoidal}:
 
-\begin{definition}[Strong monoidal functor]\label{def:monoidal_functor}
+\begin{definition}\label{def:monoidal_functor}
  A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if, for any two objects $A$ and $B$ of $\C$,
   the morphism
  \[ \phi^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
  is an isomorphism.
  (Note that for \emph{cartesian} monoidal categories, the family $\phi$ of morphisms automatically 
   is compatible with the unitators and associators of the source and target categories, 
-  since it is given by a universal property. 
-  We shall not need strong monoidal functors between arbitrary monoidal categories.)
+  since it is given by a universal property.)
 \end{definition}
 
 \begin{example}
@@ -763,14 +761,13 @@ Relative comonads over the identity functor are exactly comonads.
 \end{example}
 
 \begin{remark}
- \textcite{DBLP:conf/types/MatthesP11} define a notion of \emph{weak constructive comonad}, and show that the data type $\Tri$
-  is an instance of such a comonad. 
-  Such a weak constructive comonad, however, is \emph{precisely}
+  A \emph{weak constructive comonad} as defined by \textcite{DBLP:conf/types/MatthesP11} to characterise the codata type $\Tri$
+  and redecoration on it, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
 \end{remark}
 
 
-The notion of relative comonad captures many properties of $\stream$ resp.\ $\Tri$ and their respective operations, in particular the interplay
+The notion of relative comonad captures many properties of $\stream$ resp.\ $\Tri$ and cosubstitution on them, in particular the interplay
 of cosubstitution resp.\ redecoration with the destructors $\shead$ resp.\ $\head$ via the first two axioms.
 In order to  capture the interplay 
 of cosubstitution resp.\ redecoration with the destructor $\stail$ resp.\ $\tail$,  we develop the notion of \emph{comodule over a relative comonad}
@@ -778,9 +775,9 @@ of cosubstitution resp.\ redecoration with the destructor $\stail$ resp.\ $\tail
 
 
 
-
+\begin{Long}
 \emph{Morphisms of relative comonads} are natural transformations that are compatible with the comonadic structure:
-
+\end{Long}
 \begin{definition}[Morphism of relative comonads]\label{def:comonad_morphism}
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
   is given by a family of morphisms $\tau_A : \D(TA,SA)$ such that for any $A : \C_0$,
@@ -874,7 +871,7 @@ A morphism of relative comonads $\diagonal : \Tri \to \stream$ is defined with c
 In this section we develop the notion of \emph{comodule over a relative comonad}, dualizing the notion of module over a relative monad \parencite{ahrens_relmonads}.
 
 \begin{definition}[Comodule over relative comonad]\label{def:comodule}
- Let $T$ be a relative comonad over the functor $F:\C\to\D$, and let $\E$ be a category.
+ Let $T$ be a comonad relative to $F:\C\to\D$, and let $\E$ be a category.
  A \fat{comodule over T towards $\E$} consists of
    \begin{packitem}
    \item a map $M:\C_0 \to \E_0$ on the objects of the categories involved and
@@ -892,7 +889,7 @@ In this section we develop the notion of \emph{comodule over a relative comonad}
 
 
 
-Every relative comonad comes with a canonical comodule over it:
+Every relative comonad comes with a canonical comodule over itself:
 
 \begin{definition}[Tautological comodule]\label{def:tautological_comodule}
   Given a comonad $T$ relative to $F:\C\to\D$, the assignment $A \mapsto TA$ yields a comodule over $T$ 
@@ -1165,7 +1162,7 @@ Our prime example of relative comonad comes with a $\cut$ operation that is \emp
 
 
 
-Given a comodule $M$ over a relative comonad with cut, we define a comodule over the same comonad obtained by precomposition of $M$ with
+Given a comodule $M$ over a relative comonad $T$ with cut, we define a comodule over $T$ obtained by precomposition of $M$ with
 \enquote{product with a fixed object $E$}:
 
 
@@ -1195,7 +1192,7 @@ where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_c
 
 
 \begin{remark}[Pushforward commutes with product in context]\label{rem:prod_pullback_commute}
- Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pushforward_comodule} commute in the sense that
+ Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pushforward_comodule} commute:
  we have an isomorphism of comodules 
   $\tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_)$
  given pointwise by identity morphisms.
@@ -1378,7 +1375,7 @@ This will be investigated in future work.
 Furthermore, we will work on a suitable notion of \emph{signature} for the specification of general coinductive data types with
 a cosubstitution operation.
 
-Finally, we would like to integrate \emph{equations} into the notion of signature, equations which 
+Finally, we would like to integrate \emph{equations} into the notion of signature, which 
 will allow, e.g., considering branching trees modulo permutation of subtrees.
  
 
