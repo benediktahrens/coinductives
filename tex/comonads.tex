@@ -699,7 +699,7 @@ Just like relative monads, relative comonads are functorial:
 \begin{definition}[Functoriality for relative comonads]\label{def:lift}
  Let $T$ be a  comonad relative to $F:\C\to\D$.
  For $f : \C(A,B)$ we define
-  $ \lift^T(f) := \cobind(\comp{\counit_A}{Ff})$. 
+  $ \lift^T(f) := \cobind(\comp{\counit_A}{Ff}) : \D(TA,TB)$. 
  The functor properties are easily checked.
 \end{definition}
 Relative comonads over the identity functor are exactly comonads.
@@ -768,9 +768,9 @@ Relative comonads over the identity functor are exactly comonads.
 
 
 The notion of relative comonad captures many properties of $\stream$ resp.\ $\Tri$ and cosubstitution on them, in particular the interplay
-of cosubstitution resp.\ redecoration with the destructors $\shead$ resp.\ $\head$ via the first two axioms.
+of cosubstitution with the destructors $\shead$ resp.\ $\head$ via the first two axioms.
 In order to  capture the interplay 
-of cosubstitution resp.\ redecoration with the destructor $\stail$ resp.\ $\tail$,  we develop the notion of \emph{comodule over a relative comonad}
+of cosubstitution  with the destructor $\stail$ resp.\ $\tail$,  we develop the notion of \emph{comodule over a relative comonad}
  in \Cref{sec:comodules}. 
 
 
@@ -964,7 +964,7 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
   comodule over $T$ towards a category $\E$. We define the \fat{pushforward comodule} $\tau_*M$ to be the comodule over $S$ given by
   $  \tau_*M(A) := MA $
   and, for $f : \D(SA,FB)$,
-   \[ \mcobind^{\tau_*M}(f) := \mcobind^M(\comp{\tau_A}{f}) \enspace . \]
+   \[ \mcobind^{\tau_*M}(f) := \mcobind^M(\comp{\tau_A}{f}) : \E(MA,MB) \enspace . \]
    
   \noindent
   Pushforward is functorial: if $M$ and $N$ are comodules over $T$ with codomain category $\E$, and $\alpha : M\to N$ is 
