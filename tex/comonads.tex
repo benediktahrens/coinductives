@@ -148,8 +148,9 @@ Toulouse}
  The need to consider \emph{relative} comonads arises from the  need to check the algebraic properties of cosubstitution modulo \emph{bisimilarity} rather
  than modulo identity (in the sense of ML identity types).
  
+\begin{Long}
  We study both \emph{homogeneous}  and \emph{heterogeneous} codata types, namely the type of streams and the type of infinite triangular matrices.
-
+\end{Long}
  
 %  Dually to the aforementioned example of the lambda calculus, the codata types we consider are equipped with a canonical 
 %  \emph{co}substitution operation.
@@ -230,6 +231,7 @@ Toulouse}
 %  Afterwards, we define a notion of \emph{coalgebra} for the signature of that codata type, and show that the category of
 %  such coalgebras has a terminal object, built from the codata type.
 %  
+
  All our definitions, examples and lemmas have been implemented in the proof assistant \coq \parencite{coq84pl3}.
  The \coq source files and HTML documentation are available on the project web page \parencite{trimat_coq}.
  In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
@@ -475,7 +477,9 @@ This codata type is studied in detail by
  The codata type family $\Tri$ of infinite triangular matrices 
  is parametrized by a fixed type $E$ for entries not on the diagonal, 
  and indexed by another, \emph{variable}, type $A$ for entries on 
- the diagonal. Schematically, such a matrix looks like in \Cref{fig_tri}.
+ the diagonal. 
+\begin{Long}
+ Schematically, such a matrix looks like in \Cref{fig_tri}.
  \begin{figure}[bt]
  \centering
  \begin{tikzpicture}[scale = 0.6]
@@ -549,12 +553,19 @@ This codata type is studied in detail by
 \end{comment}
   \caption{An infinite triangular matrix over type $A$ and various operations}\label{fig_tri}
  \end{figure}
-%  
+\end{Long}
+  
  It is specified via two destructors $\head$ and $\tail$, whose types are given in the first line of \Cref{fig:tri_destructors}.
+\begin{Long}
  Given a matrix over type $A$, its $\tail$ can be considered as a trapezium as indicated by the green line in \Cref{fig_tri}, or alternatively, as
  a triangular matrix over type $E\times A$, by bundling the entries of the diagonal with those above as indicated by the orange frames in \Cref{fig_tri}.
  The latter representation is reflected in the type of the destructor $\tail$.
- 
+\end{Long}
+\begin{Short}
+ Given a matrix over type $A$, its $\tail$ can be considered as a trapezium or, alternatively, as a triangular matrix over type $E\times A$, 
+ by bundling the entries of the diagonal with those directly above the diagonal.
+\end{Short}
+
  Bisimilarity on the inhabitants of that type is defined via the destructors of the second line of \Cref{fig:tri_destructors}.    
  As with streams, we denote by $\Tri A$ not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
  underlying \emph{type}. 
@@ -881,7 +892,7 @@ In this section we develop the notion of \emph{comodule over a relative comonad}
 
 
 
-Every relative comonad comes with a canonical comodule over it, the \emph{tautological comodule}:
+Every relative comonad comes with a canonical comodule over it:
 
 \begin{definition}[Tautological comodule]\label{def:tautological_comodule}
   Given a comonad $T$ relative to $F:\C\to\D$, the assignment $A \mapsto TA$ yields a comodule over $T$ 
@@ -891,9 +902,6 @@ Every relative comonad comes with a canonical comodule over it, the \emph{tautol
 \end{definition}
 
 
-\begin{Short}
- Comodules are functorial. We omit the details.
-\end{Short}
 
 
 \begin{Long}
@@ -908,7 +916,7 @@ A more interesting example of comodule is given by the functor that maps a type 
 \begin{example}\label{ex_tri_prod_comod}
    The map $A \mapsto \Tri(E\times A)$ is equipped with a comodule structure over the relative comonad $\Tri$ by
    defining the comodule operation $\mcobind$ as (cf.\ \Cref{ex_tri})
-     \[ \mcobind_{A,B} (f) := \redec (\extend~f) \enspace . \]
+     $ \mcobind_{A,B} (f) := \redec (\extend~f)$.
 \end{example}
 
 
@@ -1000,9 +1008,10 @@ The terminal coalgebra result is hardly surprising; however, it is still interes
 
 % For lack of further examples, we do not strive for a general notion of signature and coalgebras for arbitrary signatures.
 
- 
-\subsection{Coalgebras for $\stream$}
 
+\begin{Long}
+\subsection{Coalgebras for $\stream$}
+\end{Long}
 
 We first consider the homogeneous codata type of streams.
 
@@ -1042,8 +1051,9 @@ This defines a category, with the obvious composition and identity.
 
 \end{Long}
 
-
+\begin{Long}
 \subsection{Coalgebras for $\Tri$}
+\end{Long}
 
 In analogy to the definition of coalgebras for the signature of streams (\Cref{cat_stream}), one would define
 a coalgebra for the signature of $\Tri$ as a pair $(T,r)$ of a comonad $T$ relative to $\eq : \Set \to \Setoid$ and 
@@ -1111,7 +1121,7 @@ Morphisms of comonads with cut are morphisms of comonads that are compatible wit
  Let $(T,\cut^T)$ and $(S,\cut^S)$ be two comonads relative to a functor $F$ with cut relative to $E$ as in \Cref{def:rel_comonad_with_cut}.
  A \emph{morphism of comonads with cut} is a comonad morphism $\tau$ between the underlying comonads as in \Cref{def:comonad_morphism} that 
  commutes suitably with the respective $\cut$ operations, i.e.\ for any $A : \C_0$,
-  \[ \comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A} \enspace . \]
+  $\comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A}$.
 \end{definition}
 
 
@@ -1163,8 +1173,8 @@ Given a comodule $M$ over a relative comonad with cut, we define a comodule over
  Suppose $F:\C\to\D$ is a strong monoidal functor, and $T$ is a comonad relative to $F$ with a $\cut$ operation 
  relative to $E:\C_0$ as in \Cref{def:rel_comonad_with_cut}.
  Given a comodule $M$ over $T$,  precomposition with \enquote{product with $E$}
- gives a comodule $M(E\times\_)$ over $T$,
-  \[    M(E\times \_) : A \mapsto M(E\times A) \enspace . \]
+ gives a comodule $M(E\times\_) : A \mapsto M(E\times A) $ over $T$.
+%   \[    M(E\times \_) : A \mapsto M(E\times A) \enspace . \]
  The comodule operation is deduced from that of $M$ by 
  \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \D(TA,FB)&\to \E\bigl(M(E\times A), M(E\times B)\bigr) \enspace ,\\ 
                                                       f &\mapsto \mcobind^M_{E\times A,E\times B}(\extend(f)) \enspace ,
