@@ -1,0 +1,41 @@
+
+\section{Rules for $\stream$}
+
+ \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+     
+   \AxiomC{$A : \Set$}
+    \UnaryInfC{$\stream A : \Set$}
+     \DisplayProof
+  \hspace{3ex}
+    \AxiomC{$t : \stream A$} %\doubleLine
+     \UnaryInfC{$\shead_A~t : A$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$t : \stream A$}%\doubleLine
+                                       \UnaryInfC{$\stail_A~t : \stream A$}
+                                       \DisplayProof%
+                                       
+                       
+          \vspace{1em}             
+                       
+               \AxiomC{$T : \Set$} \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} %\doubleLine
+               \TrinaryInfC{$\corec_A~hd~tl : T \to \stream A$}
+               \DisplayProof%
+                      
+          \vspace{1em}
+          
+               \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} \AxiomC{$t:T$}%\doubleLine
+               \TrinaryInfC{$\shead_A(\corec_A~hd~tl~t) = hd(t)$}
+               \DisplayProof
+               
+          \vspace{1em}     
+               
+               \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} \AxiomC{$t:T$}%\doubleLine
+               \TrinaryInfC{$\stail_A(\corec_A~hd~tl~t) = \corec_A~hd~tl~(tl~t)$}
+               \DisplayProof
+               
+               
+               
+               
+               
