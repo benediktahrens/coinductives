@@ -406,8 +406,8 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
   Let $A$ be a type. The type $\stream(A)$ (or shorter $\stream A$) of \emph{streams over $A$} is coinductively defined via the destructors 
   given in \Cref{fig:stream_destructors}.
   We use double lines in the inference rules to emphasize that we are considering a \fat{co}inductive type specified via \fat{destructors}.
-  Obviously, via Lambek's lemma, speaking in terms of destructors rather than constructors is merely a notational convention, 
-  since the destructors have a suitable inverse.
+%   Obviously, via Lambek's lemma, speaking in terms of destructors rather than constructors is merely a notational convention, 
+%   since the destructors have a suitable inverse.
   \begin{figure}[bt]
   \centering
 
@@ -474,8 +474,8 @@ parametrized by a type $B$.
 
 \end{Long}
 
-A second example we consider is given by the codata type of
-\emph{infinite triangular matrices}. It is more complicated than the example of streams as one of its destructors is \emph{heterogeneous}:
+Another codata type we consider models
+\emph{infinite triangular matrices}. It is more sophisticated than the type of streams as one of its destructors is \emph{heterogeneous}:
 
 
 
@@ -484,8 +484,6 @@ This codata type is studied in detail by
  \textcite{DBLP:conf/types/MatthesP11}.
  We give a brief summary, but urge the reader to consult the given reference 
  for an in-depth explanation. 
- 
- 
  The codata type family $\Tri$ of infinite triangular matrices 
  is parametrized by a fixed type $E$ for entries not on the diagonal, 
  and indexed by another, \emph{variable}, type $A$ for entries on 
@@ -613,14 +611,14 @@ This codata type is studied in detail by
 \end{figure}
 % 
 % 
-  A cosubstitution operation,\enquote{redecoration},
+  A cosubstitution operation, \enquote{redecoration},
     $ \redec_{A,B} : (\Tri A \to B) \to \Tri A \to \Tri B$
   is defined  through the clauses
 %     \begin{align}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
 %                      \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\extend~f\bigr)(\tail~t) \enspace . \label{eq:rest_redec}
 %     \end{align}
-    \begin{align} \comp{\redec~f}{\head} &:= f \quad\text{ and } \notag\\
-                  \comp{\redec~f}{\tail} &:= \comp{\tail}{\redec~(\extend~f)} \enspace . \label{eq:rest_redec}
+    \begin{align} \comp{\redec~f}{\head} := f \quad\text{ and } \quad
+                  \comp{\redec~f}{\tail} := \comp{\tail}{\redec~(\extend~f)} \enspace . \label{eq:rest_redec}
     \end{align}
 Here, the family of functions 
      $\extend_{A,B} : (\Tri A \to B) \to \Tri (E \times A) \to E\times B $
@@ -1377,13 +1375,14 @@ the formalization was used as a research tool, playing an essential r\^ole in th
 
 \end{comment}
 
-\section{Conclusions and future work}
+\section{Future work}
 
 
-
+\begin{Long}
 We have given a category-theoretic characterization, via a universal property, of streams and of infinite triangular matrices,
 each equipped with a cosubstitution operation,
 in intensional Martin-L\"of type theory.
+\end{Long}
 
 In a more extensional type theory, such as \emph{Homotopy Type Theory} \parencite{hottbook}, 
 one could hope to reflect bisimilarity into propositional equality by \emph{quotienting},
