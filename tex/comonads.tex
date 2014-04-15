@@ -89,7 +89,16 @@ Toulouse}
  some endofunctor on the category of sets. For instance, the set of natural numbers constitutes the carrier of the 
  initial algebra of the functor $X \mapsto 1 + X$.
  
- In a type-theoretic setting as given by Martin-L\"of type theory \parencite{martin_lof}, a similar characterisation is possible, but some attention has to be given to 
+ In a type-theoretic setting as given by Martin-L\"of type theory \parencite{martin_lof}, 
+ two approaches to the semantics of inductive types are possible: 
+ one approach consists in showing that inductive types exist in a \emph{model} of the type theory,
+ as is done by \textcite{DBLP:journals/apal/MoerdijkP00}.
+ Another approach is to prove that adding certain type-theoretic rules to the type theory
+ implies (or is equivalent to) the existence of a universal object \emph{within} type theory
+ (see, e.g., \parencite{DBLP:conf/lics/AwodeyGS12, DBLP:journals/tcs/Dybjer97}).
+ This latter approach is the one we take in the present work.
+ 
+ When a similar characterisation is possible, but some attention has to be given to 
  the precise formulation of the type theory in question:
  One important feature of that type theory is the \emph{identity type}, a type family that associates to any two 
  inhabitants $a,b : A$ of a same type $A$ the type of \enquote{identities} between them.
@@ -110,12 +119,12 @@ Toulouse}
 %  because function extensionality is needed to deduce that there is a \emph{judgmentally unique} algebra morphism from the initial algebra to any algebra.
 %  
  Intensional Martin-L\"of type theory \parencite{martin_lof} lacks this reflection principle for the sake of decidability of type checking. 
- It forms the base of two important computer proof assistants, \coq and \agda.
- \textsf{W}-types in \emph{Homotopy Type Theory} (HoTT), an extension of intensional Martin-L\"of type theory, are studied by \textcite{DBLP:conf/lics/AwodeyGS12}.
+ It forms the base of two computer proof assistants, \coq and \agda.
+ \textsf{W}-types have been studied \parencite{DBLP:conf/lics/AwodeyGS12} in \emph{Homotopy Type Theory} (HoTT) \parencite{hottbook}, an extension of intensional Martin-L\"of type theory. 
  In this extension, function extensionality is provable from the \emph{Univalence Axiom}. 
  For a suitable definition of \emph{uniqueness}---\emph{contractibility} in HoTT jargon---one can then prove unicity of the
  algebra morphisms out of the one whose carrier is given by the \textsf{W}-type.
- The work of \textcite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterisation of \textsf{W}-types as initial algebras carries over 
+ The mentioned work \parencite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterisation of \textsf{W}-types as initial algebras carries over 
  from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of unicity.
  
  
@@ -127,8 +136,8 @@ Toulouse}
  
 
 
- Dually to inductive sets, \fat{co}inductive sets such as streams are characterised as terminal objects, e.g., in the work of \textcite{jacobs1997tutorial}.
- Inhabitants of such sets are equal if and only if they are \emph{bisimilar} (see \textcite{DBLP:journals/mscs/TuriR98}):
+ Dually to inductive sets, \fat{co}inductive sets such as streams are characterised as terminal objects \parencite{jacobs1997tutorial}.
+ Inhabitants of such sets are equal if and only if they are \emph{bisimilar} \parencite{DBLP:journals/mscs/TuriR98}:
  Intuitively, two elements of a coinductive set are the same if they allow for the same observations.
  
  This correspondence between equality and bisimilarity fails in MLTT, when equality is considered to be given by the 
@@ -139,7 +148,9 @@ Toulouse}
  to the aforementioned principle of function extensionality. 
  With these conventions, we give, in the present work, a characterisation of some coinductive data types as \emph{terminal} objects in some category 
  defined in intensional Martin-L\"of type theory.
- Our terminal semantics result characterises not only the codata types themselves but also the bisimilarity relation and
+ More precisely, we prove, from rules for specific codata types added to the basic rules of Martin-L\"of type theory,
+ the existence of a terminal object in some category \emph{within IMLTT}.
+ Our terminal semantics characterises not only the codata types themselves but also the bisimilarity relation and
  a canonical cosubstitution operation on them.
  
  The fact that cosubstitution for coinductive data types is comonadic in a set-theoretic setting is established by \textcite{DBLP:conf/sfp/UustaluV01}.
@@ -232,7 +243,7 @@ Toulouse}
 %  such coalgebras has a terminal object, built from the codata type.
 %  
 
- All our definitions, examples and lemmas have been implemented in the proof assistant \coq \parencite{coq84pl3}.
+ All our results have been implemented in the proof assistant \coq \parencite{coq84pl3}.
  The \coq source files and HTML documentation are available on the project web page \parencite{trimat_coq}.
  In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
  
@@ -252,7 +263,7 @@ Toulouse}
  who show that the lambda calculus equipped with a simultaneous substitution constitutes a monad.
  We make use of the notion of \emph{relative comonad}, the dual to relative monads as introduced by \textcite{DBLP:conf/fossacs/AltenkirchCU10}.
 %  Traditional comonads for functional programming with homogeneous codata types are studied by \textcite{DBLP:conf/sfp/UustaluV01}.
- 
+%  
  One of our main examples, the codata type of infinite triangular matrices, is studied by \textcite{DBLP:conf/types/MatthesP11}.
  Redecoration for both finite and infinite triangular matrices is used by \textcite{DBLP:journals/tcs/AbelMU05} to exemplify 
  the expressivity of the studied recursion schemes.
@@ -338,9 +349,10 @@ For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ a
  If $A$ is a setoid, we also use $A$ to refer to its underlying type, and thus write $a:A$ for an element $a$ of the type underlying the setoid $A$. 
  We write $a\sim a'$ for related elements $a$ and $a'$ in $A$.
  We consider two parallel morphisms of setoids $f,g:A\to B$ equal if for any $a:A$ we have $fa \sim ga$.
-\end{definition}
+ 
+ We also write $f:A\to B$ for a morphism $f$ between objects $A$ and $B$ in some category, in particular in the category of types.
+ \end{definition}
 
-We also write $f:A\to B$ for a morphism $f$ between objects $A$ and $B$ in some category.
 
 
 \begin{definition}\label{def:eq}
@@ -388,6 +400,7 @@ we thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$.
 Maps into a coinductive data type are specified by the observations, i.e.\ the value of the destructors, on the output of those maps, as illustrated in \Cref{eq:tail_sredec}.
 
 The first example is the type of \emph{streams} of elements of a given base type $A$. 
+The precise set of rules specifying that type is given in \Cref{stream_rules}.
 In the presentation we use the notational convention of \Cref{def:set_setoid}, using the same name for a setoid and its underlying type.
 \begin{example}\label{ex_stream}
   Let $A$ be a type. The type $\stream(A)$ (or shorter $\stream A$) of \emph{streams over $A$} is coinductively defined via the destructors 
@@ -1030,6 +1043,9 @@ This defines a category, with the obvious composition and identity.
 \begin{theorem}\label{thm_stream_terminal}
  The pair $(\stream, \stail)$ is the terminal coalgebra in the category of coalgebras of \Cref{cat_stream}.
 \end{theorem}
+
+More precisely, the aforementioned theorem says that the rules given in \Cref{stream_rules} allow to prove that
+the category of coalgebras defined in \Cref{cat_stream} has a terminal object.
 
 \begin{example}
   We equip the relative comonad $\Tri$ with the structure of a coalgebra for $\stream$ by defining a 
