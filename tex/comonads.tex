@@ -420,10 +420,11 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
                                        \AxiomC{$t : \stream A$}\doubleLine
                                        \UnaryInfC{$\stail_A~t : \stream A$}
                                        \DisplayProof%
-
-
-\vspace{2ex}
-
+% 
+% 
+% \vspace{2ex}
+% 
+\hspace{3ex}
  \centering
                                             \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
@@ -593,10 +594,11 @@ This codata type is studied in detail by
                                        \AxiomC{$t : \Tri~A$}\doubleLine
                                        \UnaryInfC{$\tail_A~t : \Tri(E\times A)$}
                                        \DisplayProof%
-
-
-\vspace{2ex}
-
+% 
+% 
+% \vspace{2ex}
+% 
+ \hspace{3ex}
                                             \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
     \AxiomC{$t \sim t'$}\doubleLine
@@ -948,7 +950,7 @@ the comodule operation:
 
 \begin{example}\label{ex:tail_comodule}
  The destructor $\tail$ of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
-  from the tautological comodule  $\Tri$ to the comodule $\Tri(E\times \_)$ (cf.\ \Cref{ex_tri_prod_comod}).
+  from the tautological comodule  $\Tri$ to the comodule $\Tri(E\times \_)$. % (cf.\ \Cref{ex_tri_prod_comod}).
 \end{example}
 
 Composition and identity of comodule morphisms happens pointwise. We thus obtain a category $\RComod(T,\E)$
