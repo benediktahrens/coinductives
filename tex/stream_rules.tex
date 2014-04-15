@@ -1,5 +1,7 @@
 
-\section{Rules for $\stream$}\label{stream_rules}
+\section{Rules for $\stream$ and bisimilarity}\label{stream_rules}
+
+\subsection{$\stream$}
 
 \begin{description}
 
@@ -56,6 +58,68 @@
 
  \end{description}              
                
+\subsection{Bisimilarity}              
+ 
+% TODO: prop or type 
+ 
+\begin{description}
+
+ \item[Formation]\hfill \\
+ 
+ \begin{center}
+ \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+
+         
+   \AxiomC{$A : \Set$} \AxiomC{$s, t : \stream A$}
+    \BinaryInfC{$\bisim_A~s~t : \Set$}
+     \DisplayProof
+ \end{center} 
+ 
+ \item[Destruction]\hfill \\
+ 
+
+%   \hspace{3ex}
+
+\begin{center}
+    \AxiomC{$s, t : \stream A$} \AxiomC{$p: \bisim_A~s~t$} %\doubleLine
+     \BinaryInfC{$\shead_A~s = \shead_A~t$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$s,t : \stream A$} \AxiomC{$p: \bisim_A~s~t$}%\doubleLine
+                                       \BinaryInfC{$\bisim (\stail_A~s) (\stail_A~t)$}
+                                       \DisplayProof%
+\end{center}
+  \item[Creation]\hfill \\                                     
+                       
+%           \vspace{1em}             
+            
+\begin{center}
+               \AxiomC{$R : \stream A \to \stream A \to \Set$} \noLine\UnaryInfC{$\forall~s,t : \stream A, R~s~t \to \shead~s = \shead~t$} \noLine
+                \UnaryInfC{$\forall~s,t : \stream A, R~s~t \to \bisim (\stail~s) (\stail~t)$}  %\doubleLine
+               \UnaryInfC{$\forall~s,t : \stream A, R~s~t \to \bisim~s~t$}
+               \DisplayProof%
+\end{center}
+                      
+%           \vspace{1em}
+
+\begin{comment}
+  \item[Computation]\hfill \\
+
+\begin{center}          
+               \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} \AxiomC{$t:T$}%\doubleLine
+               \TrinaryInfC{$\shead_A(\corec_A~hd~tl~t) = hd(t)$}
+               \DisplayProof
+               
+               \vspace{1em}
+               
+               \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} \AxiomC{$t:T$}%\doubleLine
+               \TrinaryInfC{$\stail_A(\corec_A~hd~tl~t) = \corec_A~hd~tl~(tl~t)$}
+               \DisplayProof
+\end{center}
+\end{comment}
+
+ \end{description}              
                
                
                
