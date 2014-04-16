@@ -53,6 +53,7 @@ Toulouse}
  In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}, and  
  use these notions to give a terminal coalgebra semantics for coinductive type families in 
  intensional Martin-L\"of type theory.
+ Our results are mechanized in the proof assistant \coq.
  
     
 %   Our main examples come from families of coinductive data types in intensional Martin-L\"of type theory.
@@ -73,7 +74,7 @@ Toulouse}
 %   compatible comonadic $\cobind$ operation---as the \emph{terminal object}
 %   in some category.
   
-  Our results are fully mechanized in the proof assistant \coq.
+  
   \end{abstract}
 
 
@@ -90,7 +91,7 @@ Toulouse}
  initial algebra of the functor $X \mapsto 1 + X$.
  
  In a type-theoretic setting as given by Martin-L\"of type theory \parencite{martin_lof}, 
- two approaches to the semantics of inductive types are possible: 
+ two approaches to the semantics of inductive types have been studied: 
  one approach consists in showing that inductive types exist in a \emph{model} of the type theory,
  as is done by \textcite{DBLP:journals/apal/MoerdijkP00}.
  Another approach is to prove that adding certain type-theoretic rules to the type theory
@@ -140,7 +141,7 @@ Toulouse}
  Inhabitants of such sets are equal if and only if they are \emph{bisimilar} \parencite{DBLP:journals/mscs/TuriR98}:
  Intuitively, two elements of a coinductive set are the same if they allow for the same observations.
  
- This correspondence between equality and bisimilarity fails in MLTT, when equality is considered to be given by the 
+ This correspondence between equality and bisimilarity fails in IMLTT, when equality is considered to be given by the 
  Martin-L\"of identity type. Instead, one defines \emph{bisimilarity} as a coinductive predicate 
  on a coinductive type, and one reasons about the terms of a coinductive type modulo the bisimilarity predicate
  rather than identity \parencite{DBLP:conf/types/Coquand93}.
@@ -256,7 +257,7 @@ Toulouse}
  they can be deduced from the type of the later arguments.
  We assume basic knowledge of category theory; any instances used are defined in the following.
   
- \subsubsection*{Related work}
+ \subsubsection*{More related work}
  The notion of \emph{module over a monad}, which we dualize and generalize in this work, is used by \textcite{DBLP:journals/iandc/HirschowitzM10}
  to give an initial semantics result for languages with variable binding. 
  Their work is based on work of \textcite{alt_reus},
@@ -395,7 +396,7 @@ as the appropriate notion of sameness on inhabitants of these types \parencite{D
 A coinductive type with bisimilarity hence forms a setoid as in \Cref{def:set_setoid}, 
 we thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
 
-Maps into a coinductive data type are specified by the observations, i.e.\ the value of the destructors, on the output of those maps, as illustrated in \Cref{eq:tail_sredec}.
+Maps into a coinductive data type are specified by the observations, i.e.\ the value of the destructors, on the output of those maps, as illustrated in \Cref{eq:tail_sredec}. The precise rule for specifying maps into a coinductive type is given in the appendix.
 
 The first example is the type of \emph{streams} of elements of a given base type $A$. 
 The precise set of rules specifying that type is given in \Cref{stream_rules}.
@@ -403,7 +404,7 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
 \begin{example}\label{ex_stream}
   Let $A$ be a type. The type $\stream(A)$ (or shorter $\stream A$) of \emph{streams over $A$} is coinductively defined via the destructors 
   given in \Cref{fig:stream_destructors}.
-  We use double lines in the inference rules to emphasize that we are considering a \fat{co}inductive type specified via \fat{destructors}.
+%   We use double lines in the inference rules to emphasize that we are considering a \fat{co}inductive type specified via \fat{destructors}.
 %   Obviously, via Lambek's lemma, speaking in terms of destructors rather than constructors is merely a notational convention, 
 %   since the destructors have a suitable inverse.
   \begin{figure}[bt]
@@ -411,11 +412,11 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
 
      \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t : \stream A$}\doubleLine
+    \AxiomC{$t : \stream A$} %\doubleLine
      \UnaryInfC{$\shead_A~t : A$}
       \DisplayProof
                         \hspace{3ex}
-                                       \AxiomC{$t : \stream A$}\doubleLine
+                                       \AxiomC{$t : \stream A$}%\doubleLine
                                        \UnaryInfC{$\stail_A~t : \stream A$}
                                        \DisplayProof%
 % 
@@ -426,15 +427,15 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
  \centering
                                             \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t \sim t'$}\doubleLine
+    \AxiomC{$t \sim t'$} %\doubleLine
      \UnaryInfC{$\shead~t = \shead~t'$}
       \DisplayProof
                         \hspace{3ex}
-                                       \AxiomC{$t \sim t'$}\doubleLine
+                                       \AxiomC{$t \sim t'$} %\doubleLine
                                        \UnaryInfC{$ \stail~t \sim \stail~t'$}
                                        \DisplayProof   
 %   \end{center}
-  \caption{Destructors and bisimilarity for the coinductive type of streams} \label{fig:stream_destructors}
+  \caption{Destructors and bisimilarity for the coinductive family $\stream$} \label{fig:stream_destructors}
 \end{figure}
    
    
@@ -563,18 +564,20 @@ This codata type is studied in detail by
  \end{figure}
 \end{Long}
   
- It is specified via two destructors $\head$ and $\tail$, whose types are given in the first line of \Cref{fig:tri_destructors}.
+ It is specified via two destructors $\head$ and $\tail$, whose types are given in \Cref{fig:tri_destructors}.
 \begin{Long}
- Given a matrix over type $A$, its $\tail$ can be considered as a trapezium as indicated by the green line in \Cref{fig_tri}, or alternatively, as
+ Given a matrix over type $A$, its $\tail$---obtained by removing the first element on the diagonal, i.e.\ the $\head$ element---can 
+ be considered as a trapezium as indicated by the green line in \Cref{fig_tri}, or alternatively, as
  a triangular matrix over type $E\times A$, by bundling the entries of the diagonal with those above as indicated by the orange frames in \Cref{fig_tri}.
  The latter representation is reflected in the type of the destructor $\tail$.
 \end{Long}
 \begin{Short}
- Given a matrix over type $A$, its $\tail$ can be considered as a trapezium or, alternatively, as a triangular matrix over type $E\times A$, 
+ Given a matrix over type $A$, its $\tail$---obtained by removing the first element on the diagonal, i.e.\ the $\head$ element---can 
+ be considered as a trapezium or, alternatively, as a triangular matrix over type $E\times A$, 
  by bundling the entries of the diagonal with those directly above the diagonal.
 \end{Short}
 
- Bisimilarity on the inhabitants of that type is defined via the destructors of the second line of \Cref{fig:tri_destructors}.    
+ Bisimilarity on the inhabitants of that type is defined via the destructors of \Cref{fig:tri_destructors}.    
  As with streams, we denote by $\Tri A$ not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
  underlying \emph{type}. 
 
@@ -583,11 +586,11 @@ This codata type is studied in detail by
 
      \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t : \Tri~A$}\doubleLine
+    \AxiomC{$t : \Tri~A$} %\doubleLine
      \UnaryInfC{$\head_A~t : A$}
       \DisplayProof
                         \hspace{3ex}
-                                       \AxiomC{$t : \Tri~A$}\doubleLine
+                                       \AxiomC{$t : \Tri~A$}%\doubleLine
                                        \UnaryInfC{$\tail_A~t : \Tri(E\times A)$}
                                        \DisplayProof%
 % 
@@ -597,11 +600,11 @@ This codata type is studied in detail by
  \hspace{3ex}
                                             \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t \sim t'$}\doubleLine
+    \AxiomC{$t \sim t'$}%\doubleLine
      \UnaryInfC{$\head~t = \head~t'$}
       \DisplayProof
                         \hspace{3ex}
-                                       \AxiomC{$t \sim t'$}\doubleLine
+                                       \AxiomC{$t \sim t'$}%\doubleLine
                                        \UnaryInfC{$ \tail~t \sim \tail~t'$}
                                        \DisplayProof   
 
@@ -706,6 +709,24 @@ The dual notion is that of a relative \emph{co}monad:
         \comp{\cobind(f)}{\cobind(g)} = \cobind(\comp{\cobind(f)}{g})$.
   \end{packitem} 
 \end{definition}
+
+\begin{Short}
+\begin{remark}\label{def:lift}
+ \begin{itemize}
+  \item Relative comonads over the identity functor are exactly comonads.
+  \item Just like relative monads, relative comonads are functorial.
+  \item Under some conditions on the functor $F$, one can obtain comonads relative to $F$ from (absolute) comonads on the 
+ source category $\C$.
+  \item A \emph{weak constructive comonad} as defined by \textcite{DBLP:conf/types/MatthesP11}  is \emph{precisely}
+  a comonad relative to the functor $\eq : \Set\to\Setoid$.
+ \end{itemize}
+\noindent
+Details are given in the long version of this article \parencite{trimat_coq}.
+\end{remark}
+\end{Short}
+
+
+\begin{Long}
 Just like relative monads, relative comonads are functorial:
 \begin{definition}[Functoriality for relative comonads]\label{def:lift}
  Let $T$ be a  comonad relative to $F:\C\to\D$.
@@ -713,13 +734,12 @@ Just like relative monads, relative comonads are functorial:
   $ \lift^T(f) := \cobind(\comp{\counit_A}{Ff}) : \D(TA,TB)$. 
  The functor properties are easily checked.
 \end{definition}
+\end{Long}
+
+\begin{Long}
 Relative comonads over the identity functor are exactly comonads.
+\end{Long}
 
-
-\begin{Short}
- Under some conditions on the functor $F$, one can obtain comonads relative to $F$ from (absolute) comonads on the 
- source category $\C$. Details are given in the long version of this article.
-\end{Short}
 
 
 \begin{Long}
@@ -771,12 +791,13 @@ Relative comonads over the identity functor are exactly comonads.
 %  Again, the example is completely done in our \coq library.
 \end{example}
 
+\begin{Long}
 \begin{remark}
   A \emph{weak constructive comonad} as defined by \textcite{DBLP:conf/types/MatthesP11} to characterise the codata type $\Tri$
   and redecoration on it, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
 \end{remark}
-
+\end{Long}
 
 The notion of relative comonad captures many properties of $\stream$ resp.\ $\Tri$ and cosubstitution on them, in particular the interplay
 of cosubstitution with the destructors $\shead$ resp.\ $\head$ via the first two axioms.
@@ -831,9 +852,9 @@ A morphism of relative comonads $\diagonal : \Tri \to \stream$ is defined with c
 %     \begin{align}\shead~(\diagonal_A~t) &:= \head~t \quad\text{ and } \notag\\
 %                      \stail\bigl(\diagonal_A~t\bigr) &:= \diagonal_A (\cut (\tail~t)) \enspace . \label{eq:diag}
 %     \end{align}
-    \begin{align} \comp{\diagonal_A}{\shead} := \head \quad\text{ and } \quad %\notag\\
-                  \comp{\diagonal_A}{\stail} := \comp{\comp{\tail}{\cut}}{\diagonal_A} \enspace . \label{eq:diag}
-    \end{align}
+    \begin{align*} \comp{\diagonal_A}{\shead} := \head \quad\text{ and } \quad %\notag\\
+                  \comp{\diagonal_A}{\stail} := \comp{\comp{\tail}{\cut}}{\diagonal_A} \enspace . %\label{eq:diag}
+    \end{align*}
  
 \end{example}
 
