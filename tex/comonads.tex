@@ -697,7 +697,8 @@ of such comonads and their morphisms.
 whose underlying functor is not necessarily an endofunctor.
 The dual notion is that of a relative \emph{co}monad:
 
-\begin{definition}[Relative comonad]\label{def:rel_comonad}
+\begin{definition}%[Relative comonad]
+ \label{def:rel_comonad}
   Let $F:\C\to\D$ be a functor. A \fat{relative comonad $T$ over $F$} is given by
   \begin{packitem}
    \item a map $T:\C_0 \to \D_0$ on the objects of the categories involved;
@@ -731,7 +732,8 @@ Details are given in the long version of this article \parencite{trimat_coq}.
 
 \begin{Long}
 Just like relative monads, relative comonads are functorial:
-\begin{definition}[Functoriality for relative comonads]\label{def:lift}
+\begin{definition}%[Functoriality for relative comonads]
+\label{def:lift}
  Let $T$ be a  comonad relative to $F:\C\to\D$.
  For $f : \C(A,B)$ we define
   $ \lift^T(f) := \cobind(\comp{\counit_A}{Ff}) : \D(TA,TB)$. 
@@ -813,7 +815,8 @@ of cosubstitution  with the destructor $\stail$ resp.\ $\tail$,  we develop the 
 \begin{Long}
 \emph{Morphisms of relative comonads} are natural transformations that are compatible with the comonadic structure:
 \end{Long}
-\begin{definition}[Morphism of relative comonads]\label{def:comonad_morphism}
+\begin{definition}%[Morphism of relative comonads]
+\label{def:comonad_morphism}
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
   is given by a family of morphisms $\tau_A : \D(TA,SA)$ such that for any $A : \C_0$,
      $  \counit^T_A = \comp{\tau_A}{\counit^S_A} $
@@ -840,9 +843,9 @@ with respect to the functorial action of \Cref{def:lift}.
 \begin{remark}
  The definitions given in \Cref{ex_relcom_from_com} and \Cref{ex_relcom_from_com_morphism} yield a functor from 
  comonads on $\C$ to comonads relative to $F:\C\to\D$. 
- If $F$ is a right adjoint with left adjoint $L$, $L\dashv F$, then postcomposing a comonad $T$ relative to $F$ with $L$
+ If $F$ is a right adjoint with left adjoint $L$, $L\dashv F$, then postcomposing a comonad $T$ relative to $F$ with the functor $L$
  yields a monad on $\C$. Again, this map extends to morphisms.
- The two functors thus defined are again adjoints.
+ The two functors between categories of monads thus defined are again adjoints.
  Writing down the details is lengthy but easy.
 \end{remark}
 
@@ -937,7 +940,8 @@ Every relative comonad comes with a canonical comodule over itself:
 
 \begin{Long}
 Similarly to relative comonads, comodules over these are functorial:
-\begin{definition}[Functoriality for comodules]\label{def:comodule_lift}
+\begin{definition}%[Functoriality for comodules]
+\label{def:comodule_lift}
  Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
   \[ \mlift^M(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
 \end{definition}
@@ -1136,7 +1140,8 @@ to considering comonads that come with a specified $\cut$ operation for some fix
 
 
 
-\begin{definition}[Relative comonad with cut]\label{def:rel_comonad_with_cut}
+\begin{definition}%[Relative comonad with cut]
+\label{def:rel_comonad_with_cut}
  Let $\C$ and $\D$ be categories with binary products and $F:\C\to\D$ a strong monoidal functor. Let $E:\C_0$ be a fixed object of $\C$.
  We define a \fat{comonad relative to $F$ with cut relative to $E$} to be a comonad $T$ relative to $F$ together with a $\cut$ operation 
     \[ \cut : \forall~A:\C_0, T(E\times A) \to TA \qquad \text{such that}\]
@@ -1155,9 +1160,10 @@ to considering comonads that come with a specified $\cut$ operation for some fix
 
 Morphisms of comonads with cut are morphisms of comonads that are compatible with the respective $\cut$ operations:
 
-\begin{definition}[Morphism of comonads with cut]\label{def:morphism_comonad_cut}
+\begin{definition}%[Morphism of comonads with cut]
+\label{def:morphism_comonad_cut}
  Let $(T,\cut^T)$ and $(S,\cut^S)$ be two comonads relative to a functor $F$ with cut relative to $E$ as in \Cref{def:rel_comonad_with_cut}.
- A \emph{morphism of comonads with cut} is a comonad morphism $\tau$ between the underlying comonads as in \Cref{def:comonad_morphism} that 
+ A \fat{morphism of comonads with cut} is a comonad morphism $\tau$ between the underlying comonads as in \Cref{def:comonad_morphism} that 
  commutes suitably with the respective $\cut$ operations, i.e.\ for any $A : \C_0$,
   $\comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A}$.
 \end{definition}
@@ -1207,10 +1213,11 @@ Given a comodule $M$ over a relative comonad $T$ with cut, we define a comodule 
 \enquote{product with a fixed object $E$}:
 
 
-\begin{definition}[Precomposition with product]\label{def:product_in_context}
+\begin{definition}%[Precomposition with product]
+\label{def:product_in_context}
  Suppose $F:\C\to\D$ is a strong monoidal functor, and $T$ is a comonad relative to $F$ with a $\cut$ operation 
  relative to $E:\C_0$ as in \Cref{def:rel_comonad_with_cut}.
- Given a comodule $M$ over $T$,  precomposition with \enquote{product with $E$}
+ Given a comodule $M$ over $T$,  \fat{precomposition with} \enquote{\fat{product} with $E$}
  gives a comodule $M(E\times\_) : A \mapsto M(E\times A) $ over $T$.
 %   \[    M(E\times \_) : A \mapsto M(E\times A) \enspace . \]
  The comodule operation is deduced from that of $M$ by 
@@ -1260,11 +1267,11 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
 
 \begin{Long}
 The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ destructor---%
-more precisely, of \Cref{eq:rest_redec}, via the notion of comodule morphism:
+more precisely, of its behaviour with respect to cosubstitution as in \Cref{eq:rest_redec}---via the notion of comodule morphism:
 
 % TODO: we already have that example
 \begin{example}\label{ex:tail_comodule_alternative}
-This example is a reformulation of \Cref{ex_tail_comodule}.
+This example is a reformulation of \Cref{ex:tail_comodule}.
  Consider the comonad $\Tri$, equipped with the $\cut$ operation of \Cref{def:cut_for_tri}.
  The destructor $\tail$ of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
   from the tautological comodule  $\Tri$ to $\Tri(E\times \_)$.
@@ -1273,9 +1280,10 @@ This example is a reformulation of \Cref{ex_tail_comodule}.
 \end{Long}
 
 
-\begin{definition}[Coalgebras of infinite triangular matrices]\label{def:cat_tri}
+\begin{definition}%[Coalgebras of infinite triangular matrices]
+\label{def:cat_tri}
    Let $E:\Set_0$ be a set.
-   Let $\mathcal{T} = \mathcal{T}_E$ be the category where an object consists of
+   Let $\mathcal{T} = \mathcal{T}_E$ be the category of \fat{coalgebras for infinite triangular matrices} where an object consists of
    \begin{itemize}
     \item a comonad $T$ over the functor $\eq:\Set\to\Setoid$ with $\cut$ relative to $E$ and
     \item a morphism $\tail$ of comodules over $T$ of type $T \to T(E\times \_)$
@@ -1312,7 +1320,7 @@ This example is a reformulation of \Cref{ex_tail_comodule}.
 \end{theorem}
 
 \begin{Long}
-\begin{proof}[Proof sketch]
+\begin{proof}[sketch]
    For a given coalgebra $(T,\tail^T)$, the (terminal) morphism $\bigcirc = \bigcirc_T:T\to\Tri$ is defined via the corecursive equations
     \begin{align}\head\bigl(\bigcirc~t\bigr) &:= \counit^T~t \quad\text{ and } \label{eq:terminal_top}\\
                      \tail\bigl(\bigcirc~t\bigr) &:= \bigcirc(\tail^T~t) \enspace . \label{eq:terminal_rest}
@@ -1363,13 +1371,14 @@ More precisely, the family of morphisms is given by a family of \emph{setoids}, 
 type of morphisms denotes the equality relation on these morphisms. This approach was first used by
 \textcite{aczel_galois} in the proof assistant \texttt{LEGO}, and also by \textcite{concat}  in their library
 of category theory in \coq.
-Alternatively, we could have chosen to consider morphisms modulo propositional equality.
+At the moment, it seems to be the standard way of formalizing categories in intensional Martin-L\"of type theory.
+Alternatively, we could have chosen to consider morphisms modulo propositional equality, which is feasible in a more extensional type theory \parencite{rezk_completion}.
 
 Indeed, the morphisms we consider---morphisms of comonads and comodules---are given by structures
 bundling a lot of data and properties; in order to consider two such morphisms as equal, we usually only compare one field of the 
 corresponding records. Furthermore, this field usually consists of a (dependent) function.
 It would be rather cumbersome to reduce equality of two such records to extensional equality of one of their fields, 
-necessitating the use of the axioms of propositional and functional extensionality.
+necessitating the use of the axioms of propositional and functional extensionality in IMLTT.
 Using setoids for morphisms instead seems to come with less overhead and to be conceptually cleaner.
 
 
@@ -1390,13 +1399,17 @@ We can thus conveniently use the same arrow symbol to denote the type of morphis
 
 \subsection{Formal vs.\ informal definitions}
 
-The only noteworthy discrepancy between formal and informal definition arises in the definition of the codata type of infinite 
-triangular matrices:
-in \coq, coinductive types are specified through \fat{constructors} rather than \fat{destructors}.
-However, one can easily define inverse functions and work in terms of destructors afterwards.
-Work on the declaration of coinductive types via destructors is done in \agda, cf.\ \parencite{DBLP:conf/popl/AbelPTS13}.
-Other than that, the informal definitions correspond closely to the formalized ones---which might also stem from the fact that 
-the formalization was used as a research tool, playing an essential r\^ole in the development of this work.
+We provide two versions of the terminal semantics results:
+In one version, we use the \lstinline!CoInductive! vernacular command of \coq to define the codata types we consider.
+In this way, coinductive types are specified through \fat{constructors} rather than \fat{destructors}. The definition
+of functions into coinductive data types thus specified hence looks very different to function definitions 
+in terms of destructors.
+In the other version we provide the axioms of \Cref{stream_rules} and \Cref{tri_rules} as written there,
+yielding a close correspondence between the informal definitions given in this article and the formal definitions given in 
+the \coq files.
+
+This might be the right moment to point to work on a device allowing the declaration of coinductive types via destructors in \agda, 
+see \parencite{DBLP:conf/popl/AbelPTS13}.
 
 \end{Long}
 
