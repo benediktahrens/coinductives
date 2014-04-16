@@ -1043,11 +1043,9 @@ The terminal coalgebra result is hardly surprising; however, it is still interes
 
 \begin{Long}
 \subsection{Coalgebras for $\stream$}
-\end{Long}
 
 We first consider the homogeneous codata type of streams.
-
-
+\end{Long}
 
 \begin{definition}%[Coalgebras for $\stream$]
  \label{cat_stream}
@@ -1092,7 +1090,7 @@ the category of coalgebras defined in \Cref{cat_stream} has a terminal object.
 \subsection{Coalgebras for $\Tri$}
 \end{Long}
 
-In analogy to the definition of coalgebras for the signature of streams (\Cref{cat_stream}), one would define
+In analogy to the definition of coalgebras for the signature of streams, one would define
 a coalgebra for the signature of $\Tri$ as a pair $(T,r)$ of a comonad $T$ relative to $\eq : \Set \to \Setoid$ and 
 a morphism of comodules $r : T \to T(E\times \_)$. 
 It turns out that in this way, one is not capable of obtaining the right auxiliary function $\cut$ for what is
@@ -1408,7 +1406,8 @@ each equipped with a cosubstitution operation,
 in intensional Martin-L\"of type theory.
 
 The development of a notion of \enquote{signature} at least for \emph{homogeneous} codata types, and 
-a terminal semantics for them, in line with the definitions we give for $\stream$, is trivial.
+a terminal semantics for them, in line with the definitions we give for $\stream$, is easy
+and will be treated in a forthcoming work.
 
 In a more extensional type theory, such as \emph{Homotopy Type Theory} \parencite{hottbook}, 
 one can reflect bisimilarity into propositional equality by \emph{quotienting},
@@ -1439,7 +1438,7 @@ will allow, e.g., considering branching trees modulo permutation of subtrees.
 \input{tri_rules}
 
 % TODO: complete table formal
-% \input{formal_table}
+ \input{formal_table}
 
 % \input{comparison_inductive}
 
