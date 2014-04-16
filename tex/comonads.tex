@@ -847,15 +847,12 @@ with respect to the functorial action of \Cref{def:lift}.
 
 
 \begin{example}\label{ex_diag}
-A morphism of relative comonads $\diagonal : \Tri \to \stream$ is defined with carrier
- $\diagonal_A : \Tri A \to \stream A$ via the following clauses:
-%     \begin{align}\shead~(\diagonal_A~t) &:= \head~t \quad\text{ and } \notag\\
-%                      \stail\bigl(\diagonal_A~t\bigr) &:= \diagonal_A (\cut (\tail~t)) \enspace . \label{eq:diag}
-%     \end{align}
-    \begin{align*} \comp{\diagonal_A}{\shead} := \head \quad\text{ and } \quad %\notag\\
+We define a morphism of relative comonads $\diagonal : \Tri \to \stream$:
+Given a matrix $t : \Tri A$, its diagonal is a stream $\diagonal_A~t : \stream A$.
+The map $\diagonal_A$ is defined via the clauses
+\begin{align*} \comp{\diagonal_A}{\shead} := \head \quad\text{ and } \quad %\notag\\
                   \comp{\diagonal_A}{\stail} := \comp{\comp{\tail}{\cut}}{\diagonal_A} \enspace . %\label{eq:diag}
     \end{align*}
- 
 \end{example}
 
 % \begin{example}
@@ -902,7 +899,8 @@ A morphism of relative comonads $\diagonal : \Tri \to \stream$ is defined with c
 
 In this section we develop the notion of \emph{comodule over a relative comonad}, dualizing the notion of module over a relative monad \parencite{ahrens_relmonads}.
 
-\begin{definition}[Comodule over relative comonad]\label{def:comodule}
+\begin{definition}%[Comodule over relative comonad]
+\label{def:comodule}
  Let $T$ be a comonad relative to $F:\C\to\D$, and let $\E$ be a category.
  A \fat{comodule over T towards $\E$} consists of
    \begin{packitem}
@@ -923,8 +921,9 @@ In this section we develop the notion of \emph{comodule over a relative comonad}
 
 Every relative comonad comes with a canonical comodule over itself:
 
-\begin{definition}[Tautological comodule]\label{def:tautological_comodule}
-  Given a comonad $T$ relative to $F:\C\to\D$, the assignment $A \mapsto TA$ yields a comodule over $T$ 
+\begin{definition}%[Tautological comodule]
+\label{def:tautological_comodule}
+  Given a comonad $T$ relative to $F:\C\to\D$, the map $A \mapsto TA$ yields a comodule over $T$ 
   with target category $\D$, the \textbf{tautological comodule} of $T$, also called $T$.
   The comodule operation is given by
     $  \mcobind^T(f) := \cobind^T(f)$. 
@@ -941,7 +940,8 @@ Similarly to relative comonads, comodules over these are functorial:
 \end{definition}
 \end{Long}
 
-A more interesting example of comodule is given by the functor that maps a type $A$ to the setoid $\Tri(E\times A)$:
+A more interesting example of comodule is given by the functor that maps a type $A$ to the setoid $\Tri(E\times A)$
+for some fixed type $E$:
 \begin{example}\label{ex_tri_prod_comod}
    The map $A \mapsto \Tri(E\times A)$ is equipped with a comodule structure over the relative comonad $\Tri$ by
    defining the comodule operation $\mcobind$ as (cf.\ \Cref{ex_tri})
@@ -953,7 +953,8 @@ A more interesting example of comodule is given by the functor that maps a type 
 A \emph{morphism of comodules} is given by a family of morphisms that is compatible with 
 the comodule operation:
 
-\begin{definition}[Morphism of comodules]\label{def:morphism_of_comodules}
+\begin{definition}%[Morphism of comodules]
+\label{def:morphism_of_comodules}
  Let $M, N : \C \to \E$ be comodules over the comonad $T$ relative to  $F:\C \to \D$.
  A \fat{morphism of comodules} from $M$ to $N$ is given by a family of morphisms 
    $ \alpha_A:\E(MA,NA) $
@@ -991,7 +992,8 @@ over a fixed comonad $T$, towards a fixed target category $\E$.
 Given a morphism of comonads, we can \enquote{transport} comodules over the source comonad to comodules over the target comonad:
 
 
-\begin{definition}[Pushforward comodule]\label{def:pushforward_comodule} % checked
+\begin{definition}%[Pushforward comodule]
+\label{def:pushforward_comodule} 
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
   comodule over $T$ towards a category $\E$. We define the \fat{pushforward comodule} $\tau_*M$ to be the comodule over $S$ given by
   $  \tau_*M(A) := MA $
@@ -1012,7 +1014,8 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
 As presented in \Cref{def:tautological_comodule}, every relative comonad induces a comodule over itself.
 This extends to morphisms of relative comonads:
 
-\begin{definition}[Morphism of comonads induces morphism of comodules]\label{def:induced} % checked
+\begin{definition}%[Morphism of comonads induces morphism of comodules]
+\label{def:induced} % checked
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$.
   Then $\tau$ gives rise to a morphism of comodules over $S$ from the pushforward of the tautological comodule
   of $T$ along $\tau$ to the tautological comodule over $S$,
