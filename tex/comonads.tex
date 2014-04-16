@@ -21,8 +21,8 @@
 \usepackage{ownstylesansthm}
 
 \usepackage{comment}
-\excludecomment{Long}
-\includecomment{Short}
+% \excludecomment{Long}\includecomment{Short}
+\includecomment{Long}\excludecomment{Short}
 
 \pagestyle{plain}
 
@@ -163,9 +163,6 @@ Toulouse}
  The need to consider \emph{relative} comonads arises from the  need to check the algebraic properties of cosubstitution modulo \emph{bisimilarity} rather
  than modulo identity (in the sense of ML identity types).
  
-\begin{Long}
- We study both \emph{homogeneous}  and \emph{heterogeneous} codata types, namely the type of streams and the type of infinite triangular matrices.
-\end{Long}
  
 %  Dually to the aforementioned example of the lambda calculus, the codata types we consider are equipped with a canonical 
 %  \emph{co}substitution operation.
@@ -278,6 +275,7 @@ Toulouse}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
   In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those
            codata types.
+   Their specifying rules are given in \Cref{stream_rules} and \Cref{tri_rules}, respectively.
   In \Cref{sec:comonads} we present \emph{relative comonads} and define the category of comonads relative to a fixed functor.
     We give some examples of such structures, using the codata types presented in \Cref{sec:tri}.
   In \Cref{sec:comodules} we define comodules over relative comonads and give some constructions of comodules.
@@ -389,11 +387,11 @@ are called \emph{strong monoidal}:
 
 \section{Codata types in intensional Martin-L\"of type theory}\label{sec:tri}
 
-We consider some coinductive type families in Intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}, 
+We consider two particular coinductive type families in Intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}, 
 a type-theoretic foundational system.
 For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ and $b$.
 
-In this section, we present these types, and we also define \emph{bisimilarity} for each codata type, 
+In this section, we present these types, and we also define \emph{bisimilarity} for each codata type.
 Bisimilarity is a coinductively defined equivalence relation on types which is considered 
 as the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93, DBLP:journals/corr/abs-cs-0603119}.
 A coinductive type with bisimilarity hence forms a setoid as in \Cref{def:set_setoid}, 
@@ -1336,7 +1334,7 @@ the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operatio
 %  TODO: define codiag via universality
 % \end{example}
 
-\begin{comment}
+\begin{Long}
 \section{Formalization in \coq}\label{sec:formal}
 
 All our definitions and theorems are mechanized in the proof assistant \coq \parencite{coq84pl3}.
@@ -1398,7 +1396,7 @@ Work on the declaration of coinductive types via destructors is done in \agda, c
 Other than that, the informal definitions correspond closely to the formalized ones---which might also stem from the fact that 
 the formalization was used as a research tool, playing an essential r\^ole in the development of this work.
 
-\end{comment}
+\end{Long}
 
 \section{Future work}
 
