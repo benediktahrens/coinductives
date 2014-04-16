@@ -1,0 +1,70 @@
+
+\section{Rules for $\Tri$ and bisimilarity}\label{tri_rules}
+
+\subsection{$\Tri$}
+
+\begin{description}
+
+ \item[Formation]\hfill \\
+ 
+ \begin{center}
+ \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+
+         
+   \AxiomC{$A : \Set$}
+    \UnaryInfC{$\Tri A : \Set$}
+     \DisplayProof
+ \end{center} 
+ 
+ \item[Destruction]\hfill \\
+ 
+
+%   \hspace{3ex}
+
+\begin{center}
+    \AxiomC{$t : \Tri A$} %\doubleLine
+     \UnaryInfC{$\head_A~t : A$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$t : \Tri A$}%\doubleLine
+                                       \UnaryInfC{$\tail_A~t : \Tri(E\times A)$}
+                                       \DisplayProof%
+\end{center}
+  \item[Creation]\hfill \\                                     
+                       
+%           \vspace{1em}             
+            
+\begin{center}
+               \AxiomC{$T : \Set\to\Set$} 
+               \AxiomC{$hd : \forall A,TA \to A$} \AxiomC{$tl : \forall A, T A \to T(E\times A)$} %\doubleLine
+               \TrinaryInfC{$\corec_T~hd~tl :  \forall A, T A \to \Tri A$}
+               \DisplayProof%
+\end{center}
+                      
+%           \vspace{1em}
+  \item[Computation]\hfill \\
+
+\begin{center}          
+               \AxiomC{$hd : \forall A,TA \to A$} \AxiomC{$tl : \forall A, T A \to T(E\times A)$} %\doubleLine
+               \AxiomC{$t : TA$}
+               \TrinaryInfC{$\head_T(\corec_A~hd~tl~t) = hd(t)$}
+               \DisplayProof
+               
+               \vspace{1em}
+               
+               \AxiomC{$hd : \forall A,TA \to A$} \AxiomC{$tl : \forall A, T A \to T(E\times A)$} %\doubleLine
+               \AxiomC{$t : TA$}
+               \TrinaryInfC{$\tail_T(\corec_A~hd~tl~t) = \corec_A~hd~tl~(tl~t)$}
+               \DisplayProof
+\end{center}
+
+ \end{description}              
+               
+\subsection{Bisimilarity}              
+ 
+Analogous to bisimilarity for $\stream$ as in \Cref{stream_bisim}.
+
+               
+               
+               

@@ -98,9 +98,9 @@ Toulouse}
  (see, e.g., \parencite{DBLP:conf/lics/AwodeyGS12, DBLP:journals/tcs/Dybjer97}).
  This latter approach is the one we take in the present work.
  
- When a similar characterisation is possible, but some attention has to be given to 
+ Some attention has to be given to 
  the precise formulation of the type theory in question:
- One important feature of that type theory is the \emph{identity type}, a type family that associates to any two 
+ One important feature of Martin-L\"of type theory is the \emph{identity type}, a type family that associates to any two 
  inhabitants $a,b : A$ of a same type $A$ the type of \enquote{identities} between them.
  One distinguishes \emph{extensional} and \emph{intensional} type theory, according to whether terms of identity type
  are reflected into the internal, judgmental equality of the type theory or not. This difference must be considered when defining the notion of
@@ -325,13 +325,7 @@ Toulouse}
 
 \section{Preliminaries}\label{sec:preliminaries}
 
-
-
-
-The motivating examples we refer to throughout the paper are given by coinductive type families in Intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}, 
-a type-theoretic foundational system.
-For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ and $b$.
-
+In this section we present some particular categories and functors used later on, and fix some notation.
 
 
 % \begin{definition}[Category]
@@ -364,8 +358,8 @@ For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ a
 
 \begin{remark}[Notation for product]
   We denote the category-theoretic binary product of objects $A$ and $B$ of a category $\C$ by $A\times B$.
-  We write $\pr_1(A,B) : \C(A\times B, A)$ and $\pr_2(A,B) :\C(A\times B, B)$ for the projections, and we omit the 
-  argument $(A,B)$ when it is clear from the context.
+  We write $\pr_1(A,B) : \C(A\times B, A)$ and $\pr_2(A,B) :\C(A\times B, B)$ for the projections, occasionally omitting the 
+  argument $(A,B)$.
   Given $f : \C(A, B)$ and $g : \C(A,C)$, we write $\langle f,g\rangle : \C(A,B\times C)$ for the induced map into the product such that
   $\comp{\langle f,g\rangle}{\pr_1} = f$ and $\comp{\langle f,g\rangle}{\pr_2} = g$.
 \end{remark}
@@ -391,8 +385,12 @@ are called \emph{strong monoidal}:
 
 \section{Codata types in intensional Martin-L\"of type theory}\label{sec:tri}
 
-In this section we present some coinductive type families which serve as examples in the later sections.
-We also define \emph{bisimilarity} for each codata type, a coinductively defined equivalence relation which is considered 
+We consider some coinductive type families in Intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}, 
+a type-theoretic foundational system.
+For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ and $b$.
+
+In this section, we present these types, and we also define \emph{bisimilarity} for each codata type, 
+Bisimilarity is a coinductively defined equivalence relation on types which is considered 
 as the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93, DBLP:journals/corr/abs-cs-0603119}.
 A coinductive type with bisimilarity hence forms a setoid as in \Cref{def:set_setoid}, 
 we thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
@@ -444,7 +442,7 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
 %    \begin{align} \shead\bigl(\sredec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
 %                      \stail\bigl(\sredec~f~t\bigr) &:= \sredec~f~(\stail~t) \enspace . \label{eq:tail_sredec}
 %     \end{align}
-   \begin{align} \comp{\sredec~f}{\shead} := f \quad\text{ and } \notag\\
+   \begin{align} \comp{\sredec~f}{\shead} := f \quad\text{ and } \quad
                   \comp{\sredec~f}{\stail} := \comp{\stail}{\sredec~f} \enspace . \label{eq:tail_sredec}
     \end{align}
   We call such an operation \enquote{cosubstitution} since its type is dual to, e.g., the simultaneous substitution operation 
@@ -1027,8 +1025,10 @@ We first consider the homogeneous codata type of streams.
 
 
 
-\begin{definition}[Coalgebras for $\stream$]\label{cat_stream}
-  Inspired by \Cref{ex_stream_comonad} and \Cref{ex_tail_comodule}, we define a \fat{coalgebra for $\stream$} as a pair $(S,t)$ 
+\begin{definition}%[Coalgebras for $\stream$]
+ \label{cat_stream}
+  %Inspired by \Cref{ex_stream_comonad} and \Cref{ex_tail_comodule}, 
+  A \fat{coalgebra for $\stream$} is given by a pair $(S,t)$ 
   consisting of
   \begin{itemize}
    \item a comonad $S$ relative to $\eq : \Set \to \Setoid$ and
@@ -1378,14 +1378,16 @@ the formalization was used as a research tool, playing an essential r\^ole in th
 \section{Future work}
 
 
-\begin{Long}
+
 We have given a category-theoretic characterization, via a universal property, of streams and of infinite triangular matrices,
 each equipped with a cosubstitution operation,
 in intensional Martin-L\"of type theory.
-\end{Long}
+
+The development of a notion of \enquote{signature} at least for \emph{homogeneous} codata types, and 
+a terminal semantics for them, in line with the definitions we give for $\stream$, is trivial.
 
 In a more extensional type theory, such as \emph{Homotopy Type Theory} \parencite{hottbook}, 
-one could hope to reflect bisimilarity into propositional equality by \emph{quotienting},
+one can reflect bisimilarity into propositional equality by \emph{quotienting},
 thus eliminating the need to work with setoids.
 This will be investigated in future work.
 
@@ -1410,6 +1412,7 @@ will allow, e.g., considering branching trees modulo permutation of subtrees.
 \appendix
 
 \input{stream_rules}
+\input{tri_rules}
 
 % TODO: complete table formal
 % \input{formal_table}
