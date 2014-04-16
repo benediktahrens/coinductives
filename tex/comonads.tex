@@ -394,16 +394,18 @@ For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ a
 In this section, we present these types, and we also define \emph{bisimilarity} for each codata type.
 Bisimilarity is a coinductively defined equivalence relation on types which is considered 
 as the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93, DBLP:journals/corr/abs-cs-0603119}.
-A coinductive type with bisimilarity hence forms a setoid as in \Cref{def:set_setoid}, 
-we thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
+A coinductive type with bisimilarity hence forms a setoid as in \Cref{def:set_setoid}.
+We thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
 
-Maps into a coinductive data type are specified by the observations, i.e.\ the value of the destructors, on the output of those maps, as illustrated in \Cref{eq:tail_sredec}. The precise rule for specifying maps into a coinductive type is given in the appendix.
+Maps into a coinductive data type are specified by the observations, i.e.\ the value of the destructors, on the output of those maps.  
+The precise rule for specifying maps into the considered coinductive type is given in the respective appendix.
+In this text, we use a more convenient syntax, as illustrated in \Cref{eq:tail_sredec}.
 
 The first example is the type of \emph{streams} of elements of a given base type $A$. 
 The precise set of rules specifying that type is given in \Cref{stream_rules}.
 In the presentation we use the notational convention of \Cref{def:set_setoid}, using the same name for a setoid and its underlying type.
 \begin{example}\label{ex_stream}
-  Let $A$ be a type. The type $\stream(A)$ (or shorter $\stream A$) of \emph{streams over $A$} is coinductively defined via the destructors 
+  Let $A$ be a type. The type $\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors 
   given in \Cref{fig:stream_destructors}.
 %   We use double lines in the inference rules to emphasize that we are considering a \fat{co}inductive type specified via \fat{destructors}.
 %   Obviously, via Lambek's lemma, speaking in terms of destructors rather than constructors is merely a notational convention, 
