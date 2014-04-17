@@ -66,5 +66,45 @@
 Analogous to bisimilarity for $\stream$ as in \Cref{stream_bisim}.
 
                
-               
+               \begin{description}
+
+ \item[Formation]\hfill \\
+ 
+ \begin{center}
+ \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+
+         
+   \AxiomC{$A : \Set$} \AxiomC{$s, t : \Tri A$}
+    \BinaryInfC{$\bisim_A~s~t : \Set$}
+     \DisplayProof
+ \end{center} 
+ 
+ \item[Destruction]\hfill \\
+ 
+
+%   \hspace{3ex}
+
+\begin{center}
+    \AxiomC{$s, t : \Tri A$} \AxiomC{$p: \bisim_A~s~t$} %\doubleLine
+     \BinaryInfC{$\head_A~s = \head_A~t$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$s,t : \Tri A$} \AxiomC{$p: \bisim_A~s~t$}%\doubleLine
+                                       \BinaryInfC{$\bisim_A (\tail_A~s) (\tail_A~t)$}
+                                       \DisplayProof%
+\end{center}
+  \item[Creation]\hfill \\                                     
+                       
+%           \vspace{1em}             
+            
+\begin{center}
+               \AxiomC{$R : \forall A, \Tri A \to \Tri A \to \Set$} \noLine
+               \UnaryInfC{$\forall A,\forall~s,t : \Tri A, R~s~t \to \head~s = \head~t$} \noLine
+                \UnaryInfC{$\forall  A,\forall~s,t : \Tri A, R~s~t \to \bisim (\stail~s) (\stail~t)$}  %\doubleLine
+               \UnaryInfC{$\forall A,\forall~s,t : \Tri A, R~s~t \to \bisim~s~t$}
+               \DisplayProof%
+\end{center}
+
+\end{description}
                
