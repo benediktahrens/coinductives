@@ -1,0 +1,12 @@
+
+Coinitial semantics for redecoration of triangular matrices
+
+Benedikt Ahrens and Régis Spadotti
+
+The heterogeneous codata type of infinite triangular matrices and, in particular, the redecoration operation on it, were studied by Matthes and Picard. In their work, redecoration is characterized as the cobind operation of what the authors call a "weak constructive comonad".
+In this work, we identify weak constructive comonads as an instance of the more general notion of relative comonad.
+Afterwards, building upon the work by Matthes and Picard, we give a category-theoretic characterization of infinite triangular matrices---equipped with the canonical bisimilarity relation and a compatible comonadic cobind operation---as the terminal object in some category.
+Our results are fully mechanized in the proof assistant Coq.
+The full article and the accompanying Coq code can be found on
+http://benediktahrens.github.io/coinductives/ .
+

@@ -1,0 +1,270 @@
+\documentclass[a4paper,UKenglish]{lipics}
+
+\usepackage{microtype}
+%\usepackage[colorinlistoftodos]{todonotes} 
+\usepackage{tikz}
+\usepackage{latexsym}     
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{stmaryrd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{textcomp}
+\usepackage{bussproofs}
+
+\usetikzlibrary{shapes}                
+\usetikzlibrary{fit}
+
+\bibliographystyle{plain}
+\pagestyle{headings}
+
+\title{Verification of redecoration for infinite triangular matrices
+  using coinduction}
+
+\author[1]{Ralph Matthes}
+\author[2]{Celia Picard}
+\affil[1]{Institut de Recherche en Informatique de Toulouse (IRIT), \\
+  C.N.R.S. and University of Toulouse, France}
+\affil[2]{Institut de Recherche en Informatique de Toulouse (IRIT), \\
+  University of Toulouse, France}
+\authorrunning{ R. Matthes and C. Picard} 
+
+\subjclass{F.3.1 Specifying and Verifying and Reasoning about Programs}
+\keywords{nested datatype, coinduction, theorem proving, Coq}\Copyright[nc-nd]{R. Matthes and C. Picard}
+%%% before exchange with the editor, we had
+%%\Copyright[nc-nd] % or nd only!
+%%\phantom{}
+\serieslogo{}%
+\volumeinfo%
+     {Nils Anders Danielsson, Bengt Nordstr\"om}%
+     {2}%
+     {18th International Workshop on Types for Proofs and Programs (TYPES~2011)}%
+     {19}%
+     {1}%
+     {57}%
+   \EventShortName{TYPES 2011}
+   \DOI{10.4230/LIPIcs.TYPES.2011.57}%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for references
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\rdef}[1]{Definition~\ref{def:#1}}
+\newcommand{\rlem}[1]{Lemma~\ref{lemma:#1}}
+\newcommand{\rthm}[1]{Theorem~\ref{thm:#1}}
+\newcommand{\rprop}[1]{Property~\ref{prop:#1}}
+\newcommand{\rsect}[1]{Section~\ref{sect:#1}}
+\newcommand{\rfig}[1]{Figure~\ref{fig:#1}}
+\newcommand{\rcor}[1]{Corollary~\ref{cor:#1}}
+\newcommand{\rex}[1]{Example~\ref{ex:#1}}
+\newcommand{\rrem}[1]{Remark~\ref{rem:#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for Tri
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Tri}{\ensuremath{\mathit{Tri}}}
+\newcommand{\Trap}{\ensuremath{\mathit{Trap}}}
+\newcommand{\pair}[2]{\langle #1,#2\rangle}
+\newcommand{\redec}{\ensuremath{\mathit{redec}}}
+\newcommand{\Rel}{\ensuremath{\mathit{Rel}}}
+\newcommand{\Prop}{\ensuremath{\mathit{Prop}}}
+\newcommand{\bisim}{\ensuremath{\mathbin{\simeq}}} %~~
+\newcommand{\topT}{\ensuremath{\mathit{top}}}
+\newcommand{\rest}{\ensuremath{\mathit{rest}}}
+\newcommand{\cut}{\ensuremath{\mathit{cut}}}
+\newcommand{\escut}{\ensuremath{\mathit{es\_cut}}}
+\newcommand{\frow}{\ensuremath{\mathit{frow}}}
+\newcommand{\constr}{\ensuremath{\mathit{constr}}}
+\newcommand{\lift}{\ensuremath{\mathit{lift}}}
+\newcommand{\fst}{\ensuremath{\mathit{fst}}}
+
+\newcommand{\counit}{\ensuremath{\mathit{counit}}}
+\newcommand{\cobind}{\ensuremath{\mathit{cobind}}}
+\newcommand{\simcom}{\ensuremath{\mathbin{\approxeq}}} %~~^
+\newcommand{\addes}{\ensuremath{\mathit{addes}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for Stream
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Str}{\ensuremath{\mathit{Str}}}
+\newcommand{\EqSt}{\ensuremath{\mathbin{\equiv}}} %==
+\newcommand{\map}{\ensuremath{\mathit{map}}}
+\newcommand{\tl}{\ensuremath{\mathit{tl}}}
+\newcommand{\hd}{\ensuremath{\mathit{hd}}}
+\newcommand{\zipWith}{\ensuremath{\mathit{zipWith}}}
+\newcommand{\es}{\ensuremath{\mathit{es}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for TriS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\vari}{'}%{^\star}
+\newcommand{\TriS}{\ensuremath{\mathit{Tri\vari}}}
+\newcommand{\tSR}{\ensuremath{\mathit{toStreamRep}}}
+\newcommand{\fSR}{\ensuremath{\mathit{fromStreamRep}}}
+\newcommand{\bisimS}{\ensuremath{\mathbin{\cong}}} %==^
+\newcommand{\topS}{\ensuremath{\mathit{top\vari}}}
+\newcommand{\frowS}{\ensuremath{\mathit{frow\vari}}}
+\newcommand{\restS}{\ensuremath{\mathit{rest\vari}}}
+\newcommand{\redecS}{\ensuremath{\mathit{redec\vari}}}
+\newcommand{\liftS}{\ensuremath{\mathit{lift\vari}}}
+\newcommand{\redecSG}{\ensuremath{\mathit{redec\vari_{gen}}}}
+\newcommand{\redecSS}{\ensuremath{\mathit{redec\vari_{alt}}}}
+\newcommand{\addesS}{\ensuremath{\mathit{addes\vari}}}
+\newcommand{\tls}{\ensuremath{\mathit{tails}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for Tri_fin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Trif}{\ensuremath{\mathit{Tri_{fin}}}}
+\newcommand{\constrf}{\ensuremath{\mathit{constr_{fin}}}}
+\newcommand{\sgf}{\ensuremath{\mathit{sg_{fin}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for TriL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\cutL}{\ensuremath{\mathit{cutL}}}
+\newcommand{\tLR}{\ensuremath{\mathit{toListRep}}}
+\newcommand{\fLR}{\ensuremath{\mathit{fromListRep}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\maketitle
+
+
+
+\begin{abstract}
+Finite triangular matrices with a dedicated type for the diagonal
+elements can be profitably represented by a nested data type, i.\,e., a
+heterogeneous family of inductive data types, while infinite
+triangular matrices form an example of a nested coinductive type,
+which is a heterogeneous family of coinductive data types. 
+
+Redecoration for infinite triangular matrices is taken up from
+previous work involving the first author, and it is shown that
+redecoration forms a comonad with respect to bisimilarity.
+
+The main result, however, is a validation of the original algorithm
+against a model based on infinite streams of infinite streams. The
+two formulations are even provably equivalent, and the second is
+identified as a special instance of the generic cobind operation
+resulting from the well-known comultiplication operation on streams
+that creates the stream of successive tails of a given stream. Thus,
+perhaps surprisingly, the verification of redecoration is easier for
+infinite triangular matrices than for their finite counterpart.
+
+All the results have been obtained and are fully formalized in the
+current version of the Coq 
+theorem proving environment where these coinductive datatypes are
+fully supported since the version 8.1, released in 2007. 
+Nonetheless, instead of displaying the Coq development, we have chosen
+to write the paper in standard mathematical and type-theoretic 
+language. Thus, it should be accessible without any specific knowledge about
+Coq.
+
+\end{abstract}
+\input{intro}
+\input{original}
+\input{streams}
+\input{conclusion}
+
+%\bibliography{coredec}
+
+\begin{thebibliography}{10}
+
+\bibitem{grossestcspaper}
+Andreas Abel, Ralph Matthes, and Tarmo Uustalu.
+\newblock Iteration and coiteration schemes for higher-order and nested
+  datatypes.
+\newblock {\em Theoretical Computer Science}, 333(1--2):3--66, 2005.
+
+\bibitem{haskellList:redecorationAnswer}
+Jorge Adriano.
+\newblock Answer to {M}arkus {S}chnell's message \texttt{slide: useful
+  function?}
+\newblock {Haskell Mailing List}, November 2002.
+
+\bibitem{coqart}
+Yves Bertot and Pierre Cast{\'e}ran.
+\newblock {\em Interactive Theorem Proving and Program Development.
+  {C}oq'{A}rt: The Calculus of Inductive Constructions}.
+\newblock Texts in Theoretical Computer Science. Springer Verlag, 2004.
+
+\bibitem{birdmeertens}
+Richard Bird and Lambert Meertens.
+\newblock Nested datatypes.
+\newblock In Johan Jeuring, editor, {\em Mathematics of {P}rogram
+  {C}onstruction, {MPC}'98, Proceedings}, volume 1422 of {\em Lecture Notes in
+  Computer Science}, pages 52--67. Springer Verlag, 1998.
+
+\bibitem{gfolds}
+Richard Bird and Ross Paterson.
+\newblock Generalised folds for nested datatypes.
+\newblock {\em {F}ormal {A}spects of {C}omputing}, 11(2):200--222, 1999.
+
+\bibitem{dan}
+Nils~Anders Danielsson.
+\newblock Beating the productivity checker using embedded languages.
+\newblock In Ana Bove, Ekaterina Komendantskaya, and Milad Niqui, editors, {\em
+  PAR}, volume~43 of {\em EPTCS}, pages 29--48, 2010.
+
+\bibitem{daal}
+Nils~Anders Danielsson and Thorsten Altenkirch.
+\newblock Subtyping, declaratively.
+\newblock In Claude Bolduc, Jules Desharnais, and B{\'e}chir Ktari, editors,
+  {\em Mathematics of Program Construction}, volume 6120 of {\em Lecture Notes
+  in Computer Science}, pages 100--118. Springer, 2010.
+
+\bibitem{maclane}
+Saunders {Mac Lane}.
+\newblock {\em Categories for the Working Mathematician}, volume~5 of {\em
+  Graduate Texts in Mathematics}.
+\newblock Springer Verlag, second edition, 1998.
+
+\bibitem{TYPES11code}
+Ralph Matthes and Celia Picard.
+\newblock Formalization in {C}oq for this article, 2012.
+\newblock \url{www.irit.fr/~Celia.Picard/Coq/Redecoration/}.
+
+\bibitem{types07}
+Ralph Matthes and Martin Strecker.
+\newblock Verification of the redecoration algorithm for triangular matrices.
+\newblock In Furio Honsell, Marino Miculan, and Ivan Scagnetto, editors, {\em
+  Types for Proofs and Programs, International Conference, TYPES 2007, Revised
+  Selected Papers}, volume 4941 of {\em Lecture Notes in Computer Science},
+  pages 125--141. Springer Verlag, 2008.
+
+\bibitem{theseCP}
+Celia Picard.
+\newblock {\em Représentation coinductive des graphes}.
+\newblock PhD thesis, Université de Toulouse, 2012.
+
+\bibitem{DBLP:conf/tphol/SozeauO08}
+Matthieu Sozeau and Nicolas Oury.
+\newblock First-class type classes.
+\newblock In Otmane~A\"{\i}t Mohamed, C{\'e}sar Mu{\~n}oz, and Sofi{\`e}ne
+  Tahar, editors, {\em TPHOLs}, volume 5170 of {\em Lecture Notes in Computer
+  Science}, pages 278--293. Springer, 2008.
+
+\bibitem{MC}
+{T}he {C}oq~{D}evelopment {T}eam.
+\newblock The {C}oq {P}roof {A}ssistant {R}eference {M}anual.
+\newblock INRIA.
+
+\bibitem{DBLP:conf/sfp/UustaluV01}
+Tarmo Uustalu and Varmo Vene.
+\newblock The dual of substitution is redecoration.
+\newblock In Kevin Hammond and Sharon Curtis, editors, {\em Scottish Functional
+  Programming Workshop}, volume~3 of {\em Trends in Functional Programming},
+  pages 99--110. Intellect, 2001.
+
+\end{thebibliography}
+
+
+\end{document}

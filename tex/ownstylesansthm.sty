@@ -31,6 +31,9 @@
 
 \RequirePackage{bussproofs}
 
+\RequirePackage{tikz}
+\usetikzlibrary{shapes}                
+\usetikzlibrary{fit}
 
 \RequirePackage{xspace}
 \RequirePackage{verbatim}
@@ -273,7 +276,7 @@ plainpages = false
 %\newcommand{\PO}{\mathbf{PO}}
 \newcommand{\PO}{{\POop}}
 \newcommand{\PS}{{\PSop}}
-\newcommand{\Set}{\ensuremath{\mathsf{Set}}}
+\newcommand{\Set}{\ensuremath{\mathsf{Type}}}
 \newcommand{\Setoid}{\ensuremath{\mathsf{Setoid}}}
 \newcommand{\eq}{\ensuremath{\mathsf{eq}}}
 % \newcommand{\SET}{\SETop}
@@ -326,6 +329,13 @@ plainpages = false
 \newcommand{\Tri}{\constfont{Tri}}
 \newcommand{\head}{\constfont{top}}
 \newcommand{\tail}{\constfont{rest}}
+
+\newcommand{\Tree}{\constfont{Tree}}
+
+\newcommand{\shead}{\constfont{head}}
+\newcommand{\stail}{\constfont{tail}}
+\newcommand{\sredec}{\constfont{cosubst}}
+\newcommand{\diagonal}{\constfont{diag}}
 \newcommand{\bisim}{\constfont{bisim}}
 \newcommand{\redec}{\constfont{redec}}
 \newcommand{\cut}{\constfont{cut}}
@@ -335,9 +345,13 @@ plainpages = false
 \newcommand{\ULCop}{\constfont{LC}}
 \newcommand{\induced}[1]{\ensuremath{\langle {#1} \rangle}}
 
+\newcommand{\stream}{\constfont{Stream}}
+
 \newcommand{\shift}{\constfont{shift}}
 \newcommand{\abs}{\constfont{abs}}
 \newcommand{\subst}{\constfont{subst}}
+
+\newcommand{\corec}{\constfont{corec}}
 
 \newcommand{\coq}{\texttt{Coq}\xspace}
 \newcommand{\agda}{\texttt{Agda}\xspace}

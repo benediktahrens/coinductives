@@ -1,0 +1,51 @@
+
+
+
+\section{$\cut$ is not a redecoration}
+
+\begin{remark}
+ $\cut$ is not a redecoration. For suppose we have that for some $f : \Tri(E\times A) \to \Tri A$ and for any matrix $t$, $\redec~f~t \sim \cut~t$.
+ By the rule for $\head$ of \Cref{fig:tri_destructors} it follows that for any $t$ we have 
+ $f~t = \comp{\head}{\pr_2}~t$.
+ If we then compute 
+ 
+  \[ \cut~t = \cut 
+              \begin{pmatrix}
+                     e_{1} & e_{2} & \cdots   \\
+                     a_{1} & e_{3} & \cdots   \\
+                           & a_{2} & \cdots   \\
+                           &       & \vdots  
+              \end{pmatrix} =              
+              \begin{pmatrix}
+%                      e_{1} & e_{2} & \cdots   \\
+                     a_{1} & e_{3} & \cdots   \\
+                           & a_{2} & \cdots   \\
+                           &       & \vdots  
+              \end{pmatrix}              
+  \]
+ while for the redecoration with $f = \comp{\head}{\pr_2}$ we obtain
+  \[ \redec~f~ 
+              \begin{pmatrix}
+                     e_{1} & e_{2} & \cdots   \\
+                     a_{1} & e_{3} & \cdots   \\
+                           & a_{2} & \cdots   \\
+                           &       & \vdots  
+              \end{pmatrix} =              
+              \begin{pmatrix}
+%                      e_{1} & e_{2} & \cdots   \\
+                     a_{1} & e_{2} & \cdots   \\
+                           & a_{2} & \cdots   \\
+                           &       & \vdots  
+              \end{pmatrix}              
+  \]
+  meaning that $\cut~t \neq \redec~f~t$ as soon as $e_2 \neq e_3$.
+\end{remark}
+
+
+
+% \section{Some remarks about the difference between lambda calculus and triangular matrices}\label{sec_comp}
+% 
+% 
+% \begin{definition}
+%  Define the inductive 
+% \end{definition}

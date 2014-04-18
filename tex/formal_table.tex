@@ -1,6 +1,11 @@
 
 \section{Correspondence of informal and formal definitions}\label{sec:table_formal_informal}
 
+All our definitions and theorems are formalized in the proof assistant \coq.
+The \coq files and HTML documentation are available from the project web page \parencite{trimat_coq}.
+For easier orientation, the table below gives the correspondance between the items in this article and
+their names in the formal development.
+
 {
 
 \Crefname{definition}{Def.}{Defs.}
@@ -9,21 +14,24 @@
 
 \begin{center}
 {\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{lll}
-Informal & Reference & Formal \\ \hline
-Category &  & \lstinline!Category!\\
-Functor &  & \lstinline!Functor!\\
-Relative comonad & \Cref{def:rel_comonad} & \lstinline!RelativeComonad!\\
-Triangular matrices as comonad & \Cref{ex:tri_comonad} & \lstinline!Tri!\\
-Comodule over comonad & \Cref{def:comodule} & \lstinline!Comodule!\\
-Tautological comodule & \Cref{def:tautological_comodule} &\lstinline!tcomod!\\
-Pushforward comodule & \Cref{def:pushforward_comodule} & \lstinline!pushforward!\\
-Induced comodule morphism &\Cref{def:induced} & \lstinline!induced_morphism!\\
-Relative comonad with cut &\Cref{def:rel_comonad_with_cut} & \lstinline!RelativeComonadWithCut!\\
-Precomposition with product & \Cref{def:product_in_context} &\lstinline!precomposition_with_product!\\
-$\tail$ is comodule morphism &\Cref{ex:tail_comodule} & \lstinline!Rest!\\
-Coalgebras of triangular matrices & \Cref{def:cat_tri} & \lstinline!TriMat!\\
-Triangular matrices are terminal & \Cref{ex:final_sem_tri} & \lstinline!Coinitiality!\\
+\begin{tabular}{lllll}
+Informal && Reference && Formal \\ \hline
+Category &&  && \lstinline!Category!\\
+Functor &&  && \lstinline!Functor!\\
+Relative comonad && \Cref{def:rel_comonad} && \lstinline!RelativeComonad!\\
+Triangular matrices as comonad && \Cref{ex:tri_comonad} && \lstinline!Tri!\\
+Comodule over comonad && \Cref{def:comodule} && \lstinline!Comodule!\\
+Tautological comodule (of $T$) && \Cref{def:tautological_comodule} &&\lstinline!tcomod!, \lstinline!<T>!\\
+$\stail$ is comodule morphism &&\Cref{ex_tail_comodule}&& \lstinline!Tail!\\
+$\tail$ is comodule morphism &&\Cref{ex:tail_comodule} && \lstinline!Rest!\\
+Pushforward comodule && \Cref{def:pushforward_comodule} && \lstinline!pushforward!\\
+Induced comodule morphism &&\Cref{def:induced} && \lstinline!induced_morphism!\\
+Coalgebras for streams    &&\Cref{cat_stream} && \lstinline!Stream!\\
+$\stream$ is terminal && \Cref{thm_stream_terminal} && \lstinline!StreamTerminal.Coinitiality!\\
+Relative comonad with cut &&\Cref{def:rel_comonad_with_cut} && \lstinline!RelativeComonadWithCut!\\
+Precomposition with product && \Cref{def:product_in_context} &&\lstinline!precomposition_with_product!\\
+Coalgebras for triangular matrices && \Cref{def:cat_tri} && \lstinline!TriMat!\\
+$\Tri$ is terminal && \Cref{ex:final_sem_tri} && \lstinline!TriMatTerminal.Coinitiality!\\
 \end{tabular}
 }
 \end{center}
