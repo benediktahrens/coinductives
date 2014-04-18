@@ -22,7 +22,7 @@
 
 \usepackage{comment}
 \excludecomment{Long}\includecomment{Short}
-%\includecomment{Long}\excludecomment{Short}
+% \includecomment{Long}\excludecomment{Short}
 
 \pagestyle{plain}
 
@@ -1399,14 +1399,16 @@ We can thus conveniently use the same arrow symbol to denote the type of morphis
 
 \subsection{Formal vs.\ informal definitions}
 
-We provide two versions of the terminal semantics results:
+In the \coq formalization, we provide two different versions of the terminal semantics results:
+
 In one version, we use the \lstinline!CoInductive! vernacular command of \coq to define the codata types we consider.
 In this way, coinductive types are specified through \fat{constructors} rather than \fat{destructors}. The definition
 of functions into coinductive data types thus specified hence looks very different to function definitions 
-in terms of destructors.
-In the other version we provide the axioms of \Cref{stream_rules} and \Cref{tri_rules} as written there,
-yielding a close correspondence between the informal definitions given in this article and the formal definitions given in 
-the \coq files.
+in terms of destructors as used in the present article.
+
+In the other version we do not use that device for specifying coinductive types in \coq, but augment \coq by the axioms given in \Cref{stream_rules} and \Cref{tri_rules},
+respectively, and prove the existence of a terminal coalgebra from these axioms.
+This version thus is in close correspondence with the theory presented in the article.
 
 This might be the right moment to point to work on a device allowing the declaration of coinductive types via destructors in \agda, 
 see \parencite{DBLP:conf/popl/AbelPTS13}.
