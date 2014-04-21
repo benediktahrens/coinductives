@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Coinitial semantics for redecoration of triangular matrices</title>
+<script src="jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+$ (function () {
+	$ ("div.code:contains('Require')").first ().remove ();
+	$ ('div.proof').each (function () {
+		var html = $ (this).html ();
+		var indent = html.match (/^\s*((?:&nbsp;)*)/)[1];
+		var indentsize = indent.length / 6;
+		$ (this).html (html.replace (new RegExp (indent + "([^&])", 'g'), '$1')).css ('margin-left', indentsize + 'ex');
+	});
+	$ ('div.code').each (function () {
+		var first = $ ($ (this).children ()[0]);
+		if (first.prop ('tagName') === 'A' && first.hasClass ('proof')) {
+			var prev = $ (this).prev ();
+			if (prev.hasClass ('doc')) {
+				first.next ().next ().prepend ("<div class=\"proofcomment\">" + prev.html () + "</div>");
+				prev.remove ();
+				prev = $ (this).prev ();
+				if (prev.hasClass ('code')) {
+					prev.append ($ (this).contents ());
+					$ (this).remove ();
+				}
+			}
+		}
+	});
+	$ ('div.proof').each (function () {
+		var next = $ (this).next ();
+		while (next.prop ('tagName') === 'A' && next.hasClass ('proof')) {
+			next.remove ();
+			$ (this).next ().remove (); // <br />
+			next = $ (this).next (); // <div class="proof">
+			if (!$ (next.children ()[0]).hasClass ('proofcomment')) {
+				$ (this).append ('<hr />');
+			}
+			$ (this).append (next.contents ());
+			next.remove ();
+			next = $ (this).next ();
+		}
+	});
+	$ ('a.proof').click (function (e) {
+		e.preventDefault ();
+		var proof = $ (this).next ().next ();
+		$ (this).text ((proof.css ('display') === 'none' ? 'Hide' : 'Show') + ' proof.');
+		proof.slideToggle ();
+	});
+});
+</script>
+</head>
+<body>
+<div class="table-nav-top">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Terminal semantics for codata types in intensional Martin-Löf type theory</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
+</div>
+<div class="code">
+<span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Misc.Unicode.html#"><span class="id" data-type="library">Misc.Unicode</span></a>.<br/>
+<span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Theory.Notations.html#"><span class="id" data-type="library">Theory.Notations</span></a>.<br/>
+<br/>
+<span class="id" data-type="keyword">Generalizable</span> <span class="id" data-type="keyword">All</span> <span class="id" data-type="keyword">Variables</span>.<br/>
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab10"></a><h1 class="section">Axioms for streams</h1>
+
+</div>
+<div class="code"><span class="id" data-type="keyword">Module</span> <span class="id" data-type="keyword">Type</span> <a name="StreamAxioms"><span class="id" data-type="module">StreamAxioms</span></a>.<br/>
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab11"></a><h2 class="section">Stream type and destructors</h2>
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" data-type="keyword">Axiom</span> <a name="StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> : <span class="id" data-type="keyword">Type</span> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <span class="id" data-type="keyword">Type</span>.<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Axiom</span> <a name="StreamAxioms.head"><span class="id" data-type="axiom">head</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> {<span class="id" data-type="var">A</span>}<a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Axiom</span> <a name="StreamAxioms.tail"><span class="id" data-type="axiom">tail</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> {<span class="id" data-type="var">A</span>}<a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a>.<br/>
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab12"></a><h2 class="section">Corecursor on Stream and computation rules</h2>
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" data-type="keyword">Axiom</span> <a name="StreamAxioms.corec"><span class="id" data-type="axiom">corec</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> {<span class="id" data-type="var">A</span> <span class="id" data-type="var">T</span>}<a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">(</span></a><a class="idref" href="Cat.Category.Stream.Axioms.html#T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">)</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">(</span></a><a class="idref" href="Cat.Category.Stream.Axioms.html#T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#T"><span class="id" data-type="variable">T</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">)</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Axiom</span> <a name="StreamAxioms.head_corec"><span class="id" data-type="axiom">head_corec</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> {<span class="id" data-type="var">A</span> <span class="id" data-type="var">T</span>} {<span class="id" data-type="var">hd</span> : <a class="idref" href="Cat.Category.Stream.Axioms.html#T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a>} {<span class="id" data-type="var">tl</span> : <a class="idref" href="Cat.Category.Stream.Axioms.html#T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#T"><span class="id" data-type="variable">T</span></a>} {<span class="id" data-type="var">t</span>}<a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.head"><span class="id" data-type="axiom">head</span></a> (<a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.corec"><span class="id" data-type="axiom">corec</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#hd"><span class="id" data-type="variable">hd</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#tl"><span class="id" data-type="variable">tl</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#t"><span class="id" data-type="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" data-type="notation">=</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#hd"><span class="id" data-type="variable">hd</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#t"><span class="id" data-type="variable">t</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Axiom</span> <a name="StreamAxioms.tail_corec"><span class="id" data-type="axiom">tail_corec</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> {<span class="id" data-type="var">A</span> <span class="id" data-type="var">T</span>} {<span class="id" data-type="var">hd</span> : <a class="idref" href="Cat.Category.Stream.Axioms.html#T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a>} {<span class="id" data-type="var">tl</span> : <a class="idref" href="Cat.Category.Stream.Axioms.html#T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#T"><span class="id" data-type="variable">T</span></a>} {<span class="id" data-type="var">t</span>}<a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.tail"><span class="id" data-type="axiom">tail</span></a> (<a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.corec"><span class="id" data-type="axiom">corec</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#hd"><span class="id" data-type="variable">hd</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#tl"><span class="id" data-type="variable">tl</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#t"><span class="id" data-type="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" data-type="notation">=</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.corec"><span class="id" data-type="axiom">corec</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#hd"><span class="id" data-type="variable">hd</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#tl"><span class="id" data-type="variable">tl</span></a> (<a class="idref" href="Cat.Category.Stream.Axioms.html#tl"><span class="id" data-type="variable">tl</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#t"><span class="id" data-type="variable">t</span></a>).<br/>
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab13"></a><h2 class="section">Equivalence relation on streams</h2>
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" data-type="keyword">Axiom</span> <a name="StreamAxioms.bisim"><span class="id" data-type="axiom">bisim</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> {<span class="id" data-type="var">A</span>}<a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <span class="id" data-type="keyword">Prop</span>.<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Infix</span> <a name="StreamAxioms.::x_'∼'_x"><span class="id" data-type="notation">"</span></a>∼" ≔ <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.bisim"><span class="id" data-type="axiom">bisim</span></a> (<span class="id" data-type="tactic">at</span> <span class="id" data-type="keyword">level</span> 70).<br/>
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab14"></a><h2 class="section">Bisimulation elimination rules</h2>
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" data-type="keyword">Axiom</span> <a name="StreamAxioms.bisim_head"><span class="id" data-type="axiom">bisim_head</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> {<span class="id" data-type="var">A</span>} {<span class="id" data-type="var">s₁</span> <span class="id" data-type="var">s₂</span> : <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">},</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₁"><span class="id" data-type="variable">s₁</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.::x_'∼'_x"><span class="id" data-type="notation">∼</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₂"><span class="id" data-type="variable">s₂</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.head"><span class="id" data-type="axiom">head</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₁"><span class="id" data-type="variable">s₁</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" data-type="notation">=</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.head"><span class="id" data-type="axiom">head</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₂"><span class="id" data-type="variable">s₂</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Axiom</span> <a name="StreamAxioms.bisim_tail"><span class="id" data-type="axiom">bisim_tail</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> {<span class="id" data-type="var">A</span>} {<span class="id" data-type="var">s₁</span> <span class="id" data-type="var">s₂</span> : <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">},</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₁"><span class="id" data-type="variable">s₁</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.::x_'∼'_x"><span class="id" data-type="notation">∼</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₂"><span class="id" data-type="variable">s₂</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.tail"><span class="id" data-type="axiom">tail</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₁"><span class="id" data-type="variable">s₁</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.::x_'∼'_x"><span class="id" data-type="notation">∼</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.tail"><span class="id" data-type="axiom">tail</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₂"><span class="id" data-type="variable">s₂</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Notation</span> <a name="StreamAxioms.::'∼-head'"><span class="id" data-type="notation">"</span></a>∼-head" ≔ <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.bisim_head"><span class="id" data-type="axiom">bisim_head</span></a> (<span class="id" data-type="var">only</span> <span class="id" data-type="var">parsing</span>).<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Notation</span> <a name="StreamAxioms.::'∼-tail'"><span class="id" data-type="notation">"</span></a>∼-tail" ≔ <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.bisim_tail"><span class="id" data-type="axiom">bisim_tail</span></a> (<span class="id" data-type="var">only</span> <span class="id" data-type="var">parsing</span>).<br/>
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab15"></a><h2 class="section">Coinduction principle</h2>
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" data-type="keyword">Axiom</span> <a name="StreamAxioms.bisim_intro"><span class="id" data-type="axiom">bisim_intro</span></a> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> {<span class="id" data-type="var">A</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" data-type="var">R</span> : <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <span class="id" data-type="keyword">Prop</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" data-type="var">R_head</span> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">{</span></a><span class="id" data-type="var">s₁</span> <span class="id" data-type="var">s₂</span> : <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">},</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#R"><span class="id" data-type="variable">R</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₁"><span class="id" data-type="variable">s₁</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₂"><span class="id" data-type="variable">s₂</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.head"><span class="id" data-type="axiom">head</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₁"><span class="id" data-type="variable">s₁</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" data-type="notation">=</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.head"><span class="id" data-type="axiom">head</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₂"><span class="id" data-type="variable">s₂</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" data-type="var">R_tail</span> : <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">{</span></a><span class="id" data-type="var">s₁</span> <span class="id" data-type="var">s₂</span> : <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">},</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#R"><span class="id" data-type="variable">R</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₁"><span class="id" data-type="variable">s₁</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₂"><span class="id" data-type="variable">s₂</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#R"><span class="id" data-type="variable">R</span></a> (<a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.tail"><span class="id" data-type="axiom">tail</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₁"><span class="id" data-type="variable">s₁</span></a>) (<a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.tail"><span class="id" data-type="axiom">tail</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₂"><span class="id" data-type="variable">s₂</span></a>)<a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">),</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">{</span></a><span class="id" data-type="var">s₁</span> <span class="id" data-type="var">s₂</span> : <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.Stream"><span class="id" data-type="axiom">Stream</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#A"><span class="id" data-type="variable">A</span></a><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">},</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#R"><span class="id" data-type="variable">R</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₁"><span class="id" data-type="variable">s₁</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₂"><span class="id" data-type="variable">s₂</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₁"><span class="id" data-type="variable">s₁</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#StreamAxioms.::x_'∼'_x"><span class="id" data-type="notation">∼</span></a> <a class="idref" href="Cat.Category.Stream.Axioms.html#s₂"><span class="id" data-type="variable">s₂</span></a>.<br/>
+<br/>
+<span class="id" data-type="keyword">End</span> <a class="idref" href="Cat.Category.Stream.Axioms.html#"><span class="id" data-type="module">StreamAxioms</span></a>.<br/>
+</div>
+<div class="table-nav-bottom">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Terminal semantics for codata types in intensional Martin-Löf type theory</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
+</div>
+</body>
+</html>

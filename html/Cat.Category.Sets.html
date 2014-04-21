@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
 <title>Coinitial semantics for redecoration of triangular matrices</title>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 $ (function () {
 	$ ("div.code:contains('Require')").first ().remove ();
@@ -56,7 +56,7 @@ $ (function () {
 <div class="table-nav-top">
 	<div>
 		Benedikt Ahrens and Régis Spadotti&mdash;
-		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+		<a href="http://arxiv.org/abs/1401.1053">Terminal semantics for codata types in intensional Martin-Löf type theory</a>
 	</div>
 	<div class="toc-nav" >
 		<a href="toc.html">Table of contents</a>
@@ -72,16 +72,14 @@ $ (function () {
 </div>
 
 <div class="doc">
-<a name="lab42"></a><h1 class="section">Category of Sets</h1>
+<a name="lab79"></a><h1 class="section">Category of Sets</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab43"></a><h2 class="section">Type category definition</h2>
+<a name="lab80"></a><h2 class="section">Type category definition</h2>
 
 </div>
-<div class="code"><span class="id" data-type="keyword">Definition</span> <a name="Obj"><span class="id" data-type="definition">Obj</span></a> ≔ <span class="id" data-type="keyword">Type</span>.<br/>
-<br/>
-<span class="id" data-type="keyword">Program Definition</span> <a name="Hom"><span class="id" data-type="definition">Hom</span></a> (<span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> : <a class="idref" href="Cat.Category.Sets.html#Obj"><span class="id" data-type="definition">Obj</span></a>) : <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.Setoid"><span class="id" data-type="record">Setoid</span></a> ≔ <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">Setoid.make</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">Carrier</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Category.Sets.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Sets.html#B"><span class="id" data-type="variable">B</span></a><br/>
+<div class="code"><span class="id" data-type="keyword">Program Definition</span> <a name="Hom"><span class="id" data-type="definition">Hom</span></a> (<span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> : <span class="id" data-type="keyword">Type</span>) : <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.Setoid"><span class="id" data-type="record">Setoid</span></a> ≔ <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">Setoid.make</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">Carrier</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Category.Sets.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Sets.html#B"><span class="id" data-type="variable">B</span></a><br/>
 <table>
 <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">Equiv</span></a></td><td colspan="2"><a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">f</span> <span class="id" data-type="var">g</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> <span class="id" data-type="var">x</span><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <a class="idref" href="Cat.Category.Sets.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Category.Sets.html#x"><span class="id" data-type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" data-type="notation">=</span></a> <a class="idref" href="Cat.Category.Sets.html#g"><span class="id" data-type="variable">g</span></a> <a class="idref" href="Cat.Category.Sets.html#x"><span class="id" data-type="variable">x</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/></td></tr>
 </table>
@@ -123,7 +121,7 @@ $ (function () {
 </div>
 
 <div class="doc">
-<a name="lab44"></a><h2 class="section">Sets have binary product</h2>
+<a name="lab81"></a><h2 class="section">Sets have binary product</h2>
 
 </div>
 <div class="code"><span class="id" data-type="keyword">Program Instance</span> <a name="𝑺𝒆𝒕_BinaryProduct"><span class="id" data-type="instance">𝑺𝒆𝒕</span></a><a name="𝑺𝒆𝒕_BinaryProduct"><span class="id" data-type="instance">_BinaryProduct</span></a> : <a class="idref" href="Cat.Theory.Product.html#BinaryProduct"><span class="id" data-type="class">BinaryProduct</span></a> <a class="idref" href="Cat.Category.Sets.html#𝑺𝒆𝒕"><span class="id" data-type="definition">𝑺𝒆𝒕</span></a> ≔<br/>
@@ -143,7 +141,7 @@ $ (function () {
 <div class="table-nav-bottom">
 	<div>
 		Benedikt Ahrens and Régis Spadotti&mdash;
-		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+		<a href="http://arxiv.org/abs/1401.1053">Terminal semantics for codata types in intensional Martin-Löf type theory</a>
 	</div>
 	<div class="toc-nav" >
 		<a href="toc.html">Table of contents</a>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Coinitial semantics for redecoration of triangular matrices</title>
+<script src="jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+$ (function () {
+	$ ("div.code:contains('Require')").first ().remove ();
+	$ ('div.proof').each (function () {
+		var html = $ (this).html ();
+		var indent = html.match (/^\s*((?:&nbsp;)*)/)[1];
+		var indentsize = indent.length / 6;
+		$ (this).html (html.replace (new RegExp (indent + "([^&])", 'g'), '$1')).css ('margin-left', indentsize + 'ex');
+	});
+	$ ('div.code').each (function () {
+		var first = $ ($ (this).children ()[0]);
+		if (first.prop ('tagName') === 'A' && first.hasClass ('proof')) {
+			var prev = $ (this).prev ();
+			if (prev.hasClass ('doc')) {
+				first.next ().next ().prepend ("<div class=\"proofcomment\">" + prev.html () + "</div>");
+				prev.remove ();
+				prev = $ (this).prev ();
+				if (prev.hasClass ('code')) {
+					prev.append ($ (this).contents ());
+					$ (this).remove ();
+				}
+			}
+		}
+	});
+	$ ('div.proof').each (function () {
+		var next = $ (this).next ();
+		while (next.prop ('tagName') === 'A' && next.hasClass ('proof')) {
+			next.remove ();
+			$ (this).next ().remove (); // <br />
+			next = $ (this).next (); // <div class="proof">
+			if (!$ (next.children ()[0]).hasClass ('proofcomment')) {
+				$ (this).append ('<hr />');
+			}
+			$ (this).append (next.contents ());
+			next.remove ();
+			next = $ (this).next ();
+		}
+	});
+	$ ('a.proof').click (function (e) {
+		e.preventDefault ();
+		var proof = $ (this).next ().next ();
+		$ (this).text ((proof.css ('display') === 'none' ? 'Hide' : 'Show') + ' proof.');
+		proof.slideToggle ();
+	});
+});
+</script>
+</head>
+<body>
+<div class="table-nav-top">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Terminal semantics for codata types in intensional Martin-Löf type theory</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
+</div>
+<div class="code">
+<span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Category.RComod.html#"><span class="id" data-type="library">Category.RComod</span></a>.<br/>
+<span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Category.Stream.Stream.html#"><span class="id" data-type="library">Category.Stream.Stream</span></a>.<br/>
+<span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Category.Stream.Model.html#"><span class="id" data-type="library">Category.Stream.Model</span></a>.<br/>
+<span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Category.TriMat.Axioms.html#"><span class="id" data-type="library">Category.TriMat.Axioms</span></a>.<br/>
+<span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Category.TriMat.Model.html#"><span class="id" data-type="library">Category.TriMat.Model</span></a>.<br/>
+<span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Theory.Category.html#"><span class="id" data-type="library">Theory.Category</span></a>.<br/>
+<span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Theory.RelativeComonad.html#"><span class="id" data-type="library">Theory.RelativeComonad</span></a>.<br/>
+<span class="id" data-type="keyword">Require</span> <span class="id" data-type="keyword">Import</span> <a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#"><span class="id" data-type="library">Theory.RelativeComonadWithCut</span></a>.<br/>
+<br/>
+<span class="id" data-type="keyword">Module</span> <a name="Diag"><span class="id" data-type="module">Diag</span></a> (<span class="id" data-type="keyword">Import</span> <span class="id" data-type="var">TE</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Structures.Equalities.html#"><span class="id" data-type="module">Typ</span></a>).<br/>
+<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Module</span> <span class="id" data-type="keyword">Import</span> <a name="Diag.Tri"><span class="id" data-type="module">Tri</span></a> ≔ <a class="idref" href="Cat.Category.TriMat.Model.html#"><span class="id" data-type="module">TriMat.Model.Terminality</span></a> <a class="idref" href="Cat.Category.Diag.html#"><span class="id" data-type="module">TE</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Module</span> <a name="Diag.Str"><span class="id" data-type="module">Str</span></a> ≔ <a class="idref" href="Cat.Category.Stream.Model.html#"><span class="id" data-type="module">Stream.Model.Terminality</span></a>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="id" data-type="keyword">Definition</span> <a name="Diag.𝒅𝒊𝒂𝒈"><span class="id" data-type="definition">𝒅𝒊𝒂𝒈</span></a> ≔ <a class="idref" href="Cat.Category.Diag.html#Diag.Str.τ"><span class="id" data-type="definition">Str</span></a><a class="idref" href="Cat.Category.Diag.html#Diag.Str.τ"><span class="id" data-type="definition">.τ</span></a> <a class="idref" href="Cat.Category.Stream.Stream.html#Stream.::'Stream.make'_'⦃'_'T'_'≔'_x_';'_'tail'_'≔'_x_'⦄'"><span class="id" data-type="notation">Stream.make</span></a> <a class="idref" href="Cat.Category.Stream.Stream.html#Stream.::'Stream.make'_'⦃'_'T'_'≔'_x_';'_'tail'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Category.Stream.Stream.html#Stream.::'Stream.make'_'⦃'_'T'_'≔'_x_';'_'tail'_'≔'_x_'⦄'"><span class="id" data-type="notation">T</span></a> <a class="idref" href="Cat.Category.Stream.Stream.html#Stream.::'Stream.make'_'⦃'_'T'_'≔'_x_';'_'tail'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Category.Diag.html#Diag.Tri.𝑻𝒓𝒊"><span class="id" data-type="definition">𝑻𝒓𝒊</span></a> <a class="idref" href="Cat.Category.Stream.Stream.html#Stream.::'Stream.make'_'⦃'_'T'_'≔'_x_';'_'tail'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Category.Stream.Stream.html#Stream.::'Stream.make'_'⦃'_'T'_'≔'_x_';'_'tail'_'≔'_x_'⦄'"><span class="id" data-type="notation">tail</span></a> <a class="idref" href="Cat.Category.Stream.Stream.html#Stream.::'Stream.make'_'⦃'_'T'_'≔'_x_';'_'tail'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Category.Diag.html#Diag.Tri.𝑪𝒖𝒕"><span class="id" data-type="definition">𝑪𝒖𝒕</span></a> <a class="idref" href="Cat.Theory.Category.html#::x_'∘'_x"><span class="id" data-type="notation">∘</span></a> <a class="idref" href="Cat.Category.Diag.html#Diag.Tri.𝑹𝒆𝒔𝒕"><span class="id" data-type="definition">𝑹𝒆𝒔𝒕</span></a> <a class="idref" href="Cat.Category.Stream.Stream.html#Stream.::'Stream.make'_'⦃'_'T'_'≔'_x_';'_'tail'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/>
+<br/>
+<span class="id" data-type="keyword">End</span> <a class="idref" href="Cat.Category.Diag.html#"><span class="id" data-type="module">Diag</span></a>.<br/>
+</div>
+<div class="table-nav-bottom">
+	<div>
+		Benedikt Ahrens and Régis Spadotti&mdash;
+		<a href="http://arxiv.org/abs/1401.1053">Terminal semantics for codata types in intensional Martin-Löf type theory</a>
+	</div>
+	<div class="toc-nav" >
+		<a href="toc.html">Table of contents</a>
+	</div>
+	<div class="index-nav" >
+		<a href="index.html">Index</a>
+	</div>
+	<div class="sep-nav"> </div>
+</div>
+</body>
+</html>
