@@ -70,12 +70,13 @@ In this work, we study the notions of \emph{relative comonad} and \emph{comodule
  Martin-L\"of identity type. Instead, one defines \emph{bisimilarity} as a coinductive predicate 
  on a coinductive type, and one reasons about the terms of a coinductive type modulo the bisimilarity predicate
  rather than identity \parencite{DBLP:conf/types/Coquand93}.
- Consequently, we consider two maps into a coinductive type to be the same if they are \emph{pointwise bisimilar}---an analogue
- to the aforementioned principle of function extensionality. 
+ Consequently, we consider two maps into a coinductive type to be the same if they are \emph{pointwise bisimilar}, thus
+ requiring a form of extensionality for such maps.
+ 
  With these conventions, we give, in the present work, a characterisation of some coinductive data types as \emph{terminal} objects in some category 
  defined in intensional Martin-L\"of type theory.
  More precisely, we consider an example of \emph{homogeneous} codata type, streams, and 
- an example of \emph{heterogeneous} codata type, triangular matrices.
+ an example of \emph{heterogeneous} codata type, infinite triangular matrices.
  For each of these examples we prove, 
  from type-theoretic rules specifying the respective codata type added to the basic rules of Martin-L\"of type theory,
  the existence of a terminal object in some category \emph{within IMLTT}.
@@ -84,12 +85,14 @@ In this work, we study the notions of \emph{relative comonad} and \emph{comodule
  
  The fact that cosubstitution for coinductive data types is comonadic in a set-theoretic setting is established by \textcite{DBLP:conf/sfp/UustaluV01}.
  In IMLTT however, in order to characterize that cosubstitution operation on a given codata type, and its algebraic properties,
- we develop the notion of \emph{relative comonad} and \emph{comodule over a relative comonad}.
+ we develop the notion of \emph{relative comonad}---the dual to \emph{relative monads} \parencite{DBLP:conf/fossacs/AltenkirchCU10}---and \emph{comodule over a relative comonad}.
  The need to consider \emph{relative} comonads arises from the  need to check the algebraic properties of cosubstitution modulo \emph{bisimilarity} rather
  than modulo identity (in the sense of ML identity types).
  
  All our results have been implemented in the proof assistant \coq \parencite{coq84pl3}.
  The \coq source files and HTML documentation are available on the project web page \parencite{trimat_coq}.
+ A full article is available on the arXiv \parencite{trimat_coq}.
+ 
  
 \renewcommand*{\bibfont}{\small}
 \printbibliography[heading=none]
