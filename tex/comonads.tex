@@ -83,7 +83,7 @@ Toulouse}
 \section{Introduction}
  
  In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
- We then use these notions to characterise several \emph{co}inductive data types in intensional Martin-L\"of type theory
+ We then use these notions to characterize several \emph{co}inductive data types in intensional Martin-L\"of type theory
  via a universal property.
  
  In a set-theoretic setting, inductive sets are characterized as initial algebras for 
@@ -110,7 +110,7 @@ Toulouse}
  In extensional type theory, propositional equality as given by the Martin-L\"of identity type \parencite{martin_lof} is reflected 
  into judgmental equality via a \emph{reflection rule}.
  This reflection rule equips \emph{extensional} type theory with extensional features similar to those of set theory.
- As a consequence, the characterisation of a \textsf{W}-type---a member of a particular class of inductive types---in extensional MLTT as initial algebra for some endofunctor on the 
+ As a consequence, the characterization of a \textsf{W}-type---a member of a particular class of inductive types---in extensional MLTT as initial algebra for some endofunctor on the 
  category of types \parencite{DBLP:journals/tcs/Dybjer97} works as in the category of sets.
  Indeed, in extensional MLTT, one has function extensionality available, which suffices to 
  deduce that there is a \emph{judgmentally unique} algebra morphism from the initial algebra to any algebra.
@@ -125,7 +125,7 @@ Toulouse}
  In this extension, function extensionality is provable from the \emph{Univalence Axiom}. 
  For a suitable definition of \emph{uniqueness}---\emph{contractibility} in HoTT jargon---one can then prove unicity of the
  algebra morphisms out of the one whose carrier is given by the \textsf{W}-type.
- The mentioned work \parencite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterisation of \textsf{W}-types as initial algebras carries over 
+ The mentioned work \parencite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterization of \textsf{W}-types as initial algebras carries over 
  from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of unicity.
  
  
@@ -137,7 +137,7 @@ Toulouse}
  
 
 
- Dually to inductive sets, \fat{co}inductive sets such as streams are characterised as terminal objects \parencite{jacobs1997tutorial}.
+ Dually to inductive sets, \fat{co}inductive sets such as streams are characterized as terminal objects \parencite{jacobs1997tutorial}.
  Inhabitants of such sets are equal if and only if they are \emph{bisimilar} \parencite{DBLP:journals/mscs/TuriR98}:
  Intuitively, two elements of a coinductive set are the same if they allow for the same observations.
  
@@ -147,14 +147,14 @@ Toulouse}
  rather than identity \parencite{DBLP:conf/types/Coquand93}.
  Consequently, we consider two maps into a coinductive type to be the same if they are \emph{pointwise bisimilar}---an analogue
  to the aforementioned principle of function extensionality. 
- With these conventions, we give, in the present work, a characterisation of some coinductive data types as \emph{terminal} objects in some category 
+ With these conventions, we give, in the present work, a characterization of some coinductive data types as \emph{terminal} objects in some category 
  defined in intensional Martin-L\"of type theory.
  More precisely, we consider an example of \emph{homogeneous} codata type, streams, and 
  an example of \emph{heterogeneous} codata type, triangular matrices.
  For each of these examples we prove, 
  from type-theoretic rules specifying the respective codata type added to the basic rules of Martin-L\"of type theory,
  the existence of a terminal object in some category \emph{within IMLTT}.
- Our terminal semantics characterises not only the codata types themselves but also the bisimilarity relation and
+ Our terminal semantics characterizes not only the codata types themselves but also the bisimilarity relation and
  a canonical cosubstitution operation on them.
  
  The fact that cosubstitution for coinductive data types is comonadic in a set-theoretic setting is established by \textcite{DBLP:conf/sfp/UustaluV01}.
@@ -798,7 +798,7 @@ Relative comonads over the identity functor are exactly comonads.
 
 \begin{Long}
 \begin{remark}
-  A \emph{weak constructive comonad} as defined by \textcite{DBLP:conf/types/MatthesP11} to characterise the codata type $\Tri$
+  A \emph{weak constructive comonad} as defined by \textcite{DBLP:conf/types/MatthesP11} to characterize the codata type $\Tri$
   and redecoration on it, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
 \end{remark}
@@ -1043,7 +1043,7 @@ respectively. We then show that the codata types $\stream$ and $\Tri$ constitute
 the respective category of coalgebras.
 We put \enquote{coalgebra} in quotes for the reason that our coalgebras are not defined as coalgebras for a monad or an endofunctor.
 
-The terminal coalgebra result is hardly surprising; however, it is still interesting as it characterises not only the codata types themselves,
+The terminal coalgebra result is hardly surprising; however, it is still interesting as it characterizes not only the codata types themselves,
  but also the respective bisimilarity relations and comonadic operations on them, via a universal property.
  
 %  While it is obvious how to define a general notion of signature and a category of coalgebras for any such signature,
