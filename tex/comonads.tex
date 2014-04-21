@@ -123,10 +123,10 @@ Toulouse}
  It forms the base of two computer proof assistants, \coq and \agda.
  \textsf{W}-types have been studied \parencite{DBLP:conf/lics/AwodeyGS12} in \emph{Homotopy Type Theory} (HoTT) \parencite{hottbook}, an extension of intensional Martin-L\"of type theory. 
  In this extension, function extensionality is provable from the \emph{Univalence Axiom}. 
- For a suitable definition of \emph{uniqueness}---\emph{contractibility} in HoTT jargon---one can then prove unicity of the
+ For a suitable definition of \emph{uniqueness}---\emph{contractibility} in HoTT jargon---one can then prove uniqueness of the
  algebra morphisms out of the one whose carrier is given by the \textsf{W}-type.
  The mentioned work \parencite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterization of \textsf{W}-types as initial algebras carries over 
- from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of unicity.
+ from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of uniqueness.
  
  
  The characterization of inductive sets/types as initial objects in some category
@@ -273,15 +273,14 @@ Toulouse}
  
  \subsubsection*{Organisation of the paper}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
-  In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those
-           codata types.
+  In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those codata types.
    Their specifying rules are given in \Cref{stream_rules} and \Cref{tri_rules}, respectively.
   In \Cref{sec:comonads} we present \emph{relative comonads} and define the category of comonads relative to a fixed functor.
     We give some examples of such structures, using the codata types presented in \Cref{sec:tri}.
   In \Cref{sec:comodules} we define comodules over relative comonads and give some constructions of comodules.
      Again, examples of such structures are taken from \Cref{sec:tri}.
   In \Cref{sec:coalgebras_for_tri} we define categories of coalgebras for the codata types presented in \Cref{sec:tri},
-      based on the category-theoretic notions developped in the previous sections.
+      based on the category-theoretic notions developed in the previous sections.
       We then prove that the codata types constitute the terminal coalgebras in the respective categories.
       Finally, we present an example of a map defined as a terminal map exploiting the universal property of streams.
   In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
@@ -462,13 +461,13 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
 
 \begin{Long}
 
-Streams are node-labelled trees where every node has exactly one subtree.
+Streams are node-labeled trees where every node has exactly one subtree.
 We also consider a type of trees where every node has an arbitrary, but fixed, number of subtrees, 
 parametrized by a type $B$.
 
 
 
-\begin{example}[Node-labelled trees]\label{ex_trees}
+\begin{example}[Node-labeled trees]\label{ex_trees}
  We denote by $\Tree_B(A)$ the codata type given by one destructor $\shead$ and a family of 
  destructors $(\stail_b)_{b:B}$ with types analogous to those defining $\stream$ of \Cref{ex_stream}.
  We thus obtain $\stream$ by considering, for $B$, the singleton type.
@@ -1107,7 +1106,7 @@ a morphism of comodules $r : T \to T(E\times \_)$.
 It turns out that in this way, one is not capable of obtaining the right auxiliary function $\cut$ for what is
 supposed to be the \emph{terminal} such coalgebra (where $\cut$ is used to define the comodule $\Tri(E\times \_)$), namely the pair $(\Tri,\tail)$.
 As a remedy, we define a coalgebra to come equipped with a specified operation analogous to $\cut$, and some laws governing
-the behaviour of that operation:
+the behavior of that operation:
 
 
 \begin{comment}
@@ -1271,7 +1270,7 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
 
 \begin{Long}
 The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ destructor---%
-more precisely, of its behaviour with respect to cosubstitution as in \Cref{eq:rest_redec}---via the notion of comodule morphism:
+more precisely, of its behavior with respect to cosubstitution as in \Cref{eq:rest_redec}---via the notion of comodule morphism:
 
 % TODO: we already have that example
 \begin{example}\label{ex:tail_comodule_alternative}
@@ -1341,7 +1340,7 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
 \end{proof}
 \end{Long}
 
-This universal property of coinitiality characterizes not only the codata type of infinite triangular matrices, but also
+This universal property of terminality characterizes not only the codata type of infinite triangular matrices, but also
 the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operation.
 
 % \begin{example}
@@ -1446,8 +1445,7 @@ will allow, e.g., considering branching trees modulo permutation of subtrees.
 \begin{Long}
  
 \subsubsection*{Acknowledgments}
- We thank Ralph Matthes and Paige North for many helpful discussions, and Andr\'e Hirschowitz for providing feedback on
- a draft of this paper.
+ We thank André Hirschowitz, Ralph Matthes and Paige North for many helpful discussions.
 
 \end{Long}
  
