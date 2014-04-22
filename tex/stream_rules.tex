@@ -60,7 +60,7 @@
                
 \subsection{Bisimilarity}\label{stream_bisim}          
  
-% TODO: prop or type 
+
  
 \begin{description}
 
@@ -103,21 +103,6 @@
                       
 %           \vspace{1em}
 
-\begin{comment}
-  \item[Computation]\hfill \\
-
-\begin{center}          
-               \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} \AxiomC{$t:T$}%\doubleLine
-               \TrinaryInfC{$\shead_A(\corec_A~hd~tl~t) = hd(t)$}
-               \DisplayProof
-               
-               \vspace{1em}
-               
-               \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} \AxiomC{$t:T$}%\doubleLine
-               \TrinaryInfC{$\stail_A(\corec_A~hd~tl~t) = \corec_A~hd~tl~(tl~t)$}
-               \DisplayProof
-\end{center}
-\end{comment}
 
  \end{description}              
                

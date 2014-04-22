@@ -188,52 +188,11 @@ Toulouse}
 
 \end{Long}
 
-%  In this work we set off to characterize a specific \emph{co}inductive heterogeneous data type---the type family $\Tri$ of 
-%  infinite triangular matrices as studied by \textcite{DBLP:conf/types/MatthesP11}, equipped with a \emph{co}substitution operation---as a terminal object of some 
-%  category. For this, we start dualizing the approach by \textcite{DBLP:journals/iandc/HirschowitzM10}, where 
-%  the crucial notions are the notion of monad and, more importantly, \emph{module over a monad}.
-%  It turns out that more work than a simple dualization is necessary, for two reasons which we indicate in the following.
-%  
-  
-  
-  
-  
-\begin{comment}
- 
- A first difference to the inductive case of the lambda calculus springs to mind:
- while the lambda calculus is essentially a monad---hence an \emph{endo}functor---on sets, the codata type $\Tri$ cannot be considered as such;
- for a given set $A$, the type $\Tri A$, equipped with its canonical \fat{bisimilarity} relation, 
- constitutes a \emph{setoid}---a set equipped with an equivalence relation---rather than a set.
- Instead of considering comonads---as the dual notion to monads---we thus have to consider a notion of comonad whose underlying functor is not necessarily endo.
- This is precisely the raison d'\^etre of \emph{relative} comonads (defined below)---the dual notion to the relative monads defined in 
-  \parencite{DBLP:conf/fossacs/AltenkirchCU10}. 
- Fortunately, relative comonads have all the nice properties we could ask for; 
- in particular, the notion of module over a monad of \parencite{DBLP:journals/iandc/HirschowitzM10} extends to modules over \emph{relative} monads
- \parencite{ahrens_relmonads}, which can be dualized to obtain comodules over relative comonads.
- 
- The other, more important difference between the inductive and the coinductive case stems from \emph{heterogeneity}:
- Two dual operations are responsible for the heterogeneity of the data type of lambda terms and the codata type of infinite triangular
- matrices: while we precompose with taking a \emph{co}product in the case of the abstraction of the lambda calculus---in order to account
- for context extension when passing under a binder---,
- we precompose with taking a \emph{product} when giving the target of the $\tail$ destructor of $\Tri$.
- However, as it turns out, the treatment of the $\tail$ destructor is far more complicated than a dualization of that of the abstraction 
- constructor of the lambda calculus---see \Cref{rem:shift} for a detailed explanation. 
- Describing our approach to a category-theoretic treatment of the $\tail$ destructor is the main purpose of the present work.
-\end{comment} 
- 
- 
- 
 
 \section{Preliminaries}\label{sec:preliminaries}
 
 In this section we present some particular categories and functors used later on, and fix some notation.
 
-
-% \begin{definition}[Category]
-%  A \emph{category} $\C$ in MLTT is given by a type $\C_0$ of objects, a dependent type of morphisms $\C(a,b)$ over objects $a,b : \C_0$, 
-%  dependent functions for identity 
-% \end{definition}
-% 
 
 \begin{definition}[Some categories]\label{def:set_setoid}
  We denote by $\Set$ the category of types (of a fixed universe) and total functions between them in Martin-L\"of type theory. 
@@ -306,9 +265,7 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
 \begin{example}\label{ex_stream}
   Let $A$ be a type. The type $\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors 
   given in \Cref{fig:stream_destructors}.
-%   We use double lines in the inference rules to emphasize that we are considering a \fat{co}inductive type specified via \fat{destructors}.
-%   Obviously, via Lambek's lemma, speaking in terms of destructors rather than constructors is merely a notational convention, 
-%   since the destructors have a suitable inverse.
+% 
   \begin{figure}[bt]
   \centering
 
@@ -342,21 +299,13 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
    
    
    We define a \emph{co}substition operation $\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B$ on streams via the following clauses:
-%    \begin{align} \shead\bigl(\sredec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
-%                      \stail\bigl(\sredec~f~t\bigr) &:= \sredec~f~(\stail~t) \enspace . \label{eq:tail_sredec}
-%     \end{align}
+% 
    \begin{align} \comp{\sredec~f}{\shead} := f \quad\text{ and } \quad
                   \comp{\sredec~f}{\stail} := \comp{\stail}{\sredec~f} \enspace . \label{eq:tail_sredec}
     \end{align}
   We call such an operation \enquote{cosubstitution} since its type is dual to, e.g., the simultaneous substitution operation 
   of the lambda calculus \parencite{alt_reus}.
 \end{example}
-
-% In the following, we denote by $\stream A$ the \emph{setoid} whose underlying type is the type of streams over $A$, equipped with the 
-% equivalence relation of bisimilarity. By abuse of notation, we also refer to the underlying type by $\stream(A)$.
-
-
-% TODO: image of stream
 
 
 \begin{Long}
@@ -411,57 +360,18 @@ This codata type is studied in detail by
 
     \draw (-2,0) node{$\head$} ;
     
-%      \draw[color=purple!70]  (2.8,-0.6) --  (0.1,-0.6) -- node[auto, swap,
-%     left]{$\cut$}(0.8, -3.4);
-    
-
-%     \foreach \y in {0,...,2}
-%     {\foreach \x in {\y,...,2}
-%       \draw (1.5*\x+10.5, -\y) node[color=blue]{$E$} ;
-%     }
-%     \foreach \x in {0,...,3} \draw (1.5*\x+9, -\x)
-%     node{{\color{blue}\textbf{E}} $\times$ {\color{red} A}} ;
-%     \draw(14.5,-1.5) node{$\ldots$};
-    
-%     \draw[->] (5,-1.5) to node[swap, auto, above]{triangle}
-%     (8,-1.5) ; 
-    
-%     \draw[<-] (5,-2.5) to node[swap, auto, below]{trapezium}
-%     (8,-2.5) ; 
 
     \draw[color=green] (2.8,0.4) -- (-0.5,0.4) -- (-0.5, -1.1) --node[auto, swap, left]{$\tail$}
     (2.8,-4.5)  ; 
     \draw[color=green, dashed] (2.8,0.4) -- (3.6,0.4) ; 
     \draw[color=green, dashed] (2.8,-4.5) -- (3.5,-5.3) ; 
 
-%     \draw[color=green] (13.5,0.4) -- (7.2,0.4) -- (13.5, -4); 
-%     \draw[color=green, dashed] (13.5,0.4) -- (14.4,0.4) ; 
-%     \draw[color=green, dashed] (13.5,-4) -- (14.3,-4.6) ; 
 
     \draw[color=orange](0, -0.5) ellipse (12pt and 25pt) ;  
     \draw[color=orange](1, -1.5) ellipse (12pt and 25pt) ;  
     \draw[color=orange](2, -2.5) ellipse (12pt and 25pt) ;  
     \draw[color=orange](3, -3.5) ellipse (12pt and 25pt) ;  
   \end{tikzpicture}\\[-2ex]
-
-\begin{comment} 
- \begin{tikzpicture}[scale = 0.6]
-     \foreach \y in {0,...,2}
-     {\foreach \x in {\y,...,2}
-       \draw (\x+1, -\y) node[color=blue]{$E$} ;
-     }
-     \foreach \x in {0,...,3} \draw (\x, -\x) node[color=red]{$A$} ;
-     \draw(4,-1) node{$\ldots$};
-%      \draw[style = dashed](0.5,0.2) -- (0.5,-1.2);
-%      \draw[style = dashed](1.5,0.2) -- (1.5,-2.2);
-%      \draw[style = dashed, thin](2.5,0.2) -- (2.5,-3.2);
-     
-%      \draw[color=green]  (3,0.5) -- (0.3,0.5) -- (0.3,
-%      -1.2)  -- (2.8,-3.6);
-%      \draw[color=green, dashed]  (3,0.5) -- (4,0.5);
-%      \draw[color=green, dashed]  (2.8,-3.6) -- (3.5,-4.2);
- \end{tikzpicture}
-\end{comment}
   \caption{An infinite triangular matrix over type $A$ and various operations}\label{fig_tri}
  \end{figure}
 \end{Long}
@@ -517,10 +427,8 @@ This codata type is studied in detail by
   A cosubstitution operation, \enquote{redecoration},
     $ \redec_{A,B} : (\Tri A \to B) \to \Tri A \to \Tri B$
   is defined  through the clauses
-%     \begin{align}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
-%                      \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\extend~f\bigr)(\tail~t) \enspace . \label{eq:rest_redec}
-%     \end{align}
-    \begin{align} \comp{\redec~f}{\head} := f \quad\text{ and } \quad
+% 
+  \begin{align} \comp{\redec~f}{\head} := f \quad\text{ and } \quad
                   \comp{\redec~f}{\tail} := \comp{\tail}{\redec~(\extend~f)} \enspace . \label{eq:rest_redec}
     \end{align}
 Here, the family of functions 
@@ -529,10 +437,8 @@ Here, the family of functions
   rather than $t : \Tri A$, namely
   \[ \extend(f) := \langle \comp{\head_{E\times A}}{\pr_1(E,A)} , \comp{\cut_A}{f} \rangle \enspace . \]
   The auxiliary function $\cut_A : \Tri(E\times A) \to \Tri A$ is defined corecursively via
-%    \begin{align*} \head\bigl(\cut~t\bigr) := \pr_2(\head~t) \quad\text{ and } \quad
-%                      \tail\bigl(\cut~t\bigr) := \cut(\tail~t) \enspace . 
-%       \end{align*}
-      \begin{align*} \comp{\cut}{\head} := \comp{\head}{\pr_2} \quad\text{ and } \quad
+% 
+  \begin{align*} \comp{\cut}{\head} := \comp{\head}{\pr_2} \quad\text{ and } \quad
                      \comp{\cut}{\tail} := \comp{\tail}{\cut} \enspace . 
       \end{align*}
 %       
@@ -549,44 +455,7 @@ Note how heterogeneity of the destructor $\tail$ makes the definition of $\redec
 the analogous operation $\sredec$ on streams.
 \end{Long}
 
-\begin{comment}  
-  The $\cobind$ operation---called \emph{redecoration} or $\redec$ in \parencite{DBLP:conf/types/MatthesP11}--- of type
-   \[ \redec_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid(\Tri A,\Tri B )\] is defined 
-  corecursively, for $f:\Setoid(\Tri A,\eq B)$  and $t : \Tri A$ by
-      \begin{align}\head\bigl(\redec~f~t\bigr) &:= f~t \quad\text{ and } \notag\\
-                     \tail\bigl(\redec~f~t\bigr) &:= \redec\bigl(\extend~f\bigr)(\tail~t) \enspace . \label{eq:rest_redec}
-      \end{align}
-Here, the family of functions 
-     \[\extend_{A,B} : \Setoid(\Tri A,\eq B) \to \Setoid\bigr(\Tri (E \times A),\eq(E\times B)\bigr)\]
-  is suitably defined to account for the change of the type of the argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
-  rather than $t : \Tri A$, namely
-  \[ \extend(f) := \langle \comp{\head_{E\times A}}{\pr_1(E,A)} , \comp{\cut_A}{f} \rangle \enspace . \]
-  The auxiliary function $\cut_A : \Tri(E\times A) \to \Tri A$ is defined corecursively via
-   \begin{align*}\head\bigl(\cut~t\bigr) &:= \pr_2(\head~t) \quad\text{ and } \\
-                     \tail\bigl(\cut~t\bigr) &:= \cut(\tail~t) \enspace . 
-      \end{align*}
-  More precisely, the function $\cut$ constitutes a family of morphisms of setoids \[\cut_A : \Setoid(\Tri(E\times A),\Tri A) \enspace ,\]
-  but for the sake of readability, we will leave this compatibility implicit in the following and simply write $\Tri A \to \Tri B$
-  instead of $\Setoid(\Tri A,\Tri B)$.
-\end{comment}
   
-  
-%  Note that what is called $\extend$ here is called \textit{lift} in \parencite{DBLP:conf/types/MatthesP11}.
-% \end{example}
-
-% TODO: should this comment go away?
-% \begin{remark}\label{rem:wrong_cut}
-% In the definition of the $\extend$ operation in \Cref{ex:tri_comonad} the auxiliary operation $\cut$ plays a central r\^ole.
-% It should be remarked here that, using functoriality of $\Tri$, one can define another operation of the same type, namely the family of 
-% maps $\Tri(\pr_2(E,A)) : \Tri(E\times A) \to \Tri A$ for
-% all sets $A$. Had we used this operation rather than the corecursively defined $\cut$ of \Cref{ex:tri_comonad}, 
-% then the third comonad law would have failed; we refer to \parencite{DBLP:conf/types/MatthesS07} for details.
-% \end{remark}
-
-
-
-
-
 \section{Relative comonads and their morphisms}\label{sec:comonads}
 
 In this section we define the category of \emph{comonads relative to a fixed functor}, and present some examples 
@@ -664,13 +533,8 @@ Relative comonads over the identity functor are exactly comonads.
 \begin{example}[Streams]\label{ex_stream_comonad}
   The codata type family $\stream : \Set \to \Setoid$ of \Cref{ex_stream} is equipped with a structure of a comonad relative to the functor 
   $\eq : \Set \to \Setoid$ with
-%   \begin{itemize}
-%    \item 
    $\counit_A := \shead_A$ and
-%    \item 
    $\cobind_{A,B} := \sredec_{A,B}$.
-%   \end{itemize}
-%   We refrain from showing the proof of the comonadic laws here; it can be found in our \coq library.  
 \end{example}
 
 
@@ -686,13 +550,8 @@ Relative comonads over the identity functor are exactly comonads.
 \begin{example}[Infinite triangular matrices]\label{ex:tri_comonad}
   The codata type family $\Tri : \Set \to \Setoid$ of \Cref{ex_tri} is equipped with a structure of a comonad relative to the functor 
   $\eq : \Set \to \Setoid$ with
-%   \begin{itemize}
-%    \item 
    $\counit_A := \head_A$ and
-%    \item 
    $\cobind_{A,B} := \redec_{A,B}$.
-%   \end{itemize}
-%  Again, the example is completely done in our \coq library.
 \end{example}
 
 \begin{Long}
@@ -764,11 +623,6 @@ The map $\diagonal_A$ is defined via the clauses
     \end{align*}
 \end{example}
 
-% \begin{example}
-%  TODO: can we define a kind of inverse to diag
-% \end{example}
-
-
 
 \begin{Long}
 
@@ -799,8 +653,6 @@ The map $\diagonal_A$ is defined via the clauses
 
 \end{Long}
 
-% Constructors of inductive types are characterised by \textcite{DBLP:journals/iandc/HirschowitzM10} via the notion of
-% \emph{module over a monad}. We  dualize their approach by introducing comodules over (relative) comonads.
 
 
 
@@ -815,9 +667,6 @@ In this section we develop the notion of \emph{comodule over a relative comonad}
    \begin{packitem}
    \item a map $M:\C_0 \to \E_0$ on the objects of the categories involved and
    \item an operation $\mcobind: \forall A,B:\C_0, \D(TA,FB) \to \E(MA,MB)$ such that
-%   \end{packitem}
-%   such that 
-%   \begin{packitem}
    \item $\forall A : \C_0, \mcobind(\counit_A) = \id_{MA}$;
    \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
         \comp{\mcobind(f)}{\mcobind(g)} = \mcobind(\comp{\cobind(f)}{g})$ .
@@ -885,11 +734,6 @@ Composition and identity of comodule morphisms happens pointwise. We thus obtain
  of comodules
 over a fixed comonad $T$, towards a fixed target category $\E$.
 
-% 
-% \begin{remark}[Category of comodules]
-%  Fix a comonad $T$ relative to $F:\C\to\D$ and a category $\E$.
-%  Comodules over $T$ towards $\E$ and their morphisms  form a category $\RComod(T,\E)$.
-% \end{remark}
 
 
 \begin{Long}
@@ -925,7 +769,7 @@ As presented in \Cref{def:tautological_comodule}, every relative comonad induces
 This extends to morphisms of relative comonads:
 
 \begin{definition}%[Morphism of comonads induces morphism of comodules]
-\label{def:induced} % checked
+\label{def:induced} 
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$.
   Then $\tau$ gives rise to a morphism of comodules over $S$ from the pushforward of the tautological comodule
   of $T$ along $\tau$ to the tautological comodule over $S$,
@@ -945,10 +789,6 @@ We put \enquote{coalgebra} in quotes for the reason that our coalgebras are not 
 The terminal coalgebra result is hardly surprising; however, it is still interesting as it characterizes not only the codata types themselves,
  but also the respective bisimilarity relations and comonadic operations on them, via a universal property.
  
-%  While it is obvious how to define a general notion of signature and a category of coalgebras for any such signature,
-% we refrain from doing so for lack of further examples.
-
-% For lack of further examples, we do not strive for a general notion of signature and coalgebras for arbitrary signatures.
 
 
 \begin{Long}
@@ -959,7 +799,6 @@ We first consider the homogeneous codata type of streams.
 
 \begin{definition}%[Coalgebras for $\stream$]
  \label{cat_stream}
-  %Inspired by \Cref{ex_stream_comonad} and \Cref{ex_tail_comodule}, 
   A \fat{coalgebra for $\stream$} is given by a pair $(S,t)$ 
   consisting of
   \begin{itemize}
@@ -1008,38 +847,6 @@ supposed to be the \emph{terminal} such coalgebra (where $\cut$ is used to defin
 As a remedy, we define a coalgebra to come equipped with a specified operation analogous to $\cut$, and some laws governing
 the behavior of that operation:
 
-
-\begin{comment}
-\begin{remark}[$\shift$ operation for the lambda calculus]\label{rem:shift}
-  The heterogeneous data type of lambda terms comes with a term constructor $\abs_A : \ULC (A^*) \to \ULC A$, which 
-  is the constructor responsible for the heterogeneity of that data type.
-  We compare the $\extend$ operation to the one with analogue purpose in the case of the lambda calculus,
-  the $\shift$ operation, of type
-  \begin{equation}  \shift_{A,B} : \Set(A,\ULC B) \to \Set\bigl(A^*,\ULC(B^*)\bigr) \enspace .\label{eq:shift}\end{equation}
-  Here $\ULC A$ denotes the set of lambda terms in context $A$, and $A^*:=1 + A$ denotes the context $A$ extended by a distinguished 
-  variable---the variable bound by the abstraction constructor.
-  
-  The $\shift$ operation is used in the definition of the monadic substitution operation
-  \[ \subst_{A,B} : \Set(A,\ULC B) \to \Set(\ULC A,\ULC B) \]
-  of the lambda calculus, when recursively substituting under an abstraction:
-   \[ \subst~f~(\abs~t):= \abs\bigl(\subst~(\shift~f)~t\bigr) \enspace . \]
-  The reader is encouraged to compare this equation to \Cref{eq:rest_redec}.
-  
-  The $\shift$ operation can be defined in monadic terms, for any monad $T$ on the category of sets such that,
-  when $T$ is instantiated by the monad $\ULC$, it becomes the specific $\shift$ operation of \Cref{eq:shift}.
-  
-  However, we were \emph{not} able to express the $\extend$ operation of $\Tri$ entirely in terms of categorical and comonadic operations. Indeed, if
-  one dualizes the categorical definition of $\shift$, one obtains an operation that has the same type as $\extend$, 
-  but for which, when used to define the redecoration, some comonadic property of redecoration fails.
-  More specifically, it is the auxiliary $\cut$ operation as defined in \Cref{ex:tri_comonad} which does not seem to be 
-  definable in categorical terms. There is an operation of the same type which is categorical---see \Cref{canonical_cut}---but
-  which does not yield a comonadic redecoration operation (cf.\ \Cref{rem:wrong_cut}).
-\end{remark}
-
-
-The failure to describe the $\extend$ operation---more precisely, the auxiliary $\cut$---in categorical terms leads us 
-to considering comonads that come with a specified $\cut$ operation for some fixed object $E$ in the source category:
-\end{comment}
 
 
 
@@ -1122,7 +929,6 @@ Given a comodule $M$ over a relative comonad $T$ with cut, we define a comodule 
  relative to $E:\C_0$ as in \Cref{def:rel_comonad_with_cut}.
  Given a comodule $M$ over $T$,  \fat{precomposition with} \enquote{\fat{product} with $E$}
  gives a comodule $M(E\times\_) : A \mapsto M(E\times A) $ over $T$.
-%   \[    M(E\times \_) : A \mapsto M(E\times A) \enspace . \]
  The comodule operation is deduced from that of $M$ by 
  \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \D(TA,FB)&\to \E\bigl(M(E\times A), M(E\times B)\bigr) \enspace ,\\ 
                                                       f &\mapsto \mcobind^M_{E\times A,E\times B}(\extend(f)) \enspace ,
@@ -1172,7 +978,7 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
 The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ destructor---%
 more precisely, of its behavior with respect to cosubstitution as in \Cref{eq:rest_redec}---via the notion of comodule morphism:
 
-% TODO: we already have that example
+
 \begin{example}\label{ex:tail_comodule_alternative}
 This example is a reformulation of \Cref{ex:tail_comodule}.
  Consider the comonad $\Tri$, equipped with the $\cut$ operation of \Cref{def:cut_for_tri}.
@@ -1216,7 +1022,7 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
 \end{definition}   
    
 
-\begin{theorem}\label{ex:final_sem_tri} % checked   
+\begin{theorem}\label{ex:final_sem_tri} 
    The pair $(\Tri, \tail)$ consisting of the relative comonad with cut $\Tri$ of \Cref{def:cut_for_tri} together with 
     the morphism of comodules $\tail$ of \Cref{ex:tail_comodule},
    constitutes the terminal coalgebra of triangular matrices.
@@ -1243,9 +1049,6 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
 This universal property of terminality characterizes not only the codata type of infinite triangular matrices, but also
 the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operation.
 
-% \begin{example}
-%  TODO: define codiag via universality
-% \end{example}
 
 \begin{Long}
 \section{Formalization in \coq}\label{sec:formal}
@@ -1356,11 +1159,8 @@ will allow, e.g., considering branching trees modulo permutation of subtrees.
 
 \input{stream_rules}
 \input{tri_rules}
+\input{formal_table}
 
-% TODO: complete table formal
- \input{formal_table}
-
-% \input{comparison_inductive}
 
 \end{document}
 
