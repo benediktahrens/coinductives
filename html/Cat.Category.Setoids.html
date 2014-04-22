@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>Coinitial semantics for redecoration of triangular matrices</title>
+<title>Terminal semantics for codata types in intensional Martin-Löf type theory</title>
 <script src="jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 $ (function () {
@@ -72,7 +72,7 @@ $ (function () {
 </div>
 
 <div class="doc">
-<a name="lab82"></a><h1 class="section">Category of Setoids</h1>
+<a name="lab83"></a><h1 class="section">Category of Setoids</h1>
 
 <div class="paragraph"> </div>
 
@@ -86,7 +86,7 @@ $ (function () {
 </table>
 <div class="paragraph"> </div>
 
-<a name="lab83"></a><h2 class="section">Setoid category definition</h2>
+<a name="lab84"></a><h2 class="section">Setoid category definition</h2>
 
 </div>
 <div class="code"><span class="id" data-type="keyword">Module</span> <a name="Setoids"><span class="id" data-type="module">Setoids</span></a>.<br/>
@@ -137,6 +137,12 @@ $ (function () {
 <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">Setoid.make</span></a></td><td><a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">Carrier</span></a></td><td colspan="2"><a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.Morphism"><span class="id" data-type="record">Morphism</span></a> <a class="idref" href="Cat.Category.Setoids.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Category.Setoids.html#B"><span class="id" data-type="variable">B</span></a><br/></td></tr>
 <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">Equiv</span></a></td><td><a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">f</span> <span class="id" data-type="var">g</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">∀</span></a> <span class="id" data-type="var">x</span> <span class="id" data-type="var">y</span><a class="idref" href="Cat.Misc.Unicode.html#:type_scope:'∀'_x_'..'_x_','_x"><span class="id" data-type="notation">,</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.SEquiv"><span class="id" data-type="projection">SEquiv</span></a> <a class="idref" href="Cat.Category.Setoids.html#x"><span class="id" data-type="variable">x</span></a> <a class="idref" href="Cat.Category.Setoids.html#y"><span class="id" data-type="variable">y</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'→'_x"><span class="id" data-type="notation">→</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.SEquiv"><span class="id" data-type="projection">SEquiv</span></a> (<a class="idref" href="Cat.Category.Setoids.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Category.Setoids.html#x"><span class="id" data-type="variable">x</span></a>) (<a class="idref" href="Cat.Category.Setoids.html#g"><span class="id" data-type="variable">g</span></a> <a class="idref" href="Cat.Category.Setoids.html#y"><span class="id" data-type="variable">y</span></a>) <a class="idref" href="Cat.Theory.SetoidType.html#Setoid.::'Setoid.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/></td></tr>
 </table>
+</div>
+
+<div class="doc">
+equivalence 
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">constructor</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" data-type="tactic">intros</span> <span class="id" data-type="var">f</span> <span class="id" data-type="var">x</span> <span class="id" data-type="var">y</span> <span class="id" data-type="var">eq_xy</span>. <span class="id" data-type="var">now</span> <span class="id" data-type="tactic">apply</span> <a class="idref" href="Cat.Category.Setoids.html#Setoids.cong"><span class="id" data-type="projection">cong</span></a>.<br/>
@@ -157,9 +163,21 @@ $ (function () {
 <br/>
 <span class="id" data-type="keyword">Program Definition</span> <a name="compose"><span class="id" data-type="definition">compose</span></a> {<span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> <span class="id" data-type="var">C</span>} : <a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'['_x_'⟶'_x_'⟶'_x_']'"><span class="id" data-type="notation">[</span></a> <a class="idref" href="Cat.Category.Setoids.html#B"><span class="id" data-type="variable">B</span></a> <a class="idref" href="Cat.Category.Setoids.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Category.Setoids.html#C"><span class="id" data-type="variable">C</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'['_x_'⟶'_x_'⟶'_x_']'"><span class="id" data-type="notation">⟶</span></a> <a class="idref" href="Cat.Category.Setoids.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Category.Setoids.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Category.Setoids.html#B"><span class="id" data-type="variable">B</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'['_x_'⟶'_x_'⟶'_x_']'"><span class="id" data-type="notation">⟶</span></a> <a class="idref" href="Cat.Category.Setoids.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Category.Setoids.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Category.Setoids.html#C"><span class="id" data-type="variable">C</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'['_x_'⟶'_x_'⟶'_x_']'"><span class="id" data-type="notation">]</span></a> ≔<br/>
 &nbsp;&nbsp;<a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'λ'_x_'..'_x_'↦₂'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">g</span> <span class="id" data-type="var">f</span> <a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'λ'_x_'..'_x_'↦₂'_x"><span class="id" data-type="notation">↦</span></a><a class="idref" href="Cat.Theory.SetoidType.html#Π₂.::'λ'_x_'..'_x_'↦₂'_x"><span class="id" data-type="notation">₂</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.Morphism.make"><span class="id" data-type="abbreviation">Setoids.Morphism.make</span></a> (<a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">x</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Category.Setoids.html#g"><span class="id" data-type="variable">g</span></a> (<a class="idref" href="Cat.Category.Setoids.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Category.Setoids.html#x"><span class="id" data-type="variable">x</span></a>)).<br/>
+</div>
+
+<div class="doc">
+g-cong 
+</div>
+<div class="code">
 <a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">do</span> 2 <span class="id" data-type="tactic">apply</span> <a class="idref" href="Cat.Category.Setoids.html#Setoids.cong"><span class="id" data-type="projection">cong</span></a>.<br/>
 </div>
+</div>
+
+<div class="doc">
+g-cong₂ 
+</div>
+<div class="code">
 <a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;<span class="id" data-type="tactic">intros</span> <span class="id" data-type="var">f₁</span> <span class="id" data-type="var">f₂</span> <span class="id" data-type="var">eq_f₁f₂</span> <span class="id" data-type="var">g₁</span> <span class="id" data-type="var">g₂</span> <span class="id" data-type="var">eq_g₁g₂</span> <span class="id" data-type="var">x</span> <span class="id" data-type="var">y</span> <span class="id" data-type="var">eq_xy</span>; <span class="id" data-type="tactic">simpl</span>.<br/>
 &nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">apply</span> <span class="id" data-type="var">eq_f₁f₂</span>, <span class="id" data-type="var">eq_g₁g₂</span>.<br/>
@@ -188,7 +206,7 @@ $ (function () {
 </div>
 
 <div class="doc">
-<a name="lab84"></a><h2 class="section">Setoids have binary product</h2>
+<a name="lab85"></a><h2 class="section">Setoids have binary product</h2>
 
 </div>
 <div class="code"><span class="id" data-type="keyword">Section</span> <a name="Product_construction"><span class="id" data-type="section">Product_construction</span></a>.<br/>
@@ -200,6 +218,12 @@ $ (function () {
 <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">Setoids.make</span></a></td><td><a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">Carrier</span></a></td><td colspan="2"><a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Category.Setoids.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Theory.Notations.html#::x_'⟨×⟩'_x"><span class="id" data-type="notation">⟨×⟩</span></a> <a class="idref" href="Cat.Category.Setoids.html#B"><span class="id" data-type="variable">B</span></a><br/></td></tr>
 <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">Equiv</span></a></td><td><a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">S₁</span> <span class="id" data-type="var">S₂</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#fst"><span class="id" data-type="definition">fst</span></a> <a class="idref" href="Cat.Category.Setoids.html#S₁"><span class="id" data-type="variable">S₁</span></a> <a class="idref" href="Cat.Category.Setoids.html#Product_construction.::x_'∼'_x"><span class="id" data-type="notation">∼</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#fst"><span class="id" data-type="definition">fst</span></a> <a class="idref" href="Cat.Category.Setoids.html#S₂"><span class="id" data-type="variable">S₂</span></a> <a class="idref" href="Cat.Misc.Unicode.html#:type_scope:x_'∧'_x"><span class="id" data-type="notation">∧</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#snd"><span class="id" data-type="definition">snd</span></a> <a class="idref" href="Cat.Category.Setoids.html#S₁"><span class="id" data-type="variable">S₁</span></a> <a class="idref" href="Cat.Category.Setoids.html#Product_construction.::x_'∼'_x"><span class="id" data-type="notation">∼</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#snd"><span class="id" data-type="definition">snd</span></a> <a class="idref" href="Cat.Category.Setoids.html#S₂"><span class="id" data-type="variable">S₂</span></a> <a class="idref" href="Cat.Category.Setoids.html#Setoids.::'Setoids.make'_'⦃'_'Carrier'_'≔'_x_';'_'Equiv'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/></td></tr>
 </table>
+</div>
+
+<div class="doc">
+equivalence 
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">constructor</span>; <span class="id" data-type="tactic">hnf</span>.<br/>
 <table>
@@ -212,6 +236,19 @@ $ (function () {
 <br/>
 &nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="product_mor"><span class="id" data-type="definition">product_mor</span></a> (<span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> <span class="id" data-type="var">C</span> : <a class="idref" href="Cat.Category.Setoids.html#𝑺𝒆𝒕𝒐𝒊𝒅"><span class="id" data-type="definition">𝑺𝒆𝒕𝒐𝒊𝒅</span></a>) (<span class="id" data-type="var">f</span> : <a class="idref" href="Cat.Category.Setoids.html#C"><span class="id" data-type="variable">C</span></a> <a class="idref" href="Cat.Category.Setoids.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Category.Setoids.html#A"><span class="id" data-type="variable">A</span></a>) (<span class="id" data-type="var">g</span> : <a class="idref" href="Cat.Category.Setoids.html#C"><span class="id" data-type="variable">C</span></a> <a class="idref" href="Cat.Category.Setoids.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Category.Setoids.html#B"><span class="id" data-type="variable">B</span></a>) : <a class="idref" href="Cat.Category.Setoids.html#C"><span class="id" data-type="variable">C</span></a> <a class="idref" href="Cat.Category.Setoids.html#::x_'⇒'_x"><span class="id" data-type="notation">⇒</span></a> <a class="idref" href="Cat.Category.Setoids.html#product"><span class="id" data-type="definition">product</span></a> <a class="idref" href="Cat.Category.Setoids.html#A"><span class="id" data-type="variable">A</span></a> <a class="idref" href="Cat.Category.Setoids.html#B"><span class="id" data-type="variable">B</span></a> ≔<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Category.Setoids.html#Setoids.Morphism.make"><span class="id" data-type="abbreviation">Setoids.Morphism.make</span></a> (<a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">c</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#:core_scope:'('_x_','_x_','_'..'_','_x_')'"><span class="id" data-type="notation">(</span></a><a class="idref" href="Cat.Category.Setoids.html#f"><span class="id" data-type="variable">f</span></a> <a class="idref" href="Cat.Category.Setoids.html#c"><span class="id" data-type="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#:core_scope:'('_x_','_x_','_'..'_','_x_')'"><span class="id" data-type="notation">,</span></a> <a class="idref" href="Cat.Category.Setoids.html#g"><span class="id" data-type="variable">g</span></a> <a class="idref" href="Cat.Category.Setoids.html#c"><span class="id" data-type="variable">c</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Datatypes.html#:core_scope:'('_x_','_x_','_'..'_','_x_')'"><span class="id" data-type="notation">)</span></a>).<br/>
+</div>
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li>,- cong 
+</li>
+</ul>
+
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">split</span>; <span class="id" data-type="var">now</span> <span class="id" data-type="tactic">apply</span> <a class="idref" href="Cat.Category.Setoids.html#Setoids.cong"><span class="id" data-type="projection">cong</span></a>.<br/>
 </div>
@@ -230,13 +267,32 @@ $ (function () {
 <tr><td>&nbsp;&nbsp;</td><td><a class="idref" href="Cat.Theory.Product.html#::'BinaryProduct.make'_'⦃'_'Category'_'≔'_x_';'_'_×_'_'≔'_x_';'_'⟨_,_⟩'_'≔'_x_';'_'π₁'_'≔'_x_';'_'π₂'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Product.html#::'BinaryProduct.make'_'⦃'_'Category'_'≔'_x_';'_'_×_'_'≔'_x_';'_'⟨_,_⟩'_'≔'_x_';'_'π₁'_'≔'_x_';'_'π₂'_'≔'_x_'⦄'"><span class="id" data-type="notation">π</span></a><a class="idref" href="Cat.Theory.Product.html#::'BinaryProduct.make'_'⦃'_'Category'_'≔'_x_';'_'_×_'_'≔'_x_';'_'⟨_,_⟩'_'≔'_x_';'_'π₁'_'≔'_x_';'_'π₂'_'≔'_x_'⦄'"><span class="id" data-type="notation">₁</span></a></td><td><a class="idref" href="Cat.Theory.Product.html#::'BinaryProduct.make'_'⦃'_'Category'_'≔'_x_';'_'_×_'_'≔'_x_';'_'⟨_,_⟩'_'≔'_x_';'_'π₁'_'≔'_x_';'_'π₂'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Category.Setoids.html#proj_l"><span class="id" data-type="definition">proj_l</span></a><br/></td></tr>
 <tr><td>&nbsp;&nbsp;</td><td><a class="idref" href="Cat.Theory.Product.html#::'BinaryProduct.make'_'⦃'_'Category'_'≔'_x_';'_'_×_'_'≔'_x_';'_'⟨_,_⟩'_'≔'_x_';'_'π₁'_'≔'_x_';'_'π₂'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Product.html#::'BinaryProduct.make'_'⦃'_'Category'_'≔'_x_';'_'_×_'_'≔'_x_';'_'⟨_,_⟩'_'≔'_x_';'_'π₁'_'≔'_x_';'_'π₂'_'≔'_x_'⦄'"><span class="id" data-type="notation">π</span></a><a class="idref" href="Cat.Theory.Product.html#::'BinaryProduct.make'_'⦃'_'Category'_'≔'_x_';'_'_×_'_'≔'_x_';'_'⟨_,_⟩'_'≔'_x_';'_'π₁'_'≔'_x_';'_'π₂'_'≔'_x_'⦄'"><span class="id" data-type="notation">₂</span></a></td><td><a class="idref" href="Cat.Theory.Product.html#::'BinaryProduct.make'_'⦃'_'Category'_'≔'_x_';'_'_×_'_'≔'_x_';'_'⟨_,_⟩'_'≔'_x_';'_'π₁'_'≔'_x_';'_'π₂'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Category.Setoids.html#proj_r"><span class="id" data-type="definition">proj_r</span></a> <a class="idref" href="Cat.Theory.Product.html#::'BinaryProduct.make'_'⦃'_'Category'_'≔'_x_';'_'_×_'_'≔'_x_';'_'⟨_,_⟩'_'≔'_x_';'_'π₁'_'≔'_x_';'_'π₂'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/></td></tr>
 </table>
-<a class="proof" href="#">Show proof.</a><br/><div class="proof"> &nbsp;&nbsp;<span class="id" data-type="tactic">intros</span> <span class="id" data-type="var">f₁</span> <span class="id" data-type="var">f₂</span> <span class="id" data-type="var">eq_f₁f₂</span> <span class="id" data-type="var">g₁</span> <span class="id" data-type="var">g₂</span> <span class="id" data-type="var">eq_g₁g₂</span> <span class="id" data-type="var">x</span> <span class="id" data-type="var">y</span> <span class="id" data-type="var">eq_xy</span>; <span class="id" data-type="tactic">simpl</span>; <span class="id" data-type="tactic">split</span>.<br/>
+</div>
+
+<div class="doc">
+Pmor-cong₂ 
+</div>
+<div class="code">
+<a class="proof" href="#">Show proof.</a><br/><div class="proof">
+&nbsp;&nbsp;<span class="id" data-type="tactic">intros</span> <span class="id" data-type="var">f₁</span> <span class="id" data-type="var">f₂</span> <span class="id" data-type="var">eq_f₁f₂</span> <span class="id" data-type="var">g₁</span> <span class="id" data-type="var">g₂</span> <span class="id" data-type="var">eq_g₁g₂</span> <span class="id" data-type="var">x</span> <span class="id" data-type="var">y</span> <span class="id" data-type="var">eq_xy</span>; <span class="id" data-type="tactic">simpl</span>; <span class="id" data-type="tactic">split</span>.<br/>
 &nbsp;&nbsp;- <span class="id" data-type="var">now</span> <span class="id" data-type="tactic">apply</span> <span class="id" data-type="var">eq_f₁f₂</span>.<br/>
 &nbsp;&nbsp;- <span class="id" data-type="var">now</span> <span class="id" data-type="tactic">apply</span> <span class="id" data-type="var">eq_g₁g₂</span>.<br/>
 </div>
+</div>
+
+<div class="doc">
+π₁-cong 
+</div>
+<div class="code">
 <a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">apply</span> <a class="idref" href="Cat.Category.Setoids.html#Setoids.cong"><span class="id" data-type="projection">cong</span></a>.<br/>
 </div>
+</div>
+
+<div class="doc">
+π₂-cong 
+</div>
+<div class="code">
 <a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">apply</span> <a class="idref" href="Cat.Category.Setoids.html#Setoids.cong"><span class="id" data-type="projection">cong</span></a>.<br/>
 </div>
