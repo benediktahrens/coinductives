@@ -1,0 +1,107 @@
+
+
+\pdfoutput=1
+
+\documentclass[envcountsame]{llncs}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[protrusion=true,expansion=true]{microtype}
+
+
+\usepackage[style=numeric,
+%  backref=true,
+ isbn=false,
+ maxnames=3,
+ maxbibnames=99 ,                
+ uniquename=init ,
+]{biblatex}
+\bibliography{literature.bib}
+
+\usepackage{ownstylesansthm}
+
+\usepackage{comment}
+\excludecomment{Long}\includecomment{Short}
+% \includecomment{Long}\excludecomment{Short}
+
+\pagestyle{plain}
+
+\begin{document}
+
+\title{Terminal semantics for codata types\\in Homotopy Type Theory}
+
+\author{Benedikt Ahrens and R\'egis Spadotti}
+
+\institute{
+Institut de Recherche en Informatique de Toulouse\\
+Universit\'e Paul Sabatier, 
+Toulouse}
+
+\newcommand{\fat}[1]{\textbf{#1}}
+
+
+
+
+
+\maketitle
+
+% \tableofcontents
+
+\begin{abstract}
+
+ We extend and adapt previous work on terminal semantics of coinductive data types in intensional Martin-Löf type theory to
+ obtain terminal semantics for such data types in a more extensional variant of type theory, the recently developed 
+ \emph{Homotopy Type Theory} a.k.a.\ \emph{Univalent Foundations}.
+   
+\end{abstract}
+
+
+
+
+\section{Introduction}
+ 
+ In previous work \parencite{trimat_coq} we presented a terminal coalgebra semantics for coinductive data types in
+ intensional Martin-Löf type theory (IMLTT) \parencite{martin_lof}.
+ One of the main characteristics of coinductive data types in IMLTT is that the notions of \emph{equality}
+ (as given by the Martin-Löf identity type) and \emph{bisimilarity}---a form of observational equivalence---do \emph{not
+ coincide}. Properties of inhabitants of such data types and of maps into such a codata type are hence stated and proved modulo bisimilarity rather than equality.
+ 
+ \emph{Homotopy Type Theory} (HoTT) \parencite{hottbook} is a variant of Martin-Löf type theory which features more extensional 
+ characteristics; in particular, set-level quotients exist in Homotopy Type Theory \parencite[Chap.\ 6.10]{hottbook}.
+ 
+ In this work, we profit from the existence of quotients in HoTT and use them to quotient codata types with respect to their
+ bisimilarity relation, thus reconciling bisimilarity and equality in the aforementioned sense.
+ We then prove a variant of an earlier result \parencite{trimat_coq}: the data type thus obtained constitutes the terminal 
+ object in some category.
+ 
+ 
+\printbibliography
+
+
+\appendix
+
+\input{stream_rules}
+\input{tri_rules}
+% \input{formal_table}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
