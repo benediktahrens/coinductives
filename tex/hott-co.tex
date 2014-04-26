@@ -77,6 +77,25 @@ Toulouse}
  morphisms is proved modulo pointwise \emph{bisimilarity} in the former and pointwise \emph{equality} in the latter.
  
  
+ 
+ \begin{definition}
+  A \fat{coalgebra for stream} is given by
+  \begin{itemize}
+   \item a map $T : \Set \to \Set$ ;
+   \item a dependent function $h : \forall A, TA \to A$ and
+   \item a dependent function $t : \forall A, TA \to TA$.
+  \end{itemize}
+  
+  A \fat{morphism} of coalgebras $(T,h,t)\to (T',h',t')$ is given by 
+  a dependent function $f : \forall A, TA \to T'A$ such that
+   \begin{itemize}
+    \item $\comp{f_A}{h'_A} = h_A$ and
+    \item $\comp{f_A}{t'_A} = \comp{t_A}{f_A}$.
+   \end{itemize}
+ \end{definition}
+
+ 
+ 
 \printbibliography
 
 
