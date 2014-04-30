@@ -96,7 +96,7 @@
             
 \begin{center}
                \AxiomC{$R : \stream A \to \stream A \to \Set$} \noLine\UnaryInfC{$\forall~s,t : \stream A, R~s~t \to \shead~s = \shead~t$} \noLine
-                \UnaryInfC{$\forall~s,t : \stream A, R~s~t \to \bisim (\stail~s) (\stail~t)$}  %\doubleLine
+                \UnaryInfC{$\forall~s,t : \stream A, R~s~t \to R~(\stail~s) (\stail~t)$}  %\doubleLine
                \UnaryInfC{$\forall~s,t : \stream A, R~s~t \to \bisim~s~t$}
                \DisplayProof%
 \end{center}
