@@ -1,4 +1,4 @@
-#Coinitial semantics for redecoration of triangular matrices
+#Terminal semantics for codata types in intensional Martin-Löf type theory
 
 #### Benedikt Ahrens and Régis Spadotti
 
