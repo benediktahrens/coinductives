@@ -364,151 +364,17 @@ the category of coalgebras defined in \Cref{cat_stream} has a terminal object.
 In analogy to the definition of coalgebras for the signature of streams, one would define
 a coalgebra for the signature of $\Tri$ as a pair $(T,r)$ of a comonad $T$ relative to $\eq : \Set \to \Setoid$ and 
 a morphism of comodules $r : T \to T(E\times \_)$. 
-It turns out that in this way, one is not capable of obtaining the right auxiliary function $\cut$ for what is
-supposed to be the \emph{terminal} such coalgebra (where $\cut$ is used to define the comodule $\Tri(E\times \_)$), namely the pair $(\Tri,\tail)$.
-As a remedy, we define a coalgebra to come equipped with a specified operation analogous to $\cut$, and some laws governing
-the behavior of that operation:
-
-
-
-
-\begin{definition}%[Relative comonad with cut]
-\label{def:rel_comonad_with_cut}
- Let $\C$ and $\D$ be categories with binary products and $F:\C\to\D$ a strong monoidal functor. Let $E:\C_0$ be a fixed object of $\C$.
- We define a \fat{comonad relative to $F$ with cut relative to $E$} to be a comonad $T$ relative to $F$ together with a $\cut$ operation 
-    \[ \cut : \forall~A:\C_0, T(E\times A) \to TA \qquad \text{such that}\]
-%  satisfying the following axioms:
-  \begin{itemize}
-%    \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{\counit_{E\times A}}{F(\pr_2(E,A))}$;
-   \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{\lift^T(\pr_2(E,A))}{\counit_{A}}$;
-   \item $\forall~A~B:C_0,\forall~f:\D(TA,FB), \comp{\cut_A}{\cobind(f)} = \comp{\cobind(\extend~f)}{\cut_B}$,
-  \end{itemize}
-
-  \noindent
-  where, for $f:\D(TA,FB)$, we define $\extend(f) : \D\bigl(T(E\times A),F(E\times B)\bigr)$ as
-       \[ \extend(f) := \comp{\comp{\langle T(\pr_1) , \cut \rangle}{(\counit_E\times f)}}{{\phi^{F}_{E,B}}^{-1}} \enspace . \]
-  
-\end{definition}
-
-Morphisms of comonads with cut are morphisms of comonads that are compatible with the respective $\cut$ operations:
-
-\begin{definition}%[Morphism of comonads with cut]
-\label{def:morphism_comonad_cut}
- Let $(T,\cut^T)$ and $(S,\cut^S)$ be two comonads relative to a functor $F$ with cut relative to $E$ as in \Cref{def:rel_comonad_with_cut}.
- A \fat{morphism of comonads with cut} is a comonad morphism $\tau$ between the underlying comonads as in \Cref{def:comonad_morphism} that 
- commutes suitably with the respective $\cut$ operations, i.e.\ for any $A : \C_0$,
-  $\comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A}$.
-\end{definition}
-
-
-Comonads with cut relative to a fixed functor $F:\C\to\D$ and $E:\C_0$ form a category $\RComonadWC(F,E)$.
-There is the obvious forgetful functor from $\RComonadWC(F,E)$ to $\RComonad(F)$.
-Conversely, any comonad $T$ relative to a suitable functor can be equipped with a $\cut$ operation, using functoriality of $T$.
-%
-\begin{Short}
- Details are given in the long version of this article.
-\end{Short}
-
-\begin{Long}
-\begin{remark}[Canonical $\cut$ operation]\label{canonical_cut}
- Any comonad $T$ relative to a strong monoidal functor $F:\C\to\D$  can be equipped with a $\cut$ operation relative to 
- $E:\C_0$ satisfying the properties of \Cref{def:rel_comonad_with_cut} by setting
-   \[ \ccut_A := \cut_A := \lift^T\bigl(\pr_2(E,A)\bigr) \enspace . \]
- (The extra \enquote{c} of $\ccut$ stands for \enquote{canonical}.)
- It follows from the axioms of comonad morphism that a comonad morphism $\tau : T\to S$ satisfies the equation of \Cref{def:morphism_comonad_cut} 
- for the thus defined operations $\ccut^T$ and $\ccut^S$, hence constitutes a morphism of comonads with cut from $(T,\ccut^T)$ to $(S,\ccut^S)$.
- We thus obtain a functor 
- \[ \ccut_{F,E} : \RComonad(F) \to \RComonadWC(F,E)\]
- from relative comonads over $F$ to relative comonads over $F$ with cut relative to a fixed object $E:\C_0$ given on 
- objects by $T\mapsto (T,\ccut^T)$.
-\end{remark}
-
-The functor $\ccut_{F,E}$, followed by the forgetful functor, yields the identity. We can thus view
-relative comonads with cut as a generalization of relative comonads.
-\end{Long}
-
-\begin{Long}
-Our prime example of relative comonad comes with a $\cut$ operation that is \emph{not} the canonical one:
-\end{Long}
-
-\begin{example}%[$\cut$ for $\Tri$]
-\label{def:cut_for_tri}
-  The relative comonad $\Tri$ from \Cref{ex:tri_comonad}, together with the $\cut$ operation defined in \Cref{ex_tri}, 
-  is a comonad with cut as in \Cref{def:rel_comonad_with_cut}.
-\end{example}
 
 
 
 
 
-Given a comodule $M$ over a relative comonad $T$ with cut, we define a comodule over $T$ obtained by precomposition of $M$ with
-\enquote{product with a fixed object $E$}:
-
-
-\begin{definition}%[Precomposition with product]
-\label{def:product_in_context}
- Suppose $F:\C\to\D$ is a strong monoidal functor, and $T$ is a comonad relative to $F$ with a $\cut$ operation 
- relative to $E:\C_0$ as in \Cref{def:rel_comonad_with_cut}.
- Given a comodule $M$ over $T$,  \fat{precomposition with} \enquote{\fat{product} with $E$}
- gives a comodule $M(E\times\_) : A \mapsto M(E\times A) $ over $T$.
- The comodule operation is deduced from that of $M$ by 
- \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \D(TA,FB)&\to \E\bigl(M(E\times A), M(E\times B)\bigr) \enspace ,\\ 
-                                                      f &\mapsto \mcobind^M_{E\times A,E\times B}(\extend(f)) \enspace ,
-  \end{align*}                                        
-where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_cut}.
- 
- Furthermore, given two comodules $M$ and $N$ over $\T$ with target category $\E$, and a comodule morphism $\alpha : M \to N$,  
- the assignment $ \alpha(E \times \_)_A := \alpha_{E\times A}$ defines a comodule morphism 
-  $\alpha(E\times \_) : M(E\times \_) \to N(E\times \_) $.
-
-\begin{Long}
-  \noindent
-  We thus obtain an endofunctor on the category of comodules over $T$ towards $\E$,
-   $ M \mapsto  M (E\times \_) : \RComod(T,\E) \to \RComod(T,\E)$.
-\end{Long}
-\end{definition}
 
 
 
-\begin{remark}[Pushforward commutes with product in context]\label{rem:prod_pullback_commute}
- Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pushforward_comodule} commute:
- we have an isomorphism of comodules 
-  $\tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_)$
- given pointwise by identity morphisms.
-\end{remark}
-
-
-\begin{Long}
-
-It directly follows from the definition that the cut operation of any comonad $T$ with cut 
-constitutes a comodule morphism $\cut : T(E\times \_) \to T$.
-We can thus restate the definition of a morphism of comonads with cut as in \Cref{def:morphism_comonad_cut} by asking the following diagram 
-of comodule morphisms (in the category $\RComod(S,\D)$) to commute
-(where in the upper left corner we silently add an isomorphism as in \Cref{rem:prod_pullback_commute}):
- \[ \begin{xy}
-       \xymatrix{  **[l] \tau_*T(E\times \_ )  \ar[r]^{\tau_*(\cut^T)} \ar[d]_{\induced{\tau}(E\times \_)}  &  **[r] \tau_*T \ar[d]^{\induced{\tau}} \\
-                   **[l]  S (E\times \_ ) \ar[r]_{\cut^S}  &  **[r] S  \enspace .
-        }
-      \end{xy}
-   \]
-
-\end{Long}
 
 
 
-\begin{Long}
-The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ destructor---%
-more precisely, of its behavior with respect to cosubstitution as in \Cref{eq:rest_redec}---via the notion of comodule morphism:
-
-
-\begin{example}\label{ex:tail_comodule_alternative}
-This example is a reformulation of \Cref{ex:tail_comodule}.
- Consider the comonad $\Tri$, equipped with the $\cut$ operation of \Cref{def:cut_for_tri}.
- The destructor $\tail$ of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
-  from the tautological comodule  $\Tri$ to $\Tri(E\times \_)$.
-  
-\end{example}
-\end{Long}
 
 
 \begin{definition}%[Coalgebras of infinite triangular matrices]
