@@ -61,129 +61,7 @@ Toulouse}
 
 
 
-\section{Introduction}
  
- In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
- We then use these notions to characterize several \emph{co}inductive data types in intensional Martin-L\"of type theory
- via a universal property.
- 
- In a set-theoretic setting, inductive sets are characterized as initial algebras for 
- some endofunctor on the category of sets. For instance, the set of natural numbers constitutes the carrier of the 
- initial algebra of the functor $X \mapsto 1 + X$.
- 
- In a type-theoretic setting as given by Martin-L\"of type theory \parencite{martin_lof}, 
- two approaches to the semantics of inductive types have been studied: 
- one approach consists in showing that inductive types exist in a \emph{model} of the type theory,
- as is done by \textcite{DBLP:journals/apal/MoerdijkP00}.
- Another approach is to prove that adding certain type-theoretic rules to the type theory
- implies (or is equivalent to) the existence of a universal object \emph{within} type theory
- (see, e.g., \parencite{DBLP:conf/lics/AwodeyGS12, DBLP:journals/tcs/Dybjer97}).
- This latter approach is the one we take in the present work.
- 
- Some attention has to be given to 
- the precise formulation of the type theory in question:
- One important feature of Martin-L\"of type theory is the \emph{identity type}, a type family that associates to any two 
- inhabitants $a,b : A$ of a same type $A$ the type of \enquote{identities} between them.
- One distinguishes \emph{extensional} and \emph{intensional} type theory, according to whether terms of identity type
- are reflected into the internal, judgmental equality of the type theory or not. This difference must be considered when defining the notion of
- \enquote{initial algebra}, in particular the \emph{uniqueness} part of initiality:
- 
- In extensional type theory, propositional equality as given by the Martin-L\"of identity type \parencite{martin_lof} is reflected 
- into judgmental equality via a \emph{reflection rule}.
- This reflection rule equips \emph{extensional} type theory with extensional features similar to those of set theory.
- As a consequence, the characterization of a \textsf{W}-type---a member of a particular class of inductive types---in extensional MLTT as initial algebra for some endofunctor on the 
- category of types \parencite{DBLP:journals/tcs/Dybjer97} works as in the category of sets.
- Indeed, in extensional MLTT, one has function extensionality available, which suffices to 
- deduce that there is a \emph{judgmentally unique} algebra morphism from the initial algebra to any algebra.
-
-
- Intensional Martin-L\"of type theory \parencite{martin_lof} lacks this reflection principle for the sake of decidability of type checking. 
- It forms the base of two computer proof assistants, \coq and \agda.
- \textsf{W}-types have been studied \parencite{DBLP:conf/lics/AwodeyGS12} in \emph{Homotopy Type Theory} (HoTT) \parencite{hottbook}, an extension of intensional Martin-L\"of type theory. 
- In this extension, function extensionality is provable from the \emph{Univalence Axiom}. 
- For a suitable definition of \emph{uniqueness}---\emph{contractibility} in HoTT jargon---one can then prove uniqueness of the
- algebra morphisms out of the one whose carrier is given by the \textsf{W}-type.
- The mentioned work \parencite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterization of \textsf{W}-types as initial algebras carries over 
- from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of uniqueness.
- 
- 
- The characterization of inductive sets/types as initial objects in some category
- has been extended to some \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
- in different formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
- The main goal of these works is not just to characterize a data type via a universal property, but rather a data type
- \emph{equipped with a canonical, well-behaved substitution operation}.
- 
-
-
- Dually to inductive sets, \fat{co}inductive sets such as streams are characterized as terminal objects \parencite{jacobs1997tutorial}.
- Inhabitants of such sets are equal if and only if they are \emph{bisimilar} \parencite{DBLP:journals/mscs/TuriR98}:
- Intuitively, two elements of a coinductive set are the same if they allow for the same observations.
- 
- This correspondence between equality and bisimilarity fails in IMLTT, when equality is considered to be given by the 
- Martin-L\"of identity type. Instead, one defines \emph{bisimilarity} as a coinductive predicate 
- on a coinductive type, and one reasons about the terms of a coinductive type modulo the bisimilarity predicate
- rather than identity \parencite{DBLP:conf/types/Coquand93}.
- Consequently, we consider two maps into a coinductive type to be the same if they are \emph{pointwise bisimilar}---an analogue
- to the aforementioned principle of function extensionality. 
- With these conventions, we give, in the present work, a characterization of some coinductive data types as \emph{terminal} objects in some category 
- defined in intensional Martin-L\"of type theory.
- More precisely, we consider an example of \emph{homogeneous} codata type, streams, and 
- an example of \emph{heterogeneous} codata type, triangular matrices.
- For each of these examples we prove, 
- from type-theoretic rules specifying the respective codata type added to the basic rules of Martin-L\"of type theory,
- the existence of a terminal object in some category \emph{within IMLTT}.
- Our terminal semantics characterizes not only the codata types themselves but also the bisimilarity relation and
- a canonical cosubstitution operation on them.
- 
- The fact that cosubstitution for coinductive data types is comonadic in a set-theoretic setting is established by \textcite{DBLP:conf/sfp/UustaluV01}.
- In IMLTT however, in order to characterize that cosubstitution operation on a given codata type, and its algebraic properties,
- we develop the notion of \emph{relative comonad} and \emph{comodule over a relative comonad}.
- The need to consider \emph{relative} comonads arises from the  need to check the algebraic properties of cosubstitution modulo \emph{bisimilarity} rather
- than modulo identity (in the sense of ML identity types).
- 
- 
- All our results have been implemented in the proof assistant \coq \parencite{coq84pl3}.
- The \coq source files and HTML documentation are available online \parencite{trimat_coq}.
- In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
-
- 
- 
- \subsubsection*{Disclaimer}The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
- While we present them in a type-theoretic style, the definitions and lemmas can trivially be transferred to a set-theoretic setting.
- Throughout this article, we use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
- For instance, we write $f : \C(A,B)$ to indicate that $f$ is a morphism from object $A$ to object $B$ in category $\C$.
- Whenever an operation takes several arguments, we write some of them as indices; these indices might be omitted when 
- they can be deduced from the type of the later arguments.
- We assume basic knowledge of category theory; any instances used are defined in the following.
-  
- \subsubsection*{More related work}
- The notion of \emph{module over a monad}, which we dualize and generalize in this work, is used by \textcite{DBLP:journals/iandc/HirschowitzM10}
- to give an initial semantics result for languages with variable binding. 
- Their work is based on work of \textcite{alt_reus},
- who show that the lambda calculus equipped with a simultaneous substitution constitutes a monad.
- We make use of the notion of \emph{relative comonad}, the dual to relative monads as introduced by \textcite{DBLP:conf/fossacs/AltenkirchCU10}.
- One of our main examples, the codata type of infinite triangular matrices, is studied by \textcite{DBLP:conf/types/MatthesP11}.
- Redecoration for both finite and infinite triangular matrices is used by \textcite{DBLP:journals/tcs/AbelMU05} to exemplify 
- the expressivity of the studied recursion schemes.
- 
-\begin{Long}
- 
- \subsubsection*{Organisation of the paper}
-  In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
-  In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those codata types.
-   Their specifying rules are given in \Cref{stream_rules} and \Cref{tri_rules}, respectively.
-  In \Cref{sec:comonads} we present \emph{relative comonads} and define the category of comonads relative to a fixed functor.
-    We give some examples of such structures, using the codata types presented in \Cref{sec:tri}.
-  In \Cref{sec:comodules} we define comodules over relative comonads and give some constructions of comodules.
-     Again, examples of such structures are taken from \Cref{sec:tri}.
-  In \Cref{sec:coalgebras_for_tri} we define categories of coalgebras for the codata types presented in \Cref{sec:tri},
-      based on the category-theoretic notions developed in the previous sections.
-      We then prove that the codata types constitute the terminal coalgebras in the respective categories.
-      Finally, we present an example of a map defined as a terminal map exploiting the universal property of streams.
-  In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
-  A table with the correspondence between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
-
-\end{Long}
 
 
 \section{Preliminaries}\label{sec:preliminaries}
@@ -295,13 +173,6 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
 \end{figure}
    
    
-   We define a \emph{co}substition operation $\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B$ on streams via the following clauses:
-% 
-   \begin{align} \comp{\sredec~f}{\shead} := f \quad\text{ and } \quad
-                  \comp{\sredec~f}{\stail} := \comp{\stail}{\sredec~f} \enspace . \label{eq:tail_sredec}
-    \end{align}
-  We call such an operation \enquote{cosubstitution} since its type is dual to, e.g., the simultaneous substitution operation 
-  of the lambda calculus \parencite{alt_reus}.
 \end{example}
 
 
@@ -444,14 +315,16 @@ We first consider the homogeneous codata type of streams.
 
 \begin{definition}%[Coalgebras for $\stream$]
  \label{cat_stream}
-  A \fat{coalgebra for $\stream$} is given by a pair $(S,t)$ 
+  A \fat{coalgebra for $\stream$} is given by a triple $(S,h,t)$ 
   consisting of
   \begin{itemize}
-   \item a function $S : \Set\to\Setoid$  and
-   \item a family of functions $t_A : SA \to SA$.
+   \item a setoid $S : \Setoid$,
+   \item a setoid morphism $h : S \to \eq A$ and
+   \item a setoid morphism $t : S \to S$.
   \end{itemize}
-  A coalgebra morphism $(S,t) \to (S',t')$ is given by a family of functions $\tau_A : S \to S'$ such that
-     $ \comp{t_A}{\tau_A} = \comp{\tau_A}{t'_A}$.
+  A coalgebra morphism $(S,h,t) \to (S',h',t')$ is given by a setoid morphism $\tau : S \to S'$ such that
+     $\comp{\tau}{h} = h'$ pointwise and
+     $ \comp{t}{\tau} \sim \comp{\tau}{t'}$ pointwise.
 \end{definition}
 
 This defines a category, with the obvious composition and identity. 
@@ -677,130 +550,12 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
    constitutes the terminal coalgebra of triangular matrices.
 \end{theorem}
 
-\begin{Long}
-\begin{proof}[sketch]
-   For a given coalgebra $(T,\tail^T)$, the (terminal) morphism $\bigcirc = \bigcirc_T:T\to\Tri$ is defined via the corecursive equations
-    \begin{align}\head\bigl(\bigcirc~t\bigr) &:= \counit^T~t \quad\text{ and } \label{eq:terminal_top}\\
-                     \tail\bigl(\bigcirc~t\bigr) &:= \bigcirc(\tail^T~t) \enspace . \label{eq:terminal_rest}
-      \end{align}
-      By coinduction we show that the map $\bigcirc$ is compatible with $\cobind$ and $\cut$ operations of the source and 
-   target coalgebras. We omit these calculations, which can be consulted in the \coq source files.
-   
-   Note that there is actually no choice in this definition: \Cref{eq:terminal_top} is forced upon us since we want $\bigcirc$ to constitute 
-   a morphism of comonads---the equation directly corresponds to one of the axioms.
-   \Cref{eq:terminal_rest} is forced upon us by the diagram a morphism of coalgebras has to make commute.
-   
-   The same argument is used to show, again by coinduction, that any two morphisms of coalgebras $\tau,\rho : (T,\tail^T) \to (\Tri,\tail)$
-   are equal, thus concluding the proof.   
-\end{proof}
-\end{Long}
-
-This universal property of terminality characterizes not only the codata type of infinite triangular matrices, but also
-the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operation.
-
-
-\begin{Long}
-\section{Formalization in \coq}\label{sec:formal}
-
-All our definitions and theorems are mechanized in the proof assistant \coq \parencite{coq84pl3}.
-The formalization of infinite triangular matrices is taken from the work by \textcite{DBLP:conf/types/MatthesP11},
-and only slightly adapted to compile with the version of \coq we use.
-The mechanization does \emph{not} rely on any additional axioms.
-The \coq source files and HTML documentation are available from the project web site \parencite{trimat_coq}.
-
-In the following we explain some of our design choices for this mechanization
-and point out differences between the pen-and-paper definitions and the mechanized ones.
 
 
 
-\subsection{Implementation choices}
-
-We explain two choices we made in the course of the formalization in \coq. The first choice concerns
-the formalization of categories, more precisely, how to formalize \emph{equality of morphisms}.
-The second choice concerns the formalization of algebraic structures.
-
-\subsubsection{Setoids for hom-sets}
-We formalize categories to be given by a type of objects and a dependent type---indexed by pairs of objects---of morphisms,
-equipped with suitable composition and identity operations satisfying appropriate axioms.
-More precisely, the family of morphisms is given by a family of \emph{setoids}, where the setoidal equivalence relation on each
-type of morphisms denotes the equality relation on these morphisms. This approach was first used by
-\textcite{aczel_galois} in the proof assistant \texttt{LEGO}, and also by \textcite{concat}  in their library
-of category theory in \coq.
-At the moment, it seems to be the standard way of formalizing categories in intensional Martin-L\"of type theory.
-Alternatively, we could have chosen to consider morphisms modulo propositional equality, which is feasible in a more extensional type theory \parencite{rezk_completion}.
-
-Indeed, the morphisms we consider---morphisms of comonads and comodules---are given by structures
-bundling a lot of data and properties; in order to consider two such morphisms as equal, we usually only compare one field of the 
-corresponding records. Furthermore, this field usually consists of a (dependent) function.
-It would be rather cumbersome to reduce equality of two such records to extensional equality of one of their fields, 
-necessitating the use of the axioms of propositional and functional extensionality in IMLTT.
-Using setoids for morphisms instead seems to come with less overhead and to be conceptually cleaner.
 
 
 
-\subsubsection{Records vs.\ classes}
-Two approaches to the formalization of mathematical structures have been used extensively in \coq: on the one hand, packaging structures
-in \emph{record types}  in combination with use of \emph{canonical structures}, is used with success, e.g., in 
-the formalization of algebraic structure in the context of the proof of the Feit-Thompson theorem \parencite{DBLP:conf/tphol/GarillotGMR09}.
-On the other hand, \textcite{DBLP:journals/mscs/SpittersW11} suggest the use of \emph{type classes}, in particular when multiple inheritance
-is an issue.
-
-In the present formalization, we decide to use records rather than classes, since the strongest argument for type classes---multiple inheritance---does 
-not occur.
-We make use of canonical structures in order for \coq to deduce instances of categories when we mention objects of a category; 
-in particular, this is used to allow for overloading of the notation for morphisms of a category.
-We can thus conveniently use the same arrow symbol to denote the type of morphisms between two comonads, between two comodules and so on.
-
-
-\subsection{Formal vs.\ informal definitions}
-
-In the \coq formalization, we provide two different versions of the terminal semantics results:
-
-In one version, we use the \lstinline!CoInductive! vernacular command of \coq to define the codata types we consider.
-In this way, coinductive types are specified through \fat{constructors} rather than \fat{destructors}. The definition
-of functions into coinductive data types thus specified hence looks very different to function definitions 
-in terms of destructors as used in the present article.
-
-In the other version we do not use that device for specifying coinductive types in \coq, but augment \coq by the axioms given in \Cref{stream_rules} and \Cref{tri_rules},
-respectively, and prove the existence of a terminal coalgebra from these axioms.
-This version thus is in close correspondence with the theory presented in the article.
-Note that the codata types declared using the \lstinline!CoInductive! vernacular command of \coq satisfy those axioms.
-
-This might be the right moment to point to work on a device allowing the declaration of coinductive types via destructors in \agda, 
-see \parencite{DBLP:conf/popl/AbelPTS13}.
-
-\end{Long}
-
-\section{Conclusions and future work}
-
-
-
-We have given a category-theoretic characterization, via a universal property, of streams and of infinite triangular matrices,
-each equipped with a cosubstitution operation,
-in intensional Martin-L\"of type theory.
-
-The development of a notion of \enquote{signature} at least for \emph{homogeneous} codata types, and 
-a terminal semantics for them, in line with the definitions we give for $\stream$, is easy
-and will be treated in a forthcoming work.
-
-In a more extensional type theory, such as \emph{Homotopy Type Theory} \parencite{hottbook}, 
-one can reflect bisimilarity into propositional equality by \emph{quotienting},
-thus eliminating the need to work with setoids.
-This will be investigated in future work.
-
-Furthermore, we will work on a suitable notion of \emph{signature} for the specification of general coinductive data types with
-a cosubstitution operation.
-
-Finally, we would like to integrate \emph{equations} into the notion of signature, which 
-will allow, e.g., considering branching trees modulo permutation of subtrees.
- 
-
-\begin{Long}
- 
-\subsubsection*{Acknowledgments}
- We thank André Hirschowitz, Ralph Matthes and Paige North for many helpful discussions.
-
-\end{Long}
  
 \printbibliography
 
