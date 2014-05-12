@@ -1,0 +1,18 @@
+
+
+\begin{definition}\label{def:poly_functor}
+ Suppose $A : \Set$ is a type and $B: A \to \Set$ is a dependent type.
+ We define a functor $F_{A,B} : \Setoid \to \Setoid$ as follows:
+ the setoid $(X,R)$ is mapped to
+
+ the setoid with carrier $\sum_{a:A}(B(a) \to X)$ and setoid relation
+ %TODO
+ 
+ A setoid morphism $f : (X,Rx) \to (Y,Ry)$ is mapped to 
+ \[F_{A,B}(f) (t):= \langle \pi_1(t), \comp{\pi_2(t)}{t} \rangle \enspace . \]
+%  TODO: show this is setoid morph
+ 
+ 
+\end{definition}
+
+

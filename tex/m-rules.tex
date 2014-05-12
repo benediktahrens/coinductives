@@ -1,0 +1,88 @@
+\begin{description}
+
+ \item[Formation]\hfill \\
+ 
+ \begin{center}
+ \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+
+         
+   \AxiomC{$A : \Set$} \AxiomC{$B: A \to \Set$}
+    \BinaryInfC{$\M_{A,B} : \Set$}
+     \DisplayProof
+ \end{center} 
+ 
+  \begin{center}
+ \def\extraVskip{3pt}
+     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+
+         
+    \AxiomC{$s, t : \M_{A,B}$}
+    \UnaryInfC{$s \sim t : \Set$}
+     \DisplayProof
+ \end{center} 
+ 
+ 
+ \item[Destruction]\hfill \\
+ 
+
+%   \hspace{3ex}
+
+\begin{center}
+    \AxiomC{$t : \M_{A,B}$} %\doubleLine
+     \UnaryInfC{$\root(t) : A$}
+      \DisplayProof
+                        \hspace{3ex}
+                                       \AxiomC{$t : \M_{A,B}$}%\doubleLine
+                                       \UnaryInfC{$\br(t) : B(\root(t)) \to \M_{A,B}$}
+                                       \DisplayProof%
+\end{center}
+
+\begin{center}
+    \AxiomC{$s, t : \M_{A,B}$} \AxiomC{$p: s \sim t$} %\doubleLine
+     \BinaryInfC{$\sim \root(p):\root(s) = \root(t)$}
+      \DisplayProof
+                        \hspace{3ex}                                      
+                                      \AxiomC{$s,t : \M_{A,B}$} \AxiomC{$p: s \sim t$}%\doubleLine
+                                       \BinaryInfC{$\sim\br(p): \forall~x: B(\root(s)), \br(s)(x) \sim \br(t)(\transport^{y\mapsto B(root(y))}_{\root(p)}(x)) $}
+                                       \DisplayProof%
+\end{center}
+
+
+  \item[Creation]\hfill \\                                     
+                       
+%           \vspace{1em}             
+            
+\begin{center}
+               \AxiomC{$T : \Set$} \AxiomC{$hd : T \to A$} \AxiomC{$tl : \forall~t:T, B(hd(t))\to T$} %\doubleLine
+               \TrinaryInfC{$\corec_A~hd~tl : T \to \M_{A,B}$}
+               \DisplayProof%
+\end{center}
+
+\begin{center}
+               \AxiomC{$R : \M_{A,B} \to \M_{A,B} \to \Set$} \noLine
+               \UnaryInfC{$\forall~s,t : \M_{A,B}, R~s~t \to \root(s) = \root(t)$} \noLine
+               \UnaryInfC{$\forall~s,t : \M_{A,B}, \forall~p : \root(s) = \root(t), 
+                               \forall~x : B(\root(s))(x) \sim \transport_p (B(\root(t)))(x)$}  %\doubleLine
+               \UnaryInfC{$\forall~s,t : \stream A, R~s~t \to \bisim~s~t$}
+               \DisplayProof%
+\end{center}
+
+                      
+%           \vspace{1em}
+  \item[Computation]\hfill \\
+
+\begin{center}          
+               \AxiomC{$hd : T \to A$} \AxiomC{$tl : \forall~t:T, B(hd(t))\to T$} \AxiomC{$t:T$}%\doubleLine
+               \TrinaryInfC{$\root(\corec~hd~tl~t) = hd(t)$}
+               \DisplayProof
+               
+               \vspace{1em}
+               
+               \AxiomC{$hd : T \to A$} \AxiomC{$tl : \forall~t:T, B(hd(t))\to T$} \AxiomC{$t:T$}%\doubleLine
+               \TrinaryInfC{$\forall~x : B(hd(t)), \br(\corec~hd~tl~t)(x) \sim \corec~hd~tl~(\br(t)(x))$}
+               \DisplayProof
+\end{center}
+
+ \end{description}              
+               
