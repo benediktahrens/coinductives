@@ -44,7 +44,7 @@
       \DisplayProof
                         \hspace{3ex}                                      
                                       \AxiomC{$s,t : \M_{A,B}$} \AxiomC{$p: s \sim t$}%\doubleLine
-                                       \BinaryInfC{$\sim\br(p): \forall~x, \transport(\br(s))(x) \sim \br(t)(x)$}
+                                       \BinaryInfC{$\sim\br(p): \forall~x: B(\root(s)), \br(s)(x) \sim \br(t)(\transport^{y\mapsto B(root(y))}_{\root(p)}(x)) $}
                                        \DisplayProof%
 \end{center}
 
