@@ -44,7 +44,8 @@
       \DisplayProof
                         \hspace{3ex}                                      
                                       \AxiomC{$s,t : \M_{A,B}$} \AxiomC{$p: s \sim t$}%\doubleLine
-                                       \BinaryInfC{$\sim\br(p): \forall~x: B(\root(s)), \br(s)(x) \sim \br(t)(\transport^{y\mapsto B(root(y))}_{\root(p)}(x)) $}
+                                       \AxiomC{$x: B(\root(s))$}
+                                       \TrinaryInfC{$\sim\br(p,x): \br(s)(x) \sim \br(t)\bigl(\transport^{y\mapsto B(root(y))}_{\root(p)}(x)\bigr) $}
                                        \DisplayProof%
 \end{center}
 
@@ -59,12 +60,18 @@
                \DisplayProof%
 \end{center}
 
+~ \\
+
 \begin{center}
                \AxiomC{$R : \M_{A,B} \to \M_{A,B} \to \Set$} \noLine
-               \UnaryInfC{$\forall~s,t : \M_{A,B}, R~s~t \to \root(s) = \root(t)$} \noLine
-               \UnaryInfC{$\forall~s,t : \M_{A,B}, \forall~p : \root(s) = \root(t), 
-                               \forall~x : B(\root(s))(x) \sim \transport_p (B(\root(t)))(x)$}  %\doubleLine
-               \UnaryInfC{$\forall~s,t : \stream A, R~s~t \to \bisim~s~t$}
+%                \UnaryInfC{$\forall~s,t : \M_{A,B}, R~s~t \to \root(s) = \root(t)$} \noLine
+%                \UnaryInfC{$\forall~s,t : \M_{A,B}, \forall~p : \root(s) = \root(t), 
+%                                \forall~x : B(\root(s))(x) \sim \transport_p (B(\root(t)))(x)$}  \noLine
+               \UnaryInfC{$\forall~s,t : \M_{A,B}, \left\{ p : \root(s) = \root(t) \& \br(s)(x) \sim \br(t)
+%                          
+                   \left(\transport^{y\mapsto B(root(y))}_{\root(p)}(x)\right) 
+                          \right\}$}
+               \UnaryInfC{$\forall~s,t : \M_{A,B}, R~s~t \to s \sim t$}
                \DisplayProof%
 \end{center}
 
@@ -72,15 +79,17 @@
 %           \vspace{1em}
   \item[Computation]\hfill \\
 
-\begin{center}          
+\begin{center} 
+
                \AxiomC{$hd : T \to A$} \AxiomC{$tl : \forall~t:T, B(hd(t))\to T$} \AxiomC{$t:T$}%\doubleLine
-               \TrinaryInfC{$\root(\corec~hd~tl~t) = hd(t)$}
+               \TrinaryInfC{$=\root(t):\root(\corec~hd~tl~t) = hd(t)$}
                \DisplayProof
                
                \vspace{1em}
                
                \AxiomC{$hd : T \to A$} \AxiomC{$tl : \forall~t:T, B(hd(t))\to T$} \AxiomC{$t:T$}%\doubleLine
-               \TrinaryInfC{$\forall~x : B(hd(t)), \br(\corec~hd~tl~t)(x) \sim \corec~hd~tl~(\br(t)(x))$}
+                \AxiomC{$x : B(hd(t))$}
+               \QuaternaryInfC{$B(hd(t)), \br(\corec~hd~tl~t)(x) \sim \corec~hd~tl~(\br(t)(x))$}
                \DisplayProof
 \end{center}
 
