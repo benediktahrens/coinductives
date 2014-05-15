@@ -39,6 +39,7 @@ Toulouse}
 
 \newcommand{\fat}[1]{\textbf{#1}}
 \newcommand{\M}{\constfont{M}}
+\newcommand{\W}{\constfont{W}}
 \renewcommand{\root}{\constfont{root}}
 \newcommand{\br}{\constfont{br}}
 \newcommand{\transport}{\constfont{transport}}
@@ -58,9 +59,21 @@ Toulouse}
   \end{abstract}
 
 
+\section{Introduction}
 
 
- 
+
+An inductive type in type theory is characterized as initial algebra of some functor.
+Dually, a \emph{co}inductive type is characterized as final coalgebra.
+
+More precisely, one usually considers trees---well-founded ones and non well-founded ones---of a fixed shape.
+The shape of such trees is given by two pieces of data: firstly, a type $A$ of \emph{nodes}, and secondly,
+a dependent type $B : A \to \Set$ associating to any node $a : A$ a type which specifies the subtrees of $a$.
+The type of \emph{finite}---well-founded---trees with shape specified by $A$ and $B$ is called $\W_{A,B}$,
+and the type of \emph{infinite} such trees is called $\M_{A,B}$.
+The defining functor $P_{A,B} : \Set \to \Set$ is given by 
+\[ P_{A,B}(X) := \sum_{a:A}\left(B(a) \to X\right) \enspace . \]
+
 
 
 \section{Preliminaries}\label{sec:preliminaries}
