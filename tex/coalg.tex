@@ -61,18 +61,37 @@ Toulouse}
 
 \section{Introduction}
 
+The theory of polynomial functors and their relationship with well-founded and non-wellfounded trees via initial algebras and terminal coalgebras is
+well developped; see, e.g., \parencite{jacobs1997tutorial, DBLP:journals/apal/MoerdijkP00, DBLP:journals/apal/BergM07}.
+In particular, \textcite{DBLP:conf/calco/Marchi05} studies the existence of coinductive types---the types of non-wellfounded trees of a given shape---in
+various models of \emph{extensional Martin-L\"of type theory}.
 
 
-An inductive type in type theory is characterized as initial algebra of some functor.
-Dually, a \emph{co}inductive type is characterized as final coalgebra.
 
-More precisely, one usually considers trees---well-founded ones and non well-founded ones---of a fixed shape.
+We consider trees---well-founded ones and non well-founded ones---of a fixed shape in type theory.
 The shape of such trees is given by two pieces of data: firstly, a type $A$ of \emph{nodes}, and secondly,
-a dependent type $B : A \to \Set$ associating to any node $a : A$ a type which specifies the subtrees of $a$.
+a family of types $B : A \to \Set$ associating to any node $a : A$ a type which specifies the subtrees of $a$.
 The type of \emph{finite}---well-founded---trees with shape specified by $A$ and $B$ is called $\W_{A,B}$,
-and the type of \emph{infinite} such trees is called $\M_{A,B}$.
-The defining functor $P_{A,B} : \Set \to \Set$ is given by 
-\[ P_{A,B}(X) := \sum_{a:A}\left(B(a) \to X\right) \enspace . \]
+and the type of \emph{infinite} such trees is called $\M_{A,B}$. 
+
+
+The data $A$ and $B$ gives rise to a functor $P_{A,B} : \Set \to \Set$ is given by 
+\footnote{Note that one can define, more generally, polynomial functors on any category $\C$ with suitable structure
+\parencite{DBLP:journals/apal/MoerdijkP00}.
+However, this shall not be of our concern here.}
+ \[ P_{A,B}(X) := \sum_{a:A}\left(B(a) \to X\right) \enspace . \]
+In \emph{extensional} Martin-L\"of type theory, the existence of the initial algebra for the functor $P_{A,B}$ 
+is equivalent to the existence of the inductive type $\W_{A,B}$ specified by a set of type-theoretic rules
+\parencite{DBLP:journals/tcs/Dybjer97}.
+Similarly, one can show that a set of type-theoretic rules for the coinductive type $\M_{A,B}$ is equivalent to the 
+existence of the terminal coalgebra of $P_{A,B}$.
+
+In \emph{intensional} type theory, this correspondence fails because of a lack of extensional features---in particular, function extensionality is missing.
+For inductive types---i.e., for well-founded trees---the newly developped \emph{Homotopy Type Theory} brings back enough
+extensional features into intensional Martin-Löf type theory to allow for a remedy \parencite{DBLP:conf/lics/AwodeyGS12}.
+
+In the present work, we show how a set of type-theoretic rules for a coinductive type---$\M$-type---is equivalent to the 
+existence of a final coalgebra for a polynomial functor on the category of \emph{setoids} in intensional Martin-Löf type theory.
 
 
 
