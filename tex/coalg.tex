@@ -28,7 +28,7 @@
 
 \begin{document}
 
-\title{Non-wellfounded trees\\in intensional Martin-L\"of type theory}
+\title{Non-wellfounded trees in Homotopy Type Theory}
 
 \author{Benedikt Ahrens and R\'egis Spadotti}
 
@@ -43,6 +43,8 @@ Toulouse}
 \renewcommand{\root}{\constfont{root}}
 \newcommand{\br}{\constfont{br}}
 \newcommand{\transport}{\constfont{transport}}
+\newcommand{\True}{\constfont{\top}}
+\newcommand{\False}{\constfont{\bot}}
 
 
 \maketitle
@@ -149,16 +151,25 @@ are called \emph{strong monoidal}:
 \end{example}
 
 
-\section{Rules for $\M$-types in intensional Martin-L\"of type theory}\label{sec:rules}
+\section{$\M$-types in extensional type theory}
+
+Extensional type theory is similar to set theory.
+
+\subsection{The rules}
+% TODO: give the rules for M in extensional \parencite{DBLP:conf/calco/Marchi05}
+
+\subsection{The functor}
+% TODO: state and prove equivalence
+
+\subsection{The equivalence}
+%TODO: 
+
+\section{$\M$-types in intensional type theory}
 
 We consider types of non-wellfounded trees of a given shape in Intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}, 
 a type-theoretic foundational system.
 For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ and $b$.
 
-
-Suppose $A$ is a type in (intensional) Martin-L\"of type theory, and $B : A \to \Set$ is a dependent type.
-The type $\M_{A,B}$ denotes trees---possibly infinite---with nodes 
-from $A$ such that a node $a:A$ has \enquote{$B(a)$-many} subtrees.
 
 The correct notion of \enquote{sameness} for non-wellfounded trees is \emph{bisimilarity} 
 \parencite{DBLP:conf/types/Coquand93, DBLP:journals/corr/abs-cs-0603119},
@@ -166,18 +177,28 @@ an equivalence relation which identifies \enquote{observationally equal} trees.
 A coinductive type with bisimilarity forms a setoid as in \Cref{def:set_setoid}.
 We thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
 
+
+\subsection{Rules for $\M$-types in intensional Martin-L\"of type theory}\label{sec:rules}
+
+
+
+Suppose $A$ is a type in (intensional) Martin-L\"of type theory, and $B : A \to \Set$ is a dependent type.
+The type $\M_{A,B}$ denotes trees---possibly infinite---with nodes 
+from $A$ such that a node $a:A$ has \enquote{$B(a)$-many} subtrees.
+
+
 Here are the rules:
 
 
 
 \input{m-rules}
 
-\section{The category of coalgebras}
+\subsection{The category of coalgebras}
 
 \input{m-coalgebras}
 
 
-\section{Equivalence between the rules and existence of a terminal object}
+\subsection{Equivalence between the rules and existence of a terminal object}
 
 \begin{lemma}
   Given $A:\Set$ and $B:A\to\Set$ in IMLTT, the following are equivalent:
@@ -189,6 +210,17 @@ Here are the rules:
 
 \end{lemma}
 
+\subsection{Streams as $M$-type}
+
+The type of streams can be specified as an $\M$-type, namely via $A_O:= \True$, $B_O:=\lambda x.\True$.
+Postulating the axioms for $\M_{A_0,B_0}$ is the same as directly postulating axioms for streams.
+
+
+\section{$\M$-types in Homotopy Type Theory}
+
+\subsection{The rules}
+\subsection{The functor}
+\subsection{The equivalence}
  
 \printbibliography
 
