@@ -21,8 +21,8 @@
 \usepackage{ownstylesansthm}
 
 \usepackage{comment}
-\excludecomment{Long}\includecomment{Short}
-% \includecomment{Long}\excludecomment{Short}
+% \excludecomment{Long}\includecomment{Short}
+\includecomment{Long}\excludecomment{Short}
 
 \pagestyle{plain}
 
@@ -1105,19 +1105,31 @@ in particular, this is used to allow for overloading of the notation for morphis
 We can thus conveniently use the same arrow symbol to denote the type of morphisms between two comonads, between two comodules and so on.
 
 
-\subsection{Formal vs.\ informal definitions}
+\subsection{Relationship with coinductive types as provided by \coq}
 
-In the \coq formalization, we provide two different versions of the terminal semantics results:
+The proof assistant \coq provides a mechanism to specify coinductive types (and families of types) via
+the keyword \lstinline!Coinductive!.
+The syntax used to specify a coinductive data type in this way resembles that of inductive families---in particular,
+the specification is done by specifying \emph{constructors} rather than \emph{destructors}.
+Similarly, the bisimilarity relation on a coinductive type is specified via this mechanism.
+Below, we print the \coq code which specifies the codata type of infinite triangular matrices and the 
+bisimilarity relation on it:
 
-In one version, we use the \lstinline!CoInductive! vernacular command of \coq to define the codata types we consider.
-In this way, coinductive types are specified through \fat{constructors} rather than \fat{destructors}. The definition
-of functions into coinductive data types thus specified hence looks very different to function definitions 
-in terms of destructors as used in the present article.
+\begin{lstlisting}
+CoInductive Tri A : Type :=
+    constr : A -> Tri (E x A) -> Tri A.
+CoInductive bisim : forall {A}, Tri A -> Tri A -> Prop :=
+    bisim_constr : forall {A} {t t' : Tri A}, 
+          top t = top t' -> 
+          bisim (rest t) (rest t') -> 
+          bisim t t'.
+\end{lstlisting}
+Here, the code \lstinline!E x A! denotes the cartesian product of the types \lstinline!E! and \lstinline!A!.
 
-In the other version we do not use that device for specifying coinductive types in \coq, but augment \coq by the axioms given in \Cref{stream_rules} and \Cref{tri_rules},
-respectively, and prove the existence of a terminal coalgebra from these axioms.
-This version thus is in close correspondence with the theory presented in the article.
-Note that the codata types declared using the \lstinline!CoInductive! vernacular command of \coq satisfy those axioms.
+The codata types specified via this \coq mechanism are stronger than those given by the axioms we consider.
+More precisely, we prove the axioms of \Cref{tri_rules} from the above declaration of \lstinline!CoInductive Tri! and
+\lstinline!CoInductive bisim!, and similar for streams.
+
 
 This might be the right moment to point to work on a device allowing the declaration of coinductive types via destructors in \agda, 
 see \parencite{DBLP:conf/popl/AbelPTS13}.
