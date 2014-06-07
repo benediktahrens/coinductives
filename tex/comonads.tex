@@ -803,25 +803,25 @@ This extends to morphisms of relative comonads:
 
 \section{Terminality for streams and infinite triangular matrices}\label{sec:coalgebras_for_tri}
 
-In this section, we define a notion of \enquote{coalgebra} for the signatures of streams and triangular matrices,
+In this section, we define a notion of \enquote{model} for the signatures of streams and triangular matrices,
 respectively. We then show that the codata types $\stream$ and $\Tri$ constitute the terminal object in
-the respective category of coalgebras.
-We put \enquote{coalgebra} in quotes for the reason that our coalgebras are not defined as coalgebras for a monad or an endofunctor.
+the respective category of models.
 
-The terminal coalgebra result is hardly surprising; however, it is still interesting as it characterizes not only the codata types themselves,
+
+The terminal semantics result is hardly surprising; however, it is still interesting as it characterizes not only the codata types themselves,
  but also the respective bisimilarity relations and comonadic operations on them, via a universal property.
  
 
 
 \begin{Long}
-\subsection{Coalgebras for $\stream$}
+\subsection{Models for $\stream$}
 
 We first consider the homogeneous codata type of streams.
 \end{Long}
 
 \begin{definition}%[Coalgebras for $\stream$]
  \label{cat_stream}
-  A \fat{coalgebra for $\stream$} is given by a pair $(S,t)$ 
+  A \fat{model for $\stream$} is given by a pair $(S,t)$ 
   consisting of
   \begin{itemize}
    \item a comonad $S$ relative to $\eq : \Set \to \Setoid$ and
@@ -832,6 +832,22 @@ We first consider the homogeneous codata type of streams.
 \end{definition}
 
 This defines a category, with the obvious composition and identity. 
+
+\begin{remark}[Coalgebras for stream]
+   Traditionally, streams over a fixed set $A$ are described as terminal coalgebra of the 
+   endofunctor $S_A : X \mapsto A \times X$.
+   Our category of models for stream differs from the category of coalgebras of $S_A$ in that 
+   a model of \Cref{cat_stream} models the \emph{family of streams with varying base type}, rather than streams over a fixed base type.
+   
+   Coalgebras modeling the family of streams could be obtained for sets by considering a higher-order endofunctor
+   \[ S : [\Ens, \Ens] \to [\Ens,\Ens], \enspace S(X)(A) := A \times X(A) \enspace . \]
+
+   The reason for us to consider the whole family of streams rather than streams over a fixed base type is 
+   that our notion model in terms of (relative) comonad incorporates a notion of \emph{cosubstitution} as in \Cref{eq:tail_sredec}.
+   Such a cosubstitution is given by a family of maps between streams over different base types---we hence need to consider models of the whole 
+   family of streams rather than models of streams over a fixed base type.
+\end{remark}
+
 
 \begin{theorem}\label{thm_stream_terminal}
  The pair $(\stream, \stail)$ is the terminal coalgebra in the category of coalgebras of \Cref{cat_stream}.
