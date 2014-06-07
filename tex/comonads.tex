@@ -838,15 +838,19 @@ This defines a category, with the obvious composition and identity.
   \begin{align*}  F: [\Set,\Setoid] &\to [\Set,\Setoid]\\
                       F(G)(A) &:= \eq(A) \times G(A) \enspace .
   \end{align*}
-  Then we have a forgetful functor from models for streams to coalgebras of $F$ which, intuitively, forgets the comonadic structure.
+  Then we have a forgetful functor $U$ from models for streams to coalgebras of $F$ which, intuitively, forgets the comonadic structure.
   Indeed, given a model $(T,\stail)$, the comonad $T$ is, in particular, a functor $T:\Set\to\Setoid$ which constitutes the carrier of 
   a coalgebra of $F$. The coalgebra structure, as a map into a product, 
   is assembled from the counit of $T$ (to give the first component) and the comodule morphism $\stail$, which
   is, in particular, a natural transformation $T \to T$ (to give the second component).
   It is not clear to us whether this forgetful functor has an adjoint.
+  
+  The reason why we consider the richer notion of model (as compared to coalgebras) is that we want the objects of 
+  our category---and thus in particular the terminal object---to be equipped with a well-behaved \enquote{cosubstitution} operation.
+  It is this cosubstitution operation which is modeled by the comonad and comodule structure, and which is forgotten by 
+  the forgetful functor $U$ defined above.
 \end{remark}
   
-
 
 \begin{theorem}\label{thm_stream_terminal}
  The pair $(\stream, \stail)$ is the terminal object in the category of models of \Cref{cat_stream}.
