@@ -52,7 +52,7 @@ Toulouse}
 
  In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}, and  
  use these notions to give a terminal coalgebra semantics for the coinductive type families of streams and
- of infinite triangular matrices, respectively, in intensional Martin-L\"of type theory.
+ of infinite triangular matrices and their respective cosubstitution operations in intensional Martin-L\"of type theory.
  Our results are mechanized in the proof assistant \coq.
    
   
@@ -64,8 +64,8 @@ Toulouse}
 \section{Introduction}
  
  In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
- We then use these notions to characterize several \emph{co}inductive data types in intensional Martin-L\"of type theory
- via a universal property.
+ We then use these notions to characterize several coinductive data types and their respective cosubstitution operations 
+ in intensional Martin-L\"of type theory via a universal property.
  
  In a set-theoretic setting, inductive sets are characterized as initial algebras for 
  some endofunctor on the category of sets. For instance, the set of natural numbers constitutes the carrier of the 
@@ -134,8 +134,8 @@ Toulouse}
  For each of these examples we prove, 
  from type-theoretic rules specifying the respective codata type added to the basic rules of Martin-L\"of type theory,
  the existence of a terminal object in some category \emph{within IMLTT}.
- Our terminal semantics characterizes not only the codata types themselves but also the bisimilarity relation and
- a canonical cosubstitution operation on them.
+ Our terminal semantics characterizes not only the codata types themselves but also the bisimilarity relation 
+ and---via the use of (relative) comonads---a canonical cosubstitution operation on them.
  
  The fact that cosubstitution for coinductive data types is comonadic in a set-theoretic setting is established by \textcite{DBLP:conf/sfp/UustaluV01}.
  In IMLTT however, in order to characterize that cosubstitution operation on a given codata type, and its algebraic properties,
