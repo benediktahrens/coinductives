@@ -195,19 +195,44 @@ Toulouse}
 
 In this section we present some particular categories and functors used later on, and fix some notation.
 
+\begin{definition}[Setoids in IMLTT]
+  A \emph{setoid} in intensional Martin-Löf type theory is a pair $(A, \sim_A)$ of a type $A$ together with an equivalence 
+  relation $\sim_A$ on $A$. Given a setoid $S = (A, \sim_A)$, we often abuse notation by writing $s:S$ instead of $s:A$ for
+  a term $s$ of $A$.
+  Given two setoids $(A,\sim_A)$ and $(B,\sim_B)$, the cartesian product $A\times B$ of their underlying types is equipped with
+  an equivalence relation given component-wise, thus yielding a product on setoids.
+\end{definition}
+
+
+
+\begin{definition}[Category in IMLTT]\label{def:cat_imltt}
+  A category $\C$ in intensional Martin-Löf type theory (see, e.g., \parencite{aczel_galois, concat}) is given by
+  \begin{itemize}
+   \item a type of objects, also denoted by $\C$;
+   \item for any two objects $a,b:\C$, a \emph{setoid} $\C(a,b)$ of morphisms from $a$ to $b$;
+   \item an identity morphism $\id_a : \C(a,a)$ for any $a:\C$;
+   \item a dependent composition operation $(\comp{}{})_{a,b,c} : \C(b,c) \times \C(a,b) \to \C(a,c)$;
+   \item a proof that composition is compatible with the equivalence relations of the setoids of morphisms;
+   \item proofs of unitality and associativity of composition stated in terms of the equivalence relations on the morphisms.
+  \end{itemize}
+  We also write $f:a\to b$ for a morphism $f : \C(a,b)$, when the category $\C$ can be deduced from the context.
+\end{definition}
+
+Functors and natural transformations are defined in terms of the setoidal equivalence relations on morphisms.
+We omit the definitions, which can be found in our \coq files.
 
 \begin{definition}[Some categories]\label{def:set_setoid}
- We denote by $\Set$ the category of types (of a fixed universe) and total functions between them in Martin-L\"of type theory. 
- A morphism $f$ in this category is denoted by $f : A \to B$.
+ We denote by $\Set$ the category (in IMLTT) of types (of a fixed universe) and total functions between them in Martin-L\"of type theory. 
+ The setoidal equivalence relation on $\Set(A,B)$ is given by pointwise equality as given by the Martin-Löf identity type: 
+   \[f \sim g \enspace =_{\text{def}} \enspace \forall x:A, fx = gx. \]
  
- We denote by $\Setoid$ the category an object of which is a \emph{setoid}, i.e.\ a type equipped with an equivalence relation.
+ We denote by $\Setoid$ the category an object of which is a setoid.
  A morphism between setoids is a type-theoretic function between the underlying types that is compatible in the obvious sense with the equivalence relations of the source and target setoids.
- If $A$ is a setoid, we also use $A$ to refer to its underlying type, and thus write $a:A$ for an element $a$ of the type underlying the setoid $A$. 
- We write $a\sim a'$ for related elements $a$ and $a'$ in $A$.
- We consider $\Setoid$ as a cartesian closed category: two parallel morphisms of setoids $f,g:A\to B$ are equvalent if for any $a:A$ we have $fa \sim ga$.
- 
- We also write $f:A\to B$ for a morphism $f$ between objects $A$ and $B$ in some category, in particular in the category of types.
- \end{definition}
+%  If $A$ is a setoid, we also use $A$ to refer to its underlying type, and thus write $a:A$ for an element $a$ of the type underlying the setoid $A$. 
+%  We write $a\sim a'$ for related elements $a$ and $a'$ in $A$.
+ The category $\Setoid$ is cartesian closed and hence a category in the sense of \Cref{def:cat_imltt}: 
+ two parallel morphisms of setoids $f,g:A\to B$ are equivalent if for any $a:A$ we have $fa \sim_B ga$.
+\end{definition}
 
 
 
@@ -226,22 +251,17 @@ In this section we present some particular categories and functors used later on
   $\comp{\langle f,g\rangle}{\pr_1} = f$ and $\comp{\langle f,g\rangle}{\pr_2} = g$.
 \end{remark}
 
-Both of the categories of \Cref{def:set_setoid} have binary products; they are \emph{cartesian monoidal}, i.e.\ the terminal 
-object is neutral with respect to the product. Functors preserving the monoidal structure up to isomorphism
-are called \emph{strong monoidal}:
+Both of the categories of \Cref{def:set_setoid} have finite products.
 
 \begin{definition}\label{def:monoidal_functor}
- A functor $F:\C\to\D$ between cartesian monoidal categories is \fat{strong monoidal} if, for any two objects $A$ and $B$ of $\C$,
+ A functor $F:\C\to\D$ between categories with finite products \emph{preserves products} if, for any two objects $A$ and $B$ of $\C$,
   the morphism
  \[ \phi^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
  is an isomorphism.
- (Note that for \emph{cartesian} monoidal categories, the family $\phi$ of morphisms automatically 
-  is compatible with the unitators and associators of the source and target categories, 
-  since it is given by a universal property.)
 \end{definition}
 
 \begin{example}
-  The functor $\eq: \Set \to \Setoid$ of \Cref{def:eq} is strong monoidal.
+  The functor $\eq: \Set \to \Setoid$ of \Cref{def:eq} preserves products.
 \end{example}
 
 
