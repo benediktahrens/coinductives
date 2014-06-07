@@ -51,7 +51,7 @@ Toulouse}
 
 
  In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}, and  
- use these notions to give a terminal coalgebra semantics for the coinductive type families of streams and
+ use these notions to give a terminal semantics for the coinductive type families of streams and
  of infinite triangular matrices and their respective cosubstitution operations in intensional Martin-L\"of type theory.
  Our results are mechanized in the proof assistant \coq.
    
@@ -181,9 +181,9 @@ Toulouse}
     We give some examples of such structures, using the codata types presented in \Cref{sec:tri}.
   In \Cref{sec:comodules} we define comodules over relative comonads and give some constructions of comodules.
      Again, examples of such structures are taken from \Cref{sec:tri}.
-  In \Cref{sec:coalgebras_for_tri} we define categories of coalgebras for the codata types presented in \Cref{sec:tri},
+  In \Cref{sec:coalgebras_for_tri} we define categories of models for the codata types presented in \Cref{sec:tri},
       based on the category-theoretic notions developed in the previous sections.
-      We then prove that the codata types constitute the terminal coalgebras in the respective categories.
+      We then prove that the codata types constitute the terminal model in the respective categories.
       Finally, we present an example of a map defined as a terminal map exploiting the universal property of streams.
   In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
   A table with the correspondence between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
@@ -819,7 +819,7 @@ The terminal semantics result is hardly surprising; however, it is still interes
 We first consider the homogeneous codata type of streams.
 \end{Long}
 
-\begin{definition}%[Coalgebras for $\stream$]
+\begin{definition}%[Models for $\stream$]
  \label{cat_stream}
   A \fat{model for $\stream$} is given by a pair $(S,t)$ 
   consisting of
@@ -827,40 +827,39 @@ We first consider the homogeneous codata type of streams.
    \item a comonad $S$ relative to $\eq : \Set \to \Setoid$ and
    \item a morphism $t$ of tautological comodules over $S$, $t : S \to S$.
   \end{itemize}
-  A coalgebra morphism $(S,t) \to (S',t')$ is given by a comonad morphism $\tau : S \to S'$ such that
+  A model morphism $(S,t) \to (S',t')$ is given by a comonad morphism $\tau : S \to S'$ such that
      $ \comp{\tau_*t}{\induced{\tau}} = \comp{\induced{\tau}}{t'}$.
 \end{definition}
 
 This defines a category, with the obvious composition and identity. 
 
-\begin{remark}[Coalgebras for stream]
-   Traditionally, streams over a fixed set $A$ are described as terminal coalgebra of the 
-   endofunctor $S_A : X \mapsto A \times X$.
-   Our category of models for stream differs from the category of coalgebras of $S_A$ in that 
-   a model of \Cref{cat_stream} models the \emph{family of streams with varying base type}, rather than streams over a fixed base type.
-   
-   Coalgebras modeling the family of streams could be obtained for sets by considering a higher-order endofunctor
-   \[ S : [\Ens, \Ens] \to [\Ens,\Ens], \enspace S(X)(A) := A \times X(A) \enspace . \]
-
-   The reason for us to consider the whole family of streams rather than streams over a fixed base type is 
-   that our notion model in terms of (relative) comonad incorporates a notion of \emph{cosubstitution} as in \Cref{eq:tail_sredec}.
-   Such a cosubstitution is given by a family of maps between streams over different base types---we hence need to consider models of the whole 
-   family of streams rather than models of streams over a fixed base type.
+\begin{remark}[Coalgebras for streams]
+ We define 
+  \begin{align*}  F: [\Set,\Setoid] &\to [\Set,\Setoid]\\
+                      F(G)(A) &:= \eq(A) \times G(A) \enspace .
+  \end{align*}
+  Then we have a forgetful functor from models for streams to coalgebras of $F$ which, intuitively, forgets the comonadic structure.
+  Indeed, given a model $(T,\stail)$, the comonad $T$ is, in particular, a functor $T:\Set\to\Setoid$ which constitutes the carrier of 
+  a coalgebra of $F$. The coalgebra structure, as a map into a product, 
+  is assembled from the counit of $T$ (to give the first component) and the comodule morphism $\stail$, which
+  is, in particular, a natural transformation $T \to T$ (to give the second component).
+  It is not clear to us whether this forgetful functor has an adjoint.
 \end{remark}
+  
 
 
 \begin{theorem}\label{thm_stream_terminal}
- The pair $(\stream, \stail)$ is the terminal coalgebra in the category of coalgebras of \Cref{cat_stream}.
+ The pair $(\stream, \stail)$ is the terminal object in the category of models of \Cref{cat_stream}.
 \end{theorem}
 
 More precisely, the aforementioned theorem says that the rules given in \Cref{stream_rules} allow to prove that
-the category of coalgebras defined in \Cref{cat_stream} has a terminal object.
+the category of models defined in \Cref{cat_stream} has a terminal object.
 
 \begin{example}
-  We equip the relative comonad $\Tri$ with the structure of a coalgebra for $\stream$ by defining a 
+  We equip the relative comonad $\Tri$ with the structure of a model for $\stream$ by defining a 
   morphism of tautological comodules over $\Tri$, given by
    $ t^{\diagonal} := \comp{\tail}{\cut}  : \Tri \to \Tri$.
-  The resulting terminal coalgebra morphism
+  The resulting terminal model morphism
    $(\Tri, t^{\diagonal}) \to (\stream, \stail)$ has as underlying morphism of relative comonads the one defined in \Cref{ex_diag}.
 \end{example}
 
@@ -874,15 +873,15 @@ the category of coalgebras defined in \Cref{cat_stream} has a terminal object.
 \end{Long}
 
 \begin{Long}
-\subsection{Coalgebras for $\Tri$}
+\subsection{Models for $\Tri$}
 \end{Long}
 
-In analogy to the definition of coalgebras for the signature of streams, one would define
-a coalgebra for the signature of $\Tri$ as a pair $(T,r)$ of a comonad $T$ relative to $\eq : \Set \to \Setoid$ and 
+In analogy to the definition of models for the signature of streams, one would define
+a model for the signature of $\Tri$ as a pair $(T,r)$ of a comonad $T$ relative to $\eq : \Set \to \Setoid$ and 
 a morphism of comodules $r : T \to T(E\times \_)$. 
 It turns out that in this way, one is not capable of obtaining the right auxiliary function $\cut$ for what is
-supposed to be the \emph{terminal} such coalgebra (where $\cut$ is used to define the comodule $\Tri(E\times \_)$), namely the pair $(\Tri,\tail)$.
-As a remedy, we define a coalgebra to come equipped with a specified operation analogous to $\cut$, and some laws governing
+supposed to be the \emph{terminal} such model (where $\cut$ is used to define the comodule $\Tri(E\times \_)$), namely the pair $(\Tri,\tail)$.
+As a remedy, we define a model to come equipped with a specified operation analogous to $\cut$, and some laws governing
 the behavior of that operation:
 
 
@@ -1030,7 +1029,7 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
 \begin{definition}%[Coalgebras of infinite triangular matrices]
 \label{def:cat_tri}
    Let $E:\Set_0$ be a set.
-   Let $\mathcal{T} = \mathcal{T}_E$ be the category of \fat{coalgebras for infinite triangular matrices} where an object consists of
+   Let $\mathcal{T} = \mathcal{T}_E$ be the category of \fat{models for infinite triangular matrices} where an object consists of
    \begin{itemize}
     \item a comonad $T$ over the functor $\eq:\Set\to\Setoid$ with $\cut$ relative to $E$ and
     \item a morphism $\tail$ of comodules over $T$ of type $T \to T(E\times \_)$
@@ -1058,28 +1057,44 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
    \noindent
    Here in the upper right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
 \end{definition}   
+
+
+\begin{remark}[Coalgebras for $\Tri$]
+  We define 
+  \begin{align*}  F: [\Set,\Setoid] &\to [\Set,\Setoid]\\
+                      F(G)(A) &:= \eq(A) \times G(E \times A) \enspace .
+  \end{align*}
+  Then we have a forgetful functor from models for infinite triangular matrices to coalgebras of $F$ which, intuitively, forgets the comonadic structure including
+  the $\cut$ operation.
+  Indeed, given a model $(T,\cut,\tail)$, the comonad $T$ is, in particular, a functor $T:\Set\to\Setoid$ which constitutes the carrier of 
+  a coalgebra of $F$. The coalgebra structure, as a map into a product, 
+  is assembled from the counit of $T$ (to give the first component) and the comodule morphism $\tail$, which
+  is, in particular, a natural transformation $T \to T(E \times \_)$ (to give the second component).
+  It is not clear to us whether this forgetful functor has an adjoint.
+\end{remark}
+
    
 
 \begin{theorem}\label{ex:final_sem_tri} 
    The pair $(\Tri, \tail)$ consisting of the relative comonad with cut $\Tri$ of \Cref{def:cut_for_tri} together with 
     the morphism of comodules $\tail$ of \Cref{ex:tail_comodule},
-   constitutes the terminal coalgebra of triangular matrices.
+   constitutes the terminal model of triangular matrices.
 \end{theorem}
 
 \begin{Long}
 \begin{proof}[sketch]
-   For a given coalgebra $(T,\tail^T)$, the (terminal) morphism $\bigcirc = \bigcirc_T:T\to\Tri$ is defined via the corecursive equations
+   For a given model $(T,\tail^T)$, the (terminal) morphism $\bigcirc = \bigcirc_T:T\to\Tri$ is defined via the corecursive equations
     \begin{align}\head\bigl(\bigcirc~t\bigr) &:= \counit^T~t \quad\text{ and } \label{eq:terminal_top}\\
                      \tail\bigl(\bigcirc~t\bigr) &:= \bigcirc(\tail^T~t) \enspace . \label{eq:terminal_rest}
       \end{align}
       By coinduction we show that the map $\bigcirc$ is compatible with $\cobind$ and $\cut$ operations of the source and 
-   target coalgebras. We omit these calculations, which can be consulted in the \coq source files.
+   target models. We omit these calculations, which can be consulted in the \coq source files.
    
    Note that there is actually no choice in this definition: \Cref{eq:terminal_top} is forced upon us since we want $\bigcirc$ to constitute 
    a morphism of comonads---the equation directly corresponds to one of the axioms.
-   \Cref{eq:terminal_rest} is forced upon us by the diagram a morphism of coalgebras has to make commute.
+   \Cref{eq:terminal_rest} is forced upon us by the diagram a morphism of models has to make commute.
    
-   The same argument is used to show, again by coinduction, that any two morphisms of coalgebras $\tau,\rho : (T,\tail^T) \to (\Tri,\tail)$
+   The same argument is used to show, again by coinduction, that any two morphisms of models $\tau,\rho : (T,\tail^T) \to (\Tri,\tail)$
    are equal, thus concluding the proof.   
 \end{proof}
 \end{Long}
