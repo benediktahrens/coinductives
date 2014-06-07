@@ -550,6 +550,19 @@ Relative comonads over the identity functor are exactly comonads.
   The proof of the axioms of a relative comonad is immediate.
 \end{example}
 
+
+\begin{example}[Relative comonads from comonads]\label{ex_relcom_from_com_on_target}
+    Let $F : \C \to \D$ be a functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\D$.
+  We define a comonad $MF$ relative to $F$ by setting:
+  \begin{itemize}
+   \item $MF(A) := M(FA)$;
+   \item $\counit^{MF}_A := \counit^M_{FA} : \D(MFA,FA)$;
+   \item $\cobind^{MF}_{A,B} (f) := \cobind^M_{FA,FB}(f) : \D(MFA,MFB)$ for $f : \D(MFA,FB)$.
+  \end{itemize}
+  The proof of the axioms of a relative comonad is immediate.
+\end{example}
+
+
 \end{Long}
 
 \begin{example}[Streams]\label{ex_stream_comonad}
@@ -558,6 +571,12 @@ Relative comonads over the identity functor are exactly comonads.
    $\counit_A := \shead_A$ and
    $\cobind_{A,B} := \sredec_{A,B}$.
 \end{example}
+
+\begin{remark}
+ Instead of considering $\stream$ as a relative comonad from $\Set$ to $\Setoid$, it could be considered as a traditional comonad on the 
+ category $\Setoid$, propagating the equivalence relation on the base type, say $A$, to $\stream A$.
+ The relative point of view can then be recovered as an instance of \Cref{ex_relcom_from_com_on_target}.
+\end{remark}
 
 
 \begin{Long}
