@@ -320,7 +320,9 @@ In the presentation we use the notational convention of \Cref{def:set_setoid}, u
 \end{figure}
    
    
-   We define a \emph{co}substition operation $\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B$ on streams via the following clauses:
+   We define a \emph{co}substition operation 
+   \[\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B\] 
+   on streams via the following clauses:
 % 
    \begin{align} \comp{\sredec~f}{\shead} := f \quad\text{ and } \quad
                   \comp{\sredec~f}{\stail} := \comp{\stail}{\sredec~f} \enspace . \label{eq:tail_sredec}
