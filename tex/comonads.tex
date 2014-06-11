@@ -709,6 +709,16 @@ The map $\diagonal_A$ is defined via the clauses
 \end{Long}
 
 
+\begin{remark}[Comonads into cartesian closed categories]
+ With the notations of \Cref{def:rel_comonad}, suppose that the category $\D$ is cartesian closed, i.e. that $\D$ has
+ internal hom-objects. This is the case, e.g., for the category $\Setoid$ of setoids.
+ The cobind operation of a relative comonad into $\D$ might then be defined to be a family of arrows in $\D$,
+  \begin{equation}\cobind_{A,B} : \underline{\D}(TA,FB) \to \underline{\D}(TA,TB) \enspace . \label{eq_enriched}\end{equation}
+ The comonads $\stream$ (cf.\ \Cref{ex_stream_comonad}) and $\Tri$ (cf.\ \Cref{ex_tree_comonad}) are comonads with such a cobind operation. In these two cases, this \enquote{enriched} definition of the cobind operation given in \Cref{eq_enriched} encodes a higher-order 
+ compatibility of cosubstitution with bisimilarity, namely that cosubstitution with two extensionally bisimilar functions
+ yields extensionally bisimilar functions.
+\end{remark}
+
 
 
 \section{Comodules over relative comonads}\label{sec:comodules}
