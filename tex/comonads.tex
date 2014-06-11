@@ -21,8 +21,8 @@
 \usepackage{ownstylesansthm}
 
 \usepackage{comment}
-% \excludecomment{Long}\includecomment{Short}
-\includecomment{Long}\excludecomment{Short}
+\excludecomment{Long}\includecomment{Short}
+%\includecomment{Long}\excludecomment{Short}
 
 \pagestyle{plain}
 
@@ -149,6 +149,11 @@ Toulouse}
  In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
 \begin{Short}
  A longer version of this article is available on the arXiv \parencite{trimat_coq}.
+ There, we give details we had to omit from this version for reasons of space: 
+  we show how to get relative comonads from (traditional) comonads, 
+           remark on relative comonads into cartesian closed categories,
+           explain the relationship to coalgebra semantics, report on the formalization in \coq of our results and
+           give proofs of the lemmas in this work.
 \end{Short}
 
  
@@ -708,7 +713,7 @@ The map $\diagonal_A$ is defined via the clauses
 
 \end{Long}
 
-
+\begin{Long}
 \begin{remark}[Comonads into cartesian closed categories]
  With the notations of \Cref{def:rel_comonad}, suppose that the category $\D$ is cartesian closed, i.e. that $\D$ has
  internal hom-objects. This is the case, e.g., for the category $\Setoid$ of setoids.
@@ -718,7 +723,7 @@ The map $\diagonal_A$ is defined via the clauses
  compatibility of cosubstitution with bisimilarity, namely that cosubstitution with two extensionally bisimilar functions
  yields extensionally bisimilar functions.
 \end{remark}
-
+\end{Long}
 
 
 \section{Comodules over relative comonads}\label{sec:comodules}
