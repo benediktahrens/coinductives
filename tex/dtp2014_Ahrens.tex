@@ -132,6 +132,13 @@
 \newcommand{\unit}{\constfont{unit}}
 \newcommand{\coq}{\texttt{Coq}\xspace}
 \newcommand{\monbind}{\constfont{bind}}
+\newcommand{\coiter}{\constfont{coiter}}
+\newcommand{\ibisim}{\ensuremath{\_\sim\_}}
+\newcommand{\hbisim}{\ensuremath{\sim\!\constfont{head}}}
+\newcommand{\tbisim}{\ensuremath{\sim\!\constfont{tail}}}
+\newcommand{\Prop}{\constfont{Prop}}
+\newcommand{\Type}{\constfont{Type}}
+\newcommand{\M}{\constfont{M}}
 
 %  \newcommand{\bind}[2]{{#1} \blacktriangleright {#2}}
 % \newcommand{\bind}[2]{{#1} \mathbin{\vartriangleright} {#2}}
@@ -449,20 +456,54 @@ dualize techniques of H \& M to characterize
  
    \vspace{2ex}
 
- \item \enquote{Sameness} = bisimilarity in IMLTT
-  \begin{center}
-                                            \def\extraVskip{3pt}
-     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$s \sim s'$}\doubleLine
-     \UnaryInfC{$\shead(s) = \shead(s')$}
-      \DisplayProof
-                        \hspace{3em}
-                                       \AxiomC{$s \sim s'$}\doubleLine
-                                       \UnaryInfC{$ \stail(s) \sim \stail(s')$}
-                                       \DisplayProof   
-  \end{center}
+   
+ \item Propositional equality is not adequate for infinite object
+ \item[] $\qquad\leadsto$ bisimulation
+
+%  \item \enquote{Sameness} = bisimilarity in IMLTT
+%   \begin{center}
+%                                             \def\extraVskip{3pt}
+%      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+%     \AxiomC{$s \sim s'$}\doubleLine
+%      \UnaryInfC{$\shead(s) = \shead(s')$}
+%       \DisplayProof
+%                         \hspace{3em}
+%                                        \AxiomC{$s \sim s'$}\doubleLine
+%                                        \UnaryInfC{$ \stail(s) \sim \stail(s')$}
+%                                        \DisplayProof   
+%   \end{center}
   \end{itemize}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Axioms for streams}
+  \begin{tabular}{lll}
+	  $\bullet$ & Formation rules & $\stream : \Type \to \Type $ \\
+			   &                 & $\ibisim : \stream A \to \stream A \to \Prop $ \\[.75em]
+	  $\bullet$ & Destructors     & $\langle \shead , \stail \rangle : \stream A \to A \times \stream A $ \\
+	          &                 & $\hbisim : s_1 \sim s_2 \to \shead\ s_1 = \shead\ s_2 $ \\
+			 &                 & $\tbisim : s_1 \sim s_2 \to \stail\ s_1 \sim \stail\ s_2 $ \\[.75em]
+       $\bullet$  & Coiterator      & $\coiter^T : (T \to A \times T) \to T \to \stream A$ \\
+				       &                 & $\bisim^R : R \subseteq R\ on\ \langle \shead , \stail \rangle \to R \subseteq \ibisim $ \\[.75em]
+	  $\bullet$   & Computation     & $\shead (\coiter^T f\ t) = \pi_1 (f\ t)$ \\
+				    &                 &  $\stail (\coiter^T f\ t) \sim \coiter^T f (\pi_2 (f\ t))$
+  \end{tabular}
+  \vspace{0.5em}
+  \pause
+  
+  Categorically: Bisimilarity $\sim$ is the largest---i.e.\ terminal---relation that is compatible with destructors.
+  
+  %\begin{itemize}
+  %  \item Formation rule $\qquad \stream : \Type \to \Type $
+  %  \item $$
+  %  \item Destructors $\quad\qquad\langle \shead , \stail \rangle : \stream A \to A \times \stream A$
+  %  \item CoIterator $\qquad\qquad \coiter^T : (T \to A \times T) : T \to \stream A $
+  %          $$ \coiter^T : (T \to A) \to (T \to T) \to T \to \stream\ A $$
+  %  \item Computation rules
+  %          $$ \head (\coiter^T \head^T \tail^T t) = \head^T $$
+  %\end{itemize}
+\end{frame}
+
 
 \begin{frame}
  \frametitle{Structure on streams}
@@ -952,7 +993,7 @@ dualize techniques of H \& M to characterize
        \item reuses code by Matthes \& Picard '11
        \item 3000 lines of code, among which 1500 by MP '11
        \item fully constructive and axiom-free
-       \item tedious: coinduction in \texttt{Coq} cumbersome
+       \item coinductive type and bisimulation in \texttt{Coq} implies axioms
       \end{itemize}
    \end{block}
    
@@ -972,11 +1013,26 @@ dualize techniques of H \& M to characterize
     \item Mechanization in \texttt{Coq}
    \end{itemize}
 
-   \pause \begin{center} Thanks for your attention \end{center}
    
 \end{frame}
 
+\begin{frame}
+	\frametitle{Conclusion}
+	\begin{block}{Another line of work: relationship with coalgebra}
+		\begin{itemize}
+			\item Axioms $\Longleftrightarrow$ Final object ?
+			\item[] $\quad\leadsto$ Needs more general notion of coalgebra
+		\end{itemize}
+	\end{block}
+	\begin{theorem}
+		Axioms for $\M_{A,B}$ $\Longleftrightarrow$ Final coalgebra for polynomial functor $P_{A,B}$ 
+	\end{theorem}
+	\begin{block}{Future work}
+		\M-types in Univalent Foundations $\Longrightarrow$ work modulo identity rather than bisimulation
+	\end{block}
 
+   \pause \begin{center} Thanks for your attention \end{center}
+\end{frame}
 
 \begin{frame}
  \frametitle{Some references}
