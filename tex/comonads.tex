@@ -296,8 +296,12 @@ The first example is the type of \emph{streams} of elements of a given base type
 \begin{example}\label{ex_stream}
   Let $A$ be a type. The type $\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors 
   given in \Cref{stream_rules}.
-  A map into streams is defined by specifying the observations---$\shead$ and $\stail$---on the output of that map.
-  We use this principle rather informally in \Cref{eq:tail_sredec}, where we define a \emph{co}substition operation 
+  Intuitively, a map into streams is defined by specifying the observations---$\shead$ and $\stail$---on the output of that map: this intuition
+  can be obtained by considering the combination of introduction and computation rules from \Cref{stream_rules}.
+  We thus use a kind of \enquote{copattern matching} to define maps, as follows: 
+  the clauses $\comp{f}{\shead} := h$ and $\comp{f}{\stail}:= t$ define $f := \corec(h,t)$.
+  A more formal theory of copattern matching is developed by \textcite{DBLP:conf/popl/AbelPTS13}.
+  We define a \emph{co}substition operation 
    \[\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B\] 
    on streams via the following clauses:
 % 
