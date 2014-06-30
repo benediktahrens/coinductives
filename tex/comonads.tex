@@ -80,7 +80,7 @@ Toulouse}
 
  In a set-theoretic setting, inductive sets are characterized as initial algebras for 
  some endofunctor on the category of sets. For instance, the set of natural numbers constitutes the carrier of the 
- initial algebra of the functor $X \mapsto 1 + X$.
+ initial algebra of the functor $X \mapsto  \{ * \} \amalg X = 1 + X$.
  
  In a type-theoretic setting as given by Martin-L\"of type theory \parencite{martin_lof}, 
  two approaches to the semantics of inductive types have been studied: 
@@ -89,7 +89,8 @@ Toulouse}
  Another approach is to prove that adding certain type-theoretic rules to the type theory---rules which postulate the existence
  of inductive types in the type theory---implies (or is equivalent to) the existence of a universal object \emph{within} type theory
  (see, e.g., \parencite{DBLP:conf/lics/AwodeyGS12, DBLP:journals/tcs/Dybjer97}).
- This latter approach is the one we take in the present work on coinductive types.
+ This latter approach is the one we adopt in the present work: we add axioms to intensional Martin-Löf type theory 
+ which postulate the existence of \emph{co}inductive types, see below.
  
  Some attention has to be given to 
  the precise formulation of the type theory in question, in particular, to the nature of \emph{equality} in the type theory.
@@ -140,7 +141,7 @@ Toulouse}
 
  
  In a traditional set-theoretic setting, the theory of coinductive sets is completely dual to that of inductive sets:
- dually to inductive sets, \fat{co}inductive sets such as streams are characterized as terminal coalgebras of 
+ dually to inductive sets, \emph{co}inductive sets such as streams are characterized as terminal coalgebras of 
  suitable endofunctors \parencite{jacobs1997tutorial}.
  
  In type theory, this duality between inductive and coinductive objects breaks. This is rooted in the 
@@ -167,10 +168,10 @@ Toulouse}
  The cosubstitution operation is explained in the next section.
  
 \begin{Long} 
- \subsection{Cosubstitution: a generic, polymorphic operation on codata}
+ \subsection{Cosubstitution: a comonadic operation on parametrized codata}
 \end{Long}
 \begin{Short}
- \paragraph*{Cosubstitution: a generic, polymorphic operation on codata}
+ \paragraph*{Cosubstitution: a comonadic operation on parametrized codata}
 \end{Short}
 
  
@@ -728,7 +729,7 @@ of cosubstitution  with the destructor $\stail$ resp.\ $\tail$,  we develop the 
 
 
 \begin{Long}
-\emph{Morphisms of relative comonads} are natural transformations that are compatible with the comonadic structure:
+\emph{Morphisms of relative comonads} are families of morphisms that are compatible with the comonadic structure:
 \end{Long}
 \begin{definition}%[Morphism of relative comonads]
 \label{def:comonad_morphism}
