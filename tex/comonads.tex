@@ -294,7 +294,7 @@ We present some particular categories used later on, and fix some notation.
 \end{definition}
 
 Functors and natural transformations are defined in terms of the setoidal equivalence relations on morphisms.
-We omit the definitions, which can be found in our \coq files.
+We omit the definitions, which can be found in our \coq files \parencite{trimat_coq}.
 
 \begin{definition}%[Some categories]
 \label{def:set_setoid}
@@ -360,16 +360,17 @@ We thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$.
 
 % In this text, we use a more convenient syntax, as illustrated in \Cref{eq:tail_sredec}.
 
+\begin{Long}
 The first example is the type of \emph{streams} of elements of a given base type $A$:
+\end{Long}
 % In the presentation we use the notational convention of \Cref{def:set_setoid}, using the same name for a setoid and its underlying type.
 \begin{example}\label{ex_stream}
   Let $A$ be a type. The type $\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors 
   given in \Cref{stream_rules}.
   Intuitively, a map into streams is defined by specifying the observations---$\shead$ and $\stail$---on the output of that map: this intuition
   can be obtained by considering the combination of introduction and computation rules from \Cref{stream_rules}.
-  We thus use a kind of \enquote{copattern matching} to define maps, as follows: 
+  We thus use a kind of \enquote{copattern matching} \parencite{DBLP:conf/popl/AbelPTS13} to define maps, as follows: 
   the clauses $\comp{f}{\shead} := h$ and $\comp{f}{\stail}:= t$ define $f := \corec(h,t)$.
-  A more formal theory of copattern matching is developed by \textcite{DBLP:conf/popl/AbelPTS13}.
   We define a \emph{co}substition operation 
    \[\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B\] 
    on streams via the following clauses:
