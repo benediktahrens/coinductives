@@ -185,7 +185,6 @@ Toulouse}
  
  Dually, coinductive types can often be equipped with a \emph{cosubstitution} operation. 
  Is this cosubstitution operation part of a comonad structure?
- 
  In a set-theoretic setting, the fact that cosubstitution for coinductive sets is comonadic is established by \textcite{DBLP:conf/sfp/UustaluV01}.
  
   
@@ -193,7 +192,7 @@ Toulouse}
  in order to characterize that cosubstitution operation on a given codata type, and its algebraic properties,
  we develop the notion of \emph{relative comonad} and \emph{comodule over a relative comonad}.
  The need to consider \emph{relative} comonads arises from the  need to check the algebraic properties of cosubstitution modulo \emph{bisimilarity} rather
- than modulo identity (in the sense of the Martin-Löf identity types).
+ than modulo identity (i.e., the identity type).
  
  
  In order to integrate a notion of cosubstitution into the categorical semantics of the coinductive types under consideration,
@@ -213,12 +212,12 @@ Toulouse}
  
  All our results have been implemented in the proof assistant \coq \parencite{coq84pl3}.
  The \coq source files and HTML documentation are available online \parencite{trimat_coq}.
- In this document, we hence omit the proofs and focus on definitions and statements of lemmas.
+ Here, we hence omit the proofs and focus on definitions and statements.
  
 \begin{Short}
-\paragraph*{A longer version} A longer version of this article is available on the arXiv \parencite{trimat_coq}.
- There, we give details we had to omit from this version for reasons of space: 
-  we show how to get relative comonads from (traditional) comonads, 
+\paragraph*{A longer version} of this article is available on the arXiv \parencite{trimat_coq}.
+ There, we give details omitted here for reasons of space: 
+  how to get relative comonads from (traditional) comonads, 
            remark on relative comonads into cartesian closed categories,
            explain the relationship to coalgebra semantics, report on the formalization in \coq of our results and
            give proofs of the results in this work.
@@ -267,9 +266,9 @@ Toulouse}
 
 \section{Preliminaries}\label{sec:preliminaries}
 
-In this section we present some particular categories and functors used later on, and fix some notation.
+We present some particular categories used later on, and fix some notation.
 
-\begin{definition}[Setoids in IMLTT]
+\begin{definition}%[Setoids in IMLTT]
   A \emph{setoid} in intensional Martin-Löf type theory is a pair $(A, \sim_A)$ of a type $A$ together with an equivalence 
   relation $\sim_A$ on $A$. Given a setoid $S = (A, \sim_A)$, we often abuse notation by writing $s:S$ instead of $s:A$ for
   a term $s$ of $A$.
@@ -279,8 +278,9 @@ In this section we present some particular categories and functors used later on
 
 
 
-\begin{definition}[Category in IMLTT]\label{def:cat_imltt}
-  A category $\C$ in intensional Martin-Löf type theory (see, e.g., \parencite{aczel_galois, concat}) is given by
+\begin{definition}%[Category in IMLTT]
+ \label{def:cat_imltt}
+  A \emph{category} $\C$ in intensional Martin-Löf type theory  is given by
   \begin{itemize}
    \item a type of objects, also denoted by $\C$;
    \item for any two objects $a,b:\C$, a \emph{setoid} $\C(a,b)$ of morphisms from $a$ to $b$;
@@ -289,16 +289,18 @@ In this section we present some particular categories and functors used later on
    \item a proof that composition is compatible with the equivalence relations of the setoids of morphisms;
    \item proofs of unitality and associativity of composition stated in terms of the equivalence relations on the morphisms.
   \end{itemize}
-  We also write $f:a\to b$ for a morphism $f : \C(a,b)$, when the category $\C$ can be deduced from the context.
+  This definition has been used from early on, e.g., in \parencite{aczel_galois, concat}).
+  We write $f:a\to b$ for a morphism $f : \C(a,b)$, when the category $\C$ can be deduced from the context.
 \end{definition}
 
 Functors and natural transformations are defined in terms of the setoidal equivalence relations on morphisms.
 We omit the definitions, which can be found in our \coq files.
 
-\begin{definition}[Some categories]\label{def:set_setoid}
+\begin{definition}%[Some categories]
+\label{def:set_setoid}
  We denote by $\Set$ the category (in IMLTT) of types (of a fixed universe) and total functions between them in Martin-L\"of type theory. 
- The setoidal equivalence relation on $\Set(A,B)$ is given by pointwise equality as given by the Martin-Löf identity type: 
-   \[f \sim g \enspace =_{\text{def}} \enspace \forall x:A, fx = gx. \]
+ The setoidal equivalence relation on $\Set(A,B)$ is given by pointwise equality as given by the Martin-Löf identity type,
+   $f \sim g \enspace =_{\text{def}} \enspace \forall x:A, fx = gx$.
  
  We denote by $\Setoid$ the category an object of which is a setoid.
  A morphism between setoids is a type-theoretic function between the underlying types that is compatible in the obvious sense with the equivalence relations of the source and target setoids.
@@ -329,9 +331,8 @@ Both of the categories of \Cref{def:set_setoid} have finite products.
 
 \begin{definition}\label{def:monoidal_functor}
  A functor $F:\C\to\D$ between categories with finite products \emph{preserves products} if, for any two objects $A$ and $B$ of $\C$,
-  the morphism
- \[ \phi^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace  \] 
- is an isomorphism.
+  the morphism $\phi^F_{A,B}$ is an isomorphism, where
+ \[ \phi^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace . \] 
 \end{definition}
 
 \begin{example}
