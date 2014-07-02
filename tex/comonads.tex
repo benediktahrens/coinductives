@@ -1224,7 +1224,7 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
    $
 
    \noindent ~\\
-   Here in the upper right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
+   Here we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute} in the upper right corner.
 \end{multicols}
 \end{definition}   
 
@@ -1287,14 +1287,39 @@ the \fat{bisimilarity} relation on it as well as the \fat{cosubstitution} operat
 \section{Formalization in \coq}\label{sec:formal}
 
 All our definitions and theorems are mechanized in the proof assistant \coq \parencite{coq84pl3}.
-The formalization of infinite triangular matrices is taken from the work by \textcite{DBLP:conf/types/MatthesP11},
+In the formalization we add the rules of \Cref{stream_rules} and \Cref{tri_rules} as axioms internal to the \coq system, via the \lstinline!Axiom! vernacular. In order to ensure consistency, we 
+\begin{enumerate}
+ \item encapsulate the axioms in \coq \emph{module} types (separately for $\stream$ and for $\Tri$) and
+ \item instantiate each module type by defining streams and triangular matrices as coinductive types using the \lstinline!CoInductive! vernacular,
+  as shown in \Cref{tri_coinductive} for the example of $\Tri$.
+\end{enumerate}
+This shows that the axioms we add to \coq are weaker than the general mechanism of defining coinductive types in \coq via the \lstinline!CoInductive! vernacular.
+
+\begin{figure}
+ \begin{mdframed}
+  \begin{lstlisting}
+CoInductive Tri A : Type :=
+    constr : A -> Tri (E x A) -> Tri A.
+CoInductive bisim : forall {A}, Tri A -> Tri A -> Prop :=
+    bisim_constr : forall {A} {t t' : Tri A}, 
+          top t = top t' -> 
+          bisim (rest t) (rest t') -> 
+          bisim t t'.
+\end{lstlisting}
+Here, the code \lstinline!E x A! denotes the cartesian product of the types \lstinline!E! and \lstinline!A!.
+ \end{mdframed}
+ \caption{Definition of $\Tri$ and bisimilarity using \coq's \lstinline!CoInductive! vernacular} \label{tri_coinductive}
+\end{figure}
+
+
+For the instantiation of the module type for $\Tri$, the formalization of infinite triangular matrices is taken from the work by \textcite{DBLP:conf/types/MatthesP11},
 and only slightly adapted to compile with the version of \coq we use.
-The mechanization does \emph{not} rely on any additional axioms.
+
+Apart from the implementation of our codata types via axioms, the mechanization does \emph{not} rely on any additional axioms.
 The \coq source files and HTML documentation are available from the project web site \parencite{trimat_coq}.
 The correspondence between formalized statements and the statements in this article are given in \Cref{sec:table_formal_informal}.
 
-In the following we explain some of our design choices for this mechanization
-and point out differences between the pen-and-paper definitions and the mechanized ones.
+
 
 \begin{figure}
  \begin{mdframed}
@@ -1303,6 +1328,8 @@ and point out differences between the pen-and-paper definitions and the mechaniz
  \caption{Correspondence of informal and formal definitions} \label{sec:table_formal_informal}
 \end{figure}
 
+
+\begin{comment}
 \subsection{Implementation choices}
 
 We explain two choices we made in the course of the formalization in \coq. The first choice concerns
@@ -1340,8 +1367,9 @@ not occur.
 We make use of canonical structures in order for \coq to deduce instances of categories when we mention objects of a category; 
 in particular, this is used to allow for overloading of the notation for morphisms of a category.
 We can thus conveniently use the same arrow symbol to denote the type of morphisms between two comonads, between two comodules and so on.
+\end{comment}
 
-
+\begin{comment}
 \subsection{Relationship with coinductive types as provided by \coq}
 
 The proof assistant \coq provides a mechanism to specify coinductive types (and families of types) via
@@ -1370,6 +1398,7 @@ More precisely, we prove the axioms of \Cref{tri_rules} from the above declarati
 
 This might be the right moment to point to work on a device allowing the declaration of coinductive types via destructors in \agda, 
 see \parencite{DBLP:conf/popl/AbelPTS13}.
+\end{comment}
 
 \end{Long}
 
