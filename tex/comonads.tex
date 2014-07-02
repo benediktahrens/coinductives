@@ -52,7 +52,7 @@ Toulouse}
 \begin{abstract}
 
 
- In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
+ We study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
  We use these notions to give categorical semantics for the coinductive type families of streams and
  of infinite triangular matrices and their respective cosubstitution operations in intensional Martin-L\"of type theory.
  Our results are mechanized in the proof assistant \coq.
@@ -66,19 +66,21 @@ Toulouse}
 \section{Introduction}
  
  In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
- We then use these notions to characterize several coinductive data types and their respective cosubstitution operations 
- in intensional Martin-L\"of type theory via a universal property.
- 
- In the following, we explain some of the vocabulary occurring in these first sentences.
+ We then use these notions to characterize two coinductive data types and their respective cosubstitution operations 
+ in intensional Martin-L\"of type theory via a universal property: 
+ firstly, we consider the \emph{homogeneous} codata type family of streams parametrized by a base type.
+ Secondly, we consider the \emph{heterogeneous} codata type family of infinite triangular matrices parametrized by the type of diagonal entries.
+  In the rest of the introduction, we explain some of the vocabulary occurring in these first sentences.
  
 \begin{Long}
- \subsection{About inductive types}
+ \subsection{Semantics of inductive types}
 \end{Long}
 \begin{Short}
- \paragraph*{About inductive types}
+ \paragraph*{Semantics of inductive types}
 \end{Short}
 
-
+ Before turning to \emph{co}inductive types, we give an overview over semantics for inductive types.
+ 
  In a set-theoretic setting, inductive sets are characterized as initial algebras for 
  some endofunctor on the category of sets \parencite{jacobs1997tutorial}.
  
@@ -365,7 +367,7 @@ The first example is the type of \emph{streams} of elements of a given base type
 
 % In the presentation we use the notational convention of \Cref{def:set_setoid}, using the same name for a setoid and its underlying type.
 \begin{example}\label{ex_stream}
-  Let $A$ be a type. The type $\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors 
+  Let $A$ be a type. The type---setoid, actually---$\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors 
   given in \Cref{stream_rules}.
   Intuitively, a map into streams is defined by specifying the observations---$\shead$ and $\stail$---on the output of that map: this intuition
   can be obtained by considering the combination of introduction and computation rules from \Cref{stream_rules}.
@@ -379,7 +381,9 @@ The first example is the type of \emph{streams} of elements of a given base type
                   \comp{\sredec~f}{\stail} := \comp{\stail}{\sredec~f} \enspace . \label{eq:tail_sredec}
     \end{align}
   We call such an operation \enquote{cosubstitution} since its type is dual to, e.g., the simultaneous substitution operation 
-  of the lambda calculus \parencite{alt_reus}.
+  of the lambda calculus \parencite{alt_reus}. 
+  Cosubstitution is compatible with bisimilarity on streams, and thus is (the carrier of) a family
+  \[ \sredec_{A,B} : \Setoid(\stream A, \eq B) \to \Setoid(\stream A,\stream B) \enspace . \]
 
 \begin{figure}
  \begin{mdframed}
@@ -443,11 +447,10 @@ parametrized by a type $B$.
 
 \end{Long}
 
-Another codata type we consider models
-\emph{infinite triangular matrices}. It is more sophisticated than the type of streams as one of its destructors is \emph{heterogeneous}:
+We furthermore consider the \emph{heterogeneous} codata type family of \emph{infinite triangular matrices}:
 
 \begin{example}\label{ex_tri}
-The codata type of infinite triangular matrices is studied in detail by
+Infinite triangular matrices are studied in detail by
  \textcite{DBLP:conf/types/MatthesP11}, and also by \textcite{DBLP:journals/tcs/AbelMU05}.
  We give a brief summary, but urge the reader to consult the given reference 
  for an in-depth explanation. 
@@ -503,8 +506,9 @@ The codata type of infinite triangular matrices is studied in detail by
 \begin{Short}
  Given a matrix over type $A$, its $\tail$---obtained by removing the first element on the diagonal, i.e.\ the $\head$ element---can 
  be considered as a trapezium or, alternatively, as a triangular matrix over type $E\times A$, 
- by bundling the entries of the diagonal with those directly above the diagonal.
+ by bundling the entries of the diagonal with those directly above the diagonal. 
 \end{Short}
+This change of parameter (from $A$ to $E \times A$) in the type of $\tail$ is why the family $\Tri$ is called \enquote{heterogeneous}.
 
  Bisimilarity on the inhabitants of that type is defined via the destructors of \Cref{tri_rules}.    
  As with streams, we denote by $\Tri A$ not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
