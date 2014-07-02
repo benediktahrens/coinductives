@@ -187,7 +187,7 @@
    \begin{itemize}\setlength{\itemsep}{1em}
     \item Category-theoretic semantics of \fat{co}inductive data types
           in intensional Martin-L\"of type theory (IMLTT)
-    \item [$\leadsto$] Develop a notion of \enquote{coalgebra} for the signature of a codata type
+    \item [$\leadsto$] Develop a notion of \enquote{model} for the signature of a codata type
     \item Incorporate canonical cosubstitution
    \end{itemize}
 
@@ -570,8 +570,8 @@ dualize techniques of H \& M to characterize
 \begin{frame}
  \frametitle{Terminal semantics for $\stream$}
  
-  \begin{definition}[Category of coalgebras]
-    A coalgebra for the signature of $\stream$ is given by a pair $(S,t)$:
+  \begin{definition}[Category of models]
+    A \fat{model} for the signature of $\stream$ is given by a pair $(S,t)$:
     \begin{itemize}
      \item a comonad $S$ relative to $\eq: \Set \to \Setoid$
      \item a morphism of comodules over $S$
@@ -899,9 +899,9 @@ dualize techniques of H \& M to characterize
 \end{frame}
 
 \begin{frame}
- \frametitle{Coalgebras for the signature of $\Tri$}
-  \begin{definition}[Category of coalgebras]
-    A coalgebra for the signature of $\Tri$ is given by a pair $(T,r)$:
+ \frametitle{Models for the signature of $\Tri$}
+  \begin{definition}[Category of models]
+    A \fat{model} for the signature of $\Tri$ is given by a pair $(T,r)$:
     \begin{itemize}
      \item a comonad $T$ relative to $\eq: \Set \to \Setoid$
      \item a morphism of comodules over $T$
@@ -957,16 +957,16 @@ dualize techniques of H \& M to characterize
 \end{frame}
 
 \begin{frame}
- \frametitle{A specified $\cut$ for any coalgebra}
+ \frametitle{A specified $\cut$ for any model}
   \begin{itemize}
     \item we were not able to define $\cut$ categorically
-    \item fix: every coalgebra $(T,r)$ comes with a \fat{specified}
+    \item fix: every model $(T,r)$ comes with a \fat{specified}
        \[ c_A : T (E\times A) \to TA \]
           and equations characterizing $c$
     \item $c^{\Tri} := \cut$ for $\Tri$ uniquely determined by these equations
    \end{itemize}
  \begin{lemma}[for real this time]
-  $(\Tri,\cut,\tail)$ is terminal in the category of coalgebras $(T,c,r)$.
+  $(\Tri,\cut,\tail)$ is terminal in the category of models $(T,c,r)$.
  \end{lemma}
 
 \end{frame}
@@ -1007,7 +1007,7 @@ dualize techniques of H \& M to characterize
     \item $\stream$ and $\Tri$ are \fat{relative} comonads
 %     \item Ad hoc notion of weak constructive comonad is instance of relative comonad
     \item Develop comodules over relative comonads
-    \item Terminal coalgebra semantics for $\stream$ and $\Tri$
+    \item Terminal semantics for $\stream$ and $\Tri$
     \item Bisimilarity and redecoration are part of universal object
     \item $\Tri$ not as straightforward as the $\lambda$-calculus because of $\cut$
     \item Mechanization in \texttt{Coq}
