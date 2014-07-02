@@ -19,6 +19,7 @@
 \bibliography{literature.bib}
 
 \usepackage{mdframed}
+\usepackage{multicol}
 \usepackage{ownstylesansthm}
 
 \usepackage{comment}
@@ -348,7 +349,7 @@ For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ a
 
 In this section, we present these types, and we also define \emph{bisimilarity} for each codata type.
 Bisimilarity is a coinductively defined equivalence relation on types which is considered 
-to be the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93, DBLP:journals/corr/abs-cs-0603119}.
+to be the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93}.
 A coinductive type with bisimilarity hence forms a setoid as in \Cref{def:set_setoid}.
 We thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
 
@@ -1074,7 +1075,7 @@ Morphisms of comonads with cut are morphisms of comonads that are compatible wit
 
 
 Comonads with cut relative to a fixed functor $F:\C\to\D$ and $E:\C_0$ form a category $\RComonadWC(F,E)$.
-There is the obvious forgetful functor from $\RComonadWC(F,E)$ to $\RComonad(F)$.
+There is a forgetful functor from $\RComonadWC(F,E)$ to $\RComonad(F)$.
 Conversely, any comonad $T$ relative to a suitable functor can be equipped with a $\cut$ operation, using functoriality of $T$.
 %
 \begin{Short}
@@ -1203,16 +1204,17 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
    A morphism between two such objects $(T,\tail^T)$ and $(S,\tail^S)$
    is given by a morphism of relative comonads with cut $\tau : T \to S$ such that
    the following diagram of comodule morphisms in the category $\RComod(S,\E)$ commutes,
-   
-   \[ \begin{xy}
+\begin{multicols}{2}   
+   $ \begin{xy}
        \xymatrix{   \tau_*T  \ar[r]^{\tau_*(\tail^T)} \ar[d]_{\induced{\tau}}  &  **[r] \tau_*T (E\times \_ )\ar[d]^{\induced{\tau}(E\times \_)} \\
                     S  \ar[r]_{\tail^S}  &  **[r] S (E\times \_ ) \enspace .
         }
       \end{xy}
-   \]
+   $
 
-   \noindent
+%    \noindent
    Here in the upper right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
+\end{multicols}
 \end{definition}   
 
 
@@ -1266,8 +1268,8 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
 \end{proof}
 \end{Long}
 
-This universal property of terminality characterizes not only the codata type of infinite triangular matrices, but also
-the \fat{bisimilarity} relation on it as well as the \fat{redecoration} operation.
+This universal property characterizes not only the codata type $\Tri$, but also
+the \fat{bisimilarity} relation on it as well as the \fat{cosubstitution} operation.
 
 
 \begin{Long}
