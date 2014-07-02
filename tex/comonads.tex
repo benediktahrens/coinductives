@@ -42,7 +42,7 @@ Toulouse}
 \newcommand{\fat}[1]{\textbf{#1}}
 
 
-
+\newcommand{\itemizedist}{.5em}
 
 
 \maketitle
@@ -154,7 +154,7 @@ Toulouse}
  
  Instead of comparing two coinductive terms in Martin-Löf type theory up to identity, one defines a 
  binary coinductive relation called \emph{bisimilarity} on a given coinductive type, with respect to which one compares its inhabitants  \parencite{DBLP:conf/types/Coquand93}. 
- Categorically, this relation is given as the greatest---terminal---relation on the coinductive type that is compatible with the coalgebra structure.
+ Categorically, \emph{bisimilarity} is given as the greatest---\emph{terminal}---\emph{relation} on the coinductive type that is compatible with the coalgebra structure.
  
  Consequently, we consider two maps into a coinductive type to be the same if they are \emph{pointwise bisimilar}---an analogue
  to the aforementioned principle of function extensionality available in Homotopy Type Theory. 
@@ -168,6 +168,12 @@ Toulouse}
  The objects of the considered categories are not plain coalgebras for some endofunctor, but rather coalgebras with extra structure.
  This extra structure accounts for a \emph{cosubstitution} operation with which one can equip the considered codata types \emph{in a canonical way}.
  The cosubstitution operation is explained in the next section.
+
+\begin{Long}
+ We mention here work by \textcite{DBLP:conf/calco/Marchi05}, who studies the existence of coinductive types in models of \emph{extensional} Martin-L\"of type theory. In that work, no \emph{internal} characterization of coinductive types is given.
+ Furthermore, his work does not account for the mentioned cosubstitution operation.
+\end{Long}
+
  
 \begin{Long} 
  \subsection{Cosubstitution is a comonadic operation on parametrized codata.}
@@ -348,11 +354,19 @@ We consider two particular coinductive type families in Intensional Martin-L\"of
 a type-theoretic foundational system.
 For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ and $b$.
 
-In this section, we present these types, and we also define \emph{bisimilarity} for each codata type.
-Bisimilarity is a coinductively defined equivalence relation on types which is considered 
-to be the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93}.
-A coinductive type with bisimilarity hence forms a setoid as in \Cref{def:set_setoid}.
+In this section, we present the type-theoretic rules for these codata types and \emph{bisimilarity} on them.
+% Bisimilarity is a coinductively defined equivalence relation on types which 
+Categorically, bisimilarity on a given codata type is given by the largest binary relation on that type that is 
+compatible with the destructors (elimination); it is the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93}.
+A coinductive type with bisimilarity forms a setoid as in \Cref{def:set_setoid}.
 We thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
+
+A map into a codata type is defined using its \emph{introduction} rule.
+Intuitively, the introduction rule takes as arguments the \emph{observations} one can make on the image of the map thus defined.
+For instance, a map into streams is defined by specifying $\shead$ and $\stail$ on the output of that map: this intuition
+  can be obtained by considering the combination of introduction and computation rules from \Cref{stream_rules}.
+  We thus use a kind of \enquote{copattern matching} \parencite{DBLP:conf/popl/AbelPTS13} to define maps, as follows: 
+  the clauses $\comp{f}{\shead} := h$ and $\comp{f}{\stail}:= t$ abbreviate the definition $f := \corec(h,t)$.
 
 % Maps into a coinductive data type are specified by the observations, i.e.\ the value of the destructors, on the output of those maps.  
 % The precise rule for specifying maps into the considered coinductive type is given in \Cref{stream_rules}.
@@ -369,10 +383,7 @@ The first example is the type of \emph{streams} of elements of a given base type
 \begin{example}\label{ex_stream}
   Let $A$ be a type. The type---setoid, actually---$\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors 
   given in \Cref{stream_rules}.
-  Intuitively, a map into streams is defined by specifying the observations---$\shead$ and $\stail$---on the output of that map: this intuition
-  can be obtained by considering the combination of introduction and computation rules from \Cref{stream_rules}.
-  We thus use a kind of \enquote{copattern matching} \parencite{DBLP:conf/popl/AbelPTS13} to define maps, as follows: 
-  the clauses $\comp{f}{\shead} := h$ and $\comp{f}{\stail}:= t$ define $f := \corec(h,t)$.
+  
   We define a \emph{co}substition operation 
    \[\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B\] 
    on streams via the following clauses:
@@ -496,7 +507,7 @@ Infinite triangular matrices are studied in detail by
  \end{figure}
 \end{Long}
 % 
- It is specified via two destructors $\head$ and $\tail$, whose types are given in \Cref{tri_rules}.
+ The codata type is specified via two destructors $\head$ and $\tail$, whose types are given in \Cref{tri_rules}.
 \begin{Long}
  Given a matrix over type $A$, its $\tail$---obtained by removing the first element on the diagonal, i.e.\ the $\head$ element---can 
  be considered as a trapezium as indicated by the green line in \Cref{fig_tri}, or alternatively, as
@@ -510,9 +521,8 @@ Infinite triangular matrices are studied in detail by
 \end{Short}
 This change of parameter (from $A$ to $E \times A$) in the type of $\tail$ is why the family $\Tri$ is called \enquote{heterogeneous}.
 
- Bisimilarity on the inhabitants of that type is defined via the destructors of \Cref{tri_rules}.    
- As with streams, we denote by $\Tri A$ not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
- underlying \emph{type}. 
+%  As with streams, we denote by $\Tri A$ not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
+%  underlying \emph{type}. 
  
  \begin{figure}
  \begin{mdframed}
@@ -599,7 +609,7 @@ The dual notion is that of a relative \emph{co}monad:
 \begin{definition}%[Relative comonad]
  \label{def:rel_comonad}
   Let $F:\C\to\D$ be a functor. A \fat{relative comonad $T$ over $F$} is given by
-  \begin{packitem}\setlength{\itemsep}{.7em}
+  \begin{packitem}\setlength{\itemsep}{\itemizedist}
    \item a map $T:\C_0 \to \D_0$ on the objects of the categories involved;
    \item an operation $\counit : \forall A : \C_0, \D(TA,FA)$;
    \item an operation $\cobind: \forall A,B:\C_0, \D(TA,FB) \to \D(TA,TB)$
@@ -663,7 +673,7 @@ Relative comonads over the identity functor are exactly comonads.
 \begin{example}[Relative comonads from comonads]\label{ex_relcom_from_com}
   Let $F : \C \to \D$ be a fully faithful functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\C$.
   We define a comonad $FM$ relative to $F$ by setting:
-  \begin{itemize}\setlength{\itemsep}{.7em}
+  \begin{itemize}\setlength{\itemsep}{\itemizedist}
    \item $FM(A) := F(MA)$;
    \item $\counit^{FM}_A := F(\counit^M_A) : \D(FMA,FA)$;
    \item $\cobind^{FM}_{A,B} (f) := F\bigl(\cobind^M_{A,B}(F^{-1}f)\bigr)$.
@@ -675,7 +685,7 @@ Relative comonads over the identity functor are exactly comonads.
 \begin{example}[Relative comonads from comonads II]\label{ex_relcom_from_com_on_target}
     Let $F : \C \to \D$ be a functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\D$.
   We define a comonad $MF$ relative to $F$ by setting:
-  \begin{itemize}\setlength{\itemsep}{.7em}
+  \begin{itemize}\setlength{\itemsep}{\itemizedist}
    \item $MF(A) := M(FA)$;
    \item $\counit^{MF}_A := \counit^M_{FA} : \D(MFA,FA)$;
    \item $\cobind^{MF}_{A,B} (f) := \cobind^M_{FA,FB}(f) : \D(MFA,MFB)$ for $f : \D(MFA,FB)$.
@@ -734,9 +744,9 @@ of cosubstitution  with the destructor $\stail$ resp.\ $\tail$,  we develop the 
 
 
 
-\begin{Long}
+
 \emph{Morphisms of relative comonads} are families of morphisms that are compatible with the comonadic structure:
-\end{Long}
+
 \begin{definition}%[Morphism of relative comonads]
 \label{def:comonad_morphism}
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
@@ -779,7 +789,7 @@ with respect to the functorial action of \Cref{def:lift}.
 
 
 \begin{example}\label{ex_diag}
-We define a morphism of relative comonads $\diagonal : \Tri \to \stream$:
+We define a morphism of relative comonads $\diagonal : \Tri \to \stream$ as follows.
 Given a matrix $t : \Tri A$, its diagonal is a stream $\diagonal_A~t : \stream A$.
 The map $\diagonal_A$ is defined via the clauses
 \begin{align*} \comp{\diagonal_A}{\shead} := \head \quad\text{ and } \quad %\notag\\
@@ -838,7 +848,7 @@ In this section we develop the notion of \emph{comodule over a relative comonad}
 \label{def:comodule}
  Let $T$ be a comonad relative to $F:\C\to\D$, and let $\E$ be a category.
  A \fat{comodule over T towards $\E$} consists of
-   \begin{itemize}\setlength{\itemsep}{.7em}
+   \begin{itemize}\setlength{\itemsep}{\itemizedist}
    \item a map $M:\C_0 \to \E_0$ on the objects of the categories involved and
    \item an operation $\mcobind: \forall A,B:\C_0, \D(TA,FB) \to \E(MA,MB)$ such that
    \item $\forall A : \C_0, \mcobind(\counit_A) = \id_{MA}$;
@@ -944,7 +954,7 @@ This extends to morphisms of relative comonads:
 
 \begin{definition}%[Morphism of comonads induces morphism of comodules]
 \label{def:induced} 
-  Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$.
+  Let $\tau : T\to S$ be a morphism of comonads relative to $F : \C \to \D$.
   Then $\tau$ gives rise to a morphism of comodules over $S$ from the pushforward of the tautological comodule
   of $T$ along $\tau$ to the tautological comodule over $S$,
   \[ \induced{\tau} : \tau_*T \to S \enspace , \quad \induced{\tau}_A := \tau_A \enspace . \]
@@ -962,9 +972,7 @@ the respective category of models.
 
 The terminal semantics result is hardly surprising; however, it is still interesting as it characterizes not only the codata types themselves,
  but also the respective bisimilarity relations and comonadic operations on them, via a universal property.
- 
- We mention here work by \textcite{DBLP:conf/calco/Marchi05}, who studies the existence of coinductive types in models of \emph{extensional} Martin-L\"of type theory. In that work, no \emph{internal} characterization of coinductive types is given.
- 
+
 
 
 \begin{Long}
@@ -1215,7 +1223,7 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
       \end{xy}
    $
 
-%    \noindent
+   \noindent ~\\
    Here in the upper right corner we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute}.
 \end{multicols}
 \end{definition}   
