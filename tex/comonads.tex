@@ -80,8 +80,7 @@ Toulouse}
 
 
  In a set-theoretic setting, inductive sets are characterized as initial algebras for 
- some endofunctor on the category of sets. For instance, the set of natural numbers constitutes the carrier of the 
- initial algebra of the functor $X \mapsto  \{ * \} \amalg X = 1 + X$.
+ some endofunctor on the category of sets \parencite{jacobs1997tutorial}.
  
  In a type-theoretic setting as given by Martin-L\"of type theory \parencite{martin_lof}, 
  two approaches to the semantics of inductive types have been studied: 
@@ -90,8 +89,8 @@ Toulouse}
  Another approach is to prove that adding certain type-theoretic rules to the type theory---rules which postulate the existence
  of inductive types in the type theory---implies (or is equivalent to) the existence of a universal object \emph{within} type theory
  (see, e.g., \parencite{DBLP:conf/lics/AwodeyGS12, DBLP:journals/tcs/Dybjer97}).
- This latter approach is the one we adopt in the present work: we add axioms to intensional Martin-Löf type theory 
- which postulate the existence of \emph{co}inductive types, see below.
+ This latter approach is the one we adopt in the present work: we add axioms to intensional Martin-Löf type theory,
+ postulating the existence of \emph{co}inductive types, see below.
  
  Some attention has to be given to 
  the precise formulation of the type theory in question, in particular, to the nature of \emph{equality} in the type theory.
@@ -169,10 +168,10 @@ Toulouse}
  The cosubstitution operation is explained in the next section.
  
 \begin{Long} 
- \subsection{Cosubstitution: a comonadic operation on parametrized codata}
+ \subsection{Cosubstitution is a comonadic operation on parametrized codata.}
 \end{Long}
 \begin{Short}
- \paragraph*{Cosubstitution: a comonadic operation on parametrized codata}
+ \paragraph*{Cosubstitution is a comonadic operation on parametrized codata.}
 \end{Short}
 
  
@@ -193,7 +192,7 @@ Toulouse}
  in order to characterize that cosubstitution operation on a given codata type, and its algebraic properties,
  we develop the notion of \emph{relative comonad} and \emph{comodule over a relative comonad}.
  The need to consider \emph{relative} comonads arises from the  need to check the algebraic properties of cosubstitution modulo \emph{bisimilarity} rather
- than modulo identity (i.e., the identity type).
+ than modulo (the) identity (type).
  
  
  In order to integrate a notion of cosubstitution into the categorical semantics of the coinductive types under consideration,
@@ -204,10 +203,10 @@ Toulouse}
  and---via the use of (relative) comonads---a canonical cosubstitution operation on them.
  
 \begin{Long} 
- \subsection{Our proofs are correct}
+ \subsection{Our proofs are correct.}
 \end{Long}
 \begin{Short}
- \paragraph*{Our proofs are correct}
+ \paragraph*{Our proofs are correct.}
 \end{Short}
 
  
@@ -216,7 +215,7 @@ Toulouse}
  Here, we hence omit the proofs and focus on definitions and statements.
  
 \begin{Short}
-\paragraph*{A longer version} of this article is available on the arXiv \parencite{trimat_coq}.
+\paragraph*{A longer version of this article} is available on the arXiv \parencite{trimat_coq}.
  There, we give details omitted here for reasons of space: 
   how to get relative comonads from (traditional) comonads, 
            remark on relative comonads into cartesian closed categories,
@@ -361,9 +360,9 @@ We thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$.
 
 % In this text, we use a more convenient syntax, as illustrated in \Cref{eq:tail_sredec}.
 
-\begin{Long}
+
 The first example is the type of \emph{streams} of elements of a given base type $A$:
-\end{Long}
+
 % In the presentation we use the notational convention of \Cref{def:set_setoid}, using the same name for a setoid and its underlying type.
 \begin{example}\label{ex_stream}
   Let $A$ be a type. The type $\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors 
