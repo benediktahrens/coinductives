@@ -143,7 +143,7 @@
 %  \newcommand{\bind}[2]{{#1} \blacktriangleright {#2}}
 % \newcommand{\bind}[2]{{#1} \mathbin{\vartriangleright} {#2}}
 % \newcommand{\bind}[2]{{#1} \mathbin{\mathbf{\rhd}} {#2}}
-\newcommand{\LC}{\mathsf{Lc}}
+\newcommand{\LC}{{\Lambda}}
 \newcommand{\TLC}{\mathsf{TLC}}
 \newcommand{\PCF}{\mathsf{PCF}}
 
@@ -185,10 +185,10 @@
  \frametitle{Goal}
  
    \begin{itemize}\setlength{\itemsep}{1em}
-    \item Category-theoretic semantics of \fat{co}inductive data types
+    \item [1.]Category-theoretic semantics of \fat{co}inductive data types
           in intensional Martin-L\"of type theory (IMLTT)
     \item [$\leadsto$] Develop a notion of \enquote{model} for the signature of a codata type
-    \item Incorporate canonical cosubstitution
+    \item [2.] Incorporate canonical cosubstitution
    \end{itemize}
 
 %   \begin{block}{In this talk we consider}
@@ -255,7 +255,7 @@
  
   \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
     \AxiomC{$x : X$}
-     \UnaryInfC{$\Var(x) : \LC(X)$}
+     \UnaryInfC{$\Var(x) : \LC X$}
       \DisplayProof
       \hspace{.3em}
 %                       
@@ -476,33 +476,49 @@ dualize techniques of H \& M to characterize
 \end{frame}
 
 \begin{frame}
-  \frametitle{Axioms for streams}
-  \begin{tabular}{lll}
-	  $\bullet$ & Formation rules & $\stream : \Type \to \Type $ \\
-			   &                 & $\ibisim : \stream A \to \stream A \to \Prop $ \\[.75em]
-	  $\bullet$ & Destructors     & $\langle \shead , \stail \rangle : \stream A \to A \times \stream A $ \\
-	          &                 & $\hbisim : s_1 \sim s_2 \to \shead\ s_1 = \shead\ s_2 $ \\
-			 &                 & $\tbisim : s_1 \sim s_2 \to \stail\ s_1 \sim \stail\ s_2 $ \\[.75em]
-       $\bullet$  & Coiterator      & $\coiter^T : (T \to A \times T) \to T \to \stream A$ \\
-				       &                 & $\bisim^R : R \subseteq R\ on\ \langle \shead , \stail \rangle \to R \subseteq \ibisim $ \\[.75em]
-	  $\bullet$   & Computation     & $\shead (\coiter^T f\ t) = \pi_1 (f\ t)$ \\
-				    &                 &  $\stail (\coiter^T f\ t) \sim \coiter^T f (\pi_2 (f\ t))$
-  \end{tabular}
-  \vspace{0.5em}
-  \pause
-  
-  Categorically: Bisimilarity $\sim$ is the largest---i.e.\ terminal---relation that is compatible with destructors.
-  
-  %\begin{itemize}
-  %  \item Formation rule $\qquad \stream : \Type \to \Type $
-  %  \item $$
-  %  \item Destructors $\quad\qquad\langle \shead , \stail \rangle : \stream A \to A \times \stream A$
-  %  \item CoIterator $\qquad\qquad \coiter^T : (T \to A \times T) : T \to \stream A $
-  %          $$ \coiter^T : (T \to A) \to (T \to T) \to T \to \stream\ A $$
-  %  \item Computation rules
-  %          $$ \head (\coiter^T \head^T \tail^T t) = \head^T $$
-  %\end{itemize}
+ \frametitle{Axioms for streams and bisimulation}
+%   \begin{description}
+%    \item []
+         \AxiomC{$T : \Set$} \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} %\doubleLine
+                              \RightLabel{Intro}
+               \TrinaryInfC{$\coiter_A~hd~tl : T \to \stream A$}
+               \DisplayProof%
+%    \item []
+%          \AxiomC{$x, y : \stream A \vdash R : \Set$} 
+
+~\\~\\
+
+
+           \AxiomC{$ R~s~t \to \shead~s = \shead~t$}
+                \AxiomC{$ R~s~t \to R~(\stail~s) (\stail~t)$}  %\doubleLine
+                \RightLabel{Bisim-Intro}
+               \BinaryInfC{$R~s~t \to s \sim t$}
+               \DisplayProof%
+               
+~\\~\\
+$+$ elimination for streams and $\bisim$\ldots
+
+\begin{definition}
+ Bisimulation := relation compatible with destructors
+\end{definition}
+
+
+Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
+               
+%   \end{description}
+
+% \begin{block}{Axioms are equivalent to}
+%      existence of terminal coalgebra of
+%      \begin{align*}
+%            P :  \to \Setoid \\
+%                 
+%      \end{align*}
+% 
+% \end{block}
+
+
 \end{frame}
+
 
 
 \begin{frame}
@@ -1052,10 +1068,38 @@ dualize techniques of H \& M to characterize
  
 \end{frame}
 
+\begin{frame}
+  \frametitle{Axioms for streams + bisimilarity}
+  \begin{tabular}{lll}
+	  $\bullet$ & Formation rules & $\stream : \Type \to \Type $ \\
+			   &                 & $\ibisim : \stream A \to \stream A \to \Prop $ \\[.75em]
+	  $\bullet$ & Destructors     & $\langle \shead , \stail \rangle : \stream A \to A \times \stream A $ \\
+	          &                 & $\hbisim : s_1 \sim s_2 \to \shead\ s_1 = \shead\ s_2 $ \\
+			 &                 & $\tbisim : s_1 \sim s_2 \to \stail\ s_1 \sim \stail\ s_2 $ \\[.75em]
+       $\bullet$  & Coiterator      & $\coiter^T : (T \to A \times T) \to T \to \stream A$ \\
+				       &                 & $\bisim^R : R \subseteq R\ on\ \langle \shead , \stail \rangle \to R \subseteq \ibisim $ \\[.75em]
+	  $\bullet$   & Computation     & $\shead (\coiter^T f\ t) = \pi_1 (f\ t)$ \\
+				    &                 &  $\stail (\coiter^T f\ t) \sim \coiter^T f (\pi_2 (f\ t))$
+  \end{tabular}
+  \vspace{0.5em}
+  \pause
+  
+  Categorically: Bisimilarity $\sim$ is a weakly terminal bisimulation.
+  
+  %\begin{itemize}
+  %  \item Formation rule $\qquad \stream : \Type \to \Type $
+  %  \item $$
+  %  \item Destructors $\quad\qquad\langle \shead , \stail \rangle : \stream A \to A \times \stream A$
+  %  \item CoIterator $\qquad\qquad \coiter^T : (T \to A \times T) : T \to \stream A $
+  %          $$ \coiter^T : (T \to A) \to (T \to T) \to T \to \stream\ A $$
+  %  \item Computation rules
+  %          $$ \head (\coiter^T \head^T \tail^T t) = \head^T $$
+  %\end{itemize}
+\end{frame}
 
 \end{document}
 
 
-% TODO: show cut operation
-% TODO: reuse code
+
+
 
