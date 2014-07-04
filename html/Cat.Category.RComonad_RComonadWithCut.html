@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>Coinitial semantics for redecoration of triangular matrices</title>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<title>Terminal semantics for codata types in intensional Martin-Löf type theory</title>
+<script src="jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 $ (function () {
 	$ ("div.code:contains('Require')").first ().remove ();
@@ -56,7 +56,7 @@ $ (function () {
 <div class="table-nav-top">
 	<div>
 		Benedikt Ahrens and Régis Spadotti&mdash;
-		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+		<a href="http://arxiv.org/abs/1401.1053">Terminal semantics for codata types in intensional Martin-Löf type theory</a>
 	</div>
 	<div class="toc-nav" >
 		<a href="toc.html">Table of contents</a>
@@ -81,13 +81,13 @@ $ (function () {
 </div>
 
 <div class="doc">
-<a name="lab51"></a><h1 class="section">Canonical cut</h1>
+<a name="lab86"></a><h1 class="section">Canonical cut</h1>
 
 </div>
 <div class="code"></div>
 
 <div class="doc">
-<a name="lab52"></a><h2 class="section">Definition</h2>
+<a name="lab87"></a><h2 class="section">Definition</h2>
 
 </div>
 <div class="code"><span class="id" data-type="keyword">Section</span> <a name="Defs"><span class="id" data-type="section">Defs</span></a>.<br/>
@@ -100,35 +100,89 @@ $ (function () {
 <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td></td><td></td><td><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::'RelativeComonadWithCut.make'_'⦃'_'RelativeComonad'_'≔'_x_';'_'cut'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::'RelativeComonadWithCut.make'_'⦃'_'RelativeComonad'_'≔'_x_';'_'cut'_'≔'_x_'⦄'"><span class="id" data-type="notation">cut</span></a></td><td><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::'RelativeComonadWithCut.make'_'⦃'_'RelativeComonad'_'≔'_x_';'_'cut'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">A</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Theory.RelativeComonad.html#Lift"><span class="id" data-type="definition">Lift</span></a>(<a class="idref" href="Cat.Category.RComonad_RComonadWithCut.html#T"><span class="id" data-type="variable">T</span></a>) <a class="idref" href="Cat.Theory.Functor.html#::x_'⋅'_x"><span class="id" data-type="notation">⋅</span></a> <a class="idref" href="Cat.Theory.Product.html#π₂"><span class="id" data-type="projection">π</span></a><a class="idref" href="Cat.Theory.Product.html#π₂"><span class="id" data-type="projection">₂</span></a> <a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::'RelativeComonadWithCut.make'_'⦃'_'RelativeComonad'_'≔'_x_';'_'cut'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a><br/></td></tr>
 <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">map</span></a></td><td colspan="3"><a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">T</span> <span class="id" data-type="var">S</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'λ'_x_'..'_x_'↦'_x"><span class="id" data-type="notation">λ</span></a> τ <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'λ'_x_'..'_x_'↦'_x"><span class="id" data-type="notation">↦</span></a> <a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::'RelativeComonadWithCut.make'_'⦃'_'RelativeComonad-τ'_'≔'_x_'⦄'"><span class="id" data-type="notation">RelativeComonadWithCut.make</span></a> <a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::'RelativeComonadWithCut.make'_'⦃'_'RelativeComonad-τ'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::'RelativeComonadWithCut.make'_'⦃'_'RelativeComonad-τ'_'≔'_x_'⦄'"><span class="id" data-type="notation">RelativeComonad</span></a><a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::'RelativeComonadWithCut.make'_'⦃'_'RelativeComonad-τ'_'≔'_x_'⦄'"><span class="id" data-type="notation">-τ</span></a> <a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::'RelativeComonadWithCut.make'_'⦃'_'RelativeComonad-τ'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Category.RComonad_RComonadWithCut.html#τ"><span class="id" data-type="variable">τ</span></a> <a class="idref" href="Cat.Theory.RelativeComonadWithCut.html#::'RelativeComonadWithCut.make'_'⦃'_'RelativeComonad-τ'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/></td></tr>
 </table>
+</div>
+
+<div class="doc">
+cut-counit 
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">rewrite</span> <a class="idref" href="Cat.Theory.RelativeComonad.html#counit_cobind"><span class="id" data-type="projection">counit_cobind</span></a>.<br/>
 </div>
+</div>
+
+<div class="doc">
+cobind-cobind 
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">do</span> 2 <span class="id" data-type="tactic">rewrite</span> <a class="idref" href="Cat.Theory.RelativeComonad.html#cobind_cobind"><span class="id" data-type="projection">cobind_cobind</span></a>. <span class="id" data-type="tactic">apply</span> <a class="idref" href="Cat.Theory.SetoidType.html#Π.cong"><span class="id" data-type="lemma">Π.cong</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">rewrite</span> <a class="idref" href="Cat.Theory.Category.html#compose_assoc"><span class="id" data-type="projection">compose_assoc</span></a>, <a class="idref" href="Cat.Theory.RelativeComonad.html#counit_cobind"><span class="id" data-type="projection">counit_cobind</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;- <a class="idref" href="Cat.Theory.Category.html#compose_assoc"><span class="id" data-type="projection">compose_assoc</span></a>, <a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#Fπ₂_φ_inv"><span class="id" data-type="lemma">F</span></a><a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#Fπ₂_φ_inv"><span class="id" data-type="lemma">π</span></a><a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#Fπ₂_φ_inv"><span class="id" data-type="lemma">₂_</span></a><a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#Fπ₂_φ_inv"><span class="id" data-type="lemma">φ</span></a><a class="idref" href="Cat.Theory.CartesianStrongMonoidal.html#Fπ₂_φ_inv"><span class="id" data-type="lemma">_inv</span></a>, <a class="idref" href="Cat.Theory.Product.html#π₂_compose"><span class="id" data-type="projection">π</span></a><a class="idref" href="Cat.Theory.Product.html#π₂_compose"><span class="id" data-type="projection">₂_compose</span></a>.<br/>
 </div>
+</div>
+
+<div class="doc">
+cut-cobind 
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="var">now</span> <span class="id" data-type="tactic">rewrite</span> (<a class="idref" href="Cat.Theory.RelativeComonad.html#τ_counit"><span class="id" data-type="projection">RelativeComonad</span></a><a class="idref" href="Cat.Theory.RelativeComonad.html#τ_counit"><span class="id" data-type="projection">.τ</span></a><a class="idref" href="Cat.Theory.RelativeComonad.html#τ_counit"><span class="id" data-type="projection">_counit</span></a> τ), &lt;- <a class="idref" href="Cat.Theory.Category.html#compose_assoc"><span class="id" data-type="projection">compose_assoc</span></a>, <a class="idref" href="Cat.Theory.RelativeComonad.html#τ_commutes"><span class="id" data-type="projection">RelativeComonad</span></a><a class="idref" href="Cat.Theory.RelativeComonad.html#τ_commutes"><span class="id" data-type="projection">.τ</span></a><a class="idref" href="Cat.Theory.RelativeComonad.html#τ_commutes"><span class="id" data-type="projection">_commutes</span></a>.<br/>
 </div>
+</div>
+
+<div class="doc">
+map-cong 
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">intros</span> <span class="id" data-type="var">f</span> <span class="id" data-type="var">g</span> <span class="id" data-type="var">eq_fg</span> <span class="id" data-type="var">x</span>. <span class="id" data-type="tactic">auto</span>.<br/>
 </div>
+</div>
+
+<div class="doc">
+map-id 
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">reflexivity</span>.<br/>
 </div>
+</div>
+
+<div class="doc">
+map-compose 
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">reflexivity</span>.<br/>
 </div>
 <br/>
 &nbsp;&nbsp;<span class="id" data-type="keyword">Program Definition</span> <a name="𝑼"><span class="id" data-type="definition">𝑼</span></a> : <a class="idref" href="Cat.Theory.Functor.html#Functor"><span class="id" data-type="record">Functor</span></a> (<a class="idref" href="Cat.Category.RComonadWithCut.html#𝑹𝑪𝒐𝒎𝒐𝒏𝒂𝒅𝑾𝒊𝒕𝒉𝑪𝒖𝒕"><span class="id" data-type="definition">𝑹𝑪𝒐𝒎𝒐𝒏𝒂𝒅𝑾𝒊𝒕𝒉𝑪𝒖𝒕</span></a> <a class="idref" href="Cat.Category.RComonad_RComonadWithCut.html#Defs.F"><span class="id" data-type="variable">F</span></a> <a class="idref" href="Cat.Category.RComonad_RComonadWithCut.html#Defs.E"><span class="id" data-type="variable">E</span></a>) (<a class="idref" href="Cat.Category.RComonad.html#𝑹𝑪𝒐𝒎𝒐𝒏𝒂𝒅"><span class="id" data-type="definition">𝑹𝑪𝒐𝒎𝒐𝒏𝒂𝒅</span></a> <a class="idref" href="Cat.Category.RComonad_RComonadWithCut.html#Defs.F"><span class="id" data-type="variable">F</span></a>) ≔<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">Functor.make</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦃</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">F</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">T</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Category.RComonad_RComonadWithCut.html#T"><span class="id" data-type="variable">T</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">;</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">map</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">≔</span></a> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">λ</span></a> <span class="id" data-type="var">A</span> <span class="id" data-type="var">B</span> <a class="idref" href="Cat.Misc.Unicode.html#::'λ'_x_'..'_x_'∙'_x"><span class="id" data-type="notation">∙</span></a> <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'λ'_x_'..'_x_'↦'_x"><span class="id" data-type="notation">λ</span></a> τ <a class="idref" href="Cat.Theory.SetoidType.html#Π.::'λ'_x_'..'_x_'↦'_x"><span class="id" data-type="notation">↦</span></a> <a class="idref" href="Cat.Category.RComonad_RComonadWithCut.html#τ"><span class="id" data-type="variable">τ</span></a> <a class="idref" href="Cat.Theory.Functor.html#::'Functor.make'_'⦃'_'F'_'≔'_x_';'_'map'_'≔'_x_'⦄'"><span class="id" data-type="notation">⦄</span></a>.<br/>
+</div>
+
+<div class="doc">
+map-cong 
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">repeat</span> <span class="id" data-type="tactic">intro</span>; <span class="id" data-type="tactic">auto</span>.<br/>
 </div>
+</div>
+
+<div class="doc">
+map-id 
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">reflexivity</span>.<br/>
 </div>
+</div>
+
+<div class="doc">
+map-compose 
+</div>
+<div class="code">
 &nbsp;&nbsp;<a class="proof" href="#">Show proof.</a><br/><div class="proof">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" data-type="tactic">reflexivity</span>.<br/>
 </div>
@@ -138,7 +192,7 @@ $ (function () {
 <div class="table-nav-bottom">
 	<div>
 		Benedikt Ahrens and Régis Spadotti&mdash;
-		<a href="http://arxiv.org/abs/1401.1053">Coinitial semantics for redecoration of triangular matrices</a>
+		<a href="http://arxiv.org/abs/1401.1053">Terminal semantics for codata types in intensional Martin-Löf type theory</a>
 	</div>
 	<div class="toc-nav" >
 		<a href="toc.html">Table of contents</a>
