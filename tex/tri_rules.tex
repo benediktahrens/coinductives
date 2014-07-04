@@ -1,7 +1,7 @@
 
-\section{Rules for $\Tri$ and bisimilarity}\label{tri_rules}
+% \section{Rules for $\Tri$ and bisimilarity}\label{tri_rules}
 
-\subsection{$\Tri$}
+\paragraph*{Rules for $\Tri$}
 
 \begin{description}
 
@@ -17,7 +17,7 @@
      \DisplayProof
  \end{center} 
  
- \item[Destruction]\hfill \\
+ \item[Elimination]\hfill \\
  
 
 %   \hspace{3ex}
@@ -31,7 +31,7 @@
                                        \UnaryInfC{$\tail_A~t : \Tri(E\times A)$}
                                        \DisplayProof%
 \end{center}
-  \item[Creation]\hfill \\                                     
+  \item[Introduction]\hfill \\                                     
                        
 %           \vspace{1em}             
             
@@ -61,12 +61,12 @@
 
  \end{description}              
                
-\subsection{Bisimilarity}              
+\paragraph*{Bisimilarity for $\Tri$}              
  
-Analogous to bisimilarity for $\stream$ as in \Cref{stream_bisim}.
+
 
                
-               \begin{description}
+ \begin{description}
 
  \item[Formation]\hfill \\
  
@@ -80,7 +80,7 @@ Analogous to bisimilarity for $\stream$ as in \Cref{stream_bisim}.
      \DisplayProof
  \end{center} 
  
- \item[Destruction]\hfill \\
+ \item[Elimination]\hfill \\
  
 
 %   \hspace{3ex}
@@ -94,14 +94,14 @@ Analogous to bisimilarity for $\stream$ as in \Cref{stream_bisim}.
                                        \BinaryInfC{$\bisim_A (\tail_A~s) (\tail_A~t)$}
                                        \DisplayProof%
 \end{center}
-  \item[Creation]\hfill \\                                     
+  \item[Introduction]\hfill \\                                     
                        
 %           \vspace{1em}             
             
 \begin{center}
                \AxiomC{$R : \forall A, \Tri A \to \Tri A \to \Set$} \noLine
                \UnaryInfC{$\forall A,\forall~s,t : \Tri A, R~s~t \to \head~s = \head~t$} \noLine
-                \UnaryInfC{$\forall  A,\forall~s,t : \Tri A, R~s~t \to \bisim (\stail~s) (\stail~t)$}  %\doubleLine
+                \UnaryInfC{$\forall  A,\forall~s,t : \Tri A, R~s~t \to R~(\stail~s) (\stail~t)$}  %\doubleLine
                \UnaryInfC{$\forall A,\forall~s,t : \Tri A, R~s~t \to \bisim~s~t$}
                \DisplayProof%
 \end{center}

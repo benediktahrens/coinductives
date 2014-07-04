@@ -1,10 +1,10 @@
 
-\section{Correspondence of informal and formal definitions}\label{sec:table_formal_informal}
+% \paragraph*{Correspondence of informal and formal definitions}\label{sec:table_formal_informal}
 
-All our definitions and theorems are formalized in the proof assistant \coq.
-The \coq files and HTML documentation are available from the project web page \parencite{trimat_coq}.
-For easier orientation, the table below gives the correspondance between the items in this article and
-their names in the formal development.
+% All our definitions and theorems are formalized in the proof assistant \coq.
+% The \coq files and HTML documentation are available from the project web page \parencite{trimat_coq}.
+% For easier orientation, the table below gives the correspondence between the items in this article and
+% their names in the formal development.
 
 {
 
@@ -26,12 +26,12 @@ $\stail$ is comodule morphism &&\Cref{ex_tail_comodule}&& \lstinline!Tail!\\
 $\tail$ is comodule morphism &&\Cref{ex:tail_comodule} && \lstinline!Rest!\\
 Pushforward comodule && \Cref{def:pushforward_comodule} && \lstinline!pushforward!\\
 Induced comodule morphism &&\Cref{def:induced} && \lstinline!induced_morphism!\\
-Coalgebras for streams    &&\Cref{cat_stream} && \lstinline!Stream!\\
-$\stream$ is terminal && \Cref{thm_stream_terminal} && \lstinline!StreamTerminal.Coinitiality!\\
+Models for streams    &&\Cref{cat_stream} && \lstinline!Stream!\\
+$\stream$ is terminal && \Cref{thm_stream_terminal} && \lstinline!StreamTerminal.Terminality!\\
 Relative comonad with cut &&\Cref{def:rel_comonad_with_cut} && \lstinline!RelativeComonadWithCut!\\
 Precomposition with product && \Cref{def:product_in_context} &&\lstinline!precomposition_with_product!\\
-Coalgebras for triangular matrices && \Cref{def:cat_tri} && \lstinline!TriMat!\\
-$\Tri$ is terminal && \Cref{ex:final_sem_tri} && \lstinline!TriMatTerminal.Coinitiality!\\
+Models for triangular matrices && \Cref{def:cat_tri} && \lstinline!TriMat!\\
+$\Tri$ is terminal && \Cref{ex:final_sem_tri} && \lstinline!TriMatTerminal.Terminality!\\
 \end{tabular}
 }
 \end{center}
