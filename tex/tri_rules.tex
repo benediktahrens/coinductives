@@ -99,10 +99,10 @@
 %           \vspace{1em}             
             
 \begin{center}
-               \AxiomC{$R : \forall A, \Tri A \to \Tri A \to \Set$} \noLine
-               \UnaryInfC{$\forall A,\forall~s,t : \Tri A, R~s~t \to \head~s = \head~t$} \noLine
-                \UnaryInfC{$\forall  A,\forall~s,t : \Tri A, R~s~t \to R~(\stail~s) (\stail~t)$}  %\doubleLine
-               \UnaryInfC{$\forall A,\forall~s,t : \Tri A, R~s~t \to \bisim~s~t$}
+               \AxiomC{$A : \Set \entails R : \Tri A \to \Tri A \to \Set$} \noLine
+               \UnaryInfC{$A : \Set, x,y : \Tri A \entails R~x~y \to \head~x = \head~y$} \noLine
+                \UnaryInfC{$A : \Set, x,y : \Tri A \entails R~x~y \to R~(\stail~x) (\stail~y)$}  %\doubleLine
+               \UnaryInfC{$A : \Set, x,y : \Tri A \entails R~x~y \to \bisim~x~y$}
                \DisplayProof%
 \end{center}
 
