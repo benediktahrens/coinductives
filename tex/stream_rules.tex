@@ -97,9 +97,13 @@
 %           \vspace{1em}             
             
 \begin{center}
-               \AxiomC{$R : \stream A \to \stream A \to \Set$} \noLine\UnaryInfC{$\forall~s,t : \stream A, R~s~t \to \shead~s = \shead~t$} \noLine
-                \UnaryInfC{$\forall~s,t : \stream A, R~s~t \to R~(\stail~s) (\stail~t)$}  %\doubleLine
-               \UnaryInfC{$\forall~s,t : \stream A, R~s~t \to \bisim~s~t$}
+
+\def\fCenter{~\mbox{$\entails$}}
+\def\ScoreOverhang{30pt}
+
+               \Axiom$\fCenter\ R : \stream A \to \stream A \to \Set$ \noLine\UnaryInf$x,y : \stream A \fCenter\ R~x~y \to \shead~x = \shead~y$ \noLine
+                \UnaryInf$x,y : \stream A \fCenter\ R~x~y \to R~(\stail~x) (\stail~y)$  %\doubleLine
+               \UnaryInf$x,y : \stream A \fCenter\ R~x~y \to \bisim~x~y$
                \DisplayProof%
 \end{center}
                       
