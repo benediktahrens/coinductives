@@ -99,10 +99,12 @@
 %           \vspace{1em}             
             
 \begin{center}
-               \AxiomC{$A : \Set \entails R : \Tri A \to \Tri A \to \Set$} \noLine
-               \UnaryInfC{$A : \Set, x,y : \Tri A \entails R~x~y \to \head~x = \head~y$} \noLine
-                \UnaryInfC{$A : \Set, x,y : \Tri A \entails R~x~y \to R~(\stail~x) (\stail~y)$}  %\doubleLine
-               \UnaryInfC{$A : \Set, x,y : \Tri A \entails R~x~y \to \bisim~x~y$}
+\def\fCenter{~\mbox{$\entails$}}
+
+               \Axiom$A : \Set \fCenter\ R : \Tri A \to \Tri A \to \Set$ \noLine
+               \UnaryInf$A : \Set, x,y : \Tri A \fCenter\ R~x~y \to \head~x = \head~y$ \noLine
+                \UnaryInf$A : \Set, x,y : \Tri A \fCenter\ R~x~y \to R~(\stail~x) (\stail~y)$  %\doubleLine
+               \UnaryInf$A : \Set, x,y : \Tri A \fCenter\ R~x~y \to \bisim~x~y$
                \DisplayProof%
 \end{center}
 

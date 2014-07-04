@@ -98,12 +98,12 @@
             
 \begin{center}
 
-\def\fCenter{\mbox{\Large$\entails$}}
+\def\fCenter{~\mbox{$\entails$}}
+\def\ScoreOverhang{30pt}
 
-
-               \AxiomC{$R : \stream A \to \stream A \to \Set$} \noLine\UnaryInfC{$x,y : \stream A \entails R~x~y \to \shead~x = \shead~y$} \noLine
-                \UnaryInfC{$x,y : \stream A \entails R~x~y \to R~(\stail~x) (\stail~y)$}  %\doubleLine
-               \UnaryInfC{$x,y : \stream A \entails R~x~y \to \bisim~x~y$}
+               \Axiom$\fCenter\ R : \stream A \to \stream A \to \Set$ \noLine\UnaryInf$x,y : \stream A \fCenter\ R~x~y \to \shead~x = \shead~y$ \noLine
+                \UnaryInf$x,y : \stream A \fCenter\ R~x~y \to R~(\stail~x) (\stail~y)$  %\doubleLine
+               \UnaryInf$x,y : \stream A \fCenter\ R~x~y \to \bisim~x~y$
                \DisplayProof%
 \end{center}
                       
