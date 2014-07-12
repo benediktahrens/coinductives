@@ -187,7 +187,7 @@
    \begin{itemize}\setlength{\itemsep}{1em}
     \item [1.]Category-theoretic semantics of \fat{co}inductive data types
           in intensional Martin-L\"of type theory (IMLTT)
-    \item [$\leadsto$] Develop a notion of \enquote{model} for the signature of a codata type
+    \item [$\leadsto$] Develop a notion of \enquote{model} for the signature specifying a codata type
     \item [2.] Incorporate canonical cosubstitution
     \item [$\leadsto$] Any model should be equipped with a corresponding operation
    \end{itemize}
@@ -209,7 +209,7 @@
 \end{frame}
 
 
-\section{Syntax: inductives and substitution}
+\section{Heterogeneous syntax: lambda calculus and substitution}
 
 \begin{comment}
 \begin{frame}
@@ -549,6 +549,14 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
    \item needs \enquote{mediating} functor (above: $\eq$)
   \end{itemize}
 \end{definition}
+
+\pause
+Status of $\stail$?
+ \begin{block}{Remark}
+  $\stail: \stream\to\stream$ is \fat{not} a morphism of relative comonads.
+ \end{block}
+
+
 \end{frame}
 
 \begin{frame}
@@ -583,27 +591,27 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
  
 \end{frame}
 
-\begin{frame}
- \frametitle{About the destructor $\stail$}
- 
-
- \begin{block}{Morphisms of \fat{co}modules over \fat{relative co}monads}
-%   \begin{itemize}
-%    \item 
-   characterize commutativity of \fat{co}substitution with destructors
-%    \item %example of morphism of comodules:  
-         \[\stail : \stream \to \stream\]
-%              \[\stail~(\cosubst~f~t) = \cosubst~f~(\stail~t) \]
-          \[ \comp{\cosubst~f}{\stail} = \comp{\stail}{\cosubst~f} \]
-%   \end{itemize}
- \end{block} 
- 
- \begin{block}{Remark}
-  $\stail: \stream\to\stream$ is \fat{not} a morphism of relative comonads.
- \end{block}
-
- 
-\end{frame}
+% \begin{frame}
+%  \frametitle{About the destructor $\stail$}
+%  
+% 
+%  \begin{block}{Morphisms of \fat{co}modules over \fat{relative co}monads}
+% %   \begin{itemize}
+% %    \item 
+%    characterize commutativity of \fat{co}substitution with destructors
+% %    \item %example of morphism of comodules:  
+%          \[\stail : \stream \to \stream\]
+% %              \[\stail~(\cosubst~f~t) = \cosubst~f~(\stail~t) \]
+%           \[ \comp{\cosubst~f}{\stail} = \comp{\stail}{\cosubst~f} \]
+% %   \end{itemize}
+%  \end{block} 
+%  
+%  \begin{block}{Remark}
+%   $\stail: \stream\to\stream$ is \fat{not} a morphism of relative comonads.
+%  \end{block}
+% 
+%  
+% \end{frame}
 
 
 \begin{frame}
@@ -773,7 +781,7 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
  
 
 \begin{frame}
- \frametitle{Redecoration}
+ \frametitle{Cosubstitution: redecoration}
  
  
  \[\redec_{A,B} : (\Tri A \to B) \to (\Tri A \to \Tri B) \]
@@ -890,8 +898,8 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
  $(\Tri : \Set\to\Setoid, \head, \redec)$ forms a \fat{comonad relative to} $\eq:\Set\to\Setoid$.
 \end{lemma}
 
-
-
+\pause
+What about $\tail : \Tri \to \Tri(E\times\_)$?
 
 \end{frame}
 
@@ -960,7 +968,7 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
    Morphisms: \ldots
   \end{definition}
 
- \begin{lemma}
+ \begin{lemma}[tentative]
   $(\Tri,\tail)$ is the terminal object in the above category.
  \end{lemma}
 
@@ -1009,7 +1017,7 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
 \begin{frame}
  \frametitle{A specified $\cut$ for any model}
   \begin{itemize}
-    \item we were not able to define $\cut$ categorically
+    \item  $\cut$ is not a categorical operation
     \item fix: every model $(T,r)$ comes with a \fat{specified}
        \[ c_A : T (E\times A) \to TA \]
           and equations characterizing $c$
@@ -1056,10 +1064,10 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
     \item Coinductive type + bisimilarity as setoid in IMLTT
     \item $\stream$ and $\Tri$ are \fat{relative} comonads
 %     \item Ad hoc notion of weak constructive comonad is instance of relative comonad
-    \item Develop comodules over relative comonads
+    \item Develop comodules over relative comonads to characterize corecursive destructors
     \item Terminal semantics for $\stream$ and $\Tri$
     \item Bisimilarity and redecoration are part of universal object
-    \item heterogeneity of $\Tri$ not as straightforward as for $\LC$ because of $\cut$
+    \item Heterogeneity of $\Tri$ not as straightforward as for $\LC$ because of $\cut$
     \item Mechanization in \texttt{Coq}
    \end{itemize}
 
@@ -1074,7 +1082,7 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
 	   \begin{itemize}
 	      \item [$\leadsto$] Are there other interesting examples of heterogeneous codata types?
 	   \end{itemize}
-	 \item In Homotopy Type Theory, work modulo identity rather than bisimulation.
+	 \item In Homotopy Type Theory, work modulo identity rather than bisimilarity.
 	\end{itemize}
 
 	
