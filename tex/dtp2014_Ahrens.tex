@@ -90,7 +90,7 @@
     \usebeamerfont{author in head/foot}\insertshortauthor
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
-    \usebeamerfont{title in head/foot}\insertshorttitle\hfill\insertframenumber/\inserttotalframenumber
+    \usebeamerfont{title in head/foot}\insertshorttitle\hfill {} %\insertframenumber/\inserttotalframenumber
   \end{beamercolorbox}}%
   \vskip0pt%
 }
@@ -182,13 +182,14 @@
 
 
 \begin{frame}
- \frametitle{Goal}
+ \frametitle{Goals}
  
    \begin{itemize}\setlength{\itemsep}{1em}
     \item [1.]Category-theoretic semantics of \fat{co}inductive data types
           in intensional Martin-L\"of type theory (IMLTT)
     \item [$\leadsto$] Develop a notion of \enquote{model} for the signature of a codata type
     \item [2.] Incorporate canonical cosubstitution
+    \item [$\leadsto$] Any model should be equipped with a corresponding operation
    \end{itemize}
 
 %   \begin{block}{In this talk we consider}
@@ -272,12 +273,12 @@
 
  \end{center}
  
-    \item [Heterogeneity of $\Abs$:] \hfill \\ recursive argument with bigger parameter $X+1$
+    \item <2->[Heterogeneity of $\Abs$:] \hfill \\ recursive argument with bigger parameter $X+1$
     
-    \item [Substitution:] \hfill\\        
+    \item <3->[Substitution:] \hfill\\        
        $ \subst_{X,Y} : \bigl(X \to \LC Y \bigr) \to \LC X \to \LC Y $
     
-    \item [Avoiding capture:] \hfill \\ $\shift_{X,Y} : \bigl(X \to \LC Y \bigr) \to X+1 \to \LC(Y+1)$
+    \item <3->[Avoiding capture:] \hfill \\ $\shift_{X,Y} : \bigl(X \to \LC Y \bigr) \to X+1 \to \LC(Y+1)$
     
 %    \begin{itemize}
 %     \item 
@@ -326,9 +327,9 @@
 
 \begin{frame}
  \frametitle{Initial semantics for $\lambda$-calculus using monads}
-   \begin{definition}[Algebra for signature of $\LC$, H \& M '07]
+   \begin{definition}[Model for signature of $\LC$, H \& M '07]
      \begin{itemize}
-      \item a monad $(T, \unit, \monbind)$ on $\Set$
+      \item a monad $(T, \unit, \monbind)$ on $\textsf{Set}$ (or $\Set$)
       \item two \fat{morphisms of modules over $T$},
          \vspace{-.5em}
           \begin{align*}
@@ -354,7 +355,7 @@
    \pause 
    
    \begin{lemma}[Initial semantics for $\LC$, H \& M '07]
-      $(\LC, \App, \Abs)$ is the initial algebra, where $\LC = (\LC,\Var,\subst)$
+      $(\LC, \App, \Abs)$ is the initial model, where $\LC = (\LC,\Var,\subst)$
    \end{lemma}
 
 
@@ -579,6 +580,28 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
           \[ \comp{\cosubst~f}{\stail} = \comp{\stail}{\cosubst~f} \]
 %   \end{itemize}
  \end{block} 
+ 
+\end{frame}
+
+\begin{frame}
+ \frametitle{About the destructor $\stail$}
+ 
+
+ \begin{block}{Morphisms of \fat{co}modules over \fat{relative co}monads}
+%   \begin{itemize}
+%    \item 
+   characterize commutativity of \fat{co}substitution with destructors
+%    \item %example of morphism of comodules:  
+         \[\stail : \stream \to \stream\]
+%              \[\stail~(\cosubst~f~t) = \cosubst~f~(\stail~t) \]
+          \[ \comp{\cosubst~f}{\stail} = \comp{\stail}{\cosubst~f} \]
+%   \end{itemize}
+ \end{block} 
+ 
+ \begin{block}{Remark}
+  $\stail: \stream\to\stream$ is \fat{not} a morphism of relative comonads.
+ \end{block}
+
  
 \end{frame}
 
@@ -809,19 +832,30 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
 \begin{frame}
  \frametitle{$\Tri$ is a weak constructive comonad}
   \begin{block}{Sameness = \fat{bisimilarity}}
-    Bisimilarity $\sim$ coinductively defined via destructors
+
+  \begin{center}
+  
+             \AxiomC{$ R~s~t \to \head~s = \head~t$}
+                \AxiomC{$ R~s~t \to R~(\tail~s) (\tail~t)$}  %\doubleLine
+%                 \RightLabel{Bisim-Intro}
+               \BinaryInfC{$R~s~t \to s \sim t$}
+               \DisplayProof%
+               
+  \end{center}
+
+    Bisimilarity $\sim$ weakly terminal bisimulation.
      
-    \begin{center}
-                                            \def\extraVskip{3pt}
-     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t \sim t'$}\doubleLine
-     \UnaryInfC{$\head(t) = \head(t')$}
-      \DisplayProof
-                        \hspace{3ex}
-                                       \AxiomC{$t \sim t'$}\doubleLine
-                                       \UnaryInfC{$ \tail(t) \sim \tail(t')$}
-                                       \DisplayProof   
-   \end{center}                                    
+%     \begin{center}
+%                                             \def\extraVskip{3pt}
+%      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
+%     \AxiomC{$t \sim t'$}\doubleLine
+%      \UnaryInfC{$\head(t) = \head(t')$}
+%       \DisplayProof
+%                         \hspace{3ex}
+%                                        \AxiomC{$t \sim t'$}\doubleLine
+%                                        \UnaryInfC{$ \tail(t) \sim \tail(t')$}
+%                                        \DisplayProof   
+%    \end{center}                                    
   \end{block}
   
   \begin{lemma}[Matthes and Picard '11]
@@ -1025,7 +1059,7 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
     \item Develop comodules over relative comonads
     \item Terminal semantics for $\stream$ and $\Tri$
     \item Bisimilarity and redecoration are part of universal object
-    \item $\Tri$ not as straightforward as the $\lambda$-calculus because of $\cut$
+    \item heterogeneity of $\Tri$ not as straightforward as for $\LC$ because of $\cut$
     \item Mechanization in \texttt{Coq}
    \end{itemize}
 
@@ -1033,21 +1067,33 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
 \end{frame}
 
 \begin{frame}
-	\frametitle{Conclusion}
-	\begin{block}{Another line of work: relationship with coalgebra}
-		\begin{itemize}
-			\item Axioms $\Longleftrightarrow$ Final object ?
-			\item[] $\quad\leadsto$ Needs more general notion of coalgebra
-		\end{itemize}
-	\end{block}
-	\begin{theorem}
-		Axioms for $\M_{A,B}$ $\Longleftrightarrow$ Final coalgebra for polynomial functor $P_{A,B}$ 
-	\end{theorem}
-	\begin{block}{Future work}
-		\M-types in Univalent Foundations $\Longrightarrow$ work modulo identity rather than bisimulation
-	\end{block}
+	\frametitle{Future work}
+	
+	\begin{itemize}\setlength{\itemsep}{1em}
+	 \item Develop notion of \emph{signature} for coinductive datatype with cosubstitution.
+	   \begin{itemize}
+	      \item [$\leadsto$] Are there other interesting examples of heterogeneous codata types?
+	   \end{itemize}
+	 \item In Homotopy Type Theory, work modulo identity rather than bisimulation.
+	\end{itemize}
 
-   \pause \begin{center} Thanks for your attention \end{center}
+	
+% 	\begin{block}{Another line of work: relationship with coalgebra}
+% 		\begin{itemize}
+% 			\item Axioms $\Longleftrightarrow$ Final object ?
+% 			\item[] $\quad\leadsto$ Needs more general notion of coalgebra
+% 		\end{itemize}
+% 	\end{block}
+% 	\begin{theorem}
+% 		Axioms for $\M_{A,B}$ $\Longleftrightarrow$ Final coalgebra for polynomial functor $P_{A,B}$ 
+% 	\end{theorem}
+% 	\begin{block}{Future work}
+% 		\M-types in Univalent Foundations $\Longrightarrow$ work modulo identity rather than bisimulation
+% 	\end{block}
+
+\vspace{1em}
+
+   \pause \begin{center} Thanks for your attention. \end{center}
 \end{frame}
 
 \begin{frame}
@@ -1082,7 +1128,7 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
 				    &                 &  $\stail (\coiter^T f\ t) \sim \coiter^T f (\pi_2 (f\ t))$
   \end{tabular}
   \vspace{0.5em}
-  \pause
+%   \pause
   
   Categorically: Bisimilarity $\sim$ is a weakly terminal bisimulation.
   
