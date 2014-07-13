@@ -441,7 +441,7 @@ dualize techniques of H \& M to characterize
  \begin{center}
  
   \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$s : \stream A$}\doubleLine
+    \AxiomC{$s : \stream A$}%\doubleLine
      \UnaryInfC{$\shead_A(s) : A$}
       \DisplayProof
       \hspace{3em}
@@ -449,7 +449,7 @@ dualize techniques of H \& M to characterize
 %  
 %  \vspace{15ex}
 %  
-  \AxiomC{$s : \stream A$}\doubleLine
+  \AxiomC{$s : \stream A$}%\doubleLine
                                        \UnaryInfC{$\stail_A(s) : \stream A$}
                                        \DisplayProof%
 
@@ -457,9 +457,14 @@ dualize techniques of H \& M to characterize
  
    \vspace{2ex}
 
+   \item       
+               
+                   \AxiomC{$T : \Set$} \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} %\doubleLine
+%                               \RightLabel{Intro}
+               \TrinaryInfC{$\coiter_A~hd~tl : T \to \stream A$}
+               \DisplayProof%
    
- \item Propositional equality is not adequate for infinite objects
- \item[] $\qquad\leadsto$ bisimilarity
+ 
 
 %  \item \enquote{Sameness} = bisimilarity in IMLTT
 %   \begin{center}
@@ -477,27 +482,27 @@ dualize techniques of H \& M to characterize
 \end{frame}
 
 \begin{frame}
- \frametitle{Axioms for streams and bisimulation}
+ \frametitle{Sameness for streams: bisimilarity}
 %   \begin{description}
 %    \item []
-         \AxiomC{$T : \Set$} \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} %\doubleLine
-                              \RightLabel{Intro}
-               \TrinaryInfC{$\coiter_A~hd~tl : T \to \stream A$}
-               \DisplayProof%
+   
 %    \item []
 %          \AxiomC{$x, y : \stream A \vdash R : \Set$} 
+
+
+ Propositional equality of IMLTT not adequate for infinite objects \\
+ $\qquad\leadsto$ bisimilarity
 
 ~\\~\\
 
 
            \AxiomC{$ R~s~t \to \shead~s = \shead~t$}
                 \AxiomC{$ R~s~t \to R~(\stail~s) (\stail~t)$}  %\doubleLine
-                \RightLabel{Bisim-Intro}
+%                 \RightLabel{Bisim-Intro}
                \BinaryInfC{$R~s~t \to s \sim t$}
                \DisplayProof%
                
 ~\\~\\
-$+$ elimination for streams and $\bisim$\ldots
 
 \begin{definition}
  Bisimulation := relation compatible with destructors
@@ -523,7 +528,7 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
 
 
 \begin{frame}
- \frametitle{Structure on streams}
+ \frametitle{Cosubstitution on streams}
   
   \begin{itemize}\setlength{\itemsep}{1em}
    \item $(\stream A, \sim)$ is a \emph{setoid}, \[\stream : \Set \to \Setoid\]
@@ -537,7 +542,7 @@ Categorically: Bisimilarity $\sim$ is a (weakly) terminal bisimulation.
 \end{frame}
 
 \begin{frame}
- \frametitle{Structure on streams}
+ \frametitle{Comonadic structure of streams}
  
  \begin{lemma}
   $(\stream,\shead,\cosubst)$ is a \fat{comonad relative to $\eq:\Set\to\Setoid$}.
@@ -558,6 +563,17 @@ Status of $\stail$?
 
 
 \end{frame}
+
+\begin{frame}
+ \frametitle{About comodules over relative comonads}
+  \begin{itemize}\setlength{\itemsep}{1em}
+   \item \enquote{Comodule over a (relative) comonad} is generalization of (relative) comonad
+   \item Every comonad is a comodule over itself
+   \item Analogy (for modules over a monad): module over a ring
+  \end{itemize}
+
+\end{frame}
+
 
 \begin{frame}
  \frametitle{About the destructor $\stail$}
@@ -691,14 +707,14 @@ Status of $\stail$?
  \begin{center}
  
   \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t : \Tri A$}\doubleLine
+    \AxiomC{$t : \Tri A$}%\doubleLine
      \UnaryInfC{$\head_A(t) : A$}
       \DisplayProof
                       
  
  \vspace{15ex}
  
-  \AxiomC{$t : \Tri A$}\doubleLine
+  \AxiomC{$t : \Tri A$}%\doubleLine
                                        \UnaryInfC{$\tail_A(t) : \Tri(E\times A)$}
                                        \DisplayProof%
  
