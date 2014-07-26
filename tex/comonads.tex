@@ -90,6 +90,35 @@ Toulouse}
  The first codata type we consider is the \emph{homogeneous} type family of streams, parametrized by a base type.
  The second one is the \emph{heterogeneous} codata type family of infinite triangular matrices parametrized by the type of diagonal entries.
   In the rest of the introduction, we explain some of the vocabulary occurring in these first sentences.
+  
+  
+ \subsection{Intensional Martin-Löf type theory}
+ Martin-Löf type theory (MLTT) \parencite{martin_lof} is a dependent type theory developed in the 1970's, which provides a foundation of mathematics.
+ It is based on the Curry-Howard isomorphism, that is, the logical constructions are instances of more general constructions on types.
+ There are two notions of equality in Martin-Löf type theory, an external (judgmental) one, and an internal (propositional) one.
+ The latter is internalized by  the \emph{Martin-Löf identity type}, which is an inductively defined binary relation on any given type.
+ Its only constructor relates any term to itself, that is, the relation defined by the Martin-Löf identity type is the least reflexive relation on a given type.
+ Judgmentally equal terms are always propositionally equal, but the converse is not always true; 
+ indeed, one distinguishes two variants of type theory: in \emph{extensional} type theory, propositional equalities (i.e.\ terms of identity type)
+ are reflected, via a \emph{reflection rule}, into the judgmental equality of the type theory.  
+ Here, judgmental and propositional equality thus coincide.
+ \emph{Intensional} Martin-L\"of type theory  lacks the reflection principle for the sake of decidability of type checking. 
+ It forms the base of the computer proof assistants \coq, \matita and \agda.
+
+ 
+ \subsection{(Non-)wellfounded trees: (co)inductive types}
+ 
+ A \emph{tree} is abstractly given by its \emph{root} and its \emph{subtrees}, which we think of as being attached to the root.
+ Subtrees are themselves trees, again consisting of a root and attached subtrees.
+ The roots of the various subtrees occurring in a tree are called \emph{nodes}. Among those, there are nodes without any subtrees, which are called \emph{leaves}.
+ 
+%  TODO: fill in a picture of a tree
+ 
+ Many objects in mathematics and logic can be represented as \emph{trees}.
+ For instance, a natural number can be considered as such a tree: the possible nodes are $S$---a node with one subtree---and $Z$---a node without subtrees, i.e.\ a \emph{leaf}.
+ The natural number $2$ is represented by the tree $S\longrightarrow S\longrightarrow Z$. 
+ 
+%  TODO: finite vs infinite
  
 \begin{Long}
  \subsection{Semantics of inductive types}
@@ -103,8 +132,7 @@ Toulouse}
  Informally, we think of an inductive object as a  tree, consisting of a \emph{root}, 
  to which a number of \emph{subtrees} are attached. The subtrees are themselves trees.
  The root of a tree and the roots of any subtrees are more generally called \emph{nodes}.
- For instance, a natural number can be considered as such a tree: the possible nodes are $S$---a node with one subtree---and $Z$---a node without subtree, i.e.\ a \emph{leaf}.
- The natural number $2$ is represented by the tree $S\longrightarrow S\longrightarrow Z$. 
+ 
  This example demonstrates the fundamental aspect of those tree-like objects: they can be used to model basic mathematical and logical objects.
  
  An inductive set/type specifies a set/type of trees of given shape, i.e.\ it specifies the set/type of nodes and, for each node, the number (cardinality) of subtrees 
@@ -128,16 +156,6 @@ Toulouse}
  This latter approach is the one we adopt in the present work: we add axioms to intensional Martin-Löf type theory,
  postulating the existence of \emph{co}inductive types, see below.
  
- Some attention has to be given to 
- the precise formulation of the type theory in question, in particular, to the nature of \emph{equality} in the type theory.
- There are two notions of equality in Martin-Löf type theory, an external (judgmental) one, and an internal (propositional) one.
- The latter is internalized by the \emph{identity type}, a type family that associates to any two 
- inhabitants $a,b : A$ of a type $A$ the type of (propositional) \enquote{identities} between them.
- Judgmentally equal terms are always propositionally equal, but the converse is not always true.
- One distinguishes two variants of type theory: in \emph{extensional} type theory, propositional equalities (i.e.\ terms of identity type)
- are reflected, via a \emph{reflection rule}, into the judgmental equality of the type theory.  
- Here, judgmental and propositional equality thus coincide.
- In \emph{intensional} type theory, there is no such reflection rule.
  
 %  When specifying a universal property within type theory, one needs a suitable notion of \emph{uniqueness} (of certain maps or morphisms).
 %  The property of uniqueness (or more generally, equality) of morphisms may now be expressed in terms of either judgmental or propositional equality.
@@ -150,8 +168,7 @@ Toulouse}
  
   
 
- Intensional Martin-L\"of type theory \parencite{martin_lof} lacks the reflection principle for the sake of decidability of type checking. 
- It forms the base of two computer proof assistants, \coq and \agda.
+ 
   The characterization of inductive types as initial algebras of some endofunctor in intensional Martin-Löf type theory fails \parencite{DBLP:journals/tcs/Dybjer97}, 
   but it can be recovered \parencite{DBLP:conf/lics/AwodeyGS12} in an \emph{extension} of intensional MLTT called
   \emph{Homotopy Type Theory} \parencite{hottbook}.
