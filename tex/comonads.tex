@@ -225,7 +225,7 @@ Instead of considering types of trees, we consider, more generally, \emph{famili
 We consider two different uses for this parameter: firstly, the \emph{leaves} of a tree $t:T(X)$ may come from $X$. 
 Secondly, all the \emph{nodes} come from the type $X$.
 
-We first consider the first case of leaf-labeled trees.
+We first consider the first case of \emph{leaf-labeled trees}.
  Let $T(X)$ be a type family of trees with \emph{leaves from $X$}, i.e., $t: T(X)$ is a tree (of a given shape) with leaves in $X$.
  Let furthermore $f : X \to T(Y)$ be a map. We obtain a tree $t' : T(Y)$ by replacing any leaf of $t$ by its image under the map $f$.
  The operation of replacing any leaf in $t$ by its image under $f$ is called \emph{(simultaneous) substitution}---\enquote{simultaneous} because all the leaves are 
@@ -244,18 +244,20 @@ We first consider the first case of leaf-labeled trees.
  In a set-theoretic setting, the fact that cosubstitution for coinductive sets is comonadic is established by \textcite{DBLP:conf/sfp/UustaluV01}.
  
   
- In IMLTT however, 
- in order to characterize that cosubstitution operation on a given codata type, and its algebraic properties,
- we develop the notion of \emph{relative comonad} and \emph{comodule over a relative comonad}.
- The need to consider \emph{relative} comonads arises from the  need to check the algebraic properties of cosubstitution modulo \emph{bisimilarity} rather
- than modulo (the) identity (type).
+ If we consider infinite node-labeled trees in IMLTT, however, the algebraic laws of cosubstitution for such trees have to be considered 
+ \emph{modulo bisimilarity rather than identity}.
+ For this we develop the notion of \emph{relative comonad} and \emph{comodule over a relative comonad}.
+ Indeed, we show that our exemplary codata type families of streams and triangular matrices constitute relative comonads, and the maps which 
+ return the substream resp.\ submatrix of a given stream resp.\ matrix constitute comodule morphisms over those relative comonads.
  
- 
- In order to integrate a notion of cosubstitution into the categorical semantics of the coinductive types under consideration,
- we do not consider a category of plain coalgebras for some endofunctor.
- Instead, we consider coalgebras with extra structure accounting for a comonadic operation, which for the terminal coalgebra
- is given by cosubstitution.
- Our terminal semantics characterizes not only the codata types themselves but also the bisimilarity relation 
+ Our goal is to characterize those codata types and their respective cosubstitution operation as a universal object in some category.
+ Traditionally, codata types are characterized as terminal coalgebras of some endofunctor. However, this characterization does not account for 
+ the cosubstitution operation.
+ In order to integrate cosubstitution into the categorical semantics of the coinductive types under consideration,
+ we thus define a more complicated category of \enquote{models} of the signature specifying those types---coalgebras with extra structure accounting for a c
+ omonadic operation.
+ The terminal such model is given by the codata type together with its cosubstitution operation.
+ Our terminal semantics thus characterizes not only the codata types themselves but also the bisimilarity relation 
  and---via the use of (relative) comonads---a canonical cosubstitution operation on them.
  
 \subsection{Homogeneous and heterogeneous trees}
