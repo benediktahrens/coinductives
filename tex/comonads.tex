@@ -97,8 +97,23 @@ Toulouse}
 \begin{Short}
  \paragraph*{Semantics of inductive types}
 \end{Short}
-
+ 
  Before turning to \emph{co}inductive types, we give an overview over semantics for inductive types.
+ 
+ Informally, we think of an inductive object as a  tree, consisting of a \emph{root}, 
+ to which a number of \emph{subtrees} are attached. The subtrees are themselves trees.
+ The root of a tree and the roots of any subtrees are more generally called \emph{nodes}.
+ For instance, a natural number can be considered as such a tree: the possible nodes are $S$---a node with one subtree---and $Z$---a node without subtree, i.e.\ a \emph{leaf}.
+ The natural number $2$ is represented by the tree $S\longrightarrow S\longrightarrow Z$. 
+ This example demonstrates the fundamental aspect of those tree-like objects: they can be used to model basic mathematical and logical objects.
+ 
+ An inductive set/type specifies a set/type of trees of given shape, i.e.\ it specifies the set/type of nodes and, for each node, the number (cardinality) of subtrees 
+ attached to that node. The trees defined inductively are \emph{finite} trees, i.e.\ no infinite chain of subtrees occurs in such a tree.
+ 
+ By \enquote{semantics of inductive types} we mean a mathematical description of the set/type of trees of a given shape. We are interested in 
+ \emph{category-theoretic} characterizations of such sets/types. 
+ However, the question of how to give such a characterization depends on the formal system we work in. 
+ Below, we discuss briefly set-theoretic and type-theoretic such systems.
  
  In a set-theoretic setting, inductive sets are characterized as initial algebras for 
  some endofunctor on the category of sets \parencite{jacobs1997tutorial}.
@@ -146,7 +161,7 @@ Toulouse}
  The mentioned work \parencite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterization of inductive types as initial algebras carries over 
  from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of uniqueness.
  
- 
+%  TODO: put this at the beginning of cosubstitution
  The characterization of inductive sets/types as initial objects in some category
  has been extended to some \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
  in different formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
@@ -201,7 +216,7 @@ Toulouse}
  \paragraph*{Cosubstitution: a comonadic operation on parametrized codata}
 \end{Short}
 
- 
+% TODO: mention node-labeled and leaf-labeled trees
  Many inductive types, in particular parametrized ones representing \emph{syntax} such as the lambda calculus, 
  are canonically equipped with a substitution operation. The categorical characterization of this substitution operation
  has been studied extensively; our list of pointers \parencite{alt_reus, fpt, Power:2007:ASS:1230146.1230276, Tanaka:2005:UCF:1088454.1088457,
