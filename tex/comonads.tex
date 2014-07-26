@@ -2,9 +2,9 @@
 
 \pdfoutput=1
 
-\documentclass[envcountsame]{llncs}
+\documentclass[a4paper,USenglish]{lipics}
 
-\usepackage[utf8]{inputenc}
+% \usepackage[utf8]{inputenc}
 
 \usepackage[protrusion=true,expansion=true]{microtype}
 
@@ -21,30 +21,53 @@
 
 \usepackage{mdframed}
 \usepackage{multicol}
-\usepackage{ownstylesansthm}
+\usepackage{ownstylelipics}
 
 \usepackage{comment}
-\excludecomment{Long}\includecomment{Short}
-% \includecomment{Long}\excludecomment{Short}
+% \excludecomment{Long}\includecomment{Short}
+\includecomment{Long}\excludecomment{Short}
 
-\pagestyle{plain}
+% \pagestyle{plain}
 
-\begin{document}
 
-\title{Terminal semantics for codata types\\in intensional Martin-L\"of type theory}
+\title{Terminal semantics for codata types in intensional Martin-L\"of type theory}
 
-\author{Benedikt Ahrens and R\'egis Spadotti}
+\author{Benedikt Ahrens}
+\author{R\'egis Spadotti}
 
-\institute{
+\affil{
 Institut de Recherche en Informatique de Toulouse\\
 Universit\'e Paul Sabatier, 
 Toulouse}
+
+\authorrunning{B.\ Ahrens and R.\ Spadotti}
+
+\Copyright{John Q. Open and Joan R. Access}
+
+\subjclass{Dummy classification -- please refer to \url{http://www.acm.org/about/class/ccs98-html}}% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation". 
+\keywords{Dummy keyword -- please provide 1--5 keywords}% mandatory: Please provide 1-5 keywords
+% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\serieslogo{}%please provide filename (without suffix)
+\volumeinfo%(easychair interface)
+  {Billy Editor and Bill Editors}% editors
+  {2}% number of editors: 1, 2, ....
+  {Conference title on which this volume is based on}% event
+  {1}% volume
+  {1}% issue
+  {1}% starting page number
+\EventShortName{}
+\DOI{10.4230/LIPIcs.xxx.yyy.p}% to be completed by the volume editor
+% Editor-only macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \newcommand{\fat}[1]{\textbf{#1}}
 
 
 \newcommand{\itemizedist}{.5em}
 
+\begin{document}
 
 \maketitle
 

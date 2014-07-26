@@ -1,0 +1,228 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ownstylesansthm}%[ownstyle article helper]
+
+
+%Optionen werden ausgefhrt
+\ProcessOptions
+
+
+% Weitere Pakete werden geladen
+%\RequirePackage{ngerman, ifthen}
+\RequirePackage[all,2cell]{xy}\SelectTips{cm}{10}\SilentMatrices\UseAllTwocells  % commutative diagrams
+\RequirePackage{amsmath, amssymb, amsfonts}
+% \RequirePackage{amsthm}
+%\RequirePackage[latin1]{inputenc}
+%\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+% \RequirePackage{lmodern}
+
+% \RequirePackage[english]{babel}
+% \RequirePackage{csquotes}
+%\RequirePackage{geometry}
+%\usepackage{textcomp}
+
+\RequirePackage{xcolor}
+
+\definecolor{dkblue}{rgb}{0,0.1,0.5}
+\definecolor{lightblue}{rgb}{0,0.5,0.5}
+\definecolor{dkgreen}{rgb}{0,0.4,0}
+\definecolor{dk2green}{rgb}{0.4,0,0}
+\definecolor{dkviolet}{rgb}{0.6,0,0.8}
+
+\RequirePackage{bussproofs}
+
+\RequirePackage{tikz}
+\usetikzlibrary{shapes}                
+\usetikzlibrary{fit}
+
+\RequirePackage{xspace}
+\RequirePackage{verbatim}
+\RequirePackage{graphicx}
+\RequirePackage{url}
+\urlstyle{sf}
+
+\RequirePackage{listings}
+\def\lstlanguagefiles{defManSSR.tex}
+\lstset{language=SSR}
+
+
+ 
+%\renewcommand{\labelenumi}{(\roman{enumi})}
+\renewcommand{\theenumi}{\arabic{enumi}}
+%\renewcommand{\theenumi}{\alph{enumi}}
+\renewcommand{\labelenumi}{\theenumi .}
+
+\newcommand{\constfont}[1]{\ensuremath{\mathsf{#1}}}
+
+
+
+
+\definecolor{DarkBlue}{rgb}{0,0.08,0.45}
+
+
+\newenvironment{packenum}
+     {\begin{enumerate}
+  %      \setlength{\itemsep}{1pt}
+  %      \setlength{\parskip}{0pt}
+  %      \setlength{\parsep}{0pt}
+     }   	
+     {\end{enumerate}}
+
+\newenvironment{packitem}
+     {\begin{itemize}
+   %     \setlength{\itemsep}{1pt}
+   %     \setlength{\parskip}{0pt}
+   %     \setlength{\parsep}{0pt}
+     }   	
+     {\end{itemize}}
+
+
+\RequirePackage{cleveref}
+
+
+% \numberwithin{equation}{section}
+
+
+
+
+
+
+
+%\DeclareMathOperator{\PO}{PO}
+\DeclareMathOperator{\IP}{IP}
+\DeclareMathOperator{\Bool}{Bool}
+\DeclareMathOperator{\Nat}{Nat}
+\DeclareMathOperator{\App}{App}
+\DeclareMathOperator{\Abs}{Abs}
+\DeclareMathOperator{\app}{app}
+
+\DeclareMathOperator{\Rec}{Rec}
+\DeclareMathOperator{\Rep}{\mathsf{Rep}}
+\DeclareMathOperator{\Term}{Term}
+\DeclareMathOperator{\Der}{D}
+\DeclareMathOperator{\opt}{opt}
+\DeclareMathOperator{\blowup}{blowup}
+
+\DeclareMathOperator{\Fin}{\textrm{\sf Fin}}
+\DeclareMathOperator{\defaultmap}{default}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Fib}{Fib}
+\DeclareMathOperator{\POop}{\textrm{\sf Pre}}
+\DeclareMathOperator{\PSop}{\textrm{\sf wPre}}
+\DeclareMathOperator{\SETop}{Set}
+
+\DeclareMathOperator{\substop}{subst}
+\DeclareMathOperator{\LMod}{LMod}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\rmlift}{rmlift}
+\DeclareMathOperator{\inl}{inl}
+\DeclareMathOperator{\inr}{inr}
+
+\DeclareMathOperator{\Monop}{\mathsf{Mon}}
+\DeclareMathOperator{\RMonop}{\mathsf{RMon}}
+
+
+\newcommand{\Mon}[1]{\Monop({#1})}
+\newcommand{\RMon}[1]{\RMonop({#1})}
+\newcommand{\RComod}{\ensuremath{\mathsf{RComod}}}
+
+\newcommand{\kl}[2][]{\sigma^{#1}({#2)}}
+\newcommand{\mkl}[2][]{\varsigma^{#1}({#2})}
+
+
+\newcommand{\we}{\eta}
+\newcommand{\comp}[2]{\ensuremath{{#2} \circ {#1}}}
+\newcommand{\halmos}{\quad\hfill\mbox{$\Box$}}  % Beweisendezeichen
+%\newcommand{\spspace}{~\vspace{-6mm}}
+\newcommand{\C}{{\mathcal{C}}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\X}{\mathcal{X}}
+
+
+\newcommand{\Diag}{\Delta}
+%\newcommand{\PO}{\mathbf{PO}}
+\newcommand{\PO}{{\POop}}
+\newcommand{\PS}{{\PSop}}
+\newcommand{\Set}{\ensuremath{\mathsf{Type}}}
+\newcommand{\Setoid}{\ensuremath{\mathsf{Setoid}}}
+\newcommand{\eq}{\ensuremath{\mathsf{eq}}}
+% \newcommand{\SET}{\SETop}
+\newcommand{\ULC}{\ULCop}
+\newcommand{\ULCB}{\mathrm{LC}\beta}
+\newcommand{\Si}{\ensuremath{\Sigma}}
+
+
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\ot}{\leftarrow}
+\newcommand{\monic}{\rightarrowtail}
+%\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\xrap}{\to}
+\newcommand{\si}{{\sigma}}
+\newcommand{\pu}{\partial_u}
+\newcommand{\TSet}{{T\text{-}\Set}}
+\newcommand{\TauSet}{{\T\text{-}\Set}}
+\newcommand{\es}{\emptyset}
+\newcommand{\Type}{\mathbf{Type}}
+\newcommand{\IType}[1]{\ensuremath{\mathbf{Type_{#1}}}}
+%\newcommand{\PCF}{{\bf PCF}}
+
+
+\newcommand{\popl}{{\sc PoplMark} }
+\newcommand{\sub}{\textunderscore}
+\newcommand{\ren}[2]{\ensuremath{\overline{#1}^{#2}}}
+
+
+\newcommand{\code}[1]{{\tt {#1}}}
+%\def\myurl{\hfil\penalty 100 \hfilneg \hbox}
+
+
+\newcommand{\Rar}{\Rightarrow}
+\renewcommand{\st}{{\mathcal T}}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\STLC}{\mathsf{STLC}}
+
+\newcommand{\bind}[2]{{#1}\gg \hspace{-.5ex}={#2}}
+
+\newcommand{\counit}{\constfont{counit}}
+\newcommand{\cobind}{\constfont{cobind}}
+\newcommand{\mcobind}{\constfont{mcobind}}
+\newcommand{\mlift}{\constfont{mlift}}
+\newcommand{\id}{\constfont{id}}
+\newcommand{\lift}{\constfont{lift}}
+\newcommand{\pr}{\constfont{pr}}
+\newcommand{\extend}{\ensuremath{\mathsf{extend}}}
+
+\newcommand{\Tri}{\constfont{Tri}}
+\newcommand{\head}{\constfont{top}}
+\newcommand{\tail}{\constfont{rest}}
+
+\newcommand{\Tree}{\constfont{Tree}}
+
+\newcommand{\shead}{\constfont{head}}
+\newcommand{\stail}{\constfont{tail}}
+\newcommand{\sredec}{\constfont{cosubst}}
+\newcommand{\diagonal}{\constfont{diag}}
+\newcommand{\bisim}{\constfont{bisim}}
+\newcommand{\redec}{\constfont{redec}}
+\newcommand{\cut}{\constfont{cut}}
+\newcommand{\ccut}{\constfont{ccut}}
+\newcommand{\RComonad}{\constfont{RComon}}
+\newcommand{\RComonadWC}{\constfont{\RComonad wCut}}
+\newcommand{\ULCop}{\constfont{LC}}
+\newcommand{\induced}[1]{\ensuremath{\langle {#1} \rangle}}
+
+\newcommand{\stream}{\constfont{Stream}}
+
+\newcommand{\shift}{\constfont{shift}}
+\newcommand{\abs}{\constfont{abs}}
+\newcommand{\subst}{\constfont{subst}}
+
+\newcommand{\corec}{\constfont{corec}}
+
+\newcommand{\coq}{\texttt{Coq}\xspace}
+\newcommand{\agda}{\texttt{Agda}\xspace}
+
+\newcommand{\Ens}{\constfont{Set}}
+\newcommand{\entails}{\ensuremath{\vdash}}
