@@ -119,6 +119,12 @@ Toulouse}
  The natural number $2$ is represented by the tree $S\longrightarrow S\longrightarrow Z$. 
  
 %  TODO: finite vs infinite
+
+ A fundamental property of a tree is \emph{finiteness}. A tree is finite if it does not have a subtree of infinite length. 
+
+ An inductive set/type specifies a set/type of trees of given shape, i.e.\ it specifies the set/type of nodes and, for each node, the number (cardinality) of subtrees 
+ attached to that node. The trees defined inductively are \emph{finite} trees, i.e.\ no infinite chain of subtrees occurs in such a tree.
+
  
 \begin{Long}
  \subsection{Semantics of inductive types}
@@ -135,9 +141,7 @@ Toulouse}
  
  This example demonstrates the fundamental aspect of those tree-like objects: they can be used to model basic mathematical and logical objects.
  
- An inductive set/type specifies a set/type of trees of given shape, i.e.\ it specifies the set/type of nodes and, for each node, the number (cardinality) of subtrees 
- attached to that node. The trees defined inductively are \emph{finite} trees, i.e.\ no infinite chain of subtrees occurs in such a tree.
- 
+  
  By \enquote{semantics of inductive types} we mean a mathematical description of the set/type of trees of a given shape. We are interested in 
  \emph{category-theoretic} characterizations of such sets/types. 
  However, the question of how to give such a characterization depends on the formal system we work in. 
