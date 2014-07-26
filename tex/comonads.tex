@@ -89,23 +89,29 @@ Toulouse}
  in IMLTT via a universal property.
  The first codata type we consider is the \emph{homogeneous} type family of streams, parametrized by a base type.
  The second one is the \emph{heterogeneous} codata type family of infinite triangular matrices parametrized by the type of diagonal entries.
-  In the rest of the introduction, we explain some of the vocabulary occurring in these first sentences.
+  In the rest of the introduction, we explain some of the vocabulary occurring in these first sentences:
+  in \Cref{sec:mltt} we briefly introduce Martin-Löf type theory. In \Cref{sec:sem_ind} we discuss inductive types and their semantics,
+  before passing to \emph{co}inductive types in \Cref{sec:sem_coind}.
+  We then explain substitution for leaf-labeled trees and cosubstitution for node-labeled trees in \Cref{sec:cosubst}, and describe
+  the difference between homogeneous and heterogeneous (co)data types in \Cref{sec:hom_het}.
+  The last sections of the introduction concern more \enquote{administrative} aspects of the present work.
   
   
- \subsection{Intensional Martin-Löf type theory}
+ \subsection{Intensional Martin-Löf type theory}\label{sec:mltt}
  Martin-Löf type theory (MLTT) \parencite{martin_lof} is a dependent type theory developed in the 1970's, which provides a foundation of mathematics.
- It is based on the Curry-Howard isomorphism, that is, the logical constructions are instances of more general constructions on types.
- There are two notions of equality in Martin-Löf type theory, an external (judgmental) one, and an internal (propositional) one.
+ It is based on the Curry-Howard isomorphism, that is, it treats logic as a fragment of the general type theory.
+ There are two notions of \enquote{sameness} in Martin-Löf type theory, an external (judgmental) one, and an internal (propositional) one.
  The latter is internalized by  the \emph{Martin-Löf identity type}, which is an inductively defined binary relation on any given type.
  Its only constructor relates any term to itself, that is, the relation defined by the Martin-Löf identity type is the least reflexive relation on a given type.
- Judgmentally equal terms are always propositionally equal, but the converse is not always true; 
- indeed, one distinguishes two variants of type theory: in \emph{extensional} type theory, propositional equalities (i.e.\ terms of identity type)
+ Judgmentally equal terms are always propositionally equal, but the converse is not always true.
+ Indeed, one distinguishes two variants of type theory: in \emph{extensional} type theory, propositional equalities (i.e.\ terms of identity type)
  are reflected, via a \emph{reflection rule}, into the judgmental equality of the type theory.  
  Here, judgmental and propositional equality thus coincide.
  \emph{Intensional} Martin-L\"of type theory  lacks the reflection principle for the sake of decidability of type checking. 
- It forms the base of the computer proof assistants \coq, \matita and \agda.
+ This variant forms the basis of the computer proof assistants \coq, \matita and \agda.
 
  
+\begin{comment}
  \subsection{(Non-)wellfounded trees: (co)inductive types}
  
  A \emph{tree} is abstractly given by its \emph{root} and its \emph{subtrees}, which we think of as being attached to the root.
@@ -114,9 +120,7 @@ Toulouse}
  
 %  TODO: fill in a picture of a tree
  
- Many objects in mathematics and logic can be represented as \emph{trees}.
- For instance, a natural number can be considered as such a tree: the possible nodes are $S$---a node with one subtree---and $Z$---a node without subtrees, i.e.\ a \emph{leaf}.
- The natural number $2$ is represented by the tree $S\longrightarrow S\longrightarrow Z$. 
+ 
  
 %  TODO: finite vs infinite
 
@@ -124,26 +128,43 @@ Toulouse}
 
  An inductive set/type specifies a set/type of trees of given shape, i.e.\ it specifies the set/type of nodes and, for each node, the number (cardinality) of subtrees 
  attached to that node. The trees defined inductively are \emph{finite} trees, i.e.\ no infinite chain of subtrees occurs in such a tree.
-
+\end{comment}
  
 \begin{Long}
- \subsection{Semantics of inductive types}
+ \subsection{Wellfounded trees and their semantics}\label{sec:sem_ind}
 \end{Long}
 \begin{Short}
  \paragraph*{Semantics of inductive types}
 \end{Short}
  
- Before turning to \emph{co}inductive types, we give an overview over semantics for inductive types.
- 
- Informally, we think of an inductive object as a  tree, consisting of a \emph{root}, 
- to which a number of \emph{subtrees} are attached. The subtrees are themselves trees.
+ A tree is a special kind of graph (with labeled edges and unlabeled vertices), consisting of a \emph{root} (edge), 
+ to which a number of \emph{subtrees} are attached. 
+ The subtrees are themselves trees.
  The root of a tree and the roots of any subtrees are more generally called \emph{nodes}.
+ We gather trees of a fixed shape into a set or type, depending on the foundations we work in. 
+ The possible shapes of trees are given by two data:
+ \begin{enumerate}
+  \item the set/type of potential nodes and
+  \item the number of subtrees attached to each node.
+ \end{enumerate}
+ Such a pair of data is called a \emph{signature}, and we are interested in the set/type of trees which are formed according to a given signature.
  
+ A tree is called \emph{wellfounded} if any of its subtrees has finite length. In this section we consider the set/type of wellfounded trees of 
+ a given signature. Such a set/type is called \emph{inductively generated} by the signature. Intuitively, this set/type is the least one stable under
+ forming trees starting from leaves and attaching already constructed trees as subtrees to nodes.
+ One might also consider \emph{potentially infinite}, i.e., non-wellfounded trees; these are called \emph{co}inductive and are the main object of this work.
+ We discuss them in \Cref{sec:sem_coind}.
+ 
+ 
+ Many objects in mathematics and logic can be represented as (wellfounded) \emph{trees}.
+ For instance, a natural number can be considered as such a tree: let $\{S,Z\}$ be the set of possible nodes, 
+ such that node $S$ always has one subtree and node $Z$ does not have any subtrees, i.e.\ $Z$ is a \emph{leaf}.
+ The natural number $2$ is represented by the tree $S\longrightarrow S\longrightarrow Z$. 
  This example demonstrates the fundamental aspect of those tree-like objects: they can be used to model basic mathematical and logical objects.
  
   
- By \enquote{semantics of inductive types} we mean a mathematical description of the set/type of trees of a given shape. We are interested in 
- \emph{category-theoretic} characterizations of such sets/types. 
+ By \enquote{semantics of inductive types} we mean a mathematical description of the set/type of trees of a given signature. 
+ More precisely, the purpose is to give a category-theoretic explanation to the above description as \enquote{the least set/type stable under forming trees}.
  However, the question of how to give such a characterization depends on the formal system we work in. 
  Below, we discuss briefly set-theoretic and type-theoretic such systems.
  
@@ -190,18 +211,19 @@ Toulouse}
  \emph{equipped with a canonical, well-behaved substitution operation}.
  
 \begin{Long}
- \subsection{Coinductive types: simply dualizing?}
+ \subsection{Non-wellfounded trees: simply dualizing?}\label{sec:sem_coind}
 \end{Long}
 \begin{Short}
  \paragraph*{Coinductive types: simply dualizing?}
 \end{Short}
 
-  Coinductive sets/types describe potentially \emph{infinite} trees, that is, trees that may have an infinite chain of subtrees.
-  An example of such a coinductive set/type is given by the \emph{co}natural numbers, which consist of the natural numbers and an additional,
-  infinite tree $S \longrightarrow S\longrightarrow S \longrightarrow \ldots$.
+  Coinductive sets/types describe sets/types of potentially \emph{infinite} trees, that is, trees that may have an infinite chain of subtrees---still formed according to some signature.
+  An example of such a coinductive set/type is given by the \emph{co}natural numbers, which are specified by the same signature as the natural numbers.
+  They consist of the elements of the natural numbers and an additional,
+  infinite tree $S \longrightarrow S\longrightarrow S \longrightarrow \ldots$. 
   
  In a traditional set-theoretic setting, the theory of coinductive sets is completely dual to that of inductive sets:
- dually to inductive sets, \emph{co}inductive sets are characterized as terminal coalgebras of 
+  \emph{co}inductive sets are characterized as terminal coalgebras of 
  suitable endofunctors \parencite{jacobs1997tutorial}.
  
  In type theory, this duality between inductive and coinductive objects breaks. This is rooted in the 
@@ -232,9 +254,25 @@ Toulouse}
 %  Furthermore, his work does not account for the mentioned cosubstitution operation.
 % \end{Long}
 
+
+\subsection{Homogeneous and heterogeneous trees}\label{sec:hom_het}
+
+Instead of considering types of trees of a given signature, we consider, more generally, \emph{families} $T(X)$ of types of trees, families parametrized by a type $X$.
+We call a tree $t:T(X)$ over $X$ \emph{homogeneous} if all of its subtrees are also trees over $X$, i.e.\, if all the subtrees are elements of $T(X)$.
+A signature accordingly is called homogeneous if it only admits homogeneous trees.
+On the other hand, a tree $t$ is called \emph{heterogeneous}, if its subtrees $t_i$ ($i : I$ for some indexing type $I$) are trees over 
+type $F_i(X)$ for maps of types $F_i : \Set \to \Set$. Obviously, for $F_i$ the identity, we obtain homogeneous trees; heterogeneous trees are thus more general than
+homogeneous trees.
+
+In the present work, we study examples of both homogeneous and heterogeneous trees: a \emph{stream} is a \emph{homogeneous} tree with one subtree over the same type of nodes,
+whereas an \emph{infinite triangular matrix} is a \emph{heterogeneous} tree (over a type, say, $A$) with one subtree over type $E\times A$ for a fixed, but arbitrary type $E$.
+This is explained in more detail below.
+
+The examples we consider are trees with just one subtree. A generalization to trees (no matter whether homogeneous or heterogeneous) with a family of subtrees indexed by some fixed type $I$ as above is straightforward---we refrain from striving for this additional generality in order to keep the exposition as simple and clear as possible, and also in view of a lack of practical examples where this generality would be useful.
+
  
 \begin{Long} 
- \subsection{Cosubstitution: a comonadic operation on parametrized codata}
+ \subsection{Cosubstitution: a comonadic operation on parametrized codata}\label{sec:cosubst}
 \end{Long}
 \begin{Short}
  \paragraph*{Cosubstitution: a comonadic operation on parametrized codata}
@@ -242,9 +280,6 @@ Toulouse}
 
 % TODO: talk about type families
 
-Instead of considering types of trees, we consider, more generally, \emph{families} $T(X)$ of types of trees, families parametrized by a type $X$.
-We consider two different uses for this parameter: firstly, the \emph{leaves} of a tree $t:T(X)$ may come from $X$. 
-Secondly, all the \emph{nodes} come from the type $X$.
 
 We first consider the first case of \emph{leaf-labeled trees}.
  Let $T(X)$ be a type family of trees with \emph{leaves from $X$}, i.e., $t: T(X)$ is a tree (of a given shape) with leaves in $X$.
@@ -281,21 +316,6 @@ We first consider the first case of \emph{leaf-labeled trees}.
  Our terminal semantics thus characterizes not only the codata types themselves but also the bisimilarity relation 
  and---via the use of (relative) comonads---a canonical cosubstitution operation on them.
  
-\subsection{Homogeneous and heterogeneous trees}
-
-In this work we consider families of types of (infinite) node-labeled trees. 
-Here, \emph{family} refers to the fact that these types are parametrized by a type variable (and hence constitute not a single type, but an infinite family of types), 
-from which the nodes of the trees are chosen. We call a tree a \enquote{tree over type $X$} if its nodes are elements of $X$.
-A tree over $X$ is called \emph{homogeneous} if its subtrees are again trees over $X$.
-On the other hand, a tree $t$ is called \emph{heterogeneous}, if its subtrees $t_i$ ($i : I$ for some indexing type $I$) are trees over 
-type $F_i(X)$ for maps of types $F_i : \Set \to \Set$. Obviously, for $F_i$ the identity, we obtain homogeneous trees; heterogeneous trees are thus more general than
-homogeneous trees.
-
-In the present work, we study examples of both homogeneous and heterogeneous trees: a \emph{stream} is a \emph{homogeneous} tree with one subtree over the same type of nodes,
-whereas an \emph{infinite triangular matrix} is a \emph{heterogeneous} tree (over a type, say, $A$) with one subtree over type $E\times A$ for a fixed, but arbitrary type $E$.
-This is explained in more detail below.
-
-The examples we consider are trees with just one subtree. A generalization to trees (no matter whether homogeneous or heterogeneous) with a family of subtrees indexed by some fixed type $I$ as above is straightforward---we refrain from striving for this additional generality in order to keep the exposition as simple and clear as possible, and also in view of a lack of practical examples where this generality would be useful.
  
 \begin{Long} 
  \subsection{Our proofs are correct.}
