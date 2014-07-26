@@ -175,9 +175,12 @@ Toulouse}
  \paragraph*{Coinductive types: simply dualizing?}
 \end{Short}
 
- 
+  Coinductive sets/types describe potentially \emph{infinite} trees, that is, trees that may have an infinite chain of subtrees.
+  An example of such a coinductive set/type is given by the \emph{co}natural numbers, which consist of the natural numbers and an additional,
+  infinite tree $S \longrightarrow S\longrightarrow S \longrightarrow \ldots$.
+  
  In a traditional set-theoretic setting, the theory of coinductive sets is completely dual to that of inductive sets:
- dually to inductive sets, \emph{co}inductive sets such as streams are characterized as terminal coalgebras of 
+ dually to inductive sets, \emph{co}inductive sets are characterized as terminal coalgebras of 
  suitable endofunctors \parencite{jacobs1997tutorial}.
  
  In type theory, this duality between inductive and coinductive objects breaks. This is rooted in the 
@@ -203,10 +206,10 @@ Toulouse}
  This extra structure accounts for a \emph{cosubstitution} operation with which one can equip the considered codata types \emph{in a canonical way}.
  The cosubstitution operation is explained in the next section.
 
-\begin{Long}
- We mention here work by \textcite{DBLP:conf/calco/Marchi05}, who studies the existence of coinductive types in models of \emph{extensional} Martin-L\"of type theory. In that work, no \emph{internal} characterization of coinductive types is given.
- Furthermore, his work does not account for the mentioned cosubstitution operation.
-\end{Long}
+% \begin{Long}
+%  We mention here work by \textcite{DBLP:conf/calco/Marchi05}, who studies the existence of coinductive types in models of \emph{extensional} Martin-L\"of type theory. In that work, no \emph{internal} characterization of coinductive types is given.
+%  Furthermore, his work does not account for the mentioned cosubstitution operation.
+% \end{Long}
 
  
 \begin{Long} 
@@ -216,16 +219,27 @@ Toulouse}
  \paragraph*{Cosubstitution: a comonadic operation on parametrized codata}
 \end{Short}
 
-% TODO: mention node-labeled and leaf-labeled trees
- Many inductive types, in particular parametrized ones representing \emph{syntax} such as the lambda calculus, 
- are canonically equipped with a substitution operation. The categorical characterization of this substitution operation
+% TODO: talk about type families
+
+Instead of considering types of trees, we consider, more generally, \emph{families} $T(X)$ of types of trees, families parametrized by a type $X$.
+We consider two different uses for this parameter: firstly, the \emph{leaves} of a tree $t:T(X)$ may come from $X$. 
+Secondly, all the \emph{nodes} come from the type $X$.
+
+We first consider the first case of leaf-labeled trees.
+ Let $T(X)$ be a type family of trees with \emph{leaves from $X$}, i.e., $t: T(X)$ is a tree (of a given shape) with leaves in $X$.
+ Let furthermore $f : X \to T(Y)$ be a map. We obtain a tree $t' : T(Y)$ by replacing any leaf of $t$ by its image under the map $f$.
+ The operation of replacing any leaf in $t$ by its image under $f$ is called \emph{(simultaneous) substitution}---\enquote{simultaneous} because all the leaves are 
+ substituted at the same time. 
+ A well-studied example is that of the lambda calculus, the terms of which can be formalized as leaf-labeled trees over a type of \emph{free variables} \parencite{alt_reus}.
+ The categorical characterization of this substitution operation
  has been studied extensively; our list of pointers \parencite{alt_reus, fpt, Power:2007:ASS:1230146.1230276, Tanaka:2005:UCF:1088454.1088457,
  DBLP:journals/iandc/HirschowitzM10, DBLP:conf/fossacs/AltenkirchCU10, ahrens_relmonads} is necessarily incomplete.
  One such characterization is via \emph{monads}; substitution can be seen as part of a monadic structure on the functor 
  given by the parametrized data type \parencite{alt_reus, 
  DBLP:journals/iandc/HirschowitzM10, DBLP:conf/fossacs/AltenkirchCU10, ahrens_relmonads}.
  
- Dually, coinductive types can often be equipped with a \emph{cosubstitution} operation. 
+ 
+ \emph{Node-labeled trees} can be equipped with a \emph{cosubstitution} operation. 
  Is this cosubstitution operation part of a comonad structure?
  In a set-theoretic setting, the fact that cosubstitution for coinductive sets is comonadic is established by \textcite{DBLP:conf/sfp/UustaluV01}.
  
