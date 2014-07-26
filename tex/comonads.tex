@@ -292,7 +292,7 @@ The examples we consider are trees with just one subtree. A generalization to tr
  \subsection{Organisation of the paper}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
   In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those codata types.
-   Their specifying rules are given in \Cref{stream_rules} and \Cref{tri_rules}, respectively.
+%    Their specifying rules are given in \Cref{stream_rules} and \Cref{tri_rules}, respectively.
   In \Cref{sec:comonads} we present \emph{relative comonads} and define the category of comonads relative to a fixed functor.
     We give some examples of such structures, using the codata types presented in \Cref{sec:tri}.
   In \Cref{sec:comodules} we define comodules over relative comonads and give some constructions of comodules.
@@ -302,7 +302,7 @@ The examples we consider are trees with just one subtree. A generalization to tr
       We then prove that the codata types constitute the terminal model in the respective categories.
       Finally, we present an example of a map defined as a terminal map exploiting the universal property of streams.
   In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
-  A table with the correspondence between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
+%   A table with the correspondence between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
 
 \end{Long}
 
@@ -607,11 +607,89 @@ This change of parameter (from $A$ to $E \times A$) in the type of $\tail$ is wh
   \begin{align} \comp{\redec~f}{\head} := f \quad\text{ and } \quad
                   \comp{\redec~f}{\tail} := \comp{\tail}{\redec~(\extend~f)} \enspace . \label{eq:rest_redec}
     \end{align}
+An illustration of the redecoration operation is given in \Cref{fig:redec}, 
+taken from the article by \textcite{DBLP:conf/types/MatthesP11}.    
+\begin{figure}[tbp]
+  \centering
+  \begin{tikzpicture}[scale = 0.6]
+    
+    \foreach \y in {0,...,2}
+    {\foreach \x in {\y,...,2}
+      \draw (\x+1, -\y) node[color=blue]{E} ;
+    }
+    \foreach \x in {0,...,3} \draw (\x, -\x) node[color=red]{A} ;
+    \draw(4,-1) node{$\ldots$};
+
+    \foreach \y in {0,...,2}
+    {\foreach \x in {\y,...,2}
+      \draw (\x+10, -\y) node[color=blue]{E} ;
+    }
+    \foreach \x in {0,...,3} \draw (\x+9, -\x) node[color=violet]{B} ;
+    \draw(13,-1) node{$\ldots$};
+    \draw[color=purple!70]  (2.4, -3) --
+    (0.6,-1.2) -- (0.6,0.4) -- (2.4,0.4);
+    \draw[color=purple!70, dashed]  (2.4,0.4) -- (3.4,0.4);
+    \draw[color=purple!70, dashed]  (2.4,-3) -- (3.2,-3.7);
+ 
+    \draw[color=orange] (1.8,-1.5) circle(2.7cm);
+
+    \draw[color=purple!70]  (11.4, -3) --
+    (9.6,-1.2) -- (9.6,0.4) -- (11.4,0.4);
+    \draw[color=purple!70, dashed]  (11.4,0.4) -- (12.6,0.4);
+    \draw[color=purple!70, dashed]  (11.4,-3) -- (12.5,-4.05);
+    
+    \draw[color=orange] (9,0) circle(0.4cm);
+    
+    \draw[->,color = orange] (3.9,0.5) to [bend left] node[auto,
+    swap, above]{$f$} (8.8,0.5) ; 
+
+    \draw[->,color = purple!70] (3.6,-2) to node[auto,
+    swap, above]{$\redec~(\lift~f)$} (10.2,-2) ; 
+    
+  \end{tikzpicture}
+  \caption{Definition of redecoration (illustration taken from \parencite{DBLP:conf/types/MatthesP11})}
+  \label{fig:redec}
+\end{figure}
+
+    
 Here, the family of functions 
      $\extend_{A,B} : (\Tri A \to B) \to \Tri (E \times A) \to E\times B $
   is suitably defined to account for the change of the type of the argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
   rather than $t : \Tri A$, namely
   \[ \extend(f) := \langle \comp{\head_{E\times A}}{\pr_1(E,A)} , \comp{\cut_A}{f} \rangle \enspace . \]
+  An illustration of this operation is given in \Cref{fig:lift}, 
+  taken from the article by \textcite{DBLP:conf/types/MatthesP11}.    
+  \begin{figure}[tbp]
+  \centering
+  \begin{tikzpicture}[scale = 0.6]
+    \foreach \y in {0,...,2}
+    {\foreach \x in {\y,...,2}
+      \draw (\x+1, -\y) node[color=blue]{E} ;
+    }
+    \foreach \x in {1,...,3} \draw (\x, -\x) node[color=red]{A} ;
+    \draw(4,-1) node{$\ldots$};
+
+     \draw (7,-1.5) node{{\color{blue} E} $\times$ {\color{violet} B}} ;
+    \draw[color=orange] (1,0) circle(0.4cm);
+    \draw[color=orange] (6.4,-1.5) circle(0.4cm);
+    \draw[color=purple!70]  (2.8, -3.4) --
+     (0.1,-0.6) -- (2.8,-0.6);
+    \draw[color=purple!70, dashed]  (2.8,-0.6) -- (3.6,-0.6);
+    \draw[color=purple!70, dashed]  (2.8,-3.4) -- (3.5,-4.1);
+
+    \draw[color=purple!70] (7.6,-1.5) circle(0.4cm);
+
+     \draw[->, color = orange] (1,0.5) to [bend left] node[auto,
+     swap, above]{$id$} (6.4,-0.9) ; 
+    \draw[->, color = purple!70] (3.6,-2) to [bend right] node[auto,
+    swap, below]{$f$} (7.5,-2) ; 
+    
+  \end{tikzpicture}
+  \vspace{-3ex}
+  \caption{Definition of lifting (illustration taken from \parencite{DBLP:conf/types/MatthesP11})}
+  \label{fig:lift}
+\end{figure}
+
   The auxiliary function $\cut_A : \Tri(E\times A) \to \Tri A$ is defined corecursively via
 % 
   \begin{align*} \comp{\cut}{\head} := \comp{\head}{\pr_2} \quad\text{ and } \quad
@@ -687,7 +765,7 @@ Just like relative monads, relative comonads are functorial:
 \label{def:lift}
  Let $T$ be a  comonad relative to $F:\C\to\D$.
  For $f : \C(A,B)$ we define
-  $ \lift^T(f) := \cobind(\comp{\counit_A}{Ff}) : \D(TA,TB)$. 
+  \[ T(f) := \cobind(\comp{\counit_A}{Ff}) : \D(TA,TB) \enspace .\] 
  The functor properties are easily checked.
 \end{definition}
 
@@ -855,7 +933,7 @@ The map $\diagonal_A$ is defined via the clauses
   and let $E:\C_0$ be a fixed object of $\C$.
  The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$: the 
  counit is defined as
-   \[ \counit_A := \comp{\lift^T(\pr_2(E,A))}{\counit^T_{A}} \]
+   \[ \counit_A := \comp{T(\pr_2(E,A))}{\counit^T_{A}} \]
   and the cobind operation as
    \begin{align*} 
             \cobind_{A,B} : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A),T(E\times B)\bigr) \\
@@ -921,7 +999,7 @@ Similarly to relative comonads, comodules over these are functorial:
 \begin{definition}%[Functoriality for comodules]
 \label{def:comodule_lift}
  Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
-  \[ \mlift^M(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
+  \[ M(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
 \end{definition}
 \end{Long}
 
@@ -1106,7 +1184,7 @@ the behavior of that operation:
 %  satisfying the following axioms:
   \begin{itemize}
 %    \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{\counit_{E\times A}}{F(\pr_2(E,A))}$;
-   \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{\lift^T(\pr_2(E,A))}{\counit_{A}}$;
+   \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{T(\pr_2(E,A))}{\counit_{A}}$;
    \item $\forall~A~B:C_0,\forall~f:\D(TA,FB), \comp{\cut_A}{\cobind(f)} = \comp{\cobind(\extend~f)}{\cut_B}$,
   \end{itemize}
 
@@ -1139,7 +1217,7 @@ Conversely, any comonad $T$ relative to a suitable functor can be equipped with 
 \begin{remark}[Canonical $\cut$ operation]\label{canonical_cut}
  Any comonad $T$ relative to a product-preserving functor $F:\C\to\D$  can be equipped with a $\cut$ operation relative to 
  $E:\C_0$ satisfying the properties of \Cref{def:rel_comonad_with_cut} by setting
-   \[ \ccut_A := \cut_A := \lift^T\bigl(\pr_2(E,A)\bigr) \enspace . \]
+   \[ \ccut_A := \cut_A := T\bigl(\pr_2(E,A)\bigr) \enspace . \]
  (The extra \enquote{c} of $\ccut$ stands for \enquote{canonical}.)
  It follows from the axioms of comonad morphism that a comonad morphism $\tau : T\to S$ satisfies the equation of \Cref{def:morphism_comonad_cut} 
  for the thus defined operations $\ccut^T$ and $\ccut^S$, hence constitutes a morphism of comonads with cut from $(T,\ccut^T)$ to $(S,\ccut^S)$.
@@ -1257,17 +1335,15 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
    A morphism between two such objects $(T,\tail^T)$ and $(S,\tail^S)$
    is given by a morphism of relative comonads with cut $\tau : T \to S$ such that
    the following diagram of comodule morphisms in the category $\RComod(S,\E)$ commutes,
-\begin{multicols}{2}   
-   $ \begin{xy}
+% \begin{multicols}{2}   
+   \[ \begin{xy}
        \xymatrix{   \tau_*T  \ar[r]^{\tau_*(\tail^T)} \ar[d]_{\induced{\tau}}  &  **[r] \tau_*T (E\times \_ )\ar[d]^{\induced{\tau}(E\times \_)} \\
                     S  \ar[r]_{\tail^S}  &  **[r] S (E\times \_ ) \enspace .
         }
       \end{xy}
-   $
-
-   \noindent ~\\
+   \]
    Here we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute} in the upper right corner.
-\end{multicols}
+% \end{multicols}
 \end{definition}   
 
 
