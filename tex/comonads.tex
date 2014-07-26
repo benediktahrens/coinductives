@@ -42,7 +42,7 @@ Toulouse}
 
 \authorrunning{B.\ Ahrens and R.\ Spadotti}
 
-\Copyright{John Q. Open and Joan R. Access}
+\Copyright{Benedikt Ahrens and Régis Spadotti}
 
 \subjclass{Dummy classification -- please refer to \url{http://www.acm.org/about/class/ccs98-html}}% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation". 
 \keywords{Dummy keyword -- please provide 1--5 keywords}% mandatory: Please provide 1-5 keywords
@@ -63,8 +63,6 @@ Toulouse}
 
 
 \newcommand{\fat}[1]{\textbf{#1}}
-
-
 \newcommand{\itemizedist}{.5em}
 
 \begin{document}
@@ -74,15 +72,11 @@ Toulouse}
 % \tableofcontents
 
 \begin{abstract}
-
-
  We study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
  We use these notions to give categorical semantics for the coinductive type families of streams and
  of infinite triangular matrices and their respective cosubstitution operations in intensional Martin-L\"of type theory.
  Our results are mechanized in the proof assistant \coq.
-   
-  
-  \end{abstract}
+\end{abstract}
 
 
 
@@ -93,8 +87,8 @@ Toulouse}
  We then use these notions for a case study in categorical semantics of coinductive data types in intensional Martin-Löf type theory (IMLTT): 
  we characterize two coinductive data types and their respective cosubstitution operations 
  in IMLTT via a universal property.
- Firstly, we consider the \emph{homogeneous} codata type family of streams parametrized by a base type.
- Secondly, we consider the \emph{heterogeneous} codata type family of infinite triangular matrices parametrized by the type of diagonal entries.
+ The first codata type we consider is the \emph{homogeneous} type family of streams, parametrized by a base type.
+ The second one is the \emph{heterogeneous} codata type family of infinite triangular matrices parametrized by the type of diagonal entries.
   In the rest of the introduction, we explain some of the vocabulary occurring in these first sentences.
  
 \begin{Long}
@@ -201,10 +195,10 @@ Toulouse}
 
  
 \begin{Long} 
- \subsection{Cosubstitution is a comonadic operation on parametrized codata.}
+ \subsection{Cosubstitution: a comonadic operation on parametrized codata}
 \end{Long}
 \begin{Short}
- \paragraph*{Cosubstitution is a comonadic operation on parametrized codata.}
+ \paragraph*{Cosubstitution: a comonadic operation on parametrized codata}
 \end{Short}
 
  
@@ -235,6 +229,22 @@ Toulouse}
  Our terminal semantics characterizes not only the codata types themselves but also the bisimilarity relation 
  and---via the use of (relative) comonads---a canonical cosubstitution operation on them.
  
+\subsection{Homogeneous and heterogeneous trees}
+
+In this work we consider families of types of (infinite) node-labeled trees. 
+Here, \emph{family} refers to the fact that these types are parametrized by a type variable (and hence constitute not a single type, but an infinite family of types), 
+from which the nodes of the trees are chosen. We call a tree a \enquote{tree over type $X$} if its nodes are elements of $X$.
+A tree over $X$ is called \emph{homogeneous} if its subtrees are again trees over $X$.
+On the other hand, a tree $t$ is called \emph{heterogeneous}, if its subtrees $t_i$ ($i : I$ for some indexing type $I$) are trees over 
+type $F_i(X)$ for maps of types $F_i : \Set \to \Set$. Obviously, for $F_i$ the identity, we obtain homogeneous trees; heterogeneous trees are thus more general than
+homogeneous trees.
+
+In the present work, we study examples of both homogeneous and heterogeneous trees: a \emph{stream} is a \emph{homogeneous} tree with one subtree over the same type of nodes,
+whereas an \emph{infinite triangular matrix} is a \emph{heterogeneous} tree (over a type, say, $A$) with one subtree over type $E\times A$ for a fixed, but arbitrary type $E$.
+This is explained in more detail below.
+
+The examples we consider are trees with just one subtree. A generalization to trees (no matter whether homogeneous or heterogeneous) with a family of subtrees indexed by some fixed type $I$ as above is straightforward---we refrain from striving for this additional generality in order to keep the exposition as simple and clear as possible, and also in view of a lack of practical examples where this generality would be useful.
+ 
 \begin{Long} 
  \subsection{Our proofs are correct.}
 \end{Long}
@@ -258,7 +268,7 @@ Toulouse}
 
  
  
- \subsubsection*{Disclaimer}The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
+ \subsection{Type theory vs.\ set theory} The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
  While we present them in a type-theoretic style, the definitions and lemmas can trivially be transferred to a set-theoretic setting.
  Throughout this article, we use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
  For instance, we write $f : \C(A,B)$ to indicate that $f$ is a morphism from object $A$ to object $B$ in category $\C$.
@@ -279,7 +289,7 @@ Toulouse}
  
 \begin{Long}
  
- \subsubsection*{Organisation of the paper}
+ \subsection{Organisation of the paper}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
   In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those codata types.
    Their specifying rules are given in \Cref{stream_rules} and \Cref{tri_rules}, respectively.
