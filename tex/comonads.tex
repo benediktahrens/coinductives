@@ -108,7 +108,7 @@ Toulouse}
  are reflected, via a \emph{reflection rule}, into the judgmental equality of the type theory.  
  Here, judgmental and propositional equality thus coincide.
  \emph{Intensional} Martin-L\"of type theory  lacks the reflection principle for the sake of decidability of type checking. 
-T his variant forms the basis of the computer proof assistants \coq, \matita and \agda.
+ This variant forms the basis of the computer proof assistants \coq, \matita and \agda.
 
  
 \begin{comment}
@@ -188,13 +188,15 @@ T his variant forms the basis of the computer proof assistants \coq, \matita and
 %  
  
  The reflection rule equips \emph{extensional} type theory with extensional features similar to those of set theory.
- As a consequence, the characterization given by \textcite{DBLP:journals/tcs/Dybjer97} of an inductive type in extensional MLTT as initial algebra for some endofunctor on the category of types  works as in the category of sets.
+ As a consequence, the characterization given by \textcite{DBLP:journals/tcs/Dybjer97} of an inductive type in extensional MLTT works as in set theory: 
+ an inductive type constitutes the initial algebra for some endofunctor on the category of types.
  
  
   
 
  
-  The characterization of inductive types as initial algebras of some endofunctor in intensional Martin-Löf type theory fails \parencite{DBLP:journals/tcs/Dybjer97}, 
+  In \emph{intensional} Martin-Löf type theory the characterization of inductive types as initial algebras of some endofunctor fails 
+  for a lack of function extensionality \parencite{DBLP:journals/tcs/Dybjer97}, 
   but it can be recovered \parencite{DBLP:conf/lics/AwodeyGS12} in an \emph{extension} of intensional MLTT called
   \emph{Homotopy Type Theory} \parencite{hottbook}.
   In this extension, function extensionality is provable from the \emph{Univalence Axiom}. 
@@ -203,12 +205,15 @@ T his variant forms the basis of the computer proof assistants \coq, \matita and
  The mentioned work \parencite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterization of inductive types as initial algebras carries over 
  from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of uniqueness.
  
+ 
+\begin{comment} 
 %  TODO: put this at the beginning of cosubstitution
  The characterization of inductive sets/types as initial objects in some category
  has been extended to some \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
  in different formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
  The main goal of these works is not just to characterize a data type via a universal property, but rather a data type
  \emph{equipped with a canonical, well-behaved substitution operation}.
+\end{comment} 
  
 \begin{Long}
  \subsection{Non-wellfounded trees: simply dualizing?}\label{sec:sem_coind}
@@ -226,7 +231,7 @@ T his variant forms the basis of the computer proof assistants \coq, \matita and
   \emph{co}inductive sets are characterized as terminal coalgebras of 
  suitable endofunctors \parencite{jacobs1997tutorial}.
  
- In type theory, this duality between inductive and coinductive objects breaks. This is rooted in the 
+ In intensional Martin-Löf type theory, this duality between inductive and coinductive objects breaks. This is rooted in the 
  unsuitability of the Martin-Löf identity type to express sameness for inhabitants of coinductive types:
  while identity terms are inductively generated and hence necessarily finite, 
  a proof of sameness between coinductive terms---which represent infinite objects---constitutes a potentially infinite object itself.
@@ -282,11 +287,16 @@ The examples we consider are trees with just one subtree. A generalization to tr
 
 
 We first consider the first case of \emph{leaf-labeled trees}.
- Let $T(X)$ be a type family of trees with \emph{leaves from $X$}, i.e., $t: T(X)$ is a tree (of a given shape) with leaves in $X$.
+ Let $T(X)$ be a type family of trees (of a given shape) with \emph{leaves from $X$}, i.e., $t: T(X)$ is a tree (of a given shape) with leaves in $X$.
  Let furthermore $f : X \to T(Y)$ be a map. We obtain a tree $t' : T(Y)$ by replacing any leaf of $t$ by its image under the map $f$.
  The operation of replacing any leaf in $t$ by its image under $f$ is called \emph{(simultaneous) substitution}---\enquote{simultaneous} because all the leaves are 
  substituted at the same time. 
- A well-studied example is that of the lambda calculus, the terms of which can be formalized as leaf-labeled trees over a type of \emph{free variables} \parencite{alt_reus}.
+ A well-studied example is that of the lambda calculus, the terms of which can be formalized as leaf-labeled trees over a type of \emph{free variables}, that is,
+ over a \emph{context} \parencite{alt_reus}.
+ More precisely, let $\LC(X)$ be the type of lambda terms in context $X$. A map $f : X \to \LC(Y)$ is called a \emph{substitution rule}, indicating how to substitute any 
+ free variable $x:X$ occurring in a term $t : \LC(X)$. 
+ The substitution operation (parametrized by contexts $X$ and $Y$) takes as input a lambda term $t : \LC(X)$ and a rule $f : X \to \LC(Y)$ and returns the substituted term
+ $t' : \LC(Y)$.
  The categorical characterization of this substitution operation
  has been studied extensively; our list of pointers \parencite{alt_reus, fpt, Power:2007:ASS:1230146.1230276, Tanaka:2005:UCF:1088454.1088457,
  DBLP:journals/iandc/HirschowitzM10, DBLP:conf/fossacs/AltenkirchCU10, ahrens_relmonads} is necessarily incomplete.
@@ -300,7 +310,7 @@ We first consider the first case of \emph{leaf-labeled trees}.
  In a set-theoretic setting, the fact that cosubstitution for coinductive sets is comonadic is established by \textcite{DBLP:conf/sfp/UustaluV01}.
  
   
- If we consider infinite node-labeled trees in IMLTT, however, the algebraic laws of cosubstitution for such trees have to be considered 
+ If we consider infinite (i.e., coinductive) node-labeled trees in IMLTT, however, the algebraic laws of cosubstitution for such trees have to be considered 
  \emph{modulo bisimilarity rather than identity}.
  For this we develop the notion of \emph{relative comonad} and \emph{comodule over a relative comonad}.
  Indeed, we show that our exemplary codata type families of streams and triangular matrices constitute relative comonads, and the maps which 
@@ -310,8 +320,8 @@ We first consider the first case of \emph{leaf-labeled trees}.
  Traditionally, codata types are characterized as terminal coalgebras of some endofunctor. However, this characterization does not account for 
  the cosubstitution operation.
  In order to integrate cosubstitution into the categorical semantics of the coinductive types under consideration,
- we thus define a more complicated category of \enquote{models} of the signature specifying those types---coalgebras with extra structure accounting for a c
- omonadic operation.
+ we thus define a more complicated category of \enquote{models} of the signature specifying those types---coalgebras with extra structure accounting for a 
+ comonadic operation.
  The terminal such model is given by the codata type together with its cosubstitution operation.
  Our terminal semantics thus characterizes not only the codata types themselves but also the bisimilarity relation 
  and---via the use of (relative) comonads---a canonical cosubstitution operation on them.
@@ -1505,7 +1515,7 @@ Here, the code \lstinline!E x A! denotes the cartesian product of the types \lst
 For the instantiation of the module type for $\Tri$, the formalization of infinite triangular matrices is taken from the work by \textcite{DBLP:conf/types/MatthesP11},
 and only slightly adapted to compile with the version of \coq we use.
 
-Apart from the implementation of our codata types via axioms, the mechanization does \emph{not} rely on any additional axioms.
+Apart from the implementation of our codata types via axioms (which are encapsulated in modules), the mechanization does \emph{not} rely on any additional axioms.
 The \coq source files and HTML documentation are available from the project web site \parencite{trimat_coq}.
 The correspondence between formalized statements and the statements in this article are given in \Cref{sec:table_formal_informal}.
 
