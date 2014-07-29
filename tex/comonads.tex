@@ -90,7 +90,7 @@ Toulouse}
  The first codata type we consider is the \emph{homogeneous} type family of streams, parametrized by a base type.
  The second one is the \emph{heterogeneous} codata type family of infinite triangular matrices parametrized by the type of diagonal entries.
   In the rest of the introduction, we explain some of the vocabulary occurring in these first sentences:
-  in \Cref{sec:mltt} we briefly introduce Martin-Löf type theory. In \Cref{sec:sem_ind} we discuss inductive types and their semantics,
+  in \Cref{sec:mltt} we briefly introduce (intensional) Martin-Löf type theory. In \Cref{sec:sem_ind} we discuss inductive types and their semantics,
   before passing to \emph{co}inductive types in \Cref{sec:sem_coind}.
   We then explain substitution for leaf-labeled trees and cosubstitution for node-labeled trees in \Cref{sec:cosubst}, and describe
   the difference between homogeneous and heterogeneous (co)data types in \Cref{sec:hom_het}.
@@ -108,7 +108,7 @@ Toulouse}
  are reflected, via a \emph{reflection rule}, into the judgmental equality of the type theory.  
  Here, judgmental and propositional equality thus coincide.
  \emph{Intensional} Martin-L\"of type theory  lacks the reflection principle for the sake of decidability of type checking. 
- This variant forms the basis of the computer proof assistants \coq, \matita and \agda.
+T his variant forms the basis of the computer proof assistants \coq, \matita and \agda.
 
  
 \begin{comment}
@@ -383,17 +383,17 @@ We first consider the first case of \emph{leaf-labeled trees}.
 
 We present some particular categories used later on, and fix some notation.
 
-\begin{definition}%[Setoids in IMLTT]
+\begin{defn}%[Setoids in IMLTT]
   A \emph{setoid} in intensional Martin-Löf type theory is a pair $(A, \sim_A)$ of a type $A$ together with an equivalence 
   relation $\sim_A$ on $A$. Given a setoid $S = (A, \sim_A)$, we often abuse notation by writing $s:S$ instead of $s:A$ for
   a term $s$ of $A$.
   Given two setoids $(A,\sim_A)$ and $(B,\sim_B)$, the cartesian product $A\times B$ of their underlying types is equipped with
   an equivalence relation given component-wise, thus yielding a product on setoids.
-\end{definition}
+\end{defn}
 
 
 
-\begin{definition}%[Category in IMLTT]
+\begin{defn}%[Category in IMLTT]
  \label{def:cat_imltt}
   A \emph{category} $\C$ in intensional Martin-Löf type theory  is given by
   \begin{itemize}
@@ -406,12 +406,12 @@ We present some particular categories used later on, and fix some notation.
   \end{itemize}
   This definition has been used from early on, e.g., in \parencite{aczel_galois, concat}).
   We write $f:a\to b$ for a morphism $f : \C(a,b)$, when the category $\C$ can be deduced from the context.
-\end{definition}
+\end{defn}
 
 Functors and natural transformations are defined in terms of the setoidal equivalence relations on morphisms.
 We omit the definitions, which can be found in our \coq files \parencite{trimat_coq}.
 
-\begin{definition}%[Some categories]
+\begin{defn}%[Some categories]
 \label{def:set_setoid}
  We denote by $\Set$ the category (in IMLTT) of types (of a fixed universe) and total functions between them in Martin-L\"of type theory. 
  The setoidal equivalence relation on $\Set(A,B)$ is given by pointwise equality as given by the Martin-Löf identity type,
@@ -423,36 +423,36 @@ We omit the definitions, which can be found in our \coq files \parencite{trimat_
 %  We write $a\sim a'$ for related elements $a$ and $a'$ in $A$.
  The category $\Setoid$ is cartesian closed and hence a category in the sense of \Cref{def:cat_imltt}: 
  two parallel morphisms of setoids $f,g:A\to B$ are equivalent if for any $a:A$ we have $fa \sim_B ga$.
-\end{definition}
+\end{defn}
 
 
 
-\begin{definition}\label{def:eq}
+\begin{defn}\label{def:eq}
  The functor $\eq : \Set\to\Setoid$ is defined as the left adjoint to the forgetful functor $U : \Setoid \to \Set$.
   Explicitly, the functor $\eq$ sends any type $X$ to the setoid $(X,=_X)$ given by the type $X$ itself, equipped
   with the propositional equality relation $=_X$ specified via Martin-L\"of's identity type on $X$.
-\end{definition}
+\end{defn}
 
 
-\begin{remark}[Notation for product]
+\begin{rem}[Notation for product]
   We denote the category-theoretic binary product of objects $A$ and $B$ of a category $\C$ by $A\times B$.
   We write $\pr_1(A,B) : \C(A\times B, A)$ and $\pr_2(A,B) :\C(A\times B, B)$ for the projections, occasionally omitting the 
   argument $(A,B)$.
   Given $f : \C(A, B)$ and $g : \C(A,C)$, we write $\langle f,g\rangle : \C(A,B\times C)$ for the induced map into the product such that
   $\comp{\langle f,g\rangle}{\pr_1} = f$ and $\comp{\langle f,g\rangle}{\pr_2} = g$.
-\end{remark}
+\end{rem}
 
 Both of the categories of \Cref{def:set_setoid} have finite products.
 
-\begin{definition}\label{def:monoidal_functor}
+\begin{defn}\label{def:monoidal_functor}
  A functor $F:\C\to\D$ between categories with finite products \emph{preserves products} if, for any two objects $A$ and $B$ of $\C$,
   the morphism $\phi^F_{A,B}$ is an isomorphism, where
  \[ \phi^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace . \] 
-\end{definition}
+\end{defn}
 
-\begin{example}
+\begin{ex}
   The functor $\eq: \Set \to \Setoid$ of \Cref{def:eq} preserves products.
-\end{example}
+\end{ex}
 
 
 \section{Codata types in intensional Martin-L\"of type theory}\label{sec:tri}
@@ -487,7 +487,7 @@ For instance, a map into streams is defined by specifying $\shead$ and $\stail$ 
 The first example is the type of \emph{streams} of elements of a given base type $A$:
 
 % In the presentation we use the notational convention of \Cref{def:set_setoid}, using the same name for a setoid and its underlying type.
-\begin{example}\label{ex_stream}
+\begin{ex}\label{ex_stream}
   Let $A$ be a type. The type---setoid, actually---$\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors 
   given in \Cref{stream_rules}.
   
@@ -546,7 +546,7 @@ The first example is the type of \emph{streams} of elements of a given base type
 \end{comment}
    
 
-\end{example}
+\end{ex}
 
 
 \begin{Long}
@@ -567,7 +567,7 @@ parametrized by a type $B$.
 
 We furthermore consider the \emph{heterogeneous} codata type family of \emph{infinite triangular matrices}:
 
-\begin{example}\label{ex_tri}
+\begin{ex}\label{ex_tri}
 Infinite triangular matrices are studied in detail by
  \textcite{DBLP:conf/types/MatthesP11}, and also by \textcite{DBLP:journals/tcs/AbelMU05}.
  We give a brief summary, but urge the reader to consult the given reference 
@@ -774,18 +774,18 @@ All the operations are suitably compatible with the bisimilarity relations, so t
     \extend_{A,B} &: \Setoid(\Tri A,\eq B) \to \Setoid\bigr(\Tri (E \times A),\eq(E\times B)\bigr) \\
     \cut_A &:  \Setoid(\Tri(E\times A) , \Tri A) \enspace .
   \end{align*}
-\end{example}
+\end{ex}
 
 \begin{Long}
 Note how heterogeneity of the destructor $\tail$ makes the definition of $\redec$ considerably more complicated than that of
 the analogous operation $\sredec$ on streams.
 \end{Long}
 
-\begin{remark}
+\begin{rem}
  We do not specify any computation rules for bisimilarity, i.e., we think of bisimilarity as a proof-irrelevant notion. 
  Categorically, the lack of such a computation rule amounts to saying that bisimilarity is a \emph{weakly} terminal bisimulation on the respective codata. (Here, a bisimulation is a binary relation on the codata type that is compatible with the destructors of the codata types.)
  In the setting of Homotopy Type Theory \parencite{hottbook}, where one would identify bisimilarity with propositional equality, a proof-relevant treatment would be adequate.
-\end{remark}
+\end{rem}
 
 
   
@@ -798,7 +798,7 @@ of such comonads and their morphisms.
 whose underlying functor is not necessarily an endofunctor.
 The dual notion is that of a relative \emph{co}monad:
 
-\begin{definition}%[Relative comonad]
+\begin{defn}%[Relative comonad]
  \label{def:rel_comonad}
   Let $F:\C\to\D$ be a functor. A \fat{relative comonad $T$ over $F$} is given by
   \begin{packitem}\setlength{\itemsep}{\itemizedist}
@@ -813,10 +813,10 @@ The dual notion is that of a relative \emph{co}monad:
    \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
         \comp{\cobind(f)}{\cobind(g)} = \cobind(\comp{\cobind(f)}{g})$.
   \end{packitem} 
-\end{definition}
+\end{defn}
 
 \begin{Short}
-\begin{remark}\label{def:lift}
+\begin{rem}\label{def:lift}
  \begin{itemize}
   \item Relative comonads over the identity functor are comonads.
   \item Just like relative monads, relative comonads are functorial.
@@ -827,21 +827,21 @@ The dual notion is that of a relative \emph{co}monad:
  \end{itemize}
 \noindent
 Details are given in the long version of this article \parencite{trimat_coq}.
-\end{remark}
+\end{rem}
 \end{Short}
 
 
 \begin{Long}
 Just like relative monads, relative comonads are functorial:
-\begin{definition}%[Functoriality for relative comonads]
+\begin{defn}%[Functoriality for relative comonads]
 \label{def:lift}
  Let $T$ be a  comonad relative to $F:\C\to\D$.
  For $f : \C(A,B)$ we define
   \[ T(f) := \cobind(\comp{\counit_A}{Ff}) : \D(TA,TB) \enspace .\] 
  The functor properties are easily checked.
-\end{definition}
+\end{defn}
 
-\begin{remark}
+\begin{rem}
  It follows from the comonadic axioms that
  counit and cobind are natural transformations with respect to the functoriality defined in \Cref{def:lift}:
  \begin{align*}
@@ -849,7 +849,7 @@ Just like relative monads, relative comonads are functorial:
      \cobind &: \D(T\_, F\_) \to \D(T\_, T\_) : \C^{\text{op}} \times \C \to \Ens \enspace .
  \end{align*}
 
-\end{remark}
+\end{rem}
 
 
 \end{Long}
@@ -862,7 +862,7 @@ Relative comonads over the identity functor are exactly comonads.
 
 \begin{Long}
 
-\begin{example}[Relative comonads from comonads]\label{ex_relcom_from_com}
+\begin{ex}[Relative comonads from comonads]\label{ex_relcom_from_com}
   Let $F : \C \to \D$ be a fully faithful functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\C$.
   We define a comonad $FM$ relative to $F$ by setting:
   \begin{itemize}\setlength{\itemsep}{\itemizedist}
@@ -871,10 +871,10 @@ Relative comonads over the identity functor are exactly comonads.
    \item $\cobind^{FM}_{A,B} (f) := F\bigl(\cobind^M_{A,B}(F^{-1}f)\bigr)$.
   \end{itemize}
   The proof of the axioms of a relative comonad is immediate.
-\end{example}
+\end{ex}
 
 
-\begin{example}[Relative comonads from comonads II]\label{ex_relcom_from_com_on_target}
+\begin{ex}[Relative comonads from comonads II]\label{ex_relcom_from_com_on_target}
     Let $F : \C \to \D$ be a functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\D$.
   We define a comonad $MF$ relative to $F$ by setting:
   \begin{itemize}\setlength{\itemsep}{\itemizedist}
@@ -883,49 +883,49 @@ Relative comonads over the identity functor are exactly comonads.
    \item $\cobind^{MF}_{A,B} (f) := \cobind^M_{FA,FB}(f) : \D(MFA,MFB)$ for $f : \D(MFA,FB)$.
   \end{itemize}
   The proof of the axioms of a relative comonad is immediate.
-\end{example}
+\end{ex}
 
 
 \end{Long}
 
-\begin{example}[Streams]\label{ex_stream_comonad}
+\begin{ex}[Streams]\label{ex_stream_comonad}
   The codata type family $\stream : \Set \to \Setoid$ of \Cref{ex_stream} is equipped with a structure of a comonad relative to the functor 
   $\eq : \Set \to \Setoid$ with
    $\counit_A := \shead_A$ and
    $\cobind_{A,B} := \sredec_{A,B}$.
-\end{example}
+\end{ex}
 
 \begin{Long}
-\begin{remark}
+\begin{rem}
  Instead of considering $\stream$ as a relative comonad from $\Set$ to $\Setoid$, it could be considered as a traditional comonad on the 
  category $\Setoid$, propagating the equivalence relation on the base type, say $A$, to $\stream A$.
  The relative point of view can then be recovered as an instance of \Cref{ex_relcom_from_com_on_target}.
-\end{remark}
+\end{rem}
 \end{Long}
 
 
 \begin{Long}
 
-\begin{example}[Trees]\label{ex_tree_comonad}
+\begin{ex}[Trees]\label{ex_tree_comonad}
  Fix a type $B$. Analogously to \Cref{ex_stream_comonad}, the map $A \mapsto \Tree_B(A)$ of \Cref{ex_trees}
  is equipped with a structure of a comonad relative to $\eq: \Set\to\Setoid$.
-\end{example}
+\end{ex}
 
 \end{Long}
 
-\begin{example}[Infinite triangular matrices]\label{ex:tri_comonad}
+\begin{ex}[Infinite triangular matrices]\label{ex:tri_comonad}
   The codata type family $\Tri : \Set \to \Setoid$ of \Cref{ex_tri} is equipped with a structure of a comonad relative to the functor 
   $\eq : \Set \to \Setoid$ with
    $\counit_A := \head_A$ and
    $\cobind_{A,B} := \redec_{A,B}$.
-\end{example}
+\end{ex}
 
 \begin{Long}
-\begin{remark}
+\begin{rem}
   A \emph{weak constructive comonad} as defined by \textcite{DBLP:conf/types/MatthesP11} to characterize the codata type $\Tri$
   and redecoration on it, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
-\end{remark}
+\end{rem}
 \end{Long}
 
 The notion of relative comonad captures many properties of $\stream$ resp.\ $\Tri$ and cosubstitution on them, in particular the interplay
@@ -939,32 +939,32 @@ of cosubstitution  with the destructor $\stail$ resp.\ $\tail$,  we develop the 
 
 \emph{Morphisms of relative comonads} are families of morphisms that are compatible with the comonadic structure:
 
-\begin{definition}%[Morphism of relative comonads]
+\begin{defn}%[Morphism of relative comonads]
 \label{def:comonad_morphism}
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
   is given by a family of morphisms $\tau_A : \D(TA,SA)$ such that for any $A : \C_0$,
      $  \counit^T_A = \comp{\tau_A}{\counit^S_A} $
    and for any $A,B : \C_0$ and $f : \D(SA,FB)$,
    $  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)}$.
-\end{definition}
+\end{defn}
 
 Relative comonads over a fixed functor $F$ and their morphisms form a category $\RComonad(F)$ with the obvious identity and composition operations.
 
-\begin{remark}
+\begin{rem}
 A morphism $\tau : T\to S$ of relative comonads over a functor $F:\C\to\D$ is  \emph{natural}
 with respect to the functorial action of \Cref{def:lift}.
-\end{remark}
+\end{rem}
 
 \begin{Long}
 
-\begin{example}\label{ex_relcom_from_com_morphism}
+\begin{ex}\label{ex_relcom_from_com_morphism}
  Continuing \Cref{ex_relcom_from_com} with $M, M'$ two monads on $\C$, given a comonad morphism $\tau : M \to M'$, one obtains a morphism of 
  relative comonads $F\tau : FM\to FM'$ by setting $F\tau_A := F(\tau_A)$.
  Again, the axioms are easy to check.
-\end{example}
+\end{ex}
 
 
-\begin{remark}
+\begin{rem}
  The definitions given in \Cref{ex_relcom_from_com} and \Cref{ex_relcom_from_com_morphism} yield a functor from 
  comonads on $\C$ to comonads relative to $F:\C\to\D$. 
  If $F$ is a right adjoint with left adjoint $L$, $L\dashv F$, then postcomposing a comonad $T$ relative to $F$ with the functor $L$
@@ -975,32 +975,32 @@ with respect to the functorial action of \Cref{def:lift}.
  For instance, in a type theory with quotients, such as the \emph{Univalent Foundations} a.k.a.\ \emph{Homotopy Type Theory}
  \parencite{hottbook}, the functor \enquote{quotient} from setoids to types is left adjoint to the fully faithful 
  functor $\eq: \Set\to\Setoid$, thus above construction is applicable.
-\end{remark}
+\end{rem}
 
 \end{Long}
 
 
-\begin{example}\label{ex_diag}
+\begin{ex}\label{ex_diag}
 We define a morphism of relative comonads $\diagonal : \Tri \to \stream$ as follows.
 Given a matrix $t : \Tri A$, its diagonal is a stream $\diagonal_A~t : \stream A$.
 The map $\diagonal_A$ is defined via the clauses
 \begin{align*} \comp{\diagonal_A}{\shead} := \head \quad\text{ and } \quad %\notag\\
                   \comp{\diagonal_A}{\stail} := \comp{\comp{\tail}{\cut}}{\diagonal_A} \enspace . %\label{eq:diag}
     \end{align*}
-\end{example}
+\end{ex}
 
 
 \begin{Long}
 
-\begin{remark}
+\begin{rem}
  The destructors $\stail$ (for $\stream$) and $\tail$ (for $\Tri$) are \emph{not} comonad morphisms.
  One can, however, equip the functor given by precomposing $\Tri$ with \enquote{product with $E$}, i.e.\
  $A \mapsto \Tri (E\times A)$, with a structure of relative comonad, induced by that
  on $\Tri$, cf.\ \Cref{product_comonad}.
-\end{remark}
+\end{rem}
 
 
-\begin{definition}\label{product_comonad}
+\begin{defn}\label{product_comonad}
   Let $T$ be a comonad relative to a product-preserving functor $F:\C\to\D$ between categories with finite products,
   and let $E:\C_0$ be a fixed object of $\C$.
  The map $A\mapsto T(E\times A)$ inherits the structure of a comonad relative to $F$ from $T$: the 
@@ -1015,12 +1015,12 @@ The map $\diagonal_A$ is defined via the clauses
   \begin{align*} \extend' : \D\bigl(T(E\times A),FB\bigr) &\to \D\bigl(T(E\times A), F(E\times B)\bigr) \enspace , \\ 
                                             f & \mapsto \comp{\langle \comp{T(\pr_1)}{\counit^T_E}, f \rangle}{{\phi^{F}_{E,B}}^{-1}} \enspace .
   \end{align*}
-\end{definition}
+\end{defn}
 
 \end{Long}
 
 \begin{Long}
-\begin{remark}[Comonads into cartesian closed categories]
+\begin{rem}[Comonads into cartesian closed categories]
  With the notations of \Cref{def:rel_comonad}, suppose that the category $\D$ is cartesian closed, i.e. that $\D$ has
  internal hom-objects. This is the case, e.g., for the category $\Setoid$ of setoids.
  The cobind operation of a relative comonad into $\D$ might then be defined to be a family of arrows in $\D$,
@@ -1028,7 +1028,7 @@ The map $\diagonal_A$ is defined via the clauses
  The comonads $\stream$ (cf.\ \Cref{ex_stream_comonad}) and $\Tri$ (cf.\ \Cref{ex_tree_comonad}) are comonads with such a cobind operation. In these two cases, this \enquote{enriched} definition of the cobind operation given in \Cref{eq_enriched} encodes a higher-order 
  compatibility of cosubstitution with bisimilarity, namely that cosubstitution with two extensionally bisimilar functions
  yields extensionally bisimilar functions.
-\end{remark}
+\end{rem}
 \end{Long}
 
 
@@ -1036,7 +1036,7 @@ The map $\diagonal_A$ is defined via the clauses
 
 In this section we develop the notion of \emph{comodule over a relative comonad}, dualizing the notion of module over a relative monad \parencite{ahrens_relmonads}.
 
-\begin{definition}%[Comodule over relative comonad]
+\begin{defn}%[Comodule over relative comonad]
 \label{def:comodule}
  Let $T$ be a comonad relative to $F:\C\to\D$, and let $\E$ be a category.
  A \fat{comodule over T towards $\E$} consists of
@@ -1048,63 +1048,63 @@ In this section we develop the notion of \emph{comodule over a relative comonad}
         \comp{\mcobind(f)}{\mcobind(g)} = \mcobind(\comp{\cobind(f)}{g})$ .
   \end{itemize}
 
-\end{definition}
+\end{defn}
 
 
 
 
 Every relative comonad comes with a canonical comodule over itself:
 
-\begin{definition}%[Tautological comodule]
+\begin{defn}%[Tautological comodule]
 \label{def:tautological_comodule}
   Given a comonad $T$ relative to $F:\C\to\D$, the map $A \mapsto TA$ yields a comodule over $T$ 
   with target category $\D$, the \textbf{tautological comodule} of $T$, also called $T$.
   The comodule operation is given by
     $  \mcobind^T(f) := \cobind^T(f)$. 
-\end{definition}
+\end{defn}
 
 
 
 
 \begin{Long}
 Similarly to relative comonads, comodules over these are functorial:
-\begin{definition}%[Functoriality for comodules]
+\begin{defn}%[Functoriality for comodules]
 \label{def:comodule_lift}
  Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
   \[ M(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
-\end{definition}
+\end{defn}
 \end{Long}
 
 A more interesting example of comodule is given by the functor that maps a type $A$ to the setoid $\Tri(E\times A)$
 for some fixed type $E$:
-\begin{example}\label{ex_tri_prod_comod}
+\begin{ex}\label{ex_tri_prod_comod}
    The map $A \mapsto \Tri(E\times A)$ is equipped with a comodule structure over the relative comonad $\Tri$ by
    defining the comodule operation $\mcobind$ as (cf.\ \Cref{ex_tri})
      $ \mcobind_{A,B} (f) := \redec (\extend~f)$.
-\end{example}
+\end{ex}
 
 
 
 A \emph{morphism of comodules} is given by a family of morphisms that is compatible with 
 the comodule operation:
 
-\begin{definition}%[Morphism of comodules]
+\begin{defn}%[Morphism of comodules]
 \label{def:morphism_of_comodules}
  Let $M, N : \C \to \E$ be comodules over the comonad $T$ relative to  $F:\C \to \D$.
  A \fat{morphism of comodules} from $M$ to $N$ is given by a family of morphisms 
    $ \alpha_A:\E(MA,NA) $
  such that for any $A,B:\C_0$ and $f : \D(TA,FB)$ one has
  $\comp{\mcobind^M(f)}{\alpha_B} = \comp{\alpha_A}{\mcobind^N(f)}$.
-\end{definition}
+\end{defn}
 
- \begin{example}\label{ex_tail_comodule}
+ \begin{ex}\label{ex_tail_comodule}
   The destructor $\stail_A : \stream A \to \stream A$ is the carrier of a morphism of tautological comodules (over the relative comonad $\stream$).
- \end{example}
+ \end{ex}
 
-\begin{example}\label{ex:tail_comodule}
+\begin{ex}\label{ex:tail_comodule}
  The destructor $\tail$ of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
   from the tautological comodule  $\Tri$ to the comodule $\Tri(E\times \_)$. % (cf.\ \Cref{ex_tri_prod_comod}).
-\end{example}
+\end{ex}
 
 Composition and identity of comodule morphisms happens pointwise. We thus obtain a category $\RComod(T,\E)$
  of comodules
@@ -1113,16 +1113,16 @@ over a fixed comonad $T$, towards a fixed target category $\E$.
 
 
 \begin{Long}
-\begin{remark}
+\begin{rem}
   The family of morphisms constituting a comodule morphism is actually natural with respect to the functoriality 
   defined in \Cref{def:comodule_lift}.
-\end{remark}
+\end{rem}
 \end{Long}
 
 Given a morphism of comonads, we can \enquote{transport} comodules over the source comonad to comodules over the target comonad:
 
 
-\begin{definition}%[Pushforward comodule]
+\begin{defn}%[Pushforward comodule]
 \label{def:pushforward_comodule} 
   Let $\tau : T\to S$ be a morphism of comonads relative to a functor $F : \C \to \D$, and let furthermore $M$ be a 
   comodule over $T$ towards a category $\E$. We define the \fat{pushforward comodule} $\tau_*M$ to be the comodule over $S$ given by
@@ -1138,19 +1138,19 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
      $ (\tau_*\alpha)_A := \alpha_A$.
   It is easy to check that this is a morphism of comodules (over $S$) between $\tau_*M$ and $\tau_*N$.
   Pushforward thus yields a functor $\tau_*:\RComod(T,\E) \to \RComod(S,\E)$.
-\end{definition}
+\end{defn}
 
 
 As presented in \Cref{def:tautological_comodule}, every relative comonad induces a comodule over itself.
 This extends to morphisms of relative comonads:
 
-\begin{definition}%[Morphism of comonads induces morphism of comodules]
+\begin{defn}%[Morphism of comonads induces morphism of comodules]
 \label{def:induced} 
   Let $\tau : T\to S$ be a morphism of comonads relative to $F : \C \to \D$.
   Then $\tau$ gives rise to a morphism of comodules over $S$ from the pushforward of the tautological comodule
   of $T$ along $\tau$ to the tautological comodule over $S$,
   \[ \induced{\tau} : \tau_*T \to S \enspace , \quad \induced{\tau}_A := \tau_A \enspace . \]
-\end{definition}
+\end{defn}
 
 
 
@@ -1173,7 +1173,7 @@ The terminal semantics result is hardly surprising; however, it is still interes
 We first consider the homogeneous codata type of streams.
 \end{Long}
 
-\begin{definition}%[Models for $\stream$]
+\begin{defn}%[Models for $\stream$]
  \label{cat_stream}
   A \fat{model for $\stream$} is given by a pair $(S,t)$ 
   consisting of
@@ -1183,11 +1183,11 @@ We first consider the homogeneous codata type of streams.
   \end{itemize}
   A model morphism $(S,t) \to (S',t')$ is given by a comonad morphism $\tau : S \to S'$ such that
      $ \comp{\tau_*t}{\induced{\tau}} = \comp{\induced{\tau}}{t'}$.
-\end{definition}
+\end{defn}
 
 This defines a category, with the obvious composition and identity. 
 
-\begin{remark}[Coalgebras for streams]\label{rem:coalg_stream}
+\begin{rem}[Coalgebras for streams]\label{rem:coalg_stream}
  We define 
   \begin{align*}  F: [\Set,\Setoid] \to [\Set,\Setoid] , \enspace
                       F(G)(A) := \eq(A) \times G(A) \enspace .
@@ -1203,33 +1203,33 @@ This defines a category, with the obvious composition and identity.
   our category---and thus in particular the terminal object---to be equipped with a well-behaved \enquote{cosubstitution} operation.
   It is this cosubstitution operation which is modeled by the comonad and comodule structure, and which is forgotten by 
   the forgetful functor $U$ defined above.
-\end{remark}
+\end{rem}
   
 
-\begin{theorem}\label{thm_stream_terminal}
+\begin{thm}\label{thm_stream_terminal}
  The pair $(\stream, \stail)$, where $\stream$ is considered as a relative comonad and $\stail$ as
  a morphism of comodules, is the terminal object in the category of models of \Cref{cat_stream}.
-\end{theorem}
+\end{thm}
 
 \begin{Long}
 More precisely, the aforementioned theorem says that the rules given in \Cref{stream_rules} allow to prove that
 the category of models defined in \Cref{cat_stream} has a terminal object.
 \end{Long}
 
-\begin{example}
+\begin{ex}
   We equip the relative comonad $\Tri$ with the structure of a model for $\stream$ by defining a 
   morphism of tautological comodules over $\Tri$, given by
    $ t^{\diagonal} := \comp{\tail}{\cut}  : \Tri \to \Tri$.
   The resulting terminal model morphism
    $(\Tri, t^{\diagonal}) \to (\stream, \stail)$ has as underlying morphism of relative comonads the one defined in \Cref{ex_diag}.
-\end{example}
+\end{ex}
 
 \begin{Long}
  
-\begin{remark}
+\begin{rem}
  Fix a type $B$. A result analogous to \Cref{thm_stream_terminal} holds for trees $\Tree_B$ of \Cref{ex_tree_comonad}. 
  We refrain from giving a precise statement of this result.
-\end{remark}
+\end{rem}
 
 \end{Long}
 
@@ -1248,7 +1248,7 @@ the behavior of that operation:
 
 
 
-\begin{definition}%[Relative comonad with cut]
+\begin{defn}%[Relative comonad with cut]
 \label{def:rel_comonad_with_cut}
  Let $\C$ and $\D$ be categories with binary products and $F:\C\to\D$ a product-preserving functor. Let $E:\C_0$ be a fixed object of $\C$.
  We define a \fat{comonad relative to $F$ with cut relative to $E$} to be a comonad $T$ relative to $F$ together with a $\cut$ operation 
@@ -1264,17 +1264,17 @@ the behavior of that operation:
   where, for $f:\D(TA,FB)$, we define $\extend(f) : \D\bigl(T(E\times A),F(E\times B)\bigr)$ as
        \[ \extend(f) := \comp{\comp{\langle T(\pr_1) , \cut \rangle}{(\counit_E\times f)}}{{\phi^{F}_{E,B}}^{-1}} \enspace . \]
   
-\end{definition}
+\end{defn}
 
 Morphisms of comonads with cut are morphisms of comonads that are compatible with the respective $\cut$ operations:
 
-\begin{definition}%[Morphism of comonads with cut]
+\begin{defn}%[Morphism of comonads with cut]
 \label{def:morphism_comonad_cut}
  Let $(T,\cut^T)$ and $(S,\cut^S)$ be two comonads relative to a functor $F$ with cut relative to $E$ as in \Cref{def:rel_comonad_with_cut}.
  A \fat{morphism of comonads with cut} is a comonad morphism $\tau$ between the underlying comonads as in \Cref{def:comonad_morphism} that 
  commutes suitably with the respective $\cut$ operations, i.e.\ for any $A : \C_0$,
   $\comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A}$.
-\end{definition}
+\end{defn}
 
 
 Comonads with cut relative to a fixed functor $F:\C\to\D$ and $E:\C_0$ form a category $\RComonadWC(F,E)$.
@@ -1286,7 +1286,7 @@ Conversely, any comonad $T$ relative to a suitable functor can be equipped with 
 \end{Short}
 
 \begin{Long}
-\begin{remark}[Canonical $\cut$ operation]\label{canonical_cut}
+\begin{rem}[Canonical $\cut$ operation]\label{canonical_cut}
  Any comonad $T$ relative to a product-preserving functor $F:\C\to\D$  can be equipped with a $\cut$ operation relative to 
  $E:\C_0$ satisfying the properties of \Cref{def:rel_comonad_with_cut} by setting
    \[ \ccut_A := \cut_A := T\bigl(\pr_2(E,A)\bigr) \enspace . \]
@@ -1297,7 +1297,7 @@ Conversely, any comonad $T$ relative to a suitable functor can be equipped with 
  \[ \ccut_{F,E} : \RComonad(F) \to \RComonadWC(F,E)\]
  from relative comonads over $F$ to relative comonads over $F$ with cut relative to a fixed object $E:\C_0$ given on 
  objects by $T\mapsto (T,\ccut^T)$.
-\end{remark}
+\end{rem}
 
 The functor $\ccut_{F,E}$, followed by the forgetful functor, yields the identity. We can thus view
 relative comonads with cut as a generalization of relative comonads.
@@ -1307,11 +1307,11 @@ relative comonads with cut as a generalization of relative comonads.
 Our prime example of relative comonad comes with a $\cut$ operation that is \emph{not} the canonical one:
 \end{Long}
 
-\begin{example}%[$\cut$ for $\Tri$]
+\begin{ex}%[$\cut$ for $\Tri$]
 \label{def:cut_for_tri}
   The relative comonad $\Tri$ from \Cref{ex:tri_comonad}, together with the $\cut$ operation defined in \Cref{ex_tri}, 
   is a comonad with cut as in \Cref{def:rel_comonad_with_cut}.
-\end{example}
+\end{ex}
 
 
 
@@ -1321,7 +1321,7 @@ Given a comodule $M$ over a relative comonad $T$ with cut, we define a comodule 
 \enquote{product with a fixed object $E$}:
 
 
-\begin{definition}%[Precomposition with product]
+\begin{defn}%[Precomposition with product]
 \label{def:product_in_context}
  Suppose $F:\C\to\D$ is a product-preserving functor, and $T$ is a comonad relative to $F$ with a $\cut$ operation 
  relative to $E:\C_0$ as in \Cref{def:rel_comonad_with_cut}.
@@ -1342,16 +1342,16 @@ where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_c
   We thus obtain an endofunctor on the category of comodules over $T$ towards $\E$,
    $ M \mapsto  M (E\times \_) : \RComod(T,\E) \to \RComod(T,\E)$.
 \end{Long}
-\end{definition}
+\end{defn}
 
 
 
-\begin{remark}[Pushforward commutes with product in context]\label{rem:prod_pullback_commute}
+\begin{rem}[Pushforward commutes with product in context]\label{rem:prod_pullback_commute}
  Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pushforward_comodule} commute:
  we have an isomorphism of comodules 
   $\tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_)$
  given pointwise by identity morphisms.
-\end{remark}
+\end{rem}
 
 
 \begin{Long}
@@ -1377,17 +1377,17 @@ The construction of \Cref{def:product_in_context} yields a categorical character
 more precisely, of its behavior with respect to cosubstitution as in \Cref{eq:rest_redec}---via the notion of comodule morphism:
 
 
-\begin{example}\label{ex:tail_comodule_alternative}
+\begin{ex}\label{ex:tail_comodule_alternative}
 This example is a reformulation of \Cref{ex:tail_comodule}.
  Consider the comonad $\Tri$, equipped with the $\cut$ operation of \Cref{def:cut_for_tri}.
  The destructor $\tail$ of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
   from the tautological comodule  $\Tri$ to $\Tri(E\times \_)$.
   
-\end{example}
+\end{ex}
 \end{Long}
 
 
-\begin{definition}%[Coalgebras of infinite triangular matrices]
+\begin{defn}%[Coalgebras of infinite triangular matrices]
 \label{def:cat_tri}
    Let $E:\Set$ be a type.
    Let $\mathcal{T} = \mathcal{T}_E$ be the category of \fat{models for infinite triangular matrices} where an object consists of
@@ -1416,13 +1416,13 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
    \]
    Here we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute} in the upper right corner.
 % \end{multicols}
-\end{definition}   
+\end{defn}   
 
 
 
 
 
-\begin{remark}[Coalgebras for $\Tri$]
+\begin{rem}[Coalgebras for $\Tri$]
 \begin{Long}
   Let $E : \Set$ be a type. We define 
   \begin{align*}  F: [\Set,\Setoid] \to [\Set,\Setoid] , \enspace
@@ -1440,19 +1440,19 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
  A remark similar to \Cref{rem:coalg_stream} is in order. Omitted for lack of space, it can be found in the long
  version of this article.
 \end{Short}
-\end{remark}
+\end{rem}
 
 
    
 
-\begin{theorem}\label{ex:final_sem_tri} 
+\begin{thm}\label{ex:final_sem_tri} 
    The pair $(\Tri, \tail)$ consisting of the relative comonad with cut $\Tri$ of \Cref{def:cut_for_tri} together with 
     the morphism of comodules $\tail$ of \Cref{ex:tail_comodule},
    constitutes the terminal model of triangular matrices.
-\end{theorem}
+\end{thm}
 
 \begin{Long}
-\begin{proof}[sketch]
+\begin{proof}
    For a given model $(T,\tail^T)$, the (terminal) morphism $\bigcirc = \bigcirc_T:T\to\Tri$ is defined via the corecursive equations
     \begin{align}\head\bigl(\bigcirc~t\bigr) &:= \counit^T~t \quad\text{ and } \label{eq:terminal_top}\\
                      \tail\bigl(\bigcirc~t\bigr) &:= \bigcirc(\tail^T~t) \enspace . \label{eq:terminal_rest}
