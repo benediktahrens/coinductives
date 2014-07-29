@@ -92,8 +92,8 @@ Toulouse}
   In the rest of the introduction, we explain some of the vocabulary occurring in these first sentences:
   in \Cref{sec:mltt} we briefly introduce (intensional) Martin-Löf type theory. In \Cref{sec:sem_ind} we discuss inductive types and their semantics,
   before passing to \emph{co}inductive types in \Cref{sec:sem_coind}.
-  We then explain substitution for leaf-labeled trees and cosubstitution for node-labeled trees in \Cref{sec:cosubst}, and describe
-  the difference between homogeneous and heterogeneous (co)data types in \Cref{sec:hom_het}.
+  We describe
+  the difference between homogeneous and heterogeneous (co)data types in \Cref{sec:hom_het} and explain substitution for leaf-labeled trees and cosubstitution for node-labeled trees in \Cref{sec:cosubst}.
   The last sections of the introduction concern more \enquote{administrative} aspects of the present work.
   
   
@@ -391,9 +391,9 @@ We first consider the first case of \emph{leaf-labeled trees}.
 
 \section{Preliminaries}\label{sec:preliminaries}
 
-We present some particular categories used later on, and fix some notation.
+In this section we present some particular category-theoretic objects used later on, and fix some notation.
 
-\begin{defn}%[Setoids in IMLTT]
+\begin{defn}[Setoids in IMLTT]
   A \emph{setoid} in intensional Martin-Löf type theory is a pair $(A, \sim_A)$ of a type $A$ together with an equivalence 
   relation $\sim_A$ on $A$. Given a setoid $S = (A, \sim_A)$, we often abuse notation by writing $s:S$ instead of $s:A$ for
   a term $s$ of $A$.
@@ -403,7 +403,7 @@ We present some particular categories used later on, and fix some notation.
 
 
 
-\begin{defn}%[Category in IMLTT]
+\begin{defn}[Category in IMLTT]
  \label{def:cat_imltt}
   A \emph{category} $\C$ in intensional Martin-Löf type theory  is given by
   \begin{itemize}
@@ -421,7 +421,7 @@ We present some particular categories used later on, and fix some notation.
 Functors and natural transformations are defined in terms of the setoidal equivalence relations on morphisms.
 We omit the definitions, which can be found in our \coq files \parencite{trimat_coq}.
 
-\begin{defn}%[Some categories]
+\begin{defn}[Some categories in IMLTT]
 \label{def:set_setoid}
  We denote by $\Set$ the category (in IMLTT) of types (of a fixed universe) and total functions between them in Martin-L\"of type theory. 
  The setoidal equivalence relation on $\Set(A,B)$ is given by pointwise equality as given by the Martin-Löf identity type,
@@ -437,7 +437,8 @@ We omit the definitions, which can be found in our \coq files \parencite{trimat_
 
 
 
-\begin{defn}\label{def:eq}
+\begin{defn}[A functor from types to setoids]
+\label{def:eq}
  The functor $\eq : \Set\to\Setoid$ is defined as the left adjoint to the forgetful functor $U : \Setoid \to \Set$.
   Explicitly, the functor $\eq$ sends any type $X$ to the setoid $(X,=_X)$ given by the type $X$ itself, equipped
   with the propositional equality relation $=_X$ specified via Martin-L\"of's identity type on $X$.
@@ -454,7 +455,8 @@ We omit the definitions, which can be found in our \coq files \parencite{trimat_
 
 Both of the categories of \Cref{def:set_setoid} have finite products.
 
-\begin{defn}\label{def:monoidal_functor}
+\begin{defn}[Product-preserving functor]
+\label{def:monoidal_functor}
  A functor $F:\C\to\D$ between categories with finite products \emph{preserves products} if, for any two objects $A$ and $B$ of $\C$,
   the morphism $\phi^F_{A,B}$ is an isomorphism, where
  \[ \phi^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace . \] 
@@ -467,14 +469,16 @@ Both of the categories of \Cref{def:set_setoid} have finite products.
 
 \section{Codata types in intensional Martin-L\"of type theory}\label{sec:tri}
 
-We consider two particular coinductive type families in Intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}, 
-a type-theoretic foundational system.
+We consider two particular coinductive type families in intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}.
 For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ and $b$.
 
 In this section, we present the type-theoretic rules for these codata types and \emph{bisimilarity} on them.
 % Bisimilarity is a coinductively defined equivalence relation on types which 
 Categorically, bisimilarity on a given codata type is given by the largest binary relation on that type that is 
-compatible with the destructors (elimination); it is the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93}.
+compatible with the \emph{observations} on that codata; it is the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93}.
+Here, an observation is the result of \emph{destructing} an element of a given codata type.
+For instance, an infinite list a.k.a.\ a stream (defined in detail in \Cref{ex_stream}) over a base type $A$ allows to observe the first element of that list (which is a term of type $A$) and,
+corecursively, the rest of that list.
 A coinductive type with bisimilarity forms a setoid as in \Cref{def:set_setoid}.
 We thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
 
@@ -483,7 +487,7 @@ Intuitively, the introduction rule takes as arguments the \emph{observations} on
 For instance, a map into streams is defined by specifying $\shead$ and $\stail$ on the output of that map: this intuition
   can be obtained by considering the combination of introduction and computation rules from \Cref{stream_rules}.
   We thus use a kind of \enquote{copattern matching} \parencite{DBLP:conf/popl/AbelPTS13} to define maps, as follows: 
-  the clauses $\comp{f}{\shead} := h$ and $\comp{f}{\stail}:= t$ abbreviate the definition $f := \corec(h,t)$.
+  the clauses $\comp{f}{\shead} := h$ and $\comp{f}{\stail}:= t$ abbreviate the definition $f := \corec~h~t$.
 
 % Maps into a coinductive data type are specified by the observations, i.e.\ the value of the destructors, on the output of those maps.  
 % The precise rule for specifying maps into the considered coinductive type is given in \Cref{stream_rules}.
@@ -497,9 +501,30 @@ For instance, a map into streams is defined by specifying $\shead$ and $\stail$ 
 The first example is the type of \emph{streams} of elements of a given base type $A$:
 
 % In the presentation we use the notational convention of \Cref{def:set_setoid}, using the same name for a setoid and its underlying type.
-\begin{ex}\label{ex_stream}
-  Let $A$ be a type. The type---setoid, actually---$\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors 
-  given in \Cref{stream_rules}.
+\begin{ex}[The coinductive type family of streams]
+ \label{ex_stream}
+  Let $A$ be a type. A \emph{stream over $A$} is, intuitively, an infinite list of elements of $A$. 
+  Given such a stream $t$, we can extract its first element, called $\shead(t)$ (which is an element of $A$) and the rest of the stream, called $\stail(t)$, which is again a stream over $A$.
+  \begin{figure}[htb]
+     \begin{tikzpicture}
+      \foreach \x in {0,...,3}{\draw (\x,0) node[color=blue]{$a_{\x}$};};
+      \draw (4,0) node[color=blue]{$\dots$};
+      \draw (0.5,0.25)--(0.5,-0.25);
+      \draw (-0.2,-0.5) node{$\shead$};
+      \draw (1.5,-0.5) node{$\stail$};
+  \end{tikzpicture}
+   \caption{A stream destructs into a $\shead$ and a $\stail$} \label{fig:stream}
+  \end{figure}
+  Formally, the type---setoid, actually---$\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors $\shead$ and $\stail$
+  given in \Cref{stream_rules}.  A map $f:T\to \stream A$ from an arbitrary type $T$ into the type of streams is specified by giving, for each possible input $t:T$, 
+  an element $a:A$---the head of the image stream---and another $t':T$---an element which is mapped to $\stail~f(t)$. This intuition is made formal by the 
+  introduction and computation rules of \Cref{stream_rules}.
+  
+  The second part of \Cref{stream_rules} introduces \emph{bisimilarity} as a binary relation on streams (over a fixed type $A$) that is compatible with the observations,
+  that is, bisimilar streams have equal $\shead$s and bisimilar $\stail$s (see elimination rules). 
+  We call a \emph{bisimulation on streams (over a given type)} any binary relation that is compatible with the observations on streams.
+  If two streams are related by \emph{any} bisimulation,
+  then these two streams are also bisimilar (see introduction rule). In that sense, bisimilarity is the largest bisimulation.
   
   We define a \emph{co}substition operation 
    \[\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B\] 
@@ -508,7 +533,9 @@ The first example is the type of \emph{streams} of elements of a given base type
    \begin{align} \comp{\sredec~f}{\shead} := f \quad\text{ and } \quad
                   \comp{\sredec~f}{\stail} := \comp{\stail}{\sredec~f} \enspace . \label{eq:tail_sredec}
     \end{align}
-  We call such an operation \enquote{cosubstitution} since its type is dual to, e.g., the simultaneous substitution operation 
+  According to our convention above, by this, we actually mean
+  \[  \sredec_{A,B}(f) := \corec~f~\stail \enspace . \]
+  We call this operation \enquote{cosubstitution} since its type is dual to the simultaneous substitution operation 
   of the lambda calculus \parencite{alt_reus}. 
   Cosubstitution is compatible with bisimilarity on streams, and thus is (the carrier of) a family
   \[ \sredec_{A,B} : \Setoid(\stream A, \eq B) \to \Setoid(\stream A,\stream B) \enspace . \]
@@ -567,11 +594,11 @@ parametrized by a type $B$.
 
 
 
-\begin{example}[Node-labeled trees]\label{ex_trees}
+\begin{ex}[Node-labeled trees]\label{ex_trees}
  We denote by $\Tree_B(A)$ the codata type given by one destructor $\shead$ and a family of 
  destructors $(\stail_b)_{b:B}$ with types analogous to those defining $\stream$ of \Cref{ex_stream}.
  We thus obtain $\stream$ by considering, for $B$, the singleton type.
-\end{example}
+\end{ex}
 
 \end{Long}
 
