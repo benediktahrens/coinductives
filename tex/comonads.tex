@@ -596,7 +596,7 @@ parametrized by a type $B$.
 
 \begin{ex}[Node-labeled trees]\label{ex_trees}
  We denote by $\Tree_B(A)$ the codata type given by one destructor $\shead$ and a family of 
- destructors $(\stail_b)_{b:B}$ with types analogous to those defining $\stream$ of \Cref{ex_stream}.
+ destructors $(\stail_b)_{b:B}$ with type analogous to that defining $\stail$ of \Cref{ex_stream}.
  We thus obtain $\stream$ by considering, for $B$, the singleton type.
 \end{ex}
 
@@ -628,13 +628,13 @@ Infinite triangular matrices are studied in detail by
     \draw(4,-2) node{$\ldots$};
     
     
-      \draw[color=purple!70]  (2.4, -4.3) --node[auto, swap, left]{$\cut$}
-     (-1.2,-0.6) -- (2.8,-0.6);
-    \draw[color=purple!70, dashed]  (2.8,-0.6) -- (3.6,-0.6);
-    \draw[color=purple!70, dashed]  (2.4,-4.3) -- (3.0,-5);
+%       \draw[color=purple!70]  (2.4, -4.3) --node[auto, swap, left]{$\cut$}
+%      (-1.2,-0.6) -- (2.8,-0.6);
+%     \draw[color=purple!70, dashed]  (2.8,-0.6) -- (3.6,-0.6);
+%     \draw[color=purple!70, dashed]  (2.4,-4.3) -- (3.0,-5);
 
-    \draw (-2,0) node{$\head$} ;
-    
+    \draw[color=orange] (-2,0) node{$\head$} ;
+    \draw[color=orange] (-1,0) circle(0.4cm);
 
     \draw[color=green] (2.8,0.4) -- (-0.5,0.4) -- (-0.5, -1.1) --node[auto, swap, left]{$\tail$}
     (2.8,-4.5)  ; 
@@ -642,10 +642,10 @@ Infinite triangular matrices are studied in detail by
     \draw[color=green, dashed] (2.8,-4.5) -- (3.5,-5.3) ; 
 
 
-    \draw[color=orange](0, -0.5) ellipse (12pt and 25pt) ;  
-    \draw[color=orange](1, -1.5) ellipse (12pt and 25pt) ;  
-    \draw[color=orange](2, -2.5) ellipse (12pt and 25pt) ;  
-    \draw[color=orange](3, -3.5) ellipse (12pt and 25pt) ;  
+%     \draw[color=orange](0, -0.5) ellipse (12pt and 25pt) ;  
+%     \draw[color=orange](1, -1.5) ellipse (12pt and 25pt) ;  
+%     \draw[color=orange](2, -2.5) ellipse (12pt and 25pt) ;  
+%     \draw[color=orange](3, -3.5) ellipse (12pt and 25pt) ;  
   \end{tikzpicture}\\[-2ex]
   \caption{An infinite triangular matrix over type $A$ and various operations}\label{fig_tri}
  \end{figure}
@@ -655,15 +655,58 @@ Infinite triangular matrices are studied in detail by
 \begin{Long}
  Given a matrix over type $A$, its $\tail$---obtained by removing the first element on the diagonal, i.e.\ the $\head$ element---can 
  be considered as a trapezium as indicated by the green line in \Cref{fig_tri}, or alternatively, as
- a triangular matrix over type $E\times A$, by bundling the entries of the diagonal with those above as indicated by the orange frames in \Cref{fig_tri}.
+ a triangular matrix over type $E\times A$, by bundling the entries of the diagonal with those above as indicated by the orange frames, shown in \Cref{fig:tri_trap}.
  The latter representation is reflected in the type of the destructor $\tail$.
+ \begin{figure}[hbt]
+  \centering
+  \begin{tikzpicture}[scale = 0.6]
+    \foreach \y in {0,...,2}
+    {\foreach \x in {\y,...,2}
+      \draw (\x+1, -\y) node[color=blue]{$E$} ;
+    }
+    \foreach \x in {0,...,3} \draw (\x, -\x-1) node[color=red]{$A$} ;
+    \foreach \x in {0,...,3} \draw (\x, -\x)
+    node[color=blue]{$E$} ;
+    \draw(4,-2) node{$\ldots$};
+
+    \foreach \y in {0,...,2}
+    {\foreach \x in {\y,...,2}
+      \draw (1.5*\x+10.5, -\y) node[color=blue]{$E$} ;
+    }
+    \foreach \x in {0,...,3} \draw (1.5*\x+9, -\x)
+    node{{\color{blue}{$E$}} \hspace*{-.5em} $\times$ \hspace*{-.5em} {\color{red} $A$}} ;
+    \draw(14.5,-1.5) node{$\ldots$};
+    
+    \draw[->] (5,-1.5) to node[swap, auto, above]{triangle}
+    (8,-1.5) ; 
+    
+    \draw[<-] (5,-2.5) to node[swap, auto, below]{trapezium}
+    (8,-2.5) ; 
+
+    \draw[color=green] (2.8,0.4) -- (-0.5,0.4) -- (-0.5, -1.1) --
+    (2.8,-4.5)  ; 
+    \draw[color=green, dashed] (2.8,0.4) -- (3.6,0.4) ; 
+    \draw[color=green, dashed] (2.8,-4.5) -- (3.5,-5.3) ; 
+
+    \draw[color=green] (13.5,0.4) -- (7.2,0.4) -- (13.5, -4); 
+    \draw[color=green, dashed] (13.5,0.4) -- (14.4,0.4) ; 
+    \draw[color=green, dashed] (13.5,-4) -- (14.3,-4.6) ; 
+
+    \draw[color=orange](0, -0.5) ellipse (12pt and 25pt) ;  
+    \draw[color=orange](1, -1.5) ellipse (12pt and 25pt) ;  
+    \draw[color=orange](2, -2.5) ellipse (12pt and 25pt) ;  
+    \draw[color=orange](3, -3.5) ellipse (12pt and 25pt) ;  
+  \end{tikzpicture}\\[-2ex]
+  \caption{The $\tail$ of a matrix over $A$ is a matrix over $E\times A$ (illustration taken from \parencite{DBLP:conf/types/MatthesP11})}
+  \label{fig:tri_trap}
+\end{figure}
 \end{Long}
 \begin{Short}
  Given a matrix over type $A$, its $\tail$---obtained by removing the first element on the diagonal, i.e.\ the $\head$ element---can 
  be considered as a trapezium or, alternatively, as a triangular matrix over type $E\times A$, 
  by bundling the entries of the diagonal with those directly above the diagonal. 
 \end{Short}
-This change of parameter (from $A$ to $E \times A$) in the type of $\tail$ is why the family $\Tri$ is called \enquote{heterogeneous}.
+This change of parameter (from $A$ to $E \times A$) in the type of $\tail$ is why the family $\Tri$ is called \emph{heterogeneous}.
 
 %  As with streams, we denote by $\Tri A$ not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
 %  underlying \emph{type}. 
@@ -798,8 +841,9 @@ Here, the family of functions
   \caption{Definition of lifting (illustration taken from \parencite{DBLP:conf/types/MatthesP11})}
   \label{fig:lift}
 \end{figure}
-
-  The auxiliary function $\cut_A : \Tri(E\times A) \to \Tri A$ is defined corecursively via
+% 
+  The auxiliary function $\cut_A : \Tri(E\times A) \to \Tri A$ cuts the upper row of elements in $E$ of a trapezium (equivalently, of a matrix over $E\times A$).
+  It is defined corecursively via
 % 
   \begin{align*} \comp{\cut}{\head} := \comp{\head}{\pr_2} \quad\text{ and } \quad
                      \comp{\cut}{\tail} := \comp{\tail}{\cut} \enspace . 
@@ -820,8 +864,7 @@ the analogous operation $\sredec$ on streams.
 
 \begin{rem}
  We do not specify any computation rules for bisimilarity, i.e., we think of bisimilarity as a proof-irrelevant notion. 
- Categorically, the lack of such a computation rule amounts to saying that bisimilarity is a \emph{weakly} terminal bisimulation on the respective codata. (Here, a bisimulation is a binary relation on the codata type that is compatible with the destructors of the codata types.)
- In the setting of Homotopy Type Theory \parencite{hottbook}, where one would identify bisimilarity with propositional equality, a proof-relevant treatment would be adequate.
+ Categorically, the lack of such a computation rule amounts to saying that bisimilarity is a \emph{weakly} terminal bisimulation on the respective codata. 
 \end{rem}
 
 
@@ -832,24 +875,30 @@ In this section we define the category of \emph{comonads relative to a fixed fun
 of such comonads and their morphisms.
 
 \emph{Relative monads} were defined by \textcite{DBLP:conf/fossacs/AltenkirchCU10} as a notion of monad-like structure
-whose underlying functor is not necessarily an endofunctor.
-The dual notion is that of a relative \emph{co}monad:
+whose underlying functor is not necessarily an endofunctor. 
+An example of relative comonad given in that work is the lambda calculus over finite contexts.
+
+
+The dual notion is that of a relative \emph{co}monad, more precisely, a comonad relative to some functor $F:\C\to\D$.
+Indeed, since the functor underlying a relative comonad is not necessarily endo, one requires an auxiliary functor, which 
+\enquote{mediates} between source and target category.
+An application of this auxiliary functor is inserted where necessary to make the comonad-like operations and axioms welltyped.
 
 \begin{defn}%[Relative comonad]
  \label{def:rel_comonad}
   Let $F:\C\to\D$ be a functor. A \fat{relative comonad $T$ over $F$} is given by
-  \begin{packitem}\setlength{\itemsep}{\itemizedist}
+  \begin{itemize}%\setlength{\itemsep}{\itemizedist}
    \item a map $T:\C_0 \to \D_0$ on the objects of the categories involved;
    \item an operation $\counit : \forall A : \C_0, \D(TA,FA)$;
    \item an operation $\cobind: \forall A,B:\C_0, \D(TA,FB) \to \D(TA,TB)$
-%   \end{packitem}
-   such that
-%   \begin{packitem}
+  \end{itemize}
+   such that the following equations hold:
+  \begin{itemize}
    \item $\forall A,B:\C_0, \forall f:\D(TA,FB), \comp{\cobind(f)}{\counit_B} = f$;
    \item $\forall A : \C_0, \cobind(\counit_A) = \id_{TA}$;
    \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
         \comp{\cobind(f)}{\cobind(g)} = \cobind(\comp{\cobind(f)}{g})$.
-  \end{packitem} 
+  \end{itemize} 
 \end{defn}
 
 \begin{Short}
@@ -869,7 +918,7 @@ Details are given in the long version of this article \parencite{trimat_coq}.
 
 
 \begin{Long}
-Just like relative monads, relative comonads are functorial:
+ \Cref{def:rel_comonad} does not mention an action of $T$ on morphisms. Indeed, just like with relative monads, this action is definable rather than part of the definition:
 \begin{defn}%[Functoriality for relative comonads]
 \label{def:lift}
  Let $T$ be a  comonad relative to $F:\C\to\D$.
@@ -892,13 +941,13 @@ Just like relative monads, relative comonads are functorial:
 \end{Long}
 
 \begin{Long}
-Relative comonads over the identity functor are exactly comonads.
+Comonads relative to the identity functor are exactly (traditional) comonads.
 \end{Long}
 
 
 
 \begin{Long}
-
+We obtain a comonad relative to $F:\C\to\D$ from a comonad on the category $\C$ by composing $M$ with $F$:
 \begin{ex}[Relative comonads from comonads]\label{ex_relcom_from_com}
   Let $F : \C \to \D$ be a fully faithful functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\C$.
   We define a comonad $FM$ relative to $F$ by setting:
@@ -910,7 +959,7 @@ Relative comonads over the identity functor are exactly comonads.
   The proof of the axioms of a relative comonad is immediate.
 \end{ex}
 
-
+The other way round does not require any conditions on the functor $F$:
 \begin{ex}[Relative comonads from comonads II]\label{ex_relcom_from_com_on_target}
     Let $F : \C \to \D$ be a functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\D$.
   We define a comonad $MF$ relative to $F$ by setting:
