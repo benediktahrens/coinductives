@@ -974,6 +974,8 @@ The other way round does not require any conditions on the functor $F$:
 
 \end{Long}
 
+The next examples concern the codata type families presented in \Cref{sec:tri}.
+
 \begin{ex}[Streams]\label{ex_stream_comonad}
   The codata type family $\stream : \Set \to \Setoid$ of \Cref{ex_stream} is equipped with a structure of a comonad relative to the functor 
   $\eq : \Set \to \Setoid$ with
@@ -1017,7 +1019,7 @@ The other way round does not require any conditions on the functor $F$:
 The notion of relative comonad captures many properties of $\stream$ resp.\ $\Tri$ and cosubstitution on them, in particular the interplay
 of cosubstitution with the destructors $\shead$ resp.\ $\head$ via the first two axioms.
 In order to  capture the interplay 
-of cosubstitution  with the destructor $\stail$ resp.\ $\tail$,  we develop the notion of \emph{comodule over a relative comonad}
+of cosubstitution  with the destructor $\stail$ (for streams) resp.\ $\tail$ (for infinite triangular matrices), we develop the notion of \emph{comodule over a relative comonad}
  in \Cref{sec:comodules}. 
 
 
@@ -1028,10 +1030,27 @@ of cosubstitution  with the destructor $\stail$ resp.\ $\tail$,  we develop the 
 \begin{defn}%[Morphism of relative comonads]
 \label{def:comonad_morphism}
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
-  is given by a family of morphisms $\tau_A : \D(TA,SA)$ such that for any $A : \C_0$,
-     $  \counit^T_A = \comp{\tau_A}{\counit^S_A} $
-   and for any $A,B : \C_0$ and $f : \D(SA,FB)$,
-   $  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)}$.
+  is given by a family of morphisms \[\tau_A : \D(TA,SA)\] such that for any $A : \C_0$,
+%      \[  \counit^T_A = \comp{\tau_A}{\counit^S_A} \]
+     
+\[ \begin{xy}
+    \xymatrix {
+                       TA \ar[r]^{\tau_A} \ar[rd]_{\counit^T_A}  &   SA \ar[d]^{\counit^S_A}\\
+                            &    FA
+   }
+   \end{xy}
+\]
+
+   commutes and such that, for any $A,B : \C_0$ and $f : \D(SA,FB)$,
+%    \[  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)} \enspace . \]
+\[ \begin{xy}
+     \xymatrix@C=6em{
+                     TA \ar[d]_{\tau_A}   \ar[r]^{\cobind^T(\comp{\tau_A}{f})} & TB \ar[d]^{\tau_B}\\
+                     SA \ar[r]_{\cobind^S(f)} & SB
+     }  
+   \end{xy}
+\]
+ commutes.
 \end{defn}
 
 Relative comonads over a fixed functor $F$ and their morphisms form a category $\RComonad(F)$ with the obvious identity and composition operations.
