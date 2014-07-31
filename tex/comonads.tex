@@ -889,16 +889,39 @@ An application of this auxiliary functor is inserted where necessary to make the
   Let $F:\C\to\D$ be a functor. A \fat{relative comonad $T$ over $F$} is given by
   \begin{itemize}%\setlength{\itemsep}{\itemizedist}
    \item a map $T:\C_0 \to \D_0$ on the objects of the categories involved;
-   \item an operation $\counit : \forall A : \C_0, \D(TA,FA)$;
-   \item an operation $\cobind: \forall A,B:\C_0, \D(TA,FB) \to \D(TA,TB)$
+   \item an operation \[\counit : \forall A : \C_0, \D(TA,FA)\]
+   \item an operation \[\cobind: \forall A,B:\C_0, \D(TA,FB) \to \D(TA,TB)\]
   \end{itemize}
    such that the following equations hold:
-  \begin{itemize}
-   \item $\forall A,B:\C_0, \forall f:\D(TA,FB), \comp{\cobind(f)}{\counit_B} = f$;
-   \item $\forall A : \C_0, \cobind(\counit_A) = \id_{TA}$;
-   \item $\forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \\
-        \comp{\cobind(f)}{\cobind(g)} = \cobind(\comp{\cobind(f)}{g})$.
-  \end{itemize} 
+ \begin{align}
+  & \forall A,B:\C_0, \forall f:\D(TA,FB), \comp{\cobind(f)}{\counit_B} = f \\
+  & \forall A : \C_0, \cobind(\counit_A) = \id_{TA} \\
+  & \forall A,B,C:\C_0, \forall f : \D(TA,FB),\forall g:\D(TB,FC), \notag \\
+  &  \qquad    \comp{\cobind(f)}{\cobind(g)} = \cobind(\comp{\cobind(f)}{g}) \enspace ,
+ \end{align}
+   
+  in diagrammatic form:
+\[ \begin{xy}
+    \xymatrix@C=4em{
+                       TA \ar[r]^{\cobind(f)} \ar[rd]_{f}& TB \ar[d]^{\counit_B} \\
+                          & FB
+    }
+    \end{xy}
+    \qquad
+    \begin{xy}
+    \xymatrix{
+                       TA \ar@/^1pc/[rd]^{\cobind(\counit_A)} \ar@/_1pc/[rd]_{\id}& \\
+                          & TA
+    }
+   \end{xy}
+   \qquad
+   \begin{xy}
+    \xymatrix@C=4em{
+       TA \ar[r]^{\cobind(f)} \ar[rd]_{\cobind(\comp{\cobind(f)}{g})\;\;\;\;}& TB \ar[d]^{\cobind(g)} \\
+          & TC .
+    }
+   \end{xy}
+\]
 \end{defn}
 
 \begin{Short}
