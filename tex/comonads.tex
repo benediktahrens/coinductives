@@ -1335,7 +1335,7 @@ respectively. We then show that the codata types $\stream$ and $\Tri$ constitute
 the respective category of models.
 
 
-The terminal semantics result is hardly surprising; however, it is still interesting as it characterizes not only the codata types themselves,
+This terminal semantics result is hardly surprising; however, it is still interesting as it characterizes not only the codata types themselves,
  but also the respective bisimilarity relations and comonadic operations on them, via a universal property.
 
 
@@ -1346,39 +1346,54 @@ The terminal semantics result is hardly surprising; however, it is still interes
 We first consider the homogeneous codata type of streams.
 \end{Long}
 
-\begin{defn}%[Models for $\stream$]
+\begin{defn}[Category of models for $\stream$]
  \label{cat_stream}
   A \fat{model for $\stream$} is given by a pair $(S,t)$ 
   consisting of
   \begin{itemize}
    \item a comonad $S$ relative to $\eq : \Set \to \Setoid$ and
-   \item a morphism $t$ of tautological comodules over $S$, $t : S \to S$.
+   \item a morphism $t$ of tautological comodules over $S$, 
+                   \[t : S \to S \enspace . \]
   \end{itemize}
-  A model morphism $(S,t) \to (S',t')$ is given by a comonad morphism $\tau : S \to S'$ such that
-     $ \comp{\tau_*t}{\induced{\tau}} = \comp{\induced{\tau}}{t'}$.
+  A \fat{model morphism} $(S,t) \to (S',t')$ is given by a comonad morphism $\tau : S \to S'$ such that
+     $ \comp{\tau_*t}{\induced{\tau}} = \comp{\induced{\tau}}{t'}$, in diagrammatic form,
+ \[
+  \begin{xy}
+   \xymatrix{
+                  S \ar[r]^{\tau_*t} \ar[d]_{\induced{\tau}} & S \ar[d]^{\induced{\tau}}\\
+                  S' \ar[r]_{t'} & S' .
+   }
+  \end{xy}
+ \]
+  Note that the above diagram is a diagram in the category $\RComod(S', \Setoid)$. 
+  
+  This defines a category, with composition and identity inherited from those of comonad morphisms.
+
 \end{defn}
 
-This defines a category, with the obvious composition and identity. 
+In the introduction, we mentioned a more traditional notion of \enquote{model} for a signature of a coinductive data type, 
+namely that of a coalgebra of some endofunctor. The relationship is as follows:
 
-\begin{rem}[Coalgebras for streams]\label{rem:coalg_stream}
+\begin{rem}[Coalgebras for streams: forgetting cosubstitution]\label{rem:coalg_stream}
  We define 
-  \begin{align*}  F: [\Set,\Setoid] \to [\Set,\Setoid] , \enspace
-                      F(G)(A) := \eq(A) \times G(A) \enspace .
+  \begin{align*}  F: [\Set,\Setoid] &\to [\Set,\Setoid]  \enspace , \\
+                      F(G)(A) &:= \eq(A) \times G(A) \enspace .
   \end{align*}
-  Then we have a forgetful functor $U$ from models for streams to coalgebras of $F$ which, intuitively, forgets the comonadic structure.
-  Indeed, given a model $(T,\stail)$, the comonad $T$ is, in particular, a functor $T:\Set\to\Setoid$ which constitutes the carrier of 
-  a coalgebra of $F$. The coalgebra structure, as a map into a product, 
-  is assembled from the counit of $T$ (to give the first component) and the comodule morphism $\stail$, which
-  is a natural transformation $T \to T$ (to give the second component).
-  It is not clear to us whether this forgetful functor has an adjoint.
+  Then we have a forgetful functor from models for streams (in the sense of \Cref{cat_stream}) to coalgebras of $F$ which, intuitively, forgets the cosubstitution structure.
+  Indeed, given a model $(S,t)$, the comonad $S$ is, in particular, a functor $S:\Set\to\Setoid$ which constitutes the carrier of 
+  a coalgebra of $F$: the coalgebra structure, as a map into a product, 
+  is assembled from the counit of $S$ as the first component, and the comodule morphism $t:S\to S$, which
+  is a natural transformation $t : S \to S$ as the second component.
+\end{rem}
   
   The reason why we consider the richer notion of model (as compared to coalgebras) is that we want the objects of 
   our category---and thus in particular the terminal object---to be equipped with a well-behaved \enquote{cosubstitution} operation.
   It is this cosubstitution operation which is modeled by the comonad and comodule structure, and which is forgotten by 
   the forgetful functor $U$ defined above.
-\end{rem}
-  
 
+  
+  The category of models for $\stream$ has a terminal object:
+  
 \begin{thm}\label{thm_stream_terminal}
  The pair $(\stream, \stail)$, where $\stream$ is considered as a relative comonad and $\stail$ as
  a morphism of comodules, is the terminal object in the category of models of \Cref{cat_stream}.
@@ -1387,14 +1402,21 @@ This defines a category, with the obvious composition and identity.
 \begin{Long}
 More precisely, the aforementioned theorem says that the rules given in \Cref{stream_rules} allow to prove that
 the category of models defined in \Cref{cat_stream} has a terminal object.
+The proof of \Cref{thm_stream_terminal} being essentially the same as that of \Cref{ex:final_sem_tri}, we omit the former.
+However, a mechanized proof can be found in our \coq library, see \Cref{sec:formal}.
 \end{Long}
+
+
+The property of being terminal can be used to specify a map into streams, by equipping some comonad $S$ relative to $\eq:\Set\to\Setoid$
+with the structure of a model for streams, that is, with a comodule morphism $S\to S$.
+We do so for the comonad $\Tri$:
 
 \begin{ex}
   We equip the relative comonad $\Tri$ with the structure of a model for $\stream$ by defining a 
   morphism of tautological comodules over $\Tri$, given by
-   $ t^{\diagonal} := \comp{\tail}{\cut}  : \Tri \to \Tri$.
-  The resulting terminal model morphism
-   $(\Tri, t^{\diagonal}) \to (\stream, \stail)$ has as underlying morphism of relative comonads the one defined in \Cref{ex_diag}.
+   \[ t^{\diagonal} := \comp{\tail}{\cut}  : \Tri \to \Tri \enspace . \]
+  It follows that the resulting terminal model morphism
+   \[(\Tri, t^{\diagonal}) \to (\stream, \stail)\] has as underlying morphism of relative comonads the one defined in \Cref{ex_diag}.
 \end{ex}
 
 \begin{Long}
@@ -1410,11 +1432,11 @@ the category of models defined in \Cref{cat_stream} has a terminal object.
 \subsection{Models for $\Tri$}
 \end{Long}
 
-In analogy to the definition of models for the signature of streams, one would define
+In analogy to the definition of models for the signature of streams, one would like to define
 a model for the signature of $\Tri$ as a pair $(T,r)$ of a comonad $T$ relative to $\eq : \Set \to \Setoid$ and 
 a morphism of comodules $r : T \to T(E\times \_)$. 
-It turns out that in this way, one is not capable of obtaining the right auxiliary function $\cut$ for what is
-supposed to be the \emph{terminal} such model (where $\cut$ is used to define the comodule $\Tri(E\times \_)$), namely the pair $(\Tri,\tail)$.
+It turns out that in this way, one does not obtain the right auxiliary function $\cut$ for what is
+supposed to be the \emph{terminal} such model, the pair $(\Tri,\tail)$, where $\cut$ is used to define the comodule $\Tri(E\times \_)$.
 As a remedy, we define a model to come equipped with a specified operation analogous to $\cut$, and some laws governing
 the behavior of that operation:
 
@@ -1432,6 +1454,22 @@ the behavior of that operation:
    \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{T(\pr_2(E,A))}{\counit_{A}}$;
    \item $\forall~A~B:C_0,\forall~f:\D(TA,FB), \comp{\cut_A}{\cobind(f)} = \comp{\cobind(\extend~f)}{\cut_B}$,
   \end{itemize}
+that is,
+\[
+ \begin{xy}
+  \xymatrix@C=5em{
+                T(E\times A) \ar@<1ex>[r]^-{T(\pr_2(E,A))} \ar@<-1ex>[r]_-{\cut_A} & TA \ar[r]^{\counit_A} & FA
+  }
+ \end{xy}
+ \quad\text{ and } \quad
+ \begin{xy}
+  \xymatrix@C=5em{
+	      T(E\times A) \ar[r]^{\cobind(\extend~f)} \ar[d]_{\cut_A} & T(E\times B) \ar[d]^{\cut_B} \\
+	      TA \ar[r]_{\cobind(f)} &  TB 
+  }
+ \end{xy}
+\]
+
 
   \noindent
   where, for $f:\D(TA,FB)$, we define $\extend(f) : \D\bigl(T(E\times A),F(E\times B)\bigr)$ as
@@ -1446,7 +1484,16 @@ Morphisms of comonads with cut are morphisms of comonads that are compatible wit
  Let $(T,\cut^T)$ and $(S,\cut^S)$ be two comonads relative to a functor $F$ with cut relative to $E$ as in \Cref{def:rel_comonad_with_cut}.
  A \fat{morphism of comonads with cut} is a comonad morphism $\tau$ between the underlying comonads as in \Cref{def:comonad_morphism} that 
  commutes suitably with the respective $\cut$ operations, i.e.\ for any $A : \C_0$,
-  $\comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A}$.
+  $\comp{\tau_{E \times A}}{\cut^S_A}  = \comp{\cut^T_A}{\tau_A}$:
+\[
+ \begin{xy}
+  \xymatrix@C=4em{
+                 T(E\times A)   \ar[r]^-{\cut^T_A} \ar[d]_{\tau_{E \times A}}  & TA \ar[d]^{\tau_{A}}\\
+                 S(E \times A)  \ar[r]_-{\cut^S_A}   & S A.
+  }
+ \end{xy}
+\]
+
 \end{defn}
 
 
