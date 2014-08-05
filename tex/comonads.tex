@@ -1748,7 +1748,7 @@ The correspondence between formalized statements and the statements in this arti
 
 
 
-\begin{figure}
+\begin{figure}[htb]
  \begin{mdframed}
   \input{formal_table}
  \end{mdframed}
@@ -1831,13 +1831,17 @@ see \parencite{DBLP:conf/popl/AbelPTS13}.
 
 \section{Future work}
 
-In a forthcoming work, we develop a notion of signature for specifying codata types with a cosubstitution operation,
-and give a categorical semantics for such comonadic codata types.
+We have given a categorical semantics for some homogeneous (streams and trees) and heterogeneous (infinite triangular matrices) codata types,
+using the notion of relative comonad and comodule over such comonads.
 
-In a more extensional type theory, such as \emph{Homotopy Type Theory} \parencite{hottbook}, 
-one can  reconcile bisimilarity and propositional equality,
-thus eliminating the need to work with setoids.
-This will be investigated in future work.
+It remains to investigate more general forms of heterogeneous trees, in particular, more general forms of heterogeneity than the one we have
+considered here, given by precomposition with a product.
+This necessitates a semantic analysis of the conditions a functor (on the category of types) responsible for heterogeneity needs to satisfy in order to allow the lifting of a (co)substitution rule.
+
+In another line of work, we are investigating the syntax and semantics of coinductive types in \emph{Homotopy Type Theory} \parencite{hottbook},
+a more extensional type theory.
+Whereas in the present work, the focus lies on the categorical characterization of cosubstitution, our work on codata types in Homotopy Type Theory is more foundational:
+there, the issue is to identify, for a given codata type, suitable axioms and computation rules to extend the type theory with in order to add this type to the formal system.
 
  
 
