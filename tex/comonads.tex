@@ -1512,7 +1512,7 @@ Conversely, any comonad $T$ relative to a suitable functor can be equipped with 
    \[ \ccut_A := \cut_A := T\bigl(\pr_2(E,A)\bigr) \enspace . \]
  (The extra \enquote{c} of $\ccut$ stands for \enquote{canonical}.)
  It follows from the axioms of comonad morphism that a comonad morphism $\tau : T\to S$ satisfies the equation of \Cref{def:morphism_comonad_cut} 
- for the thus defined operations $\ccut^T$ and $\ccut^S$, hence constitutes a morphism of comonads with cut from $(T,\ccut^T)$ to $(S,\ccut^S)$.
+ for the  operations $\ccut^T$ and $\ccut^S$ thus defined. The morphism $\tau$ hence constitutes a morphism of comonads with cut from $(T,\ccut^T)$ to $(S,\ccut^S)$.
  We thus obtain a functor 
  \[ \ccut_{F,E} : \RComonad(F) \to \RComonadWC(F,E)\]
  from relative comonads over $F$ to relative comonads over $F$ with cut relative to a fixed object $E:\C_0$ given on 
@@ -1546,21 +1546,22 @@ Given a comodule $M$ over a relative comonad $T$ with cut, we define a comodule 
  Suppose $F:\C\to\D$ is a product-preserving functor, and $T$ is a comonad relative to $F$ with a $\cut$ operation 
  relative to $E:\C_0$ as in \Cref{def:rel_comonad_with_cut}.
  Given a comodule $M$ over $T$,  \fat{precomposition with} \enquote{\fat{product} with $E$}
- gives a comodule $M(E\times\_) : A \mapsto M(E\times A) $ over $T$.
- The comodule operation is deduced from that of $M$ by 
+ gives a comodule 
+   \[ M(E\times\_) : A \mapsto M(E\times A) \] over $T$.
+ The comodule operation is induced by that of $M$ by 
  \begin{align*} \mcobind^{M(E\times\_)}_{A,B} : \D(TA,FB)&\to \E\bigl(M(E\times A), M(E\times B)\bigr) \enspace ,\\ 
                                                       f &\mapsto \mcobind^M_{E\times A,E\times B}(\extend(f)) \enspace ,
   \end{align*}                                        
 where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_cut}.
  
  Furthermore, given two comodules $M$ and $N$ over $\T$ with target category $\E$, and a comodule morphism $\alpha : M \to N$,  
- the assignment $ \alpha(E \times \_)_A := \alpha_{E\times A}$ defines a comodule morphism 
+ the assignment \[ \alpha(E \times \_)_A := \alpha_{E\times A} \] defines a comodule morphism 
   $\alpha(E\times \_) : M(E\times \_) \to N(E\times \_) $.
 
 \begin{Long}
   \noindent
   We thus obtain an endofunctor on the category of comodules over $T$ towards $\E$,
-   $ M \mapsto  M (E\times \_) : \RComod(T,\E) \to \RComod(T,\E)$.
+   \[ M \mapsto  M (E\times \_) : \RComod(T,\E) \to \RComod(T,\E) \enspace . \]
 \end{Long}
 \end{defn}
 
@@ -1569,7 +1570,7 @@ where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_c
 \begin{rem}[Pushforward commutes with product in context]\label{rem:prod_pullback_commute}
  Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pushforward_comodule} commute:
  we have an isomorphism of comodules 
-  $\tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_)$
+  \[     \tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_)        \]
  given pointwise by identity morphisms.
 \end{rem}
 
@@ -1607,7 +1608,7 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
 \end{Long}
 
 
-\begin{defn}%[Coalgebras of infinite triangular matrices]
+\begin{defn}[Models for infinite triangular matrices]
 \label{def:cat_tri}
    Let $E:\Set$ be a type.
    Let $\mathcal{T} = \mathcal{T}_E$ be the category of \fat{models for infinite triangular matrices} where an object consists of
@@ -1619,8 +1620,17 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
     $ \comp{\cut_A}{\tail_A} = \comp{\tail_{E\times A}}{\cut_{E\times A}}$.
     
  \begin{Long}
-   The last equation can be stated as an equality of comodule morphisms as
-     \[ \comp{\cut}{\tail} = \comp{\tail(E\times \_)}{\cut(E\times\_)} \quad \bigl( = (\comp{\tail}{\cut})(E\times \_)\bigr)\enspace . \]
+   The last equation can be stated as an equality of comodule morphisms, diagrammatically
+%      \[ \comp{\cut}{\tail} = \comp{\tail(E\times \_)}{\cut(E\times\_)} \quad \bigl( = (\comp{\tail}{\cut})(E\times \_)\bigr)\enspace . \]
+   \[
+    \begin{xy}
+     \xymatrix@C=5em{
+                     T(E\times \_) \ar[d]_{\cut} \ar[r]^-{\tail(E\times \_ )} & T(E \times E \times \_)  \ar[d]^{\cut(E\times\_)} \\
+                     T A \ar[r]_{\tail} & T (E\times A).
+     }
+    \end{xy}
+   \]
+
 \end{Long}
   
    
