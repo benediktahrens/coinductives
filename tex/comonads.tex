@@ -1611,13 +1611,13 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
 \begin{defn}[Models for infinite triangular matrices]
 \label{def:cat_tri}
    Let $E:\Set$ be a type.
-   Let $\mathcal{T} = \mathcal{T}_E$ be the category of \fat{models for infinite triangular matrices} where an object consists of
+   Let $\mathcal{T} = \mathcal{T}_E$ be the category of \fat{models for infinite triangular matrices} where an object is a pair $(T,\tail^T)$ consisting of
    \begin{itemize}
     \item a comonad $T$ over the functor $\eq:\Set\to\Setoid$ with $\cut$ relative to $E$ and
-    \item a morphism $\tail$ of comodules over $T$ of type $T \to T(E\times \_)$
+    \item a morphism $\tail^T$ of comodules over $T$ of type $T \to T(E\times \_)$
    \end{itemize}
    such that for any set $A$,
-    $ \comp{\cut_A}{\tail_A} = \comp{\tail_{E\times A}}{\cut_{E\times A}}$.
+    $ \comp{\cut^T_A}{\tail^T_A} = \comp{\tail^T_{E\times A}}{\cut^T_{E\times A}}$.
     
  \begin{Long}
    The last equation can be stated as an equality of comodule morphisms, diagrammatically
@@ -1625,8 +1625,8 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
    \[
     \begin{xy}
      \xymatrix@C=5em{
-                     T(E\times \_) \ar[d]_{\cut} \ar[r]^-{\tail(E\times \_ )} & T(E \times E \times \_)  \ar[d]^{\cut(E\times\_)} \\
-                     T A \ar[r]_{\tail} & T (E\times A).
+                     T(E\times \_) \ar[d]_{\cut^T} \ar[r]^-{\tail^T(E\times \_ )} & T(E \times E \times \_)  \ar[d]^{\cut^T(E\times\_)} \\
+                     T A \ar[r]_{\tail^T} & T (E\times A).
      }
     \end{xy}
    \]
@@ -1638,33 +1638,35 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
    is given by a morphism of relative comonads with cut $\tau : T \to S$ such that
    the following diagram of comodule morphisms in the category $\RComod(S,\E)$ commutes,
 % \begin{multicols}{2}   
-   \[ \begin{xy}
+   \begin{equation} \begin{xy}
        \xymatrix{   \tau_*T  \ar[r]^{\tau_*(\tail^T)} \ar[d]_{\induced{\tau}}  &  **[r] \tau_*T (E\times \_ )\ar[d]^{\induced{\tau}(E\times \_)} \\
                     S  \ar[r]_{\tail^S}  &  **[r] S (E\times \_ ) \enspace .
         }
       \end{xy}
-   \]
+      \label{eq:tri_model}
+   \end{equation}
    Here we silently insert an isomorphism as in \Cref{rem:prod_pullback_commute} in the upper right corner.
 % \end{multicols}
 \end{defn}   
 
 
 
-
+Analogously to the signature for streams, there is a forgetful functor from models for triangular matrices to coalgebras of a specific higher-order
+endofunctor:
 
 \begin{rem}[Coalgebras for $\Tri$]
 \begin{Long}
   Let $E : \Set$ be a type. We define 
-  \begin{align*}  F: [\Set,\Setoid] \to [\Set,\Setoid] , \enspace
-                      F(G)(A) := \eq(A) \times G(E \times A) \enspace .
+  \begin{align*}  F: [\Set,\Setoid] &\to [\Set,\Setoid]  \enspace ,\\
+                      F(G)(A) &:= \eq(A) \times G(E \times A) \enspace .
   \end{align*}
   Then we have a forgetful functor from models for infinite triangular matrices to coalgebras of $F$ which, intuitively, forgets the comonadic cobind operation and the $\cut$ operation.
-  Indeed, given a model $(T,\cut,\tail)$, the comonad $T$ is, in particular, a functor $T:\Set\to\Setoid$ which constitutes the carrier of 
+  Indeed, given a model $(T,\tail^T)$, the comonad $T$ is, in particular, a functor $T:\Set\to\Setoid$ which constitutes the carrier of 
   a coalgebra of $F$. The coalgebra structure on $T$, being a map into a product, 
   is assembled from the counit of $T$ (to give the first component) 
-  and the comodule morphism $\tail : T \to T(E\times \_$ (to give the second component).
-  Note that both the counit and $\tail$ are natural transformations.
-  It is not clear to us whether this forgetful functor has an adjoint.
+  and the comodule morphism $\tail^T : T \to T(E\times \_$ (to give the second component).
+  Note that both the counit and $\tail^T$ are natural transformations.
+%   It is not clear to us whether this forgetful functor has an adjoint.
 \end{Long}
 \begin{Short}
  A remark similar to \Cref{rem:coalg_stream} is in order. Omitted for lack of space, it can be found in the long
@@ -1684,18 +1686,23 @@ This example is a reformulation of \Cref{ex:tail_comodule}.
 \begin{Long}
 \begin{proof}
    For a given model $(T,\tail^T)$, the (terminal) morphism $\bigcirc = \bigcirc_T:T\to\Tri$ is defined via the corecursive equations
-    \begin{align}\head\bigl(\bigcirc~t\bigr) &:= \counit^T~t \quad\text{ and } \label{eq:terminal_top}\\
-                     \tail\bigl(\bigcirc~t\bigr) &:= \bigcirc(\tail^T~t) \enspace . \label{eq:terminal_rest}
-      \end{align}
-      By coinduction we show that the map $\bigcirc$ is compatible with $\cobind$ and $\cut$ operations of the source and 
+% %     \begin{align}\head\bigl(\bigcirc~t\bigr) &:= \counit^T~t \quad\text{ and } \\
+% %                      \tail\bigl(\bigcirc~t\bigr) &:= \bigcirc(\tail^T~t) 
+% %       \end{align}
+%       
+    \begin{align}  \comp{\bigcirc}{\head} &:= \counit^T \quad \text{ and } \label{eq:terminal_top}\\
+                   \comp{\bigcirc}{\tail} &:= \comp{\tail^T}{\bigcirc} \enspace . \label{eq:terminal_rest}
+    \end{align}
+
+      Using the introduction axiom for bisimilarity we show that the map $\bigcirc$ commutes with $\cobind$ and $\cut$ operations of the source and 
    target models. We omit these calculations, which can be consulted in the \coq source files.
    
    Note that there is actually no choice in this definition: \Cref{eq:terminal_top} is forced upon us since we want $\bigcirc$ to constitute 
    a morphism of comonads---the equation directly corresponds to one of the axioms.
-   \Cref{eq:terminal_rest} is forced upon us by the diagram a morphism of models has to make commute.
+   \Cref{eq:terminal_rest} is forced upon us by the diagram of \Cref{eq:tri_model}, which a morphism of models has to make commute.
    
-   The same argument is used to show, again by coinduction, that any two morphisms of models $\tau,\rho : (T,\tail^T) \to (\Tri,\tail)$
-   are equal, thus concluding the proof.   
+   The same argument is used to show, again by use of the introduction rule for bisimilarity, that any two morphisms of models $\tau,\rho : (T,\tail^T) \to (\Tri,\tail)$
+   are equal in the sense of being pointwise bisimilar, thus concluding the proof.   
 \end{proof}
 \end{Long}
 
