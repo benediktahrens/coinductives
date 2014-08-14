@@ -1137,10 +1137,15 @@ The map $\diagonal_A$ is defined via the clauses
 \begin{Long}
 
 \begin{rem}[Non-examples]
- The destructors $\stail$ (for $\stream$) and $\tail$ (for $\Tri$) are \emph{not} comonad morphisms.
- One can, however, equip the functor given by precomposing $\Tri$ with \enquote{product with $E$}, i.e.\
- $A \mapsto \Tri (E\times A)$, with a structure of relative comonad, induced by that
- on $\Tri$, cf.\ \Cref{product_comonad}.
+ The family of destructors $\stail_A : \stream A \to \stream A$  
+ does \emph{not} satisfy the axioms for a morphism of relative comonads $\stream\to\stream$.
+ 
+ Similarly, while the map $A \mapsto \Tri(E\times A)$ inherits the structure of a relative comonad (see \Cref{product_comonad}),
+ the family $\tail_A : \Tri A \to \Tri(E \times A)$  does \emph{not} constitute a comonad morphism
+ of type $\Tri \to \Tri(E \times \_)$.
+%  One can, however, equip the functor given by precomposing $\Tri$ with \enquote{product with $E$}, i.e.\
+%  $A \mapsto \Tri (E\times A)$, with a structure of relative comonad, induced by that
+%  on $\Tri$, cf.\ \Cref{product_comonad}.
 \end{rem}
 
 Let $\C$ be a category with products and $E:\C_0$ be an object of $\C$.
@@ -1270,12 +1275,14 @@ the comodule operation:
 The following examples are the motivating ones for us to consider comodule and their morphisms:
 
  \begin{ex}\label{ex_tail_comodule}
-  The destructor $\stail_A : \stream A \to \stream A$ is the carrier of a morphism of tautological comodules (over the relative comonad $\stream$).
+  The family of destructors $\stail_A : \stream A \to \stream A$, indexed by a type $A$, is the carrier of a morphism of tautological comodules (over the relative comonad $\stream$),
+  \[ \stail : \stream \to \stream \enspace . \]
  \end{ex}
 
 \begin{ex}\label{ex:tail_comodule}
- The destructor $\tail_A : \Tri A \to \Tri(E\times A)$ of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
-  from the tautological comodule  $\Tri$ to the comodule $\Tri(E\times \_)$ as defined in \Cref{ex_tri_prod_comod}.
+ The family of destructors $\tail_A : \Tri A \to \Tri(E\times A)$, indexed by a type $A$, of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
+  from the tautological comodule  $\Tri$ to the comodule $\Tri(E\times \_)$ as defined in \Cref{ex_tri_prod_comod},
+  \[ \tail : \Tri \to \Tri(E\times \_) \enspace . \]
 \end{ex}
 
 Composition and identity of comodule morphisms happens pointwise. We thus obtain a category $\RComod(T,\E)$
@@ -1596,20 +1603,24 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
 The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ destructor---%
 more precisely, of its behavior with respect to cosubstitution as in \Cref{eq:rest_redec}---via the notion of comodule morphism:
 
-
+% TODO: this is bs
 \begin{ex}\label{ex:tail_comodule_alternative}
-This example is a reformulation of \Cref{ex:tail_comodule}.
- Consider the comonad $\Tri$, equipped with the $\cut$ operation of \Cref{def:cut_for_tri}.
- The destructor $\tail$ of \Cref{ex_tri} is a morphism of comodules over the comonad $\Tri$ 
-  from the tautological comodule  $\Tri$ to $\Tri(E\times \_)$.
+\Cref{def:product_in_context} is an axiomatization of \Cref{ex:tail_comodule}:
+the relative comonad $\Tri$ is a relative comonad with cut, and 
+the family of destructors $\tail_A : \Tri A \to \Tri (E\times A)$ constitutes a morphism of comodules
+\[ \tail : \Tri \to \Tri (E \times \_ ) \]
+from the tautological comodule $\Tri$ to the composed comodule $\Tri (E\times \_)$ (obtained by precomposing the tautological comodule $\Tri$
+with \enquote{product with $E$} as defined in \Cref{def:product_in_context}).
   
 \end{ex}
 \end{Long}
 
 
+The axiomatization of the cut operation now allows us to define models for the signature of infinite triangular matrices:
+
 \begin{defn}[Models for infinite triangular matrices]
 \label{def:cat_tri}
-   Let $E:\Set$ be a type.
+   Let $E:\Set$ be a fixed type.
    Let $\mathcal{T} = \mathcal{T}_E$ be the category of \fat{models for infinite triangular matrices} where an object is a pair $(T,\tail^T)$ consisting of
    \begin{itemize}
     \item a comonad $T$ over the functor $\eq:\Set\to\Setoid$ with $\cut$ relative to $E$ and
