@@ -395,7 +395,7 @@ We first consider the first case of \emph{leaf-labeled trees}.
 In this section we present some particular category-theoretic objects used later on, and fix some notation.
 
 \begin{defn}[Setoids in IMLTT]
-  A \emph{setoid} in intensional Martin-Löf type theory is a pair $(A, \sim_A)$ of a type $A$ together with an equivalence 
+  A \fat{setoid} in intensional Martin-Löf type theory is a pair $(A, \sim_A)$ of a type $A$ together with an equivalence 
   relation $\sim_A$ on $A$. Given a setoid $S = (A, \sim_A)$, we often abuse notation by writing $s:S$ instead of $s:A$ for
   a term $s$ of $A$.
   Given two setoids $(A,\sim_A)$ and $(B,\sim_B)$, the cartesian product $A\times B$ of their underlying types is equipped with
@@ -404,9 +404,9 @@ In this section we present some particular category-theoretic objects used later
 
 
 
-\begin{defn}[Category in IMLTT]
+\begin{defn}[Category in IMLTT, \parencite{aczel_galois, concat}]
  \label{def:cat_imltt}
-  A \emph{category} $\C$ in intensional Martin-Löf type theory  is given by
+  A \fat{category} $\C$ in intensional Martin-Löf type theory  is given by
   \begin{itemize}
    \item a type of objects, also denoted by $\C$;
    \item for any two objects $a,b:\C$, a \emph{setoid} $\C(a,b)$ of morphisms from $a$ to $b$;
@@ -415,7 +415,6 @@ In this section we present some particular category-theoretic objects used later
    \item a proof that composition is compatible with the equivalence relations of the setoids of morphisms;
    \item proofs of unitality and associativity of composition stated in terms of the equivalence relations on the morphisms.
   \end{itemize}
-  This definition has been used from early on, e.g., in \parencite{aczel_galois, concat}).
   We write $f:a\to b$ for a morphism $f : \C(a,b)$, when the category $\C$ can be deduced from the context.
 \end{defn}
 
@@ -424,16 +423,18 @@ We omit the definitions, which can be found in our \coq files \parencite{trimat_
 
 \begin{defn}[Some categories in IMLTT]
 \label{def:set_setoid}
- We denote by $\Set$ the category (in IMLTT) of types (of a fixed universe) and total functions between them in Martin-L\"of type theory. 
+ We denote by $\Set$ the category (in the sense of \Cref{def:cat_imltt}) of types (of a fixed universe) and total functions between them in Martin-L\"of type theory. 
  The setoidal equivalence relation on $\Set(A,B)$ is given by pointwise equality as given by the Martin-Löf identity type,
    $f \sim g \enspace =_{\text{def}} \enspace \forall x:A, fx = gx$.
  
- We denote by $\Setoid$ the category an object of which is a setoid.
+ We denote by $\Setoid$ the category (in the sense of \Cref{def:cat_imltt}) an object of which is a setoid.
  A morphism between setoids is a type-theoretic function between the underlying types that is compatible in the obvious sense with the equivalence relations of the source and target setoids.
 %  If $A$ is a setoid, we also use $A$ to refer to its underlying type, and thus write $a:A$ for an element $a$ of the type underlying the setoid $A$. 
 %  We write $a\sim a'$ for related elements $a$ and $a'$ in $A$.
- The category $\Setoid$ is cartesian closed and hence a category in the sense of \Cref{def:cat_imltt}: 
+ The equivalence relation on setoid morphisms is given by pointwise equivalence:
  two parallel morphisms of setoids $f,g:A\to B$ are equivalent if for any $a:A$ we have $fa \sim_B ga$.
+ The category $\Setoid$ thus is cartesian closed.
+ 
 \end{defn}
 
 
@@ -454,17 +455,18 @@ We omit the definitions, which can be found in our \coq files \parencite{trimat_
   $\comp{\langle f,g\rangle}{\pr_1} = f$ and $\comp{\langle f,g\rangle}{\pr_2} = g$.
 \end{rem}
 
-Both of the categories of \Cref{def:set_setoid} have finite products.
+Both of the categories of \Cref{def:set_setoid} have finite products, i.e., binary products and a terminal object.
 
 \begin{defn}[Product-preserving functor]
 \label{def:monoidal_functor}
- A functor $F:\C\to\D$ between categories with finite products \emph{preserves products} if, for any two objects $A$ and $B$ of $\C$,
+ A functor $F:\C\to\D$ between categories with finite products \fat{preserves finite products} if it preserves the terminal object and,
+ for any two objects $A$ and $B$ of $\C$,
   the morphism $\phi^F_{A,B}$ is an isomorphism, where
- \[ \phi^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : \D\bigl(F(A\times B), FA\times FB\bigr)\enspace . \] 
+ \[ \phi^F_{A,B} := \bigl\langle F(\pr_1), F(\pr_2) \bigr\rangle : F(A \times B) \to FA\times FB \enspace . \] %\D\bigl(F(A\times B), FA\times FB\bigr)\enspace . \] 
 \end{defn}
 
 \begin{ex}
-  The functor $\eq: \Set \to \Setoid$ of \Cref{def:eq} preserves products.
+  The functor $\eq: \Set \to \Setoid$ of \Cref{def:eq} preserves finite products.
 \end{ex}
 
 
