@@ -372,16 +372,18 @@ We first consider the first case of \emph{leaf-labeled trees}.
  
  \subsection{Organisation of the paper}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
-  In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those codata types.
+  In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those codata types,
+  in particular, the respective cosubstitution operations.
 %    Their specifying rules are given in \Cref{stream_rules} and \Cref{tri_rules}, respectively.
   In \Cref{sec:comonads} we present \emph{relative comonads} and define the category of comonads relative to a fixed functor.
-    We give some examples of such structures, using the codata types presented in \Cref{sec:tri}.
-  In \Cref{sec:comodules} we define comodules over relative comonads and give some constructions of comodules.
-     Again, examples of such structures are taken from \Cref{sec:tri}.
-  In \Cref{sec:coalgebras_for_tri} we define categories of models for the codata types presented in \Cref{sec:tri},
-      based on the category-theoretic notions developed in the previous sections.
-      We then prove that the codata types constitute the terminal model in the respective categories.
-      Finally, we present an example of a map defined as a terminal map exploiting the universal property of streams.
+    We give some examples of relative comonads using the codata types presented in \Cref{sec:tri}, 
+    and relate them to traditional comonads.
+  In \Cref{sec:comodules} we define \emph{comodules over relative comonads} and give some constructions of comodules.
+     Again, examples of comodules are taken from \Cref{sec:tri}.
+  In \Cref{sec:coalgebras_for_tri} we define categories of models for the (signatures of the) codata types presented in \Cref{sec:tri},
+      based on the category-theoretic notions developed in the preceding sections.
+      We then prove that the codata types constitute the terminal models in the respective categories.
+      We present an example of a map defined as a terminal morphism in the category of models for streams, exploiting terminality of $\stream$.
   In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
 %   A table with the correspondence between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
 
@@ -646,7 +648,7 @@ Infinite triangular matrices are studied in detail by
 %     \draw[color=orange](2, -2.5) ellipse (12pt and 25pt) ;  
 %     \draw[color=orange](3, -3.5) ellipse (12pt and 25pt) ;  
   \end{tikzpicture}\\[-2ex]
-  \caption{An infinite triangular matrix over type $A$ and various operations}\label{fig_tri}
+  \caption{An infinite triangular matrix over type $A$ and its destructors $\head$ and $\tail$}\label{fig_tri}
  \end{figure}
 \end{Long}
 % 
@@ -1066,7 +1068,8 @@ of cosubstitution  with the destructor $\stail$ (for streams) resp.\ $\tail$ (fo
 \begin{defn}%[Morphism of relative comonads]
 \label{def:comonad_morphism}
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
-  is given by a family of morphisms \[\tau_A : \D(TA,SA)\] such that the following diagrams commute: for any $A : \C_0$,
+  is given by a family of morphisms \[\tau_A : \D(TA,SA)\] such that the following diagrams commute: 
+  for any $A : \C_0$ (first diagram), and, for any $A,B : \C_0$ and $f : \D(SA,FB)$ (second diagram),
 %      \[  \counit^T_A = \comp{\tau_A}{\counit^S_A} \]
      
 \[ \begin{xy}
@@ -1075,11 +1078,13 @@ of cosubstitution  with the destructor $\stail$ (for streams) resp.\ $\tail$ (fo
                             &    FA
    }
    \end{xy}
-\]
-
-  and, for any $A,B : \C_0$ and $f : \D(SA,FB)$,
+% 
+% 
+%   
 %    \[  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)} \enspace . \]
-\[ \begin{xy}
+% 
+\qquad
+\begin{xy}
      \xymatrix@C=6em{
                      TA \ar[d]_{\tau_A}   \ar[r]^{\cobind^T(\comp{\tau_A}{f})} & TB \ar[d]^{\tau_B}\\
                      SA \ar[r]_{\cobind^S(f)} & SB .
@@ -1453,8 +1458,9 @@ the behavior of that operation:
 \label{def:rel_comonad_with_cut}
  Let $\C$ and $\D$ be categories with binary products and $F:\C\to\D$ a product-preserving functor. Let $E:\C_0$ be a fixed object of $\C$.
  We define a \fat{comonad relative to $F$ with cut relative to $E$} to be a comonad $T$ relative to $F$ together with a $\cut$ operation 
-    \[ \cut : \forall~A:\C_0, T(E\times A) \to TA \qquad \text{such that}\]
-%  satisfying the following axioms:
+    \[ \cut : \forall~A:\C_0, T(E\times A) \to TA \]
+%   
+ satisfying the axioms
   \begin{itemize}
 %    \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{\counit_{E\times A}}{F(\pr_2(E,A))}$;
    \item $\forall~A:C_0, \comp{\cut_A}{\counit_A} = \comp{T(\pr_2(E,A))}{\counit_{A}}$;
