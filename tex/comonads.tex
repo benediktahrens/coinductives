@@ -1537,7 +1537,7 @@ Conversely, any comonad $T$ relative to a suitable functor can be equipped with 
  $E:\C_0$ satisfying the properties of \Cref{def:rel_comonad_with_cut} by setting
    \[ \ccut_A := \cut_A := T\bigl(\pr_2(E,A)\bigr) \enspace . \]
  (The extra \enquote{c} of $\ccut$ stands for \enquote{canonical}.)
- It follows from the axioms of comonad morphism that a comonad morphism $\tau : T\to S$ satisfies the equation of \Cref{def:morphism_comonad_cut} 
+ It follows from the axioms of comonad morphisms that a comonad morphism $\tau : T\to S$ satisfies the equation of \Cref{def:morphism_comonad_cut} 
  for the  operations $\ccut^T$ and $\ccut^S$ thus defined. The morphism $\tau$ hence constitutes a morphism of comonads with cut from $(T,\ccut^T)$ to $(S,\ccut^S)$.
  We thus obtain a functor 
  \[ \ccut_{F,E} : \RComonad(F) \to \RComonadWC(F,E)\]
@@ -1594,7 +1594,7 @@ where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_c
 
 
 \begin{rem}[Pushforward commutes with product in context]\label{rem:prod_pullback_commute}
- Note that the constructions of \Cref{def:product_in_context} and \Cref{def:pushforward_comodule} commute:
+ The constructions of \Cref{def:product_in_context} and \Cref{def:pushforward_comodule} commute:
  we have an isomorphism of comodules 
   \[     \tau_*(M(E\times \_)) \cong (\tau_*M)(E \times \_)        \]
  given pointwise by identity morphisms.
@@ -1623,7 +1623,7 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
 The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ destructor---%
 more precisely, of its behavior with respect to cosubstitution as in \Cref{eq:rest_redec}---via the notion of comodule morphism:
 
-% TODO: this is bs
+
 \begin{ex}\label{ex:tail_comodule_alternative}
 \Cref{def:product_in_context} is an axiomatization of \Cref{ex:tail_comodule}:
 the relative comonad $\Tri$ is a relative comonad with cut, and 
@@ -1686,15 +1686,15 @@ endofunctor:
 
 \begin{rem}[Coalgebras for $\Tri$]
 \begin{Long}
-  Let $E : \Set$ be a type. We define 
+  Let $E : \Set$ be a type. Define the functor
   \begin{align*}  F: [\Set,\Setoid] &\to [\Set,\Setoid]  \enspace ,\\
                       F(G)(A) &:= \eq(A) \times G(E \times A) \enspace .
   \end{align*}
-  Then we have a forgetful functor from models for infinite triangular matrices to coalgebras of $F$ which, intuitively, forgets the comonadic cobind operation and the $\cut$ operation.
+  There is a forgetful functor from models for infinite triangular matrices to coalgebras of $F$ which, intuitively, forgets the comonadic cobind operation and the $\cut$ operation.
   Indeed, given a model $(T,\tail^T)$, the comonad $T$ is, in particular, a functor $T:\Set\to\Setoid$ which constitutes the carrier of 
-  a coalgebra of $F$. The coalgebra structure on $T$, being a map into a product, 
+  a coalgebra of $F$. The coalgebra structure map on $T$, being a map $T \to \eq \times T(E\times \_ )$ into a product, 
   is assembled from the counit of $T$ (to give the first component) 
-  and the comodule morphism $\tail^T : T \to T(E\times \_$ (to give the second component).
+  and the comodule morphism $\tail^T : T \to T(E\times \_)$ (to give the second component).
   Note that both the counit and $\tail^T$ are natural transformations.
 %   It is not clear to us whether this forgetful functor has an adjoint.
 \end{Long}
@@ -1724,6 +1724,7 @@ endofunctor:
                    \comp{\bigcirc}{\tail} &:= \comp{\tail^T}{\bigcirc} \enspace . \label{eq:terminal_rest}
     \end{align}
 
+  \noindent
       Using the introduction axiom for bisimilarity we show that the map $\bigcirc$ commutes with $\cobind$ and $\cut$ operations of the source and 
    target models. We omit these calculations, which can be consulted in the \coq source files.
    
@@ -1744,7 +1745,7 @@ the \fat{bisimilarity} relation on it as well as the \fat{cosubstitution} operat
 \section{Formalization in \coq}\label{sec:formal}
 
 All our definitions and theorems are mechanized in the proof assistant \coq \parencite{coq84pl4}.
-In the formalization we add the rules of \Cref{stream_rules} and \Cref{tri_rules} as axioms internal to the \coq system, via the \lstinline!Axiom! vernacular. In order to ensure consistency, we 
+In the formalization we add the rules of \Cref{stream_rules} and \Cref{tri_rules} as axioms to the \coq system, via the \lstinline!Axiom! vernacular. In order to ensure consistency, we 
 \begin{enumerate}
  \item encapsulate the axioms in \coq \emph{module} types (separately for $\stream$ and for $\Tri$) and
  \item instantiate each module type by defining streams and triangular matrices as coinductive types using the \lstinline!CoInductive! vernacular,
@@ -1770,11 +1771,11 @@ Here, the code \lstinline!E x A! denotes the cartesian product of the types \lst
 
 
 For the instantiation of the module type for $\Tri$, the formalization of infinite triangular matrices is taken from the work by \textcite{DBLP:conf/types/MatthesP11},
-and only slightly adapted to compile with the version of \coq we use.
+and only slightly adapted to compile with \coq version 8.4pl4.
 
 Apart from the implementation of our codata types via axioms (which are encapsulated in modules), the mechanization does \emph{not} rely on any additional axioms.
 The \coq source files and HTML documentation are available from the project web site \parencite{trimat_coq}.
-The correspondence between formalized statements and the statements in this article are given in \Cref{sec:table_formal_informal}.
+The correspondences between formalized statements and the statements in this article are given in \Cref{sec:table_formal_informal}.
 
 
 
@@ -1859,19 +1860,20 @@ see \parencite{DBLP:conf/popl/AbelPTS13}.
 
 \end{Long}
 
-\section{Future work}
+\section{Conclusion and future work}
 
 We have given a categorical semantics for some homogeneous (streams and trees) and heterogeneous (infinite triangular matrices) codata types,
 using the notion of relative comonad and comodule over such comonads.
 
 It remains to investigate more general forms of heterogeneous trees, in particular, more general forms of heterogeneity than the one we have
 considered here, given by precomposition with a product.
-This necessitates a semantic analysis of the conditions a functor (on the category of types) responsible for heterogeneity needs to satisfy in order to allow the lifting of a (co)substitution rule.
+This necessitates a semantic analysis of the conditions that a functor (on the category of types) responsible for heterogeneity needs to satisfy in order to allow the lifting of a (co)substitution rule.
 
 In another line of work, we are investigating the syntax and semantics of coinductive types in \emph{Homotopy Type Theory} \parencite{hottbook},
 a more extensional type theory.
 Whereas in the present work, the focus lies on the categorical characterization of cosubstitution, our work on codata types in Homotopy Type Theory is more foundational:
-there, the issue is to identify, for a given codata type, suitable axioms and computation rules to extend the type theory with in order to add this type to the formal system.
+there, the issue is to identify, for a given signature of a codata type, suitable axioms and computation rules to extend the type theory with in order to 
+add the  codata type generated by the signature to the formal system.
 
  
 
