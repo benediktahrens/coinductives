@@ -1082,8 +1082,8 @@ we develop the notion of \emph{comodule over a relative comonad} and, more impor
 \begin{defn}%[Morphism of relative comonads]
 \label{def:comonad_morphism}
  Let $T$ and $S$ be comonads relative to a functor $F : \C \to \D$. A \fat{morphism of relative comonads} $\tau : T \to S$
-  is given by a family of morphisms \[\tau_A : \D(TA,SA)\] such that the following diagrams commute: 
-  for any $A : \C_0$ (first diagram), and, for any $A,B : \C_0$ and $f : \D(SA,FB)$ (second diagram),
+  is given by a family of morphisms \[\tau_A : TA \to SA\] such that the following diagrams commute
+  for any  $A,B : \C_0$ and $f : SA\to FB$:
 %      \[  \counit^T_A = \comp{\tau_A}{\counit^S_A} \]
      
 \[ \begin{xy}
@@ -1197,6 +1197,7 @@ as a \emph{comodule} over $T$, rather than a comonad. The below definition may t
 \section{Comodules over relative comonads}\label{sec:comodules}
 
 In this section we develop the notion of \emph{comodule over a relative comonad}, dualizing the notion of module over a relative monad \parencite{ahrens_relmonads}.
+Our motivation for developing this notion is the characterization of the destructors $\stail$ and $\tail$ as \emph{morphisms of comodules}.
 
 \begin{defn}%[Comodule over relative comonad]
 \label{def:comodule}
@@ -1233,8 +1234,16 @@ In this section we develop the notion of \emph{comodule over a relative comonad}
 \end{defn}
 
 
+\begin{Long}
+Similarly to relative comonads, comodules over these are functorial:
+\begin{defn}[Functoriality for comodules]
+\label{def:comodule_lift}
+ Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
+  \[ M(f) := \mcobind(\comp{\counit_A}{Ff}) \enspace .  \]
+\end{defn}
+\end{Long}
 
-
+\noindent
 Every relative comonad constitutes a comodule over itself, the \emph{tautological} comodule:
 
 \begin{defn}[Tautological comodule]
@@ -1245,27 +1254,16 @@ Every relative comonad constitutes a comodule over itself, the \emph{tautologica
     $  \mcobind^T(f) := \cobind^T(f)$. 
 \end{defn}
 
-
-
-
-\begin{Long}
-Similarly to relative comonads, comodules over these are functorial:
-\begin{defn}[Functoriality for comodules]
-\label{def:comodule_lift}
- Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
-  \[ M(f) := \mcobind(\comp{\counit_A}{Ff}) .  \]
-\end{defn}
-\end{Long}
-
+\noindent
 A more interesting example of comodule is given by the functor that maps a type $A$ to the setoid $\Tri(E\times A)$
 for some fixed type $E$:
 \begin{ex}\label{ex_tri_prod_comod}
    The map $A \mapsto \Tri(E\times A)$ is equipped with a comodule structure over the relative comonad $\Tri$ by
    defining the comodule operation $\mcobind$ as (cf.\ \Cref{ex_tri})
-     \[ \mcobind_{A,B} (f) := \redec (\extend~f) \enspace . \]
+     \[ \mcobind_{A,B} (f) := \redec_{E\times A, E\times B} (\extend~f) \enspace \text{ for } \enspace f : \Setoid(\Tri A, \eq B) \enspace . \]
 \end{ex}
 
-We later generalize \Cref{ex_tri_prod_comod}---precomposition with a product---to more general relative comonads over suitable categories.
+In \Cref{sec:coalgebras_for_tri} we generalize \Cref{ex_tri_prod_comod}---precomposition with a product---to more general relative comonads over suitable categories.
 However, this requires an axiomatization of the $\extend$ operation, more precisely of an important building block of it, the
 $\cut$ operation.
 
@@ -1291,7 +1289,12 @@ the comodule operation:
 
 \end{defn}
 
-The following examples are the motivating ones for us to consider comodule and their morphisms:
+\noindent
+Composition and identity of comodule morphisms happens pointwise. We thus obtain a category $\RComod(T,\E)$
+ of comodules
+over a fixed comonad $T$, towards a fixed category $\E$.
+
+The motivating examples for us to consider comodules and their morphisms are the following:
 
  \begin{ex}\label{ex_tail_comodule}
   The family of destructors $\stail_A : \stream A \to \stream A$, indexed by a type $A$, is the carrier of a morphism of tautological comodules (over the relative comonad $\stream$),
@@ -1304,9 +1307,6 @@ The following examples are the motivating ones for us to consider comodule and t
   \[ \tail : \Tri \to \Tri(E\times \_) \enspace . \]
 \end{ex}
 
-Composition and identity of comodule morphisms happens pointwise. We thus obtain a category $\RComod(T,\E)$
- of comodules
-over a fixed comonad $T$, towards a fixed category $\E$.
 
 
 
@@ -1340,7 +1340,7 @@ Given a morphism of comonads, we can \enquote{transport} comodules over the sour
 
 
 As presented in \Cref{def:tautological_comodule}, every relative comonad induces a comodule over itself.
-This extends to morphisms of relative comonads:
+This extends to morphisms of relative comonads in the following sense:
 
 \begin{defn}%[Morphism of comonads induces morphism of comodules]
 \label{def:induced} 
@@ -1380,7 +1380,7 @@ We first consider the homogeneous codata type of streams.
    \item a morphism $t$ of tautological comodules over $S$, 
                    \[t : S \to S \enspace . \]
   \end{itemize}
-  A \fat{model morphism} $(S,t) \to (S',t')$ is given by a comonad morphism $\tau : S \to S'$ such that
+  A \fat{morphism of models} $(S,t) \to (S',t')$ is given by a comonad morphism $\tau : S \to S'$ such that
      $ \comp{\tau_*t}{\induced{\tau}} = \comp{\induced{\tau}}{t'}$, in diagrammatic form,
  \[
   \begin{xy}
@@ -1392,21 +1392,21 @@ We first consider the homogeneous codata type of streams.
  \]
   Note that the above diagram is a diagram in the category $\RComod(S', \Setoid)$. 
   
-  This defines a category, with composition and identity inherited from those of comonad morphisms.
+  This defines a category of models of the signature of streams, with composition and identity inherited from those of comonad morphisms.
 
 \end{defn}
 
-In the introduction, we mentioned a more traditional notion of \enquote{model} for a signature of a coinductive data type, 
-namely that of a coalgebra of some endofunctor. The relationship is as follows:
+In the introduction we mentioned a more traditional notion of \enquote{model} for a signature of a coinductive data type, 
+namely that of a coalgebra of some endofunctor. The relationship between models as in \Cref{cat_stream} and coalgebras is as follows:
 
 \begin{rem}[Coalgebras for streams: forgetting cosubstitution]\label{rem:coalg_stream}
- We define 
+ Define the functor
   \begin{align*}  F: [\Set,\Setoid] &\to [\Set,\Setoid]  \enspace , \\
                       F(G)(A) &:= \eq(A) \times G(A) \enspace .
   \end{align*}
   Then we have a forgetful functor from models for streams (in the sense of \Cref{cat_stream}) to coalgebras of $F$ which, intuitively, forgets the cosubstitution structure.
   Indeed, given a model $(S,t)$, the comonad $S$ is, in particular, a functor $S:\Set\to\Setoid$ which constitutes the carrier of 
-  a coalgebra of $F$: the coalgebra structure, as a map into a product, 
+  a coalgebra of $F$: the coalgebra structure map $S \to F(S):=\eq\times S$, as a map into a product, 
   is assembled from the counit of $S$ as the first component, and the comodule morphism $t:S\to S$, which
   is a natural transformation $t : S \to S$ as the second component.
 \end{rem}
@@ -1414,7 +1414,7 @@ namely that of a coalgebra of some endofunctor. The relationship is as follows:
   The reason why we consider the richer notion of model (as compared to coalgebras) is that we want the objects of 
   our category---and thus in particular the terminal object---to be equipped with a well-behaved \enquote{cosubstitution} operation.
   It is this cosubstitution operation which is modeled by the comonad and comodule structure, and which is forgotten by 
-  the forgetful functor $U$ defined above.
+  the forgetful functor defined above.
 
   
   The category of models for $\stream$ has a terminal object:
@@ -1425,7 +1425,7 @@ namely that of a coalgebra of some endofunctor. The relationship is as follows:
 \end{thm}
 
 \begin{Long}
-More precisely, the aforementioned theorem says that the rules given in \Cref{stream_rules} allow to prove that
+More precisely, \Cref{thm_stream_terminal} says that the rules given in \Cref{stream_rules} allow to prove that
 the category of models defined in \Cref{cat_stream} has a terminal object.
 The proof of \Cref{thm_stream_terminal} being essentially the same as that of \Cref{ex:final_sem_tri}, we omit the former.
 However, a mechanized proof can be found in our \coq library, see \Cref{sec:formal}.
@@ -1440,7 +1440,7 @@ We do so for the comonad $\Tri$:
   We equip the relative comonad $\Tri$ with the structure of a model for $\stream$ by defining a 
   morphism of tautological comodules over $\Tri$, given by
    \[ t^{\diagonal} := \comp{\tail}{\cut}  : \Tri \to \Tri \enspace . \]
-  It follows that the resulting terminal model morphism
+  It follows that the resulting terminal morphism of models
    \[(\Tri, t^{\diagonal}) \to (\stream, \stail)\] has as underlying morphism of relative comonads the one defined in \Cref{ex_diag}.
 \end{ex}
 
