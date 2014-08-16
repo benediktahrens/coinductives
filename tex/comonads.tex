@@ -472,25 +472,27 @@ Both of the categories of \Cref{def:set_setoid} have finite products, i.e., bina
 
 \section{Codata types in intensional Martin-L\"of type theory}\label{sec:tri}
 
-We consider two particular coinductive type families in intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof}.
-For $a,b : A$, we denote by $a = b$ the Martin-L\"of identity type between $a$ and $b$.
+In this section two particular coinductive type families in intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof} are presented.
+For $a,b : A$, the Martin-L\"of identity type between $a$ and $b$ is denoted by $a = b$.
 
-In this section, we present the type-theoretic rules for these codata types and \emph{bisimilarity} on them.
+We present the type-theoretic rules specifying these codata types and \emph{bisimilarity} on them.
 % Bisimilarity is a coinductively defined equivalence relation on types which 
 Categorically, bisimilarity on a given codata type is given by the largest binary relation on that type that is 
-compatible with the \emph{observations} on that codata; it is the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93}.
-Here, an observation is the result of \emph{destructing} an element of a given codata type.
-For instance, an infinite list a.k.a.\ a stream (defined in detail in \Cref{ex_stream}) over a base type $A$ allows to observe the first element of that list (which is a term of type $A$) and,
-corecursively, the rest of that list.
-A coinductive type with bisimilarity forms a setoid as in \Cref{def:set_setoid}.
-We thus denote bisimilar elements using an infix $\sim$, as in $t \sim t'$. 
+compatible (in a sense to be specified later) with the \emph{observations} on that codata; it is the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93}.
+Here, an observation is the result of \emph{destructing}, i.e.\ taking apart, an element of a given codata type.
+For instance, an infinite list a.k.a.\ a stream (defined in detail in \Cref{ex_stream}) over a base type $A$ allows to observe the first element---the $\shead$---of that list (which is a term of type $A$) and,
+corecursively, the $\stail$ of that list, which is again an infinite list of elements of $A$.
+
+A coinductive type together with its associated bisimilarity relation forms a setoid as in \Cref{def:set_setoid}.
+We thus denote bisimilar elements $t$ and $t'$ by $t \sim t'$. 
 
 A map into a codata type is defined using its \emph{introduction} rule.
 Intuitively, the introduction rule takes as arguments the \emph{observations} one can make on the image of the map thus defined.
 For instance, a map into streams is defined by specifying $\shead$ and $\stail$ on the output of that map: this intuition
   can be obtained by considering the combination of introduction and computation rules from \Cref{stream_rules}.
   We thus use a kind of \enquote{copattern matching} \parencite{DBLP:conf/popl/AbelPTS13} to define maps, as follows: 
-  the clauses $\comp{f}{\shead} := h$ and $\comp{f}{\stail}:= t$ abbreviate the definition $f := \corec~h~t$.
+  the pair of clauses 
+   \[\comp{f}{\shead} := h \quad \text{ and } \quad \comp{f}{\stail}:= t \] abbreviates the definition $f := \corec~h~t$.
 
 % Maps into a coinductive data type are specified by the observations, i.e.\ the value of the destructors, on the output of those maps.  
 % The precise rule for specifying maps into the considered coinductive type is given in \Cref{stream_rules}.
@@ -507,27 +509,34 @@ The first example is the type of \emph{streams} of elements of a given base type
 \begin{ex}[The coinductive type family of streams]
  \label{ex_stream}
   Let $A$ be a type. A \emph{stream over $A$} is, intuitively, an infinite list of elements of $A$. 
-  Given such a stream $t$, we can extract its first element, called $\shead(t)$ (which is an element of $A$) and the rest of the stream, called $\stail(t)$, which is again a stream over $A$.
+  Given such a stream $t$, we can extract an element of $A$, called $\shead(t)$ and the rest of the stream, called $\stail(t)$, which is again a stream over $A$; see \Cref{fig:stream} for a schematic illustration of the two operations.
   \begin{figure}[htb]
      \begin{tikzpicture}
-      \foreach \x in {0,...,3}{\draw (\x,0) node[color=blue]{$a_{\x}$};};
-      \draw (4,0) node[color=blue]{$\dots$};
-      \draw (0.5,0.25)--(0.5,-0.25);
-      \draw (-0.2,-0.5) node{$\shead$};
-      \draw (1.5,-0.5) node{$\stail$};
+      \foreach \x in {0,...,3}{\draw (\x,0) node[color=red]{$A$};};
+      \draw (4,0) node[color=red]{$\dots$};
+      
+      \draw[color=orange] (0,-0.8) node{$\shead$};
+      \draw[color=orange] (0,0) circle(0.4cm);
+
+      
+      \draw[color=green] (2,-0.8) node{$\stail$};
+      \draw[color=green] (3.5, 0.3)--(0.6,0.3)--(0.6,-0.3)--(3.5,-0.3);
+      \draw[color=green, dashed] (3.5,0.3)--(4.5,0.3);
+      \draw[color=green, dashed] (3.5,-0.3)--(4.5,-0.3);
+      
   \end{tikzpicture}
-   \caption{A stream destructs into a $\shead$ and a $\stail$} \label{fig:stream}
+   \caption{A stream decomposes into its $\shead$ and $\stail$} \label{fig:stream}
   \end{figure}
   Formally, the type---setoid, actually---$\stream A$ of \emph{streams over $A$} is coinductively defined via the destructors $\shead$ and $\stail$
   given in \Cref{stream_rules}.  A map $f:T\to \stream A$ from an arbitrary type $T$ into the type of streams is specified by giving, for each possible input $t:T$, 
   an element $a:A$---the head of the image stream---and another $t':T$---an element which is mapped to $\stail~f(t)$. This intuition is made formal by the 
   introduction and computation rules of \Cref{stream_rules}.
   
-  The second part of \Cref{stream_rules} introduces \emph{bisimilarity} as a binary relation on streams (over a fixed type $A$) that is compatible with the observations,
-  that is, bisimilar streams have equal $\shead$s and bisimilar $\stail$s (see elimination rules). 
+  The second part of \Cref{stream_rules} introduces \emph{bisimilarity} as a binary relation on streams (over a fixed type $A$) that is compatible with the observations
+  in the sense that bisimilar streams have equal $\shead$s and bisimilar $\stail$s (cf.\ the elimination rules). 
   We call a \emph{bisimulation on streams (over a given type)} any binary relation that is compatible with the observations on streams.
   If two streams are related by \emph{any} bisimulation,
-  then these two streams are also bisimilar (see introduction rule). In that sense, bisimilarity is the largest bisimulation.
+  then these two streams are also bisimilar; this is what the introduction rule declares. In that sense, bisimilarity is the largest bisimulation.
   
   We define a \emph{co}substition operation 
    \[\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B\] 
