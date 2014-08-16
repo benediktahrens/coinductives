@@ -511,6 +511,7 @@ The first example is the type of \emph{streams} of elements of a given base type
   Let $A$ be a type. A \emph{stream over $A$} is, intuitively, an infinite list of elements of $A$. 
   Given such a stream $t$, we can extract an element of $A$, called $\shead(t)$ and the rest of the stream, called $\stail(t)$, which is again a stream over $A$; see \Cref{fig:stream} for a schematic illustration of the two operations.
   \begin{figure}[htb]
+    \centering
      \begin{tikzpicture}
       \foreach \x in {0,...,3}{\draw (\x,0) node[color=red]{$A$};};
       \draw (4,0) node[color=red]{$\dots$};
@@ -814,11 +815,12 @@ taken from the article by \textcite{DBLP:conf/types/MatthesP11}.
   \caption{Definition of redecoration (illustration taken from \parencite{DBLP:conf/types/MatthesP11})}
   \label{fig:redec}
 \end{figure}
-
-    
-Here, the family of functions 
-     $\extend_{A,B} : (\Tri A \to B) \to \Tri (E \times A) \to E\times B $
-  is suitably defined to account for the change of the type of the argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
+% 
+%     
+Here, the need for the family of auxiliary functions 
+     \[\extend_{A,B} : (\Tri A \to B) \to \Tri (E \times A) \to E\times B \]
+  arises from the \emph{heterogeneity} of the destructor $\tail$. These functions
+  are suitably defined to account for the change of the type of the argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
   rather than $t : \Tri A$, namely
   \[ \extend(f) := \langle \comp{\head_{E\times A}}{\pr_1(E,A)} , \comp{\cut_A}{f} \rangle \enspace . \]
   An illustration of this operation is given in \Cref{fig:lift}, 
@@ -869,10 +871,6 @@ All the operations are suitably compatible with the bisimilarity relations, so t
   \end{align*}
 \end{ex}
 
-\begin{Long}
-Note how heterogeneity of the destructor $\tail$ makes the definition of $\redec$ considerably more complicated than that of
-the analogous operation $\sredec$ on streams.
-\end{Long}
 
 \begin{rem}
  We do not specify any computation rules for bisimilarity, i.e., we think of bisimilarity as a proof-irrelevant notion. 
