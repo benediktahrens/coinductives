@@ -881,8 +881,7 @@ All the operations are suitably compatible with the bisimilarity relations, so t
   
 \section{Relative comonads and their morphisms}\label{sec:comonads}
 
-In this section we define the category of \emph{comonads relative to a fixed functor}, and present some examples 
-of such comonads and their morphisms.
+In this section we define \emph{comonads relative to a functor} and morphisms between those, and present some examples.
 
 \emph{Relative monads} were defined by \textcite{DBLP:conf/fossacs/AltenkirchCU10} as a notion of monad-like structure
 whose underlying functor is not necessarily an endofunctor. 
@@ -898,9 +897,11 @@ An application of this auxiliary functor is inserted where necessary to make the
  \label{def:rel_comonad}
   Let $F:\C\to\D$ be a functor. A \fat{relative comonad $T$ over $F$} is given by
   \begin{itemize}%\setlength{\itemsep}{\itemizedist}
-   \item a map $T:\C_0 \to \D_0$ on the objects of the categories involved;
-   \item an operation \[\counit : \forall A : \C_0, \D(TA,FA)\]
-   \item an operation \[\cobind: \forall A,B:\C_0, \D(TA,FB) \to \D(TA,TB)\]
+   \item a map $T:\C_0 \to \D_0$ on the objects of the categories involved and
+   \item operations 
+          \begin{align*} \counit &: \forall A : \C_0, \D(TA,FA) \\
+                         \cobind &: \forall A,B:\C_0, \D(TA,FB) \to \D(TA,TB)
+          \end{align*}
   \end{itemize}
    such that the following equations hold:
  \begin{align}
@@ -984,29 +985,30 @@ We obtain a comonad relative to $F:\C\to\D$ from a comonad on the category $\C$ 
 \begin{ex}[Relative comonads from comonads]\label{ex_relcom_from_com}
   Let $F : \C \to \D$ be a fully faithful functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\C$.
   We define a comonad $FM$ relative to $F$ by setting:
-  \begin{itemize}\setlength{\itemsep}{\itemizedist}
-   \item $FM(A) := F(MA)$;
-   \item $\counit^{FM}_A := F(\counit^M_A) : \D(FMA,FA)$;
-   \item $\cobind^{FM}_{A,B} (f) := F\bigl(\cobind^M_{A,B}(F^{-1}f)\bigr)$.
-  \end{itemize}
-  The proof of the axioms of a relative comonad is immediate.
+   \begin{align*}
+        FM(A) &:= F(MA) \\
+        \counit^{FM}_A &:= F(\counit^M_A) : \D(FMA,FA) \\
+        \cobind^{FM}_{A,B} (f) &:= F\bigl(\cobind^M_{A,B}(F^{-1}f)\bigr) \enspace .
+    \end{align*}
+
 \end{ex}
 
+\noindent
 The other way round does not require any conditions on the functor $F$:
 \begin{ex}[Relative comonads from comonads II]\label{ex_relcom_from_com_on_target}
     Let $F : \C \to \D$ be a functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\D$.
   We define a comonad $MF$ relative to $F$ by setting:
-  \begin{itemize}\setlength{\itemsep}{\itemizedist}
-   \item $MF(A) := M(FA)$;
-   \item $\counit^{MF}_A := \counit^M_{FA} : \D(MFA,FA)$;
-   \item $\cobind^{MF}_{A,B} (f) := \cobind^M_{FA,FB}(f) : \D(MFA,MFB)$ for $f : \D(MFA,FB)$.
-  \end{itemize}
-  The proof of the axioms of a relative comonad is immediate.
+  \begin{align*}
+      MF(A) &:= M(FA)\\
+      \counit^{MF}_A &:= \counit^M_{FA} : \D(MFA,FA) \\
+      \cobind^{MF}_{A,B} (f) &:= \cobind^M_{FA,FB}(f) : \D(MFA,MFB) \enspace \text{ for } \enspace f : \D(MFA,FB) \enspace .
+  \end{align*}
 \end{ex}
 
 
 \end{Long}
 
+\noindent
 The next examples concern the codata type families presented in \Cref{sec:tri}.
 
 \begin{ex}[Streams]\label{ex_stream_comonad}
@@ -1062,12 +1064,15 @@ The next examples concern the codata type families presented in \Cref{sec:tri}.
 \end{Long}
 
 
-
 The notion of relative comonad captures many properties of $\stream$ resp.\ $\Tri$ and cosubstitution on them, in particular the interplay
 of cosubstitution with the destructors $\shead$ resp.\ $\head$ via the first two axioms.
 In order to  capture the interplay 
-of cosubstitution  with the destructor $\stail$ (for streams) resp.\ $\tail$ (for infinite triangular matrices), we develop the notion of \emph{comodule over a relative comonad}
- in \Cref{sec:comodules}. 
+of cosubstitution  with the destructor $\stail$ (for streams) resp.\ $\tail$ (for infinite triangular matrices), 
+we develop the notion of \emph{comodule over a relative comonad} and, more importantly, their morphisms, in \Cref{sec:comodules}. 
+
+
+
+
 
 
 
