@@ -540,6 +540,14 @@ The first example is the type of \emph{streams} of elements of a given base type
   We call a \emph{bisimulation on streams (over a given type)} any binary relation that is compatible with the observations on streams.
   If two streams are related by \emph{any} bisimulation,
   then these two streams are also bisimilar; this is what the introduction rule declares. In that sense, bisimilarity is the largest bisimulation.
+
+\begin{figure}
+ \begin{mdframed}
+  \input{stream_rules}
+ \end{mdframed}
+ \caption{Rules for streams and bisimilarity on them} \label{stream_rules}
+\end{figure}
+
   
   We define a \emph{co}substition operation 
    \[\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B\] 
@@ -555,12 +563,6 @@ The first example is the type of \emph{streams} of elements of a given base type
   Cosubstitution is compatible with bisimilarity on streams, and thus is (the carrier of) a family
   \[ \sredec_{A,B} : \Setoid(\stream A, \eq B) \to \Setoid(\stream A,\stream B) \enspace . \]
 
-\begin{figure}
- \begin{mdframed}
-  \input{stream_rules}
- \end{mdframed}
- \caption{Rules for streams and bisimilarity on them} \label{stream_rules}
-\end{figure}
 
 % 
 
