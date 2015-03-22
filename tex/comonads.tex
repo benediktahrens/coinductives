@@ -4,24 +4,11 @@
 
 \documentclass[a4paper,USenglish]{lipics}
 
-% \usepackage[utf8]{inputenc}
-
-% \usepackage[protrusion=true,expansion=true]{microtype}
 
 \usepackage{csquotes}
 
-% \usepackage[style=numeric,
-% %  backref=true,
-%  isbn=false,
-% %  doi=false,
-%  maxnames=3,
-%  maxbibnames=99 ,                
-%  uniquename=init ,
-% ]{biblatex}
-% \bibliography{literature.bib}
 
 \usepackage{mdframed}
-\usepackage{multicol}
 \usepackage{ownstylelipics}
 
 
@@ -70,7 +57,6 @@ Toulouse}
 
 \maketitle
 
-% \tableofcontents
 
 \begin{abstract}
  We study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
@@ -111,24 +97,6 @@ Toulouse}
  \emph{Intensional} Martin-L\"of type theory  lacks the reflection principle for the sake of decidability of type checking. 
  This variant forms the basis of the computer proof assistants \coq, \matita and \agda.
 
- 
-\begin{comment}
- \subsection{(Non-)wellfounded trees: (co)inductive types}
- 
- A \emph{tree} is abstractly given by its \emph{root} and its \emph{subtrees}, which we think of as being attached to the root.
- Subtrees are themselves trees, again consisting of a root and attached subtrees.
- The roots of the various subtrees occurring in a tree are called \emph{nodes}. Among those, there are nodes without any subtrees, which are called \emph{leaves}.
- 
-%  TODO: fill in a picture of a tree
- 
- 
- 
-
- A fundamental property of a tree is \emph{finiteness}. A tree is finite if it does not have a subtree of infinite length. 
-
- An inductive set/type specifies a set/type of trees of given shape, i.e.\ it specifies the set/type of nodes and, for each node, the number (cardinality) of subtrees 
- attached to that node. The trees defined inductively are \emph{finite} trees, i.e.\ no infinite chain of subtrees occurs in such a tree.
-\end{comment}
  
 
  \subsection{Wellfounded trees and their semantics}\label{sec:sem_ind}
@@ -178,20 +146,12 @@ Toulouse}
  postulating the existence of \emph{co}inductive types, see below.
  
  
-%  When specifying a universal property within type theory, one needs a suitable notion of \emph{uniqueness} (of certain maps or morphisms).
-%  The property of uniqueness (or more generally, equality) of morphisms may now be expressed in terms of either judgmental or propositional equality.
-%   While in extensional type theory the two equalities coincide, in intensional type theory they do not, making this choice a crucial one.
-%  
- 
  The reflection rule equips \emph{extensional} type theory with extensional features similar to those of set theory.
  As a consequence, the characterization given by Dybjer \cite{DBLP:journals/tcs/Dybjer97} of an inductive type in extensional MLTT works as in set theory: 
  an inductive type constitutes the initial algebra for some endofunctor on the category of types.
- 
- 
   
-
  
-  In \emph{intensional} Martin-Löf type theory the characterization of inductive types as initial algebras of some endofunctor fails 
+ In \emph{intensional} Martin-Löf type theory the characterization of inductive types as initial algebras of some endofunctor fails 
   for a lack of function extensionality \parencite{DBLP:journals/tcs/Dybjer97}, 
   but it can be recovered \parencite{DBLP:conf/lics/AwodeyGS12} in an \emph{extension} of intensional MLTT called
   \emph{Homotopy Type Theory} \parencite{hottbook}.
@@ -202,14 +162,6 @@ Toulouse}
  from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of uniqueness.
  
  
-\begin{comment} 
-%  TODO: put this at the beginning of cosubstitution
- The characterization of inductive sets/types as initial objects in some category
- has been extended to some \emph{heterogeneous}---also called \emph{nested}---inductive data types, e.g., the type of $\lambda$-terms,
- in different formulations \parencite{fpt, DBLP:journals/iandc/HirschowitzM10}.
- The main goal of these works is not just to characterize a data type via a universal property, but rather a data type
- \emph{equipped with a canonical, well-behaved substitution operation}.
-\end{comment} 
  
 
  \subsection{Non-wellfounded trees: simply dualizing?}\label{sec:sem_coind}
@@ -245,11 +197,6 @@ Toulouse}
  The objects of the considered categories are not plain coalgebras for some endofunctor, but rather coalgebras with extra structure.
  This extra structure accounts for a \emph{cosubstitution} operation with which the considered codata types are endowed in a canonical way.
  The cosubstitution operation is explained in \Cref{sec:cosubst}.
-
-% \begin{Long}
-%  We mention here work by \textcite{DBLP:conf/calco/Marchi05}, who studies the existence of coinductive types in models of \emph{extensional} Martin-L\"of type theory. In that work, no \emph{internal} characterization of coinductive types is given.
-%  Furthermore, his work does not account for the mentioned cosubstitution operation.
-% \end{Long}
 
 
 \subsection{Homogeneous and heterogeneous trees}\label{sec:hom_het}
@@ -315,7 +262,7 @@ We first consider the first case of \emph{leaf-labeled trees}.
  
  
 
- \subsection{Our proofs are correct.}
+ \subsection{Computer-checked proofs}
 
  
  All our results have been implemented in the proof assistant \coq \parencite{coq84pl4}.
@@ -333,23 +280,12 @@ We first consider the first case of \emph{leaf-labeled trees}.
  they can be deduced from the type of the later arguments.
  We assume basic knowledge of category theory; any instances used are defined in the following.
   
-%  \subsubsection*{More related work}
- 
-% %  The notion of \emph{module over a monad}, which we dualize and generalize in this work, is used by \textcite{DBLP:journals/iandc/HirschowitzM10}
-% %  to give an initial semantics result for languages with variable binding. 
-%  Their work is based on work of \textcite{alt_reus},
-%  who show that the lambda calculus equipped with a simultaneous substitution constitutes a monad.
-%  We make use of the notion of \emph{relative comonad}, the dual to relative monads as introduced by \textcite{DBLP:conf/fossacs/AltenkirchCU10}.
-%  One of our main examples, the codata type of infinite triangular matrices, is studied by \textcite{DBLP:conf/types/MatthesP11}.
-%  Redecoration for both finite and infinite triangular matrices is used by \textcite{DBLP:journals/tcs/AbelMU05} to exemplify 
-%  the expressivity of the studied recursion schemes.
  
  
  \subsection{Organisation of the paper}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
   In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those codata types,
   in particular, the respective cosubstitution operations.
-%    Their specifying rules are given in \Cref{stream_rules} and \Cref{tri_rules}, respectively.
   In \Cref{sec:comonads} we present \emph{relative comonads} and define the category of comonads relative to a fixed functor.
     We give some examples of relative comonads using the codata types presented in \Cref{sec:tri}, 
     and relate them to traditional comonads.
@@ -360,8 +296,7 @@ We first consider the first case of \emph{leaf-labeled trees}.
       We then prove that the codata types constitute the terminal models in the respective categories.
       We present an example of a map defined as a terminal morphism in the category of models for streams, exploiting terminality of $\stream$.
   In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
-%   A table with the correspondence between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
-
+  
 
 \section{Preliminaries}\label{sec:preliminaries}
 
@@ -402,8 +337,6 @@ We omit the definitions, which can be found in our \coq files \parencite{trimat_
  
  We denote by $\Setoid$ the category (in the sense of \Cref{def:cat_imltt}) an object of which is a setoid.
  A morphism between setoids is a type-theoretic function between the underlying types that is compatible in the obvious sense with the equivalence relations of the source and target setoids.
-%  If $A$ is a setoid, we also use $A$ to refer to its underlying type, and thus write $a:A$ for an element $a$ of the type underlying the setoid $A$. 
-%  We write $a\sim a'$ for related elements $a$ and $a'$ in $A$.
  The equivalence relation on setoid morphisms is given by pointwise equivalence:
  two parallel morphisms of setoids $f,g:A\to B$ are equivalent if for any $a:A$ we have $fa \sim_B ga$.
  The category $\Setoid$ thus is cartesian closed.
@@ -449,7 +382,6 @@ In this section two particular coinductive type families in intensional Martin-L
 For $a,b : A$, the Martin-L\"of identity type between $a$ and $b$ is denoted by $a = b$.
 
 We present the type-theoretic rules specifying these codata types and \emph{bisimilarity} on them.
-% Bisimilarity is a coinductively defined equivalence relation on types which 
 Categorically, bisimilarity on a given codata type is given by the largest binary relation on that type that is 
 compatible (in a sense to be specified later) with the \emph{observations} on that codata; it is the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93}.
 Here, an observation is the result of \emph{destructing}, i.e.\ taking apart, an element of a given codata type.
@@ -467,18 +399,11 @@ For instance, a map into streams is defined by specifying $\shead$ and $\stail$ 
   the pair of clauses 
    \[\comp{f}{\shead} := h \quad \text{ and } \quad \comp{f}{\stail}:= t \] abbreviates the definition $f := \corec~h~t$.
 
-% Maps into a coinductive data type are specified by the observations, i.e.\ the value of the destructors, on the output of those maps.  
-% The precise rule for specifying maps into the considered coinductive type is given in \Cref{stream_rules}.
-
-
-
-
-% In this text, we use a more convenient syntax, as illustrated in \Cref{eq:tail_sredec}.
 
 
 The first example is the type of \emph{streams} of elements of a given base type $A$:
 
-% In the presentation we use the notational convention of \Cref{def:set_setoid}, using the same name for a setoid and its underlying type.
+
 \begin{ex}[The coinductive type family of streams]
  \label{ex_stream}
   Let $A$ be a type. A \emph{stream over $A$} is, intuitively, an infinite list of elements of $A$. 
@@ -1776,7 +1701,6 @@ This necessitates a semantic analysis of the conditions that a functor (on the c
  We are grateful to André Hirschowitz, Ralph Matthes and Paige North for many helpful discussions.
  We thank the referees for their suggestions and comments, and the editors for making these proceedings happen.
  
-% \printbibliography
 \bibliographystyle{plain}
 \bibliography{literature}
 
