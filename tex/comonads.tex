@@ -6,29 +6,27 @@
 
 % \usepackage[utf8]{inputenc}
 
-\usepackage[protrusion=true,expansion=true]{microtype}
+% \usepackage[protrusion=true,expansion=true]{microtype}
 
+\usepackage{csquotes}
 
-\usepackage[style=numeric,
-%  backref=true,
- isbn=false,
-%  doi=false,
- maxnames=3,
- maxbibnames=99 ,                
- uniquename=init ,
-]{biblatex}
-\bibliography{literature.bib}
+% \usepackage[style=numeric,
+% %  backref=true,
+%  isbn=false,
+% %  doi=false,
+%  maxnames=3,
+%  maxbibnames=99 ,                
+%  uniquename=init ,
+% ]{biblatex}
+% \bibliography{literature.bib}
 
 \usepackage{mdframed}
 \usepackage{multicol}
 \usepackage{ownstylelipics}
 
-\usepackage{comment}
-% \excludecomment{Long}\includecomment{Short}
-\includecomment{Long}\excludecomment{Short}
 
-% \pagestyle{plain}
 
+\newcommand{\parencite}[1]{\cite{#1}}
 
 \title{Terminal semantics for codata types in intensional Martin-L\"of type theory%
 \footnote{The work of Benedikt Ahrens was partially supported by the CIMI (Centre International de Mathématiques et d'Informatique) Excellence program ANR-11-LABX-0040-CIMI within the program ANR-11-IDEX-0002-02 during a postdoctoral fellowship.}
@@ -132,12 +130,8 @@ Toulouse}
  attached to that node. The trees defined inductively are \emph{finite} trees, i.e.\ no infinite chain of subtrees occurs in such a tree.
 \end{comment}
  
-\begin{Long}
+
  \subsection{Wellfounded trees and their semantics}\label{sec:sem_ind}
-\end{Long}
-\begin{Short}
- \paragraph*{Semantics of inductive types}
-\end{Short}
  
  A tree is a special kind of graph (with labeled edges and unlabeled vertices), consisting of a \emph{root} (edge), 
  to which a number of \emph{subtrees} are attached. 
@@ -175,8 +169,8 @@ Toulouse}
  
  In a type-theoretic setting as given by Martin-L\"of type theory \parencite{martin_lof}, 
  two approaches to the semantics of inductive types have been studied: 
- one approach consists in showing that inductive types exist in a \emph{model} of the type theory,
- as is done, e.g., by \textcite{DBLP:journals/apal/MoerdijkP00}.
+ one approach consists in showing that inductive types exist in a \emph{model} of the type theory
+ (see, e.g., \cite{DBLP:journals/apal/MoerdijkP00}).
  Another approach is to prove that adding certain type-theoretic rules to the type theory---rules which postulate the existence
  of inductive types in the type theory---implies (or is equivalent to) the existence of a universal object \emph{within} type theory
  (see, e.g., \parencite{DBLP:conf/lics/AwodeyGS12, DBLP:journals/tcs/Dybjer97}).
@@ -190,7 +184,7 @@ Toulouse}
 %  
  
  The reflection rule equips \emph{extensional} type theory with extensional features similar to those of set theory.
- As a consequence, the characterization given by \textcite{DBLP:journals/tcs/Dybjer97} of an inductive type in extensional MLTT works as in set theory: 
+ As a consequence, the characterization given by Dybjer \cite{DBLP:journals/tcs/Dybjer97} of an inductive type in extensional MLTT works as in set theory: 
  an inductive type constitutes the initial algebra for some endofunctor on the category of types.
  
  
@@ -217,12 +211,8 @@ Toulouse}
  \emph{equipped with a canonical, well-behaved substitution operation}.
 \end{comment} 
  
-\begin{Long}
+
  \subsection{Non-wellfounded trees: simply dualizing?}\label{sec:sem_coind}
-\end{Long}
-\begin{Short}
- \paragraph*{Coinductive types: simply dualizing?}
-\end{Short}
 
   Coinductive sets/types describe sets/types of potentially \emph{infinite} trees, that is, trees that may have an infinite chain of subtrees---still formed according to some signature.
   An example of such a coinductive set/type is given by the \emph{co}natural numbers, which are specified by the same signature as the natural numbers.
@@ -278,12 +268,8 @@ This is explained in more detail below.
 The examples we consider are trees with just one subtree. A generalization to trees (no matter whether homogeneous or heterogeneous) with a family of subtrees indexed by some fixed type $I$ as above is straightforward---we refrain from striving for this additional generality in order to keep the exposition as simple and clear as possible, and also in view of a lack of practical examples where this generality would be useful.
 
  
-\begin{Long} 
+
  \subsection{Cosubstitution: a comonadic operation on parametrized codata}\label{sec:cosubst}
-\end{Long}
-\begin{Short}
- \paragraph*{Cosubstitution: a comonadic operation on parametrized codata}
-\end{Short}
 
 
 
@@ -308,7 +294,7 @@ We first consider the first case of \emph{leaf-labeled trees}.
  
  \emph{Node-labeled trees} can be equipped with a \emph{cosubstitution} operation. 
  Is this cosubstitution operation part of a comonad structure?
- In a set-theoretic setting, the fact that cosubstitution for coinductive sets is comonadic is established by \textcite{DBLP:conf/sfp/UustaluV01}.
+ In a set-theoretic setting, the fact that cosubstitution for coinductive sets is comonadic is established by Uustalu and Vene \cite{DBLP:conf/sfp/UustaluV01}.
  
   
  If we consider infinite (i.e., coinductive) node-labeled trees in IMLTT, however, the algebraic laws of cosubstitution for such trees have to be considered 
@@ -328,26 +314,14 @@ We first consider the first case of \emph{leaf-labeled trees}.
  and---via the use of (relative) comonads---a canonical cosubstitution operation on them.
  
  
-\begin{Long} 
+
  \subsection{Our proofs are correct.}
-\end{Long}
-\begin{Short}
- \paragraph*{Our proofs are correct.}
-\end{Short}
 
  
  All our results have been implemented in the proof assistant \coq \parencite{coq84pl4}.
  The \coq source files and HTML documentation are available online \parencite{trimat_coq}.
  Here, we hence omit the proofs and focus on definitions and statements.
  
-\begin{Short}
-\paragraph*{A longer version of this article} is available on the arXiv \parencite{trimat_coq}.
- There, we give details omitted here for reasons of space: 
-  how to get relative comonads from (traditional) comonads, 
-           remark on relative comonads into cartesian closed categories,
-           explain the relationship to coalgebra semantics, report on the formalization in \coq of our results and
-           give proofs of the results in this work.
-\end{Short}
 
  
  
@@ -370,7 +344,6 @@ We first consider the first case of \emph{leaf-labeled trees}.
 %  Redecoration for both finite and infinite triangular matrices is used by \textcite{DBLP:journals/tcs/AbelMU05} to exemplify 
 %  the expressivity of the studied recursion schemes.
  
-\begin{Long}
  
  \subsection{Organisation of the paper}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
@@ -388,8 +361,6 @@ We first consider the first case of \emph{leaf-labeled trees}.
       We present an example of a map defined as a terminal morphism in the category of models for streams, exploiting terminality of $\stream$.
   In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
 %   A table with the correspondence between formal and informal definitions is given in \Cref{sec:table_formal_informal}.
-
-\end{Long}
 
 
 \section{Preliminaries}\label{sec:preliminaries}
@@ -603,7 +574,6 @@ The first example is the type of \emph{streams} of elements of a given base type
 \end{ex}
 
 
-\begin{Long}
 
 Streams are node-labeled trees where every node has exactly one subtree.
 We also consider a type of trees where every node has an arbitrary, but fixed, number of subtrees, 
@@ -617,20 +587,17 @@ parametrized by a type $B$.
  We thus obtain $\stream$ by considering, for $B$, the singleton type.
 \end{ex}
 
-\end{Long}
 
 We furthermore consider the \emph{heterogeneous} codata type family of \emph{infinite triangular matrices}:
 
 \begin{ex}\label{ex_tri}
-Infinite triangular matrices are studied in detail by
- \textcite{DBLP:conf/types/MatthesP11}, and also by \textcite{DBLP:journals/tcs/AbelMU05}.
+Infinite triangular matrices are studied in detail by Matthes and Picard \cite{DBLP:conf/types/MatthesP11}.
  We give a brief summary, but urge the reader to consult the given reference 
  for an in-depth explanation. 
  The codata type family $\Tri$ of infinite triangular matrices 
  is parametrized by a fixed type $E$ for entries not on the diagonal, 
  and indexed by another, \emph{variable}, type $A$ for entries on 
  the diagonal. 
-\begin{Long}
  Schematically, such a matrix looks like in \Cref{fig_tri}.
  \begin{figure}[bt]
  \centering
@@ -666,10 +633,10 @@ Infinite triangular matrices are studied in detail by
   \end{tikzpicture}\\[-2ex]
   \caption{An infinite triangular matrix over type $A$ and its destructors $\head$ and $\tail$}\label{fig_tri}
  \end{figure}
-\end{Long}
+
 % 
  The codata type is specified via two destructors $\head$ and $\tail$, whose types are given in \Cref{tri_rules}.
-\begin{Long}
+% 
  Given a matrix over type $A$, its $\tail$---obtained by removing the first element on the diagonal, i.e.\ the $\head$ element---can 
  be considered as a trapezium as indicated by the green line in \Cref{fig_tri}, or alternatively, as
  a triangular matrix over type $E\times A$, by bundling the entries of the diagonal with those above as indicated by the orange frames, shown in \Cref{fig:tri_trap}.
@@ -717,12 +684,7 @@ Infinite triangular matrices are studied in detail by
   \caption{The $\tail$ of a matrix over $A$ is a matrix over $E\times A$ (illustration taken from \parencite{DBLP:conf/types/MatthesP11})}
   \label{fig:tri_trap}
 \end{figure}
-\end{Long}
-\begin{Short}
- Given a matrix over type $A$, its $\tail$---obtained by removing the first element on the diagonal, i.e.\ the $\head$ element---can 
- be considered as a trapezium or, alternatively, as a triangular matrix over type $E\times A$, 
- by bundling the entries of the diagonal with those directly above the diagonal. 
-\end{Short}
+% 
 This change of parameter (from $A$ to $E \times A$) in the type of $\tail$ is the reason why the family $\Tri$ is called \emph{heterogeneous}.
 
 %  As with streams, we denote by $\Tri A$ not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
@@ -776,8 +738,7 @@ This change of parameter (from $A$ to $E \times A$) in the type of $\tail$ is th
   \begin{align} \comp{\redec~f}{\head} := f \quad\text{ and } \quad
                   \comp{\redec~f}{\tail} := \comp{\tail}{\redec~(\extend~f)} \enspace . \label{eq:rest_redec}
     \end{align}
-An illustration of the redecoration operation is given in \Cref{fig:redec}, 
-taken from the article by \textcite{DBLP:conf/types/MatthesP11}.    
+An illustration of the redecoration operation is given in \Cref{fig:redec} (taken from \cite{DBLP:conf/types/MatthesP11}).    
 \begin{figure}[tbp]
   \centering
   \begin{tikzpicture}[scale = 0.6]
@@ -827,8 +788,7 @@ Here, the need for the family of auxiliary functions
   are suitably defined to account for the change of the type of the argument of $\redec$ when redecorating $\tail~t : \Tri(E\times A)$
   rather than $t : \Tri A$, namely
   \[ \extend(f) := \langle \comp{\head_{E\times A}}{\pr_1(E,A)} , \comp{\cut_A}{f} \rangle \enspace . \]
-  An illustration of this operation is given in \Cref{fig:lift}, 
-  taken from the article by \textcite{DBLP:conf/types/MatthesP11}.    
+  An illustration of this operation is given in \Cref{fig:lift} (taken from \cite{DBLP:conf/types/MatthesP11}).    
   \begin{figure}[tbp]
   \centering
   \begin{tikzpicture}[scale = 0.6]
@@ -887,7 +847,7 @@ All the operations are suitably compatible with the bisimilarity relations, so t
 
 In this section we define \emph{comonads relative to a functor} and morphisms between those, and present some examples.
 
-\emph{Relative monads} were defined by \textcite{DBLP:conf/fossacs/AltenkirchCU10} as a notion of monad-like structure
+\emph{Relative monads} were defined by Altenkirch, Chapman and Uustalu \cite{DBLP:conf/fossacs/AltenkirchCU10} as a notion of monad-like structure
 whose underlying functor is not necessarily an endofunctor. 
 An example of relative monad given in that work is the lambda calculus over finite contexts.
 
@@ -939,23 +899,9 @@ An application of this auxiliary functor is inserted where necessary to make the
 \]
 \end{defn}
 
-\begin{Short}
-\begin{rem}\label{def:lift}
- \begin{itemize}
-  \item Relative comonads over the identity functor are comonads.
-  \item Just like relative monads, relative comonads are functorial.
-  \item Under some conditions on the functor $F$, one can obtain comonads relative to $F$ from (absolute) comonads on the 
- source category $\C$.
-  \item A \emph{weak constructive comonad} as defined by \textcite{DBLP:conf/types/MatthesP11}  is \emph{precisely}
-  a comonad relative to the functor $\eq : \Set\to\Setoid$.
- \end{itemize}
-\noindent
-Details are given in the long version of this article \parencite{trimat_coq}.
-\end{rem}
-\end{Short}
 
 
-\begin{Long}
+
  \Cref{def:rel_comonad} does not mention an action of $T$ on morphisms. Indeed, just like with relative monads, this action is definable rather than part of the definition:
 \begin{defn}%[Functoriality for relative comonads]
 \label{def:lift}
@@ -976,15 +922,14 @@ Details are given in the long version of this article \parencite{trimat_coq}.
 \end{rem}
 
 
-\end{Long}
 
-\begin{Long}
+
+
 Comonads relative to the identity functor are exactly (traditional) comonads.
-\end{Long}
 
 
 
-\begin{Long}
+
 We obtain a comonad relative to $F:\C\to\D$ from a comonad on the category $\C$ by composing $M$ with $F$:
 \begin{ex}[Relative comonads from comonads]\label{ex_relcom_from_com}
   Let $F : \C \to \D$ be a fully faithful functor and $(M,\counit,\cobind)$ be a (traditional) comonad (in Kleisli form) on $\C$.
@@ -1010,7 +955,6 @@ The other way round does not require any conditions on the functor $F$:
 \end{ex}
 
 
-\end{Long}
 
 \noindent
 The next examples concern the codata type families presented in \Cref{sec:tri}.
@@ -1022,23 +966,19 @@ The next examples concern the codata type families presented in \Cref{sec:tri}.
    $\cobind_{A,B} := \sredec_{A,B}$.
 \end{ex}
 
-\begin{Long}
+
 \begin{rem}
  Instead of considering $\stream$ as a relative comonad from $\Set$ to $\Setoid$, it could be considered as a traditional comonad on the 
  category $\Setoid$, propagating the equivalence relation on the base type, say $A$, to $\stream A$.
  The relative point of view can then be recovered as an instance of \Cref{ex_relcom_from_com_on_target}.
 \end{rem}
-\end{Long}
 
 
-\begin{Long}
 
 \begin{ex}[Trees]\label{ex_tree_comonad}
  Fix a type $B$. Analogously to \Cref{ex_stream_comonad}, the map $A \mapsto \Tree_B(A)$ of \Cref{ex_trees}
  is equipped with a structure of a comonad relative to $\eq: \Set\to\Setoid$.
 \end{ex}
-
-\end{Long}
 
 \begin{ex}[Infinite triangular matrices]\label{ex:tri_comonad}
   The codata type family $\Tri : \Set \to \Setoid$ of \Cref{ex_tri} is equipped with a structure of a comonad relative to the functor 
@@ -1047,15 +987,14 @@ The next examples concern the codata type families presented in \Cref{sec:tri}.
    $\cobind_{A,B} := \redec_{A,B}$.
 \end{ex}
 
-\begin{Long}
+
 \begin{rem}
-  A \emph{weak constructive comonad} as defined by \textcite{DBLP:conf/types/MatthesP11} to characterize the codata type $\Tri$
+  A \emph{weak constructive comonad} as defined by Matthes and Picard \cite{DBLP:conf/types/MatthesP11} to characterize the codata type $\Tri$
   and redecoration on it, is \emph{precisely}
   a comonad relative to the functor $\eq : \Set\to\Setoid$.
 \end{rem}
-\end{Long}
 
-\begin{Long}
+
 \begin{rem}[Comonads into cartesian closed categories]
  With the notations of \Cref{def:rel_comonad}, suppose that the category $\D$ is cartesian closed, i.e. that $\D$ has
  internal hom-objects. This is the case, e.g., for the category $\Setoid$ of setoids.
@@ -1065,7 +1004,6 @@ The next examples concern the codata type families presented in \Cref{sec:tri}.
  compatibility of cosubstitution with bisimilarity, namely that cosubstitution with two extensionally bisimilar functions
  yields extensionally bisimilar functions.
 \end{rem}
-\end{Long}
 
 
 The notion of relative comonad captures many properties of $\stream$ resp.\ $\Tri$ and cosubstitution on them, in particular the interplay
@@ -1119,7 +1057,6 @@ A morphism $\tau : T\to S$ of relative comonads over a functor $F:\C\to\D$ is  \
 with respect to the functorial action of \Cref{def:lift}.
 \end{rem}
 
-\begin{Long}
 
 \begin{ex}[\Cref{ex_relcom_from_com} continued]\label{ex_relcom_from_com_morphism}
  Let $M$ and $M'$ be two comonads on $\C$, and let $\tau : M \to M'$ be a comonad morphism. 
@@ -1141,7 +1078,6 @@ with respect to the functorial action of \Cref{def:lift}.
 %  functor $\eq: \Set\to\Setoid$, thus above construction is applicable.
 \end{rem}
 
-\end{Long}
 
 
 An example of comonad morphism is given by the \emph{diagonal} map which extracts the diagonal of an infinite triangular matrix (over type $A$),
@@ -1157,7 +1093,6 @@ The map $\diagonal_A$ is defined via the clauses
 \end{ex}
 
 
-\begin{Long}
 
 \begin{rem}[Non-examples]
  The family of destructors $\stail_A : \stream A \to \stream A$  
@@ -1194,7 +1129,6 @@ as a \emph{comodule} over $T$, rather than a comonad. The below definition may t
   \end{align*}
 \end{defn}
 
-\end{Long}
 
 
 
@@ -1238,14 +1172,12 @@ Our motivation for developing this notion is the characterization of the destruc
 \end{defn}
 
 
-\begin{Long}
 Similarly to relative comonads, comodules over these are functorial:
 \begin{defn}[Functoriality for comodules]
 \label{def:comodule_lift}
  Let $M : \RComod(T,\E)$ be a comodule over $T$ towards some category $\E$. For $f : \C(A,B)$ we define
   \[ M(f) := \mcobind(\comp{\counit_A}{Ff}) \enspace .  \]
 \end{defn}
-\end{Long}
 
 \noindent
 Every relative comonad constitutes a comodule over itself, the \emph{tautological} comodule:
@@ -1314,12 +1246,10 @@ The motivating examples for us to consider comodules and their morphisms are the
 
 
 
-\begin{Long}
 \begin{rem}
   The family of morphisms constituting a comodule morphism is actually natural with respect to the functoriality 
   defined in \Cref{def:comodule_lift}.
 \end{rem}
-\end{Long}
 
 Given a morphism of comonads, we can \enquote{transport} comodules over the source comonad to comodules over the target comonad:
 
@@ -1369,11 +1299,9 @@ This terminal semantics result is hardly surprising; however, it is still intere
 
 
 
-\begin{Long}
 \subsection{Models for $\stream$}
 
 We first consider the homogeneous codata type of streams.
-\end{Long}
 
 \begin{defn}[Category of models for $\stream$]
  \label{cat_stream}
@@ -1428,12 +1356,10 @@ namely that of a coalgebra of some endofunctor. The relationship between models 
  a morphism of comodules, is the terminal object in the category of models of \Cref{cat_stream}.
 \end{thm}
 
-\begin{Long}
 More precisely, \Cref{thm_stream_terminal} says that the rules given in \Cref{stream_rules} allow to prove that
 the category of models defined in \Cref{cat_stream} has a terminal object.
 The proof of \Cref{thm_stream_terminal} being essentially the same as that of \Cref{ex:final_sem_tri}, we omit the former.
 However, a mechanized proof can be found in our \coq library, see \Cref{sec:formal}.
-\end{Long}
 
 
 The property of being terminal can be used to specify a map into streams, by equipping some comonad $S$ relative to $\eq:\Set\to\Setoid$
@@ -1448,18 +1374,14 @@ We do so for the comonad $\Tri$:
    \[(\Tri, t^{\diagonal}) \to (\stream, \stail)\] has as underlying morphism of relative comonads the one defined in \Cref{ex_diag}.
 \end{ex}
 
-\begin{Long}
  
 \begin{rem}
  Fix a type $B$. A result analogous to \Cref{thm_stream_terminal} holds for trees $\Tree_B$ of \Cref{ex_tree_comonad}. 
  We refrain from giving a precise statement of this result.
 \end{rem}
 
-\end{Long}
 
-\begin{Long}
 \subsection{Models for $\Tri$}
-\end{Long}
 
 In analogy to the definition of models for the signature of streams, one would like to define
 a model for the signature of $\Tri$ as a pair $(T,r)$ of a comonad $T$ relative to $\eq : \Set \to \Setoid$ and 
@@ -1531,11 +1453,7 @@ Comonads with cut relative to a fixed functor $F:\C\to\D$ and $E:\C_0$ form a ca
 There is a forgetful functor from $\RComonadWC(F,E)$ to $\RComonad(F)$.
 Conversely, any comonad $T$ relative to a suitable functor can be equipped with a $\cut$ operation, using functoriality of $T$.
 %
-\begin{Short}
- Details are given in the long version of this article.
-\end{Short}
 
-\begin{Long}
 \begin{rem}[Canonical $\cut$ operation]\label{canonical_cut}
  Any comonad $T$ relative to a product-preserving functor $F:\C\to\D$  can be equipped with a $\cut$ operation relative to 
  $E:\C_0$ satisfying the properties of \Cref{def:rel_comonad_with_cut} by setting
@@ -1551,11 +1469,8 @@ Conversely, any comonad $T$ relative to a suitable functor can be equipped with 
 
 The functor $\ccut_{F,E}$, followed by the forgetful functor, yields the identity. We can thus view
 relative comonads with cut as a generalization of relative comonads.
-\end{Long}
 
-\begin{Long}
 Our prime example of relative comonad comes with a $\cut$ operation that is \emph{not} the canonical one:
-\end{Long}
 
 \begin{ex}%[$\cut$ for $\Tri$]
 \label{def:cut_for_tri}
@@ -1588,11 +1503,9 @@ where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_c
  the assignment \[ \alpha(E \times \_)_A := \alpha_{E\times A} \] defines a comodule morphism 
   $\alpha(E\times \_) : M(E\times \_) \to N(E\times \_) $.
 
-\begin{Long}
   \noindent
   We thus obtain an endofunctor on the category of comodules over $T$ towards $\E$,
    \[ M \mapsto  M (E\times \_) : \RComod(T,\E) \to \RComod(T,\E) \enspace . \]
-\end{Long}
 \end{defn}
 
 
@@ -1605,7 +1518,6 @@ where the $\extend$ operation is the one defined in \Cref{def:rel_comonad_with_c
 \end{rem}
 
 
-\begin{Long}
 
 It directly follows from the definition that the cut operation of any comonad $T$ with cut 
 constitutes a comodule morphism $\cut : T(E\times \_) \to T$.
@@ -1619,11 +1531,9 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
       \end{xy}
    \]
 
-\end{Long}
 
 
 
-\begin{Long}
 The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ destructor---%
 more precisely, of its behavior with respect to cosubstitution as in \Cref{eq:rest_redec}---via the notion of comodule morphism:
 
@@ -1637,7 +1547,6 @@ from the tautological comodule $\Tri$ to the composed comodule $\Tri (E\times \_
 with \enquote{product with $E$} as defined in \Cref{def:product_in_context}).
   
 \end{ex}
-\end{Long}
 
 
 The axiomatization of the cut operation now allows us to define models for the signature of infinite triangular matrices:
@@ -1653,7 +1562,6 @@ The axiomatization of the cut operation now allows us to define models for the s
    such that for any set $A$,
     $ \comp{\cut^T_A}{\tail^T_A} = \comp{\tail^T_{E\times A}}{\cut^T_{E\times A}}$.
     
- \begin{Long}
    The last equation can be stated as an equality of comodule morphisms, diagrammatically
 %      \[ \comp{\cut}{\tail} = \comp{\tail(E\times \_)}{\cut(E\times\_)} \quad \bigl( = (\comp{\tail}{\cut})(E\times \_)\bigr)\enspace . \]
    \[
@@ -1665,7 +1573,6 @@ The axiomatization of the cut operation now allows us to define models for the s
     \end{xy}
    \]
 
-\end{Long}
   
    
    A morphism between two such objects $(T,\tail^T)$ and $(S,\tail^S)$
@@ -1689,7 +1596,6 @@ Analogously to the signature for streams, there is a forgetful functor from mode
 endofunctor:
 
 \begin{rem}[Coalgebras for $\Tri$]
-\begin{Long}
   Let $E : \Set$ be a type. Define the functor
   \begin{align*}  F: [\Set,\Setoid] &\to [\Set,\Setoid]  \enspace ,\\
                       F(G)(A) &:= \eq(A) \times G(E \times A) \enspace .
@@ -1701,11 +1607,6 @@ endofunctor:
   and the comodule morphism $\tail^T : T \to T(E\times \_)$ (to give the second component).
   Note that both the counit and $\tail^T$ are natural transformations.
 %   It is not clear to us whether this forgetful functor has an adjoint.
-\end{Long}
-\begin{Short}
- A remark similar to \Cref{rem:coalg_stream} is in order. Omitted for lack of space, it can be found in the long
- version of this article.
-\end{Short}
 \end{rem}
 
 
@@ -1717,7 +1618,6 @@ endofunctor:
    constitutes the terminal model of triangular matrices.
 \end{thm}
 
-\begin{Long}
 \begin{proof}
    For a given model $(T,\tail^T)$, the (terminal) morphism $\bigcirc = \bigcirc_T:T\to\Tri$ is defined via the corecursive equations
 % %     \begin{align}\head\bigl(\bigcirc~t\bigr) &:= \counit^T~t \quad\text{ and } \\
@@ -1739,13 +1639,11 @@ endofunctor:
    The same argument is used to show, again by use of the introduction rule for bisimilarity, that any two morphisms of models $\tau,\rho : (T,\tail^T) \to (\Tri,\tail)$
    are equal in the sense of being pointwise bisimilar, thus concluding the proof.   
 \end{proof}
-\end{Long}
 
 This universal property characterizes not only the codata type $\Tri$, but also
 the \fat{bisimilarity} relation on it as well as the \fat{cosubstitution} operation.
 
 
-\begin{Long}
 \section{Formalization in \coq}\label{sec:formal}
 
 All our definitions and theorems are mechanized in the proof assistant \coq \parencite{coq84pl4}.
@@ -1774,7 +1672,7 @@ Here, the code \lstinline!E x A! denotes the cartesian product of the types \lst
 \end{figure}
 
 
-For the instantiation of the module type for $\Tri$, the formalization of infinite triangular matrices is taken from the work by \textcite{DBLP:conf/types/MatthesP11},
+For the instantiation of the module type for $\Tri$, the formalization of infinite triangular matrices is taken from the work by Matthes and Picard \cite{DBLP:conf/types/MatthesP11},
 and only slightly adapted to compile with \coq version 8.4pl4.
 
 Apart from the implementation of our codata types via axioms (which are encapsulated in modules), the mechanization does \emph{not} rely on any additional axioms.
@@ -1862,7 +1760,6 @@ This might be the right moment to point to work on a device allowing the declara
 see \parencite{DBLP:conf/popl/AbelPTS13}.
 \end{comment}
 
-\end{Long}
 
 \section{Conclusion and future work}
 
@@ -1875,14 +1772,13 @@ This necessitates a semantic analysis of the conditions that a functor (on the c
 
 
 
-\begin{Long}
 \paragraph*{Acknowledgments}
  We are grateful to André Hirschowitz, Ralph Matthes and Paige North for many helpful discussions.
  We thank the referees for their suggestions and comments, and the editors for making these proceedings happen.
-\end{Long}
  
-\printbibliography
-
+% \printbibliography
+\bibliographystyle{plain}
+\bibliography{literature}
 
 
 \end{document}
