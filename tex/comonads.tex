@@ -772,7 +772,7 @@ All the operations are suitably compatible with the bisimilarity relations, so t
 
 In this section we define \emph{comonads relative to a functor} and morphisms between those, and present some examples.
 
-\emph{Relative monads} were defined by Altenkirch, Chapman and Uustalu \cite{DBLP:conf/fossacs/AltenkirchCU10} as a notion of monad-like structure
+\emph{Relative monads} were defined by Altenkirch, Chapman, and Uustalu \cite{DBLP:conf/fossacs/AltenkirchCU10} as a notion of monad-like structure
 whose underlying functor is not necessarily an endofunctor. 
 An example of relative monad given in that work is the lambda calculus over finite contexts.
 
@@ -997,10 +997,6 @@ with respect to the functorial action of \Cref{def:lift}.
  yields a monad on $\C$. Again, this map extends to morphisms.
  The two functors between categories of monads thus defined are again adjoints.
  Writing down the details is lengthy but easy.
- 
-%  For instance, in a type theory with quotients, such as the \emph{Univalent Foundations} a.k.a.\ \emph{Homotopy Type Theory}
-%  \parencite{hottbook}, the functor \enquote{quotient} from setoids to types is left adjoint to the fully faithful 
-%  functor $\eq: \Set\to\Setoid$, thus above construction is applicable.
 \end{rem}
 
 
@@ -1026,9 +1022,6 @@ The map $\diagonal_A$ is defined via the clauses
  Similarly, while the map $A \mapsto \Tri(E\times A)$ inherits the structure of a relative comonad (see \Cref{product_comonad}),
  the family $\tail_A : \Tri A \to \Tri(E \times A)$  does \emph{not} constitute a comonad morphism
  of type $\Tri \to \Tri(E \times \_)$.
-%  One can, however, equip the functor given by precomposing $\Tri$ with \enquote{product with $E$}, i.e.\
-%  $A \mapsto \Tri (E\times A)$, with a structure of relative comonad, induced by that
-%  on $\Tri$, cf.\ \Cref{product_comonad}.
 \end{rem}
 
 Let $\C$ be a category with products and $E:\C_0$ be an object of $\C$.
@@ -1545,11 +1538,8 @@ endofunctor:
 
 \begin{proof}
    For a given model $(T,\tail^T)$, the (terminal) morphism $\bigcirc = \bigcirc_T:T\to\Tri$ is defined via the corecursive equations
-% %     \begin{align}\head\bigl(\bigcirc~t\bigr) &:= \counit^T~t \quad\text{ and } \\
-% %                      \tail\bigl(\bigcirc~t\bigr) &:= \bigcirc(\tail^T~t) 
-% %       \end{align}
-%       
-    \begin{align}  \comp{\bigcirc}{\head} &:= \counit^T \quad \text{ and } \label{eq:terminal_top}\\
+% 
+   \begin{align}  \comp{\bigcirc}{\head} &:= \counit^T \quad \text{ and } \label{eq:terminal_top}\\
                    \comp{\bigcirc}{\tail} &:= \comp{\tail^T}{\bigcirc} \enspace . \label{eq:terminal_rest}
     \end{align}
 
@@ -1614,78 +1604,6 @@ The correspondences between formalized statements and the statements in this art
 \end{figure}
 
 
-\begin{comment}
-\subsection{Implementation choices}
-
-We explain two choices we made in the course of the formalization in \coq. The first choice concerns
-the formalization of categories, more precisely, how to formalize \emph{equality of morphisms}.
-The second choice concerns the formalization of algebraic structures.
-
-\subsubsection{Setoids for hom-sets}
-We formalize categories to be given by a type of objects and a dependent type---indexed by pairs of objects---of morphisms,
-equipped with suitable composition and identity operations satisfying appropriate axioms.
-More precisely, the family of morphisms is given by a family of \emph{setoids}, where the setoidal equivalence relation on each
-type of morphisms denotes the equality relation on these morphisms. This approach was first used by
-\textcite{aczel_galois} in the proof assistant \texttt{LEGO}, and also by \textcite{concat}  in their library
-of category theory in \coq.
-At the moment, it seems to be the standard way of formalizing categories in intensional Martin-L\"of type theory.
-Alternatively, we could have chosen to consider morphisms modulo propositional equality, which is feasible in a more extensional type theory \parencite{rezk_completion}.
-
-Indeed, the morphisms we consider---morphisms of comonads and comodules---are given by structures
-bundling a lot of data and properties; in order to consider two such morphisms as equal, we usually only compare one field of the 
-corresponding records. Furthermore, this field usually consists of a (dependent) function.
-It would be rather cumbersome to reduce equality of two such records to extensional equality of one of their fields, 
-necessitating the use of the axioms of propositional and functional extensionality in IMLTT.
-Using setoids for morphisms instead seems to come with less overhead and to be conceptually cleaner.
-
-
-
-\subsubsection{Records vs.\ classes}
-Two approaches to the formalization of mathematical structures have been used extensively in \coq: on the one hand, packaging structures
-in \emph{record types}  in combination with use of \emph{canonical structures}, is used with success, e.g., in 
-the formalization of algebraic structure in the context of the proof of the Feit-Thompson theorem \parencite{DBLP:conf/tphol/GarillotGMR09}.
-On the other hand, \textcite{DBLP:journals/mscs/SpittersW11} suggest the use of \emph{type classes}, in particular when multiple inheritance
-is an issue.
-
-In the present formalization, we decide to use records rather than classes, since the strongest argument for type classes---multiple inheritance---does 
-not occur.
-We make use of canonical structures in order for \coq to deduce instances of categories when we mention objects of a category; 
-in particular, this is used to allow for overloading of the notation for morphisms of a category.
-We can thus conveniently use the same arrow symbol to denote the type of morphisms between two comonads, between two comodules and so on.
-\end{comment}
-
-\begin{comment}
-\subsection{Relationship with coinductive types as provided by \coq}
-
-The proof assistant \coq provides a mechanism to specify coinductive types (and families of types) via
-the keyword \lstinline!Coinductive!.
-The syntax used to specify a coinductive data type in this way resembles that of inductive families---in particular,
-the specification is done by specifying \emph{constructors} rather than \emph{destructors}.
-Similarly, the bisimilarity relation on a coinductive type is specified via this mechanism.
-Below, we print the \coq code which specifies the codata type of infinite triangular matrices and the 
-bisimilarity relation on it:
-
-\begin{lstlisting}
-CoInductive Tri A : Type :=
-    constr : A -> Tri (E x A) -> Tri A.
-CoInductive bisim : forall {A}, Tri A -> Tri A -> Prop :=
-    bisim_constr : forall {A} {t t' : Tri A}, 
-          top t = top t' -> 
-          bisim (rest t) (rest t') -> 
-          bisim t t'.
-\end{lstlisting}
-Here, the code \lstinline!E x A! denotes the cartesian product of the types \lstinline!E! and \lstinline!A!.
-
-The codata types specified via this \coq mechanism are stronger than those given by the axioms we consider.
-More precisely, we prove the axioms of \Cref{tri_rules} from the above declaration of \lstinline!CoInductive Tri! and
-\lstinline!CoInductive bisim!, and similar for streams.
-
-
-This might be the right moment to point to work on a device allowing the declaration of coinductive types via destructors in \agda, 
-see \parencite{DBLP:conf/popl/AbelPTS13}.
-\end{comment}
-
-
 \section{Conclusion and future work}
 
 We have given a categorical semantics for some homogeneous (streams and trees) and heterogeneous (infinite triangular matrices) codata types,
@@ -1699,7 +1617,7 @@ This necessitates a semantic analysis of the conditions that a functor (on the c
 
 \paragraph*{Acknowledgments}
  We are grateful to André Hirschowitz, Ralph Matthes and Paige North for many helpful discussions.
- We thank the referees for their suggestions and comments, and the editors for making these proceedings happen.
+ We thank the referees for their suggestions and comments, and the editors for their efforts organizing these proceedings.
  
 \bibliographystyle{plain}
 \bibliography{literature}

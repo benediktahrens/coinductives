@@ -1,25 +1,11 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ownstylelipics}%[ownstyle article helper]
+\ProvidesPackage{ownstylelipics}
 
-
-%Optionen werden ausgefhrt
 \ProcessOptions
 
-
-% Weitere Pakete werden geladen
-%\RequirePackage{ngerman, ifthen}
 \RequirePackage[all,2cell]{xy}\SelectTips{cm}{10}\SilentMatrices\UseAllTwocells  % commutative diagrams
 \RequirePackage{amsmath, amssymb, amsfonts}
-% \RequirePackage{amsthm}
-%\RequirePackage[latin1]{inputenc}
-%\RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
-% \RequirePackage{lmodern}
-
-% \RequirePackage[english]{babel}
-% \RequirePackage{csquotes}
-%\RequirePackage{geometry}
-%\usepackage{textcomp}
 
 \RequirePackage{xcolor}
 
@@ -28,6 +14,7 @@
 \definecolor{dkgreen}{rgb}{0,0.4,0}
 \definecolor{dk2green}{rgb}{0.4,0,0}
 \definecolor{dkviolet}{rgb}{0.6,0,0.8}
+\definecolor{DarkBlue}{rgb}{0,0.08,0.45}
 
 \RequirePackage{bussproofs}
 
@@ -45,49 +32,14 @@
 \def\lstlanguagefiles{defManSSR.tex}
 \lstset{language=SSR}
 
-
- 
-%\renewcommand{\labelenumi}{(\roman{enumi})}
-% \renewcommand{\theenumi}{\arabic{enumi}}
-%\renewcommand{\theenumi}{\alph{enumi}}
-% \renewcommand{\labelenumi}{\theenumi .}
-
 \newcommand{\constfont}[1]{\ensuremath{\mathsf{#1}}}
-
-
-
-
-\definecolor{DarkBlue}{rgb}{0,0.08,0.45}
-
-
-% \newenvironment{packenum}
-%      {\begin{enumerate}
-%   %      \setlength{\itemsep}{1pt}
-%   %      \setlength{\parskip}{0pt}
-%   %      \setlength{\parsep}{0pt}
-%      }   	
-%      {\end{enumerate}}
-
-% \newenvironment{packitem}
-%      {\begin{itemize}
-%    %     \setlength{\itemsep}{1pt}
-%    %     \setlength{\parskip}{0pt}
-%    %     \setlength{\parsep}{0pt}
-%      }   	
-%      {\end{itemize}}
-
 
 \RequirePackage{cleveref}
 
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}%[section]
 \newtheorem{ex}[defn]{Example}
-% \theoremstyle{remark}
  \newtheorem{rem}[defn]{Remark}
-%\newtheorem{defundsatz}[definition]{Definition und Satz}
-%\newtheorem{conjecture}{Conjecture}
-% \theoremstyle{myplain}
-%\newtheorem{prop}[definition]{Proposition}
 \theoremstyle{plain}
 \newtheorem{thm}[defn]{Theorem}
 
@@ -97,16 +49,6 @@
 \Crefname{thm}{Theorem}{Theorems}
 \Crefname{ex}{Example}{Examples}
 \Crefname{rem}{Remark}{Remarks}
-
-
-
-% \numberwithin{equation}{section}
-
-
-
-
-
-
 
 %\DeclareMathOperator{\PO}{PO}
 \DeclareMathOperator{\IP}{IP}
