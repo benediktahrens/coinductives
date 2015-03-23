@@ -1005,12 +1005,18 @@ An example of comonad morphism is given by the \emph{diagonal} map which extract
 yielding a stream over $A$:
 
 \begin{ex}\label{ex_diag}
-We define a morphism of relative comonads $\diagonal : \Tri \to \stream$ as follows.
-Given a matrix $t : \Tri A$, its diagonal is a stream $\diagonal_A~t : \stream A$.
+We define a morphism of relative comonads $\diagonal : \Tri \to \stream$ as follows:
+given a matrix $t : \Tri A$, its diagonal is a stream $\diagonal_A~t : \stream A$.
 The map $\diagonal_A$ is defined via the clauses
-\begin{align*} \comp{\diagonal_A}{\shead} := \head \quad\text{ and } \quad %\notag\\
+ \begin{equation*} \comp{\diagonal_A}{\shead} := \head \quad\text{ and } \quad %\notag\\
                   \comp{\diagonal_A}{\stail} := \comp{\comp{\tail}{\cut}}{\diagonal_A} \enspace . %\label{eq:diag}
-    \end{align*}
+ \end{equation*}
+Instead of proving the comonad morphism axioms for this map, we will, in \Cref{ex_diag_terminal}, specify the same map via a universal property. 
+There, the compatibility of this map with 
+cosubstitution on source and target will follow for free.
+
+
+
 \end{ex}
 
 
@@ -1284,12 +1290,15 @@ The property of being terminal can be used to specify a map into streams, by equ
 with the structure of a model for streams, that is, with a comodule morphism $S\to S$.
 We do so for the comonad $\Tri$:
 
-\begin{ex}
+\begin{ex}\label{ex_diag_terminal}
   We equip the relative comonad $\Tri$ with the structure of a model for $\stream$ by defining a 
-  morphism of tautological comodules over $\Tri$, given by
+  morphism of tautological comodules over $\Tri$, given by the composition
    \[ t^{\diagonal} := \comp{\tail}{\cut}  : \Tri \to \Tri \enspace . \]
-  It follows that the resulting terminal morphism of models
-   \[(\Tri, t^{\diagonal}) \to (\stream, \stail)\] has as underlying morphism of relative comonads the one defined in \Cref{ex_diag}.
+  By terminality we obtain a morphism of models
+   \[(\Tri, t^{\diagonal}) \to (\stream, \stail) \] 
+  which has, as underlying morphism of relative comonads, the one defined in \Cref{ex_diag}; 
+  that is, compatibility of this map with cosubstitution in $\Tri$ and $\stream$, respectively,
+  is for free.
 \end{ex}
 
  
