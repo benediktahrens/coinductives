@@ -1208,6 +1208,38 @@ This extends to morphisms of relative comonads in the following sense:
   \[ \induced{\tau} : \tau_*T \to S \enspace , \quad \induced{\tau}_A := \tau_A \enspace . \]
 \end{defn}
 
+We conclude the section with some constructions of comodules, which are not used in the following.
+
+\begin{lem}
+Let $T$ be a comonad relative to $F : \C \to \D$, and let $M : \C \to \E$ be a comodule over $T$.
+Let $G : \E \to \X$ be a functor.
+Then $G \circ M : \C \to \X$ is a comodule over $T$.
+
+This extends to morphisms of comodules: for $N$ another comodule over $T$ with target category $\E$, and $\alpha : M \to N$ a morphism of comodules,
+$G \circ \alpha, c \mapsto G(\alpha_c)$
+is a morphism of comodules from $G \circ M$ to $G \circ N$.
+This yields a functor
+$\RComod(T,\E) \to \RComod(T,\X)$. 
+\end{lem}
+
+\begin{lem}
+Let $T$ be a comonad relative to $F : \C \to \D$, and let $M : \C \to \E$ be a comodule over $T$.
+Let $G : \C \to \C$ be an endofunctor.
+Then $M \circ G : \C \to \E$ is a comodule over $T$.
+
+This extends to morphisms of comodules: for $N$ another comodule over $T$ with target category $\E$, and $\alpha : M \to N$ a morphism of comodules,
+$\alpha \circ G, c \mapsto \alpha_{Gc}$
+is a morphism of comodules from $M \circ G$ to $N \circ G$.
+This yields an endofunctor
+$\RComod(T,\E) \to \RComod(T,\E)$. 
+\end{lem}
+
+\begin{lem}
+Let $T$ be a comonad relative to $F : \C \to \D$, and let $M, N: \C \to \E$ be comodules over $T$.
+Suppose that $\E$ has coproducts, denoted $e + e'$.
+Then $M + N, c \mapsto M c + N c$ is a comodule over $T$.
+This construction extends to a coproduct on $\RComod(T,\E)$. 
+\end{lem}
 
 
 
