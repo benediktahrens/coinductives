@@ -1556,7 +1556,7 @@ endofunctor:
 \end{proof}
 
 This universal property characterizes not only the codata type $\Tri$, but also
-the \fat{bisimilarity} relation on it as well as the \fat{cosubstitution} operation.
+the bisimilarity relation on it as well as the cosubstitution operation.
 
 
 \section{Formalization in \coq}\label{sec:formal}
@@ -1586,9 +1586,6 @@ Here, the code \lstinline!E x A! denotes the cartesian product of the types \lst
  \caption{Definition of $\Tri$ and bisimilarity using \coq's \lstinline!CoInductive! vernacular} \label{tri_coinductive}
 \end{figure}
 
-
-For the instantiation of the module type for $\Tri$, the formalization of infinite triangular matrices is taken from the work by Matthes and Picard \cite{DBLP:conf/types/MatthesP11},
-and only slightly adapted to compile with \coq version 8.4pl4.
 
 Apart from the implementation of our codata types via axioms (which are encapsulated in modules), the mechanization does \emph{not} rely on any additional axioms.
 The \coq source files and HTML documentation are available from the project web site \parencite{trimat_coq}.
