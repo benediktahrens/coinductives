@@ -81,7 +81,7 @@ Toulouse}
   before passing to \emph{co}inductive types in \Cref{sec:sem_coind}.
   We describe
   the difference between homogeneous and heterogeneous (co)data types in \Cref{sec:hom_het} and explain substitution for leaf-labeled trees and cosubstitution for node-labeled trees in \Cref{sec:cosubst}.
-  The last sections of the introduction concern more \enquote{administrative} aspects of the present work.
+  \Cref{sec:computer_checked,sec:type_vs_set,sec:organisation} of the introduction concern more \enquote{administrative} aspects.
   
   
  \subsection{Intensional Martin-Löf type theory}\label{sec:mltt}
@@ -154,7 +154,7 @@ Toulouse}
  In \emph{intensional} Martin-Löf type theory the characterization of inductive types as initial algebras of some endofunctor fails 
   for a lack of function extensionality \parencite{DBLP:journals/tcs/Dybjer97}, 
   but it can be recovered \parencite{DBLP:conf/lics/AwodeyGS12} in an \emph{extension} of intensional MLTT called
-  \emph{Homotopy Type Theory} \parencite{hottbook}.
+  \emph{Homotopy Type Theory} (HoTT) \parencite{hottbook}.
   In this extension, function extensionality is provable from the \emph{Univalence Axiom}. 
  For a suitable definition of \emph{uniqueness}---\emph{contractibility} in HoTT jargon---one can prove uniqueness of the
  algebra morphisms out of the one whose carrier is given by the inductive type under consideration.
@@ -169,7 +169,7 @@ Toulouse}
   Coinductive sets/types describe sets/types of potentially \emph{infinite} trees, that is, trees that may have an infinite chain of subtrees---still formed according to some signature.
   An example of such a coinductive set/type is given by the \emph{co}natural numbers, which are specified by the same signature as the natural numbers.
   They consist of the elements of the natural numbers and an additional,
-  infinite tree $S \longrightarrow S\longrightarrow S \longrightarrow \ldots$. 
+  infinite, tree $S \longrightarrow S\longrightarrow S \longrightarrow \ldots$. 
   
  In a traditional set-theoretic setting, the theory of coinductive sets is completely dual to that of inductive sets:
   \emph{co}inductive sets are characterized as terminal coalgebras of 
@@ -181,18 +181,18 @@ Toulouse}
  a proof of sameness between coinductive terms---which represent infinite objects---constitutes a potentially infinite object itself.
  The type of such proofs hence cannot be exhaustively given by the (inductive) identity type.
  
- Instead of comparing two coinductive terms in Martin-Löf type theory up to identity, one defines a 
+ Instead of comparing two coinductive terms in IMLTT up to identity, one defines a 
  binary coinductive relation called \emph{bisimilarity} on a given coinductive type, with respect to which one compares its inhabitants  \parencite{DBLP:conf/types/Coquand93}. 
- Categorically, \emph{bisimilarity} is given as the greatest---\emph{weakly terminal}---\emph{relation} on the coinductive type that is compatible with the coalgebra structure.
- 
+ Categorically, \emph{bisimilarity} is given as a \emph{weakly terminal} relation on the coinductive type that is compatible with the coalgebra structure.
  Consequently, we consider two maps into a coinductive type to be the same if they are \emph{pointwise bisimilar}---an analogue
- to the aforementioned principle of function extensionality available in Homotopy Type Theory. 
+ to the aforementioned principle of function extensionality available in HoTT. 
+ 
  With these conventions, we give, in the present work, a characterization of some coinductive data types as \emph{terminal} object in some category 
- defined in intensional Martin-L\"of type theory.
+ defined in IMLTT.
  More precisely, we consider an example of \emph{homogeneous} codata type, streams, and 
  an example of \emph{heterogeneous} codata type, triangular matrices.
  For each of these examples we prove, 
- from type-theoretic rules specifying the respective codata type added to the basic rules of Martin-L\"of type theory,
+ from type-theoretic rules specifying the respective codata type added to the basic rules of IMLTT,
  the existence of a terminal object in some category \emph{within IMLTT}.
  The objects of the considered categories are not plain coalgebras for some endofunctor, but rather coalgebras with extra structure.
  This extra structure accounts for a \emph{cosubstitution} operation with which the considered codata types are endowed in a canonical way.
@@ -262,7 +262,7 @@ We first consider the first case of \emph{leaf-labeled trees}.
  
  
 
- \subsection{Computer-checked proofs}
+ \subsection{Computer-checked proofs}\label{sec:computer_checked}
 
  
  All our results have been implemented in the proof assistant \coq \parencite{coq84pl4}.
@@ -272,7 +272,7 @@ We first consider the first case of \emph{leaf-labeled trees}.
 
  
  
- \subsection{Type theory vs.\ set theory} The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
+ \subsection{Type theory vs.\ set theory} \label{sec:type_vs_set} The category-theoretic concepts studied in this work are agnostic to the foundational system being worked in.
  While we present them in a type-theoretic style, the definitions and lemmas can trivially be transferred to a set-theoretic setting.
  Throughout this article, we use type-theoretic notation,  writing $t:T$ to indicate that $t$ is of type $T$. 
  For instance, we write $f : \C(A,B)$ to indicate that $f$ is a morphism from object $A$ to object $B$ in category $\C$.
@@ -282,7 +282,7 @@ We first consider the first case of \emph{leaf-labeled trees}.
   
  
  
- \subsection{Organisation of the paper}
+ \subsection{Organisation of the paper} \label{sec:organisation}
   In \Cref{sec:preliminaries} we introduce some concepts and notations used later on.
   In \Cref{sec:tri} we present the coinductive type families $\stream$ of streams and $\Tri$ of infinite triangular matrices and some operations on those codata types,
   in particular, the respective cosubstitution operations.
@@ -295,12 +295,12 @@ We first consider the first case of \emph{leaf-labeled trees}.
       based on the category-theoretic notions developed in the preceding sections.
       We then prove that the codata types constitute the terminal models in the respective categories.
       We present an example of a map defined as a terminal morphism in the category of models for streams, exploiting terminality of $\stream$.
-  In \Cref{sec:formal} we explain some details of the formalization of this work in the proof assistant \coq.
+  In \Cref{sec:formal} we give an overview of the formalization of this work in the proof assistant \coq.
   
 
 \section{Preliminaries}\label{sec:preliminaries}
 
-In this section we present some particular category-theoretic objects used later on, and fix some notation.
+We present a few particular category-theoretic objects used later on, and fix some notation.
 
 \begin{defn}[Setoids in IMLTT]
   A \fat{setoid} in intensional Martin-Löf type theory is a pair $(A, \sim_A)$ of a type $A$ together with an equivalence 
@@ -323,7 +323,7 @@ In this section we present some particular category-theoretic objects used later
    \item a proof that composition is compatible with the equivalence relations of the setoids of morphisms;
    \item proofs of unitality and associativity of composition stated in terms of the equivalence relations on the morphisms.
   \end{itemize}
-  We write $f:a\to b$ for a morphism $f : \C(a,b)$, when the category $\C$ can be deduced from the context.
+  We write $f:a\to b$ for $f : \C(a,b)$, when the category $\C$ can be deduced from the context.
 \end{defn}
 
 Functors and natural transformations are defined in terms of the setoidal equivalence relations on morphisms.
@@ -378,13 +378,13 @@ Both of the categories of \Cref{def:set_setoid} have finite products, i.e., bina
 
 \section{Codata types in intensional Martin-L\"of type theory}\label{sec:tri}
 
-In this section two particular coinductive type families in intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof} are presented.
-For $a,b : A$, the Martin-L\"of identity type between $a$ and $b$ is denoted by $a = b$.
+In this section, two coinductive type families in intensional Martin-L\"of type theory (IMLTT) \parencite{martin_lof} are presented.
+For $a,b : A$, the identity type between $a$ and $b$ is denoted by $a = b$.
 
 We present the type-theoretic rules specifying these codata types and \emph{bisimilarity} on them.
 Categorically, bisimilarity on a given codata type is given by the largest binary relation on that type that is 
 compatible (in a sense to be specified later) with the \emph{observations} on that codata; it is the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93}.
-Here, an observation is the result of \emph{destructing}, i.e.\ taking apart, an element of a given codata type.
+Here, an observation is the result of \emph{destructing}, i.e.\ taking apart, an element of the codata type.
 For instance, an infinite list a.k.a.\ a stream (defined in detail in \Cref{ex_stream}) over a base type $A$ allows to observe the first element---the $\shead$---of that list (which is a term of type $A$) and,
 corecursively, the $\stail$ of that list, which is again an infinite list of elements of $A$.
 
@@ -395,12 +395,13 @@ A map into a codata type is defined using its \emph{introduction} rule.
 Intuitively, the introduction rule takes as arguments the \emph{observations} one can make on the image of the map thus defined.
 For instance, a map into streams is defined by specifying $\shead$ and $\stail$ on the output of that map: this intuition
   can be obtained by considering the combination of introduction and computation rules from \Cref{stream_rules}.
-  We thus use a kind of \enquote{copattern matching} \parencite{DBLP:conf/popl/AbelPTS13} to define maps, as follows: 
+  We thus use a kind of \enquote{copattern matching} \parencite{DBLP:conf/popl/AbelPTS13} to define maps into streams (and analogously for other codata types): 
+  the definition $f := \corec~h~t$ is written as
   the pair of clauses 
-   \[\comp{f}{\shead} := h \quad \text{ and } \quad \comp{f}{\stail}:= t \] abbreviates the definition $f := \corec~h~t$.
+   \[\comp{f}{\shead} := h \quad \text{ and } \quad \comp{f}{\stail}:= t \enspace . \]
 
 
-
+\noindent
 The first example is the type of \emph{streams} of elements of a given base type $A$:
 
 
@@ -435,7 +436,7 @@ The first example is the type of \emph{streams} of elements of a given base type
   in the sense that bisimilar streams have equal $\shead$s and bisimilar $\stail$s (cf.\ the elimination rules). 
   We call a \emph{bisimulation on streams (over a given type)} any binary relation that is compatible with the observations on streams.
   If two streams are related by \emph{any} bisimulation,
-  then these two streams are also bisimilar; this is what the introduction rule declares. In that sense, bisimilarity is the largest bisimulation.
+  then they are also bisimilar; this is what the introduction rule declares. In that sense, bisimilarity is the largest bisimulation.
 
 \begin{figure}
  \begin{mdframed}
@@ -445,13 +446,13 @@ The first example is the type of \emph{streams} of elements of a given base type
 \end{figure}
 
   
-  We define a \emph{co}substition operation 
-   \[\sredec_{A,B} : (\stream A \to B) \to \stream A\to\stream B\] 
-   on streams via the following clauses:
-% 
-   \begin{align} \comp{\sredec~f}{\shead} := f \quad\text{ and } \quad
-                  \comp{\sredec~f}{\stail} := \comp{\stail}{\sredec~f} \enspace . \label{eq:tail_sredec}
-    \end{align}
+  We define a \emph{co}substition operation  on streams via the following clauses:
+    
+   \begin{align*} 
+                  \sredec_{A,B} : (\stream A \to B) &\to \stream A\to\stream B \\
+                  \comp{\sredec~f}{\shead} &:= f \quad\text{ and } \quad \\
+                  \comp{\sredec~f}{\stail} &:= \comp{\stail}{\sredec~f} \enspace . %\label{eq:tail_sredec}
+    \end{align*}
   According to our convention above, by this, we actually mean
   \[  \sredec_{A,B}(f) := \corec~f~\stail \enspace . \]
   We call this operation \enquote{cosubstitution} since its type is dual to the simultaneous substitution operation 
@@ -459,47 +460,10 @@ The first example is the type of \emph{streams} of elements of a given base type
   Cosubstitution is compatible with bisimilarity on streams, and thus is (the carrier of) a family
   \[ \sredec_{A,B} : \Setoid(\stream A, \eq B) \to \Setoid(\stream A,\stream B) \enspace . \]
 
-
-% 
-
-\begin{comment}
-  \begin{figure}[bt]
-  \centering
-
-     \def\extraVskip{3pt}
-     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t : \stream A$} %\doubleLine
-     \UnaryInfC{$\shead_A~t : A$}
-      \DisplayProof
-                        \hspace{3ex}
-                                       \AxiomC{$t : \stream A$}%\doubleLine
-                                       \UnaryInfC{$\stail_A~t : \stream A$}
-                                       \DisplayProof%
-% 
-% 
-% \vspace{2ex}
-% 
-\hspace{3ex}
- \centering
-                                            \def\extraVskip{3pt}
-     \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
-    \AxiomC{$t \sim t'$} %\doubleLine
-     \UnaryInfC{$\shead~t = \shead~t'$}
-      \DisplayProof
-                        \hspace{3ex}
-                                       \AxiomC{$t \sim t'$} %\doubleLine
-                                       \UnaryInfC{$ \stail~t \sim \stail~t'$}
-                                       \DisplayProof   
-%   \end{center}
-  \caption{Destructors and bisimilarity for the coinductive family $\stream$} \label{fig:stream_destructors}
-\end{figure}
-\end{comment}
-   
-
 \end{ex}
 
 
-
+\noindent
 Streams are node-labeled trees where every node has exactly one subtree.
 We also consider a type of trees where every node has an arbitrary, but fixed, number of subtrees, 
 parametrized by a type $B$.
@@ -513,7 +477,7 @@ parametrized by a type $B$.
 \end{ex}
 
 
-We furthermore consider the \emph{heterogeneous} codata type family of \emph{infinite triangular matrices}:
+We also consider the \emph{heterogeneous} codata type family of \emph{infinite triangular matrices}:
 
 \begin{ex}\label{ex_tri}
 Infinite triangular matrices are studied in detail by Matthes and Picard \cite{DBLP:conf/types/MatthesP11}.
@@ -524,7 +488,7 @@ Infinite triangular matrices are studied in detail by Matthes and Picard \cite{D
  and indexed by another, \emph{variable}, type $A$ for entries on 
  the diagonal. 
  Schematically, such a matrix looks like in \Cref{fig_tri}.
- \begin{figure}[bt]
+ \begin{figure}[hbt]
  \centering
  \begin{tikzpicture}[scale = 0.6]
     \foreach \y in {0,...,2}
@@ -561,12 +525,18 @@ Infinite triangular matrices are studied in detail by Matthes and Picard \cite{D
 
 % 
  The codata type is specified via two destructors $\head$ and $\tail$, whose types are given in \Cref{tri_rules}.
+  \begin{figure}
+ \begin{mdframed}
+  \input{tri_rules}
+ \end{mdframed}
+ \caption{Rules for triangular matrices and bisimilarity on them} \label{tri_rules}
+\end{figure}
 % 
  Given a matrix over type $A$, its $\tail$---obtained by removing the first element on the diagonal, i.e.\ the $\head$ element---can 
  be considered as a trapezium as indicated by the green line in \Cref{fig_tri}, or alternatively, as
  a triangular matrix over type $E\times A$, by bundling the entries of the diagonal with those above as indicated by the orange frames, shown in \Cref{fig:tri_trap}.
  The latter representation is reflected in the type of the destructor $\tail$.
- \begin{figure}[hbt]
+ \begin{figure}[bt]
   \centering
   \begin{tikzpicture}[scale = 0.6]
     \foreach \y in {0,...,2}
@@ -615,12 +585,7 @@ This change of parameter (from $A$ to $E \times A$) in the type of $\tail$ is th
 %  As with streams, we denote by $\Tri A$ not only the resulting \emph{setoid} of triangular matrices over $A$, but also its
 %  underlying \emph{type}. 
  
- \begin{figure}
- \begin{mdframed}
-  \input{tri_rules}
- \end{mdframed}
- \caption{Rules for triangular matrices and bisimilarity on them} \label{tri_rules}
-\end{figure}
+
  
 
 \begin{comment}
@@ -664,7 +629,7 @@ This change of parameter (from $A$ to $E \times A$) in the type of $\tail$ is th
                   \comp{\redec~f}{\tail} := \comp{\tail}{\redec~(\extend~f)} \enspace . \label{eq:rest_redec}
     \end{align}
 An illustration of the redecoration operation is given in \Cref{fig:redec} (taken from \cite{DBLP:conf/types/MatthesP11}).    
-\begin{figure}[tbp]
+\begin{figure}[bt]
   \centering
   \begin{tikzpicture}[scale = 0.6]
     
@@ -714,7 +679,7 @@ Here, the need for the family of auxiliary functions
   rather than $t : \Tri A$, namely
   \[ \extend(f) := \langle \comp{\head_{E\times A}}{\pr_1(E,A)} , \comp{\cut_A}{f} \rangle \enspace . \]
   An illustration of this operation is given in \Cref{fig:lift} (taken from \cite{DBLP:conf/types/MatthesP11}).    
-  \begin{figure}[tbp]
+  \begin{figure}[bt]
   \centering
   \begin{tikzpicture}[scale = 0.6]
     \foreach \y in {0,...,2}
@@ -740,7 +705,6 @@ Here, the need for the family of auxiliary functions
     swap, below]{$f$} (7.5,-2) ; 
     
   \end{tikzpicture}
-  \vspace{-3ex}
   \caption{Definition of lifting (illustration taken from \parencite{DBLP:conf/types/MatthesP11})}
   \label{fig:lift}
 \end{figure}
@@ -763,7 +727,7 @@ All the operations are suitably compatible with the bisimilarity relations, so t
 
 \begin{rem}
  We do not specify any computation rules for bisimilarity, i.e., we think of bisimilarity as a proof-irrelevant notion. 
- Categorically, the lack of such a computation rule amounts to saying that bisimilarity is a \emph{weakly} terminal bisimulation on the respective codata. 
+ The lack of such a computation rule amounts to asserting that bisimilarity is a \emph{weakly} terminal bisimulation on the respective codata. 
 \end{rem}
 
 
@@ -840,8 +804,8 @@ An application of this auxiliary functor is inserted where necessary to make the
  It follows from the comonadic axioms that
  counit and cobind are natural transformations with respect to the functoriality defined in \Cref{def:lift}:
  \begin{align*}
-     \counit &: T \to F : \C\to \D \\
-     \cobind &: \D(T\_, F\_) \to \D(T\_, T\_) : \C^{\text{op}} \times \C \to \Ens \enspace .
+     \counit &: T \xrightarrow{.} F : \C\to \D \\
+     \cobind &: \D(T\_, F\_) \xrightarrow{.} \D(T\_, T\_) : \C^{\text{op}} \times \C \to \Setoid \enspace .
  \end{align*}
 
 \end{rem}
@@ -962,7 +926,6 @@ we develop the notion of \emph{comodule over a relative comonad} and, more impor
 % 
 % 
 %   
-%    \[  \comp{\cobind^T(\comp{\tau_A}{f})}{\tau_B} = \comp{\tau_A}{\cobind^S(f)} \enspace . \]
 % 
 \qquad
 \begin{xy}
@@ -975,6 +938,7 @@ we develop the notion of \emph{comodule over a relative comonad} and, more impor
 
 \end{defn}
 
+\noindent
 Relative comonads over a fixed functor $F$ and their morphisms form a category $\RComonad(F)$ with the identity and composition operations given pointwise.
 
 \begin{rem}
@@ -1207,7 +1171,7 @@ This extends to morphisms of relative comonads in the following sense:
   of $T$ along $\tau$ to the tautological comodule over $S$,
   \[ \induced{\tau} : \tau_*T \to S \enspace , \quad \induced{\tau}_A := \tau_A \enspace . \]
 \end{defn}
-
+% 
 We conclude the section with some constructions of comodules, which are not used in the following.
 
 \begin{lem}
@@ -1289,8 +1253,8 @@ namely that of a coalgebra of some endofunctor. The relationship between models 
 
 \begin{rem}[Coalgebras for streams: forgetting cosubstitution]\label{rem:coalg_stream}
  Define the functor
-  \begin{align*}  F: [\Set,\Setoid] &\to [\Set,\Setoid]  \enspace , \\
-                      F(G)(A) &:= \eq(A) \times G(A) \enspace .
+  \begin{align*}  F: [\Set,\Setoid] \to [\Set,\Setoid]  \enspace , \enspace
+                      F(G)(A) := \eq(A) \times G(A) \enspace .
   \end{align*}
   Then we have a forgetful functor from models for streams (in the sense of \Cref{cat_stream}) to coalgebras of $F$ which, intuitively, forgets the cosubstitution structure.
   Indeed, given a model $(S,t)$, the comonad $S$ is, in particular, a functor $S:\Set\to\Setoid$ which constitutes the carrier of 
@@ -1328,8 +1292,8 @@ We do so for the comonad $\Tri$:
    \[ t^{\diagonal} := \comp{\tail}{\cut}  : \Tri \to \Tri \enspace . \]
   By terminality we obtain a morphism of models
    \[(\Tri, t^{\diagonal}) \to (\stream, \stail) \] 
-  which has, as underlying morphism of relative comonads, the one defined in \Cref{ex_diag}; 
-  that is, compatibility of this map with cosubstitution in $\Tri$ and $\stream$, respectively,
+  which has, as underlying morphism of relative comonads, the one defined in \Cref{ex_diag}. 
+  Compatibility of this map with cosubstitution in $\Tri$ and $\stream$, respectively,
   is for free.
 \end{ex}
 
@@ -1388,6 +1352,7 @@ that is,
   
 \end{defn}
 
+\noindent
 Morphisms of comonads with cut are morphisms of comonads that are compatible with the respective $\cut$ operations:
 
 \begin{defn}%[Morphism of comonads with cut]
@@ -1492,7 +1457,7 @@ of comodule morphisms (in the category $\RComod(S,\D)$) to commute
 
 
 
-
+\noindent
 The construction of \Cref{def:product_in_context} yields a categorical characterization of the $\tail$ destructor---%
 more precisely, of its behavior with respect to cosubstitution as in \Cref{eq:rest_redec}---via the notion of comodule morphism:
 
@@ -1533,7 +1498,7 @@ The axiomatization of the cut operation now allows us to define models for the s
    \]
 
   
-   
+   \noindent
    A morphism between two such objects $(T,\tail^T)$ and $(S,\tail^S)$
    is given by a morphism of relative comonads with cut $\tau : T \to S$ such that
    the following diagram of comodule morphisms in the category $\RComod(S,\E)$ commutes,
@@ -1556,8 +1521,8 @@ endofunctor:
 
 \begin{rem}[Coalgebras for $\Tri$]
   Let $E : \Set$ be a type. Define the functor
-  \begin{align*}  F: [\Set,\Setoid] &\to [\Set,\Setoid]  \enspace ,\\
-                      F(G)(A) &:= \eq(A) \times G(E \times A) \enspace .
+  \begin{align*}  F: [\Set,\Setoid] \to [\Set,\Setoid]  \enspace ,\enspace
+                      F(G)(A) := \eq(A) \times G(E \times A) \enspace .
   \end{align*}
   There is a forgetful functor from models for infinite triangular matrices to coalgebras of $F$ which, intuitively, forgets the comonadic cobind operation and the $\cut$ operation.
   Indeed, given a model $(T,\tail^T)$, the comonad $T$ is, in particular, a functor $T:\Set\to\Setoid$ which constitutes the carrier of 
@@ -1596,8 +1561,8 @@ endofunctor:
    are equal in the sense of being pointwise bisimilar, thus concluding the proof.   
 \end{proof}
 
-This universal property characterizes not only the codata type $\Tri$, but also
-the bisimilarity relation on it as well as the cosubstitution operation.
+% This universal property characterizes not only the codata type $\Tri$, but also
+% the bisimilarity relation on it as well as the cosubstitution operation.
 
 
 \section{Formalization in \coq}\label{sec:formal}
@@ -1612,18 +1577,17 @@ In the formalization we add the rules of \Cref{stream_rules} and \Cref{tri_rules
 This shows that the axioms we add to \coq are weaker than the general mechanism of defining coinductive types in \coq via the \lstinline!CoInductive! vernacular.
 
 \begin{figure}
- \begin{mdframed}
+%  \begin{mdframed}
   \begin{lstlisting}
 CoInductive Tri A : Type :=
     constr : A -> Tri (E x A) -> Tri A.
 CoInductive bisim : forall {A}, Tri A -> Tri A -> Prop :=
     bisim_constr : forall {A} {t t' : Tri A}, 
-          top t = top t' -> 
-          bisim (rest t) (rest t') -> 
+          top t = top t' /\ bisim (rest t) (rest t') -> 
           bisim t t'.
 \end{lstlisting}
-Here, the code \lstinline!E x A! denotes the cartesian product of the types \lstinline!E! and \lstinline!A!.
- \end{mdframed}
+% Here, the code \lstinline!E x A! denotes the cartesian product of the types \lstinline!E! and \lstinline!A!.
+%  \end{mdframed}
  \caption{Definition of $\Tri$ and bisimilarity using \coq's \lstinline!CoInductive! vernacular} \label{tri_coinductive}
 \end{figure}
 
@@ -1634,7 +1598,7 @@ The correspondences between formalized statements and the statements in this art
 
 
 
-\begin{figure}[htb]
+\begin{figure}[hbt]
  \begin{mdframed}
   \input{formal_table}
  \end{mdframed}
@@ -1651,9 +1615,7 @@ It remains to investigate more general forms of heterogeneous trees, in particul
 considered here, given by precomposition with a product.
 This necessitates a semantic analysis of the conditions that a functor (on the category of types) responsible for heterogeneity needs to satisfy in order to allow the lifting of a (co)substitution rule.
 
-
-
-\paragraph*{Acknowledgments}
+ \textit{Acknowledgments:}
  We are grateful to André Hirschowitz, Ralph Matthes and Paige North for many helpful discussions.
  We thank the referees for their suggestions and comments, and the editors for their efforts organizing these proceedings.
  
