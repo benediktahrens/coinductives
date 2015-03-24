@@ -198,6 +198,10 @@ Toulouse}
  This extra structure accounts for a \emph{cosubstitution} operation with which the considered codata types are endowed in a canonical way.
  The cosubstitution operation is explained in \Cref{sec:cosubst}.
 
+ In the present work, we do not study \emph{existence} of coinductive types. 
+ In variants of IMLTT, coinductive types have been derived from inductive types: 
+ for IMLTT with Uniqueness of Identity Proofs \cite{indexed_containers}, and for IMLTT augmented by the Univalence Axiom \cite{ahrens_capriotti_spadotti}.
+ We are not aware of any existence result for pure IMLTT.
 
 \subsection{Homogeneous and heterogeneous trees}\label{sec:hom_het}
 
@@ -1098,7 +1102,7 @@ the comodule operation:
 \label{def:morphism_of_comodules}
  Let $M$ and $N : \C \to \E$ be comodules over the comonad $T$ relative to  $F:\C \to \D$.
  A \fat{morphism of comodules} from $M$ to $N$ is given by a family of morphisms 
-   \[ \alpha_A:\E(MA,NA) \]
+   $ \alpha_A:\E(MA,NA) $
  such that for any $A,B:\C_0$ and $f : \D(TA,FB)$ one has
  \[\comp{\mcobind^M(f)}{\alpha_B} = \comp{\alpha_A}{\mcobind^N(f)} \enspace, \]
  in diagrammatic form
