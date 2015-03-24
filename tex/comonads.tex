@@ -1177,8 +1177,7 @@ We conclude the section with some constructions of comodules, which are not used
 \begin{lem}
 Let $T$ be a comonad relative to $F : \C \to \D$, and let $M : \C \to \E$ be a comodule over $T$.
 Let $G : \E \to \X$ be a functor.
-Then $G \circ M : \C \to \X$ is a comodule over $T$.
-
+Then $(G \circ M, G\circ \mcobind^M)$ is a comodule over $T$.
 This extends to morphisms of comodules: for $N$ another comodule over $T$ with target category $\E$, and $\alpha : M \to N$ a morphism of comodules,
 $G \circ \alpha, c \mapsto G(\alpha_c)$
 is a morphism of comodules from $G \circ M$ to $G \circ N$.
@@ -1186,11 +1185,12 @@ This yields a functor
 $\RComod(T,\E) \to \RComod(T,\X)$. 
 \end{lem}
 
+In particular, given any object $e:\E_0$, the constant functor $\C\to\E$ mapping to $e$ is a comodule for any comonad relative to $F:\C\to\D$.
+
 \begin{lem}
 Let $T$ be a comonad relative to $F : \C \to \D$, and let $M : \C \to \E$ be a comodule over $T$.
 Let $G : \C \to \C$ be an endofunctor.
-Then $M \circ G : \C \to \E$ is a comodule over $T$.
-
+Then $(M \circ G, \mcobind^M \circ G)$ is a comodule over $T$.
 This extends to morphisms of comodules: for $N$ another comodule over $T$ with target category $\E$, and $\alpha : M \to N$ a morphism of comodules,
 $\alpha \circ G, c \mapsto \alpha_{Gc}$
 is a morphism of comodules from $M \circ G$ to $N \circ G$.
@@ -1201,7 +1201,7 @@ $\RComod(T,\E) \to \RComod(T,\E)$.
 \begin{lem}
 Let $T$ be a comonad relative to $F : \C \to \D$, and let $M, N: \C \to \E$ be comodules over $T$.
 Suppose that $\E$ has coproducts, denoted $e + e'$.
-Then $M + N, c \mapsto M c + N c$ is a comodule over $T$.
+Then $M + N, c \mapsto M c + N c$ is a comodule over $T$, with cosubstitution given by $\mcobind^M + \mcobind^N$.
 This construction extends to a coproduct on $\RComod(T,\E)$. 
 \end{lem}
 
