@@ -51,7 +51,7 @@ Toulouse}
 
 
 \newcommand{\fat}[1]{\textbf{#1}}
-\newcommand{\itemizedist}{.5em}
+% \newcommand{\itemizedist}{.5em}
 
 \begin{document}
 
@@ -1033,7 +1033,7 @@ Our motivation for developing this notion is the characterization of the destruc
 \label{def:comodule}
  Let $T$ be a comonad relative to $F:\C\to\D$, and let $\E$ be a category.
  A \fat{comodule over T towards $\E$} consists of
-   \begin{itemize}\setlength{\itemsep}{\itemizedist}
+   \begin{itemize}
    \item a map $M:\C_0 \to \E_0$ on the objects of the categories involved and
    \item an operation \[\mcobind: \forall A,B:\C_0, \D(TA,FB) \to \E(MA,MB)\] such that the following equations hold:
  \begin{align}
@@ -1223,7 +1223,7 @@ This terminal semantics result is hardly surprising; however, it is still intere
 
 
 
-\subsection{Models for $\stream$}
+\subsection{Models for \texorpdfstring{$\stream$}{Stream}}
 
 We first consider the homogeneous codata type of streams.
 
@@ -1308,7 +1308,7 @@ We do so for the comonad $\Tri$:
 \end{rem}
 
 
-\subsection{Models for $\Tri$}
+\subsection{Models for \texorpdfstring{$\Tri$}{Tri}}
 
 In analogy to the definition of models for the signature of streams, one would like to define
 a model for the signature of $\Tri$ as a pair $(T,r)$ of a comonad $T$ relative to $\eq : \Set \to \Setoid$ and 
