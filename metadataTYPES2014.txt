@@ -1,0 +1,36 @@
+# Metadata for paper in TYPES 2014 post-proceedings
+#
+# please conform to the data given in the LaTeX sources
+#
+# * Paper title.
+
+Terminal semantics for codata types in intensional Martin-L\"of type theory
+
+#  * For each author:
+#    * First name.
+#    * Last name.
+#    Please list authors in the same order as in the paper.
+# 
+# Example:
+# (1) first name: John, last name: Open
+# (2) first name: Joan, last name: Access
+
+(1) first name: Benedikt, last name: Ahrens
+(2) first name: R\'egis, last name: Spadotti
+
+
+#  * Keywords (separated by commas - taken from the \keywords command).
+
+relative comonad, Martin-L\"of type theory, coinductive type, computer theorem proving
+
+#  * ACM 1998 classification of the paper (taken from the \subjclass command).
+
+F.3.2 Semantics of Programming Languages
+
+#  * Abstract (plain text with LaTeX mathematics, but no commands
+#    starting with the backslash character).
+
+We study the notions of relative comonad and comodule over a relative comonad.
+We use these notions to give categorical semantics for the coinductive type families of streams and
+ of infinite triangular matrices and their respective cosubstitution operations in intensional Martin-L\"of type theory.
+Our results are mechanized in the proof assistant Coq.
