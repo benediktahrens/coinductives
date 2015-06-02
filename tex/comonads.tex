@@ -268,7 +268,7 @@ We first consider the  case of \emph{leaf-labeled trees}.
  \subsection{Computer-checked proofs}\label{sec:computer_checked}
 
  
- All our results have been implemented in the proof assistant \coq \parencite{coq84pl4}.
+ All our results have been implemented in the proof assistant \coq \parencite{coq84pl6}.
  The \coq source files and HTML documentation are available online \parencite{trimat_coq}.
  Here, we hence omit the proofs and focus on definitions and statements.
  
@@ -291,7 +291,7 @@ We first consider the  case of \emph{leaf-labeled trees}.
   in particular, the respective cosubstitution operations.
   In Section \ref{sec:comonads} we present \emph{relative comonads} and define the category of comonads relative to a fixed functor.
     We give some examples of relative comonads using the codata types presented in Section \ref{sec:tri}, 
-    and relate them to traditional comonads.
+    and relate relative comonads to traditional comonads.
   In Section \ref{sec:comodules} we define \emph{comodules over relative comonads} and give some constructions of comodules.
      Again, examples of comodules are taken from Section \ref{sec:tri}.
   In Section \ref{sec:coalgebras_for_tri} we define categories of models for the (signatures of the) codata types presented in Section \ref{sec:tri},
@@ -1559,7 +1559,7 @@ endofunctor:
 
 \section{Formalization in \coq}\label{sec:formal}
 
-All our definitions and theorems are mechanized in the proof assistant \coq \parencite{coq84pl4}.
+All our definitions and theorems are mechanized in the proof assistant \coq \parencite{coq84pl6}.
 In the formalization we add the rules of Figure \ref{stream_rules} and Figure \ref{tri_rules} as axioms to the \coq system, via the \lstinline!Axiom! vernacular. In order to ensure consistency, we 
 \begin{enumerate}
  \item encapsulate the axioms in \coq \emph{module} types (separately for $\stream$ and for $\Tri$) and
@@ -1600,16 +1600,16 @@ The correspondences between formalized statements and the statements in this art
 
 \section{Conclusion and future work}
 
-We have given a categorical semantics for some homogeneous (streams and trees) and heterogeneous (infinite triangular matrices) codata types,
+We have given a categorical semantics for some homogeneous (streams and trees) and heterogeneous (infinite triangular matrices) codata type families,
 using the notion of relative comonad and comodule over such comonads.
 
-It remains to investigate more general forms of heterogeneous trees, in particular, more general forms of heterogeneity than the one we have
-considered here, given by precomposition with a product.
-This necessitates a semantic analysis of the conditions that a functor (on the category of types) responsible for heterogeneity needs to satisfy in order to allow the lifting of a (co)substitution rule.
+It remains to investigate more general forms of trees, in particular more general forms of heterogeneity than the one we have
+considered here.
+This requires a semantic analysis of the conditions that a functor (on the category of types) responsible for heterogeneity needs to satisfy in order to allow the lifting of a (co)substitution rule.
 
  \textit{Acknowledgments:}
  We are grateful to André Hirschowitz, Ralph Matthes and Paige North for many helpful discussions.
- We thank the referees for their suggestions and comments, and the editors for their efforts organizing these proceedings.
+ We thank the referees for their suggestions and comments, and the editors for their efforts in organizing these proceedings.
  
 \bibliographystyle{plain}
 \bibliography{literature}
