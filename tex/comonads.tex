@@ -73,7 +73,7 @@ Toulouse}
  
  In this work, we study the notions of \emph{relative comonad} and \emph{comodule over a relative comonad}.
  We then use these notions for a case study in categorical semantics of coinductive data types in intensional Martin-Löf type theory (IMLTT): 
- we characterize two coinductive data types and their respective cosubstitution operations 
+ we characterize two coinductive type families and their respective cosubstitution operations 
  in IMLTT via a universal property.
  The first codata type we consider is the \emph{homogeneous} type family of streams, parametrized by a base type.
  The second one is the \emph{heterogeneous} codata type family of infinite triangular matrices parametrized by the type of diagonal entries.
@@ -89,7 +89,7 @@ Toulouse}
  Martin-Löf type theory (MLTT) \parencite{martin_lof} is a dependent type theory developed in the 1970's, which provides a foundation of mathematics.
  It is based on the Curry-Howard isomorphism, that is, it treats logic as a fragment of the general type theory.
  There are two notions of \enquote{sameness} in Martin-Löf type theory, an external (judgmental) one, and an internal (propositional) one.
- The latter is internalized by  the \emph{Martin-Löf identity type}, which is an inductively defined binary relation on any given type.
+ The latter is given by  the \emph{Martin-Löf identity type}, which is an inductively defined binary relation on any given type.
  Its only constructor relates any term to itself, that is, the relation defined by the Martin-Löf identity type is the least reflexive relation on a given type.
  Judgmentally equal terms are always propositionally equal, but the converse is not always true.
  Indeed, one distinguishes two variants of type theory: in \emph{extensional} type theory, propositional equalities (i.e.\ terms of identity type)
@@ -107,14 +107,14 @@ Toulouse}
  The subtrees are themselves trees.
  The root of a tree and the roots of any subtrees are more generally called \emph{nodes}.
  We gather trees of a fixed shape into a set or type, depending on the foundations we work in. 
- The possible shapes of trees are given by two data:
+ The possible shapes of trees are given by two pieces of data:
  \begin{enumerate}
   \item the set/type of potential nodes and
   \item the number of subtrees attached to each node.
  \end{enumerate}
- Such a pair of data is called a \emph{signature}, and we are interested in the set/type of trees which are formed according to a given signature.
+ Such a pair is called a \emph{signature}, and we are interested in the set/type of trees which are formed according to a given signature.
  
- A tree is called \emph{wellfounded} if any of its subtrees has finite length. In this section we consider the set/type of wellfounded trees of 
+ A tree is called \emph{wellfounded} if all of its subtrees have finite length. In this section we consider the set/type of wellfounded trees of 
  a given signature. Such a set/type is called \emph{inductively generated} by the signature. Intuitively, this set/type is the least one stable under
  forming trees starting from leaves and attaching already constructed trees as subtrees to nodes.
  One might also consider \emph{potentially infinite}, i.e., non-wellfounded trees; these are called \emph{co}inductive and are the main object of this work.
@@ -129,20 +129,19 @@ Toulouse}
  
   
  By \enquote{semantics of inductive types} we mean a mathematical description of the set/type of trees of a given signature. 
- More precisely, the purpose is to give a category-theoretic explanation to the above description as \enquote{the least set/type stable under forming trees}.
+ More precisely, the goal is to give a category-theoretic explanation to the above description as \enquote{the least set/type stable under forming trees}.
  However, the question of how to give such a characterization depends on the formal system we work in. 
- Below, we discuss briefly set-theoretic and type-theoretic such systems.
  
- In a set-theoretic setting, inductive sets are characterized as initial algebras for 
+ In a \emph{set-theoretic} setting, inductive sets are characterized as initial algebras for 
  some endofunctor on the category of sets \parencite{jacobs1997tutorial}.
  
- In a type-theoretic setting as given by Martin-L\"of type theory \parencite{martin_lof}, 
+ In a \emph{type-theoretic} setting as given by Martin-L\"of type theory \parencite{martin_lof}, 
  two approaches to the semantics of inductive types have been studied: 
  one approach consists in showing that inductive types exist in a \emph{model} of the type theory
  (see, e.g., \cite{DBLP:journals/apal/MoerdijkP00}).
  Another approach is to prove that adding certain type-theoretic rules to the type theory---rules which postulate the existence
  of inductive types in the type theory---implies (or is equivalent to) the existence of a universal object \emph{within} type theory
- (see, e.g., \parencite{DBLP:conf/lics/AwodeyGS12, DBLP:journals/tcs/Dybjer97}).
+ (see, e.g., \parencite{DBLP:journals/tcs/Dybjer97, DBLP:conf/lics/AwodeyGS12}).
  This latter approach is the one we adopt in the present work: we add axioms to intensional Martin-Löf type theory,
  postulating the existence of \emph{co}inductive types, see below.
  
@@ -157,8 +156,8 @@ Toulouse}
   but it can be recovered \parencite{DBLP:conf/lics/AwodeyGS12} in an \emph{extension} of intensional MLTT called
   \emph{Homotopy Type Theory} (HoTT) \parencite{hottbook}.
   In this extension, function extensionality is provable from the \emph{Univalence Axiom}. 
- For a suitable definition of \emph{uniqueness}---\emph{contractibility} in HoTT jargon---one can prove uniqueness of the
- algebra morphisms out of the one whose carrier is given by the inductive type under consideration.
+ For a suitable definition of \emph{uniqueness}---\emph{contractibility} in HoTT jargon---one can prove 
+ a logical equivalence between type-theoretic rules specifying an inductive type on the one hand and the existence of an initial algebra within the theory on the other hand.
  The mentioned work \parencite{DBLP:conf/lics/AwodeyGS12} thus shows that the characterization of inductive types as initial algebras carries over 
  from extensional to intensional type theory if one adds an extensionality principle for functions and adapts the notion of uniqueness.
  
@@ -182,9 +181,9 @@ Toulouse}
  a proof of sameness between coinductive terms---which represent infinite objects---constitutes a potentially infinite object itself.
  The type of such proofs hence cannot be exhaustively given by the (inductive) identity type.
  
- Instead of comparing two coinductive terms in IMLTT up to identity, one defines a 
+ Instead of comparing two coinductive terms in IMLTT modulo identity, one defines a 
  binary coinductive relation called \emph{bisimilarity} on a given coinductive type, with respect to which one compares its inhabitants  \parencite{DBLP:conf/types/Coquand93}. 
- Categorically, \emph{bisimilarity} is given as a \emph{weakly terminal} relation on the coinductive type that is compatible with the coalgebra structure.
+ Expressed categorically, bisimilarity in IMLTT is given as a \emph{weakly terminal} relation on the coinductive type that is compatible with the coalgebra structure.
  Consequently, we consider two maps into a coinductive type to be the same if they are \emph{pointwise bisimilar}---an analogue
  to the aforementioned principle of function extensionality available in HoTT. 
  
@@ -202,7 +201,6 @@ Toulouse}
  In the present work, we do not study \emph{existence} of coinductive types. 
  In variants of IMLTT, coinductive types have been derived from inductive types: 
  for IMLTT with Uniqueness of Identity Proofs \cite{indexed_containers}, and for IMLTT augmented by the Univalence Axiom \cite{ahrens_capriotti_spadotti}.
- We are not aware of any existence result for pure IMLTT.
 
 \subsection{Homogeneous and heterogeneous trees}\label{sec:hom_het}
 
@@ -225,7 +223,7 @@ The examples we consider are trees with just one subtree. A generalization to tr
 
 
 
-We first consider the first case of \emph{leaf-labeled trees}.
+We first consider the  case of \emph{leaf-labeled trees}.
  Let $T(X)$ be a type family of trees (of a given shape) with \emph{leaves from $X$}, i.e., $t: T(X)$ is a tree (of a given shape) with leaves in $X$.
  Let furthermore $f : X \to T(Y)$ be a map. We obtain a tree $t' : T(Y)$ by replacing any leaf of $t$ by its image under the map $f$.
  The operation of replacing any leaf in $t$ by its image under $f$ is called \emph{(simultaneous) substitution}---\enquote{simultaneous} because all the leaves are 
