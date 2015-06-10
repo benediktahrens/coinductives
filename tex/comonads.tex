@@ -1563,7 +1563,7 @@ All our definitions and theorems are mechanized in the proof assistant \coq~\par
 In the formalization, we axiomatize the considered coinductive type families as given by the rules of Figures \ref{stream_rules} and \ref{tri_rules}. 
 In order to ensure consistency, we 
 \begin{enumerate}
- \item encapsulate the axioms, implemented via the \lstinline!Axiom! vernacular, in \coq \emph{module} types (separately for $\stream$ and for $\Tri$),  and
+ \item use \coq \emph{module} types to encapsulate the axioms, implemented via the \lstinline!Axiom! vernacular,  and
  \item instantiate each module type by defining streams and triangular matrices as coinductive types using the \lstinline!CoInductive! vernacular,
   as shown in Figure \ref{tri_coinductive} for the example of $\Tri$.
 \end{enumerate}
