@@ -389,7 +389,7 @@ Categorically, bisimilarity on a given codata type is given by the largest binar
 compatible (in a sense to be specified later) with the \emph{observations} on that codata; it is the appropriate notion of sameness on inhabitants of these types \parencite{DBLP:conf/types/Coquand93}.
 Here, an observation is the result of \emph{destructing}, i.e.\ taking apart, an element of the codata type.
 For instance, an infinite list a.k.a.\ a stream (defined in detail in Example \ref{ex_stream}) over a base type $A$ allows to observe the first element---the $\shead$---of that list (which is a term of type $A$) and,
-corecursively, the $\stail$ of that list, which is again an infinite list of elements of $A$.
+corecursively, the $\stail$ of that list, which is again an infinite list over $A$.
 
 A coinductive type together with its associated bisimilarity relation forms a setoid as in Definition \ref{def:set_setoid}.
 We thus denote bisimilar elements $t$ and $t'$ by $t \sim t'$. 
@@ -1374,7 +1374,7 @@ Conversely, any comonad $T$ relative to a suitable functor can be equipped with 
 \begin{rem}[Canonical $\cut$ operation]\label{canonical_cut}
  Any comonad $T$ relative to a product-preserving functor $F:\C\to\D$  can be equipped with a $\cut$ operation relative to 
  $E:\C_0$ satisfying the properties of Definition \ref{def:rel_comonad_with_cut} by setting
-   \[ \ccut_A := \cut_A := T\bigl(\pr_2(E,A)\bigr) \enspace . \]
+   $ \ccut_A := \cut_A := T\bigl(\pr_2(E,A)\bigr)$.
  (The extra \enquote{c} of $\ccut$ stands for \enquote{canonical}.)
  It follows from the axioms of comonad morphisms that a comonad morphism $\tau : T\to S$ satisfies the equation of Definition \ref{def:morphism_comonad_cut} 
  for the  operations $\ccut^T$ and $\ccut^S$ thus defined. The morphism $\tau$ hence constitutes a morphism of comonads with cut from $(T,\ccut^T)$ to $(S,\ccut^S)$.
@@ -1417,7 +1417,7 @@ Given a comodule $M$ over a relative comonad $T$ with cut, we define a comodule 
 where the $\extend$ operation is the one defined in Definition \ref{def:rel_comonad_with_cut}.
  
  Furthermore, given two comodules $M$ and $N$ over $\T$ with target category $\E$, and a comodule morphism $\alpha : M \to N$,  
- the assignment \[ \alpha(E \times \_)_A := \alpha_{E\times A} \] defines a comodule morphism 
+ the assignment $ \alpha(E \times \_)_A := \alpha_{E\times A} $ defines a comodule morphism 
   $\alpha(E\times \_) : M(E\times \_) \to N(E\times \_) $.
 
   \noindent
@@ -1559,14 +1559,16 @@ endofunctor:
 
 \section{Formalization in \coq}\label{sec:formal}
 
-All our definitions and theorems are mechanized in the proof assistant \coq \parencite{coq84pl6}.
-In the formalization we add the rules of Figure \ref{stream_rules} and Figure \ref{tri_rules} as axioms to the \coq system, via the \lstinline!Axiom! vernacular. In order to ensure consistency, we 
+All our definitions and theorems are mechanized in the proof assistant \coq~\parencite{coq84pl6}.
+In the formalization, we axiomatize the considered coinductive type families as given by the rules of Figures \ref{stream_rules} and \ref{tri_rules}. 
+In order to ensure consistency, we 
 \begin{enumerate}
- \item encapsulate the axioms in \coq \emph{module} types (separately for $\stream$ and for $\Tri$) and
+ \item encapsulate the axioms, implemented via the \lstinline!Axiom! vernacular, in \coq \emph{module} types (separately for $\stream$ and for $\Tri$),  and
  \item instantiate each module type by defining streams and triangular matrices as coinductive types using the \lstinline!CoInductive! vernacular,
   as shown in Figure \ref{tri_coinductive} for the example of $\Tri$.
 \end{enumerate}
 This shows that the axioms we add to \coq are weaker than the general mechanism of defining coinductive types in \coq via the \lstinline!CoInductive! vernacular.
+Our results are hence axiom-free with respect to the theory implemented in the \coq proof assistant.
 
 \begin{figure}
 %  \begin{mdframed}
@@ -1583,8 +1585,8 @@ CoInductive bisim : forall {A}, Tri A -> Tri A -> Prop :=
 \end{figure}
 
 
-Apart from the implementation of our codata types via axioms (which are encapsulated in modules), the mechanization does \emph{not} rely on any additional axioms.
-The \coq source files and HTML documentation are available from the project web site \parencite{trimat_coq}.
+
+The \coq source files  are available from the project web site \parencite{trimat_coq}.
 The correspondences between formalized statements and the statements in this article are given in Table \ref{sec:table_formal_informal}.
 
 
