@@ -1575,8 +1575,7 @@ CoInductive Tri A : Type :=
     constr : A -> Tri (E x A) -> Tri A.
 CoInductive bisim : forall {A}, Tri A -> Tri A -> Prop :=
     bisim_constr : forall {A} {t t' : Tri A}, 
-          top t = top t' /\ bisim (rest t) (rest t') -> 
-          bisim t t'.
+          top t = top t' /\ bisim (rest t) (rest t') -> bisim t t'.
 \end{lstlisting}
 % Here, the code \lstinline!E x A! denotes the cartesian product of the types \lstinline!E! and \lstinline!A!.
 %  \end{mdframed}
@@ -1596,6 +1595,16 @@ The correspondences between formalized statements and the statements in this art
  \end{mdframed}
  \caption{Correspondence of informal and formal definitions} \label{sec:table_formal_informal}
 \end{table}
+
+
+ Prior to version 8.5 of \coq, a duplication of the definition of \emph{setoids} was necessary in order to avoid a universe inconsistency: indeed, 
+ the type of setoids is both the target type of a field in the record of categories as well as the type of objects of the category of setoids,
+ which leads to a complicated graph of universe constraints. In order to work around a universe inconsistency, the type of setoids to be used as objects of the category of 
+ setoids hence had to be (re)defined later to obtain a sufficiently large universe level.
+ 
+ In our code repository, we have a version of the code where we employ the universe polymorphism \cite{DBLP:conf/itp/SozeauT14} newly introduced in \coq~8.5 (beta2 at the time of writing)
+ in order to avoid this duplication. However, getting our files accepted by \coq~then required giving up on canonical structures, which do not seem to play well (yet) with universe polymorphism.
+
 
 
 \section{Conclusion and future work}
