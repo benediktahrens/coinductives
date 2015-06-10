@@ -1461,7 +1461,7 @@ the relative comonad $\Tri$ is a relative comonad with cut, and
 the family of destructors $\tail_A : \Tri A \to \Tri (E\times A)$ constitutes a morphism of comodules
 \[ \tail : \Tri \to \Tri (E \times \_ ) \]
 from the tautological comodule $\Tri$ to the composed comodule $\Tri (E\times \_)$ (obtained by precomposing the tautological comodule $\Tri$
-with \enquote{product with $E$} as defined in Definition \ref{def:product_in_context}).
+with \enquote{product with $E$} as defined in Definition~\ref{def:product_in_context}).
   
 \end{example}
 
@@ -1602,8 +1602,11 @@ The correspondences between formalized statements and the statements in this art
  which leads to a complicated graph of universe constraints. In order to work around a universe inconsistency, the type of setoids to be used as objects of the category of 
  setoids hence had to be (re)defined later to obtain a sufficiently large universe level.
  
- In our code repository, we have a version of the code where we employ the universe polymorphism \cite{DBLP:conf/itp/SozeauT14} newly introduced in \coq~8.5 (beta2 at the time of writing)
- in order to avoid this duplication. However, getting our files accepted by \coq~then required giving up on canonical structures, which do not seem to play well (yet) with universe polymorphism.
+ Version 8.5 of \coq~introduces a new, optional, universe polymorphism \cite{DBLP:conf/itp/SozeauT14}.
+ In our code repository \cite{trimat_coq}, we provide a version of our code for \coq~8.4pl6 and two versions for \coq~8.5 (beta2 at the time of writing);
+ one where universe polymorphism is not employed, and where hence the aforementioned duplication of code is necessary, and one where 
+ polymorphism is used to get rid of that duplication.
+ However, in that latter version, getting our files accepted by \coq~then required giving up on canonical structures, which do not seem to play well (yet) with universe polymorphism.
 
 
 
