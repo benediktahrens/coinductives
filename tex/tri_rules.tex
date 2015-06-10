@@ -6,7 +6,7 @@
 \begin{description}
 
  \item[Formation]\hfill \\
- 
+\mbox{\hfill} 
  \begin{center}
  \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
@@ -16,12 +16,10 @@
     \UnaryInfC{$\Tri A : \Set$}
      \DisplayProof
  \end{center} 
- 
+\mbox{\hfill}
+\mbox{\hfill}
  \item[Elimination]\hfill \\
- 
-
-%   \hspace{3ex}
-
+\mbox{\hfill} 
 \begin{center}
     \AxiomC{$t : \Tri A$} %\doubleLine
      \UnaryInfC{$\head_A~t : A$}
@@ -31,11 +29,11 @@
                                        \UnaryInfC{$\tail_A~t : \Tri(E\times A)$}
                                        \DisplayProof%
 \end{center}
+\mbox{\hfill}
+\mbox{\hfill}
   \item[Introduction]\hfill \\                                     
-                       
-%           \vspace{1em}             
-            
-\begin{center}
+\mbox{\hfill}
+  \begin{center}
                \AxiomC{$T : \Set\to\Set$} 
                \AxiomC{$hd : \forall A,TA \to A$} \AxiomC{$tl : \forall A, T A \to T(E\times A)$} %\doubleLine
                \TrinaryInfC{$\corec_T~hd~tl :  \forall A, T A \to \Tri A$}
@@ -44,7 +42,7 @@
                       
 %           \vspace{1em}
   \item[Computation]\hfill \\
-
+\mbox{\hfill}
 \begin{center}          
                \AxiomC{$hd : \forall A,TA \to A$} \AxiomC{$tl : \forall A, T A \to T(E\times A)$} %\doubleLine
                \AxiomC{$t : TA$}
@@ -69,7 +67,7 @@
  \begin{description}
 
  \item[Formation]\hfill \\
- 
+\mbox{\hfill} 
  \begin{center}
  \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
@@ -79,12 +77,10 @@
     \BinaryInfC{$\bisim_A~s~t : \Set$}
      \DisplayProof
  \end{center} 
- 
+\mbox{\hfill}
+\mbox{\hfill}
  \item[Elimination]\hfill \\
- 
-
-%   \hspace{3ex}
-
+ \mbox{\hfill}
 \begin{center}
     \AxiomC{$s, t : \Tri A$} \AxiomC{$p: \bisim_A~s~t$} %\doubleLine
      \BinaryInfC{$\head_A~s = \head_A~t$}
@@ -94,11 +90,11 @@
                                        \BinaryInfC{$\bisim_A (\tail_A~s) (\tail_A~t)$}
                                        \DisplayProof%
 \end{center}
+\mbox{\hfill}
+\mbox{\hfill}
   \item[Introduction]\hfill \\                                     
-                       
-%           \vspace{1em}             
-            
-\begin{center}
+\mbox{\hfill}
+  \begin{center}
 \def\fCenter{~\mbox{$\entails$}}
 
                \Axiom$A : \Set \fCenter\ R : \Tri A \to \Tri A \to \Set$ \noLine

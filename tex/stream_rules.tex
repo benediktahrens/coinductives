@@ -8,7 +8,7 @@
 \begin{description}
 
  \item[Formation]\hfill \\
- 
+\mbox{\hfill} 
  \begin{center}
  \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
@@ -18,12 +18,10 @@
     \UnaryInfC{$\stream A : \Set$}
      \DisplayProof
  \end{center} 
- 
+\mbox{\hfill}
+\mbox{\hfill}
  \item[Elimination]\hfill \\
- 
-
-%   \hspace{3ex}
-
+\mbox{\hfill}
 \begin{center}
     \AxiomC{$t : \stream A$} %\doubleLine
      \UnaryInfC{$\shead_A~t : A$}
@@ -33,19 +31,19 @@
                                        \UnaryInfC{$\stail_A~t : \stream A$}
                                        \DisplayProof%
 \end{center}
+\mbox{\hfill}
+\mbox{\hfill}
   \item[Introduction]\hfill \\                                     
-                       
-%           \vspace{1em}             
-            
-\begin{center}
+\mbox{\hfill}
+  \begin{center}
                \AxiomC{$T : \Set$} \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} %\doubleLine
                \TrinaryInfC{$\corec_A~hd~tl : T \to \stream A$}
                \DisplayProof%
 \end{center}
-                      
-%           \vspace{1em}
+\mbox{\hfill}
+\mbox{\hfill}         
   \item[Computation]\hfill \\
-
+\mbox{\hfill}
 \begin{center}          
                \AxiomC{$hd : T \to A$} \AxiomC{$tl : T \to T$} \AxiomC{$t:T$}%\doubleLine
                \TrinaryInfC{$\shead_A(\corec_A~hd~tl~t) = hd(t)$}
@@ -67,7 +65,7 @@
 \begin{description}
 
  \item[Formation]\hfill \\
- 
+\mbox{\hfill} 
  \begin{center}
  \def\extraVskip{3pt}
      \def\proofSkipAmount{\vskip.8ex plus.8ex minus.4ex}
@@ -77,12 +75,10 @@
     \BinaryInfC{$\bisim_A~s~t : \Set$}
      \DisplayProof
  \end{center} 
- 
+\mbox{\hfill}
+\mbox{\hfill}
  \item[Elimination]\hfill \\
- 
-
-%   \hspace{3ex}
-
+ \mbox{\hfill}
 \begin{center}
     \AxiomC{$s, t : \stream A$} \AxiomC{$p: \bisim_A~s~t$} %\doubleLine
      \BinaryInfC{$\shead_A~s = \shead_A~t$}
@@ -92,10 +88,10 @@
                                        \BinaryInfC{$\bisim_A (\stail_A~s) (\stail_A~t)$}
                                        \DisplayProof%
 \end{center}
+\mbox{\hfill}
+\mbox{\hfill}
   \item[Introduction]\hfill \\                                     
-                       
-%           \vspace{1em}             
-            
+\mbox{\hfill}                        
 \begin{center}
 
 \def\fCenter{~\mbox{$\entails$}}
