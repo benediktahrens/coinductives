@@ -226,8 +226,8 @@ The examples we consider are trees with just one subtree. A generalization to tr
 We first consider the  case of \emph{leaf-labeled trees}.
  Let $T(X)$ be a type family of trees (of a given shape) with \emph{leaves from $X$}, i.e., $t: T(X)$ is a tree (of a given shape) with leaves in $X$.
  Let furthermore $f : X \to T(Y)$ be a map. We obtain a tree $t' : T(Y)$ by replacing any leaf of $t$ by its image under the map $f$.
- The operation of replacing any leaf in $t$ by its image under $f$ is called \emph{(simultaneous) substitution}---\enquote{simultaneous} because all the leaves are 
- substituted at the same time. 
+ This replacement operation is called \emph{(simultaneous) substitution}---\enquote{simultaneous} because all the leaves are 
+ substituted at once. 
  A well-studied example is that of the lambda calculus, the terms of which can be formalized as leaf-labeled trees over a type of \emph{free variables}, that is,
  over a \emph{context} \parencite{alt_reus}.
  More precisely, let $\LC(X)$ be the type of lambda terms in context $X$. A map $f : X \to \LC(Y)$ is called a \emph{substitution rule}, indicating how to substitute any 
